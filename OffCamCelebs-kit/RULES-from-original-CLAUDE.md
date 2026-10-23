@@ -419,9 +419,15 @@ These survive independent of style. (Look rules live in the style's own preferen
 ### Handback
 - **★★ THE HANDBACK IS THE REAL HYPERFRAMES STUDIO, NEVER A STAND-IN (user, 2026-10-23, on 034: "you're supposed to
   launch the hyperframes studio, remember that").** Launch `npx --yes hyperframes@0.8.143 preview --background --no-open
-  --port <p>` for the film and hand back a link to THAT Studio. Do not build a custom player or viewer page in its place,
-  even when the request says "as an artifact". The Studio needs its own server, so a static page cannot be it. Where no
-  tunnel can reach the Studio, say so plainly and ask; never substitute.
+  --port <p>` for the film and hand back THAT Studio. Never build a custom player or viewer page in its place.
+- **★★ THE STUDIO GOES IN A CLAUDE.AI ARTIFACT, AND IS REPUBLISHED AFTER EVERY CHANGE (user, 2026-10-23, on 034: "hyper
+  frames studio in the artifact", "always remember to update it after you make changes").** In a cloud session no tunnel
+  can reach the Studio, so the handback is the real Studio's own bundle mirrored as an artifact:
+  `node scratchpad/studio_artifact.mjs <outDir> --port <p>` opens the running Studio in headless Chrome, saves every
+  server answer it asks for, and adds a shim that serves them. It is read-only: edits are refused, so changes are made in
+  the source. After EVERY change: `node scripts/build.mjs`, re-run `studio_artifact.mjs` into the same `<outDir>`, and
+  publish `<outDir>/index.html` with `root` = `<outDir>` and its `files.json` list to the SAME artifact URL. 034's is
+  https://claude.ai/artifact/6RtKcFwrU9RhNWkbU6jZvW. The artifact host refuses a literal U+FFFD; the script escapes it.
 - **★★ FINALIZE THE VO SCRIPT FIRST AND SEND IT THE MOMENT IT IS READY (user, 2026-10-01, OffCamCelebs 025: "From now
   on, finalize the VO script as soon as possible and send it to me").** On a new brief, the script comes before the
   build: fact-check the lines first (in parallel, the fastest way), write the corrected `VO_SCRIPT.txt`, and send it
