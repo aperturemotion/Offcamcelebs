@@ -1,0 +1,37 @@
+{
+  "note": "034 — brief lines that FAIL verification (CLAUDE.md, V26: armed BEFORE the take). Any caption matching a `bad` pattern means the take was read from the BRIEF: the master is blocked until it is re-recorded or accepted. Read with JSON.parse, never regex over source. Verified 2026-10-23 (two parallel checks at source); VO_SCRIPT.txt has the trail. The take is generated in-session from the corrected script, so it should carry none.",
+  "fixes": [
+    {
+      "at": "hook c1",
+      "brief": "This year, his salary is two million.",
+      "briefSpoken": "This year, his salary is 2 million.",
+      "use": "This year, he's paid two million.",
+      "why": "His contractual salary is $70M a year, $68M of it deferred (AP, 11 Dec 2023; Cot's). 'His salary is two million' can be answered with 'no, it's seventy'; 'he's paid two million' is exactly true.",
+      "bad": "\\bhis salary is\\b"
+    },
+    {
+      "at": "value c2",
+      "brief": "Call it four hundred sixty million, not seven hundred.",
+      "briefSpoken": "Call it 460 million, not 700.",
+      "use": "That's about four hundred sixty million, not seven hundred.",
+      "why": "$460M is baseball's luxury-tax value (10 x $46.08M); the players' union calculated $437.8M (Cot's). 'Call it' presents it as THE present value; 'That's about', after 'for its luxury tax, baseball values', keeps it tied to the tax (the brief's guardrail).",
+      "bad": "\\bcall it\\b"
+    },
+    {
+      "at": "fair c1",
+      "brief": "And Sportico estimates he makes a hundred twenty-five million a year off the field.",
+      "briefSpoken": "And Sportico estimates he makes 125 million a year off the field.",
+      "use": "And Sportico estimates he'll make a hundred twenty-five million off the field this year.",
+      "why": "Sportico (17 Mar 2026): $125M projected for 2026, a record (last year: $100M), not a steady yearly amount.",
+      "bad": "\\bmakes (a |one )?(hundred twenty-five|125) million a year\\b"
+    }
+  ],
+  "guardrails": [
+    { "why": "The $700 million is real and will all be paid: never say or show that he loses money, or that the contract is fake (the brief).", "bad": "\\b(los(e|es|ing|t)\\b.{0,24}\\b(money|out|millions?|dollars)|fake|not real|isn't real|doesn't get)\\b", "example": "He loses 240 million dollars." },
+    { "why": "~$460M is baseball's luxury-tax present value: never present it as his actual pay (the brief).", "bad": "\\b(he|ohtani) (only )?(gets|got|earns|is paid|will (get|be paid)|receives)( only)?( about)? (\\$?460|four hundred sixty)", "example": "He only gets 460 million dollars." },
+    { "why": "$125M off the field is a Sportico ESTIMATE: say 'Sportico estimates' (the brief).", "bad": "^(?!.*sportico).*\\b(125|hundred twenty-five) million\\b", "example": "He'll make 125 million off the field this year." },
+    { "why": "Nothing about his former interpreter's case, gambling, taxes or where he will live when the money is paid (the brief).", "bad": "\\b(interpreter|mizuhara|gambl\\w*|betting|bookie|income tax|state tax|taxes|california|where he (will )?live|move (away|out))\\b", "example": "The deferral could save him California taxes." },
+    { "why": "'Fraud' and 'scam' never appear (the brief).", "bad": "\\b(fraud|scam)s?\\b", "example": "It's not a scam." },
+    { "why": "The verdict rates the '$700 million' headline as the deal's value, not him (the brief).", "bad": "\\b(he|ohtani|he's|ohtani's) (is |was )?(inflated|overrated|overpaid)\\b", "example": "Ohtani is overrated." }
+  ]
+}
