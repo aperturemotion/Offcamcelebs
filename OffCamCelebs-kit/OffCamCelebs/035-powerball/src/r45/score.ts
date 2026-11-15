@@ -56,10 +56,31 @@ export const buildScore = (sets: SetRow[], peaks: number[]) => {
   add(wi("ticket")("flick", TK.cut + 1, undefined, 0.18, "the ticket drops onto the presenter's nip"));
   // ── 3 · the annuity ──
   void AN;
-  // ── 4 · the withholding ──
-  void WH;
-  // ── 5 · the full bill ──
-  void BL;
+  // ── 4 · the withholding: a mechanism (chain) for the gauge's screw, a click where the clamp seats, a thud under each chop,
+  //    a slap of paper when each cut-off lands ──
+  {
+    const p = pk("withhold"), c = wi("withhold");
+    for (const [push, clamp, chop, land, unclamp, n] of [
+      [WH.push1, WH.clamp1, WH.chop1, WH.land1, WH.unclamp1, "24 %"], [WH.push2, WH.clamp2, WH.chop2, WH.land2, WH.unclamp2, "8 %"]] as const) {
+      add(c("chainshort", push[0], push[1], 0.45, `the gauge's hand wheel turns: the screw pushes the slab ${n} past the knife`));
+      add(p("click", clamp[1], undefined, 0.5, "the clamp seats on the slab"));
+      add(p("thud", chop, undefined, 1.0, `the knife slams through the cash (${n})`));
+      add(p("flick", land, undefined, 0.9, `the ${n} cut-off lands`));
+      add(p("click", unclamp[0] + 2, undefined, 0.28, "the clamp lets go"));
+    }
+    add(c("chainshort", WH.retract[0], WH.retract[1], 0.32, "the gauge backs away from what is left"));
+  }
+  // ── 5 · the full bill: a tick for every amount key that locks down, a click for the cycle key, data while the machine
+  //    cycles (prints and feeds a line), one quiet ping when the total stands ──
+  {
+    const p = pk("bill"), c = wi("bill");
+    for (const cy of BL.cycles) {
+      for (const k of cy.keys) add(p("tick", k, undefined, 0.55, "an amount key locks down"));
+      add(p("click", cy.go, undefined, 0.7, cy.total ? "the total key" : "the motor bar or the % key starts the cycle"));
+      add(c("datashort", cy.strike - 1, cy.adv[1] + 2, 0.6, "the machine cycles: it strikes the line and feeds the tape"));
+      if (cy.total) add(p("pingshort", cy.adv[1], undefined, 0.35, "the total stands above the tear bar"));
+    }
+  }
   // ── 6 · to be fair ──
   void FA;
   // ── 7 · the verdict ──
