@@ -12,6 +12,7 @@ import { TRAVEL } from "./tokens";
 //                   3%): the landing becomes a gentle push-in, so the motion hands over to the place instead of stopping;
 //   · expo        — 64 / 68 f: under way sooner, then an exponential-like deceleration over a long tail; the yaw and the
 //                   depth arc ease out with it.
+// ★ Timur picked D, "expo" (2026-11-15): the standing hand-over for every film from 035 on.
 // ═══════════════════════════════════════════════════════════════════════════
 export type HandoverShape = {
   name: string; truck: number; crane: number; curve: (t: number) => number;
@@ -24,5 +25,5 @@ const SHAPES: Record<string, HandoverShape> = {
   glidePush: { name: "glidePush", truck: 60, crane: 64, curve: Easing.bezier(0.5, 0, 0.1, 1), landZoom: 1.06, leaveZoom: 0.97 },
   expo: { name: "expo", truck: 64, crane: 68, curve: Easing.bezier(0.3, 0, 0, 1), landZoom: 1, leaveZoom: 1 },
 };
-export const HANDOVER_VARIANT = "current";
+export const HANDOVER_VARIANT = "expo";
 export const HO: HandoverShape = SHAPES[HANDOVER_VARIANT];

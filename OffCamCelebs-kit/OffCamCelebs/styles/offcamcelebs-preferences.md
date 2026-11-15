@@ -2141,8 +2141,11 @@ _Log every OffCamCelebs preference change and every video build here with a date
     enough… it should be more like a smooth 100 basis points style transition, like smoothly moves and eases into the
     scene rather than abruptly stopping once it gets to its target destination. It eases into it very nicely"). The
     hand-over's shape lives in `src/r45/handover.ts`; four rendered alternatives were sent for him to pick (current 44/48 f
-    TRAVEL; glide 60/64 f with a long landing; glidePush, the glide plus a 6% landing push-in; expo 64/68 f). His pick
-    becomes the standing shape for every film (recorded here when he chooses).
+    TRAVEL; glide 60/64 f with a long landing; glidePush, the glide plus a 6% landing push-in; expo 64/68 f).
+    **HIS PICK (same day): D, "expo": the standing hand-over for every film from 035 on.** Truck 64 f, crane 68 f, on
+    `Easing.bezier(0.3, 0, 0, 1)`: under way sooner, then an exponential-like deceleration over a long tail, the yaw and the
+    depth arc easing out with it; no landing zoom. A new film keeps `HANDOVER_VARIANT = "expo"` in `src/r45/handover.ts`;
+    the old symmetric TRAVEL hand-over (44/48 f) is retired.
 
 - **2026-10-23 (Video 034, Timur's first review): SEVEN STANDING RULES FOR EVERY FILM, written into the locked look.**
   Timur: "the changes that I tell you to make for this video right now, I want you to save them all as style preferences.
