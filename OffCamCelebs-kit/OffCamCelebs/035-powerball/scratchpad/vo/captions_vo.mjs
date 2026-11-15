@@ -117,10 +117,12 @@ fs.writeFileSync("src/audit/cues.ts",
 const BLOCKS = [
   [["The **headlines** said", "one **Powerball** ticket"]],
   [["won", "**$847 million.**"]],
-  [["The winner will never", "take home **that number.**"]],
+  [["The winner will never", "take home"]],
+  [["**that number.**"]],   // ★ the screen sweep: "take home that number." ran wider than the band (x 52–987)
   [["It was sold at a", "**Wegmans**"]],
   [["in **Montvale,**", "**New Jersey,**"]],
-  [["for the", "**November 4th** drawing."]],
+  [["for the", "**November 4th**"]],
+  [["drawing."]],   // ★ "November 4th drawing." ran wider than the band (x 47–992)
   [["But **$847 million**", "is the **annuity:**"]],
   [["**30 payments**", "over **29 years.**"]],
   [["Take the money now,"]],
@@ -132,7 +134,8 @@ const BLOCKS = [
   [["That leaves about", "**$247 million**"]],
   [["on **payout day.**"]],
   [["And that's not", "the **final bill.**"]],
-  [["At the **top federal**", "and **New Jersey** tax rates,"]],
+  [["At the **top federal**"]],
+  [["and **New Jersey**", "tax rates,"]],   // ★ "and New Jersey tax rates," ran wider than the band (x 28–1011)
   [["we **estimate** about", "**$190 million.**"]],
   [["To be fair:", "choose the **annuity,**"]],
   [["and the **full**", "**$847 million**"]],
@@ -189,6 +192,9 @@ const blocks = [];
       if (dollarOpen && k <= i1 && /^dollars?$/.test(tok(k)) && d !== tok(k)) { k += 1; dollarOpen = false; }
       if (k > i1) fail(`beat ${i0}..${i1}: display word "${flat[j].t}" has no token left`);
       flat[j].a = startOf(k);
+      // ★ 035: the hook's sign falls through the caption band for its first frames (the screen sweep: CROSS on "The" and
+      //   "headlines" at f2–5); the film's first two words show from 0.24 s (7 frames), once the sign is past them
+      if (k <= 1) flat[j].a = Math.max(flat[j].a, 0.24);
       if (flat[j].t.startsWith("$")) dollarOpen = true;
       if (tok(k) === d) k += 1;
       else if (k + 1 <= i1 && tok(k) + tok(k + 1) === d) k += 2;

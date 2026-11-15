@@ -102,9 +102,9 @@ const FLOOR = 1450, XK = 700, ZM = -40;
 const STORY: CamKey[] = [
   { at: -9999, x: 650, y: 1222, z: 1.72, dur: 1 },                        // close: the knife over the slab's end
   { at: THEN + 2, x: 548, y: 1236, z: 1.45, dur: 38 },                     // out and left: the gauge pushes, its index to 24
-  { at: CLAMP1[0], x: 690, y: 1230, z: 1.68, dur: 30 },                    // in on the knife: the chop, the fall
-  { at: CLAMP2[0] - 31, x: 566, y: 1240, z: 1.5, dur: 30 },                // back for the gauge: 8 more
-  { at: CLAMP2[0] + 1, x: 686, y: 1232, z: 1.7, dur: 30 },                 // in again: the second chop
+  { at: CLAMP1[0], x: 690, y: 1120, z: 1.68, dur: 30 },                    // in on the knife: the chop, the fall (★ y 1230 put the lever's ball at y 558, in the caption band)
+  { at: CLAMP2[0] - 31, x: 566, y: 1200, z: 1.5, dur: 30 },                // back for the gauge: 8 more (★ lowered with the push-ins: the band)
+  { at: CLAMP2[0] + 1, x: 686, y: 1122, z: 1.7, dur: 30 },                 // in again: the second chop (★ lowered with the first)
   { at: Math.max(LEAVES + 6, CLAMP2[0] + 32), x: 548, y: 1246, z: 1.45, dur: 44 },   // along what is left
 ];
 export const WH_CAM: CamKey[] = alive(S, STORY, WH_DONE + 44, { amp: 0.6 });
