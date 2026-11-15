@@ -2134,6 +2134,16 @@ the rest is provisional until the user reacts — confirmed items then become nu
 _Log every OffCamCelebs preference change and every video build here with a date. Nothing about
 100BasisPoints / Style 3 goes in this file._
 
+- **2026-11-15 (Video 035 "The Real Jackpot", Timur's first review): "Great, you stuck to the styles."** Two notes, standing:
+  - **A stamp never carries its word on its own body** ("inflated is written on top of the stamp itself. Just remove that,
+    fix the stamp"): the index label on a stamp's mount is a blank ruled frame; the word exists only as the ink it leaves.
+  - **★★★ HAND-OVERS GLIDE IN AND EASE INTO THE PLACE, 100bps-style, never stop abruptly** ("I don't think it's smooth
+    enough… it should be more like a smooth 100 basis points style transition, like smoothly moves and eases into the
+    scene rather than abruptly stopping once it gets to its target destination. It eases into it very nicely"). The
+    hand-over's shape lives in `src/r45/handover.ts`; four rendered alternatives were sent for him to pick (current 44/48 f
+    TRAVEL; glide 60/64 f with a long landing; glidePush, the glide plus a 6% landing push-in; expo 64/68 f). His pick
+    becomes the standing shape for every film (recorded here when he chooses).
+
 - **2026-10-23 (Video 034, Timur's first review): SEVEN STANDING RULES FOR EVERY FILM, written into the locked look.**
   Timur: "the changes that I tell you to make for this video right now, I want you to save them all as style preferences.
   Make up the rules based on what I say now… and don't make me ask you again in future videos."

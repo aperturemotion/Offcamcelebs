@@ -10,6 +10,7 @@ import { MatDefs } from "./mat";
 import { SetWindow, HandOver, Pass } from "./camera";
 import { Caption, type Align } from "./Caption";
 import { cue } from "./time";
+import { HO } from "./handover";
 import { BLOCKS } from "./blocks";
 import { CUES } from "../audit/cues";
 import { F } from "./time";
@@ -53,7 +54,7 @@ type SetDef = {
   /** ★ 031 (the user: "slight screen shake" on "the stock jumps"): a jolt of the whole place (its objects and its captions) */
   shake?: (f: number) => { x: number; y: number };
 };
-export const TRUCK_DUR = 44, CRANE_DUR = 48, CRANE = 2000;
+export const TRUCK_DUR = HO.truck, CRANE_DUR = HO.crane, CRANE = 2000;   // ★ the shape: handover.ts (2026-11-15)
 // ★★ RULE 54b (user, 2026-10-10: "ensure that none of the visuals just appear on screen before they have to… the corner of
 //   the visual for the next scene snaps on screen… the corner of a visual is still visible and just vanishes"). A place is
 //   seen ONLY through its own move: each place is bounded by a soft FRAME MASK that rides with the hand-over. On a side that
@@ -161,7 +162,8 @@ export const stageOf = (k: number, f: number): Stage => {
   if (k > 0 && tr) {
     const D = tr.kind === "truck" ? TRUCK_DUR : CRANE_DUR, a = shot.t0 - D / 2, b = shot.t0 + D / 2;
     if (f < b) {
-      const q = TRAVEL(prog(f, a, b)), sn = Math.sin(Math.PI * q);
+      const q = HO.curve(prog(f, a, b)), sn = Math.sin(Math.PI * q);
+      st.sc *= 1 + (HO.landZoom - 1) * (1 - q);   // ★ glidePush: the place settles in from closer as it lands
       if (tr.kind === "truck") { const s = tr.dir === "R" ? 1 : -1; st.tx += s * span(tr) * (1 - q); st.yaw += -s * YAW * sn; }
       else { const s = tr.dir === "down" ? 1 : -1; st.ty += s * CRANE * (1 - q); st.pitch += s * PITCH * sn; }
       // ★ the wall AND the floor: both places are on screen, so each one's architecture shows only on its own half,
@@ -175,7 +177,8 @@ export const stageOf = (k: number, f: number): Stage => {
   if (nx && nt) {
     const D = nt.kind === "truck" ? TRUCK_DUR : CRANE_DUR, a = nx.t0 - D / 2, b = nx.t0 + D / 2;
     if (f >= a) {
-      const p = TRAVEL(prog(f, a, b)), sn = Math.sin(Math.PI * p);
+      const p = HO.curve(prog(f, a, b)), sn = Math.sin(Math.PI * p);
+      st.sc *= 1 + (HO.leaveZoom - 1) * p;
       if (nt.kind === "truck") { const s = nt.dir === "R" ? 1 : -1; st.tx -= s * span(nt) * p; st.yaw += -s * YAW * sn; }
       else { const s = nt.dir === "down" ? 1 : -1; st.ty -= s * CRANE * p; st.pitch += s * PITCH * sn; }
       const w = 1 - SOFT(prog(f, a, nx.t0));
@@ -245,14 +248,14 @@ export const HANDOVER_PEAK = SHOTS.map((s) => {
   const tr = s.tr;
   if (!tr) return 0;
   const D = tr.kind === "truck" ? TRUCK_DUR : CRANE_DUR;
-  return fastest((f) => TRAVEL(prog(f, s.t0 - D / 2, s.t0 + D / 2)), s.t0 - D / 2, s.t0 + D / 2) + (tr.peak ?? 0);
+  return fastest((f) => HO.curve(prog(f, s.t0 - D / 2, s.t0 + D / 2)), s.t0 - D / 2, s.t0 + D / 2) + (tr.peak ?? 0);
 });
 /** ★ for curves028.mjs: each hand-over's own progress curve over its run, sampled per frame (the audit judges its ends) */
 export const HANDOVER_RUNS = SHOTS.map((s) => {
   const tr = s.tr;
   if (!tr) return null;
   const D = tr.kind === "truck" ? TRUCK_DUR : CRANE_DUR;
-  return { id: s.id, kind: tr.kind, a: s.t0 - D / 2, b: s.t0 + D / 2, p: Array.from({ length: D + 1 }, (_, i) => TRAVEL(i / D)) };
+  return { id: s.id, kind: tr.kind, a: s.t0 - D / 2, b: s.t0 + D / 2, p: Array.from({ length: D + 1 }, (_, i) => HO.curve(i / D)) };
 }).filter(Boolean);
 void fastestSeen;
 

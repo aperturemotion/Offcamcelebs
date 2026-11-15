@@ -733,11 +733,13 @@ export const verdictModel = (geo: VerdictGeo) => (): Model<VerdictP> => {
   const block = rbox(BLW, BLH, BLD, 4, { px: beechF, nx: beechF, top: beechT, bottom: beechT, front: beechF, back: beechF });
   block.position.set(0, 7.15 + BLH / 2, BLD / 2);
   st.add(block);
-  // the index label on the mount's top: a blank ruled frame until the press, then the die's impression the right way round
+  // the index label on the mount's top: a blank ruled frame, ALWAYS (★ Timur, 2026-11-15, on 035: "inflated is written on top
+  //   of the stamp itself. Just remove that": the word is only ever the ink on the page)
   const idx = liveTex(176, 56, 3);
   let idxShown = -1;
   const paintIdx = (w: number) => {
-    const q = w > 0.5 ? 1 : 0;
+    void w;
+    const q = 0;
     if (q === idxShown) return;
     idxShown = q;
     idx.paint((c) => {
@@ -745,7 +747,6 @@ export const verdictModel = (geo: VerdictGeo) => (): Model<VerdictP> => {
       for (let i = 0; i < 300; i++) { c.fillStyle = `rgba(120,100,70,${0.04 + 0.05 * hash(i, 3, 17)})`; c.fillRect(hash(i, 1, 17) * 176, hash(i, 2, 17) * 56, 0.5 + hash(i, 4, 17) * 1.5, 0.3); }
       c.strokeStyle = RED; c.fillStyle = RED; c.lineWidth = 2.6; c.beginPath(); c.roundRect(8, 8, 160, 40, 5); c.stroke();
       c.lineWidth = 0.9; c.beginPath(); c.roundRect(13, 13, 150, 30, 3); c.stroke();
-      if (q) { track(c, 2.5); fitFont(c, 800, 26, geo.word, 136); c.textAlign = "center"; c.textBaseline = "middle"; c.fillText(geo.word, 89, 29); track(c, 0); }
     });
   };
   const idxM = mesh(new THREE.PlaneGeometry(176, 56).rotateX(-Math.PI / 2), M.print(idx.tex, 0.8), false, true);
