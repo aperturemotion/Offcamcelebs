@@ -38,10 +38,22 @@ export const buildScore = (sets: SetRow[], peaks: number[]) => {
     add(pk(id)("airwoosh", k.at + k.dur / 2, k.at + k.dur, travel > 600 ? 0.7 : 0.5, `the camera travels (${id}, key ${i})`));
   });
 
-  // ── 1 · the hook ──
-  void HK;
-  // ── 2 · the ticket ──
-  void TK;
+  // ── 1 · the hook: the sign falls and lands; the cabinet rocks on its studs; it powers up and its modules light; the blink on
+  //    "$847"; the brownout on "never"; the display dies on "that number" ──
+  add(pk("hook")("whooshsoft", HK.land - 1, HK.land, 0.2, "the sign falls"));
+  add(wi("hook")("thud", HK.land, undefined, 0.5, "the sign's feet land"));
+  add(wi("hook")("sub", HK.land, undefined, 0.3, "its weight"));
+  add(wi("hook")("chainshort", HK.land + 1, HK.land + 26, 0.14, "the cabinet rocks on its studs"));
+  add(wi("hook")("click", HK.pwr, undefined, 0.28, "the sign powers up"));
+  add(wi("hook")("datashort", HK.segA, HK.lit, 0.2, "the LED modules light, segment by segment"));
+  add(wi("hook")("click", HK.blink - 3, undefined, 0.18, "the display blinks"));
+  add(wi("hook")("lowwoosh", HK.brown, HK.brown + 30, 0.22, "the supply sags: the display browns out"));
+  add(wi("hook")("click", HK.dieA, undefined, 0.24, "the display starts to die"));
+  add(wi("hook")("sub", HK.dead - 2, undefined, 0.22, "the last module goes dark: the hum stops"));
+  // ── 2 · the ticket: the printer feeds the ticket in three bursts; the cutter snips; the ticket drops onto the nip ──
+  TK.feeds.forEach(([a, b], i) => add(wi("ticket")("datashort", a, b + 2, 0.22, `the printer feeds the ticket (burst ${i + 1})`)));
+  add(wi("ticket")("click", TK.cut, undefined, 0.3, "the cutter snips the ticket"));
+  add(wi("ticket")("flick", TK.cut + 1, undefined, 0.18, "the ticket drops onto the presenter's nip"));
   // ── 3 · the annuity ──
   void AN;
   // ── 4 · the withholding ──
