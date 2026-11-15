@@ -1,0 +1,43 @@
+OffCamCelebs 035 — "The Real Jackpot" ($847M Powerball) — CORRECTED VO SCRIPT (final, 2026-11-15)
+Read this version, not the brief's. The line marked * below was changed after checking every line at source.
+
+------------------------------------------------------------------ PASTE-READY
+The headlines said one Powerball ticket won eight hundred forty-seven million dollars. The winner will never take home that number.
+
+It was sold at a Wegmans in Montvale, New Jersey, for the November fourth drawing.
+
+But eight hundred forty-seven million is the annuity: thirty payments over twenty-nine years. Take the money now, and the lottery's own figure is three hundred sixty-three million.
+
+Then the taxes. The I.R.S. withholds twenty-four percent. New Jersey withholds eight. That leaves about two hundred forty-seven million on payout day.
+
+And that's not the final bill. At the top federal and New Jersey tax rates, we estimate about one hundred ninety million.
+
+To be fair: choose the annuity, and the full eight hundred forty-seven million does get paid, before tax. It just takes twenty-nine years.
+
+So here's the audit. Eight hundred forty-seven million on the headline. About one hundred ninety in the bank. Our rating: inflated.
+
+Send us who to audit next.
+------------------------------------------------------------------
+
+WHAT CHANGED, AND WHY
+
+* Line 2: "The winner will never see that number." → "The winner will never take home that number."
+  The script's own fairness line says the opposite of "never see": "choose the annuity, and the full eight hundred forty-seven
+  million does get paid, before tax" (NJ Lottery release: the annuity is "30 increasing payments over 29 years", and "Both
+  prize options are before taxes"). Taken literally, an annuity winner does receive $847M in payments, so "never see" can be
+  answered with "yes they will, over 29 years". "Take home" is true for both options: tax comes off the cash value and off
+  every annuity payment (IRS W-2G instructions: 24% withheld; NJ Taxation: 8% on payouts over $500,000). It keeps the hook
+  and matches the verdict ("about one hundred ninety in the bank").
+
+EVERY OTHER LINE, CHECKED (unchanged)
+- $847M jackpot, cash value $363.1M, annuity of 30 payments over 29 years, before taxes; sold at Wegmans, Montvale, Bergen
+  County; the Nov. 4, 2026 drawing: NJ Lottery release on powerball.com and wire reports (NBC Philadelphia, Fox, Gray TV).
+- IRS withholds 24% (lottery winnings minus the wager over $5,000): IRS Instructions for Forms W-2G and 5754 (01/2026).
+- New Jersey withholds 8% on Lottery payouts over $500,000, residents and nonresidents: NJ Division of Taxation.
+- $363.1M × (1 − 0.24 − 0.08) = $246.9M → "about two hundred forty-seven million on payout day".
+- Top rates: federal 37% (2026, over $640,600 single); New Jersey 10.75% (over $1M). $363.1M × (1 − 0.37 − 0.1075) =
+  $189.7M → "we estimate about one hundred ninety million". Both rates are MARGINAL: applied to the whole prize they slightly
+  overstate the bill on the first ~$1M, a difference of well under $0.1M on $363.1M, so "about $190 million" holds. It stays
+  an estimate on screen and in the voice ("we estimate", "about").
+- No year 2000–2009 is spoken. "I.R.S." is read as letters and printed IRS (no dots) on screen.
+- Not used, so not checked further: the ranking (sources differ: ninth- vs tenth-largest).

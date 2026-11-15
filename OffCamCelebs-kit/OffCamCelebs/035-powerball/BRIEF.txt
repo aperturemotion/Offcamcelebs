@@ -1,0 +1,63 @@
+NEW VIDEO — "The Real Jackpot" ($847M Powerball, audit #035). ~60 seconds, 1080x1920 @30fps. FOLDER: 035-powerball | COMPOSITION: InfluencerAudit035
+
+THIS IS A CONTENT-ONLY PROMPT. The story, script and facts are fixed. Everything visual is your call, within your own locked house style: look, colours, type, captions, transitions, pacing, how many scenes.
+
+This is the first video in the channel's wider format: instead of auditing a person, it audits a famous money HEADLINE. Same audit, same verdicts, same pace.
+
+WHAT THE VIDEO HAS TO DO
+
+- Open straight on the hook line. No intro, no title card. $847,000,000 should hit the screen in the first second.
+- Visuals should follow the words: when the VO names a number, a percentage, a place or a tax, the viewer should be seeing it.
+- The core contrast: one number shrinking in steps: $847M (headline) → $363.1M (cash value) → ~$247M (after withholding) → ~$190M (after the full tax bill).
+- NO photo this time: there is no person in the story (the winner is unidentified). Everything is built.
+- Practical only: it's posted as an Instagram Reel, so keep text clear of the app's buttons and caption area.
+- Cover frame suggestion: "$847,000,000" with the ~$190M figure beneath it.
+
+THE STORY (beats, so you know what each part is about)
+
+1. HOOK — headlines said one Powerball ticket won $847M; the winner will never see that number.
+2. THE TICKET — sold at a Wegmans in Montvale, New Jersey, for the 4 November 2026 drawing.
+3. THE ANNUITY — $847M is 30 payments over 29 years; the lottery's own cash figure is $363.1M.
+4. THE WITHHOLDING — the IRS withholds 24%, New Jersey 8%: about $247M on payout day.
+5. THE FULL BILL — at the top federal and New Jersey rates, our estimate is about $190M.
+6. FAIRNESS — choose the annuity and the full $847M is paid, before tax; it just takes 29 years.
+7. VERDICT — $847M on the headline, about $190M in the bank. INFLATED.
+8. CTA — fixed channel close.
+
+SCRIPT (identical to the ElevenLabs VO; "I.R.S." = IRS on screen)
+
+The headlines said one Powerball ticket won eight hundred forty-seven million dollars. The winner will never see that number.
+
+It was sold at a Wegmans in Montvale, New Jersey, for the November fourth drawing.
+
+But eight hundred forty-seven million is the annuity: thirty payments over twenty-nine years. Take the money now, and the lottery's own figure is three hundred sixty-three million.
+
+Then the taxes. The I.R.S. withholds twenty-four percent. New Jersey withholds eight. That leaves about two hundred forty-seven million on payout day.
+
+And that's not the final bill. At the top federal and New Jersey tax rates, we estimate about one hundred ninety million.
+
+To be fair: choose the annuity, and the full eight hundred forty-seven million does get paid, before tax. It just takes twenty-nine years.
+
+So here's the audit. Eight hundred forty-seven million on the headline. About one hundred ninety in the bank. Our rating: inflated.
+
+Send us who to audit next.
+
+FACTS (all verified — show sources on screen or not, your call)
+
+- NJ Lottery release on Powerball.com, 5 Nov 2026: "$847 million Powerball jackpot", "cash value of $363.1 million", annuity "30 increasing payments over 29 years", "Both prize options are before taxes". Sold at "Wegmans Food Market, 100 Farm View, Montvale in Bergen County". "The ninth-largest jackpot in game history."
+- CBS New York, Nov 2026: "the Nov. 4, 2026, Powerball drawing"; "State and federal taxes will be withheld."
+- IRS, Instructions for Forms W-2G and 5754: federal income tax must be withheld when lottery winnings minus the wager exceed $5,000, at "24% of gambling winnings".
+- NJ Division of Taxation (updated 28 Sep 2026): "8% for Lottery payouts over $500,000". The rule applies "to both residents and nonresidents".
+- $363.1M × (1 − 24% − 8%) = $246.9M. SNJ Today reported the same: "$246.9 million after taxes withheld at payout".
+- Top rates: federal 37% (IRS, tax year 2026); New Jersey 10.75% (NJ Division of Taxation).
+- Estimate: $363.1M × (1 − 37% − 10.75%) ≈ $189.7M, "about $190 million". SNJ Today: "about $190 million after full federal and New Jersey taxes." This is an ESTIMATE: real tax depends on the winner's own situation.
+- Powerball.com prize chart (optional on-screen detail): jackpot odds "1 in 292,201,338".
+
+ACCURACY GUARDRAILS (content, not style)
+
+- The $847M figure is real as the annuity total. The verdict rates "$847 million" as the money the winner gets, not the lottery and not the winner.
+- $363.1M is the lottery's own cash figure. ~$247M is arithmetic on official withholding rates. ~$190M is OUR ESTIMATE: always "we estimate" or "about".
+- The winner is unidentified. Never name, guess or depict a winner; no stand-in person.
+- Taxes: only the rates above. Don't speculate about the winner's home state, deductions or tax planning.
+- Don't encourage or discourage playing the lottery; no odds-shaming.
+- "Fraud" and "scam" never appear (on screen or VO).

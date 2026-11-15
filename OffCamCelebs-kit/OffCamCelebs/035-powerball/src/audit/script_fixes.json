@@ -1,0 +1,21 @@
+{
+  "note": "035 — brief lines that FAIL verification (CLAUDE.md, V26: armed BEFORE the take). Any caption matching a `bad` pattern means the take was read from the BRIEF: the master is blocked until it is re-recorded or accepted. Read with JSON.parse, never regex over source. Verified 2026-11-15 (parallel checks at source); VO_SCRIPT.txt has the trail. The take is generated in-session from the corrected script, so it should carry none.",
+  "fixes": [
+    {
+      "at": "hook c1",
+      "brief": "The winner will never see that number.",
+      "briefSpoken": "The winner will never see that number.",
+      "use": "The winner will never take home that number.",
+      "why": "The script's own fairness line says the annuity pays the full $847M before tax, so an annuity winner does 'see' it over 29 years. 'Take home' is true for both options: tax comes off the cash value and off every annuity payment.",
+      "bad": "\\bnever see that number\\b"
+    }
+  ],
+  "guardrails": [
+    { "why": "~$190M is OUR ESTIMATE: always 'we estimate' or 'about' (the brief).", "bad": "^(?!.*\\b(about|estimate)).*\\b(\\$?190|hundred ninety)\\b", "example": "The winner gets 190 million." },
+    { "why": "The winner is unidentified: never name, guess or describe a winner (the brief).", "bad": "\\b(the winner|winner) (is|was) (named|identified|revealed|a (man|woman|family|couple))\\b|\\b(he|she) won\\b", "example": "The winner was named on Friday." },
+    { "why": "Taxes: only the rates in the brief (24%, 8%, 37%, 10.75%); nothing about home state, deductions or tax planning (the brief).", "bad": "\\b(?!(24|8|37|10\\.75)\\s?(%|percent))\\d+(\\.\\d+)?\\s?(%|percent)\\b|\\b(deduct\\w*|tax planning|write[- ]offs?|home state|moves? to|florida|texas|nevada)\\b", "example": "A 39.6% rate, unless the winner moves to Florida." },
+    { "why": "Don't encourage or discourage playing the lottery; no odds-shaming (the brief).", "bad": "\\b(odds|don't play|should play|buy a ticket|stop playing|waste of money|never win)\\b", "example": "The odds are terrible, so don't play." },
+    { "why": "'Fraud' and 'scam' never appear (the brief).", "bad": "\\b(fraud|scam)s?\\b", "example": "The jackpot is a scam." },
+    { "why": "The verdict rates the '$847 million' headline as the money the winner gets, not the lottery and not the winner (the brief).", "bad": "\\b(the lottery|powerball|the winner|the jackpot) (is|was) (inflated|lying|a lie|rigged|fake)\\b", "example": "Powerball is lying." }
+  ]
+}
