@@ -241,12 +241,13 @@ const sideTex = () => paintTex("cash-side-v2", 256, 128, (g) => {
   for (let i = 0; i < 40; i++) { g.fillStyle = `rgba(90,100,80,${0.04 + r() * 0.05})`; g.fillRect(r() * 256, 0, 2 + r() * 10, 128); }
 }, 2);
 
-const bandTex = () => paintTex("cash-strap-v1", 96, 220, (g) => {
+const bandTex = (plain = false) => paintTex(plain ? "cash-strap-plain-v1" : "cash-strap-v1", 96, 220, (g) => {
   // the strap's top: kraft mustard, its fibre, two rules and "$10,000" read along the strap
   g.fillStyle = MUSTARD; g.fillRect(0, 0, 96, 220);
   const r = RNG(11);
   for (let i = 0; i < 300; i++) { g.fillStyle = `rgba(${r() > 0.5 ? "120,85,20" : "250,225,140"},${0.08 + r() * 0.1})`; g.fillRect(r() * 96, r() * 220, 0.6 + r() * 2.5, 0.5); }
   g.fillStyle = "rgba(60,40,10,0.75)"; g.fillRect(6, 0, 1.2, 220); g.fillRect(89, 0, 1.2, 220);
+  if (plain) return;   // ★ (035) a strap with no printed figure: the scene's only figure is the caption's
   g.save(); g.translate(48, 110); g.rotate(-Math.PI / 2);
   g.fillStyle = "#2B1E0B"; g.textAlign = "center"; g.textBaseline = "middle";
   g.font = `800 34px "Archivo", sans-serif`; g.fillText("$10,000", 0, 2);
@@ -366,7 +367,10 @@ const geometries = () => {
 
 /** ★ ONE BUNDLE, its origin on the surface it rests on (the strap's underside), the notes' length along x.
  *  `seed` varies its core, its notes' shapes and their small turns and shifts; `flip` turns it end for end. */
-export const bundle = (seed: number, flip = false) => {
+/** ★ (035) the strap's top with no printed figure (kraft and its rules only), built on first use */
+let bandTopPlain: THREE.Material | null = null;
+const plainTop = () => (bandTopPlain ??= new THREE.MeshStandardMaterial({ map: bandTex(true), roughness: 0.8, envMapIntensity: 0.35, polygonOffset: true, polygonOffsetFactor: -1, polygonOffsetUnits: -2 }));
+export const bundle = (seed: number, flip = false, o: { plain?: boolean } = {}) => {
   const m = materials(), G = geometries();
   const b = new THREE.Group();
   b.userData.unit = true;
@@ -379,7 +383,7 @@ export const bundle = (seed: number, flip = false) => {
     b.add(n);
   }
   b.add(mesh(G.strap, m.band));
-  const st = mesh(G.strapTop, m.bandTop, false, true);
+  const st = mesh(G.strapTop, o.plain ? plainTop() : m.bandTop, false, true);
   b.add(st);
   if (flip) b.rotation.y = Math.PI;
   const w = new THREE.Group();
@@ -389,11 +393,11 @@ export const bundle = (seed: number, flip = false) => {
 
 /** ★ A PILE of n bundles, each squared by hand: a little turned and shifted, now and then end for end. Each bundle is its own
  *  object for the audit (`${tag}-${i}`), so a bundle passing through its neighbour is caught. Returns the group and its height. */
-export const pile = (tag: string, n: number, seed: number, o: { turn?: number; shift?: number } = {}) => {
+export const pile = (tag: string, n: number, seed: number, o: { turn?: number; shift?: number; plain?: boolean } = {}) => {
   const turn = o.turn ?? 0.035, shift = o.shift ?? 3.5;
   const g = new THREE.Group();
   for (let i = 0; i < n; i++) {
-    const bd = bundle(seed * 7 + i, hash(seed, i, 9) > 0.62);
+    const bd = bundle(seed * 7 + i, hash(seed, i, 9) > 0.62, { plain: o.plain });
     bd.userData.obj = `${tag}-${i}`;
     bd.rotation.y = (hash(seed, i, 4) - 0.5) * 2 * turn;
     bd.position.set((hash(seed, i, 5) - 0.5) * 2 * shift, i * (BUNDLE_H + 0.3), (hash(seed, i, 6) - 0.5) * 2 * shift);

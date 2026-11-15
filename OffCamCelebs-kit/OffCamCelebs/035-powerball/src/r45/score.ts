@@ -55,7 +55,11 @@ export const buildScore = (sets: SetRow[], peaks: number[]) => {
   add(wi("ticket")("click", TK.cut, undefined, 0.3, "the cutter snips the ticket"));
   add(wi("ticket")("flick", TK.cut + 1, undefined, 0.18, "the ticket drops onto the presenter's nip"));
   // ── 3 · the annuity ──
-  void AN;
+  // each payment seats on the board (a tick per stack: counted items); the board is drawn away (swoosh, at its fastest
+  // frame, as it leaves the frame); the lump sum slides in (whooshsoft, fastest at its start: GLIDE)
+  AN.rests.forEach((r, k) => add(wi("annuity")("tick", r, undefined, k < 2 ? 0.9 : 0.55 + 0.2 * ((k % 3) === 0 ? 1 : 0), `payment ${k + 2} seats on the board`)));
+  add(pk("annuity")("swoosh", AN.boardA + AN.boardN - 7, AN.boardA + AN.boardN, 0.8, "the board and its 30 payments are drawn away"));
+  add(pk("annuity")("whooshsoft", AN.pileA + 4, AN.pileA + AN.pileN, 0.75, "the lump sum slides in"));
   // ── 4 · the withholding: a mechanism (chain) for the gauge's screw, a click where the clamp seats, a thud under each chop,
   //    a slap of paper when each cut-off lands ──
   {
@@ -82,9 +86,17 @@ export const buildScore = (sets: SetRow[], peaks: number[]) => {
     }
   }
   // ── 6 · to be fair ──
-  void FA;
-  // ── 7 · the verdict ──
-  void VD;
+  // each coin rings as it lands in the jar: every one while they come singly, then every other one of the stream, softer
+  FA.lands.forEach((t, i) => {
+    if (i < 12 || i % 2 === 0) add(wi("fair")("coin", t, undefined, i < 12 ? 0.8 - 0.02 * i : 0.45, `coin ${i + 1} lands in the jar`));
+  });
+  // ── 7 · the verdict: the zip runs open on "in the bank"; the stamp glides in, presses INFLATED, lifts and is drawn away ──
+  add(pk("verdict")("swoosh", VD.zipA + 10, VD.zipB, 0.22, "the deposit bag's zip runs further open"));
+  add(pk("verdict")("lowwoosh", VD.inA + 9, VD.overA, 0.36, "the stamp glides in over the page"));
+  add(wi("verdict")("thud", VD.inkA, undefined, 0.5, "the stamp presses: INFLATED"));
+  add(wi("verdict")("sub", VD.inkA, undefined, 0.42, "INFLATED"));
+  add(wi("verdict")("click", VD.holdTo + 1, undefined, 0.2, "the stamp lifts off the page"));
+  add(pk("verdict")("whooshsoft", VD.liftTo + 12, VD.goneAt, 0.16, "the stamp is drawn away"));
 
   // ★ ONE WHOOSH AT A TIME: a camera travel that peaks with an action's own whoosh is carried by the action's sound
   const MOVE = new Set(["swoosh", "whooshlong", "whooshsoft", "airwoosh", "lowwoosh"]);
