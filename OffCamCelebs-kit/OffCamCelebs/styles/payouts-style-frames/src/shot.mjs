@@ -1,0 +1,18 @@
+import { createRequire } from "module";
+import path from "path";
+import fs from "fs";
+const { chromium } = createRequire("/")("playwright");
+const [file, outDir] = process.argv.slice(2);
+fs.mkdirSync(outDir, { recursive: true });
+const b = await chromium.launch({ args: ["--no-sandbox"] });
+const p = await b.newPage({ viewport: { width: 3500, height: 2100 }, deviceScaleFactor: 1 });
+p.on("console", (m) => { if (m.type() === "error") console.log("console:", m.text()); });
+await p.goto("file://" + path.resolve(file));
+await p.evaluate(() => document.fonts.ready);
+await p.waitForTimeout(400);
+const fr = await p.$$(".frame");
+const base = path.basename(file, ".html");
+for (let i = 0; i < fr.length; i++) await fr[i].screenshot({ path: `${outDir}/${base}_${i + 1}.png` });
+await p.screenshot({ path: `${outDir}/${base}_sheet.png`, fullPage: true });
+await b.close();
+console.log(base, fr.length, "frames");

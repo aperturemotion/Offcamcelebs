@@ -1,0 +1,76 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+:root{--mint:#7df5c4;--khaki:#cdb974;--ink:#17150f}
+.frame{background:radial-gradient(75% 55% at 50% 42%,#fbf9f2 0%,#f1ede1 55%,#cfc9b8 100%);font-family:'Archivo';color:var(--ink)}
+.frame:after{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .08 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");mix-blend-mode:multiply;pointer-events:none}
+.card{position:absolute;left:110px;width:860px;height:470px;border-radius:34px;overflow:hidden;box-shadow:0 30px 50px rgba(40,34,10,.28),0 4px 0 rgba(255,255,255,.6) inset}
+.c1{background:radial-gradient(80% 90% at 50% 40%,#1d2f28,#0a120f)}
+.c2{background:radial-gradient(80% 90% at 50% 40%,#4a4226,#1c180c)}
+.c3{background:radial-gradient(80% 90% at 50% 40%,#25303f,#0d1118)}
+.row{position:absolute;left:0;width:100%;text-align:center;font-weight:500;font-size:62px;letter-spacing:-1px;white-space:nowrap}
+.row b{font-weight:800;padding:0 16px 2px;border-radius:10px;margin-left:6px}
+.row b.m{background:var(--mint);box-shadow:0 0 0 3px #17150f inset}
+.row b.k{background:var(--khaki);box-shadow:0 0 0 3px #17150f inset}
+.row i{font-style:normal;color:#8d8672;font-weight:400;margin:0 6px}
+.sub{position:absolute;left:0;width:100%;text-align:center;font-size:32px;color:#7d776a;font-weight:500}
+.word{position:absolute;left:0;width:100%;text-align:center;font-family:'Archivo Black';font-size:104px;color:#fff;-webkit-text-stroke:14px #17150f;paint-order:stroke fill;letter-spacing:-1px}
+.word span{position:relative}
+.tag{position:absolute;left:0;width:100%;top:150px;text-align:center;font-family:'JetBrains Mono';font-size:24px;letter-spacing:6px;color:#9a9483}
+
+/* objects */
+.ticket{position:absolute;left:150px;top:60px;width:560px;height:340px;border-radius:20px;background:linear-gradient(160deg,#fbf6e6,#e6dbb8);transform:rotate(-6deg);box-shadow:0 30px 40px rgba(0,0,0,.55);overflow:hidden}
+.ticket .hd{height:92px;background:linear-gradient(180deg,#d9392f,#b92a22);color:#fff6e8;font:400 46px/92px 'Archivo Black';letter-spacing:7px;text-align:center}
+.balls{display:flex;gap:14px;justify-content:center;margin-top:30px}
+.balls i{width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#e9e2cf 70%,#c9bf9f);box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),0 3px 5px rgba(0,0,0,.25);font:800 31px/74px 'Archivo';text-align:center;font-style:normal;color:#17150f}
+.balls i.r{background:radial-gradient(circle at 35% 30%,#ff7b6e,#d9392f 65%,#9d1f18);color:#fff}
+.ticket .ln{position:absolute;left:30px;right:30px;bottom:26px;display:flex;justify-content:space-between;font:500 22px 'JetBrains Mono';letter-spacing:2px;border-top:2px dashed #9c9172;padding-top:16px;color:#17150f}
+.neonS{position:absolute;right:46px;top:44px;font:900 44px 'Fraunces';color:#d9fff0;text-shadow:0 0 6px #7df5c4,0 0 22px #4fe6ad,0 0 60px rgba(79,230,173,.75);transform:rotate(5deg)}
+
+.stacks{position:absolute;left:0;right:0;bottom:60px;display:flex;justify-content:center;align-items:flex-end;gap:18px}
+.stk{width:150px;display:flex;flex-direction:column-reverse}
+.stk u{display:block;height:26px;margin-top:-3px;border-radius:4px;background:linear-gradient(180deg,#cfe3c4,#9fbd92 60%,#6f9165);box-shadow:0 2px 0 rgba(0,0,0,.35),inset 0 2px 0 rgba(255,255,255,.5);position:relative}
+.stk u:after{content:"";position:absolute;left:55px;width:40px;top:0;bottom:0;background:linear-gradient(180deg,#f6ecc6,#d6c486)}
+.chq{position:absolute;left:110px;top:90px;width:640px;height:290px;border-radius:10px;background:linear-gradient(165deg,#f4f8f1,#d5e2d2);transform:rotate(-4deg);box-shadow:0 30px 40px rgba(0,0,0,.55);padding:30px 36px;color:#1d2a22;font-family:'JetBrains Mono';font-size:21px;letter-spacing:1.5px}
+.chq:before{content:"";position:absolute;inset:12px;border:2px solid #9bb39f;border-radius:5px}
+.chq h5{font:800 28px 'Archivo';letter-spacing:3px;margin-bottom:26px}
+.chq .l{border-bottom:2px solid #6f8a76;padding:14px 0 6px;display:flex;justify-content:space-between;align-items:baseline}
+.chq .l b{font:900 50px 'Fraunces';letter-spacing:-1px}
+.chq .sig{position:absolute;right:44px;bottom:30px;font:400 40px 'Caveat';color:#23408f;transform:rotate(-4deg)}
+
+.count{position:absolute;left:0;width:100%;text-align:center;font-weight:500;font-size:190px;letter-spacing:-6px;line-height:1}
+.count small{display:block;font-size:34px;letter-spacing:0;color:#7d776a;margin-top:14px;font-weight:500}
+.vchip{display:inline-block;background:#17150f;color:var(--khaki);font:400 58px 'Archivo Black';letter-spacing:5px;padding:14px 38px 16px;border-radius:14px;transform:rotate(-2deg)}
+</style></head><body>
+
+<div class="frame">
+  <div class="tag">THE PAYOUTS | AUDIT 036</div>
+  <div class="card c1" style="top:250px"><div class="ticket"><div class="hd">POWERBALL</div><div class="balls"><i>07</i><i>19</i><i>33</i><i>48</i><i>61</i><i class="r">12</i></div><div class="ln"><span>NOV 4 2026</span><span>MONTVALE NJ</span></div></div></div>
+  <div class="row" style="top:742px">Headline <i>|</i><b class="m">$847,000,000</b></div>
+  <div class="sub" style="top:832px">as reported, November 2026</div>
+  <div class="word" style="top:930px">Headlines</div>
+  <div class="count" style="top:1150px;color:#c9c3b2">?<small>what actually reaches the bank</small></div>
+</div>
+
+<div class="frame">
+  <div class="tag">THE PAYOUTS | AUDIT 036</div>
+  <div class="card c1" style="top:250px"><div class="ticket"><div class="hd">POWERBALL</div><div class="balls"><i>07</i><i>19</i><i>33</i><i>48</i><i>61</i><i class="r">12</i></div><div class="ln"><span>NOV 4 2026</span><span>MONTVALE NJ</span></div></div></div>
+  <div class="row" style="top:742px">Headline <i>|</i><b class="m">$847,000,000</b></div>
+  <div class="sub" style="top:832px">30 payments over 29 years</div>
+  <div class="word" style="top:912px">cash</div>
+  <div class="row" style="top:1068px">Cash option <i>|</i><b class="k">$363,100,000</b></div>
+  <div class="card c2" style="top:1160px;height:400px"><div class="stacks">
+    <div class="stk"><u></u><u></u><u></u><u></u><u></u><u></u></div><div class="stk"><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></div><div class="stk"><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></div><div class="stk"><u></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></div><div class="stk"><u></u><u></u><u></u><u></u><u></u></div>
+  </div></div>
+</div>
+
+<div class="frame">
+  <div class="tag">THE PAYOUTS | AUDIT 036</div>
+  <div class="card c3" style="top:250px"><div class="chq"><h5>PAY TO THE ORDER OF</h5><div class="l"><span>THE TICKET HOLDER</span><b>≈$189.7M</b></div><div class="l" style="font-size:19px"><span>AFTER 37% FEDERAL, 10.75% NJ</span><span>EST.</span></div><div class="sig">The Payouts</div></div></div>
+  <div class="row" style="top:742px">Kept <i>|</i><b class="k">≈$190,000,000</b></div>
+  <div class="sub" style="top:832px">our estimate, top rates, no deductions</div>
+  <div class="word" style="top:912px">estimate</div>
+  <div class="count" style="top:1090px">22<span style="color:#b5ae9b">/100</span><small>cents kept per headline dollar</small></div>
+  <div class="abs" style="left:0;width:100%;top:1390px;text-align:center"><span class="vchip">INFLATED</span></div>
+  <div class="sub" style="top:1500px;font-size:36px;color:#17150f;font-weight:600">Send us who to audit next.</div>
+</div>
+</body></html>

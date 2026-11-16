@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+.frame{background:radial-gradient(85% 60% at 50% 50%,#fbf8ef 0%,#efe9d9 60%,#d3ccb8 100%);font-family:'Archivo'}
+.frame svg{position:absolute;inset:0}
+.word{position:absolute;left:0;width:100%;top:1340px;text-align:center;font-family:'Archivo Black';font-size:140px;color:#fff;letter-spacing:-2px;text-shadow:0 6px 0 #17150f,0 0 0 #17150f,6px 0 0 #17150f,-6px 0 0 #17150f,0 -6px 0 #17150f,4px 4px 0 #17150f,-4px 4px 0 #17150f,4px -4px 0 #17150f,-4px -4px 0 #17150f,0 16px 30px rgba(0,0,0,.45)}
+.tag{position:absolute;left:0;width:100%;top:150px;text-align:center;font-family:'JetBrains Mono';font-size:24px;letter-spacing:6px;color:#9a9483}
+.key{position:absolute;left:0;width:100%;top:1580px;text-align:center;font-size:30px;font-weight:500;color:#6f6a5c}
+.key b{display:inline-block;width:26px;height:26px;border-radius:5px;vertical-align:-3px;margin-right:10px;box-shadow:inset 0 -5px 0 rgba(0,0,0,.2)}
+</style></head><body>
+<div class="frame" id="f1"><div class="tag">THE PAYOUTS | AUDIT 036</div><svg viewBox="0 0 1080 1920"></svg><div class="word">Headlines</div><div class="key"><b style="background:#7df5c4"></b>one block = $10 million</div></div>
+<div class="frame" id="f2"><div class="tag">THE PAYOUTS | AUDIT 036</div><svg viewBox="0 0 1080 1920"></svg><div class="word">cash</div><div class="key"><b style="background:#cdb974"></b>what the lottery actually holds</div></div>
+<div class="frame" id="f3"><div class="tag">THE PAYOUTS | AUDIT 036</div><svg viewBox="0 0 1080 1920"></svg><div class="word">kept</div><div class="key" style="color:#17150f;font-weight:600;font-size:36px">Send us who to audit next.</div></div>
+<script>
+const W = 40, H = 23, D = 44, CX = 540, Y0 = 760;
+const P = (x, y, z = 0) => [CX + (x - y) * W, Y0 + (x + y) * H - z * D];
+const pts = (a) => a.map((p) => p.join(",")).join(" ");
+const shade = (hex, k) => { const n = parseInt(hex.slice(1), 16); const c = [n >> 16, (n >> 8) & 255, n & 255].map((v) => Math.max(0, Math.min(255, Math.round(v * k)))); return `rgb(${c})`; };
+function scene(id, build) {
+  const svg = document.querySelector(`#${id} svg`); const items = []; let out = "";
+  const api = {
+    block(x, y, z, col, o = {}) { items.push({ k: (x + y) * 100 + z, draw() {
+      const t = [P(x, y, z + 1), P(x + 1, y, z + 1), P(x + 1, y + 1, z + 1), P(x, y + 1, z + 1)], l = [P(x, y + 1, z + 1), P(x + 1, y + 1, z + 1), P(x + 1, y + 1, z), P(x, y + 1, z)], r = [P(x + 1, y, z + 1), P(x + 1, y + 1, z + 1), P(x + 1, y + 1, z), P(x + 1, y, z)];
+      if (o.ghost) return `<g fill="${col}" fill-opacity=".10" stroke="${shade(col, .6)}" stroke-opacity=".55" stroke-width="2" stroke-dasharray="6 6" stroke-linejoin="round"><polygon points="${pts(t)}"/><polygon points="${pts(l)}"/><polygon points="${pts(r)}"/></g>`;
+      return `<g stroke="${shade(col, .42)}" stroke-width="2" stroke-linejoin="round"><polygon points="${pts(l)}" fill="${shade(col, .78)}"/><polygon points="${pts(r)}" fill="${shade(col, .6)}"/><polygon points="${pts(t)}" fill="${col}"/><polygon points="${pts([P(x + .12, y + .12, z + 1), P(x + .88, y + .12, z + 1), P(x + .88, y + .88, z + 1), P(x + .12, y + .88, z + 1)])}" fill="${shade(col, 1.12)}" stroke="none" opacity=".55"/></g>`;
+    } }); },
+    pile(x0, y0, nx, ny, n, col, o) { let c = 0; for (let z = 0; c < n; z++) for (let y = 0; y < ny && c < n; y++) for (let x = 0; x < nx && c < n; x++, c++) api.block(x0 + x, y0 + y, z, col, o); },
+    peg(x, y, col) { items.push({ k: (x + y) * 100 + 50, draw() { const [sx, sy] = P(x, y, 0); return `<ellipse cx="${sx}" cy="${sy}" rx="20" ry="9" fill="#000" opacity=".25"/><rect x="${sx - 14}" y="${sy - 52}" width="28" height="54" rx="13" fill="${col}" stroke="${shade(col, .5)}" stroke-width="2"/><circle cx="${sx}" cy="${sy - 64}" r="15" fill="#f0d4b0" stroke="#8a6a44" stroke-width="2"/>`; } }); },
+    sign(x, y, z, lines, bg, fg, o = {}) { items.push({ k: (x + y) * 100 + 99, draw() { const [sx, sy] = P(x, y, 0); const w = o.w || 250, h = 34 + lines.length * 44, top = sy - z * D - h; let s = `<rect x="${sx - 5}" y="${top + h - 4}" width="10" height="${z * D + 4}" fill="#6b5a3a"/><rect x="${sx - w / 2}" y="${top}" width="${w}" height="${h}" rx="10" fill="${bg}" stroke="${shade(bg, .5)}" stroke-width="3"/><rect x="${sx - w / 2 + 6}" y="${top + 6}" width="${w - 12}" height="${h - 12}" rx="6" fill="none" stroke="${fg}" stroke-opacity=".35" stroke-width="2"/>`; lines.forEach((t, i) => { s += `<text x="${sx}" y="${top + 52 + i * 44}" text-anchor="middle" font-family="Archivo" font-weight="${i ? 800 : 600}" font-size="${i ? 40 : 28}" fill="${fg}" letter-spacing="${i ? 0 : 3}">${t}</text>`; }); return s; } }); },
+  };
+  // the baseplate
+  const N = 12, T = 0.5;
+  out += `<ellipse cx="540" cy="${Y0 + N * H + 60}" rx="560" ry="250" fill="#000" opacity=".16" filter="url(#blur)"/>`;
+  out += `<polygon points="${pts([P(0, N, 0), P(N, N, 0), P(N, N, -T), P(0, N, -T)])}" fill="#16302a"/><polygon points="${pts([P(N, 0, 0), P(N, N, 0), P(N, N, -T), P(N, 0, -T)])}" fill="#0f231e"/><polygon points="${pts([P(0, 0), P(N, 0), P(N, N), P(0, N)])}" fill="#27503f"/>`;
+  for (let i = 1; i < N; i++) out += `<line x1="${P(i, 0)[0]}" y1="${P(i, 0)[1]}" x2="${P(i, N)[0]}" y2="${P(i, N)[1]}" stroke="#2f5f4b" stroke-width="1.5"/><line x1="${P(0, i)[0]}" y1="${P(0, i)[1]}" x2="${P(N, i)[0]}" y2="${P(N, i)[1]}" stroke="#2f5f4b" stroke-width="1.5"/>`;
+  const board = build(api);
+  items.sort((a, b) => a.k - b.k); for (const it of items) out += it.draw();
+  svg.innerHTML = `<defs><filter id="blur"><feGaussianBlur stdDeviation="40"/></filter><filter id="glow" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>` + (board || "") + out;
+}
+const billboard = (title, big, neon) => `<rect x="300" y="640" width="14" height="210" fill="#3a3a3a"/><rect x="766" y="640" width="14" height="210" fill="#3a3a3a"/><rect x="150" y="330" width="780" height="320" rx="18" fill="#0b1411" stroke="#2b2b2b" stroke-width="8"/><text x="540" y="420" text-anchor="middle" font-family="JetBrains Mono" font-size="30" letter-spacing="10" fill="#8fa39a">${title}</text><text x="540" y="565" text-anchor="middle" font-family="Fraunces" font-weight="900" font-size="${neon ? 94 : 118}" letter-spacing="-2" fill="${neon ? "#d9fff0" : "#cdb974"}" ${neon ? 'filter="url(#glow)" stroke="#7df5c4" stroke-width="1.5"' : ""}>${big}</text>`;
+const MINT = "#7df5c4", KH = "#cdb974", RED = "#e2574b", OR = "#e79a4d";
+scene("f1", (s) => { s.pile(4, 3, 4, 4, 85, MINT); s.peg(2.5, 9.5, "#3b93e0"); s.peg(3.6, 10.4, "#e2574b"); s.peg(9.6, 9.2, "#8c6bd6"); s.peg(10.5, 7.6, "#e79a4d"); s.peg(8.4, 10.6, "#4fae7a"); return billboard("HEADLINES SAID", "$847,000,000", true); });
+scene("f2", (s) => { s.pile(2, 2, 4, 4, 85, MINT, { ghost: true }); s.pile(7, 6, 3, 3, 36, KH); s.sign(10.6, 9.6, 2.2, ["CASH OPTION", "$363.1M"], "#cdb974", "#17150f"); s.peg(5.2, 10.3, "#3b93e0"); s.peg(6.3, 10.9, "#e2574b"); return billboard("HEADLINES SAID", "$847,000,000", true); });
+scene("f3", (s) => { s.pile(1, 5, 2, 2, 13, RED); s.sign(0.6, 7.6, 1.6, ["IRS 37%", "-$134M"], "#e2574b", "#fff", { w: 220 }); s.pile(8, 1, 2, 2, 4, OR); s.sign(10.6, 2.4, 1.8, ["NJ 10.75%", "-$39M"], "#e79a4d", "#17150f", { w: 240 }); s.pile(6, 7, 3, 3, 19, KH); s.sign(9.9, 10.3, 2, ["KEPT (EST.)", "≈$190M"], "#cdb974", "#17150f", { w: 250 }); s.peg(4.6, 10.4, "#3b93e0"); s.peg(3.2, 9.2, "#8c6bd6"); return billboard("OUR RATING", "INFLATED", false); });
+</script>
+</body></html>

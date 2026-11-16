@@ -1,0 +1,143 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+.frame{background:radial-gradient(120% 90% at 50% 45%,#1a1a1d 0%,#0b0b0d 70%,#050506 100%)}
+svg{position:absolute;inset:0;width:1080px;height:1920px}
+.hand{font-family:'Patrick Hand';fill:#1c1c1e}
+.mark{font-family:'Permanent Marker';fill:#1c1c1e}
+.tape{position:absolute;left:90px;top:150px;background:#111;color:#f3f1ea;font-family:'Archivo';font-weight:800;font-size:54px;letter-spacing:.5px;padding:16px 34px 18px;border-radius:6px;transform:rotate(-1.2deg);box-shadow:0 10px 24px rgba(0,0,0,.55),inset 0 2px 0 rgba(255,255,255,.12),inset 0 -3px 0 rgba(0,0,0,.6)}
+.tape i{font-weight:400;font-style:italic;font-size:40px;opacity:.85}
+.tape b{color:#7df5c4;font-weight:800}
+.tape.k b{color:#d6c486}
+.tag{position:absolute;right:60px;top:60px;font-family:'JetBrains Mono';font-size:22px;color:#77777c;letter-spacing:2px}
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+  <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>
+  <filter id="rough2" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3"/></filter>
+  <filter id="ink" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.1 1.25" result="a"/><feComposite in="SourceGraphic" in2="a" operator="in" result="c"/><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="w"/><feDisplacementMap in="c" in2="w" scale="5"/></filter>
+  <filter id="paper"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="2" seed="7"/><feColorMatrix type="matrix" values="0 0 0 0 0.35  0 0 0 0 0.32  0 0 0 0 0.25  0 0 0 0.09 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#000" flood-opacity=".7"/></filter>
+  <filter id="stamp" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" seed="11" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.75" result="a"/><feComposite in="SourceGraphic" in2="a" operator="in"/></filter>
+  <pattern id="dots" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1.6" fill="#b9b6ab"/></pattern>
+  <pattern id="hatchMint" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(38)"><rect width="14" height="14" fill="#7df5c4" opacity=".55"/><rect width="7" height="14" fill="#5fe9b2" opacity=".75"/></pattern>
+  <pattern id="hatchRed" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="12" height="12" fill="#e8483c"/><rect width="5" height="12" fill="#d5362b"/></pattern>
+  <pattern id="hatchKhaki" width="13" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="13" height="13" fill="#cdb974"/><rect width="6" height="13" fill="#bfa962"/></pattern>
+  <pattern id="hatchBlue" width="13" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="13" height="13" fill="#3b93e0"/><rect width="6" height="13" fill="#2c80cd"/></pattern>
+  <pattern id="hatchGrey" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="10" height="10" fill="#e4e1d8"/><rect width="2" height="10" fill="#c9c6bc"/></pattern>
+
+  <!-- THE SHEET: 1000 x 1400, drawn in layers l1 (the headline), l2 (the audit), l3 (the verdict) -->
+  <g id="sheet">
+    <g filter="url(#shadow)"><rect width="1000" height="1700" fill="#f6f3ea"/></g>
+    <rect width="1000" height="1700" fill="url(#dots)"/>
+    <rect width="1000" height="1700" fill="#fff" filter="url(#paper)"/>
+
+    <g class="l1">
+      <!-- the ticket -->
+      <g transform="translate(78 92) rotate(-3 220 150)">
+        <g filter="url(#ink)">
+          <rect x="0" y="0" width="440" height="290" rx="14" fill="#fffdf6"/>
+          <rect x="0" y="0" width="440" height="78" rx="14" fill="url(#hatchRed)"/>
+          <rect x="0" y="60" width="440" height="18" fill="url(#hatchRed)"/>
+          <rect x="24" y="222" width="250" height="44" fill="url(#hatchGrey)"/>
+        </g>
+        <g filter="url(#rough)" fill="none" stroke="#1c1c1e" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <rect x="0" y="0" width="440" height="290" rx="14"/>
+          <path d="M0 78H440"/>
+          <circle cx="62" cy="150" r="30"/><circle cx="136" cy="150" r="30"/><circle cx="210" cy="150" r="30"/><circle cx="284" cy="150" r="30"/>
+          <path d="M24 222h250v44H24z" stroke-width="3"/>
+          <path d="M300 230h110M300 246h80M300 262h100" stroke-width="3"/>
+        </g>
+        <g filter="url(#ink)"><circle cx="372" cy="150" r="30" fill="#e8483c"/></g>
+        <circle cx="372" cy="150" r="30" fill="none" stroke="#1c1c1e" stroke-width="5" filter="url(#rough)"/>
+        <text class="mark" x="220" y="54" text-anchor="middle" font-size="44" style="fill:#fffdf6" letter-spacing="4">POWERBALL</text>
+        <g class="mark" font-size="32" text-anchor="middle"><text x="62" y="162">07</text><text x="136" y="162">19</text><text x="210" y="162">33</text><text x="284" y="162">48</text><text x="372" y="162" style="fill:#fffdf6">12</text></g>
+        <text class="hand" x="34" y="254" font-size="27">NOV 4 2026 | NJ</text>
+      </g>
+      <!-- notes beside the ticket -->
+      <g class="hand" font-size="34">
+        <text x="580" y="150">one ticket,</text><text x="580" y="192">Montvale NJ</text>
+        <text x="580" y="290" font-size="30" style="fill:#55555a">advertised prize =</text><text x="580" y="328" font-size="30" style="fill:#55555a">29 years of payments</text>
+      </g>
+      <path d="M572 170C545 180 535 200 528 216" fill="none" stroke="#1c1c1e" stroke-width="3.5" stroke-linecap="round" filter="url(#rough2)"/>
+      <path d="M520 200l7 20 17-12" fill="none" stroke="#1c1c1e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#rough2)"/>
+      <!-- the headline number, highlighted mint -->
+      <text class="hand" x="82" y="468" font-size="34" style="fill:#55555a" letter-spacing="3">HEADLINES SAID</text>
+      <g filter="url(#ink)"><path d="M70 506L842 494L850 592L64 604Z" fill="#7df5c4"/><path d="M70 520L842 508L846 560L66 572Z" fill="#62ecb6" opacity=".7"/></g>
+      <text class="mark" x="84" y="584" font-size="102" letter-spacing="1" filter="url(#rough2)">$847,000,000</text>
+    </g>
+
+    <g class="l2">
+      <g fill="none" stroke="#1c1c1e" stroke-width="4" stroke-linecap="round" filter="url(#rough)"><path d="M66 1420H940"/></g>
+      <g filter="url(#ink)"><rect x="96" y="793" width="140" height="627" fill="url(#hatchMint)"/></g>
+      <g filter="url(#ink)"><rect x="306" y="1151" width="140" height="269" fill="url(#hatchKhaki)"/></g>
+      <g filter="url(#ink)"><rect x="516" y="1236" width="140" height="184" fill="url(#hatchKhaki)"/><rect x="516" y="1151" width="140" height="85" fill="url(#hatchRed)"/></g>
+      <g filter="url(#ink)"><rect x="726" y="1280" width="140" height="140" fill="url(#hatchBlue)"/><rect x="726" y="1151" width="140" height="129" fill="url(#hatchRed)"/></g>
+      <g fill="none" stroke="#1c1c1e" stroke-width="5" stroke-linejoin="round" filter="url(#rough)">
+        <rect x="96" y="793" width="140" height="627"/><rect x="306" y="1151" width="140" height="269"/><rect x="516" y="1151" width="140" height="269"/><path d="M516 1236H656"/><rect x="726" y="1151" width="140" height="269"/><path d="M726 1280H866"/>
+      </g>
+      <path d="M240 800C340 812 384 960 378 1124" fill="none" stroke="#1c1c1e" stroke-width="3.5" stroke-dasharray="4 12" stroke-linecap="round" filter="url(#rough2)"/>
+      <path d="M363 1106l15 26 16-24" fill="none" stroke="#1c1c1e" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <g class="hand" font-size="33" text-anchor="middle">
+        <text x="166" y="774" class="mark" font-size="36">$847M</text>
+        <text x="530" y="1010" style="fill:#55555a" font-size="34">the cash option:</text><text x="530" y="1052" style="fill:#55555a" font-size="34">what the lottery</text><text x="530" y="1094" style="fill:#55555a" font-size="34">has in the bank</text>
+        <text x="376" y="1474" class="mark" font-size="36">$363.1M</text>
+        <text x="586" y="1474" class="mark" font-size="36">$247M</text>
+        <text x="796" y="1474" class="mark" font-size="36" style="fill:#2c6fb5">≈$190M</text>
+        <text x="166" y="1474" style="fill:#55555a" font-size="31">advertised</text>
+        <text x="376" y="1512" style="fill:#55555a" font-size="29">cash</text>
+        <text x="586" y="1512" style="fill:#55555a" font-size="29">after withholding</text>
+        <text x="796" y="1512" style="fill:#55555a" font-size="29">we estimate</text>
+      </g>
+      <g class="hand" font-size="30" text-anchor="middle" style="fill:#fffdf6"><text x="586" y="1190">24% IRS</text><text x="586" y="1222">8% NJ</text><text x="796" y="1196">top rates</text><text x="796" y="1230">37% IRS</text><text x="796" y="1264">10.75% NJ</text></g>
+    </g>
+
+    <g class="l3">
+      <g id="sq" transform="translate(96 1572)"></g>
+      <text class="hand" x="96" y="1654" font-size="33">about 22¢ of every headline dollar reaches the bank</text>
+      <g transform="translate(650 880) rotate(-11)" filter="url(#stamp)">
+        <rect x="-215" y="-72" width="430" height="144" rx="10" fill="none" stroke="#d2281e" stroke-width="10"/>
+        <rect x="-199" y="-56" width="398" height="112" rx="5" fill="none" stroke="#d2281e" stroke-width="3"/>
+        <text x="0" y="25" text-anchor="middle" font-family="Archivo Black" font-size="66" fill="#d2281e" letter-spacing="5">INFLATED</text>
+      </g>
+      <text class="hand" x="650" y="786" font-size="32" text-anchor="middle" style="fill:#c92f25" transform="rotate(-11 650 880)">our rating</text>
+    </g>
+  </g>
+
+  <!-- a marker pen -->
+  <g id="pen">
+    <g transform="rotate(38)">
+      <rect x="-22" y="0" width="44" height="560" rx="20" fill="#18181a"/><rect x="-22" y="0" width="14" height="560" rx="7" fill="#2c2c30"/>
+      <rect x="-24" y="330" width="48" height="26" fill="#7df5c4"/>
+      <path d="M-20 4L-9 -46H9L20 4Z" fill="#232326"/><path d="M-9 -46L-5 -70H6L9 -46Z" fill="#7df5c4"/>
+    </g>
+  </g>
+</defs></svg>
+
+<div class="frame" data-view="40 -170 860 1529" data-layers="l1">
+  <svg class="stage"></svg>
+  <svg viewBox="0 0 1080 1920"><g transform="translate(1000 1500)" filter="url(#shadow)"><use href="#pen" transform="scale(1.5)"/></g></svg>
+  <div class="tape" style="top:70px"><i>The</i> headlines <i>said</i> <b>$847 million.</b></div>
+</div>
+
+<div class="frame" data-view="262 640 700 1244" data-layers="l1 l2">
+  <svg class="stage"></svg>
+  <div class="tape k" style="top:140px"><i>The</i> cash option <i>was</i> <b>$363.1 million.</b></div>
+</div>
+
+<div class="frame" data-view="-130 -260 1260 2240" data-layers="l1 l2 l3">
+  <svg class="stage"></svg>
+  <div class="tape" style="top:95px;left:250px"><i>Our rating:</i> Inflated.</div>
+  <div class="tag" style="top:auto;bottom:170px;right:auto;left:0;width:100%;text-align:center;font-size:30px;color:#9a9aa0;letter-spacing:1px;font-family:'Archivo';font-weight:500">Send us who to audit next.</div>
+</div>
+
+<script>
+const sq = document.getElementById("sq");
+for (let i = 0; i < 50; i++) { const kept = i < 11; sq.insertAdjacentHTML("beforeend", `<rect x="${i * 16.4}" y="0" width="12" height="34" fill="${kept ? "#3b93e0" : "#d8d5cb"}" stroke="#1c1c1e" stroke-width="1.6"/>`); }
+for (const f of document.querySelectorAll(".frame")) {
+  const s = f.querySelector(".stage"); s.setAttribute("viewBox", f.dataset.view);
+  const g = document.getElementById("sheet").cloneNode(true); g.removeAttribute("id");
+  for (const l of ["l1", "l2", "l3"]) if (!f.dataset.layers.includes(l)) g.querySelectorAll("." + l).forEach((e) => e.remove());
+  s.appendChild(g);
+}
+</script>
+</body></html>

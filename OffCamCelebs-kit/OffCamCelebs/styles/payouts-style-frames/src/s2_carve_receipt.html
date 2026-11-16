@@ -1,0 +1,84 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+:root{--mint:#7df5c4;--khaki:#cdb974;--paper:#efe6cc;--ink:#1d1a12}
+.frame{background:radial-gradient(90% 60% at 50% 38%,#17241f 0%,#0c1411 55%,#060a08 100%);color:#f2efe6;font-family:'Archivo'}
+.frame:after{content:"";position:absolute;inset:0;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");mix-blend-mode:overlay;pointer-events:none}
+.brand{position:absolute;top:150px;left:0;width:100%;text-align:center;font-family:'JetBrains Mono';font-size:24px;letter-spacing:6px;color:#8fa39a}
+.brand b{display:block;margin:0 auto 14px;width:74px;height:74px;border-radius:50%;border:2.5px solid var(--khaki);color:var(--khaki);font-family:'Fraunces';font-weight:900;font-size:40px;line-height:68px;letter-spacing:0}
+.pill{display:inline-block;border:2px solid var(--khaki);color:var(--khaki);border-radius:40px;padding:10px 26px 11px;font-family:'JetBrains Mono';font-size:27px;letter-spacing:3px}
+.neon{font-family:'Fraunces';font-weight:900;color:#d9fff0;text-shadow:0 0 6px #7df5c4,0 0 22px #4fe6ad,0 0 60px rgba(79,230,173,.75),0 0 130px rgba(79,230,173,.45);letter-spacing:-2px}
+.cap{position:absolute;left:90px;right:120px;font-family:'Fraunces';font-weight:600;font-size:64px;line-height:1.12;letter-spacing:-.5px}
+.cap em{font-style:italic;font-weight:400;color:#b9c6c0}
+.cap b{color:var(--mint);font-weight:700}
+.cap k{color:var(--khaki)}
+.foot{position:absolute;left:0;width:100%;bottom:120px;text-align:center;font-family:'JetBrains Mono';font-size:19px;letter-spacing:2px;color:#56665f}
+
+/* the ticket */
+.ticket{position:absolute;left:230px;top:330px;width:620px;height:380px;border-radius:22px;background:linear-gradient(160deg,#fbf6e6 0%,#efe6cc 60%,#dccfa8 100%);transform:perspective(1600px) rotateX(18deg) rotateZ(-7deg);box-shadow:0 60px 80px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.2),inset 0 2px 0 rgba(255,255,255,.7);color:var(--ink);overflow:hidden}
+.ticket .hd{height:104px;background:linear-gradient(180deg,#d9392f,#b92a22);color:#fff6e8;font-family:'Archivo Black';font-size:52px;letter-spacing:8px;text-align:center;line-height:104px}
+.balls{display:flex;gap:18px;justify-content:center;margin-top:34px}
+.balls i{width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#e9e2cf 70%,#c9bf9f);box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),0 3px 5px rgba(0,0,0,.25);font:800 36px/84px 'Archivo';text-align:center;font-style:normal}
+.balls i.r{background:radial-gradient(circle at 35% 30%,#ff7b6e,#d9392f 65%,#9d1f18);color:#fff}
+.ticket .ln{position:absolute;left:36px;right:36px;bottom:34px;display:flex;justify-content:space-between;font-family:'JetBrains Mono';font-size:25px;letter-spacing:2px;border-top:2px dashed #9c9172;padding-top:20px}
+
+/* the receipt */
+.slot{position:absolute;left:150px;top:420px;width:780px;height:46px;border-radius:23px;background:linear-gradient(180deg,#050807,#1b2924);box-shadow:inset 0 6px 14px #000,0 2px 0 rgba(255,255,255,.08)}
+.rc{position:absolute;left:190px;top:442px;width:700px;background:var(--paper);color:var(--ink);font-family:'JetBrains Mono';padding:54px 46px 60px;box-shadow:0 40px 70px rgba(0,0,0,.55);
+ -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 18px) no-repeat,radial-gradient(circle at 14px 0,#000 13px,transparent 14px) bottom left/28px 18px repeat-x;mask:linear-gradient(#000 0 0) top/100% calc(100% - 18px) no-repeat,conic-gradient(from 135deg at 50% 0,#000 90deg,transparent 0) bottom left/28px 18px repeat-x}
+.rc:before{content:"";position:absolute;left:0;right:0;top:0;height:70px;background:linear-gradient(180deg,rgba(0,0,0,.45),transparent)}
+.rc h4{text-align:center;font-size:25px;letter-spacing:5px;color:#8c6b1f;font-weight:700;margin-bottom:30px}
+.rc .r{display:flex;justify-content:space-between;align-items:baseline;font-size:31px;padding:17px 0;letter-spacing:1px}
+.rc .r s{flex:1;border-bottom:3px dotted #b3a988;margin:0 14px;transform:translateY(-6px);text-decoration:none}
+.rc .r small{display:block;font-size:20px;color:#7b735c;letter-spacing:1px;margin-top:4px}
+.rc .r.h span:last-child{background:var(--mint);padding:2px 10px;margin-right:-10px}
+.rc .cut{border-top:3px dashed #9c9172;margin:22px 0 26px}
+.rc .k{display:flex;justify-content:space-between;align-items:baseline;font-family:'Archivo';font-weight:800;font-size:44px;color:#7a5a12}
+.rc .k b{font-family:'Fraunces';font-weight:900;font-size:76px;letter-spacing:-2px;color:#1d1a12}
+.rc .n{text-align:center;font-size:20px;letter-spacing:3px;color:#7b735c;margin-top:30px}
+
+/* the verdict plaque */
+.plq{position:absolute;left:150px;top:650px;width:780px;padding:56px 0 62px;text-align:center;border-radius:14px;background:linear-gradient(170deg,#e0cd8a 0%,#cdb974 45%,#a8944f 100%);box-shadow:0 50px 80px rgba(0,0,0,.6),inset 0 3px 0 rgba(255,255,255,.55),inset 0 -5px 0 rgba(0,0,0,.25);color:#1d1a12}
+.plq:before,.plq:after{content:"";position:absolute;top:22px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3e6b0,#7d6a2e);box-shadow:0 2px 3px rgba(0,0,0,.4)}
+.plq:before{left:24px}.plq:after{right:24px}
+.plq small{display:block;font-family:'JetBrains Mono';font-size:26px;letter-spacing:8px;margin-bottom:10px;color:#5a4a1a}
+.plq b{font-family:'Fraunces';font-weight:900;font-size:150px;letter-spacing:-4px;line-height:1}
+</style></head><body>
+
+<div class="frame">
+  <div class="brand"><b>P</b>THE PAYOUTS | AUDIT 036</div>
+  <div class="ticket"><div class="hd">POWERBALL</div><div class="balls"><i>07</i><i>19</i><i>33</i><i>48</i><i>61</i><i class="r">12</i></div><div class="ln"><span>NOV 4 2026</span><span>MONTVALE NJ</span></div></div>
+  <div class="abs" style="left:90px;top:800px"><span class="pill">HEADLINES SAID</span></div>
+  <div class="neon abs" style="left:84px;top:868px;font-size:122px">$847,000,000</div>
+  <div class="cap" style="top:1090px">The <b>jackpot</b> was $847 million. <em>Here's what the documents say</em> reaches the bank.</div>
+  <div class="foot">ESTIMATES ARE LABELLED | SOURCES IN THE CAPTION</div>
+</div>
+
+<div class="frame">
+  <div class="brand"><b>P</b>THE PAYOUTS | AUDIT 036</div>
+  <div class="abs" style="left:0;width:100%;top:300px;text-align:center"><span class="neon" style="font-size:74px;letter-spacing:-1px">$847,000,000</span></div>
+  <div class="slot"></div>
+  <div class="rc">
+    <h4>THE PAYOUTS | THE CARVE</h4>
+    <div class="r h"><span>ADVERTISED</span><s></s><span>$847,000,000</span></div>
+    <div class="r"><span>CASH OPTION<small>multi-state lottery assoc., nov 2026</small></span><s></s><span>$363,100,000</span></div>
+    <div class="r"><span>FEDERAL 37%</span><s></s><span>-$134,347,000</span></div>
+    <div class="r"><span>NEW JERSEY 10.75%</span><s></s><span>-$39,033,250</span></div>
+    <div class="cut"></div>
+    <div class="k"><span>KEPT</span><b>≈$189.7M</b></div>
+    <div class="n">OUR ESTIMATE | TOP RATES | NO DEDUCTIONS</div>
+  </div>
+  <div class="cap" style="top:1400px;font-size:58px;text-align:center;left:120px">We estimate <k>about $190 million.</k></div>
+  <div class="foot">ESTIMATES ARE LABELLED | SOURCES IN THE CAPTION</div>
+</div>
+
+<div class="frame">
+  <div class="brand"><b>P</b>THE PAYOUTS | AUDIT 036</div>
+  <div class="abs" style="left:0;width:100%;top:400px;text-align:center"><span class="neon" style="font-size:96px;letter-spacing:-1px;opacity:.9">$847,000,000</span></div>
+  <div class="abs" style="left:0;width:100%;top:540px;text-align:center;font-family:'JetBrains Mono';font-size:26px;letter-spacing:6px;color:#8fa39a">THE HEADLINE, AS THE MONEY THE WINNER GETS</div>
+  <div class="plq"><small>OUR RATING</small><b>Inflated.</b></div>
+  <div class="abs" style="left:0;width:100%;top:1010px;text-align:center"><span class="pill">≈22¢ KEPT PER HEADLINE DOLLAR | EST.</span></div>
+  <div class="cap" style="top:1120px;font-size:44px;font-weight:400;text-align:center;left:130px;right:130px;color:#b9c6c0;line-height:1.25">In fairness: the annuity does pay the full $847 million, before tax, over 29 years.</div>
+  <div class="cap" style="top:1330px;font-size:60px;text-align:center;left:120px">Send us who to <b>audit next.</b></div>
+  <div class="foot">ESTIMATES ARE LABELLED | SOURCES IN THE CAPTION</div>
+</div>
+</body></html>

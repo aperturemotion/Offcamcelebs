@@ -2134,6 +2134,14 @@ the rest is provisional until the user reacts — confirmed items then become nu
 _Log every OffCamCelebs preference change and every video build here with a date. Nothing about
 100BasisPoints / Style 3 goes in this file._
 
+- **2026-11-16: THE CHANNEL IS RENAMED "THE PAYOUTS" AND GOES TOP-FUNNEL.** Posts now audit one famous MONEY HEADLINE with
+  one big number (jackpots, deferred contracts, "up to" sales, valuations, transfer fees, box office, fight purses) and find
+  the real number behind it. Mint neon marks THE HEADLINE NUMBER as reported; khaki plaques stay the documented figures. A
+  famous face keeps slide 1; with no person, slide 1 is the headline number on a rendered object that is the thing itself;
+  never name or show private individuals. Captions open "Headlines said…". Timur is choosing a NEW STYLE for the Reels:
+  five candidates, each adapted (never copied) from an over-performing account, three frames each, are in
+  `styles/payouts-style-frames/` (README there). His pick is recorded here when he makes it.
+
 - **2026-11-15 (Video 035 "The Real Jackpot", Timur's first review): "Great, you stuck to the styles."** Two notes, standing:
   - **A stamp never carries its word on its own body** ("inflated is written on top of the stamp itself. Just remove that,
     fix the stamp"): the index label on a stamp's mount is a blank ruled frame; the word exists only as the ink it leaves.

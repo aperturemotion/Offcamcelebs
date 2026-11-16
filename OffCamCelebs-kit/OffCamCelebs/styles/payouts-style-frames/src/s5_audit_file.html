@@ -1,0 +1,85 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+:root{--mint:#7df5c4;--khaki:#d6c486}
+.frame{background:#07090b;font-family:'Archivo';color:#f3f1ea}
+.win{position:absolute;left:40px;top:150px;width:1000px;height:560px;border-radius:26px;overflow:hidden;box-shadow:0 0 0 2px #1d2227}
+.win .ex{position:absolute;left:26px;top:24px;font:500 22px 'JetBrains Mono';letter-spacing:4px;background:rgba(7,9,11,.78);color:#cfd6d2;padding:8px 16px;border-radius:8px}
+.win .wm{position:absolute;right:26px;bottom:22px;font:700 22px 'Archivo';letter-spacing:4px;color:rgba(255,255,255,.55)}
+.w1{background:radial-gradient(70% 90% at 50% 45%,#1a2c25,#07100d)}
+.w2{background:radial-gradient(70% 90% at 50% 45%,#3a3423,#12100a)}
+.w3{background:radial-gradient(70% 90% at 50% 45%,#232c38,#0a0d12)}
+.neon{font-family:'Fraunces';font-weight:900;color:#d9fff0;text-shadow:0 0 6px #7df5c4,0 0 22px #4fe6ad,0 0 60px rgba(79,230,173,.75),0 0 130px rgba(79,230,173,.45);letter-spacing:-2px}
+.signbox{position:absolute;left:110px;top:150px;width:780px;height:260px;border-radius:16px;background:#050807;border:6px solid #2a2f2c;text-align:center;box-shadow:0 30px 50px rgba(0,0,0,.6)}
+.signbox small{display:block;font:500 24px 'JetBrains Mono';letter-spacing:10px;color:#8fa39a;margin:34px 0 6px}
+.doc{position:absolute;left:170px;top:70px;width:660px;height:560px;background:#f4efe0;color:#1d1a12;transform:rotate(-2.5deg);padding:44px 48px;box-shadow:0 30px 50px rgba(0,0,0,.6);font-family:'Fraunces'}
+.doc h6{font:700 25px 'Archivo';letter-spacing:4px;border-bottom:3px solid #1d1a12;padding-bottom:12px;margin-bottom:22px}
+.doc p{font-size:25px;line-height:1.45;color:#4a4636}
+.doc .hl{display:flex;justify-content:space-between;font:600 30px 'JetBrains Mono';margin:16px 0;padding:10px 12px}
+.doc .hl.k{background:#d6c486}
+.doc .hl.m{background:var(--mint)}
+.tape{position:absolute;left:280px;top:40px;width:440px;height:520px;background:#f6f2e6;color:#1d1a12;font:500 30px/1.9 'JetBrains Mono';padding:30px 36px;transform:rotate(3deg);box-shadow:0 30px 50px rgba(0,0,0,.6)}
+.tape div{display:flex;justify-content:space-between}
+.tape hr{border:0;border-top:3px dashed #1d1a12;margin:10px 0}
+.stamp{position:absolute;left:520px;top:300px;border:9px solid #d2281e;color:#d2281e;font:400 70px 'Archivo Black';letter-spacing:5px;padding:6px 26px 10px;border-radius:10px;transform:rotate(-12deg);}
+
+.file{position:absolute;left:70px;right:110px;top:770px}
+.file .hd{display:flex;justify-content:space-between;font:500 23px 'JetBrains Mono';letter-spacing:5px;color:#6d7a75;border-bottom:2px solid #1d2227;padding-bottom:18px;margin-bottom:26px}
+.ln{display:flex;gap:26px;margin-bottom:26px;font-size:47px;line-height:1.18;font-weight:600;letter-spacing:-.3px}
+.ln n{font:500 23px 'JetBrains Mono';color:#4b5652;padding-top:14px;letter-spacing:2px;min-width:38px}
+.ln.past{color:#59625f;font-size:36px;font-weight:500;margin-bottom:16px}
+.ln.past n{padding-top:8px}
+.ln.past b,.ln.past k{color:inherit!important}
+.ln.next{color:transparent;font-size:36px;margin-bottom:16px}
+.ln.next span{background:#12171a;border-radius:8px}
+.ln b{color:var(--mint);font-weight:800}
+.ln k{color:var(--khaki);font-weight:800}
+.ln em{font-style:italic;font-weight:400;color:#aab3af}
+.bar{position:absolute;left:70px;right:110px;top:1500px;display:flex;gap:10px}
+.bar i{flex:1;height:8px;border-radius:4px;background:#1d2227}
+.bar i.on{background:var(--khaki)}
+.bar i.m{background:var(--mint)}
+.so{position:absolute;left:70px;top:1540px;font:500 30px 'Archivo';color:#8d9793}
+</style></head><body>
+
+<div class="frame">
+  <div class="win w1"><div class="signbox"><small>JACKPOT</small><span class="neon" style="font-size:112px">$847,000,000</span></div><div class="ex">EXHIBIT A | THE HEADLINE</div><div class="wm">THE PAYOUTS</div></div>
+  <div class="file">
+    <div class="hd"><span>AUDIT 036 | POWERBALL, NOV 4 2026</span><span>1/6</span></div>
+    <div class="ln"><n>01</n><span>Headlines said one ticket won <b>$847 million.</b></span></div>
+    <div class="ln next"><n>02</n><span>That figure is the annuity: 30 payments.</span></div>
+    <div class="ln next"><n>03</n><span>The cash option was far smaller.</span></div>
+    <div class="ln next"><n>04</n><span>Then the IRS takes its share first.</span></div>
+    <div class="ln next"><n>05</n><span>And New Jersey takes its own.</span></div>
+    <div class="ln next"><n>06</n><span>We estimate what is left over.</span></div>
+  </div>
+  <div class="bar"><i class="m"></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+
+<div class="frame">
+  <div class="win w2"><div class="doc"><h6>PRIZE ANNOUNCEMENT</h6><p>Estimated jackpot for the drawing of November 4, 2026:</p><div class="hl m"><span>ANNUITY</span><span>$847,000,000</span></div><div class="hl k"><span>CASH VALUE</span><span>$363,100,000</span></div><p>The annuity is paid as 30 graduated payments over 29 years.</p></div><div class="ex">EXHIBIT B | THE PRIZE NOTICE</div><div class="wm">THE PAYOUTS</div></div>
+  <div class="file">
+    <div class="hd"><span>AUDIT 036 | POWERBALL, NOV 4 2026</span><span>3/6</span></div>
+    <div class="ln past"><n>01</n><span>Headlines said one ticket won $847 million.</span></div>
+    <div class="ln past"><n>02</n><span>That figure is the annuity: 30 payments over 29 years.</span></div>
+    <div class="ln"><n>03</n><span>The cash option, <em>the money that exists today,</em> was <k>$363.1 million.</k></span></div>
+    <div class="ln next"><n>04</n><span>Then the IRS takes its share first.</span></div>
+    <div class="ln next"><n>05</n><span>And New Jersey takes its own.</span></div>
+    <div class="ln next"><n>06</n><span>We estimate what is left over.</span></div>
+  </div>
+  <div class="bar"><i class="m"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div>
+</div>
+
+<div class="frame">
+  <div class="win w3"><div class="tape"><div><span>CASH</span><span>363.1</span></div><div><span>IRS 37%</span><span>-134.3</span></div><div><span>NJ 10.75%</span><span>-39.0</span></div><hr><div style="font-weight:700;font-size:38px"><span>KEPT</span><span>≈189.7</span></div><div style="font-size:20px;letter-spacing:2px;color:#7b735c"><span>$ MILLIONS | OUR ESTIMATE</span></div></div><div class="stamp">INFLATED</div><div class="ex">EXHIBIT C | THE SUM</div><div class="wm">THE PAYOUTS</div></div>
+  <div class="file">
+    <div class="hd"><span>AUDIT 036 | POWERBALL, NOV 4 2026</span><span>6/6</span></div>
+    <div class="ln past"><n>03</n><span>The cash option was $363.1 million.</span></div>
+    <div class="ln past"><n>04</n><span>The top federal rate is 37%.</span></div>
+    <div class="ln past"><n>05</n><span>New Jersey's top rate is 10.75%.</span></div>
+    <div class="ln"><n>06</n><span>We estimate <k>about $190 million</k> is kept. <em>Our rating:</em> Inflated.</span></div>
+    <div class="ln past" style="margin-top:34px;color:#8d9793"><n>&nbsp;</n><span>In fairness: the annuity does pay the full $847 million, before tax.</span></div>
+  </div>
+  <div class="bar"><i class="m"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div>
+  <div class="so">Send us who to audit next.</div>
+</div>
+</body></html>
