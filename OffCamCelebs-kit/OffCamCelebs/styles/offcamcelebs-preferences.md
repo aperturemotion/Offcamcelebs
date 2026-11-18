@@ -2173,6 +2173,11 @@ _Log every OffCamCelebs preference change and every video build here with a date
       voice (our 5.5 dB bed rule already matches); the longest pauses, 0.8–0.9 s, are the turn cards; the film ends
       0.6–0.9 s after the last word.
     - **P10 NO CHROME.** No logo bug, no lower third, no progress bar, no end card of their own.
+    - **P11 ★★★ NO 2-D VISUALS, ALL 3-D, IN HYPERFRAMES** (Timur, 2026-11-18, on 037: "No 2D visuals, all 3D. Use
+      hyperframes"). Every visual is a real 3-D render inside the HyperFrames composition: objects, signs, figures,
+      charts, stamps, highlights, glows, and the TURN CARDS too (solid extruded letters in the studio, not CSS text on a
+      CSS glow). Nothing that is a visual is drawn flat in CSS or SVG. The narration captions are text, and the plain
+      black ground stays. One HyperFrames composition, no other renderer.
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
     often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,
