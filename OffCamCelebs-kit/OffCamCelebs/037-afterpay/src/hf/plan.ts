@@ -1,7 +1,7 @@
 // THE PLAN, for the HTML generator (scripts/build.mjs runs this in Node): every layer's frames, every SFX cue and the bed's
 // level curve, read off the SAME modules the browser bundle draws with — so index.html can never disagree with the film.
 import { layerSpecs } from "./film";
-import { SCORE_CUES, bedVolume } from "../r45/Film";
+import { SCORE_CUES, bedVolume } from "../world/film3d";
 import { GAIN, LEN } from "../r45/SfxLayer";
 import { TOTAL_FRAMES, FPS, VO_GAIN, VO_SKIP_FRAMES, VO_END, MUSIC_FILE, HAS_VO, HAS_MUSIC, HAS_SFX, COMPOSITION_ID } from "../audit/data";
 

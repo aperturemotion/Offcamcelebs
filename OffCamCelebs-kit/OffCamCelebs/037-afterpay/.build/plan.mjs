@@ -4,491 +4,6 @@ var __export = (target, all) => {
     __defProp(target, name, { get: all[name], enumerable: true });
 };
 
-// ../034-ohtani/node_modules/preact/dist/preact.mjs
-var n;
-var l;
-var u;
-var t;
-var i;
-var r;
-var o;
-var e;
-var f;
-var c;
-var a;
-var s;
-var h;
-var p;
-var v;
-var y;
-var d = {};
-var w = [];
-var _ = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
-var g = Array.isArray;
-function m(n2, l3) {
-  for (var u4 in l3) n2[u4] = l3[u4];
-  return n2;
-}
-function b(n2) {
-  n2 && n2.parentNode && n2.parentNode.removeChild(n2);
-}
-function k(l3, u4, t3) {
-  var i3, r3, o3, e3 = {};
-  for (o3 in u4) "key" == o3 ? i3 = u4[o3] : "ref" == o3 ? r3 = u4[o3] : e3[o3] = u4[o3];
-  if (arguments.length > 2 && (e3.children = arguments.length > 3 ? n.call(arguments, 2) : t3), "function" == typeof l3 && null != l3.defaultProps) for (o3 in l3.defaultProps) void 0 === e3[o3] && (e3[o3] = l3.defaultProps[o3]);
-  return x(l3, e3, i3, r3, null);
-}
-function x(n2, t3, i3, r3, o3) {
-  var e3 = { type: n2, props: t3, key: i3, ref: r3, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: null == o3 ? ++u : o3, __i: -1, __u: 0 };
-  return null == o3 && null != l.vnode && l.vnode(e3), e3;
-}
-function S(n2) {
-  return n2.children;
-}
-function C(n2, l3) {
-  this.props = n2, this.context = l3;
-}
-function $(n2, l3) {
-  if (null == l3) return n2.__ ? $(n2.__, n2.__i + 1) : null;
-  for (var u4; l3 < n2.__k.length; l3++) if (null != (u4 = n2.__k[l3]) && null != u4.__e) return u4.__e;
-  return "function" == typeof n2.type ? $(n2) : null;
-}
-function I(n2) {
-  if (n2.__P && n2.__d) {
-    var u4 = n2.__v, t3 = u4.__e, i3 = [], r3 = [], o3 = m({}, u4);
-    o3.__v = u4.__v + 1, l.vnode && l.vnode(o3), q(n2.__P, o3, u4, n2.__n, n2.__P.namespaceURI, 32 & u4.__u ? [t3] : null, i3, null == t3 ? $(u4) : t3, !!(32 & u4.__u), r3), o3.__v = u4.__v, o3.__.__k[o3.__i] = o3, D(i3, o3, r3), u4.__e = u4.__ = null, o3.__e != t3 && P(o3);
-  }
-}
-function P(n2) {
-  if (null != (n2 = n2.__) && null != n2.__c) return n2.__e = n2.__c.base = null, n2.__k.some(function(l3) {
-    if (null != l3 && null != l3.__e) return n2.__e = n2.__c.base = l3.__e;
-  }), P(n2);
-}
-function A(n2) {
-  (!n2.__d && (n2.__d = true) && i.push(n2) && !H.__r++ || r != l.debounceRendering) && ((r = l.debounceRendering) || o)(H);
-}
-function H() {
-  try {
-    for (var n2, l3 = 1; i.length; ) i.length > l3 && i.sort(e), n2 = i.shift(), l3 = i.length, I(n2);
-  } finally {
-    i.length = H.__r = 0;
-  }
-}
-function L(n2, l3, u4, t3, i3, r3, o3, e3, f4, c3, a3) {
-  var s3, h3, p3, v3, y3, _3, g4 = t3 && t3.__k || w, m3 = l3.length;
-  for (f4 = T(u4, l3, g4, f4, m3), s3 = 0; s3 < m3; s3++) null != (p3 = u4.__k[s3]) && (h3 = -1 != p3.__i && g4[p3.__i] || d, p3.__i = s3, _3 = q(n2, p3, h3, i3, r3, o3, e3, f4, c3, a3), v3 = p3.__e, p3.ref && h3.ref != p3.ref && (h3.ref && J(h3.ref, null, p3), a3.push(p3.ref, p3.__c || v3, p3)), null == y3 && null != v3 && (y3 = v3), 4 & p3.__u ? (f4 = j(p3, f4, n2), h3.__e && (h3.__e = null)) : "function" == typeof p3.type && void 0 !== _3 ? f4 = _3 : v3 && (f4 = v3.nextSibling), p3.__u &= -7);
-  return u4.__e = y3, f4;
-}
-function T(n2, l3, u4, t3, i3) {
-  var r3, o3, e3, f4, c3, a3 = u4.length, s3 = a3, h3 = 0;
-  for (n2.__k = new Array(i3), r3 = 0; r3 < i3; r3++) null != (o3 = l3[r3]) && "boolean" != typeof o3 && "function" != typeof o3 ? ("string" == typeof o3 || "number" == typeof o3 || "bigint" == typeof o3 || o3.constructor == String ? o3 = n2.__k[r3] = x(null, o3, null, null, null) : g(o3) ? o3 = n2.__k[r3] = x(S, { children: o3 }, null, null, null) : void 0 === o3.constructor && o3.__b > 0 ? o3 = n2.__k[r3] = x(o3.type, o3.props, o3.key, o3.ref ? o3.ref : null, o3.__v) : n2.__k[r3] = o3, f4 = r3 + h3, o3.__ = n2, o3.__b = n2.__b + 1, e3 = null, -1 != (c3 = o3.__i = O(o3, u4, f4, s3)) && (s3--, (e3 = u4[c3]) && (e3.__u |= 2)), null == e3 || null == e3.__v ? (-1 == c3 && (i3 > a3 ? h3-- : i3 < a3 && h3++), "function" != typeof o3.type && (o3.__u |= 4)) : c3 != f4 && (c3 == f4 - 1 ? h3-- : c3 == f4 + 1 ? h3++ : (c3 > f4 ? h3-- : h3++, o3.__u |= 4))) : n2.__k[r3] = null;
-  if (s3) for (r3 = 0; r3 < a3; r3++) null != (e3 = u4[r3]) && 0 == (2 & e3.__u) && (e3.__e == t3 && (t3 = $(e3)), K(e3, e3));
-  return t3;
-}
-function j(n2, l3, u4) {
-  var t3, i3;
-  if ("function" == typeof n2.type) {
-    for (t3 = n2.__k, i3 = 0; t3 && i3 < t3.length; i3++) t3[i3] && (t3[i3].__ = n2, l3 = j(t3[i3], l3, u4));
-    return l3;
-  }
-  n2.__e != l3 && (l3 && n2.type && !l3.parentNode && (l3 = $(n2)), l3 = u4.insertBefore(n2.__e, l3 || null));
-  do {
-    l3 = l3 && l3.nextSibling;
-  } while (null != l3 && 8 == l3.nodeType);
-  return l3;
-}
-function F(n2, l3) {
-  return l3 = l3 || [], null == n2 || "boolean" == typeof n2 || (g(n2) ? n2.some(function(n3) {
-    F(n3, l3);
-  }) : l3.push(n2)), l3;
-}
-function O(n2, l3, u4, t3) {
-  var i3, r3, o3, e3 = n2.key, f4 = n2.type, c3 = l3[u4], a3 = null != c3 && 0 == (2 & c3.__u);
-  if (null === c3 && null == e3 || a3 && e3 == c3.key && f4 == c3.type) return u4;
-  if (t3 > (a3 ? 1 : 0)) {
-    for (i3 = u4 - 1, r3 = u4 + 1; i3 >= 0 || r3 < l3.length; ) if (null != (c3 = l3[o3 = i3 >= 0 ? i3-- : r3++]) && 0 == (2 & c3.__u) && e3 == c3.key && f4 == c3.type) return o3;
-  }
-  return -1;
-}
-function z(n2, l3, u4) {
-  "-" == l3[0] ? n2.setProperty(l3, null == u4 ? "" : u4) : n2[l3] = null == u4 ? "" : "number" != typeof u4 || _.test(l3) ? u4 : u4 + "px";
-}
-function N(n2, l3, u4, t3, i3) {
-  var r3, o3;
-  n: if ("style" == l3) if ("string" == typeof u4) n2.style.cssText = u4;
-  else {
-    if ("string" == typeof t3 && (n2.style.cssText = t3 = ""), t3) for (l3 in t3) u4 && l3 in u4 || z(n2.style, l3, "");
-    if (u4) for (l3 in u4) t3 && u4[l3] == t3[l3] || z(n2.style, l3, u4[l3]);
-  }
-  else if ("o" == l3[0] && "n" == l3[1]) r3 = l3 != (l3 = l3.replace(s, "$1")), o3 = l3.toLowerCase(), l3 = o3 in n2 || "onFocusOut" == l3 || "onFocusIn" == l3 ? o3.slice(2) : l3.slice(2), n2.l || (n2.l = {}), n2.l[l3 + r3] = u4, u4 ? t3 ? u4[a] = t3[a] : (u4[a] = h, n2.addEventListener(l3, r3 ? v : p, r3)) : n2.removeEventListener(l3, r3 ? v : p, r3);
-  else {
-    if ("http://www.w3.org/2000/svg" == i3) l3 = l3.replace(/xlink(H|:h)/, "h").replace(/sName$/, "s");
-    else if ("width" != l3 && "height" != l3 && "href" != l3 && "list" != l3 && "form" != l3 && "tabIndex" != l3 && "download" != l3 && "rowSpan" != l3 && "colSpan" != l3 && "role" != l3 && "popover" != l3 && l3 in n2) try {
-      n2[l3] = null == u4 ? "" : u4;
-      break n;
-    } catch (n3) {
-    }
-    "function" == typeof u4 || (null == u4 || false === u4 && "-" != l3[4] ? n2.removeAttribute(l3) : n2.setAttribute(l3, "popover" == l3 && 1 == u4 ? "" : u4));
-  }
-}
-function V(n2) {
-  return function(u4) {
-    if (this.l) {
-      var t3 = this.l[u4.type + n2];
-      if (null == u4[c]) u4[c] = h++;
-      else if (u4[c] < t3[a]) return;
-      return t3(l.event ? l.event(u4) : u4);
-    }
-  };
-}
-function q(n2, u4, t3, i3, r3, o3, e3, f4, c3, a3) {
-  var s3, h3, p3, v3, y3, d3, _3, k3, x3, M3, I2, P5, A5, H3, T4, j4, F4 = u4.type;
-  if (void 0 !== u4.constructor) return null;
-  128 & t3.__u && (c3 = !!(32 & t3.__u), o3 = [f4 = u4.__e = t3.__e]), (s3 = l.__b) && s3(u4);
-  n: if ("function" == typeof F4) {
-    h3 = e3.length;
-    try {
-      if (x3 = u4.props, M3 = F4.prototype && F4.prototype.render, I2 = (s3 = F4.contextType) && i3[s3.__c], P5 = s3 ? I2 ? I2.props.value : s3.__ : i3, t3.__c ? k3 = (p3 = u4.__c = t3.__c).__ = p3.__E : (M3 ? u4.__c = p3 = new F4(x3, P5) : (u4.__c = p3 = new C(x3, P5), p3.constructor = F4, p3.render = Q), I2 && I2.sub(p3), p3.state || (p3.state = {}), p3.__n = i3, v3 = p3.__d = true, p3.__h = [], p3._sb = []), M3 && null == p3.__s && (p3.__s = p3.state), M3 && null != F4.getDerivedStateFromProps && (p3.__s == p3.state && (p3.__s = m({}, p3.__s)), m(p3.__s, F4.getDerivedStateFromProps(x3, p3.__s))), y3 = p3.props, d3 = p3.state, p3.__v = u4, v3) M3 && null == F4.getDerivedStateFromProps && null != p3.componentWillMount && p3.componentWillMount(), M3 && null != p3.componentDidMount && p3.__h.push(p3.componentDidMount);
-      else {
-        if (M3 && null == F4.getDerivedStateFromProps && x3 !== y3 && null != p3.componentWillReceiveProps && p3.componentWillReceiveProps(x3, P5), u4.__v == t3.__v || !p3.__e && null != p3.shouldComponentUpdate && false === p3.shouldComponentUpdate(x3, p3.__s, P5)) {
-          u4.__v != t3.__v && (p3.props = x3, p3.state = p3.__s, p3.__d = false), u4.__e = t3.__e, u4.__k = t3.__k, u4.__k.some(function(n3) {
-            n3 && (n3.__ = u4);
-          }), w.push.apply(p3.__h, p3._sb), p3._sb = [], p3.__h.length && e3.push(p3), f4 = $(t3);
-          break n;
-        }
-        null != p3.componentWillUpdate && p3.componentWillUpdate(x3, p3.__s, P5), M3 && null != p3.componentDidUpdate && p3.__h.push(function() {
-          p3.componentDidUpdate(y3, d3, _3);
-        });
-      }
-      if (p3.context = P5, p3.props = x3, p3.__P = n2, p3.__e = false, A5 = l.__r, H3 = 0, M3) p3.state = p3.__s, p3.__d = false, A5 && A5(u4), s3 = p3.render(p3.props, p3.state, p3.context), w.push.apply(p3.__h, p3._sb), p3._sb = [];
-      else do {
-        p3.__d = false, A5 && A5(u4), s3 = p3.render(p3.props, p3.state, p3.context), p3.state = p3.__s;
-      } while (p3.__d && ++H3 < 25);
-      p3.state = p3.__s, null != p3.getChildContext && (i3 = m(m({}, i3), p3.getChildContext())), M3 && !v3 && null != p3.getSnapshotBeforeUpdate && (_3 = p3.getSnapshotBeforeUpdate(y3, d3)), T4 = null != s3 && s3.type === S && null == s3.key ? E(s3.props.children) : s3, f4 = L(n2, g(T4) ? T4 : [T4], u4, t3, i3, r3, o3, e3, f4, c3, a3), p3.base = u4.__e, u4.__u &= -161, p3.__h.length && e3.push(p3), k3 && (p3.__E = p3.__ = null);
-    } catch (n3) {
-      if (e3.length = h3, u4.__v = null, c3 || null != o3) {
-        if (n3.then) {
-          for (u4.__u |= c3 ? 160 : 128; f4 && 8 == f4.nodeType && f4.nextSibling; ) f4 = f4.nextSibling;
-          null != o3 && (o3[o3.indexOf(f4)] = null), u4.__e = f4;
-        } else if (null != o3) for (j4 = o3.length; j4--; ) b(o3[j4]);
-      } else u4.__e = t3.__e;
-      null == u4.__k && (u4.__k = t3.__k || []), n3.then || B(u4), l.__e(n3, u4, t3);
-    }
-  } else null == o3 && u4.__v == t3.__v ? (u4.__k = t3.__k, u4.__e = t3.__e) : f4 = u4.__e = G(t3.__e, u4, t3, i3, r3, o3, e3, c3, a3);
-  return (s3 = l.diffed) && s3(u4), 128 & u4.__u ? void 0 : f4;
-}
-function B(n2) {
-  n2 && (n2.__c && (n2.__c.__e = true), n2.__k && n2.__k.some(B));
-}
-function D(n2, u4, t3) {
-  for (var i3 = 0; i3 < t3.length; i3++) J(t3[i3], t3[++i3], t3[++i3]);
-  l.__c && l.__c(u4, n2), n2.some(function(u5) {
-    try {
-      n2 = u5.__h, u5.__h = [], n2.some(function(n3) {
-        n3.call(u5);
-      });
-    } catch (n3) {
-      l.__e(n3, u5.__v);
-    }
-  });
-}
-function E(n2) {
-  return "object" != typeof n2 || null == n2 || n2.__b > 0 ? n2 : g(n2) ? n2.map(E) : void 0 !== n2.constructor ? null : m({}, n2);
-}
-function G(u4, t3, i3, r3, o3, e3, f4, c3, a3) {
-  var s3, h3, p3, v3, y3, w3, _3, m3 = i3.props || d, k3 = t3.props, x3 = t3.type;
-  if ("svg" == x3 ? o3 = "http://www.w3.org/2000/svg" : "math" == x3 ? o3 = "http://www.w3.org/1998/Math/MathML" : o3 || (o3 = "http://www.w3.org/1999/xhtml"), null != e3) {
-    for (s3 = 0; s3 < e3.length; s3++) if ((y3 = e3[s3]) && "setAttribute" in y3 == !!x3 && (x3 ? y3.localName == x3 : 3 == y3.nodeType)) {
-      u4 = y3, e3[s3] = null;
-      break;
-    }
-  }
-  if (null == u4) {
-    if (null == x3) return document.createTextNode(k3);
-    u4 = document.createElementNS(o3, x3, k3.is && k3), c3 && (l.__m && l.__m(t3, e3), c3 = false), e3 = null;
-  }
-  if (null == x3) m3 === k3 || c3 && u4.data == k3 || (u4.data = k3);
-  else {
-    if (e3 = "textarea" == x3 && null != k3.defaultValue ? null : e3 && n.call(u4.childNodes), !c3 && null != e3) for (m3 = {}, s3 = 0; s3 < u4.attributes.length; s3++) m3[(y3 = u4.attributes[s3]).name] = y3.value;
-    for (s3 in m3) y3 = m3[s3], "dangerouslySetInnerHTML" == s3 ? p3 = y3 : "children" == s3 || s3 in k3 || "value" == s3 && "defaultValue" in k3 || "checked" == s3 && "defaultChecked" in k3 || N(u4, s3, null, y3, o3);
-    for (s3 in k3) y3 = k3[s3], "children" == s3 ? v3 = y3 : "dangerouslySetInnerHTML" == s3 ? h3 = y3 : "value" == s3 ? w3 = y3 : "checked" == s3 ? _3 = y3 : c3 && "function" != typeof y3 || m3[s3] === y3 || N(u4, s3, y3, m3[s3], o3);
-    if (h3) c3 || p3 && (h3.__html == p3.__html || h3.__html == u4.innerHTML) || (u4.innerHTML = h3.__html), t3.__k = [];
-    else if (p3 && (u4.innerHTML = ""), L("template" == t3.type ? u4.content : u4, g(v3) ? v3 : [v3], t3, i3, r3, "foreignObject" == x3 ? "http://www.w3.org/1999/xhtml" : o3, e3, f4, e3 ? e3[0] : i3.__k && $(i3, 0), c3, a3), null != e3) for (s3 = e3.length; s3--; ) b(e3[s3]);
-    c3 && "textarea" != x3 || (s3 = "value", "progress" == x3 && null == w3 ? u4.removeAttribute("value") : null != w3 && (w3 !== u4[s3] || "progress" == x3 && !w3 || "option" == x3 && w3 != m3[s3]) && N(u4, s3, w3, m3[s3], o3), s3 = "checked", null != _3 && _3 != u4[s3] && N(u4, s3, _3, m3[s3], o3));
-  }
-  return u4;
-}
-function J(n2, u4, t3) {
-  try {
-    if ("function" == typeof n2) {
-      var i3 = "function" == typeof n2.__u;
-      i3 && n2.__u(), i3 && null == u4 || (n2.__u = n2(u4));
-    } else n2.current = u4;
-  } catch (n3) {
-    l.__e(n3, t3);
-  }
-}
-function K(n2, u4, t3) {
-  var i3, r3;
-  if (l.unmount && l.unmount(n2), (i3 = n2.ref) && (i3.current && i3.current != n2.__e || J(i3, null, u4)), null != (i3 = n2.__c)) {
-    if (i3.componentWillUnmount) try {
-      i3.componentWillUnmount();
-    } catch (n3) {
-      l.__e(n3, u4);
-    }
-    i3.base = i3.__P = i3.__n = null;
-  }
-  if (i3 = n2.__k) for (r3 = 0; r3 < i3.length; r3++) i3[r3] && K(i3[r3], u4, t3 || "function" != typeof n2.type);
-  t3 || b(n2.__e), n2.__c = n2.__ = n2.__e = void 0;
-}
-function Q(n2, l3, u4) {
-  return this.constructor(n2, u4);
-}
-function X(n2) {
-  function l3(n3) {
-    var u4, t3;
-    return this.getChildContext || (u4 = /* @__PURE__ */ new Set(), (t3 = {})[l3.__c] = this, this.getChildContext = function() {
-      return t3;
-    }, this.componentWillUnmount = function() {
-      u4 = null;
-    }, this.shouldComponentUpdate = function(n4) {
-      this.props.value != n4.value && u4.forEach(function(n5) {
-        n5.__e = true, A(n5);
-      });
-    }, this.sub = function(n4) {
-      u4.add(n4);
-      var l4 = n4.componentWillUnmount;
-      n4.componentWillUnmount = function() {
-        u4 && u4.delete(n4), l4 && l4.call(n4);
-      };
-    }), n3.children;
-  }
-  return l3.__c = "__cC" + y++, l3.__ = n2, l3.Provider = l3.__l = (l3.Consumer = function(n3, l4) {
-    return n3.children(l4);
-  }).contextType = l3, l3;
-}
-n = w.slice, l = { __e: function(n2, l3, u4, t3) {
-  for (var i3, r3, o3; l3 = l3.__; ) if ((i3 = l3.__c) && !i3.__) try {
-    if ((r3 = i3.constructor) && null != r3.getDerivedStateFromError && (i3.setState(r3.getDerivedStateFromError(n2)), o3 = i3.__d), null != i3.componentDidCatch && (i3.componentDidCatch(n2, t3 || {}), o3 = i3.__d), o3) return i3.__E = i3;
-  } catch (l4) {
-    n2 = l4;
-  }
-  throw n2;
-} }, u = 0, t = function(n2) {
-  return null != n2 && void 0 === n2.constructor;
-}, C.prototype.setState = function(n2, l3) {
-  var u4;
-  u4 = null != this.__s && this.__s != this.state ? this.__s : this.__s = m({}, this.state), "function" == typeof n2 && (n2 = n2(m({}, u4), this.props)), n2 && m(u4, n2), null != n2 && this.__v && (l3 && this._sb.push(l3), A(this));
-}, C.prototype.forceUpdate = function(n2) {
-  this.__v && (this.__e = true, n2 && this.__h.push(n2), A(this));
-}, C.prototype.render = S, i = [], o = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, e = function(n2, l3) {
-  return n2.__v.__b - l3.__v.__b;
-}, H.__r = 0, f = Math.random().toString(8), c = "__d" + f, a = "__a" + f, s = /(PointerCapture)$|Capture$/i, h = 0, p = V(false), v = V(true), y = 0;
-
-// src/shim/remotion.tsx
-var NEWTON_ITERATIONS = 4;
-var NEWTON_MIN_SLOPE = 1e-3;
-var SUBDIVISION_PRECISION = 1e-7;
-var SUBDIVISION_MAX_ITERATIONS = 10;
-var kSplineTableSize = 11;
-var kSampleStepSize = 1 / (kSplineTableSize - 1);
-var A2 = (a1, a22) => 1 - 3 * a22 + 3 * a1;
-var B2 = (a1, a22) => 3 * a22 - 6 * a1;
-var C2 = (a1) => 3 * a1;
-var calcBezier = (t3, a1, a22) => ((A2(a1, a22) * t3 + B2(a1, a22)) * t3 + C2(a1)) * t3;
-var getSlope = (t3, a1, a22) => 3 * A2(a1, a22) * t3 * t3 + 2 * B2(a1, a22) * t3 + C2(a1);
-var bezier = (x1, y1, x22, y22) => {
-  if (x1 === y1 && x22 === y22) return (x3) => x3;
-  const sample = new Float32Array(kSplineTableSize);
-  for (let i3 = 0; i3 < kSplineTableSize; ++i3) sample[i3] = calcBezier(i3 * kSampleStepSize, x1, x22);
-  const tForX = (x3) => {
-    let start = 0, cur = 1;
-    const last = kSplineTableSize - 1;
-    for (; cur !== last && sample[cur] <= x3; ++cur) start += kSampleStepSize;
-    --cur;
-    const dist = (x3 - sample[cur]) / (sample[cur + 1] - sample[cur]);
-    const guess = start + dist * kSampleStepSize;
-    const slope = getSlope(guess, x1, x22);
-    if (slope >= NEWTON_MIN_SLOPE) {
-      let t4 = guess;
-      for (let i4 = 0; i4 < NEWTON_ITERATIONS; ++i4) {
-        const s3 = getSlope(t4, x1, x22);
-        if (s3 === 0) return t4;
-        t4 -= (calcBezier(t4, x1, x22) - x3) / s3;
-      }
-      return t4;
-    }
-    if (slope === 0) return guess;
-    let a3 = start, b2 = start + kSampleStepSize, t3 = 0, xx = 0, i3 = 0;
-    do {
-      t3 = a3 + (b2 - a3) / 2;
-      xx = calcBezier(t3, x1, x22) - x3;
-      if (xx > 0) b2 = t3;
-      else a3 = t3;
-    } while (Math.abs(xx) > SUBDIVISION_PRECISION && ++i3 < SUBDIVISION_MAX_ITERATIONS);
-    return t3;
-  };
-  return (x3) => x3 === 0 || x3 === 1 ? x3 : calcBezier(tForX(x3), y1, y22);
-};
-var Easing = {
-  bezier,
-  linear: (t3) => t3,
-  in: (e3) => e3,
-  out: (e3) => (t3) => 1 - e3(1 - t3),
-  inOut: (e3) => (t3) => t3 < 0.5 ? e3(t3 * 2) / 2 : 1 - e3((1 - t3) * 2) / 2,
-  poly: (n2) => (t3) => Math.pow(t3, n2),
-  cubic: (t3) => t3 * t3 * t3,
-  sin: (t3) => 1 - Math.cos(t3 * Math.PI / 2)
-};
-var interpolate = (input, inputRange, outputRange, opts = {}) => {
-  const { easing = (t4) => t4, extrapolateLeft = "extend", extrapolateRight = "extend" } = opts;
-  let i3 = 1;
-  for (; i3 < inputRange.length - 1; i3++) if (inputRange[i3] >= input) break;
-  const i0 = i3 - 1, i1 = i3;
-  const a3 = inputRange[i0], b2 = inputRange[i1], oa = outputRange[i0], ob = outputRange[i1];
-  let x3 = input;
-  if (x3 < a3) {
-    if (extrapolateLeft === "clamp") x3 = a3;
-    else if (extrapolateLeft === "identity") return x3;
-  }
-  if (x3 > b2) {
-    if (extrapolateRight === "clamp") x3 = b2;
-    else if (extrapolateRight === "identity") return x3;
-  }
-  if (a3 === b2) return oa;
-  let t3 = (x3 - a3) / (b2 - a3);
-  t3 = easing(t3);
-  return oa + (ob - oa) * t3;
-};
-
-// ../034-ohtani/node_modules/preact/jsx-runtime/dist/jsxRuntime.mjs
-var f2 = 0;
-function u2(e3, t3, n2, o3, i3, u4) {
-  t3 || (t3 = {});
-  var a3, c3, p3 = t3;
-  if ("ref" in p3) for (c3 in p3 = {}, t3) "ref" == c3 ? a3 = t3[c3] : p3[c3] = t3[c3];
-  var l3 = { type: e3, props: p3, key: n2, ref: a3, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: --f2, __i: -1, __u: 0, __source: i3, __self: u4 };
-  if ("function" == typeof e3 && (a3 = e3.defaultProps)) for (c3 in a3) void 0 === p3[c3] && (p3[c3] = a3[c3]);
-  return l.vnode && l.vnode(l3), l3;
-}
-
-// src/r45/SfxLayer.tsx
-var EVEN = {
-  coin: 0.1,
-  ding: 0.699,
-  flick: 0.09,
-  thud: 0.06,
-  tick: 0.03,
-  sub: 0.043,
-  bloom: 0.107,
-  // ★ 029's take: airwoosh 0.101 → 0.072 (−3 dB): its 11 camera-move cues peaked +2.3 dB over the voice against the band's
-  //   −0.7…−3.0 (sfxlevels028); every other family was in the band
-  // ★ 028's take: click 0.327 → 0.232 (−3 dB). Its peaks sat +2.7 dB over the voice against Bankers V4's −0.9 (sfxlevels028)
-  ping: 0.743,
-  whooshlong: 0.202,
-  whooshsoft: 0.202,
-  click: 0.232,
-  data: 0.286,
-  airwoosh: 0.072,
-  chain: 0.947,
-  lowwoosh: 0.283,
-  swoosh: 0.065,
-  pingshort: 0.85,
-  chainshort: 0.7,
-  datashort: 0.34,
-  datamid: 0.31
-};
-var PRESENCE = 0.94;
-var GAIN = Object.fromEntries(Object.entries(EVEN).map(([k3, v3]) => [k3, v3 * PRESENCE]));
-var LEN = {
-  coin: 24,
-  ding: 40,
-  flick: 16,
-  thud: 30,
-  tick: 8,
-  sub: 30,
-  bloom: 60,
-  ping: 108,
-  whooshlong: 32,
-  whooshsoft: 27,
-  click: 7,
-  data: 68,
-  airwoosh: 53,
-  chain: 90,
-  lowwoosh: 75,
-  swoosh: 40,
-  pingshort: 39,
-  chainshort: 32,
-  datashort: 29,
-  datamid: 48
-};
-var ONSET = {
-  coin: 0,
-  ding: 0,
-  flick: 0,
-  thud: 0,
-  tick: 0,
-  sub: 0,
-  bloom: 0,
-  ping: 0,
-  whooshlong: 8,
-  whooshsoft: 6,
-  click: 0,
-  data: 0,
-  airwoosh: 19,
-  chain: 0,
-  lowwoosh: 10,
-  swoosh: 10,
-  pingshort: 0,
-  chainshort: 4,
-  datashort: 0,
-  datamid: 0
-};
-var PEAK = {
-  airwoosh: 21,
-  bloom: 3,
-  chain: 0,
-  chainshort: 4,
-  click: 0,
-  coin: 0,
-  data: 2,
-  datamid: 2,
-  datashort: 2,
-  ding: 0,
-  flick: 0,
-  lowwoosh: 13,
-  ping: 0,
-  pingshort: 0,
-  sub: 1,
-  swoosh: 12,
-  thud: 0,
-  tick: 0,
-  whooshlong: 13,
-  whooshsoft: 8
-};
-var SUSTAINED = /* @__PURE__ */ new Set(["data", "datamid", "datashort", "chain", "chainshort", "lowwoosh", "airwoosh", "swoosh", "whooshlong", "whooshsoft"]);
-var within = (beat) => (s3, visFrom, visTo, vol, why) => {
-  const from = Math.max(Math.round(beat.at), Math.round(visFrom - ONSET[s3]));
-  const stopBy = SUSTAINED.has(s3) && visTo !== void 0 ? Math.min(Math.round(visTo), Math.round(beat.end)) : Math.round(beat.end);
-  const dur = Math.max(3, Math.min(LEN[s3], stopBy - from));
-  return { s: s3, at: from, dur, fade: dur < LEN[s3] ? Math.min(10, Math.max(3, Math.round(dur / 3))) : 0, vol, why };
-};
-var peakOn = (beat) => (s3, peakAt, visTo, vol, why) => within(beat)(s3, peakAt - (PEAK[s3] - ONSET[s3]), visTo, vol, why);
-
-// src/r45/tokens.ts
-var SOFT = Easing.bezier(0.5, 0, 0.25, 1);
-var ARRIVE = Easing.bezier(0.45, 0, 0.25, 1);
-var SMOOTH = Easing.bezier(0.45, 0.05, 0.35, 1);
-var TRAVEL = Easing.bezier(0.6, 0, 0.4, 1);
-var SETTLE = Easing.bezier(0.4, 0.12, 0, 1);
-var GLIDE = Easing.out(Easing.poly(4));
-var INOUT = Easing.inOut(Easing.sin);
-var COUNT = Easing.bezier(0.45, 0, 0.25, 1);
-var EXIT = Easing.in(Easing.cubic);
-var clamp01 = (x3) => Math.max(0, Math.min(1, x3));
-var ramp = (f4, a3, b2, ease = SOFT) => interpolate(f4, [a3, b2], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
-var lerp = (a3, b2, t3) => a3 + (b2 - a3) * t3;
-
 // src/audit/cues.ts
 var VO_START = 0;
 var CUES = [
@@ -634,9 +149,589 @@ var CUES = [
   }
 ];
 
-// src/r45/time.ts
+// src/audit/script_fixes.json
+var script_fixes_default = {
+  note: "037 \u2014 brief lines that FAIL verification (CLAUDE.md, V26: armed BEFORE the take). Any caption matching a `bad` pattern means the take was read from the BRIEF. Read with JSON.parse, never regex over source. Verified 2026-11-18; VO_SCRIPT.txt has the trail.",
+  fixes: [
+    {
+      at: "hook c1",
+      brief: "That's the number on every headline.",
+      briefSpoken: "That's the number on every headline.",
+      use: "That's the number in the headlines.",
+      why: "'Every' cannot be shown; Australian coverage led with A$39 billion.",
+      bad: "\\bevery headline\\b"
+    },
+    {
+      at: "price c1",
+      brief: "That day, one Square share was worth two hundred and forty-seven dollars.",
+      briefSpoken: "That day, one Square share was worth two hundred and forty-seven dollars.",
+      use: "At the time, one Square share was worth two hundred and forty-seven dollars.",
+      why: "US$247.26 is the 30 Jul 2021 close; the announcement day, 1 Aug 2021, was a Sunday.",
+      bad: "\\bthat day,? one square share\\b"
+    },
+    {
+      at: "fair c2",
+      brief: "and Afterpay's owners kept those shares.",
+      briefSpoken: "and Afterpay's owners kept those shares.",
+      use: "and Afterpay's owners got those shares.",
+      why: "They received the shares; whether holders kept them is undocumented.",
+      bad: "\\bowners kept those shares\\b"
+    }
+  ],
+  guardrails: [
+    {
+      why: "$29B was accurate on announcement day: never imply Square, Block, Dorsey or the founders misled anyone (the brief).",
+      bad: "\\b(lied|lying|misled|mislead\\w*|deceiv\\w*|cover(ed)?[- ]up|hid the|fake)\\b",
+      example: "Square misled the market."
+    },
+    {
+      why: "Never say founders or shareholders 'lost' $15B: they received Block shares whose value kept moving (the brief).",
+      bad: "\\b(lost|losing|wiped out|robbed|cheated)\\b",
+      example: "Shareholders lost fifteen billion."
+    },
+    {
+      why: "No current Block share price anywhere (the brief).",
+      bad: "\\b(today|now|currently)\\b[^.]*\\b(share|stock) price\\b|\\b(share|stock) price\\b[^.]*\\b(today|now|currently)\\b",
+      example: "Today the share price is sixty dollars."
+    },
+    {
+      why: "'Fraud' and 'scam' never appear (standing rule).",
+      bad: "\\b(fraud|scam)\\w*\\b",
+      example: "The deal was a scam."
+    },
+    {
+      why: "The verdict rates the $29 billion figure as the price paid, not any person or company (the brief).",
+      bad: "\\b(afterpay|square|block|dorsey|the founders?) (is|was|are|were) (inflated|overpriced|overvalued|dishonest)\\b",
+      example: "Afterpay was overvalued."
+    }
+  ]
+};
+
+// src/audit/record.ts
+var DEAL = { announced: 29e9, booked: 138e8, gap: 15e9, ratio: 0.375 };
+var PRICE = { announce: 247.26, announceDate: "30 JUL 2021", close: 122.29, closeDate: "31 JAN 2022" };
+var DATES = { contract: "1 AUG 2021", from: "AUG 2021", to: "JAN 2022", form: "FORM 10-Q | Q1 2022" };
+var NAMES = { buyer: "JACK DORSEY | CEO, SQUARE", holders: "AFTERPAY SHAREHOLDERS", was: "SQUARE", now: "BLOCK" };
+var FILING_LINE = "AGGREGATE FAIR VALUE OF THE SHARES ISSUED: $13.8 BILLION";
+
+// src/audit/data.ts
 var FPS = 30;
-var F2 = (sec) => Math.round(sec * FPS);
+var COMPOSITION_ID = "InfluencerAudit037";
+var SCRIPT_FIXES = script_fixes_default.fixes;
+var said = (re) => CUES.some((c3) => re.test(c3.text));
+var TAKE = {
+  /** the sign-off is SPOKEN (019: a take read from the brief had none) */
+  ctaSpoken: said(/audit next/i)
+};
+var HAS_PHOTO = false;
+var PHOTO_FILE = "afterpay_face.jpg";
+var HAS_VO = false;
+var HAS_MUSIC = false;
+var HAS_SFX = true;
+var VO_SKIP_FRAMES = Math.round(VO_START * FPS);
+var VO_GAIN = 1;
+var MUSIC_FILE = "music_bigrichtown_bed.wav";
+var MUSIC_GAIN = 0.505;
+var SCENE_ORDER = ["hook", "explain", "deal", "price", "catch", "close", "fair", "verdict"];
+var SCENE_CUES = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 3, fair: 2, verdict: 4 };
+{
+  const got = {};
+  for (const c3 of CUES) got[c3.scene] = (got[c3.scene] ?? 0) + 1;
+  const bad = SCENE_ORDER.filter((id) => (got[id] ?? 0) !== SCENE_CUES[id]).map((id) => `${id}: wired ${got[id] ?? 0}, the film indexes ${SCENE_CUES[id]}`);
+  if (bad.length) throw new Error("037 CUE COUNT MISMATCH \u2014 the wired take does not match the film.\n" + bad.map((b2) => "  \xB7 " + b2).join("\n"));
+}
+var OUTRO_SEC = 0.5;
+var VO_END = Math.round(CUES[CUES.length - 1].b * FPS);
+var OUTRO_HOLD = Math.round(OUTRO_SEC * FPS);
+var TOTAL_FRAMES = VO_END + OUTRO_HOLD;
+
+// src/audit/bedenv.ts
+var BED_ENV = [
+  [7.71, 1.5],
+  [17.71, 1.4],
+  [27.71, 2.1],
+  [37.71, -0.1],
+  [47.71, 1.4],
+  [48.8, 1.4]
+];
+
+// ../034-ohtani/node_modules/preact/dist/preact.mjs
+var n;
+var l;
+var u;
+var t;
+var i;
+var r;
+var o;
+var e;
+var f;
+var c;
+var a;
+var s;
+var h;
+var p;
+var v;
+var y;
+var d = {};
+var w = [];
+var _ = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
+var g = Array.isArray;
+function m(n2, l3) {
+  for (var u4 in l3) n2[u4] = l3[u4];
+  return n2;
+}
+function b(n2) {
+  n2 && n2.parentNode && n2.parentNode.removeChild(n2);
+}
+function k(l3, u4, t3) {
+  var i3, r3, o2, e3 = {};
+  for (o2 in u4) "key" == o2 ? i3 = u4[o2] : "ref" == o2 ? r3 = u4[o2] : e3[o2] = u4[o2];
+  if (arguments.length > 2 && (e3.children = arguments.length > 3 ? n.call(arguments, 2) : t3), "function" == typeof l3 && null != l3.defaultProps) for (o2 in l3.defaultProps) void 0 === e3[o2] && (e3[o2] = l3.defaultProps[o2]);
+  return x(l3, e3, i3, r3, null);
+}
+function x(n2, t3, i3, r3, o2) {
+  var e3 = { type: n2, props: t3, key: i3, ref: r3, __k: null, __: null, __b: 0, __e: null, __c: null, constructor: void 0, __v: null == o2 ? ++u : o2, __i: -1, __u: 0 };
+  return null == o2 && null != l.vnode && l.vnode(e3), e3;
+}
+function S(n2) {
+  return n2.children;
+}
+function C(n2, l3) {
+  this.props = n2, this.context = l3;
+}
+function $(n2, l3) {
+  if (null == l3) return n2.__ ? $(n2.__, n2.__i + 1) : null;
+  for (var u4; l3 < n2.__k.length; l3++) if (null != (u4 = n2.__k[l3]) && null != u4.__e) return u4.__e;
+  return "function" == typeof n2.type ? $(n2) : null;
+}
+function I(n2) {
+  if (n2.__P && n2.__d) {
+    var u4 = n2.__v, t3 = u4.__e, i3 = [], r3 = [], o2 = m({}, u4);
+    o2.__v = u4.__v + 1, l.vnode && l.vnode(o2), q(n2.__P, o2, u4, n2.__n, n2.__P.namespaceURI, 32 & u4.__u ? [t3] : null, i3, null == t3 ? $(u4) : t3, !!(32 & u4.__u), r3), o2.__v = u4.__v, o2.__.__k[o2.__i] = o2, D(i3, o2, r3), u4.__e = u4.__ = null, o2.__e != t3 && P(o2);
+  }
+}
+function P(n2) {
+  if (null != (n2 = n2.__) && null != n2.__c) return n2.__e = n2.__c.base = null, n2.__k.some(function(l3) {
+    if (null != l3 && null != l3.__e) return n2.__e = n2.__c.base = l3.__e;
+  }), P(n2);
+}
+function A(n2) {
+  (!n2.__d && (n2.__d = true) && i.push(n2) && !H.__r++ || r != l.debounceRendering) && ((r = l.debounceRendering) || o)(H);
+}
+function H() {
+  try {
+    for (var n2, l3 = 1; i.length; ) i.length > l3 && i.sort(e), n2 = i.shift(), l3 = i.length, I(n2);
+  } finally {
+    i.length = H.__r = 0;
+  }
+}
+function L(n2, l3, u4, t3, i3, r3, o2, e3, f3, c3, a3) {
+  var s2, h3, p3, v3, y3, _3, g4 = t3 && t3.__k || w, m3 = l3.length;
+  for (f3 = T(u4, l3, g4, f3, m3), s2 = 0; s2 < m3; s2++) null != (p3 = u4.__k[s2]) && (h3 = -1 != p3.__i && g4[p3.__i] || d, p3.__i = s2, _3 = q(n2, p3, h3, i3, r3, o2, e3, f3, c3, a3), v3 = p3.__e, p3.ref && h3.ref != p3.ref && (h3.ref && J(h3.ref, null, p3), a3.push(p3.ref, p3.__c || v3, p3)), null == y3 && null != v3 && (y3 = v3), 4 & p3.__u ? (f3 = j(p3, f3, n2), h3.__e && (h3.__e = null)) : "function" == typeof p3.type && void 0 !== _3 ? f3 = _3 : v3 && (f3 = v3.nextSibling), p3.__u &= -7);
+  return u4.__e = y3, f3;
+}
+function T(n2, l3, u4, t3, i3) {
+  var r3, o2, e3, f3, c3, a3 = u4.length, s2 = a3, h3 = 0;
+  for (n2.__k = new Array(i3), r3 = 0; r3 < i3; r3++) null != (o2 = l3[r3]) && "boolean" != typeof o2 && "function" != typeof o2 ? ("string" == typeof o2 || "number" == typeof o2 || "bigint" == typeof o2 || o2.constructor == String ? o2 = n2.__k[r3] = x(null, o2, null, null, null) : g(o2) ? o2 = n2.__k[r3] = x(S, { children: o2 }, null, null, null) : void 0 === o2.constructor && o2.__b > 0 ? o2 = n2.__k[r3] = x(o2.type, o2.props, o2.key, o2.ref ? o2.ref : null, o2.__v) : n2.__k[r3] = o2, f3 = r3 + h3, o2.__ = n2, o2.__b = n2.__b + 1, e3 = null, -1 != (c3 = o2.__i = O(o2, u4, f3, s2)) && (s2--, (e3 = u4[c3]) && (e3.__u |= 2)), null == e3 || null == e3.__v ? (-1 == c3 && (i3 > a3 ? h3-- : i3 < a3 && h3++), "function" != typeof o2.type && (o2.__u |= 4)) : c3 != f3 && (c3 == f3 - 1 ? h3-- : c3 == f3 + 1 ? h3++ : (c3 > f3 ? h3-- : h3++, o2.__u |= 4))) : n2.__k[r3] = null;
+  if (s2) for (r3 = 0; r3 < a3; r3++) null != (e3 = u4[r3]) && 0 == (2 & e3.__u) && (e3.__e == t3 && (t3 = $(e3)), K(e3, e3));
+  return t3;
+}
+function j(n2, l3, u4) {
+  var t3, i3;
+  if ("function" == typeof n2.type) {
+    for (t3 = n2.__k, i3 = 0; t3 && i3 < t3.length; i3++) t3[i3] && (t3[i3].__ = n2, l3 = j(t3[i3], l3, u4));
+    return l3;
+  }
+  n2.__e != l3 && (l3 && n2.type && !l3.parentNode && (l3 = $(n2)), l3 = u4.insertBefore(n2.__e, l3 || null));
+  do {
+    l3 = l3 && l3.nextSibling;
+  } while (null != l3 && 8 == l3.nodeType);
+  return l3;
+}
+function F(n2, l3) {
+  return l3 = l3 || [], null == n2 || "boolean" == typeof n2 || (g(n2) ? n2.some(function(n3) {
+    F(n3, l3);
+  }) : l3.push(n2)), l3;
+}
+function O(n2, l3, u4, t3) {
+  var i3, r3, o2, e3 = n2.key, f3 = n2.type, c3 = l3[u4], a3 = null != c3 && 0 == (2 & c3.__u);
+  if (null === c3 && null == e3 || a3 && e3 == c3.key && f3 == c3.type) return u4;
+  if (t3 > (a3 ? 1 : 0)) {
+    for (i3 = u4 - 1, r3 = u4 + 1; i3 >= 0 || r3 < l3.length; ) if (null != (c3 = l3[o2 = i3 >= 0 ? i3-- : r3++]) && 0 == (2 & c3.__u) && e3 == c3.key && f3 == c3.type) return o2;
+  }
+  return -1;
+}
+function z(n2, l3, u4) {
+  "-" == l3[0] ? n2.setProperty(l3, null == u4 ? "" : u4) : n2[l3] = null == u4 ? "" : "number" != typeof u4 || _.test(l3) ? u4 : u4 + "px";
+}
+function N(n2, l3, u4, t3, i3) {
+  var r3, o2;
+  n: if ("style" == l3) if ("string" == typeof u4) n2.style.cssText = u4;
+  else {
+    if ("string" == typeof t3 && (n2.style.cssText = t3 = ""), t3) for (l3 in t3) u4 && l3 in u4 || z(n2.style, l3, "");
+    if (u4) for (l3 in u4) t3 && u4[l3] == t3[l3] || z(n2.style, l3, u4[l3]);
+  }
+  else if ("o" == l3[0] && "n" == l3[1]) r3 = l3 != (l3 = l3.replace(s, "$1")), o2 = l3.toLowerCase(), l3 = o2 in n2 || "onFocusOut" == l3 || "onFocusIn" == l3 ? o2.slice(2) : l3.slice(2), n2.l || (n2.l = {}), n2.l[l3 + r3] = u4, u4 ? t3 ? u4[a] = t3[a] : (u4[a] = h, n2.addEventListener(l3, r3 ? v : p, r3)) : n2.removeEventListener(l3, r3 ? v : p, r3);
+  else {
+    if ("http://www.w3.org/2000/svg" == i3) l3 = l3.replace(/xlink(H|:h)/, "h").replace(/sName$/, "s");
+    else if ("width" != l3 && "height" != l3 && "href" != l3 && "list" != l3 && "form" != l3 && "tabIndex" != l3 && "download" != l3 && "rowSpan" != l3 && "colSpan" != l3 && "role" != l3 && "popover" != l3 && l3 in n2) try {
+      n2[l3] = null == u4 ? "" : u4;
+      break n;
+    } catch (n3) {
+    }
+    "function" == typeof u4 || (null == u4 || false === u4 && "-" != l3[4] ? n2.removeAttribute(l3) : n2.setAttribute(l3, "popover" == l3 && 1 == u4 ? "" : u4));
+  }
+}
+function V(n2) {
+  return function(u4) {
+    if (this.l) {
+      var t3 = this.l[u4.type + n2];
+      if (null == u4[c]) u4[c] = h++;
+      else if (u4[c] < t3[a]) return;
+      return t3(l.event ? l.event(u4) : u4);
+    }
+  };
+}
+function q(n2, u4, t3, i3, r3, o2, e3, f3, c3, a3) {
+  var s2, h3, p3, v3, y3, d3, _3, k3, x3, M3, I2, P4, A5, H3, T4, j4, F4 = u4.type;
+  if (void 0 !== u4.constructor) return null;
+  128 & t3.__u && (c3 = !!(32 & t3.__u), o2 = [f3 = u4.__e = t3.__e]), (s2 = l.__b) && s2(u4);
+  n: if ("function" == typeof F4) {
+    h3 = e3.length;
+    try {
+      if (x3 = u4.props, M3 = F4.prototype && F4.prototype.render, I2 = (s2 = F4.contextType) && i3[s2.__c], P4 = s2 ? I2 ? I2.props.value : s2.__ : i3, t3.__c ? k3 = (p3 = u4.__c = t3.__c).__ = p3.__E : (M3 ? u4.__c = p3 = new F4(x3, P4) : (u4.__c = p3 = new C(x3, P4), p3.constructor = F4, p3.render = Q), I2 && I2.sub(p3), p3.state || (p3.state = {}), p3.__n = i3, v3 = p3.__d = true, p3.__h = [], p3._sb = []), M3 && null == p3.__s && (p3.__s = p3.state), M3 && null != F4.getDerivedStateFromProps && (p3.__s == p3.state && (p3.__s = m({}, p3.__s)), m(p3.__s, F4.getDerivedStateFromProps(x3, p3.__s))), y3 = p3.props, d3 = p3.state, p3.__v = u4, v3) M3 && null == F4.getDerivedStateFromProps && null != p3.componentWillMount && p3.componentWillMount(), M3 && null != p3.componentDidMount && p3.__h.push(p3.componentDidMount);
+      else {
+        if (M3 && null == F4.getDerivedStateFromProps && x3 !== y3 && null != p3.componentWillReceiveProps && p3.componentWillReceiveProps(x3, P4), u4.__v == t3.__v || !p3.__e && null != p3.shouldComponentUpdate && false === p3.shouldComponentUpdate(x3, p3.__s, P4)) {
+          u4.__v != t3.__v && (p3.props = x3, p3.state = p3.__s, p3.__d = false), u4.__e = t3.__e, u4.__k = t3.__k, u4.__k.some(function(n3) {
+            n3 && (n3.__ = u4);
+          }), w.push.apply(p3.__h, p3._sb), p3._sb = [], p3.__h.length && e3.push(p3), f3 = $(t3);
+          break n;
+        }
+        null != p3.componentWillUpdate && p3.componentWillUpdate(x3, p3.__s, P4), M3 && null != p3.componentDidUpdate && p3.__h.push(function() {
+          p3.componentDidUpdate(y3, d3, _3);
+        });
+      }
+      if (p3.context = P4, p3.props = x3, p3.__P = n2, p3.__e = false, A5 = l.__r, H3 = 0, M3) p3.state = p3.__s, p3.__d = false, A5 && A5(u4), s2 = p3.render(p3.props, p3.state, p3.context), w.push.apply(p3.__h, p3._sb), p3._sb = [];
+      else do {
+        p3.__d = false, A5 && A5(u4), s2 = p3.render(p3.props, p3.state, p3.context), p3.state = p3.__s;
+      } while (p3.__d && ++H3 < 25);
+      p3.state = p3.__s, null != p3.getChildContext && (i3 = m(m({}, i3), p3.getChildContext())), M3 && !v3 && null != p3.getSnapshotBeforeUpdate && (_3 = p3.getSnapshotBeforeUpdate(y3, d3)), T4 = null != s2 && s2.type === S && null == s2.key ? E(s2.props.children) : s2, f3 = L(n2, g(T4) ? T4 : [T4], u4, t3, i3, r3, o2, e3, f3, c3, a3), p3.base = u4.__e, u4.__u &= -161, p3.__h.length && e3.push(p3), k3 && (p3.__E = p3.__ = null);
+    } catch (n3) {
+      if (e3.length = h3, u4.__v = null, c3 || null != o2) {
+        if (n3.then) {
+          for (u4.__u |= c3 ? 160 : 128; f3 && 8 == f3.nodeType && f3.nextSibling; ) f3 = f3.nextSibling;
+          null != o2 && (o2[o2.indexOf(f3)] = null), u4.__e = f3;
+        } else if (null != o2) for (j4 = o2.length; j4--; ) b(o2[j4]);
+      } else u4.__e = t3.__e;
+      null == u4.__k && (u4.__k = t3.__k || []), n3.then || B(u4), l.__e(n3, u4, t3);
+    }
+  } else null == o2 && u4.__v == t3.__v ? (u4.__k = t3.__k, u4.__e = t3.__e) : f3 = u4.__e = G(t3.__e, u4, t3, i3, r3, o2, e3, c3, a3);
+  return (s2 = l.diffed) && s2(u4), 128 & u4.__u ? void 0 : f3;
+}
+function B(n2) {
+  n2 && (n2.__c && (n2.__c.__e = true), n2.__k && n2.__k.some(B));
+}
+function D(n2, u4, t3) {
+  for (var i3 = 0; i3 < t3.length; i3++) J(t3[i3], t3[++i3], t3[++i3]);
+  l.__c && l.__c(u4, n2), n2.some(function(u5) {
+    try {
+      n2 = u5.__h, u5.__h = [], n2.some(function(n3) {
+        n3.call(u5);
+      });
+    } catch (n3) {
+      l.__e(n3, u5.__v);
+    }
+  });
+}
+function E(n2) {
+  return "object" != typeof n2 || null == n2 || n2.__b > 0 ? n2 : g(n2) ? n2.map(E) : void 0 !== n2.constructor ? null : m({}, n2);
+}
+function G(u4, t3, i3, r3, o2, e3, f3, c3, a3) {
+  var s2, h3, p3, v3, y3, w3, _3, m3 = i3.props || d, k3 = t3.props, x3 = t3.type;
+  if ("svg" == x3 ? o2 = "http://www.w3.org/2000/svg" : "math" == x3 ? o2 = "http://www.w3.org/1998/Math/MathML" : o2 || (o2 = "http://www.w3.org/1999/xhtml"), null != e3) {
+    for (s2 = 0; s2 < e3.length; s2++) if ((y3 = e3[s2]) && "setAttribute" in y3 == !!x3 && (x3 ? y3.localName == x3 : 3 == y3.nodeType)) {
+      u4 = y3, e3[s2] = null;
+      break;
+    }
+  }
+  if (null == u4) {
+    if (null == x3) return document.createTextNode(k3);
+    u4 = document.createElementNS(o2, x3, k3.is && k3), c3 && (l.__m && l.__m(t3, e3), c3 = false), e3 = null;
+  }
+  if (null == x3) m3 === k3 || c3 && u4.data == k3 || (u4.data = k3);
+  else {
+    if (e3 = "textarea" == x3 && null != k3.defaultValue ? null : e3 && n.call(u4.childNodes), !c3 && null != e3) for (m3 = {}, s2 = 0; s2 < u4.attributes.length; s2++) m3[(y3 = u4.attributes[s2]).name] = y3.value;
+    for (s2 in m3) y3 = m3[s2], "dangerouslySetInnerHTML" == s2 ? p3 = y3 : "children" == s2 || s2 in k3 || "value" == s2 && "defaultValue" in k3 || "checked" == s2 && "defaultChecked" in k3 || N(u4, s2, null, y3, o2);
+    for (s2 in k3) y3 = k3[s2], "children" == s2 ? v3 = y3 : "dangerouslySetInnerHTML" == s2 ? h3 = y3 : "value" == s2 ? w3 = y3 : "checked" == s2 ? _3 = y3 : c3 && "function" != typeof y3 || m3[s2] === y3 || N(u4, s2, y3, m3[s2], o2);
+    if (h3) c3 || p3 && (h3.__html == p3.__html || h3.__html == u4.innerHTML) || (u4.innerHTML = h3.__html), t3.__k = [];
+    else if (p3 && (u4.innerHTML = ""), L("template" == t3.type ? u4.content : u4, g(v3) ? v3 : [v3], t3, i3, r3, "foreignObject" == x3 ? "http://www.w3.org/1999/xhtml" : o2, e3, f3, e3 ? e3[0] : i3.__k && $(i3, 0), c3, a3), null != e3) for (s2 = e3.length; s2--; ) b(e3[s2]);
+    c3 && "textarea" != x3 || (s2 = "value", "progress" == x3 && null == w3 ? u4.removeAttribute("value") : null != w3 && (w3 !== u4[s2] || "progress" == x3 && !w3 || "option" == x3 && w3 != m3[s2]) && N(u4, s2, w3, m3[s2], o2), s2 = "checked", null != _3 && _3 != u4[s2] && N(u4, s2, _3, m3[s2], o2));
+  }
+  return u4;
+}
+function J(n2, u4, t3) {
+  try {
+    if ("function" == typeof n2) {
+      var i3 = "function" == typeof n2.__u;
+      i3 && n2.__u(), i3 && null == u4 || (n2.__u = n2(u4));
+    } else n2.current = u4;
+  } catch (n3) {
+    l.__e(n3, t3);
+  }
+}
+function K(n2, u4, t3) {
+  var i3, r3;
+  if (l.unmount && l.unmount(n2), (i3 = n2.ref) && (i3.current && i3.current != n2.__e || J(i3, null, u4)), null != (i3 = n2.__c)) {
+    if (i3.componentWillUnmount) try {
+      i3.componentWillUnmount();
+    } catch (n3) {
+      l.__e(n3, u4);
+    }
+    i3.base = i3.__P = i3.__n = null;
+  }
+  if (i3 = n2.__k) for (r3 = 0; r3 < i3.length; r3++) i3[r3] && K(i3[r3], u4, t3 || "function" != typeof n2.type);
+  t3 || b(n2.__e), n2.__c = n2.__ = n2.__e = void 0;
+}
+function Q(n2, l3, u4) {
+  return this.constructor(n2, u4);
+}
+function X(n2) {
+  function l3(n3) {
+    var u4, t3;
+    return this.getChildContext || (u4 = /* @__PURE__ */ new Set(), (t3 = {})[l3.__c] = this, this.getChildContext = function() {
+      return t3;
+    }, this.componentWillUnmount = function() {
+      u4 = null;
+    }, this.shouldComponentUpdate = function(n4) {
+      this.props.value != n4.value && u4.forEach(function(n5) {
+        n5.__e = true, A(n5);
+      });
+    }, this.sub = function(n4) {
+      u4.add(n4);
+      var l4 = n4.componentWillUnmount;
+      n4.componentWillUnmount = function() {
+        u4 && u4.delete(n4), l4 && l4.call(n4);
+      };
+    }), n3.children;
+  }
+  return l3.__c = "__cC" + y++, l3.__ = n2, l3.Provider = l3.__l = (l3.Consumer = function(n3, l4) {
+    return n3.children(l4);
+  }).contextType = l3, l3;
+}
+n = w.slice, l = { __e: function(n2, l3, u4, t3) {
+  for (var i3, r3, o2; l3 = l3.__; ) if ((i3 = l3.__c) && !i3.__) try {
+    if ((r3 = i3.constructor) && null != r3.getDerivedStateFromError && (i3.setState(r3.getDerivedStateFromError(n2)), o2 = i3.__d), null != i3.componentDidCatch && (i3.componentDidCatch(n2, t3 || {}), o2 = i3.__d), o2) return i3.__E = i3;
+  } catch (l4) {
+    n2 = l4;
+  }
+  throw n2;
+} }, u = 0, t = function(n2) {
+  return null != n2 && void 0 === n2.constructor;
+}, C.prototype.setState = function(n2, l3) {
+  var u4;
+  u4 = null != this.__s && this.__s != this.state ? this.__s : this.__s = m({}, this.state), "function" == typeof n2 && (n2 = n2(m({}, u4), this.props)), n2 && m(u4, n2), null != n2 && this.__v && (l3 && this._sb.push(l3), A(this));
+}, C.prototype.forceUpdate = function(n2) {
+  this.__v && (this.__e = true, n2 && this.__h.push(n2), A(this));
+}, C.prototype.render = S, i = [], o = "function" == typeof Promise ? Promise.prototype.then.bind(Promise.resolve()) : setTimeout, e = function(n2, l3) {
+  return n2.__v.__b - l3.__v.__b;
+}, H.__r = 0, f = Math.random().toString(8), c = "__d" + f, a = "__a" + f, s = /(PointerCapture)$|Capture$/i, h = 0, p = V(false), v = V(true), y = 0;
+
+// src/shim/remotion.tsx
+var NEWTON_ITERATIONS = 4;
+var NEWTON_MIN_SLOPE = 1e-3;
+var SUBDIVISION_PRECISION = 1e-7;
+var SUBDIVISION_MAX_ITERATIONS = 10;
+var kSplineTableSize = 11;
+var kSampleStepSize = 1 / (kSplineTableSize - 1);
+var A2 = (a1, a22) => 1 - 3 * a22 + 3 * a1;
+var B2 = (a1, a22) => 3 * a22 - 6 * a1;
+var C2 = (a1) => 3 * a1;
+var calcBezier = (t3, a1, a22) => ((A2(a1, a22) * t3 + B2(a1, a22)) * t3 + C2(a1)) * t3;
+var getSlope = (t3, a1, a22) => 3 * A2(a1, a22) * t3 * t3 + 2 * B2(a1, a22) * t3 + C2(a1);
+var bezier = (x1, y1, x22, y22) => {
+  if (x1 === y1 && x22 === y22) return (x3) => x3;
+  const sample = new Float32Array(kSplineTableSize);
+  for (let i3 = 0; i3 < kSplineTableSize; ++i3) sample[i3] = calcBezier(i3 * kSampleStepSize, x1, x22);
+  const tForX = (x3) => {
+    let start = 0, cur = 1;
+    const last = kSplineTableSize - 1;
+    for (; cur !== last && sample[cur] <= x3; ++cur) start += kSampleStepSize;
+    --cur;
+    const dist = (x3 - sample[cur]) / (sample[cur + 1] - sample[cur]);
+    const guess = start + dist * kSampleStepSize;
+    const slope = getSlope(guess, x1, x22);
+    if (slope >= NEWTON_MIN_SLOPE) {
+      let t4 = guess;
+      for (let i4 = 0; i4 < NEWTON_ITERATIONS; ++i4) {
+        const s2 = getSlope(t4, x1, x22);
+        if (s2 === 0) return t4;
+        t4 -= (calcBezier(t4, x1, x22) - x3) / s2;
+      }
+      return t4;
+    }
+    if (slope === 0) return guess;
+    let a3 = start, b2 = start + kSampleStepSize, t3 = 0, xx = 0, i3 = 0;
+    do {
+      t3 = a3 + (b2 - a3) / 2;
+      xx = calcBezier(t3, x1, x22) - x3;
+      if (xx > 0) b2 = t3;
+      else a3 = t3;
+    } while (Math.abs(xx) > SUBDIVISION_PRECISION && ++i3 < SUBDIVISION_MAX_ITERATIONS);
+    return t3;
+  };
+  return (x3) => x3 === 0 || x3 === 1 ? x3 : calcBezier(tForX(x3), y1, y22);
+};
+var Easing = {
+  bezier,
+  linear: (t3) => t3,
+  in: (e3) => e3,
+  out: (e3) => (t3) => 1 - e3(1 - t3),
+  inOut: (e3) => (t3) => t3 < 0.5 ? e3(t3 * 2) / 2 : 1 - e3((1 - t3) * 2) / 2,
+  poly: (n2) => (t3) => Math.pow(t3, n2),
+  cubic: (t3) => t3 * t3 * t3,
+  sin: (t3) => 1 - Math.cos(t3 * Math.PI / 2)
+};
+var interpolate = (input, inputRange, outputRange, opts = {}) => {
+  const { easing = (t4) => t4, extrapolateLeft = "extend", extrapolateRight = "extend" } = opts;
+  let i3 = 1;
+  for (; i3 < inputRange.length - 1; i3++) if (inputRange[i3] >= input) break;
+  const i0 = i3 - 1, i1 = i3;
+  const a3 = inputRange[i0], b2 = inputRange[i1], oa = outputRange[i0], ob = outputRange[i1];
+  let x3 = input;
+  if (x3 < a3) {
+    if (extrapolateLeft === "clamp") x3 = a3;
+    else if (extrapolateLeft === "identity") return x3;
+  }
+  if (x3 > b2) {
+    if (extrapolateRight === "clamp") x3 = b2;
+    else if (extrapolateRight === "identity") return x3;
+  }
+  if (a3 === b2) return oa;
+  let t3 = (x3 - a3) / (b2 - a3);
+  t3 = easing(t3);
+  return oa + (ob - oa) * t3;
+};
+
+// src/r45/tokens.ts
+var SOFT = Easing.bezier(0.5, 0, 0.25, 1);
+var ARRIVE = Easing.bezier(0.45, 0, 0.25, 1);
+var SMOOTH = Easing.bezier(0.45, 0.05, 0.35, 1);
+var TRAVEL = Easing.bezier(0.6, 0, 0.4, 1);
+var SETTLE = Easing.bezier(0.4, 0.12, 0, 1);
+var GLIDE = Easing.out(Easing.poly(4));
+var INOUT = Easing.inOut(Easing.sin);
+var COUNT = Easing.bezier(0.45, 0, 0.25, 1);
+var EXIT = Easing.in(Easing.cubic);
+var clamp01 = (x3) => Math.max(0, Math.min(1, x3));
+var ramp = (f3, a3, b2, ease = SOFT) => interpolate(f3, [a3, b2], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
+var lerp = (a3, b2, t3) => a3 + (b2 - a3) * t3;
+
+// src/r45/SfxLayer.tsx
+var EVEN = {
+  coin: 0.1,
+  ding: 0.699,
+  flick: 0.09,
+  thud: 0.06,
+  tick: 0.03,
+  sub: 0.043,
+  bloom: 0.107,
+  // ★ 029's take: airwoosh 0.101 → 0.072 (−3 dB): its 11 camera-move cues peaked +2.3 dB over the voice against the band's
+  //   −0.7…−3.0 (sfxlevels028); every other family was in the band
+  // ★ 028's take: click 0.327 → 0.232 (−3 dB). Its peaks sat +2.7 dB over the voice against Bankers V4's −0.9 (sfxlevels028)
+  ping: 0.743,
+  whooshlong: 0.202,
+  whooshsoft: 0.202,
+  click: 0.232,
+  data: 0.286,
+  airwoosh: 0.072,
+  chain: 0.947,
+  lowwoosh: 0.283,
+  swoosh: 0.065,
+  pingshort: 0.85,
+  chainshort: 0.7,
+  datashort: 0.34,
+  datamid: 0.31
+};
+var PRESENCE = 0.94;
+var GAIN = Object.fromEntries(Object.entries(EVEN).map(([k3, v3]) => [k3, v3 * PRESENCE]));
+var LEN = {
+  coin: 24,
+  ding: 40,
+  flick: 16,
+  thud: 30,
+  tick: 8,
+  sub: 30,
+  bloom: 60,
+  ping: 108,
+  whooshlong: 32,
+  whooshsoft: 27,
+  click: 7,
+  data: 68,
+  airwoosh: 53,
+  chain: 90,
+  lowwoosh: 75,
+  swoosh: 40,
+  pingshort: 39,
+  chainshort: 32,
+  datashort: 29,
+  datamid: 48
+};
+var ONSET = {
+  coin: 0,
+  ding: 0,
+  flick: 0,
+  thud: 0,
+  tick: 0,
+  sub: 0,
+  bloom: 0,
+  ping: 0,
+  whooshlong: 8,
+  whooshsoft: 6,
+  click: 0,
+  data: 0,
+  airwoosh: 19,
+  chain: 0,
+  lowwoosh: 10,
+  swoosh: 10,
+  pingshort: 0,
+  chainshort: 4,
+  datashort: 0,
+  datamid: 0
+};
+var PEAK = {
+  airwoosh: 21,
+  bloom: 3,
+  chain: 0,
+  chainshort: 4,
+  click: 0,
+  coin: 0,
+  data: 2,
+  datamid: 2,
+  datashort: 2,
+  ding: 0,
+  flick: 0,
+  lowwoosh: 13,
+  ping: 0,
+  pingshort: 0,
+  sub: 1,
+  swoosh: 12,
+  thud: 0,
+  tick: 0,
+  whooshlong: 13,
+  whooshsoft: 8
+};
+var SUSTAINED = /* @__PURE__ */ new Set(["data", "datamid", "datashort", "chain", "chainshort", "lowwoosh", "airwoosh", "swoosh", "whooshlong", "whooshsoft"]);
+var within = (beat) => (s2, visFrom, visTo, vol, why) => {
+  const from = Math.max(Math.round(beat.at), Math.round(visFrom - ONSET[s2]));
+  const stopBy = SUSTAINED.has(s2) && visTo !== void 0 ? Math.min(Math.round(visTo), Math.round(beat.end)) : Math.round(beat.end);
+  const dur = Math.max(3, Math.min(LEN[s2], stopBy - from));
+  return { s: s2, at: from, dur, fade: dur < LEN[s2] ? Math.min(10, Math.max(3, Math.round(dur / 3))) : 0, vol, why };
+};
+var peakOn = (beat) => (s2, peakAt, visTo, vol, why) => within(beat)(s2, peakAt - (PEAK[s2] - ONSET[s2]), visTo, vol, why);
+
+// src/r45/time.ts
+var FPS2 = 30;
+var F2 = (sec) => Math.round(sec * FPS2);
 var ofScene = (id) => CUES.filter((c3) => c3.scene === id);
 var cue = (id, i3) => F2(ofScene(id)[i3].a);
 var cueEnd = (id, i3) => F2(ofScene(id)[i3].b);
@@ -647,17 +742,12 @@ var word = (id, i3, re) => {
   return F2(w3[1]);
 };
 
-// src/audit/Probe.tsx
-var useTag = () => (_id3, _kind) => ({});
-var Obj = ({ children }) => /* @__PURE__ */ u2(S, { children });
-
 // ../034-ohtani/node_modules/preact/hooks/dist/hooks.mjs
 var t2;
 var r2;
 var u3;
 var i2;
-var o2 = 0;
-var f3 = [];
+var f2 = [];
 var c2 = l;
 var e2 = c2.__b;
 var a2 = c2.__r;
@@ -665,17 +755,8 @@ var v2 = c2.diffed;
 var l2 = c2.__c;
 var m2 = c2.unmount;
 var p2 = c2.__;
-function s2(n2, t3) {
-  c2.__h && c2.__h(r2, n2, o2 || t3), o2 = 0;
-  var u4 = r2.__H || (r2.__H = { __: [], __h: [] });
-  return n2 >= u4.__.length && u4.__.push({}), u4.__[n2];
-}
-function x2(n2) {
-  var u4 = r2.context[n2.__c], i3 = s2(t2++, 9);
-  return i3.c = n2, u4 ? (null == i3.__ && (i3.__ = true, u4.sub(r2)), u4.props.value) : n2.__;
-}
 function j2() {
-  for (var n2; n2 = f3.shift(); ) {
+  for (var n2; n2 = f2.shift(); ) {
     var t3 = n2.__H;
     if (n2.__P && t3) try {
       t3.__h.some(z2), t3.__h.some(B3), t3.__h = [];
@@ -697,7 +778,7 @@ c2.__b = function(n2) {
 }, c2.diffed = function(n2) {
   v2 && v2(n2);
   var t3 = n2.__c;
-  t3 && t3.__H && (t3.__H.__h.length && (1 !== f3.push(t3) && i2 === c2.requestAnimationFrame || ((i2 = c2.requestAnimationFrame) || w2)(j2)), t3.__H.__.some(function(n3) {
+  t3 && t3.__H && (t3.__H.__h.length && (1 !== f2.push(t3) && i2 === c2.requestAnimationFrame || ((i2 = c2.requestAnimationFrame) || w2)(j2)), t3.__H.__.some(function(n3) {
     n3.u && (n3.__H = n3.u, n3.u = void 0);
   })), u3 = r2 = null;
 }, c2.__c = function(n2, t3) {
@@ -763,7 +844,7 @@ var A4 = "undefined" != typeof Symbol && Symbol.for && Symbol.for("react.forward
 var O2 = l.__e;
 l.__e = function(n2, t3, e3, r3) {
   if (n2.then) {
-    for (var u4, o3 = t3; o3 = o3.__; ) if ((u4 = o3.__c) && u4.__c) return null == t3.__e && (t3.__e = e3.__e, t3.__k = e3.__k || []), u4.__c(n2, t3);
+    for (var u4, o2 = t3; o2 = o2.__; ) if ((u4 = o2.__c) && u4.__c) return null == t3.__e && (t3.__e = e3.__e, t3.__k = e3.__k || []), u4.__c(n2, t3);
   }
   O2(n2, t3, e3, r3);
 };
@@ -796,13 +877,13 @@ l.unmount = function(n2) {
 }, (P3.prototype = new C()).__c = function(n2, t3) {
   var e3 = t3.__c, r3 = this;
   null == r3.o && (r3.o = []), r3.o.push(e3);
-  var u4 = j3(r3.__v), o3 = false, i3 = function() {
-    o3 || r3.__z || (o3 = true, e3.__R = null, u4 ? u4(f4) : f4());
+  var u4 = j3(r3.__v), o2 = false, i3 = function() {
+    o2 || r3.__z || (o2 = true, e3.__R = null, u4 ? u4(f3) : f3());
   };
   e3.__R = i3;
   var l3 = e3.__P;
   e3.__P = null;
-  var f4 = function() {
+  var f3 = function() {
     if (!--r3.__u) {
       if (r3.state.__a) {
         var n3 = r3.state.__a;
@@ -818,8 +899,8 @@ l.unmount = function(n2) {
 }, P3.prototype.render = function(n2, e3) {
   if (this.__b) {
     if (this.__v.__k) {
-      var r3 = document.createElement("div"), o3 = this.__v.__k[0].__c;
-      this.__v.__k[0] = V2(this.__b, r3, o3.__O = o3.__P);
+      var r3 = document.createElement("div"), o2 = this.__v.__k[0].__c;
+      this.__v.__k[0] = V2(this.__b, r3, o2.__O = o2.__P);
     }
     this.__b = null;
   }
@@ -836,10 +917,10 @@ var H2 = function(n2, t3, e3) {
 (B4.prototype = new C()).__a = function(n2) {
   var t3 = this, e3 = j3(t3.__v), r3 = t3.l.get(n2);
   return r3[0]++, function(u4) {
-    var o3 = function() {
+    var o2 = function() {
       t3.props.revealOrder ? (r3.push(u4), H2(t3, n2, r3)) : u4();
     };
-    e3 ? e3(o3) : o3();
+    e3 ? e3(o2) : o2();
   };
 }, B4.prototype.render = function(n2) {
   this.i = null, this.l = /* @__PURE__ */ new Map();
@@ -884,12 +965,12 @@ var un = { configurable: true, get: function() {
 var on = l.vnode;
 l.vnode = function(n2) {
   "string" == typeof n2.type && (function(n3) {
-    var t3 = n3.props, e3 = n3.type, u4 = {}, o3 = -1 == e3.indexOf("-");
+    var t3 = n3.props, e3 = n3.type, u4 = {}, o2 = -1 == e3.indexOf("-");
     for (var i3 in t3) {
       var l3 = t3[i3];
       if (!("value" === i3 && "defaultValue" in t3 && null == l3 || Q2 && "children" === i3 && "noscript" === e3 || "class" === i3 || "className" === i3)) {
-        var f4 = i3.toLowerCase();
-        "defaultValue" === i3 && "value" in t3 && null == t3.value ? i3 = "value" : "download" === i3 && true === l3 ? l3 = "" : "translate" === f4 && "no" === l3 ? l3 = false : "o" === f4[0] && "n" === f4[1] ? "ondoubleclick" === f4 ? i3 = "ondblclick" : "onchange" !== f4 || "input" !== e3 && "textarea" !== e3 || X2(t3.type) ? "onfocus" === f4 ? i3 = "onfocusin" : "onblur" === f4 ? i3 = "onfocusout" : J2.test(i3) && (i3 = f4) : f4 = i3 = "oninput" : o3 && G2.test(i3) ? i3 = i3.replace(K2, "-$&").toLowerCase() : null === l3 && (l3 = void 0), "oninput" === f4 && u4[i3 = f4] && (i3 = "oninputCapture"), u4[i3] = l3;
+        var f3 = i3.toLowerCase();
+        "defaultValue" === i3 && "value" in t3 && null == t3.value ? i3 = "value" : "download" === i3 && true === l3 ? l3 = "" : "translate" === f3 && "no" === l3 ? l3 = false : "o" === f3[0] && "n" === f3[1] ? "ondoubleclick" === f3 ? i3 = "ondblclick" : "onchange" !== f3 || "input" !== e3 && "textarea" !== e3 || X2(t3.type) ? "onfocus" === f3 ? i3 = "onfocusin" : "onblur" === f3 ? i3 = "onfocusout" : J2.test(i3) && (i3 = f3) : f3 = i3 = "oninput" : o2 && G2.test(i3) ? i3 = i3.replace(K2, "-$&").toLowerCase() : null === l3 && (l3 = void 0), "oninput" === f3 && u4[i3 = f3] && (i3 = "oninputCapture"), u4[i3] = l3;
       }
     }
     "select" == e3 && (u4.multiple && Array.isArray(u4.value) && (u4.value = F(t3.children).forEach(function(n4) {
@@ -913,23 +994,22 @@ l.diffed = function(n2) {
 // src/r45/camera.tsx
 var IO = SETTLE;
 var DRIFT = (t3) => 0.5 - 0.5 * Math.cos(Math.PI * clamp01(t3));
-var HOME = { x: 540, y: 960 };
 var checkKeys = (name, keys) => {
   for (let i3 = 1; i3 < keys.length; i3++) {
-    const k3 = keys[i3], a3 = keys[i3 - 1], travel = Math.hypot(k3.x - a3.x, k3.y - a3.y);
-    const min = travel >= 400 ? 40 : 30;
-    if (k3.dur < min) throw new Error(`camera ${name}: key ${i3} (f${k3.at}) travels ${Math.round(travel)} px in ${k3.dur} f \u2014 rule 48 wants \u2265 ${min} f`);
+    const k3 = keys[i3], a3 = keys[i3 - 1], travel2 = Math.hypot(k3.x - a3.x, k3.y - a3.y);
+    const min = travel2 >= 400 ? 40 : 30;
+    if (k3.dur < min) throw new Error(`camera ${name}: key ${i3} (f${k3.at}) travels ${Math.round(travel2)} px in ${k3.dur} f \u2014 rule 48 wants \u2265 ${min} f`);
   }
   for (let i3 = 2; i3 < keys.length; i3++)
     if (keys[i3].at < keys[i3 - 1].at + keys[i3 - 1].dur)
       throw new Error(`camera ${name}: key ${i3} (f${keys[i3].at}) starts before key ${i3 - 1} ends (f${keys[i3 - 1].at + keys[i3 - 1].dur}) \u2014 camera keys never overlap`);
   return keys;
 };
-var alive = (name, story, until, o3 = {}) => {
-  const amp = o3.amp ?? 1, seed = o3.seed ?? name.length * 7.3;
+var alive = (name, story, until, o2 = {}) => {
+  const amp = o2.amp ?? 1, seed = o2.seed ?? name.length * 7.3;
   const rnd = (i3, j4) => {
-    const s3 = Math.sin(i3 * 127.1 + j4 * 311.7 + seed * 74.7) * 43758.5453;
-    return s3 - Math.floor(s3);
+    const s2 = Math.sin(i3 * 127.1 + j4 * 311.7 + seed * 74.7) * 43758.5453;
+    return s2 - Math.floor(s2);
   };
   const out = [story[0]];
   let n2 = 0;
@@ -956,47 +1036,21 @@ var alive = (name, story, until, o3 = {}) => {
   breathe(last, story.length > 1 ? last.at + last.dur : 0, until);
   return checkKeys(name, out);
 };
-var camView = (keys, f4) => {
+var camView = (keys, f3) => {
   const ov = globalThis.__camOverride;
   if (ov) return ov;
   let v3 = { x: keys[0].x, y: keys[0].y, z: keys[0].z };
   for (let i3 = 1; i3 < keys.length; i3++) {
     const k3 = keys[i3];
-    if (f4 <= k3.at) break;
-    const t3 = (k3.drift ? DRIFT : IO)(clamp01((f4 - k3.at) / k3.dur)), a3 = keys[i3 - 1];
+    if (f3 <= k3.at) break;
+    const t3 = (k3.drift ? DRIFT : IO)(clamp01((f3 - k3.at) / k3.dur)), a3 = keys[i3 - 1];
     v3 = { x: lerp(a3.x, k3.x, t3), y: lerp(a3.y, k3.y, t3), z: Math.exp(lerp(Math.log(a3.z), Math.log(k3.z), t3)) };
   }
   return v3;
 };
-var camMoving = (keys, f4) => keys.some((k3, i3) => i3 > 0 && f4 > k3.at && f4 < k3.at + k3.dur);
 var HandOver = X({ tx: 0, ty: 0, far: 1, floor: 1 });
 var SetWindow = X({ from: 0, to: 1 });
 var Pass = X("front");
-var CREEP = 0;
-var layerTf = (keys, f4, win, p3) => {
-  const v3 = camView(keys, f4);
-  const creep = 1 + CREEP * clamp01((f4 - win.from) / Math.max(1, win.to - win.from));
-  const z3 = 1 + (v3.z * creep - 1) * p3;
-  const x3 = HOME.x + (v3.x - HOME.x) * p3, y3 = HOME.y + (v3.y - HOME.y) * p3;
-  return { z: z3, tx: HOME.x - x3 * z3, ty: HOME.y - y3 * z3 };
-};
-var Layer = ({ tf, moving, children }) => /* @__PURE__ */ u2("div", { "data-moving": moving ? "1" : void 0, style: {
-  position: "absolute",
-  inset: 0,
-  transform: `translate(540px, 960px) perspective(1800px) rotateX(0.15deg) translate(-540px, -960px) translate(${tf.tx.toFixed(3)}px, ${tf.ty.toFixed(3)}px)`
-}, children: /* @__PURE__ */ u2("div", { style: { position: "absolute", left: 0, top: 0, width: 1080, height: 1920, transformOrigin: "0 0", transform: `scale(${tf.z.toFixed(5)})` }, children }) });
-var World = ({ keys, f: f4, children }) => {
-  const win = x2(SetWindow);
-  if (x2(Pass) !== "front") return null;
-  return /* @__PURE__ */ u2(Layer, { tf: layerTf(keys, f4, win, 1), moving: camMoving(keys, f4), children });
-};
-var Light = ({ keys, f: f4, ground, pools, o: o3 = 1 }) => {
-  const win = x2(SetWindow);
-  const ho = x2(HandOver);
-  if (x2(Pass) !== "back" || ho.floor <= 2e-3) return null;
-  const fill3 = ground === "dark" ? "url(#mPoolDark)" : "url(#mPoolCream)";
-  return /* @__PURE__ */ u2("div", { style: { position: "absolute", inset: 0, opacity: ho.floor * o3 < 0.999 ? ho.floor * o3 : void 0 }, children: /* @__PURE__ */ u2(Layer, { tf: layerTf(keys, f4, win, 1), moving: false, children: /* @__PURE__ */ u2("svg", { width: 1080, height: 1920, style: { position: "absolute", left: 0, top: 0, overflow: "visible" }, children: pools.map(([cx, cy, rx, ry], i3) => /* @__PURE__ */ u2("ellipse", { cx, cy, rx, ry, fill: fill3 }, i3)) }) }) });
-};
 
 // ../034-ohtani/node_modules/three/build/three.module.js
 var three_module_exports = {};
@@ -1174,7 +1228,7 @@ __export(three_module_exports, {
   LessEqualDepth: () => LessEqualDepth,
   LessEqualStencilFunc: () => LessEqualStencilFunc,
   LessStencilFunc: () => LessStencilFunc,
-  Light: () => Light2,
+  Light: () => Light,
   LightProbe: () => LightProbe,
   Line: () => Line,
   Line3: () => Line3,
@@ -1843,17 +1897,17 @@ function smootherstep(x3, min, max) {
   x3 = (x3 - min) / (max - min);
   return x3 * x3 * x3 * (x3 * (x3 * 6 - 15) + 10);
 }
-function randInt(low, high2) {
-  return low + Math.floor(Math.random() * (high2 - low + 1));
+function randInt(low, high) {
+  return low + Math.floor(Math.random() * (high - low + 1));
 }
-function randFloat(low, high2) {
-  return low + Math.random() * (high2 - low);
+function randFloat(low, high) {
+  return low + Math.random() * (high - low);
 }
 function randFloatSpread(range) {
   return range * (0.5 - Math.random());
 }
-function seededRandom(s3) {
-  if (s3 !== void 0) _seed = s3;
+function seededRandom(s2) {
+  if (s2 !== void 0) _seed = s2;
   let t3 = _seed += 1831565813;
   t3 = Math.imul(t3 ^ t3 >>> 15, t3 | 1);
   t3 ^= t3 + Math.imul(t3 ^ t3 >>> 7, t3 | 61);
@@ -1878,7 +1932,7 @@ function setQuaternionFromProperEuler(q4, a3, b2, c3, order) {
   const cos = Math.cos;
   const sin = Math.sin;
   const c22 = cos(b2 / 2);
-  const s22 = sin(b2 / 2);
+  const s2 = sin(b2 / 2);
   const c13 = cos((a3 + c3) / 2);
   const s13 = sin((a3 + c3) / 2);
   const c1_3 = cos((a3 - c3) / 2);
@@ -1887,22 +1941,22 @@ function setQuaternionFromProperEuler(q4, a3, b2, c3, order) {
   const s3_1 = sin((c3 - a3) / 2);
   switch (order) {
     case "XYX":
-      q4.set(c22 * s13, s22 * c1_3, s22 * s1_3, c22 * c13);
+      q4.set(c22 * s13, s2 * c1_3, s2 * s1_3, c22 * c13);
       break;
     case "YZY":
-      q4.set(s22 * s1_3, c22 * s13, s22 * c1_3, c22 * c13);
+      q4.set(s2 * s1_3, c22 * s13, s2 * c1_3, c22 * c13);
       break;
     case "ZXZ":
-      q4.set(s22 * c1_3, s22 * s1_3, c22 * s13, c22 * c13);
+      q4.set(s2 * c1_3, s2 * s1_3, c22 * s13, c22 * c13);
       break;
     case "XZX":
-      q4.set(c22 * s13, s22 * s3_1, s22 * c3_1, c22 * c13);
+      q4.set(c22 * s13, s2 * s3_1, s2 * c3_1, c22 * c13);
       break;
     case "YXY":
-      q4.set(s22 * c3_1, c22 * s13, s22 * s3_1, c22 * c13);
+      q4.set(s2 * c3_1, c22 * s13, s2 * s3_1, c22 * c13);
       break;
     case "ZYZ":
-      q4.set(s22 * s3_1, s22 * c3_1, c22 * s13, c22 * c13);
+      q4.set(s2 * s3_1, s2 * c3_1, c22 * s13, c22 * c13);
       break;
     default:
       warn("MathUtils: .setQuaternionFromProperEuler() encountered an unknown order: " + order);
@@ -2341,9 +2395,9 @@ var Vector2 = class _Vector2 {
    * @param {number} s - The scalar to add.
    * @return {Vector2} A reference to this vector.
    */
-  addScalar(s3) {
-    this.x += s3;
-    this.y += s3;
+  addScalar(s2) {
+    this.x += s2;
+    this.y += s2;
     return this;
   }
   /**
@@ -2365,9 +2419,9 @@ var Vector2 = class _Vector2 {
    * @param {number} s - The factor that scales `v`.
    * @return {Vector2} A reference to this vector.
    */
-  addScaledVector(v3, s3) {
-    this.x += v3.x * s3;
-    this.y += v3.y * s3;
+  addScaledVector(v3, s2) {
+    this.x += v3.x * s2;
+    this.y += v3.y * s2;
     return this;
   }
   /**
@@ -2387,9 +2441,9 @@ var Vector2 = class _Vector2 {
    * @param {number} s - The scalar to subtract.
    * @return {Vector2} A reference to this vector.
    */
-  subScalar(s3) {
-    this.x -= s3;
-    this.y -= s3;
+  subScalar(s2) {
+    this.x -= s2;
+    this.y -= s2;
     return this;
   }
   /**
@@ -2777,11 +2831,11 @@ var Vector2 = class _Vector2 {
    * @return {Vector2} A reference to this vector.
    */
   rotateAround(center, angle) {
-    const c3 = Math.cos(angle), s3 = Math.sin(angle);
+    const c3 = Math.cos(angle), s2 = Math.sin(angle);
     const x3 = this.x - center.x;
     const y3 = this.y - center.y;
-    this.x = x3 * c3 - y3 * s3 + center.x;
-    this.y = x3 * s3 + y3 * c3 + center.y;
+    this.x = x3 * c3 - y3 * s2 + center.x;
+    this.y = x3 * s2 + y3 * c3 + center.y;
     return this;
   }
   /**
@@ -2855,26 +2909,26 @@ var Quaternion = class {
         w1 = -w1;
         dot = -dot;
       }
-      let s3 = 1 - t3;
+      let s2 = 1 - t3;
       if (dot < 0.9995) {
         const theta = Math.acos(dot);
         const sin = Math.sin(theta);
-        s3 = Math.sin(s3 * theta) / sin;
+        s2 = Math.sin(s2 * theta) / sin;
         t3 = Math.sin(t3 * theta) / sin;
-        x0 = x0 * s3 + x1 * t3;
-        y0 = y0 * s3 + y1 * t3;
-        z0 = z0 * s3 + z1 * t3;
-        w0 = w0 * s3 + w1 * t3;
+        x0 = x0 * s2 + x1 * t3;
+        y0 = y0 * s2 + y1 * t3;
+        z0 = z0 * s2 + z1 * t3;
+        w0 = w0 * s2 + w1 * t3;
       } else {
-        x0 = x0 * s3 + x1 * t3;
-        y0 = y0 * s3 + y1 * t3;
-        z0 = z0 * s3 + z1 * t3;
-        w0 = w0 * s3 + w1 * t3;
-        const f4 = 1 / Math.sqrt(x0 * x0 + y0 * y0 + z0 * z0 + w0 * w0);
-        x0 *= f4;
-        y0 *= f4;
-        z0 *= f4;
-        w0 *= f4;
+        x0 = x0 * s2 + x1 * t3;
+        y0 = y0 * s2 + y1 * t3;
+        z0 = z0 * s2 + z1 * t3;
+        w0 = w0 * s2 + w1 * t3;
+        const f3 = 1 / Math.sqrt(x0 * x0 + y0 * y0 + z0 * z0 + w0 * w0);
+        x0 *= f3;
+        y0 *= f3;
+        z0 *= f3;
+        w0 *= f3;
       }
     }
     dst[dstOffset] = x0;
@@ -3017,44 +3071,44 @@ var Quaternion = class {
     const c22 = cos(y3 / 2);
     const c3 = cos(z3 / 2);
     const s1 = sin(x3 / 2);
-    const s22 = sin(y3 / 2);
+    const s2 = sin(y3 / 2);
     const s3 = sin(z3 / 2);
     switch (order) {
       case "XYZ":
-        this._x = s1 * c22 * c3 + c1 * s22 * s3;
-        this._y = c1 * s22 * c3 - s1 * c22 * s3;
-        this._z = c1 * c22 * s3 + s1 * s22 * c3;
-        this._w = c1 * c22 * c3 - s1 * s22 * s3;
+        this._x = s1 * c22 * c3 + c1 * s2 * s3;
+        this._y = c1 * s2 * c3 - s1 * c22 * s3;
+        this._z = c1 * c22 * s3 + s1 * s2 * c3;
+        this._w = c1 * c22 * c3 - s1 * s2 * s3;
         break;
       case "YXZ":
-        this._x = s1 * c22 * c3 + c1 * s22 * s3;
-        this._y = c1 * s22 * c3 - s1 * c22 * s3;
-        this._z = c1 * c22 * s3 - s1 * s22 * c3;
-        this._w = c1 * c22 * c3 + s1 * s22 * s3;
+        this._x = s1 * c22 * c3 + c1 * s2 * s3;
+        this._y = c1 * s2 * c3 - s1 * c22 * s3;
+        this._z = c1 * c22 * s3 - s1 * s2 * c3;
+        this._w = c1 * c22 * c3 + s1 * s2 * s3;
         break;
       case "ZXY":
-        this._x = s1 * c22 * c3 - c1 * s22 * s3;
-        this._y = c1 * s22 * c3 + s1 * c22 * s3;
-        this._z = c1 * c22 * s3 + s1 * s22 * c3;
-        this._w = c1 * c22 * c3 - s1 * s22 * s3;
+        this._x = s1 * c22 * c3 - c1 * s2 * s3;
+        this._y = c1 * s2 * c3 + s1 * c22 * s3;
+        this._z = c1 * c22 * s3 + s1 * s2 * c3;
+        this._w = c1 * c22 * c3 - s1 * s2 * s3;
         break;
       case "ZYX":
-        this._x = s1 * c22 * c3 - c1 * s22 * s3;
-        this._y = c1 * s22 * c3 + s1 * c22 * s3;
-        this._z = c1 * c22 * s3 - s1 * s22 * c3;
-        this._w = c1 * c22 * c3 + s1 * s22 * s3;
+        this._x = s1 * c22 * c3 - c1 * s2 * s3;
+        this._y = c1 * s2 * c3 + s1 * c22 * s3;
+        this._z = c1 * c22 * s3 - s1 * s2 * c3;
+        this._w = c1 * c22 * c3 + s1 * s2 * s3;
         break;
       case "YZX":
-        this._x = s1 * c22 * c3 + c1 * s22 * s3;
-        this._y = c1 * s22 * c3 + s1 * c22 * s3;
-        this._z = c1 * c22 * s3 - s1 * s22 * c3;
-        this._w = c1 * c22 * c3 - s1 * s22 * s3;
+        this._x = s1 * c22 * c3 + c1 * s2 * s3;
+        this._y = c1 * s2 * c3 + s1 * c22 * s3;
+        this._z = c1 * c22 * s3 - s1 * s2 * c3;
+        this._w = c1 * c22 * c3 - s1 * s2 * s3;
         break;
       case "XZY":
-        this._x = s1 * c22 * c3 - c1 * s22 * s3;
-        this._y = c1 * s22 * c3 - s1 * c22 * s3;
-        this._z = c1 * c22 * s3 + s1 * s22 * c3;
-        this._w = c1 * c22 * c3 + s1 * s22 * s3;
+        this._x = s1 * c22 * c3 - c1 * s2 * s3;
+        this._y = c1 * s2 * c3 - s1 * c22 * s3;
+        this._z = c1 * c22 * s3 + s1 * s2 * c3;
+        this._w = c1 * c22 * c3 + s1 * s2 * s3;
         break;
       default:
         warn("Quaternion: .setFromEuler() encountered an unknown order: " + order);
@@ -3070,10 +3124,10 @@ var Quaternion = class {
    * @return {Quaternion} A reference to this quaternion.
    */
   setFromAxisAngle(axis, angle) {
-    const halfAngle = angle / 2, s3 = Math.sin(halfAngle);
-    this._x = axis.x * s3;
-    this._y = axis.y * s3;
-    this._z = axis.z * s3;
+    const halfAngle = angle / 2, s2 = Math.sin(halfAngle);
+    this._x = axis.x * s2;
+    this._y = axis.y * s2;
+    this._z = axis.z * s2;
     this._w = Math.cos(halfAngle);
     this._onChangeCallback();
     return this;
@@ -3087,29 +3141,29 @@ var Quaternion = class {
   setFromRotationMatrix(m3) {
     const te = m3.elements, m11 = te[0], m12 = te[4], m13 = te[8], m21 = te[1], m22 = te[5], m23 = te[9], m31 = te[2], m32 = te[6], m33 = te[10], trace = m11 + m22 + m33;
     if (trace > 0) {
-      const s3 = 0.5 / Math.sqrt(trace + 1);
-      this._w = 0.25 / s3;
-      this._x = (m32 - m23) * s3;
-      this._y = (m13 - m31) * s3;
-      this._z = (m21 - m12) * s3;
+      const s2 = 0.5 / Math.sqrt(trace + 1);
+      this._w = 0.25 / s2;
+      this._x = (m32 - m23) * s2;
+      this._y = (m13 - m31) * s2;
+      this._z = (m21 - m12) * s2;
     } else if (m11 > m22 && m11 > m33) {
-      const s3 = 2 * Math.sqrt(1 + m11 - m22 - m33);
-      this._w = (m32 - m23) / s3;
-      this._x = 0.25 * s3;
-      this._y = (m12 + m21) / s3;
-      this._z = (m13 + m31) / s3;
+      const s2 = 2 * Math.sqrt(1 + m11 - m22 - m33);
+      this._w = (m32 - m23) / s2;
+      this._x = 0.25 * s2;
+      this._y = (m12 + m21) / s2;
+      this._z = (m13 + m31) / s2;
     } else if (m22 > m33) {
-      const s3 = 2 * Math.sqrt(1 + m22 - m11 - m33);
-      this._w = (m13 - m31) / s3;
-      this._x = (m12 + m21) / s3;
-      this._y = 0.25 * s3;
-      this._z = (m23 + m32) / s3;
+      const s2 = 2 * Math.sqrt(1 + m22 - m11 - m33);
+      this._w = (m13 - m31) / s2;
+      this._x = (m12 + m21) / s2;
+      this._y = 0.25 * s2;
+      this._z = (m23 + m32) / s2;
     } else {
-      const s3 = 2 * Math.sqrt(1 + m33 - m11 - m22);
-      this._w = (m21 - m12) / s3;
-      this._x = (m13 + m31) / s3;
-      this._y = (m23 + m32) / s3;
-      this._z = 0.25 * s3;
+      const s2 = 2 * Math.sqrt(1 + m33 - m11 - m22);
+      this._w = (m21 - m12) / s2;
+      this._x = (m13 + m31) / s2;
+      this._y = (m23 + m32) / s2;
+      this._z = 0.25 * s2;
     }
     this._onChangeCallback();
     return this;
@@ -3307,22 +3361,22 @@ var Quaternion = class {
       w3 = -w3;
       dot = -dot;
     }
-    let s3 = 1 - t3;
+    let s2 = 1 - t3;
     if (dot < 0.9995) {
       const theta = Math.acos(dot);
       const sin = Math.sin(theta);
-      s3 = Math.sin(s3 * theta) / sin;
+      s2 = Math.sin(s2 * theta) / sin;
       t3 = Math.sin(t3 * theta) / sin;
-      this._x = this._x * s3 + x3 * t3;
-      this._y = this._y * s3 + y3 * t3;
-      this._z = this._z * s3 + z3 * t3;
-      this._w = this._w * s3 + w3 * t3;
+      this._x = this._x * s2 + x3 * t3;
+      this._y = this._y * s2 + y3 * t3;
+      this._z = this._z * s2 + z3 * t3;
+      this._w = this._w * s2 + w3 * t3;
       this._onChangeCallback();
     } else {
-      this._x = this._x * s3 + x3 * t3;
-      this._y = this._y * s3 + y3 * t3;
-      this._z = this._z * s3 + z3 * t3;
-      this._w = this._w * s3 + w3 * t3;
+      this._x = this._x * s2 + x3 * t3;
+      this._y = this._y * s2 + y3 * t3;
+      this._z = this._z * s2 + z3 * t3;
+      this._w = this._w * s2 + w3 * t3;
       this.normalize();
     }
     return this;
@@ -3583,10 +3637,10 @@ var Vector3 = class _Vector3 {
    * @param {number} s - The scalar to add.
    * @return {Vector3} A reference to this vector.
    */
-  addScalar(s3) {
-    this.x += s3;
-    this.y += s3;
-    this.z += s3;
+  addScalar(s2) {
+    this.x += s2;
+    this.y += s2;
+    this.z += s2;
     return this;
   }
   /**
@@ -3609,10 +3663,10 @@ var Vector3 = class _Vector3 {
    * @param {number} s - The factor that scales `v`.
    * @return {Vector3} A reference to this vector.
    */
-  addScaledVector(v3, s3) {
-    this.x += v3.x * s3;
-    this.y += v3.y * s3;
-    this.z += v3.z * s3;
+  addScaledVector(v3, s2) {
+    this.x += v3.x * s2;
+    this.y += v3.y * s2;
+    this.z += v3.z * s2;
     return this;
   }
   /**
@@ -3633,10 +3687,10 @@ var Vector3 = class _Vector3 {
    * @param {number} s - The scalar to subtract.
    * @return {Vector3} A reference to this vector.
    */
-  subScalar(s3) {
-    this.x -= s3;
-    this.y -= s3;
-    this.z -= s3;
+  subScalar(s2) {
+    this.x -= s2;
+    this.y -= s2;
+    this.z -= s2;
     return this;
   }
   /**
@@ -4140,8 +4194,8 @@ var Vector3 = class _Vector3 {
    * @param {Spherical} s - The spherical coordinates.
    * @return {Vector3} A reference to this vector.
    */
-  setFromSpherical(s3) {
-    return this.setFromSphericalCoords(s3.radius, s3.phi, s3.theta);
+  setFromSpherical(s2) {
+    return this.setFromSphericalCoords(s2.radius, s2.phi, s2.theta);
   }
   /**
    * Sets the vector components from the given spherical coordinates.
@@ -4528,17 +4582,17 @@ var Matrix3 = class _Matrix3 {
    * @param {number} s - The scalar.
    * @return {Matrix3} A reference to this matrix.
    */
-  multiplyScalar(s3) {
+  multiplyScalar(s2) {
     const te = this.elements;
-    te[0] *= s3;
-    te[3] *= s3;
-    te[6] *= s3;
-    te[1] *= s3;
-    te[4] *= s3;
-    te[7] *= s3;
-    te[2] *= s3;
-    te[5] *= s3;
-    te[8] *= s3;
+    te[0] *= s2;
+    te[3] *= s2;
+    te[6] *= s2;
+    te[1] *= s2;
+    te[4] *= s2;
+    te[7] *= s2;
+    te[2] *= s2;
+    te[5] *= s2;
+    te[8] *= s2;
     return this;
   }
   /**
@@ -4548,8 +4602,8 @@ var Matrix3 = class _Matrix3 {
    */
   determinant() {
     const te = this.elements;
-    const a3 = te[0], b2 = te[1], c3 = te[2], d3 = te[3], e3 = te[4], f4 = te[5], g4 = te[6], h3 = te[7], i3 = te[8];
-    return a3 * e3 * i3 - a3 * f4 * h3 - b2 * d3 * i3 + b2 * f4 * g4 + c3 * d3 * h3 - c3 * e3 * g4;
+    const a3 = te[0], b2 = te[1], c3 = te[2], d3 = te[3], e3 = te[4], f3 = te[5], g4 = te[6], h3 = te[7], i3 = te[8];
+    return a3 * e3 * i3 - a3 * f3 * h3 - b2 * d3 * i3 + b2 * f3 * g4 + c3 * d3 * h3 - c3 * e3 * g4;
   }
   /**
    * Inverts this matrix, using the [analytic method](https://en.wikipedia.org/wiki/Invertible_matrix#Analytic_solution).
@@ -4635,14 +4689,14 @@ var Matrix3 = class _Matrix3 {
    */
   setUvTransform(tx, ty, sx, sy, rotation, cx, cy) {
     const c3 = Math.cos(rotation);
-    const s3 = Math.sin(rotation);
+    const s2 = Math.sin(rotation);
     this.set(
       sx * c3,
-      sx * s3,
-      -sx * (c3 * cx + s3 * cy) + cx + tx,
-      -sy * s3,
+      sx * s2,
+      -sx * (c3 * cx + s2 * cy) + cx + tx,
+      -sy * s2,
       sy * c3,
-      -sy * (-s3 * cx + c3 * cy) + cy + ty,
+      -sy * (-s2 * cx + c3 * cy) + cy + ty,
       0,
       0,
       1
@@ -4725,12 +4779,12 @@ var Matrix3 = class _Matrix3 {
    */
   makeRotation(theta) {
     const c3 = Math.cos(theta);
-    const s3 = Math.sin(theta);
+    const s2 = Math.sin(theta);
     this.set(
       c3,
-      -s3,
+      -s2,
       0,
-      s3,
+      s2,
       c3,
       0,
       0,
@@ -5642,11 +5696,11 @@ var Vector4 = class _Vector4 {
    * @param {number} s - The scalar to add.
    * @return {Vector4} A reference to this vector.
    */
-  addScalar(s3) {
-    this.x += s3;
-    this.y += s3;
-    this.z += s3;
-    this.w += s3;
+  addScalar(s2) {
+    this.x += s2;
+    this.y += s2;
+    this.z += s2;
+    this.w += s2;
     return this;
   }
   /**
@@ -5670,11 +5724,11 @@ var Vector4 = class _Vector4 {
    * @param {number} s - The factor that scales `v`.
    * @return {Vector4} A reference to this vector.
    */
-  addScaledVector(v3, s3) {
-    this.x += v3.x * s3;
-    this.y += v3.y * s3;
-    this.z += v3.z * s3;
-    this.w += v3.w * s3;
+  addScaledVector(v3, s2) {
+    this.x += v3.x * s2;
+    this.y += v3.y * s2;
+    this.z += v3.z * s2;
+    this.w += v3.w * s2;
     return this;
   }
   /**
@@ -5696,11 +5750,11 @@ var Vector4 = class _Vector4 {
    * @param {number} s - The scalar to subtract.
    * @return {Vector4} A reference to this vector.
    */
-  subScalar(s3) {
-    this.x -= s3;
-    this.y -= s3;
-    this.z -= s3;
-    this.w -= s3;
+  subScalar(s2) {
+    this.x -= s2;
+    this.y -= s2;
+    this.z -= s2;
+    this.w -= s2;
     return this;
   }
   /**
@@ -5789,15 +5843,15 @@ var Vector4 = class _Vector4 {
    */
   setAxisAngleFromQuaternion(q4) {
     this.w = 2 * Math.acos(q4.w);
-    const s3 = Math.sqrt(1 - q4.w * q4.w);
-    if (s3 < 1e-4) {
+    const s2 = Math.sqrt(1 - q4.w * q4.w);
+    if (s2 < 1e-4) {
       this.x = 1;
       this.y = 0;
       this.z = 0;
     } else {
-      this.x = q4.x / s3;
-      this.y = q4.y / s3;
-      this.z = q4.z / s3;
+      this.x = q4.x / s2;
+      this.y = q4.y / s2;
+      this.z = q4.z / s2;
     }
     return this;
   }
@@ -5857,11 +5911,11 @@ var Vector4 = class _Vector4 {
       this.set(x3, y3, z3, angle);
       return this;
     }
-    let s3 = Math.sqrt((m32 - m23) * (m32 - m23) + (m13 - m31) * (m13 - m31) + (m21 - m12) * (m21 - m12));
-    if (Math.abs(s3) < 1e-3) s3 = 1;
-    this.x = (m32 - m23) / s3;
-    this.y = (m13 - m31) / s3;
-    this.z = (m21 - m12) / s3;
+    let s2 = Math.sqrt((m32 - m23) * (m32 - m23) + (m13 - m31) * (m13 - m31) + (m21 - m12) * (m21 - m12));
+    if (Math.abs(s2) < 1e-3) s2 = 1;
+    this.x = (m32 - m23) / s2;
+    this.y = (m13 - m31) / s2;
+    this.z = (m21 - m12) / s2;
     this.w = Math.acos((m11 + m22 + m33 - 1) / 2);
     return this;
   }
@@ -7964,11 +8018,11 @@ var Matrix4 = class _Matrix4 {
     const x3 = euler.x, y3 = euler.y, z3 = euler.z;
     const a3 = Math.cos(x3), b2 = Math.sin(x3);
     const c3 = Math.cos(y3), d3 = Math.sin(y3);
-    const e3 = Math.cos(z3), f4 = Math.sin(z3);
+    const e3 = Math.cos(z3), f3 = Math.sin(z3);
     if (euler.order === "XYZ") {
-      const ae = a3 * e3, af = a3 * f4, be = b2 * e3, bf = b2 * f4;
+      const ae = a3 * e3, af = a3 * f3, be = b2 * e3, bf = b2 * f3;
       te[0] = c3 * e3;
-      te[4] = -c3 * f4;
+      te[4] = -c3 * f3;
       te[8] = d3;
       te[1] = af + be * d3;
       te[5] = ae - bf * d3;
@@ -7977,20 +8031,20 @@ var Matrix4 = class _Matrix4 {
       te[6] = be + af * d3;
       te[10] = a3 * c3;
     } else if (euler.order === "YXZ") {
-      const ce = c3 * e3, cf = c3 * f4, de = d3 * e3, df = d3 * f4;
+      const ce = c3 * e3, cf = c3 * f3, de = d3 * e3, df = d3 * f3;
       te[0] = ce + df * b2;
       te[4] = de * b2 - cf;
       te[8] = a3 * d3;
-      te[1] = a3 * f4;
+      te[1] = a3 * f3;
       te[5] = a3 * e3;
       te[9] = -b2;
       te[2] = cf * b2 - de;
       te[6] = df + ce * b2;
       te[10] = a3 * c3;
     } else if (euler.order === "ZXY") {
-      const ce = c3 * e3, cf = c3 * f4, de = d3 * e3, df = d3 * f4;
+      const ce = c3 * e3, cf = c3 * f3, de = d3 * e3, df = d3 * f3;
       te[0] = ce - df * b2;
-      te[4] = -a3 * f4;
+      te[4] = -a3 * f3;
       te[8] = de + cf * b2;
       te[1] = cf + de * b2;
       te[5] = a3 * e3;
@@ -7999,11 +8053,11 @@ var Matrix4 = class _Matrix4 {
       te[6] = b2;
       te[10] = a3 * c3;
     } else if (euler.order === "ZYX") {
-      const ae = a3 * e3, af = a3 * f4, be = b2 * e3, bf = b2 * f4;
+      const ae = a3 * e3, af = a3 * f3, be = b2 * e3, bf = b2 * f3;
       te[0] = c3 * e3;
       te[4] = be * d3 - af;
       te[8] = ae * d3 + bf;
-      te[1] = c3 * f4;
+      te[1] = c3 * f3;
       te[5] = bf * d3 + ae;
       te[9] = af * d3 - be;
       te[2] = -d3;
@@ -8012,25 +8066,25 @@ var Matrix4 = class _Matrix4 {
     } else if (euler.order === "YZX") {
       const ac = a3 * c3, ad = a3 * d3, bc = b2 * c3, bd = b2 * d3;
       te[0] = c3 * e3;
-      te[4] = bd - ac * f4;
-      te[8] = bc * f4 + ad;
-      te[1] = f4;
+      te[4] = bd - ac * f3;
+      te[8] = bc * f3 + ad;
+      te[1] = f3;
       te[5] = a3 * e3;
       te[9] = -b2 * e3;
       te[2] = -d3 * e3;
-      te[6] = ad * f4 + bc;
-      te[10] = ac - bd * f4;
+      te[6] = ad * f3 + bc;
+      te[10] = ac - bd * f3;
     } else if (euler.order === "XZY") {
       const ac = a3 * c3, ad = a3 * d3, bc = b2 * c3, bd = b2 * d3;
       te[0] = c3 * e3;
-      te[4] = -f4;
+      te[4] = -f3;
       te[8] = d3 * e3;
-      te[1] = ac * f4 + bd;
+      te[1] = ac * f3 + bd;
       te[5] = a3 * e3;
-      te[9] = ad * f4 - bc;
-      te[2] = bc * f4 - ad;
+      te[9] = ad * f3 - bc;
+      te[2] = bc * f3 - ad;
       te[6] = b2 * e3;
-      te[10] = bd * f4 + ac;
+      te[10] = bd * f3 + ac;
     }
     te[3] = 0;
     te[7] = 0;
@@ -8153,24 +8207,24 @@ var Matrix4 = class _Matrix4 {
    * @param {number} s - The scalar.
    * @return {Matrix4} A reference to this matrix.
    */
-  multiplyScalar(s3) {
+  multiplyScalar(s2) {
     const te = this.elements;
-    te[0] *= s3;
-    te[4] *= s3;
-    te[8] *= s3;
-    te[12] *= s3;
-    te[1] *= s3;
-    te[5] *= s3;
-    te[9] *= s3;
-    te[13] *= s3;
-    te[2] *= s3;
-    te[6] *= s3;
-    te[10] *= s3;
-    te[14] *= s3;
-    te[3] *= s3;
-    te[7] *= s3;
-    te[11] *= s3;
-    te[15] *= s3;
+    te[0] *= s2;
+    te[4] *= s2;
+    te[8] *= s2;
+    te[12] *= s2;
+    te[1] *= s2;
+    te[5] *= s2;
+    te[9] *= s2;
+    te[13] *= s2;
+    te[2] *= s2;
+    te[6] *= s2;
+    te[10] *= s2;
+    te[14] *= s2;
+    te[3] *= s2;
+    te[7] *= s2;
+    te[11] *= s2;
+    te[15] *= s2;
     return this;
   }
   /**
@@ -8361,7 +8415,7 @@ var Matrix4 = class _Matrix4 {
    * @return {Matrix4} A reference to this matrix.
    */
   makeRotationX(theta) {
-    const c3 = Math.cos(theta), s3 = Math.sin(theta);
+    const c3 = Math.cos(theta), s2 = Math.sin(theta);
     this.set(
       1,
       0,
@@ -8369,10 +8423,10 @@ var Matrix4 = class _Matrix4 {
       0,
       0,
       c3,
-      -s3,
+      -s2,
       0,
       0,
-      s3,
+      s2,
       c3,
       0,
       0,
@@ -8390,17 +8444,17 @@ var Matrix4 = class _Matrix4 {
    * @return {Matrix4} A reference to this matrix.
    */
   makeRotationY(theta) {
-    const c3 = Math.cos(theta), s3 = Math.sin(theta);
+    const c3 = Math.cos(theta), s2 = Math.sin(theta);
     this.set(
       c3,
       0,
-      s3,
+      s2,
       0,
       0,
       1,
       0,
       0,
-      -s3,
+      -s2,
       0,
       c3,
       0,
@@ -8419,13 +8473,13 @@ var Matrix4 = class _Matrix4 {
    * @return {Matrix4} A reference to this matrix.
    */
   makeRotationZ(theta) {
-    const c3 = Math.cos(theta), s3 = Math.sin(theta);
+    const c3 = Math.cos(theta), s2 = Math.sin(theta);
     this.set(
       c3,
-      -s3,
+      -s2,
       0,
       0,
-      s3,
+      s2,
       c3,
       0,
       0,
@@ -8453,21 +8507,21 @@ var Matrix4 = class _Matrix4 {
    */
   makeRotationAxis(axis, angle) {
     const c3 = Math.cos(angle);
-    const s3 = Math.sin(angle);
+    const s2 = Math.sin(angle);
     const t3 = 1 - c3;
     const x3 = axis.x, y3 = axis.y, z3 = axis.z;
     const tx = t3 * x3, ty = t3 * y3;
     this.set(
       tx * x3 + c3,
-      tx * y3 - s3 * z3,
-      tx * z3 + s3 * y3,
+      tx * y3 - s2 * z3,
+      tx * z3 + s2 * y3,
       0,
-      tx * y3 + s3 * z3,
+      tx * y3 + s2 * z3,
       ty * y3 + c3,
-      ty * z3 - s3 * x3,
+      ty * z3 - s2 * x3,
       0,
-      tx * z3 - s3 * y3,
-      ty * z3 + s3 * x3,
+      tx * z3 - s2 * y3,
+      ty * z3 + s2 * x3,
       t3 * z3 * z3 + c3,
       0,
       0,
@@ -10688,14 +10742,14 @@ var Color = class {
    * @param {string} [colorSpace=ColorManagement.workingColorSpace] - The color space.
    * @return {Color} A reference to this color.
    */
-  setHSL(h3, s3, l3, colorSpace = ColorManagement.workingColorSpace) {
+  setHSL(h3, s2, l3, colorSpace = ColorManagement.workingColorSpace) {
     h3 = euclideanModulo(h3, 1);
-    s3 = clamp(s3, 0, 1);
+    s2 = clamp(s2, 0, 1);
     l3 = clamp(l3, 0, 1);
-    if (s3 === 0) {
+    if (s2 === 0) {
       this.r = this.g = this.b = l3;
     } else {
-      const p3 = l3 <= 0.5 ? l3 * (1 + s3) : l3 + s3 - l3 * s3;
+      const p3 = l3 <= 0.5 ? l3 * (1 + s2) : l3 + s2 - l3 * s2;
       const q4 = 2 * l3 - p3;
       this.r = hue2rgb(q4, p3, h3 + 1 / 3);
       this.g = hue2rgb(q4, p3, h3);
@@ -10965,9 +11019,9 @@ var Color = class {
    * @param {number} l - Lightness value between `0.0` and `1.0`.
    * @return {Color} A reference to this color.
    */
-  offsetHSL(h3, s3, l3) {
+  offsetHSL(h3, s2, l3) {
     this.getHSL(_hslA);
-    return this.setHSL(_hslA.h + h3, _hslA.s + s3, _hslA.l + l3);
+    return this.setHSL(_hslA.h + h3, _hslA.s + s2, _hslA.l + l3);
   }
   /**
    * Adds the RGB values of the given color to the RGB values of this color.
@@ -11000,10 +11054,10 @@ var Color = class {
    * @param {number} s - The scalar to add.
    * @return {Color} A reference to this color.
    */
-  addScalar(s3) {
-    this.r += s3;
-    this.g += s3;
-    this.b += s3;
+  addScalar(s2) {
+    this.r += s2;
+    this.g += s2;
+    this.b += s2;
     return this;
   }
   /**
@@ -11036,10 +11090,10 @@ var Color = class {
    * @param {number} s - The scalar to multiply.
    * @return {Color} A reference to this color.
    */
-  multiplyScalar(s3) {
-    this.r *= s3;
-    this.g *= s3;
-    this.b *= s3;
+  multiplyScalar(s2) {
+    this.r *= s2;
+    this.g *= s2;
+    this.b *= s2;
     return this;
   }
   /**
@@ -11088,9 +11142,9 @@ var Color = class {
     this.getHSL(_hslA);
     color.getHSL(_hslB);
     const h3 = lerp2(_hslA.h, _hslB.h, alpha);
-    const s3 = lerp2(_hslA.s, _hslB.s, alpha);
+    const s2 = lerp2(_hslA.s, _hslB.s, alpha);
     const l3 = lerp2(_hslA.l, _hslB.l, alpha);
-    this.setHSL(h3, s3, l3);
+    this.setHSL(h3, s2, l3);
     return this;
   }
   /**
@@ -11742,9 +11796,9 @@ function toHalfFloat(val) {
   if (Math.abs(val) > 65504) warn("DataUtils.toHalfFloat(): Value out of range.");
   val = clamp(val, -65504, 65504);
   _tables.floatView[0] = val;
-  const f4 = _tables.uint32View[0];
-  const e3 = f4 >> 23 & 511;
-  return _tables.baseTable[e3] + ((f4 & 8388607) >> _tables.shiftTable[e3]);
+  const f3 = _tables.uint32View[0];
+  const e3 = f3 >> 23 & 511;
+  return _tables.baseTable[e3] + ((f3 & 8388607) >> _tables.shiftTable[e3]);
 }
 function fromHalfFloat(val) {
   const m3 = val >> 10;
@@ -15938,8 +15992,8 @@ var InstancedMesh = class extends Mesh {
   getMorphAt(index, object) {
     const objectInfluences = object.morphTargetInfluences;
     const array = this.morphTexture.source.data.data;
-    const len = objectInfluences.length + 1;
-    const dataIndex = index * len + 1;
+    const len2 = objectInfluences.length + 1;
+    const dataIndex = index * len2 + 1;
     for (let i3 = 0; i3 < objectInfluences.length; i3++) {
       objectInfluences[i3] = array[dataIndex + i3];
     }
@@ -16001,9 +16055,9 @@ var InstancedMesh = class extends Mesh {
    */
   setMorphAt(index, object) {
     const objectInfluences = object.morphTargetInfluences;
-    const len = objectInfluences.length + 1;
+    const len2 = objectInfluences.length + 1;
     if (this.morphTexture === null) {
-      this.morphTexture = new DataTexture(new Float32Array(len * this.count), len, this.count, RedFormat, FloatType);
+      this.morphTexture = new DataTexture(new Float32Array(len2 * this.count), len2, this.count, RedFormat, FloatType);
     }
     const array = this.morphTexture.source.data.data;
     let morphInfluencesSum = 0;
@@ -16011,7 +16065,7 @@ var InstancedMesh = class extends Mesh {
       morphInfluencesSum += objectInfluences[i3];
     }
     const morphBaseInfluence = this.geometry.morphTargetsRelative ? 1 : 1 - morphInfluencesSum;
-    const dataIndex = len * index;
+    const dataIndex = len2 * index;
     array[dataIndex] = morphBaseInfluence;
     array.set(objectInfluences, dataIndex + 1);
   }
@@ -16679,13 +16733,13 @@ function copyAttributeData(src, target, targetOffset = 0) {
 }
 function copyArrayContents(src, target) {
   if (src.constructor !== target.constructor) {
-    const len = Math.min(src.length, target.length);
-    for (let i3 = 0; i3 < len; i3++) {
+    const len2 = Math.min(src.length, target.length);
+    for (let i3 = 0; i3 < len2; i3++) {
       target[i3] = src[i3];
     }
   } else {
-    const len = Math.min(src.length, target.length);
-    target.set(new src.constructor(src.buffer, 0, len));
+    const len2 = Math.min(src.length, target.length);
+    target.set(new src.constructor(src.buffer, 0, len2));
   }
 }
 var BatchedMesh = class extends Mesh {
@@ -18376,8 +18430,8 @@ var CircleGeometry = class _CircleGeometry extends BufferGeometry {
     vertices.push(0, 0, 0);
     normals.push(0, 0, 1);
     uvs.push(0.5, 0.5);
-    for (let s3 = 0, i3 = 3; s3 <= segments; s3++, i3 += 3) {
-      const segment = thetaStart + s3 / segments * thetaLength;
+    for (let s2 = 0, i3 = 3; s2 <= segments; s2++, i3 += 3) {
+      const segment = thetaStart + s2 / segments * thetaLength;
       vertex2.x = radius * Math.cos(segment);
       vertex2.y = radius * Math.sin(segment);
       vertices.push(vertex2.x, vertex2.y, vertex2.z);
@@ -19195,20 +19249,20 @@ var Curve = class {
     } else {
       targetArcLength = u4 * arcLengths[il - 1];
     }
-    let low = 0, high2 = il - 1, comparison;
-    while (low <= high2) {
-      i3 = Math.floor(low + (high2 - low) / 2);
+    let low = 0, high = il - 1, comparison;
+    while (low <= high) {
+      i3 = Math.floor(low + (high - low) / 2);
       comparison = arcLengths[i3] - targetArcLength;
       if (comparison < 0) {
         low = i3 + 1;
       } else if (comparison > 0) {
-        high2 = i3 - 1;
+        high = i3 - 1;
       } else {
-        high2 = i3;
+        high = i3;
         break;
       }
     }
-    i3 = high2;
+    i3 = high;
     if (arcLengths[i3] === targetArcLength) {
       return i3 / (il - 1);
     }
@@ -20671,9 +20725,9 @@ function splitEarcut(start, triangles, dim, minX, minY, invSize) {
 }
 function eliminateHoles(data, holeIndices, outerNode, dim) {
   const queue = [];
-  for (let i3 = 0, len = holeIndices.length; i3 < len; i3++) {
+  for (let i3 = 0, len2 = holeIndices.length; i3 < len2; i3++) {
     const start = holeIndices[i3] * dim;
-    const end = i3 < len - 1 ? holeIndices[i3 + 1] * dim : data.length;
+    const end = i3 < len2 - 1 ? holeIndices[i3 + 1] * dim : data.length;
     const list = linkedList(data, start, end, dim, false);
     if (list === list.next) list.steiner = true;
     queue.push(getLeftmost(list));
@@ -20764,7 +20818,7 @@ function sortLinked(list) {
     let p3 = list;
     let e3;
     list = null;
-    let tail2 = null;
+    let tail = null;
     numMerges = 0;
     while (p3) {
       numMerges++;
@@ -20786,14 +20840,14 @@ function sortLinked(list) {
           q4 = q4.nextZ;
           qSize--;
         }
-        if (tail2) tail2.nextZ = e3;
+        if (tail) tail.nextZ = e3;
         else list = e3;
-        e3.prevZ = tail2;
-        tail2 = e3;
+        e3.prevZ = tail;
+        tail = e3;
       }
       p3 = q4;
     }
-    tail2.nextZ = null;
+    tail.nextZ = null;
     inSize *= 2;
   } while (numMerges > 1);
   return list;
@@ -20839,12 +20893,12 @@ function equals(p1, p22) {
 }
 function intersects(p1, q1, p22, q22) {
   const o1 = sign(area(p1, q1, p22));
-  const o22 = sign(area(p1, q1, q22));
+  const o2 = sign(area(p1, q1, q22));
   const o3 = sign(area(p22, q22, p1));
   const o4 = sign(area(p22, q22, q1));
-  if (o1 !== o22 && o3 !== o4) return true;
+  if (o1 !== o2 && o3 !== o4) return true;
   if (o1 === 0 && onSegment(p1, p22, q1)) return true;
-  if (o22 === 0 && onSegment(p1, q22, q1)) return true;
+  if (o2 === 0 && onSegment(p1, q22, q1)) return true;
   if (o3 === 0 && onSegment(p22, p1, q22)) return true;
   if (o4 === 0 && onSegment(p22, q1, q22)) return true;
   return false;
@@ -21230,15 +21284,15 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
           v3(position2.x, position2.y, position2.z);
         }
       }
-      for (let s3 = 1; s3 <= steps; s3++) {
+      for (let s2 = 1; s2 <= steps; s2++) {
         for (let i3 = 0; i3 < vlen; i3++) {
           const vert = bevelEnabled ? scalePt2(vertices[i3], verticesMovements[i3], bs) : vertices[i3];
           if (!extrudeByPath) {
-            v3(vert.x, vert.y, depth / steps * s3);
+            v3(vert.x, vert.y, depth / steps * s2);
           } else {
-            normal.copy(splineTube.normals[s3]).multiplyScalar(vert.x);
-            binormal.copy(splineTube.binormals[s3]).multiplyScalar(vert.y);
-            position2.copy(extrudePts[s3]).add(normal).add(binormal);
+            normal.copy(splineTube.normals[s2]).multiplyScalar(vert.x);
+            binormal.copy(splineTube.binormals[s2]).multiplyScalar(vert.y);
+            position2.copy(extrudePts[s2]).add(normal).add(binormal);
             v3(position2.x, position2.y, position2.z);
           }
         }
@@ -21273,22 +21327,22 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
           let offset = vlen * layer;
           for (let i3 = 0; i3 < flen; i3++) {
             const face = faces[i3];
-            f32(face[2] + offset, face[1] + offset, face[0] + offset);
+            f3(face[2] + offset, face[1] + offset, face[0] + offset);
           }
           layer = steps + bevelSegments * 2;
           offset = vlen * layer;
           for (let i3 = 0; i3 < flen; i3++) {
             const face = faces[i3];
-            f32(face[0] + offset, face[1] + offset, face[2] + offset);
+            f3(face[0] + offset, face[1] + offset, face[2] + offset);
           }
         } else {
           for (let i3 = 0; i3 < flen; i3++) {
             const face = faces[i3];
-            f32(face[2], face[1], face[0]);
+            f3(face[2], face[1], face[0]);
           }
           for (let i3 = 0; i3 < flen; i3++) {
             const face = faces[i3];
-            f32(face[0] + vlen * steps, face[1] + vlen * steps, face[2] + vlen * steps);
+            f3(face[0] + vlen * steps, face[1] + vlen * steps, face[2] + vlen * steps);
           }
         }
         scope.addGroup(start, verticesArray.length / 3 - start, 0);
@@ -21311,9 +21365,9 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
           const j4 = i3;
           let k3 = i3 - 1;
           if (k3 < 0) k3 = contour2.length - 1;
-          for (let s3 = 0, sl = steps + bevelSegments * 2; s3 < sl; s3++) {
-            const slen1 = vlen * s3;
-            const slen2 = vlen * (s3 + 1);
+          for (let s2 = 0, sl = steps + bevelSegments * 2; s2 < sl; s2++) {
+            const slen1 = vlen * s2;
+            const slen2 = vlen * (s2 + 1);
             const a3 = layeroffset + j4 + slen1, b2 = layeroffset + k3 + slen1, c3 = layeroffset + k3 + slen2, d3 = layeroffset + j4 + slen2;
             f4(a3, b2, c3, d3);
           }
@@ -21324,7 +21378,7 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
         placeholder.push(y3);
         placeholder.push(z3);
       }
-      function f32(a3, b2, c3) {
+      function f3(a3, b2, c3) {
         addVertex(a3);
         addVertex(b2);
         addVertex(c3);
@@ -22366,7 +22420,7 @@ var TubeGeometry = class _TubeGeometry extends BufferGeometry {
     const vertex2 = new Vector3();
     const normal = new Vector3();
     const uv = new Vector2();
-    let P5 = new Vector3();
+    let P4 = new Vector3();
     const vertices = [];
     const normals = [];
     const uvs = [];
@@ -22385,7 +22439,7 @@ var TubeGeometry = class _TubeGeometry extends BufferGeometry {
       generateIndices();
     }
     function generateSegment(i3) {
-      P5 = path.getPointAt(i3 / tubularSegments, P5);
+      P4 = path.getPointAt(i3 / tubularSegments, P4);
       const N2 = frames.normals[i3];
       const B5 = frames.binormals[i3];
       for (let j4 = 0; j4 <= radialSegments; j4++) {
@@ -22397,9 +22451,9 @@ var TubeGeometry = class _TubeGeometry extends BufferGeometry {
         normal.z = cos * N2.z + sin * B5.z;
         normal.normalize();
         normals.push(normal.x, normal.y, normal.z);
-        vertex2.x = P5.x + radius * normal.x;
-        vertex2.y = P5.y + radius * normal.y;
-        vertex2.z = P5.z + radius * normal.z;
+        vertex2.x = P4.x + radius * normal.x;
+        vertex2.y = P4.y + radius * normal.y;
+        vertex2.z = P4.z + radius * normal.z;
         vertices.push(vertex2.x, vertex2.y, vertex2.z);
       }
     }
@@ -22476,8 +22530,8 @@ var WireframeGeometry = class extends BufferGeometry {
         if (groups.length === 0) {
           groups = [{ start: 0, count: indices.count, materialIndex: 0 }];
         }
-        for (let o3 = 0, ol = groups.length; o3 < ol; ++o3) {
-          const group = groups[o3];
+        for (let o2 = 0, ol = groups.length; o2 < ol; ++o2) {
+          const group = groups[o2];
           const groupStart = group.start;
           const groupCount = group.count;
           for (let i3 = groupStart, l3 = groupStart + groupCount; i3 < l3; i3 += 3) {
@@ -24369,8 +24423,8 @@ var AnimationClip = class {
   static findByName(objectOrClipArray, name) {
     let clipArray = objectOrClipArray;
     if (!Array.isArray(objectOrClipArray)) {
-      const o3 = objectOrClipArray;
-      clipArray = o3.geometry && o3.geometry.animations || o3.animations;
+      const o2 = objectOrClipArray;
+      clipArray = o2.geometry && o2.geometry.animations || o2.animations;
     }
     for (let i3 = 0; i3 < clipArray.length; i3++) {
       if (clipArray[i3].name === name) {
@@ -25179,13 +25233,13 @@ var CompressedTextureLoader = class extends Loader {
         const texDatas = scope.parse(buffer, true);
         if (texDatas.isCubemap) {
           const faces = texDatas.mipmaps.length / texDatas.mipmapCount;
-          for (let f4 = 0; f4 < faces; f4++) {
-            images[f4] = { mipmaps: [] };
+          for (let f3 = 0; f3 < faces; f3++) {
+            images[f3] = { mipmaps: [] };
             for (let i3 = 0; i3 < texDatas.mipmapCount; i3++) {
-              images[f4].mipmaps.push(texDatas.mipmaps[f4 * texDatas.mipmapCount + i3]);
-              images[f4].format = texDatas.format;
-              images[f4].width = texDatas.width;
-              images[f4].height = texDatas.height;
+              images[f3].mipmaps.push(texDatas.mipmaps[f3 * texDatas.mipmapCount + i3]);
+              images[f3].format = texDatas.format;
+              images[f3].width = texDatas.width;
+              images[f3].height = texDatas.height;
             }
           }
           texture.image = images;
@@ -25452,7 +25506,7 @@ var TextureLoader = class extends Loader {
     return texture;
   }
 };
-var Light2 = class extends Object3D {
+var Light = class extends Object3D {
   /**
    * Constructs a new light.
    *
@@ -25492,7 +25546,7 @@ var Light2 = class extends Object3D {
     return data;
   }
 };
-var HemisphereLight = class extends Light2 {
+var HemisphereLight = class extends Light {
   /**
    * Constructs a new hemisphere light.
    *
@@ -25719,7 +25773,7 @@ var SpotLightShadow = class extends LightShadow {
     return this;
   }
 };
-var SpotLight = class extends Light2 {
+var SpotLight = class extends Light {
   /**
    * Constructs a new spot light.
    *
@@ -25851,7 +25905,7 @@ var PointLightShadow = class extends LightShadow {
     this._frustum.setFromProjectionMatrix(_projScreenMatrix, camera.coordinateSystem, camera.reversedDepth);
   }
 };
-var PointLight = class extends Light2 {
+var PointLight = class extends Light {
   /**
    * Constructs a new point light.
    *
@@ -26016,7 +26070,7 @@ var DirectionalLightShadow = class extends LightShadow {
     this.isDirectionalLightShadow = true;
   }
 };
-var DirectionalLight = class extends Light2 {
+var DirectionalLight = class extends Light {
   /**
    * Constructs a new directional light.
    *
@@ -26042,7 +26096,7 @@ var DirectionalLight = class extends Light2 {
     return this;
   }
 };
-var AmbientLight = class extends Light2 {
+var AmbientLight = class extends Light {
   /**
    * Constructs a new ambient light.
    *
@@ -26055,7 +26109,7 @@ var AmbientLight = class extends Light2 {
     this.type = "AmbientLight";
   }
 };
-var RectAreaLight = class extends Light2 {
+var RectAreaLight = class extends Light {
   /**
    * Constructs a new area light.
    *
@@ -26194,9 +26248,9 @@ var SphericalHarmonics3 = class {
    * @param {number} s - The scale factor.
    * @return {SphericalHarmonics3} A reference to this spherical harmonics.
    */
-  addScaledSH(sh, s3) {
+  addScaledSH(sh, s2) {
     for (let i3 = 0; i3 < 9; i3++) {
-      this.coefficients[i3].addScaledVector(sh.coefficients[i3], s3);
+      this.coefficients[i3].addScaledVector(sh.coefficients[i3], s2);
     }
     return this;
   }
@@ -26206,9 +26260,9 @@ var SphericalHarmonics3 = class {
    * @param {number} s - The scale factor.
    * @return {SphericalHarmonics3} A reference to this spherical harmonics.
    */
-  scale(s3) {
+  scale(s2) {
     for (let i3 = 0; i3 < 9; i3++) {
-      this.coefficients[i3].multiplyScalar(s3);
+      this.coefficients[i3].multiplyScalar(s2);
     }
     return this;
   }
@@ -26305,7 +26359,7 @@ var SphericalHarmonics3 = class {
     shBasis[8] = 0.546274 * (x3 * x3 - y3 * y3);
   }
 };
-var LightProbe = class extends Light2 {
+var LightProbe = class extends Light {
   /**
    * Constructs a new light probe.
    *
@@ -28635,10 +28689,10 @@ var PropertyMixer = class {
     Quaternion.slerpFlat(buffer, dstOffset, buffer, dstOffset, buffer, workOffset, t3);
   }
   _lerp(buffer, dstOffset, srcOffset, t3, stride) {
-    const s3 = 1 - t3;
+    const s2 = 1 - t3;
     for (let i3 = 0; i3 !== stride; ++i3) {
       const j4 = dstOffset + i3;
-      buffer[j4] = buffer[j4] * s3 + buffer[srcOffset + i3] * t3;
+      buffer[j4] = buffer[j4] * s2 + buffer[srcOffset + i3] * t3;
     }
   }
   _lerpAdditive(buffer, dstOffset, srcOffset, t3, stride) {
@@ -31277,7 +31331,7 @@ var Line3 = class {
    */
   distanceSqToLine3(line, c1 = _c1, c22 = _c2) {
     const EPSILON = 1e-8 * 1e-8;
-    let s3, t3;
+    let s2, t3;
     const p1 = this.start;
     const p22 = line.start;
     const q1 = this.end;
@@ -31287,7 +31341,7 @@ var Line3 = class {
     _r.subVectors(p1, p22);
     const a3 = _d1.dot(_d1);
     const e3 = _d2.dot(_d2);
-    const f4 = _d2.dot(_r);
+    const f3 = _d2.dot(_r);
     if (a3 <= EPSILON && e3 <= EPSILON) {
       c1.copy(p1);
       c22.copy(p22);
@@ -31295,33 +31349,33 @@ var Line3 = class {
       return c1.dot(c1);
     }
     if (a3 <= EPSILON) {
-      s3 = 0;
-      t3 = f4 / e3;
+      s2 = 0;
+      t3 = f3 / e3;
       t3 = clamp(t3, 0, 1);
     } else {
       const c3 = _d1.dot(_r);
       if (e3 <= EPSILON) {
         t3 = 0;
-        s3 = clamp(-c3 / a3, 0, 1);
+        s2 = clamp(-c3 / a3, 0, 1);
       } else {
         const b2 = _d1.dot(_d2);
         const denom = a3 * e3 - b2 * b2;
         if (denom !== 0) {
-          s3 = clamp((b2 * f4 - c3 * e3) / denom, 0, 1);
+          s2 = clamp((b2 * f3 - c3 * e3) / denom, 0, 1);
         } else {
-          s3 = 0;
+          s2 = 0;
         }
-        t3 = (b2 * s3 + f4) / e3;
+        t3 = (b2 * s2 + f3) / e3;
         if (t3 < 0) {
           t3 = 0;
-          s3 = clamp(-c3 / a3, 0, 1);
+          s2 = clamp(-c3 / a3, 0, 1);
         } else if (t3 > 1) {
           t3 = 1;
-          s3 = clamp((b2 - c3) / a3, 0, 1);
+          s2 = clamp((b2 - c3) / a3, 0, 1);
         }
       }
     }
-    c1.copy(p1).add(_d1.multiplyScalar(s3));
+    c1.copy(p1).add(_d1.multiplyScalar(s2));
     c22.copy(p22).add(_d2.multiplyScalar(t3));
     c1.sub(c22);
     return c1.dot(c1);
@@ -45171,19 +45225,12 @@ var WebGLRenderer = class {
 
 // src/three/stage.ts
 var EYE = { x: 1250, y: 0, D: 1600 };
-var jobs = [];
-var addJob = (j4) => {
-  jobs.push(j4);
-};
-var layerKey = "x";
-var counter = 0;
-var viewId = (name) => `${layerKey}--${name ? name.replace(/[^a-z0-9]+/gi, "-") : "v" + counter++}`;
 var FACES = ['500 40px "Archivo"', '600 40px "Archivo"', '700 40px "Archivo"', '800 40px "Archivo"', 'italic 300 40px "Archivo"'];
 var fontsOK = false;
 var fontsReady = () => {
   if (fontsOK) return true;
   try {
-    fontsOK = FACES.every((f4) => document.fonts.check(f4));
+    fontsOK = FACES.every((f3) => document.fonts.check(f3));
   } catch {
     fontsOK = false;
   }
@@ -45232,10 +45279,10 @@ var mirrorClip = new Plane();
 var mirrorP = new Vector3();
 var lathe = (prof, seg = 96) => new LatheGeometry(prof.map(([r3, y3]) => new Vector2(Math.max(0, r3), y3)), seg);
 var mesh = (g4, m3, cast = true, receive = true) => {
-  const o3 = new Mesh(g4, m3);
-  o3.castShadow = cast;
-  o3.receiveShadow = receive;
-  return o3;
+  const o2 = new Mesh(g4, m3);
+  o2.castShadow = cast;
+  o2.receiveShadow = receive;
+  return o2;
 };
 var slabOf = (shape, depth, bevel = 3, curveSegments = 12) => {
   const g4 = new ExtrudeGeometry(shape, {
@@ -45333,49 +45380,49 @@ var fadeShadow = (m3, axes, c3, r3) => {
   };
   m3.customProgramCacheKey = () => `fadeShadow-${axes}`;
 };
-var makeFloor = (o3) => {
+var makeFloor = (o2) => {
   const g4 = new Group();
   g4.userData.noBounds = true;
   g4.userData.isFloor = true;
-  const w3 = o3.x1 - o3.x0, d3 = o3.z1 - o3.z0;
-  const cx = (o3.x0 + o3.x1) / 2, cz = (o3.z0 + o3.z1) / 2;
-  const shadowMat = new ShadowMaterial({ color: 0, opacity: o3.shadow ?? 0.55, transparent: true, depthWrite: false });
+  const w3 = o2.x1 - o2.x0, d3 = o2.z1 - o2.z0;
+  const cx = (o2.x0 + o2.x1) / 2, cz = (o2.z0 + o2.z1) / 2;
+  const shadowMat = new ShadowMaterial({ color: 0, opacity: o2.shadow ?? 0.55, transparent: true, depthWrite: false });
   const sh = new Mesh(new PlaneGeometry(w3, d3), shadowMat);
   sh.rotation.x = -Math.PI / 2;
-  sh.position.set(cx, -o3.y + 0.4, cz);
-  fadeShadow(shadowMat, "xz", o3.fadeC ?? [cx, cz], o3.fadeR ?? [w3 / 2, d3 / 2]);
+  sh.position.set(cx, -o2.y + 0.4, cz);
+  fadeShadow(shadowMat, "xz", o2.fadeC ?? [cx, cz], o2.fadeR ?? [w3 / 2, d3 / 2]);
   sh.receiveShadow = true;
   sh.renderOrder = 2;
   g4.add(sh);
   let refl = null;
-  if ((o3.reflect ?? 0) > 0) {
+  if ((o2.reflect ?? 0) > 0) {
     const m3 = mirrorMaterial();
-    m3.uniforms.strength.value = o3.reflect;
-    m3.uniforms.fadeC.value.set(...o3.fadeC ?? [cx, cz]);
-    m3.uniforms.fadeR.value.set(...o3.fadeR ?? [w3 / 2, d3 / 2]);
+    m3.uniforms.strength.value = o2.reflect;
+    m3.uniforms.fadeC.value.set(...o2.fadeC ?? [cx, cz]);
+    m3.uniforms.fadeR.value.set(...o2.fadeR ?? [w3 / 2, d3 / 2]);
     refl = new Mesh(new PlaneGeometry(w3, d3), m3);
     refl.rotation.x = -Math.PI / 2;
-    refl.position.set(cx, -o3.y, cz);
+    refl.position.set(cx, -o2.y, cz);
     refl.renderOrder = 1;
     refl.userData.isMirror = true;
     g4.add(refl);
   }
   const blobMats = [];
-  for (const b2 of o3.blobs ?? []) {
+  for (const b2 of o2.blobs ?? []) {
     const m3 = new MeshBasicMaterial({ transparent: true, depthWrite: false, opacity: b2.a ?? 0.7, toneMapped: false, color: 0 });
     m3.alphaMap = blobTexture();
     const p3 = new Mesh(new PlaneGeometry(b2.w, b2.d), m3);
     p3.rotation.x = -Math.PI / 2;
-    p3.position.set(b2.x, -o3.y + 0.25, b2.z);
+    p3.position.set(b2.x, -o2.y + 0.25, b2.z);
     p3.renderOrder = 1.5;
     g4.add(p3);
     blobMats.push({ m: m3, a: b2.a ?? 0.7 });
   }
-  const shadow0 = o3.shadow ?? 0.55, reflect0 = o3.reflect ?? 0;
-  g4.setStage = (white2) => {
-    shadowMat.opacity = shadow0 * (1 - 0.55 * white2);
-    if (refl) refl.material.uniforms.strength.value = reflect0 * (1 - 0.45 * white2);
-    for (const b2 of blobMats) b2.m.opacity = b2.a * (1 - 0.5 * white2);
+  const shadow0 = o2.shadow ?? 0.55, reflect0 = o2.reflect ?? 0;
+  g4.setStage = (white) => {
+    shadowMat.opacity = shadow0 * (1 - 0.55 * white);
+    if (refl) refl.material.uniforms.strength.value = reflect0 * (1 - 0.45 * white);
+    for (const b2 of blobMats) b2.m.opacity = b2.a * (1 - 0.5 * white);
   };
   return g4;
 };
@@ -45417,16 +45464,6 @@ var rr = (g4, x3, y3, w3, h3, r3) => {
 // src/three/View3D.tsx
 var YawCtx = X(0);
 var EyeCtx = X(EYE);
-function View3D({ name, rect, org = { x: 0, y: 0 }, make, params, eye, localEye, light, style }) {
-  const yaw = x2(YawCtx);
-  const sceneEye = x2(EyeCtx);
-  const id = viewId(name);
-  const e3 = localEye ?? eye ?? sceneEye;
-  const ox = localEye ? 0 : org.x, oy = localEye ? 0 : org.y;
-  const local = { x: e3.x - ox - e3.D * Math.tan(yaw * Math.PI / 180), y: e3.y - oy, D: e3.D };
-  addJob({ id, rect, eye: local, make, params, light });
-  return /* @__PURE__ */ u2("canvas", { "data-g3": id, style: { position: "absolute", left: rect.x, top: rect.y, width: rect.w, height: rect.h, ...style } });
-}
 
 // ../034-ohtani/node_modules/three/examples/jsm/geometries/RoundedBoxGeometry.js
 var _tempNormal = new Vector3();
@@ -45552,8 +45589,8 @@ var RoundedBoxGeometry = class _RoundedBoxGeometry extends BoxGeometry {
 // src/three/kit029.ts
 var col = (h3) => new three_module_exports.Color(h3);
 var hash = (a3, b2, c3) => {
-  const s3 = Math.sin(a3 * 127.1 + b2 * 311.7 + c3 * 74.7) * 43758.5453;
-  return s3 - Math.floor(s3);
+  const s2 = Math.sin(a3 * 127.1 + b2 * 311.7 + c3 * 74.7) * 43758.5453;
+  return s2 - Math.floor(s2);
 };
 var rbox = (w3, h3, d3, r3, m3, seg = 3) => {
   const g4 = new RoundedBoxGeometry(w3, h3, d3, seg, Math.min(r3, w3 / 2 - 0.01, h3 / 2 - 0.01, d3 / 2 - 0.01));
@@ -45566,13 +45603,13 @@ var font = (g4, weight, size2, italic = false) => {
   g4.font = `${italic ? "italic " : ""}${weight} ${size2}px ${FACE}`;
 };
 var fitFont = (g4, weight, size2, text, maxW, italic = false) => {
-  let s3 = size2;
-  font(g4, weight, s3, italic);
-  while (s3 > 6 && g4.measureText(text).width > maxW) {
-    s3 *= 0.97;
-    font(g4, weight, s3, italic);
+  let s2 = size2;
+  font(g4, weight, s2, italic);
+  while (s2 > 6 && g4.measureText(text).width > maxW) {
+    s2 *= 0.97;
+    font(g4, weight, s2, italic);
   }
-  return s3;
+  return s2;
 };
 var track = (g4, px2) => {
   g4.letterSpacing = `${px2}px`;
@@ -45582,8 +45619,8 @@ var typeLines = (g4, x3, y3, w3, n2, gap = 26, h3 = 6, a3 = 0.24, seed = 0) => {
   g4.fillStyle = `rgba(20,14,10,${a3})`;
   for (let i3 = 0; i3 < n2; i3++) {
     const k3 = (i3 * 7 + seed * 13) % 10;
-    const len = i3 === n2 - 1 ? w3 * 0.55 : w3 * (0.82 + 0.018 * k3);
-    const r3 = h3 / 2, yy = y3 + i3 * gap, ww = Math.min(w3, len);
+    const len2 = i3 === n2 - 1 ? w3 * 0.55 : w3 * (0.82 + 0.018 * k3);
+    const r3 = h3 / 2, yy = y3 + i3 * gap, ww = Math.min(w3, len2);
     g4.beginPath();
     g4.moveTo(x3 + r3, yy);
     g4.lineTo(x3 + ww - r3, yy);
@@ -45618,15 +45655,15 @@ var SM = {
   red: () => new three_module_exports.MeshPhysicalMaterial({ color: col("#B3262B"), roughness: 0.5, metalness: 0.1, clearcoat: 0.3, envMapIntensity: 0.9 })
 };
 var STUDIO_RIG = { key: 0.75, fill: 3.2, rim: 4.5, dir: [-0.45, 0.8, 0.55] };
-var textTex = (key2, w3, h3, lines, o3 = {}) => paintTex(`studio:${key2}`, w3, h3, (g4) => {
-  const pad = o3.pad ?? Math.round(h3 * 0.12), r3 = o3.r ?? 0;
-  if (o3.bg) {
-    g4.fillStyle = o3.bg;
+var textTex = (key2, w3, h3, lines, o2 = {}) => paintTex(`studio:${key2}`, w3, h3, (g4) => {
+  const pad = o2.pad ?? Math.round(h3 * 0.12), r3 = o2.r ?? 0;
+  if (o2.bg) {
+    g4.fillStyle = o2.bg;
     rr(g4, 0, 0, w3, h3, r3);
     g4.fill();
   }
-  if (o3.border) {
-    g4.strokeStyle = o3.border;
+  if (o2.border) {
+    g4.strokeStyle = o2.border;
     g4.lineWidth = 3;
     rr(g4, 6, 6, w3 - 12, h3 - 12, Math.max(0, r3 - 4));
     g4.stroke();
@@ -45635,7 +45672,7 @@ var textTex = (key2, w3, h3, lines, o3 = {}) => paintTex(`studio:${key2}`, w3, h
     track(g4, (l3.track ?? 0.02) * l3.size);
     return fitFont(g4, l3.weight ?? 800, l3.size, l3.t, w3 - 2 * pad);
   });
-  const total = sizes.reduce((s3, z3, i3) => s3 + z3 + (i3 ? lines[i3].gap ?? z3 * 0.28 : 0), 0);
+  const total = sizes.reduce((s2, z3, i3) => s2 + z3 + (i3 ? lines[i3].gap ?? z3 * 0.28 : 0), 0);
   let y3 = (h3 - total) / 2;
   g4.textBaseline = "alphabetic";
   lines.forEach((l3, i3) => {
@@ -45643,8 +45680,8 @@ var textTex = (key2, w3, h3, lines, o3 = {}) => paintTex(`studio:${key2}`, w3, h
     if (i3) y3 += l3.gap ?? z3 * 0.28;
     font(g4, l3.weight ?? 800, z3);
     track(g4, (l3.track ?? 0.02) * z3);
-    g4.textAlign = o3.align === "left" ? "left" : "center";
-    const x3 = o3.align === "left" ? pad : w3 / 2;
+    g4.textAlign = o2.align === "left" ? "left" : "center";
+    const x3 = o2.align === "left" ? pad : w3 / 2;
     const c3 = l3.color ?? C3.white;
     g4.fillStyle = c3;
     if ((l3.glow ?? 0) > 0) {
@@ -45664,13 +45701,13 @@ var litFace = (w3, h3, tex) => {
   m3.userData.lit = true;
   return m3;
 };
-var plaque = (key2, w3, h3, lines, o3 = {}) => {
+var plaque = (key2, w3, h3, lines, o2 = {}) => {
   const g4 = new three_module_exports.Group();
-  const d3 = o3.depth ?? 26;
+  const d3 = o2.depth ?? 26;
   const body = rbox(w3 + 18, h3 + 18, d3, 7, SM.graphite());
   const rim2 = rbox(w3 + 26, h3 + 26, d3 - 8, 9, SM.edge());
   rim2.position.z = -6;
-  const face = litFace(w3, h3, textTex(key2, w3, h3, lines, { bg: "#0B0B0C", r: 6, ...o3 }));
+  const face = litFace(w3, h3, textTex(key2, w3, h3, lines, { bg: "#0B0B0C", r: 6, ...o2 }));
   face.position.z = 0.8;
   g4.add(rim2, body, face);
   g4.userData.face = face;
@@ -45695,35 +45732,35 @@ var halo = (w3, h3, hex, op = 0.5, flat = false) => {
   m3.receiveShadow = false;
   return m3;
 };
-var studioFloor = (o3) => makeFloor({
-  y: o3.y,
-  x0: o3.cx - (o3.rx ?? 900) - 600,
-  x1: o3.cx + (o3.rx ?? 900) + 600,
-  z0: (o3.cz ?? 0) - 1400,
-  z1: (o3.cz ?? 0) + 1200,
-  reflect: o3.reflect ?? 0.42,
+var studioFloor = (o2) => makeFloor({
+  y: o2.y,
+  x0: o2.cx - (o2.rx ?? 900) - 600,
+  x1: o2.cx + (o2.rx ?? 900) + 600,
+  z0: (o2.cz ?? 0) - 1400,
+  z1: (o2.cz ?? 0) + 1200,
+  reflect: o2.reflect ?? 0.42,
   shadow: 0.6,
-  fadeC: [o3.cx, o3.cz ?? 0],
-  fadeR: [(o3.rx ?? 900) * 1.15, o3.rz ?? 760]
+  fadeC: [o2.cx, o2.cz ?? 0],
+  fadeR: [(o2.rx ?? 900) * 1.15, o2.rz ?? 760]
 });
 
 // src/three/obj/tag.ts
-var tagShape = (w3, h3, cut, r3) => {
-  const s3 = new three_module_exports.Shape();
+var tagShape = (w3, h3, cut2, r3) => {
+  const s2 = new three_module_exports.Shape();
   const x3 = w3 / 2, y3 = h3 / 2;
-  s3.moveTo(-x3 + r3, -y3);
-  s3.lineTo(x3 - r3, -y3);
-  s3.quadraticCurveTo(x3, -y3, x3, -y3 + r3);
-  s3.lineTo(x3, y3 - cut * 0.62);
-  s3.lineTo(x3 - cut, y3);
-  s3.lineTo(-x3 + cut, y3);
-  s3.lineTo(-x3, y3 - cut * 0.62);
-  s3.lineTo(-x3, -y3 + r3);
-  s3.quadraticCurveTo(-x3, -y3, -x3 + r3, -y3);
-  return s3;
+  s2.moveTo(-x3 + r3, -y3);
+  s2.lineTo(x3 - r3, -y3);
+  s2.quadraticCurveTo(x3, -y3, x3, -y3 + r3);
+  s2.lineTo(x3, y3 - cut2 * 0.62);
+  s2.lineTo(x3 - cut2, y3);
+  s2.lineTo(-x3 + cut2, y3);
+  s2.lineTo(-x3, y3 - cut2 * 0.62);
+  s2.lineTo(-x3, -y3 + r3);
+  s2.quadraticCurveTo(-x3, -y3, -x3 + r3, -y3);
+  return s2;
 };
-var makeTag = (o3) => {
-  const w3 = o3.w ?? 800, h3 = o3.h ?? 330, cord = o3.cord ?? 240, T4 = 20;
+var makeTag = (o2) => {
+  const w3 = o2.w ?? 800, h3 = o2.h ?? 330, cord = o2.cord ?? 240, T4 = 20;
   const CUT = Math.min(h3 * 0.3, 96), EYE_Y = h3 / 2 - 34, EYE_R = 12;
   const group = new three_module_exports.Group();
   const sway = new three_module_exports.Group();
@@ -45731,8 +45768,8 @@ var makeTag = (o3) => {
   const metal = SM.edge();
   const ring = mesh(new three_module_exports.TorusGeometry(10, 2.6, 12, 32), metal);
   sway.add(ring);
-  if (o3.rail) {
-    const rail = mesh(new three_module_exports.CylinderGeometry(6, 6, o3.rail, 20), metal);
+  if (o2.rail) {
+    const rail = mesh(new three_module_exports.CylinderGeometry(6, 6, o2.rail, 20), metal);
     rail.rotation.z = Math.PI / 2;
     rail.position.set(0, 16, -4);
     const clamp2 = mesh(new three_module_exports.CylinderGeometry(9.5, 9.5, 26, 20), SM.graphite());
@@ -45741,11 +45778,11 @@ var makeTag = (o3) => {
     group.add(rail, clamp2);
   }
   const cordM = new three_module_exports.MeshStandardMaterial({ color: 14275266, roughness: 0.8, metalness: 0 });
-  const len = cord + (h3 / 2 - EYE_Y) - 8;
-  for (const s3 of [-1, 1]) {
-    const c3 = mesh(new three_module_exports.CylinderGeometry(1.7, 1.7, Math.hypot(len, 7), 8), cordM);
-    c3.position.set(s3 * 3.5, -8 - len / 2, s3 * 1.5);
-    c3.rotation.z = s3 * Math.atan2(7, len);
+  const len2 = cord + (h3 / 2 - EYE_Y) - 8;
+  for (const s2 of [-1, 1]) {
+    const c3 = mesh(new three_module_exports.CylinderGeometry(1.7, 1.7, Math.hypot(len2, 7), 8), cordM);
+    c3.position.set(s2 * 3.5, -8 - len2 / 2, s2 * 1.5);
+    c3.rotation.z = s2 * Math.atan2(7, len2);
     sway.add(c3);
   }
   const turn = new three_module_exports.Group();
@@ -45768,10 +45805,10 @@ var makeTag = (o3) => {
   grom.scale.z = (T4 + 6) / 8.4;
   turn.add(rim2, body, grom);
   const fw = w3 - 56, top = h3 / 2 - CUT * 0.62 - 6, bot = -h3 / 2 + 22, fh = top - bot;
-  const faces = o3.faces.map((f4, i3) => {
-    const tex = textTex(`${o3.key}:${i3}:${f4.figure}:${f4.kicker}`, fw, fh, [
-      { t: f4.kicker, size: Math.round(h3 * 0.105), weight: 600, color: C3.white, track: 0.16 },
-      { t: f4.figure, size: Math.round(h3 * 0.36), weight: 800, color: f4.color, glow: 26, gap: Math.round(h3 * 0.07) }
+  const faces = o2.faces.map((f3, i3) => {
+    const tex = textTex(`${o2.key}:${i3}:${f3.figure}:${f3.kicker}`, fw, fh, [
+      { t: f3.kicker, size: Math.round(h3 * 0.105), weight: 600, color: C3.white, track: 0.16 },
+      { t: f3.figure, size: Math.round(h3 * 0.36), weight: 800, color: f3.color, glow: 26, gap: Math.round(h3 * 0.07) }
     ], { pad: 10 });
     const m3 = litFace(fw, fh, tex);
     m3.position.set(0, (top + bot) / 2, (i3 ? -1 : 1) * (T4 / 2 + 0.8));
@@ -45779,7 +45816,7 @@ var makeTag = (o3) => {
     turn.add(m3);
     return m3;
   });
-  const air = halo(w3 * 1.7, h3 * 2.6, o3.lamp ?? C3.amber, 0.22);
+  const air = halo(w3 * 1.7, h3 * 2.6, o2.lamp ?? C3.amber, 0.22);
   air.position.set(0, -(cord + h3 / 2), -60);
   sway.add(air);
   const update = (p3) => {
@@ -45796,8 +45833,8 @@ var makeTag = (o3) => {
 };
 
 // src/three/obj/desk.ts
-var makeDesk = (o3 = {}) => {
-  const w3 = o3.w ?? 1500, d3 = o3.d ?? 640, t3 = o3.t ?? 44, drop = o3.drop ?? 0;
+var makeDesk = (o2 = {}) => {
+  const w3 = o2.w ?? 1500, d3 = o2.d ?? 640, t3 = o2.t ?? 44, drop = o2.drop ?? 0;
   const group = new three_module_exports.Group();
   const top = rbox(w3, t3, d3, 7, SM.black());
   top.position.set(0, -t3 / 2, d3 / 2);
@@ -45828,8 +45865,8 @@ var makeDesk = (o3 = {}) => {
 };
 
 // src/three/obj/frame.ts
-var makeFrame = (o3) => {
-  const w3 = o3.w ?? 300, h3 = o3.h ?? 380, B5 = 22, T4 = 24, LEAN = -0.2;
+var makeFrame = (o2) => {
+  const w3 = o2.w ?? 300, h3 = o2.h ?? 380, B5 = 22, T4 = 24, LEAN = -0.2;
   const group = new three_module_exports.Group();
   const tilt = new three_module_exports.Group();
   tilt.rotation.x = LEAN;
@@ -45840,8 +45877,8 @@ var makeFrame = (o3) => {
   body.position.set(0, h3 / 2, T4 / 2);
   tilt.add(lip, body);
   const ow = w3 - 2 * B5, oh = h3 - 2 * B5, M3 = Math.round(w3 * 0.085), iw = ow - 2 * M3, ih = oh - 2 * M3;
-  const tex = paintTex(`frame:${o3.key}:${o3.photo ?? "matte"}`, ow, oh, (g4) => {
-    g4.fillStyle = o3.photo ? "#D9D4C8" : "#2B2C30";
+  const tex = paintTex(`frame:${o2.key}:${o2.photo ?? "matte"}`, ow, oh, (g4) => {
+    g4.fillStyle = o2.photo ? "#D9D4C8" : "#2B2C30";
     g4.fillRect(0, 0, ow, oh);
     const gr = g4.createLinearGradient(M3, M3, M3 + iw, M3 + ih);
     gr.addColorStop(0, "#1B1C20");
@@ -45849,11 +45886,11 @@ var makeFrame = (o3) => {
     gr.addColorStop(1, "#0C0C0E");
     g4.fillStyle = gr;
     g4.fillRect(M3, M3, iw, ih);
-    if (o3.photo) {
-      const im = imageOf(`assets/${o3.photo}`);
+    if (o2.photo) {
+      const im = imageOf(`assets/${o2.photo}`);
       if (im.complete && im.naturalWidth > 0) {
-        const s3 = Math.max(iw / im.naturalWidth, ih / im.naturalHeight);
-        const sw = iw / s3, sh = ih / s3;
+        const s2 = Math.max(iw / im.naturalWidth, ih / im.naturalHeight);
+        const sw = iw / s2, sh = ih / s2;
         g4.filter = "grayscale(1) contrast(1.08) brightness(0.92)";
         g4.drawImage(im, (im.naturalWidth - sw) / 2, Math.max(0, (im.naturalHeight - sh) * 0.2), sw, sh, M3, M3, iw, ih);
         g4.filter = "none";
@@ -45866,7 +45903,7 @@ var makeFrame = (o3) => {
       g4.fillStyle = sh;
       g4.fillRect(M3, M3, iw, ih);
     }
-    g4.strokeStyle = o3.photo ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.22)";
+    g4.strokeStyle = o2.photo ? "rgba(255,255,255,0.85)" : "rgba(255,255,255,0.22)";
     g4.lineWidth = 1.6;
     g4.strokeRect(M3 - 0.8, M3 - 0.8, iw + 1.6, ih + 1.6);
   }, 3);
@@ -45874,9 +45911,9 @@ var makeFrame = (o3) => {
   print.position.set(0, h3 / 2, T4 / 2 + 0.7);
   tilt.add(print);
   for (const [x3, y3, bw, bh] of [[0, h3 / 2 + oh / 2, ow + 4, 2.4], [0, h3 / 2 - oh / 2, ow + 4, 2.4], [-ow / 2, h3 / 2, 2.4, oh], [ow / 2, h3 / 2, 2.4, oh]]) {
-    const s3 = rbox(bw, bh, 2, 0.8, SM.edge(), 1);
-    s3.position.set(x3, y3, T4 / 2 + 1.6);
-    tilt.add(s3);
+    const s2 = rbox(bw, bh, 2, 0.8, SM.edge(), 1);
+    s2.position.set(x3, y3, T4 / 2 + 1.6);
+    tilt.add(s2);
   }
   const prop = rbox(60, h3 * 0.7, 8, 3, SM.graphite());
   prop.position.set(0, h3 * 0.34, -60);
@@ -45905,25 +45942,25 @@ var greek = (g4, x3, y3, w3, rows, seed, gap = 22, h3 = 8) => {
   }
   return y3 + rows * gap;
 };
-var makeFiling = (o3) => {
-  const w3 = o3.w ?? 420, d3 = o3.d ?? 560, t3 = o3.t ?? 64, CT = 8;
+var makeFiling = (o2) => {
+  const w3 = o2.w ?? 420, d3 = o2.d ?? 560, t3 = o2.t ?? 64, CT = 8;
   const k3 = w3 / 420;
   const group = new three_module_exports.Group();
-  const black2 = SM.black();
-  const back = rbox(w3 + 8, CT, d3 + 8, 2.5, black2);
+  const black = SM.black();
+  const back = rbox(w3 + 8, CT, d3 + 8, 2.5, black);
   back.position.set(2, CT / 2, d3 / 2 + 4);
   const spine = rbox(16, t3 + 2 * CT + 2, d3 + 8, 5, SM.graphite());
   spine.position.set(-w3 / 2 - 6, (t3 + 2 * CT + 2) / 2, d3 / 2 + 4);
   const spineLine = rbox(3, 3, d3 - 30, 1, SM.edge(), 1);
   spineLine.position.set(-w3 / 2 - 14.5, t3 / 2 + CT, (d3 - 30) / 2);
   group.add(back, spine, spineLine);
-  const leaves = (len) => {
-    const tx = paintTex(`filing:leaves:${Math.round(len)}:${Math.round(t3)}`, len, t3, (g4) => {
+  const leaves = (len2) => {
+    const tx = paintTex(`filing:leaves:${Math.round(len2)}:${Math.round(t3)}`, len2, t3, (g4) => {
       g4.fillStyle = "#E9E2D2";
-      g4.fillRect(0, 0, len, t3);
+      g4.fillRect(0, 0, len2, t3);
       for (let y3 = 0.6; y3 < t3; y3 += 1.7) {
         g4.fillStyle = `rgba(92,82,60,${(0.1 + 0.2 * hash(Math.round(y3 * 10), 2, 9)).toFixed(3)})`;
-        g4.fillRect(0, y3, len, 0.55);
+        g4.fillRect(0, y3, len2, 0.55);
       }
     }, 3);
     return SM.print(tx);
@@ -45932,9 +45969,9 @@ var makeFiling = (o3) => {
   const block = rbox(w3, t3, d3, 1.2, { px: leaves(d3), nx: paper, top: paper, bottom: paper, front: leaves(w3), back: leaves(w3) }, 1);
   block.position.set(0, CT + t3 / 2, d3 / 2);
   group.add(block);
-  const pw = w3 - 24, pd = d3 - 24, PAD = 30 * k3, TW = pw - 2 * PAD - 16 * k3;
-  const cut = o3.line.indexOf(": ");
-  const [label, figure] = cut > 0 ? [o3.line.slice(0, cut + 1), o3.line.slice(cut + 2)] : [o3.line, ""];
+  const pw = w3 - 24, pd = d3 - 24, PAD = 30 * k3, TW2 = pw - 2 * PAD - 16 * k3;
+  const cut2 = o2.line.indexOf(": ");
+  const [label, figure] = cut2 > 0 ? [o2.line.slice(0, cut2 + 1), o2.line.slice(cut2 + 2)] : [o2.line, ""];
   const rows = (() => {
     if (label.length <= 24) return [label];
     const ws = label.split(" ");
@@ -45948,10 +45985,10 @@ var makeFiling = (o3) => {
     }
     return [ws.slice(0, best).join(" "), ws.slice(best).join(" ")];
   })();
-  const LS = Math.min(34 * k3, TW / (Math.max(...rows.map((r3) => r3.length)) * 0.72)), FS = figure ? Math.min(74 * k3, TW / (figure.length * 0.72)) : 0;
-  const ROWS1 = 4, P1 = 92 * k3, GAP = 22 * k3;
-  const lineTop = P1 + ROWS1 * GAP + 26 * k3, labelH = LS * 1.22 * rows.length + LS * 0.2, figH = FS * 1.12, lineBot = lineTop + labelH + figH + 8 * k3;
-  const pageTex = paintTex(`filing:${o3.key}:page:${Math.round(w3)}`, pw, pd, (g4) => {
+  const LS = Math.min(34 * k3, TW2 / (Math.max(...rows.map((r3) => r3.length)) * 0.72)), FS = figure ? Math.min(74 * k3, TW2 / (figure.length * 0.72)) : 0;
+  const ROWS1 = 4, P1 = 92 * k3, GAP2 = 22 * k3;
+  const lineTop = P1 + ROWS1 * GAP2 + 26 * k3, labelH = LS * 1.22 * rows.length + LS * 0.2, figH = FS * 1.12, lineBot = lineTop + labelH + figH + 8 * k3;
+  const pageTex = paintTex(`filing:${o2.key}:page:${Math.round(w3)}`, pw, pd, (g4) => {
     g4.fillStyle = PAGE;
     g4.fillRect(0, 0, pw, pd);
     g4.textBaseline = "alphabetic";
@@ -45963,19 +46000,19 @@ var makeFiling = (o3) => {
     track(g4, 0);
     g4.fillStyle = "#8A8068";
     g4.fillRect(PAD, 64 * k3, pw - 2 * PAD, 1.6 * k3);
-    greek(g4, PAD, P1, pw - 2 * PAD, ROWS1, 1, GAP, 8 * k3);
+    greek(g4, PAD, P1, pw - 2 * PAD, ROWS1, 1, GAP2, 8 * k3);
     g4.fillStyle = INK;
     rows.forEach((r3, i3) => {
-      const ls = fitFont(g4, 700, LS, r3, TW);
+      const ls = fitFont(g4, 700, LS, r3, TW2);
       g4.fillText(r3, PAD + 8 * k3, lineTop + LS * 1.02 + i3 * LS * 1.22 - (LS - ls) / 2);
     });
     if (figure) {
-      const fs = fitFont(g4, 800, FS, figure, TW);
+      const fs = fitFont(g4, 800, FS, figure, TW2);
       g4.fillText(figure, PAD + 8 * k3, lineTop + labelH + FS * 0.9 - (FS - fs) / 2);
     }
-    let y3 = greek(g4, PAD, lineBot + 30 * k3, pw - 2 * PAD, 4, 2, GAP, 8 * k3);
-    y3 = greek(g4, PAD, y3 + 20 * k3, pw - 2 * PAD, 5, 3, GAP, 8 * k3);
-    if (y3 + 150 * k3 < pd) greek(g4, PAD, y3 + 20 * k3, pw - 2 * PAD, 3, 4, GAP, 8 * k3);
+    let y3 = greek(g4, PAD, lineBot + 30 * k3, pw - 2 * PAD, 4, 2, GAP2, 8 * k3);
+    y3 = greek(g4, PAD, y3 + 20 * k3, pw - 2 * PAD, 5, 3, GAP2, 8 * k3);
+    if (y3 + 150 * k3 < pd) greek(g4, PAD, y3 + 20 * k3, pw - 2 * PAD, 3, 4, GAP2, 8 * k3);
   }, 3);
   const page = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(pw, pd), SM.print(pageTex));
   page.rotation.x = -Math.PI / 2;
@@ -45983,7 +46020,7 @@ var makeFiling = (o3) => {
   page.receiveShadow = true;
   group.add(page);
   const hlH = lineBot - lineTop + 8 * k3, hlW = pw - 2 * PAD + 12 * k3;
-  const hl = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(hlW, hlH), new three_module_exports.MeshBasicMaterial({ color: o3.lineColor ?? C3.khaki, transparent: true, opacity: 0.46, depthWrite: false, toneMapped: false }));
+  const hl = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(hlW, hlH), new three_module_exports.MeshBasicMaterial({ color: o2.lineColor ?? C3.khaki, transparent: true, opacity: 0.46, depthWrite: false, toneMapped: false }));
   hl.rotation.x = -Math.PI / 2;
   hl.position.set(0, CT + t3 + 1.1, -pd / 2 + (lineTop + lineBot) / 2 - 2 * k3);
   hl.renderOrder = 4;
@@ -45991,23 +46028,23 @@ var makeFiling = (o3) => {
   const hinge = new three_module_exports.Group();
   hinge.position.set(-w3 / 2 - 2, CT + t3 + CT / 2 + 1.2, 0);
   group.add(hinge);
-  const cover2 = rbox(w3 + 6, CT, d3 + 8, 2.5, black2);
+  const cover2 = rbox(w3 + 6, CT, d3 + 8, 2.5, black);
   cover2.position.set((w3 + 6) / 2, 0, d3 / 2 + 4);
   hinge.add(cover2);
   const title = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(pw, pd), new three_module_exports.MeshBasicMaterial({
-    map: textTex(`${o3.key}:cover`, pw, pd, o3.cover.map((c3, i3) => ({ t: c3, size: (i3 ? 30 : 62) * k3, weight: i3 ? 600 : 800, color: i3 ? C3.dim : C3.white, track: i3 ? 0.14 : 0.04, gap: 22 * k3 })), { pad: 30 * k3 }),
+    map: textTex(`${o2.key}:cover`, pw, pd, o2.cover.map((c3, i3) => ({ t: c3, size: (i3 ? 30 : 62) * k3, weight: i3 ? 600 : 800, color: i3 ? C3.dim : C3.white, track: i3 ? 0.14 : 0.04, gap: 22 * k3 })), { pad: 30 * k3 }),
     transparent: true,
     toneMapped: false
   }));
   title.rotation.x = -Math.PI / 2;
   title.position.set(w3 / 2 + 2, CT / 2 + 0.6, 0);
   hinge.add(title);
-  const insideTex = paintTex(`filing:${o3.key}:inside:${Math.round(w3)}`, pw, pd, (g4) => {
+  const insideTex = paintTex(`filing:${o2.key}:inside:${Math.round(w3)}`, pw, pd, (g4) => {
     g4.fillStyle = "#ECE5D4";
     g4.fillRect(0, 0, pw, pd);
-    let y3 = greek(g4, PAD, 70 * k3, pw - 2 * PAD, 6, 11, GAP, 8 * k3);
-    y3 = greek(g4, PAD, y3 + 24 * k3, pw - 2 * PAD, 7, 12, GAP, 8 * k3);
-    greek(g4, PAD, y3 + 24 * k3, pw - 2 * PAD, 5, 13, GAP, 8 * k3);
+    let y3 = greek(g4, PAD, 70 * k3, pw - 2 * PAD, 6, 11, GAP2, 8 * k3);
+    y3 = greek(g4, PAD, y3 + 24 * k3, pw - 2 * PAD, 7, 12, GAP2, 8 * k3);
+    greek(g4, PAD, y3 + 24 * k3, pw - 2 * PAD, 5, 13, GAP2, 8 * k3);
   }, 2);
   const inside = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(pw, pd), SM.print(insideTex));
   inside.rotation.x = Math.PI / 2;
@@ -46029,8 +46066,8 @@ var makeFiling = (o3) => {
 };
 
 // src/three/obj/a_paper.ts
-var makePaper = (o3) => {
-  const w3 = o3.w ?? 360, d3 = o3.d ?? 260, t3 = o3.t ?? 20, tone = o3.tone ?? "#E6DFCF";
+var makePaper = (o2) => {
+  const w3 = o2.w ?? 360, d3 = o2.d ?? 260, t3 = o2.t ?? 20, tone = o2.tone ?? "#E6DFCF";
   const group = new three_module_exports.Group();
   const edgeTex = paintTex(`paper:edge:${tone}`, 64, 20, (g4) => {
     g4.fillStyle = tone;
@@ -46040,7 +46077,7 @@ var makePaper = (o3) => {
   }, 4);
   const edge = new three_module_exports.MeshStandardMaterial({ map: edgeTex, roughness: 0.92, metalness: 0 });
   const plain = new three_module_exports.MeshStandardMaterial({ color: new three_module_exports.Color(tone), roughness: 0.92, metalness: 0 });
-  const face = new three_module_exports.MeshStandardMaterial({ roughness: 0.9, metalness: 0, envMapIntensity: 0.5, map: paintTex(`paper:face:${o3.key}`, w3, d3, (g4) => {
+  const face = new three_module_exports.MeshStandardMaterial({ roughness: 0.9, metalness: 0, envMapIntensity: 0.5, map: paintTex(`paper:face:${o2.key}`, w3, d3, (g4) => {
     g4.fillStyle = tone;
     g4.fillRect(0, 0, w3, d3);
     const ink = "#211D14", soft = "#5A5342";
@@ -46048,8 +46085,8 @@ var makePaper = (o3) => {
     g4.textAlign = "center";
     g4.textBaseline = "alphabetic";
     track(g4, 2);
-    fitFont(g4, 800, 30, o3.masthead, w3 - 36);
-    g4.fillText(o3.masthead, w3 / 2, 40);
+    fitFont(g4, 800, 30, o2.masthead, w3 - 36);
+    g4.fillText(o2.masthead, w3 / 2, 40);
     g4.fillRect(14, 50, w3 - 28, 2.4);
     g4.fillRect(14, 55, w3 - 28, 0.9);
     font(g4, 500, 9);
@@ -46065,11 +46102,11 @@ var makePaper = (o3) => {
     g4.fillStyle = ink;
     font(g4, 700, 19);
     track(g4, 0.6);
-    g4.fillText(o3.kicker ?? "AFTERPAY SOLD FOR", 16, 100);
+    g4.fillText(o2.kicker ?? "AFTERPAY SOLD FOR", 16, 100);
     font(g4, 800, 78);
     track(g4, -1);
-    g4.fillText(o3.figure ?? "$29B", 14, 170);
-    const fwid = g4.measureText(o3.figure ?? "$29B").width;
+    g4.fillText(o2.figure ?? "$29B", 14, 170);
+    const fwid = g4.measureText(o2.figure ?? "$29B").width;
     track(g4, 0);
     g4.fillStyle = "rgba(60,54,42,0.34)";
     g4.fillRect(w3 - 128, 86, 112, 92);
@@ -46103,102 +46140,6 @@ var makePaper = (o3) => {
   } };
 };
 
-// src/audit/script_fixes.json
-var script_fixes_default = {
-  note: "037 \u2014 brief lines that FAIL verification (CLAUDE.md, V26: armed BEFORE the take). Any caption matching a `bad` pattern means the take was read from the BRIEF. Read with JSON.parse, never regex over source. Verified 2026-11-18; VO_SCRIPT.txt has the trail.",
-  fixes: [
-    {
-      at: "hook c1",
-      brief: "That's the number on every headline.",
-      briefSpoken: "That's the number on every headline.",
-      use: "That's the number in the headlines.",
-      why: "'Every' cannot be shown; Australian coverage led with A$39 billion.",
-      bad: "\\bevery headline\\b"
-    },
-    {
-      at: "price c1",
-      brief: "That day, one Square share was worth two hundred and forty-seven dollars.",
-      briefSpoken: "That day, one Square share was worth two hundred and forty-seven dollars.",
-      use: "At the time, one Square share was worth two hundred and forty-seven dollars.",
-      why: "US$247.26 is the 30 Jul 2021 close; the announcement day, 1 Aug 2021, was a Sunday.",
-      bad: "\\bthat day,? one square share\\b"
-    },
-    {
-      at: "fair c2",
-      brief: "and Afterpay's owners kept those shares.",
-      briefSpoken: "and Afterpay's owners kept those shares.",
-      use: "and Afterpay's owners got those shares.",
-      why: "They received the shares; whether holders kept them is undocumented.",
-      bad: "\\bowners kept those shares\\b"
-    }
-  ],
-  guardrails: [
-    {
-      why: "$29B was accurate on announcement day: never imply Square, Block, Dorsey or the founders misled anyone (the brief).",
-      bad: "\\b(lied|lying|misled|mislead\\w*|deceiv\\w*|cover(ed)?[- ]up|hid the|fake)\\b",
-      example: "Square misled the market."
-    },
-    {
-      why: "Never say founders or shareholders 'lost' $15B: they received Block shares whose value kept moving (the brief).",
-      bad: "\\b(lost|losing|wiped out|robbed|cheated)\\b",
-      example: "Shareholders lost fifteen billion."
-    },
-    {
-      why: "No current Block share price anywhere (the brief).",
-      bad: "\\b(today|now|currently)\\b[^.]*\\b(share|stock) price\\b|\\b(share|stock) price\\b[^.]*\\b(today|now|currently)\\b",
-      example: "Today the share price is sixty dollars."
-    },
-    {
-      why: "'Fraud' and 'scam' never appear (standing rule).",
-      bad: "\\b(fraud|scam)\\w*\\b",
-      example: "The deal was a scam."
-    },
-    {
-      why: "The verdict rates the $29 billion figure as the price paid, not any person or company (the brief).",
-      bad: "\\b(afterpay|square|block|dorsey|the founders?) (is|was|are|were) (inflated|overpriced|overvalued|dishonest)\\b",
-      example: "Afterpay was overvalued."
-    }
-  ]
-};
-
-// src/audit/record.ts
-var DEAL = { announced: 29e9, booked: 138e8, gap: 15e9, ratio: 0.375 };
-var PRICE = { announce: 247.26, announceDate: "30 JUL 2021", close: 122.29, closeDate: "31 JAN 2022" };
-var DATES = { contract: "1 AUG 2021", from: "AUG 2021", to: "JAN 2022", form: "FORM 10-Q | Q1 2022" };
-var NAMES = { buyer: "JACK DORSEY | CEO, SQUARE", holders: "AFTERPAY SHAREHOLDERS", was: "SQUARE", now: "BLOCK" };
-var FILING_LINE = "AGGREGATE FAIR VALUE OF THE SHARES ISSUED: $13.8 BILLION";
-
-// src/audit/data.ts
-var FPS2 = 30;
-var COMPOSITION_ID = "InfluencerAudit037";
-var SCRIPT_FIXES = script_fixes_default.fixes;
-var said = (re) => CUES.some((c3) => re.test(c3.text));
-var TAKE = {
-  /** the sign-off is SPOKEN (019: a take read from the brief had none) */
-  ctaSpoken: said(/audit next/i)
-};
-var HAS_PHOTO = false;
-var PHOTO_FILE = "afterpay_face.jpg";
-var HAS_VO = false;
-var HAS_MUSIC = false;
-var HAS_SFX = true;
-var VO_SKIP_FRAMES = Math.round(VO_START * FPS2);
-var VO_GAIN = 1;
-var MUSIC_FILE = "music_bigrichtown_bed.wav";
-var MUSIC_GAIN = 0.505;
-var SCENE_ORDER = ["hook", "explain", "deal", "price", "catch", "close", "fair", "verdict"];
-var SCENE_CUES = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 3, fair: 2, verdict: 4 };
-{
-  const got = {};
-  for (const c3 of CUES) got[c3.scene] = (got[c3.scene] ?? 0) + 1;
-  const bad = SCENE_ORDER.filter((id) => (got[id] ?? 0) !== SCENE_CUES[id]).map((id) => `${id}: wired ${got[id] ?? 0}, the film indexes ${SCENE_CUES[id]}`);
-  if (bad.length) throw new Error("037 CUE COUNT MISMATCH \u2014 the wired take does not match the film.\n" + bad.map((b2) => "  \xB7 " + b2).join("\n"));
-}
-var OUTRO_SEC = 0.5;
-var VO_END = Math.round(CUES[CUES.length - 1].b * FPS2);
-var OUTRO_HOLD = Math.round(OUTRO_SEC * FPS2);
-var TOTAL_FRAMES = VO_END + OUTRO_HOLD;
-
 // src/three/props/hook.ts
 var HOOK_GEO = {
   floor: 1444,
@@ -46207,61 +46148,6 @@ var HOOK_GEO = {
   papers: { x: 330, y: 1160 },
   frame: { x: 1110 },
   filing: { x: 830 }
-};
-var PAPERS = [
-  { x: 170, z: -285, ry: -0.11, masthead: "THE MORNING LEDGER", tone: "#E6DFCF" },
-  { x: 480, z: -235, ry: 0.13, masthead: "MARKET DAILY", tone: "#DCD5C4" },
-  { x: 320, z: 5, ry: 0.035, masthead: "THE BUSINESS POST", tone: "#E9E2D3" }
-];
-var hookModel = () => {
-  const G3 = HOOK_GEO, DY = -G3.desk.y;
-  const root = new three_module_exports.Group();
-  root.add(studioFloor({ y: G3.floor, cx: G3.desk.x, rx: 1300 }));
-  const tag = makeTag({ key: "hook", w: G3.tag.w, h: G3.tag.h, cord: G3.tag.cord, rail: 2600, faces: [
-    { kicker: "AFTERPAY | SOLD FOR", figure: "$29,000,000,000", color: C3.mint },
-    { kicker: "THE FILING SAYS", figure: "$13,800,000,000", color: C3.khaki }
-  ] });
-  tag.group.position.set(G3.tag.x, -G3.tag.y, -40);
-  tag.group.userData.obj = "tag";
-  root.add(tag.group);
-  const desk = makeDesk({ w: G3.desk.w, d: G3.desk.d, drop: G3.floor - G3.desk.y - 44 });
-  desk.group.position.set(G3.desk.x, DY, 0);
-  desk.group.userData.obj = "desk";
-  root.add(desk.group);
-  const papers = PAPERS.map((q4, i3) => {
-    const p3 = makePaper({ key: `hook${i3}`, masthead: q4.masthead, tone: q4.tone, w: 300, d: 215, t: 18 });
-    p3.group.userData.obj = `paper${i3}`;
-    root.add(p3.group);
-    return p3.group;
-  });
-  const pool = halo(900, 620, C3.amber, 0.16, true);
-  pool.position.set(G3.tag.x - 140, DY + 0.6, -120);
-  root.add(pool);
-  const frame = makeFrame({ key: "hook", photo: HAS_PHOTO ? PHOTO_FILE : null });
-  frame.group.position.set(G3.frame.x, DY, -230);
-  frame.group.rotation.y = -0.26;
-  frame.group.userData.obj = "frame";
-  const filing = makeFiling({ key: "hook", w: 300, d: 400, t: 74, cover: ["FORM 10-Q", "BLOCK, INC. | Q1 2022"], line: "" });
-  filing.group.position.set(G3.filing.x, DY, -90);
-  filing.group.rotation.y = 0.08;
-  filing.group.userData.obj = "filing";
-  const lamp = halo(820, 640, C3.white, 0, true);
-  lamp.position.set((G3.frame.x + G3.filing.x) / 2 + 20, DY + 0.7, -150);
-  root.add(frame.group, filing.group, lamp);
-  return {
-    root,
-    rig: STUDIO_RIG,
-    update: (p3) => {
-      tag.update({ flip: p3.flip, swing: p3.swing, lit: p3.lit });
-      papers.forEach((g4, i3) => {
-        const q4 = PAPERS[i3], [h3, spin] = p3.drop[i3] ?? [0, 0];
-        g4.position.set(q4.x, DY + h3, q4.z);
-        g4.rotation.set(0, q4.ry + spin, 0);
-        g4.visible = h3 < 1400;
-      });
-      lamp.material.opacity = 0.05 + 0.13 * p3.desk;
-    }
-  };
 };
 
 // src/r45/sets/hook.tsx
@@ -46290,52 +46176,42 @@ var STORY = [
 ];
 var HK_DONE = Math.max(cueEnd(S2, 2) + 4, HK.flipB + 8);
 var HK_CAM = alive("hook", STORY, HK_DONE + 30, { amp: 0.4 });
-for (let f4 = 0; f4 <= HK_DONE + 30; f4++) {
-  const v3 = camView(HK_CAM, f4), y3 = 960 + (HOOK_GEO.tag.y - 16 - v3.y) * v3.z;
-  if (y3 < 280) throw new Error(`hook: the tag's rail reaches y ${Math.round(y3)} on screen at f${f4} (the caption line)`);
+for (let f3 = 0; f3 <= HK_DONE + 30; f3++) {
+  const v3 = camView(HK_CAM, f3), y3 = 960 + (HOOK_GEO.tag.y - 16 - v3.y) * v3.z;
+  if (y3 < 280) throw new Error(`hook: the tag's rail reaches y ${Math.round(y3)} on screen at f${f3} (the caption line)`);
 }
-var MODEL = hookModel;
-var eyeAt = (f4) => {
-  const v3 = camView(HK_CAM, f4), up = ramp(f4, HEAD - 6, HEAD + 38, SETTLE);
-  return { x: v3.x + 240, y: v3.y - 380 - 420 * up, D: 2100 };
-};
-var dropAt = (f4, land) => {
-  const t3 = clamp01((land - f4) / FALL);
-  if (f4 < land - FALL) return [9999, 0];
+var dropAt = (f3, land) => {
+  const t3 = clamp01((land - f3) / FALL);
+  if (f3 < land - FALL) return [9999, 0];
   return [H0 * t3 * t3, 0.5 * t3];
 };
-var paramsAt = (f4) => {
-  const k3 = f4 - HK.flipA;
+var paramsAt = (f3) => {
+  const k3 = f3 - HK.flipA;
   return {
-    flip: ramp(f4, HK.flipA, HK.flipB, SETTLE),
+    flip: ramp(f3, HK.flipA, HK.flipB, SETTLE),
     // the tag sways from frame 0 and settles; the flip sets it swaying again
-    swing: 2.4 * Math.sin(f4 / 19) * Math.exp(-f4 / 240) + 0.45 * Math.sin(f4 / 37) + (k3 > 0 ? 1.6 * Math.sin(k3 / 9) * Math.exp(-k3 / 34) : 0),
+    swing: 2.4 * Math.sin(f3 / 19) * Math.exp(-f3 / 240) + 0.45 * Math.sin(f3 / 37) + (k3 > 0 ? 1.6 * Math.sin(k3 / 9) * Math.exp(-k3 / 34) : 0),
     lit: 1,
-    drop: LANDS.map((l3) => dropAt(f4, l3)),
-    desk: ramp(f4, FILE_W - 8, FILE_W + 10, SETTLE)
+    drop: LANDS.map((l3) => dropAt(f3, l3)),
+    desk: ramp(f3, FILE_W - 8, FILE_W + 10, SETTLE)
   };
 };
-var Hook = ({ f: f4 }) => /* @__PURE__ */ u2(S, { children: [
-  /* @__PURE__ */ u2(Light, { keys: HK_CAM, f: f4, ground: "dark", pools: [[HOOK_GEO.desk.x, HOOK_GEO.desk.y + 40, 900, 320]] }),
-  /* @__PURE__ */ u2(World, { keys: HK_CAM, f: f4, children: /* @__PURE__ */ u2(Obj, { s: S2, g: "place", children: /* @__PURE__ */ u2(View3D, { name: "hook", rect: { x: -560, y: -120, w: 2500, h: 2200 }, eye: eyeAt(f4), make: MODEL, params: paramsAt(f4) }) }) })
-] });
-var HookSet = { id: S2, ground: "dark", Comp: Hook, align: () => "centre", focus: [540, 900] };
 
 // src/three/obj/nameplate.ts
-var makeNameplate = (o3) => {
-  const w3 = o3.w ?? 620, h3 = o3.h ?? 104, T4 = 30, LEAN = -0.3;
+var makeNameplate = (o2) => {
+  const w3 = o2.w ?? 620, h3 = o2.h ?? 104, T4 = 30, LEAN = -0.3;
   const group = new three_module_exports.Group();
   const base = rbox(w3 + 36, 10, 76, 4, SM.edge());
   base.position.set(0, 5, 38);
   const foot = rbox(w3 + 22, 6, 62, 3, SM.black());
   foot.position.set(0, 12, 31);
   group.add(base, foot);
-  for (const s3 of [-1, 1]) {
+  for (const s2 of [-1, 1]) {
     const post = rbox(10, h3 * 0.62, 26, 3, SM.edge());
-    post.position.set(s3 * (w3 / 2 + 9), 14 + h3 * 0.31, 6);
+    post.position.set(s2 * (w3 / 2 + 9), 14 + h3 * 0.31, 6);
     const pin = mesh(new three_module_exports.CylinderGeometry(6, 6, 8, 20), SM.edge());
     pin.rotation.z = Math.PI / 2;
-    pin.position.set(s3 * (w3 / 2 + 16), 14 + h3 / 2 + 4, 0);
+    pin.position.set(s2 * (w3 / 2 + 16), 14 + h3 / 2 + 4, 0);
     group.add(post, pin);
   }
   const roll = new three_module_exports.Group();
@@ -46344,14 +46220,14 @@ var makeNameplate = (o3) => {
   const bar = rbox(w3, h3, T4, 8, SM.black());
   bar.position.z = T4 / 2;
   roll.add(bar);
-  o3.texts.forEach((t3, i3) => {
+  o2.texts.forEach((t3, i3) => {
     if (!t3) return;
     const fw = w3 - 22, fh = h3 - 18;
     const m3 = litFace(fw, fh, textTex(
-      `${o3.key}:${i3}:${t3}`,
+      `${o2.key}:${i3}:${t3}`,
       fw,
       fh,
-      [{ t: t3, size: Math.round(h3 * 0.5), weight: 800, color: o3.color ?? C3.white, track: 0.06, glow: 6 }],
+      [{ t: t3, size: Math.round(h3 * 0.5), weight: 800, color: o2.color ?? C3.white, track: 0.06, glow: 6 }],
       { pad: Math.round(h3 * 0.2), border: "#5A5D63", r: 5 }
     ));
     m3.position.z = (i3 ? -1 : 1) * (T4 / 2 + 0.8);
@@ -46369,7 +46245,7 @@ var makeNameplate = (o3) => {
 var INK2 = "#2A2416";
 var SOFT2 = "#6A6048";
 var LINE = "#8E7C45";
-var certTex = (key2, w3, h3, label, sub, o3 = {}) => paintTex(`certs:${key2}:${label}:${sub ?? ""}:${o3.big ?? ""}`, w3, h3, (g4) => {
+var certTex = (key2, w3, h3, label, sub2, o2 = {}) => paintTex(`certs:${key2}:${label}:${sub2 ?? ""}:${o2.big ?? ""}`, w3, h3, (g4) => {
   const gr = g4.createLinearGradient(0, 0, w3, h3);
   gr.addColorStop(0, "#F4EEDF");
   gr.addColorStop(1, "#E6DDC8");
@@ -46384,9 +46260,9 @@ var certTex = (key2, w3, h3, label, sub, o3 = {}) => paintTex(`certs:${key2}:${l
   g4.stroke();
   g4.lineWidth = 0.7;
   g4.globalAlpha = 0.75;
-  const wave = (x0, y0, len, horiz, ph) => {
+  const wave = (x0, y0, len2, horiz, ph) => {
     g4.beginPath();
-    for (let i3 = 0; i3 <= len; i3 += 2) {
+    for (let i3 = 0; i3 <= len2; i3 += 2) {
       const a3 = band * 0.42 * Math.sin(i3 / band * 2.2 + ph);
       const x3 = horiz ? x0 + i3 : x0 + a3, y4 = horiz ? y0 + a3 : y0 + i3;
       if (i3 === 0) g4.moveTo(x3, y4);
@@ -46418,12 +46294,12 @@ var certTex = (key2, w3, h3, label, sub, o3 = {}) => paintTex(`certs:${key2}:${l
   font(g4, 600, Math.round(h3 * 0.062));
   g4.fillText("SHARE CERTIFICATE", cx, y3);
   g4.fillRect(cx - inner * 0.22, y3 + h3 * 0.03, inner * 0.44, 1.2);
-  if (o3.big) {
+  if (o2.big) {
     track(g4, 0);
-    g4.fillStyle = o3.bigColor ?? INK2;
-    const z3 = fitFont(g4, 800, Math.round(h3 * 0.36), o3.big, inner);
+    g4.fillStyle = o2.bigColor ?? INK2;
+    const z3 = fitFont(g4, 800, Math.round(h3 * 0.36), o2.big, inner);
     y3 += h3 * 0.07 + z3 * 0.84;
-    g4.fillText(o3.big, cx, y3);
+    g4.fillText(o2.big, cx, y3);
     g4.fillStyle = INK2;
     track(g4, 2);
     const z22 = fitFont(g4, 700, Math.round(h3 * 0.085), label, inner);
@@ -46435,12 +46311,12 @@ var certTex = (key2, w3, h3, label, sub, o3 = {}) => paintTex(`certs:${key2}:${l
     const z3 = fitFont(g4, 800, Math.round(h3 * 0.21), label, inner);
     y3 += h3 * 0.09 + z3 * 0.84;
     g4.fillText(label, cx, y3);
-    if (sub) {
+    if (sub2) {
       g4.fillStyle = SOFT2;
       track(g4, 3);
-      const z22 = fitFont(g4, 600, Math.round(h3 * 0.058), sub, inner);
+      const z22 = fitFont(g4, 600, Math.round(h3 * 0.058), sub2, inner);
       y3 += h3 * 0.05 + z22;
-      g4.fillText(sub, cx, y3);
+      g4.fillText(sub2, cx, y3);
     }
   }
   track(g4, 0);
@@ -46482,20 +46358,20 @@ var certTex = (key2, w3, h3, label, sub, o3 = {}) => paintTex(`certs:${key2}:${l
   g4.arc(sx, sy, sr * 0.5, 0, Math.PI * 2);
   g4.stroke();
 }, 3);
-var makeCerts = (o3) => {
-  const n2 = o3.n ?? 36, w3 = o3.w ?? 380, d3 = o3.d ?? 260, t3 = o3.t ?? 6;
+var makeCerts = (o2) => {
+  const n2 = o2.n ?? 36, w3 = o2.w ?? 380, d3 = o2.d ?? 260, t3 = o2.t ?? 6;
   const group = new three_module_exports.Group();
   const paper = SM.paper(), paperAlt = SM.paper("#E0D7C2"), paperDk = SM.paper("#D6CCB4");
   const sheets = Array.from({ length: n2 }, (_3, i3) => {
-    const s3 = rbox(w3, t3 - 0.6, d3, 1.4, i3 % 5 === 4 ? paperDk : i3 % 2 ? paperAlt : paper, 1);
+    const s2 = rbox(w3, t3 - 0.6, d3, 1.4, i3 % 5 === 4 ? paperDk : i3 % 2 ? paperAlt : paper, 1);
     const out = hash(i3, 5, 7) > 0.8 ? 2.4 : 1;
-    s3.position.set((hash(i3, 1, 7) - 0.5) * 9 * out, t3 / 2 + i3 * t3, d3 / 2 + (hash(i3, 2, 7) - 0.5) * 8 * out);
-    s3.rotation.y = (hash(i3, 3, 7) - 0.5) * 0.045 * out;
-    group.add(s3);
-    return s3;
+    s2.position.set((hash(i3, 1, 7) - 0.5) * 9 * out, t3 / 2 + i3 * t3, d3 / 2 + (hash(i3, 2, 7) - 0.5) * 8 * out);
+    s2.rotation.y = (hash(i3, 3, 7) - 0.5) * 0.045 * out;
+    group.add(s2);
+    return s2;
   });
-  const tops = o3.labels.map((l3, i3) => {
-    const m3 = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(w3 - 6, d3 - 6), SM.print(certTex(`${o3.key}:${i3}`, w3 - 6, d3 - 6, l3, o3.sub)));
+  const tops = o2.labels.map((l3, i3) => {
+    const m3 = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(w3 - 6, d3 - 6), SM.print(certTex(`${o2.key}:${i3}`, w3 - 6, d3 - 6, l3, o2.sub)));
     m3.rotation.x = -Math.PI / 2;
     m3.receiveShadow = true;
     group.add(m3);
@@ -46508,8 +46384,8 @@ var makeCerts = (o3) => {
   group.add(air, lift);
   const update = (p3) => {
     const k3 = Math.max(1, Math.round(n2 * Math.max(0, Math.min(1, p3.height))));
-    sheets.forEach((s3, i3) => {
-      s3.visible = i3 < k3;
+    sheets.forEach((s2, i3) => {
+      s2.visible = i3 < k3;
     });
     const top = sheets[k3 - 1];
     tops.forEach((m3, i3) => {
@@ -46592,8 +46468,8 @@ var dealModel = () => {
   const desk = makeDesk({ w: G3.desk.w, d: G3.desk.d, drop: G3.floor - G3.desk.y - 44 });
   desk.group.position.set(G3.desk.x, Y, -G3.desk.d / 2);
   desk.group.userData.obj = "desk";
-  for (const [x3, z3, w3, d3, o3] of [[G3.plate.x, -40, 1300, 760, 0.12], [G3.swapX, 0, 1200, 760, 0.1], [G3.card.x, 40, 1200, 760, 0.12]]) {
-    const pool = halo(w3, d3, C3.white, o3, true);
+  for (const [x3, z3, w3, d3, o2] of [[G3.plate.x, -40, 1300, 760, 0.12], [G3.swapX, 0, 1200, 760, 0.1], [G3.card.x, 40, 1200, 760, 0.12]]) {
+    const pool = halo(w3, d3, C3.white, o2, true);
     pool.position.set(x3, Y + 3, z3);
     root.add(pool);
   }
@@ -46604,10 +46480,10 @@ var dealModel = () => {
   contract.userData.obj = "contract";
   const cw = G3.contract.w, cd = G3.contract.d;
   for (let i3 = 0; i3 < 3; i3++) {
-    const s3 = rbox(cw, 2.2, cd, 1, SM.paper(i3 ? "#E4DCC9" : "#EDE6D6"), 1);
-    s3.position.set((2 - i3) * 5, 1.1 + i3 * 2.2, cd / 2 + (2 - i3) * 4);
-    s3.rotation.y = (2 - i3) * 0.018;
-    contract.add(s3);
+    const s2 = rbox(cw, 2.2, cd, 1, SM.paper(i3 ? "#E4DCC9" : "#EDE6D6"), 1);
+    s2.position.set((2 - i3) * 5, 1.1 + i3 * 2.2, cd / 2 + (2 - i3) * 4);
+    s2.rotation.y = (2 - i3) * 0.018;
+    contract.add(s2);
   }
   const cface = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(cw - 4, cd - 4), SM.print(contractTex(cw - 4, cd - 4)));
   cface.rotation.x = -Math.PI / 2;
@@ -46644,13 +46520,13 @@ var dealModel = () => {
   lidLine.position.set(0, 4, -K3.d - 6);
   lidPivot.add(lid, lidLine);
   lidPivot.rotation.x = -1.25;
-  for (const s3 of [-1, 1]) {
+  for (const s2 of [-1, 1]) {
     const h3 = mesh(new three_module_exports.TorusGeometry(34, 5, 10, 24, Math.PI), SM.edge());
     h3.rotation.set(0, Math.PI / 2, Math.PI);
-    h3.position.set(s3 * (K3.w / 2 + 5), K3.h * 0.66, 0);
+    h3.position.set(s2 * (K3.w / 2 + 5), K3.h * 0.66, 0);
     cooler.add(h3);
     const latch = rbox(34, 44, 8, 3, SM.edge());
-    latch.position.set(s3 * K3.w * 0.26, K3.h - 30, K3.d / 2 + 5);
+    latch.position.set(s2 * K3.w * 0.26, K3.h - 30, K3.d / 2 + 5);
     cooler.add(latch);
   }
   const goldM = SM.gold(), bandM = SM.paper("#EFE8D8");
@@ -46678,41 +46554,41 @@ var dealModel = () => {
   cooler.add(body, lip, lipLine, lidPivot, bundles, cl, cair, cup);
   const certs = makeCerts({ key: "deal", w: G3.certs.w, d: G3.certs.d, n: G3.certs.n, t: G3.certs.t, labels: ["SQUARE SHARES"], sub: "CLASS A COMMON STOCK" });
   certs.group.userData.obj = "certs";
-  const card = new three_module_exports.Group();
-  card.userData.obj = "card";
-  const CW = G3.card.w, CH = G3.card.h, A5 = CW * DEAL.ratio, B5 = CW - A5, TH = 8;
+  const card2 = new three_module_exports.Group();
+  card2.userData.obj = "card";
+  const CW = G3.card.w, CH = G3.card.h, A5 = CW * DEAL.ratio, B5 = CW - A5, TH2 = 8;
   const rail = rbox(CW + 70, 12, 46, 4, SM.edge());
   rail.position.set(0, 6, 23);
   const railIn = rbox(CW + 50, 5, 20, 2, SM.black());
   railIn.position.set(0, 12, 10);
-  card.add(rail, railIn);
+  card2.add(rail, railIn);
   const lean = new three_module_exports.Group();
   lean.position.y = 12 + CH / 2;
   lean.rotation.x = -0.1;
-  card.add(lean);
+  card2.add(lean);
   const frontTex = certTex("deal:one", CW, CH, "AFTERPAY SHARE", void 0, { big: "1" });
   const part = (w3, u0, u1) => {
     const g4 = new three_module_exports.Group();
-    const back = rbox(w3, CH, TH, 2.5, SM.paper(), 1);
-    back.position.z = TH / 2;
+    const back = rbox(w3, CH, TH2, 2.5, SM.paper(), 1);
+    back.position.z = TH2 / 2;
     const geo = new three_module_exports.PlaneGeometry(w3 - 1, CH - 1);
     const uv = geo.attributes.uv;
     for (let i3 = 0; i3 < uv.count; i3++) uv.setX(i3, u0 + (u1 - u0) * uv.getX(i3));
-    const f4 = new three_module_exports.Mesh(geo, SM.print(frontTex));
-    f4.position.z = TH / 2 + 0.7;
-    g4.add(back, f4);
+    const f3 = new three_module_exports.Mesh(geo, SM.print(frontTex));
+    f3.position.z = TH2 / 2 + 0.7;
+    g4.add(back, f3);
     lean.add(g4);
     return g4;
   };
   const pa = part(A5, 0, DEAL.ratio), pb = part(B5, DEAL.ratio, 1);
   const backFace = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(A5 - 1, CH - 1), SM.print(certTex("deal:frac", A5, CH, "SQUARE SHARE", void 0, { big: String(DEAL.ratio), bigColor: "#8A6410" })));
-  backFace.position.z = -TH / 2 - 0.7;
+  backFace.position.z = -TH2 / 2 - 0.7;
   backFace.rotation.y = Math.PI;
   pa.add(backFace);
   const fair = halo(A5 * 2.6, CH * 2, C3.khaki, 0);
   fair.position.set(0, 12 + CH / 2, -50);
-  card.add(fair);
-  root.add(desk.group, plate.group, contract, cooler, certs.group, card);
+  card2.add(fair);
+  root.add(desk.group, plate.group, contract, cooler, certs.group, card2);
   return {
     root,
     rig: STUDIO_RIG,
@@ -46724,8 +46600,8 @@ var dealModel = () => {
       certs.group.position.set(G3.swapX + 1700 * (1 - p3.certs), Y, 20);
       certs.group.visible = p3.certs > 1e-3;
       certs.update({ height: 1, glow: p3.certs });
-      card.position.set(G3.card.x + 1300 * (1 - p3.card), Y, G3.card.z);
-      card.visible = p3.card > 1e-3;
+      card2.position.set(G3.card.x + 1300 * (1 - p3.card), Y, G3.card.z);
+      card2.visible = p3.card > 1e-3;
       const k3 = p3.flip;
       pa.position.x = (-CW / 2 + A5 / 2) * (1 - k3);
       pa.rotation.y = Math.PI * k3;
@@ -46760,43 +46636,30 @@ var STORY2 = [
 ];
 var DL_DONE = Math.max(cueEnd(S3, 3) + 4, DL.flip[1] + 10);
 var DL_CAM = alive("deal", STORY2, DL_DONE + 40, { amp: 0.5 });
-var eyeAt2 = (f4) => {
-  const v3 = camView(DL_CAM, f4);
-  return { x: v3.x + 240, y: v3.y - 760, D: 2e3 };
-};
-var paramsAt2 = (f4) => ({
-  contract: ramp(f4, DL.contract[0], DL.contract[1], GLIDE),
-  cooler: ramp(f4, DL.cooler[0], DL.cooler[1], EXIT),
-  certs: ramp(f4, DL.certs[0], DL.certs[1], GLIDE),
-  card: ramp(f4, DL.card[0], DL.card[1], GLIDE),
-  flip: ramp(f4, DL.flip[0], DL.flip[1], SETTLE)
+var paramsAt2 = (f3) => ({
+  contract: ramp(f3, DL.contract[0], DL.contract[1], GLIDE),
+  cooler: ramp(f3, DL.cooler[0], DL.cooler[1], EXIT),
+  certs: ramp(f3, DL.certs[0], DL.certs[1], GLIDE),
+  card: ramp(f3, DL.card[0], DL.card[1], GLIDE),
+  flip: ramp(f3, DL.flip[0], DL.flip[1], SETTLE)
 });
-var Deal = ({ f: f4 }) => {
-  const v3 = camView(DL_CAM, f4);
-  const x3 = Math.round((v3.x - 1150) / 50) * 50;
-  return /* @__PURE__ */ u2(S, { children: [
-    /* @__PURE__ */ u2(Light, { keys: DL_CAM, f: f4, ground: "dark", pools: [[DEAL_GEO.plate.x, TOP + 60, 760, 330], [DEAL_GEO.swapX, TOP + 60, 760, 330], [DEAL_GEO.card.x, TOP + 60, 760, 330]] }),
-    /* @__PURE__ */ u2(World, { keys: DL_CAM, f: f4, children: /* @__PURE__ */ u2(Obj, { s: S3, g: "place", children: /* @__PURE__ */ u2(View3D, { name: "deal", rect: { x: x3, y: 150, w: 2300, h: 1850 }, eye: eyeAt2(f4), make: dealModel, params: paramsAt2(f4) }) }) })
-  ] });
-};
-var DealSet = { id: S3, ground: "dark", Comp: Deal, align: () => "centre", focus: [540, 1e3] };
 
 // src/three/obj/led.ts
 var dotsOf = (text, cols, rows, weight = 800, mark = false) => {
   const c3 = document.createElement("canvas");
-  const S10 = 4;
-  c3.width = cols * S10;
-  c3.height = rows * S10;
+  const S9 = 4;
+  c3.width = cols * S9;
+  c3.height = rows * S9;
   const g4 = c3.getContext("2d");
   g4.fillStyle = "#fff";
   g4.textBaseline = "alphabetic";
   g4.textAlign = "center";
-  let size2 = rows * S10 * 1.28;
+  let size2 = rows * S9 * 1.28;
   font(g4, weight, size2);
   track(g4, size2 * 0.03);
-  const mw = mark ? rows * S10 * 0.95 : 0;
+  const mw = mark ? rows * S9 * 0.95 : 0;
   const tw = g4.measureText(text).width + mw;
-  const fit = c3.width - 2 * S10 - size2 * 0.06;
+  const fit = c3.width - 2 * S9 - size2 * 0.06;
   if (tw > fit) {
     size2 *= fit / tw;
     font(g4, weight, size2);
@@ -46804,7 +46667,7 @@ var dotsOf = (text, cols, rows, weight = 800, mark = false) => {
   }
   const w22 = g4.measureText(text).width, x0 = (c3.width - (w22 + mw)) / 2;
   if (mark) {
-    const a3 = rows * S10 * 0.62, mx = x0 + a3 * 0.5, my = c3.height * 0.5;
+    const a3 = rows * S9 * 0.62, mx = x0 + a3 * 0.5, my = c3.height * 0.5;
     g4.beginPath();
     g4.moveTo(mx - a3 / 2, my - a3 * 0.42);
     g4.lineTo(mx + a3 / 2, my - a3 * 0.42);
@@ -46817,13 +46680,13 @@ var dotsOf = (text, cols, rows, weight = 800, mark = false) => {
   const lit = [];
   for (let r3 = 0; r3 < rows; r3++) for (let q4 = 0; q4 < cols; q4++) {
     let a3 = 0;
-    for (let y3 = 0; y3 < S10; y3++) for (let x3 = 0; x3 < S10; x3++) a3 += px2[((r3 * S10 + y3) * c3.width + q4 * S10 + x3) * 4 + 3];
-    lit.push(a3 / (S10 * S10) > 110);
+    for (let y3 = 0; y3 < S9; y3++) for (let x3 = 0; x3 < S9; x3++) a3 += px2[((r3 * S9 + y3) * c3.width + q4 * S9 + x3) * 4 + 3];
+    lit.push(a3 / (S9 * S9) > 110);
   }
   return lit;
 };
-var makeLed = (o3) => {
-  const w3 = o3.w ?? 640, h3 = o3.h ?? 300, legs = o3.legs ?? 220, D3 = 54;
+var makeLed = (o2) => {
+  const w3 = o2.w ?? 640, h3 = o2.h ?? 300, legs = o2.legs ?? 220, D3 = 54;
   const group = new three_module_exports.Group();
   const cy = legs + h3 / 2;
   const house = rbox(w3, h3, D3, 12, SM.black());
@@ -46833,20 +46696,20 @@ var makeLed = (o3) => {
   const hood = rbox(w3 + 4, 12, 44, 4, SM.graphite());
   hood.position.set(0, legs + h3 + 2, D3 / 2 + 40);
   group.add(rim2, house, hood);
-  for (const s3 of [-1, 1]) {
+  for (const s2 of [-1, 1]) {
     const leg = mesh(new three_module_exports.CylinderGeometry(8, 8, legs, 20), SM.edge());
-    leg.position.set(s3 * w3 * 0.34, legs / 2, 0);
+    leg.position.set(s2 * w3 * 0.34, legs / 2, 0);
     const collar = mesh(new three_module_exports.CylinderGeometry(13, 13, 16, 20), SM.graphite());
-    collar.position.set(s3 * w3 * 0.34, legs - 8, 0);
+    collar.position.set(s2 * w3 * 0.34, legs - 8, 0);
     const foot = rbox(96, 12, 190, 5, SM.graphite());
-    foot.position.set(s3 * w3 * 0.34, 6, 95);
+    foot.position.set(s2 * w3 * 0.34, 6, 95);
     const footEdge = rbox(98, 3, 4, 1.2, SM.edge(), 1);
-    footEdge.position.set(s3 * w3 * 0.34, 10, 97);
+    footEdge.position.set(s2 * w3 * 0.34, 10, 97);
     group.add(leg, collar, foot, footEdge);
     for (const v3 of [-1, 1]) {
       const bolt = mesh(new three_module_exports.CylinderGeometry(5, 5, 4, 14), SM.edge());
       bolt.rotation.x = Math.PI / 2;
-      bolt.position.set(s3 * (w3 / 2 - 16), cy + v3 * (h3 / 2 - 16), D3 / 2 + 1.5);
+      bolt.position.set(s2 * (w3 / 2 - 16), cy + v3 * (h3 / 2 - 16), D3 / 2 + 1.5);
       group.add(bolt);
     }
   }
@@ -46864,7 +46727,7 @@ var makeLed = (o3) => {
     g4.arc(gx + (q4 + 0.5) * PITCH, y0 + (r3 + 0.5) * PITCH, PITCH * 0.36, 0, Math.PI * 2);
     g4.fill();
   };
-  const baseTex = paintTex(`led:${o3.key}:base:${w3}x${h3}`, fw, fh, (g4) => {
+  const baseTex = paintTex(`led:${o2.key}:base:${w3}x${h3}`, fw, fh, (g4) => {
     g4.fillStyle = "#050506";
     rr(g4, 0, 0, fw, fh, 6);
     g4.fill();
@@ -46873,7 +46736,7 @@ var makeLed = (o3) => {
     g4.textBaseline = "alphabetic";
     font(g4, 600, Math.round(titleH * 0.5));
     track(g4, titleH * 0.14);
-    g4.fillText(o3.title ?? "SHARE PRICE", fw / 2, titleH * 0.78);
+    g4.fillText(o2.title ?? "SHARE PRICE", fw / 2, titleH * 0.78);
     track(g4, 0);
     g4.fillStyle = "#17171A";
     for (let r3 = 0; r3 < rowsBig; r3++) for (let q4 = 0; q4 < cols; q4++) dot(g4, q4, r3, bigY);
@@ -46890,7 +46753,7 @@ var makeLed = (o3) => {
   const spill = halo(w3 * 1.3, 420, C3.khaki, 0.14, true);
   spill.position.set(0, 1.2, 150);
   group.add(air, spill);
-  const litTex = (v3, date, red) => paintTex(`led:${o3.key}:${w3}x${h3}:${v3}:${date}:${red ? "r" : "k"}`, fw, fh, (g4) => {
+  const litTex = (v3, date, red) => paintTex(`led:${o2.key}:${w3}x${h3}:${v3}:${date}:${red ? "r" : "k"}`, fw, fh, (g4) => {
     const c3 = red ? C3.red : C3.khaki;
     const big = dotsOf(v3, cols, rowsBig, 800, red);
     for (const pass of [0, 1]) {
@@ -46948,36 +46811,36 @@ var priceModel = () => {
   const pool = halo(1500, 1100, C3.white, 0.1, true);
   pool.position.set(X3, Y + 2, 160);
   root.add(pool);
-  const P5 = G3.plinth;
-  const plinth = rbox(P5.w, P5.h, P5.d, 10, SM.black());
-  plinth.position.set(X3, Y + P5.h / 2, P5.z + P5.d / 2);
-  const pTop = rbox(P5.w - 30, 3, P5.d - 30, 3, SM.graphite(), 1);
-  pTop.position.set(X3, Y + P5.h + 0.6, P5.z + (P5.d - 30) / 2);
+  const P4 = G3.plinth;
+  const plinth = rbox(P4.w, P4.h, P4.d, 10, SM.black());
+  plinth.position.set(X3, Y + P4.h / 2, P4.z + P4.d / 2);
+  const pTop = rbox(P4.w - 30, 3, P4.d - 30, 3, SM.graphite(), 1);
+  pTop.position.set(X3, Y + P4.h + 0.6, P4.z + (P4.d - 30) / 2);
   pTop.receiveShadow = true;
-  const pLine = rbox(P5.w - 8, 4, 4, 1.4, SM.edge(), 1);
-  pLine.position.set(X3, Y + P5.h - 4, P5.z + P5.d / 2 + 2.4);
+  const pLine = rbox(P4.w - 8, 4, 4, 1.4, SM.edge(), 1);
+  pLine.position.set(X3, Y + P4.h - 4, P4.z + P4.d / 2 + 2.4);
   const certs = makeCerts({ key: "price", w: G3.certs.w, d: G3.certs.d, n: G3.certs.n, t: G3.certs.t, labels: ["SQUARE SHARES"], sub: "0.375 PER AFTERPAY SHARE" });
-  certs.group.position.set(X3, Y + P5.h + 2, P5.z);
+  certs.group.position.set(X3, Y + P4.h + 2, P4.z);
   certs.group.userData.obj = "certs";
   const led = makeLed({ key: "price", w: G3.led.w, h: G3.led.h, legs: G3.led.legs });
   led.group.position.set(X3, Y, 0);
   led.group.userData.obj = "led";
   const sign2 = (t3, y3, z3, stemTo) => {
     const g4 = new three_module_exports.Group();
-    const s3 = plaque(`price:${t3}`, 104, 104, [{ t: t3, size: 100, weight: 800, color: C3.white, glow: 14 }], { pad: 4, depth: 20 });
-    const len = Math.abs(y3 - stemTo) - 52;
-    if (len > 4) {
-      const stem = mesh(new three_module_exports.CylinderGeometry(4, 4, len, 12), SM.edge());
-      stem.position.y = -(52 + len / 2);
+    const s2 = plaque(`price:${t3}`, 104, 104, [{ t: t3, size: 100, weight: 800, color: C3.white, glow: 14 }], { pad: 4, depth: 20 });
+    const len2 = Math.abs(y3 - stemTo) - 52;
+    if (len2 > 4) {
+      const stem = mesh(new three_module_exports.CylinderGeometry(4, 4, len2, 12), SM.edge());
+      stem.position.y = -(52 + len2 / 2);
       g4.add(stem);
     }
-    g4.add(s3);
+    g4.add(s2);
     g4.position.set(X3, -y3, z3);
     g4.userData.obj = `sign${t3}`;
     root.add(g4);
-    return { g: g4, face: s3.userData.face };
+    return { g: g4, face: s2.userData.face };
   };
-  const signs = [sign2("\xD7", G3.times.y, G3.times.z, G3.floor - P5.h), sign2("=", G3.equals.y, 20, G3.equals.y + 60)];
+  const signs = [sign2("\xD7", G3.times.y, G3.times.z, G3.floor - P4.h), sign2("=", G3.equals.y, 20, G3.equals.y + 60)];
   const tag = makeTag({ key: "price", w: G3.tag.w, h: G3.tag.h, cord: G3.tag.cord, faces: [
     { kicker: "ANNOUNCED | 1 AUG 2021", figure: "$29,000,000,000", color: C3.mint },
     { kicker: "ANNOUNCED | 1 AUG 2021", figure: "$29,000,000,000", color: C3.mint }
@@ -47031,32 +46894,23 @@ var STORY3 = [
 ];
 var PR_DONE = Math.max(cueEnd(S4, 1) + 4, PUSH + 40);
 var PR_CAM = alive("price", STORY3, PR_DONE + 40, { amp: 0.5 });
-var eyeAt3 = (f4) => {
-  const v3 = camView(PR_CAM, f4);
-  return { x: v3.x + 210, y: v3.y - 330, D: 2100 };
-};
-var paramsAt3 = (f4) => ({
-  on: ramp(f4, PR.on[0], PR.on[1], SETTLE),
-  stack: ramp(f4, PR.stack[0], PR.stack[1], GLIDE),
-  turn: ramp(f4, PR.turn[0], PR.turn[1], SETTLE),
-  sum: ramp(f4, PR.sum[0], PR.sum[1], SETTLE),
-  tag: ramp(f4, PR.tag[0], PR.tag[1], SETTLE),
-  swing: 0.7 * Math.sin(f4 / 29),
-  hang: ramp(f4, PR.hang[0], PR.hang[1], GLIDE)
+var paramsAt3 = (f3) => ({
+  on: ramp(f3, PR.on[0], PR.on[1], SETTLE),
+  stack: ramp(f3, PR.stack[0], PR.stack[1], GLIDE),
+  turn: ramp(f3, PR.turn[0], PR.turn[1], SETTLE),
+  sum: ramp(f3, PR.sum[0], PR.sum[1], SETTLE),
+  tag: ramp(f3, PR.tag[0], PR.tag[1], SETTLE),
+  swing: 0.7 * Math.sin(f3 / 29),
+  hang: ramp(f3, PR.hang[0], PR.hang[1], GLIDE)
 });
-var Price = ({ f: f4 }) => /* @__PURE__ */ u2(S, { children: [
-  /* @__PURE__ */ u2(Light, { keys: PR_CAM, f: f4, ground: "dark", pools: [[PRICE_GEO.cx, PRICE_GEO.floor - 20, 820, 300]] }),
-  /* @__PURE__ */ u2(World, { keys: PR_CAM, f: f4, children: /* @__PURE__ */ u2(Obj, { s: S4, g: "place", children: /* @__PURE__ */ u2(View3D, { name: "price", rect: { x: -700, y: -920, w: 2480, h: 3060 }, eye: eyeAt3(f4), make: priceModel, params: paramsAt3(f4) }) }) })
-] });
-var PriceSet = { id: S4, ground: "dark", Comp: Price, align: () => "centre", focus: [540, 1e3] };
 
 // src/three/obj/c_calendar.ts
 var smooth = (x3) => {
   const t3 = Math.max(0, Math.min(1, x3));
   return t3 * t3 * (3 - 2 * t3);
 };
-var makeCalendar = (o3) => {
-  const W3 = o3.w ?? 380, H3 = o3.h ?? 340, n2 = o3.months.length;
+var makeCalendar = (o2) => {
+  const W3 = o2.w ?? 380, H3 = o2.h ?? 340, n2 = o2.months.length;
   const BASE_H = 34, TOP2 = BASE_H + H3 + 46, FRONT = 0.27;
   const group = new three_module_exports.Group();
   const base = rbox(W3 + 90, BASE_H, 300, 7, SM.black());
@@ -47065,12 +46919,12 @@ var makeCalendar = (o3) => {
   strip.position.set(0, BASE_H - 9, 152.5);
   group.add(base, strip);
   const L2 = (TOP2 - BASE_H) / Math.cos(FRONT);
-  for (const s3 of [1, -1]) {
+  for (const s2 of [1, -1]) {
     const pivot = new three_module_exports.Group();
     pivot.position.set(0, TOP2 - 8, 0);
-    pivot.rotation.x = -s3 * FRONT;
+    pivot.rotation.x = -s2 * FRONT;
     const board = rbox(W3 + 30, L2, 10, 4, SM.graphite());
-    board.position.set(0, -L2 / 2, s3 > 0 ? -2 : 8);
+    board.position.set(0, -L2 / 2, s2 > 0 ? -2 : 8);
     pivot.add(board);
     group.add(pivot);
   }
@@ -47078,10 +46932,10 @@ var makeCalendar = (o3) => {
   bar.rotation.z = Math.PI / 2;
   bar.position.set(0, TOP2, 4);
   group.add(bar);
-  for (const s3 of [-1, 1]) {
+  for (const s2 of [-1, 1]) {
     const ring = mesh(new three_module_exports.TorusGeometry(19, 3.6, 10, 32), SM.edge());
     ring.rotation.y = Math.PI / 2;
-    ring.position.set(s3 * W3 * 0.27, TOP2 - 2, 6);
+    ring.position.set(s2 * W3 * 0.27, TOP2 - 2, 6);
     group.add(ring);
     for (const e3 of [-1, 1]) {
       const cap = mesh(new three_module_exports.SphereGeometry(9, 16, 12), SM.edge());
@@ -47090,11 +46944,11 @@ var makeCalendar = (o3) => {
     }
   }
   const paper = SM.paper("#EFE8D8"), paperBack = SM.paper("#E2DAC6");
-  const leaves = o3.months.map((m3, i3) => {
+  const leaves = o2.months.map((m3, i3) => {
     const pivot = new three_module_exports.Group();
     pivot.position.set(0, TOP2 - 4, 6);
     const [mon, year] = m3.split(" ");
-    const tex = textTex(`${o3.key}:leaf:${i3}:${m3}`, W3, H3, [
+    const tex = textTex(`${o2.key}:leaf:${i3}:${m3}`, W3, H3, [
       { t: mon, size: H3 * 0.42, weight: 800, color: "#1B1810", track: 0.01 },
       { t: year ?? "", size: H3 * 0.17, weight: 700, color: "#5B5443", gap: H3 * 0.04, track: 0.12 }
     ], { bg: "#EFE8D8", pad: W3 * 0.1 });
@@ -47123,11 +46977,11 @@ var makeCalendar = (o3) => {
 };
 
 // src/three/obj/c_stamp.ts
-var makeStamp = (o3) => {
-  const w3 = o3.w ?? 360, h3 = o3.h ?? 96, turn = o3.turn ?? -0.09;
+var makeStamp = (o2) => {
+  const w3 = o2.w ?? 360, h3 = o2.h ?? 96, turn = o2.turn ?? -0.09;
   const group = new three_module_exports.Group();
   group.rotation.y = turn;
-  const tex = paintTex(`stamp:${o3.key}:${o3.text}`, w3, h3, (g4) => {
+  const tex = paintTex(`stamp:${o2.key}:${o2.text}`, w3, h3, (g4) => {
     g4.clearRect(0, 0, w3, h3);
     g4.strokeStyle = C3.red;
     g4.fillStyle = C3.red;
@@ -47138,11 +46992,11 @@ var makeStamp = (o3) => {
     rr(g4, 12, 12, w3 - 24, h3 - 24, 5);
     g4.stroke();
     track(g4, 2.2);
-    const s3 = fitFont(g4, 800, h3 * 0.42, o3.text, w3 - 52);
-    font(g4, 800, s3);
+    const s2 = fitFont(g4, 800, h3 * 0.42, o2.text, w3 - 52);
+    font(g4, 800, s2);
     g4.textAlign = "center";
     g4.textBaseline = "alphabetic";
-    g4.fillText(o3.text, w3 / 2, h3 / 2 + s3 * 0.36);
+    g4.fillText(o2.text, w3 / 2, h3 / 2 + s2 * 0.36);
     track(g4, 0);
     g4.globalCompositeOperation = "destination-out";
     for (let i3 = 0; i3 < 260; i3++) {
@@ -47176,8 +47030,8 @@ var makeStamp = (o3) => {
   tool.add(die, mount, band, neck, collar);
   group.add(tool);
   const UP = 560;
-  const update = (s3) => {
-    const p3 = Math.max(0, Math.min(1, s3.p));
+  const update = (s2) => {
+    const p3 = Math.max(0, Math.min(1, s2.p));
     let y3 = UP;
     if (p3 <= 0.5) {
       const u4 = p3 / 0.5;
@@ -47283,13 +47137,11 @@ var CL = {
   stamp: [STAMP, STAMP + 26]
 };
 var DESK_AT = cue(S5, 2) - 8;
-var high = (f4) => ramp(f4, DESK_AT, DESK_AT + 48, TRAVEL);
-var EYE_LOW = { dx: 240, dy: -480 };
 var EYE_HIGH = { dx: 60, dy: -1750 };
 var D2 = 2100;
 var onDesk = (ax, ay, x3, z3, h3 = 0) => {
-  const ex = ax + EYE_HIGH.dx, ey = ay + EYE_HIGH.dy, s3 = D2 / (D2 - z3);
-  return { x: ex + (x3 - ex) * s3, y: ey + (CLOSE_GEO.desk.y - h3 - ey) * s3 };
+  const ex = ax + EYE_HIGH.dx, ey = ay + EYE_HIGH.dy, s2 = D2 / (D2 - z3);
+  return { x: ex + (x3 - ex) * s2, y: ey + (CLOSE_GEO.desk.y - h3 - ey) * s2 };
 };
 var aimAt = (x3, z3, h3 = 0) => {
   let a3 = { x: x3, y: CLOSE_GEO.desk.y };
@@ -47315,30 +47167,21 @@ var STORY4 = [
 ];
 var CL_DONE = Math.min(Math.max(cueEnd(S5, 2) + 4, LAND + 6), cue("fair", 0) - 1);
 var CL_CAM = alive("close", STORY4, CL_DONE + 40, { amp: 0.45 });
-var eyeAt4 = (f4) => {
-  const v3 = camView(CL_CAM, f4), h3 = high(f4);
-  return { x: v3.x + lerp(EYE_LOW.dx, EYE_HIGH.dx, h3), y: v3.y + lerp(EYE_LOW.dy, EYE_HIGH.dy, h3), D: D2 };
-};
-var paramsAt4 = (f4) => ({
-  cal: ramp(f4, CL.cal[0], CL.cal[1], (t3) => t3),
-  swap: ramp(f4, CL.swap[0], CL.swap[1], SETTLE),
-  fall: ramp(f4, CL.fall[0], CL.fall[1], COUNT),
-  open: ramp(f4, CL.open[0], CL.open[1], SETTLE),
-  hl: ramp(f4, CL.hl[0], CL.hl[1], SETTLE),
-  stamp: ramp(f4, CL.stamp[0], CL.stamp[1], (t3) => t3)
+var paramsAt4 = (f3) => ({
+  cal: ramp(f3, CL.cal[0], CL.cal[1], (t3) => t3),
+  swap: ramp(f3, CL.swap[0], CL.swap[1], SETTLE),
+  fall: ramp(f3, CL.fall[0], CL.fall[1], COUNT),
+  open: ramp(f3, CL.open[0], CL.open[1], SETTLE),
+  hl: ramp(f3, CL.hl[0], CL.hl[1], SETTLE),
+  stamp: ramp(f3, CL.stamp[0], CL.stamp[1], (t3) => t3)
 });
-var Close = ({ f: f4 }) => /* @__PURE__ */ u2(S, { children: [
-  /* @__PURE__ */ u2(Light, { keys: CL_CAM, f: f4, ground: "dark", pools: [[CLOSE_GEO.cal.x, CLOSE_GEO.floor - 40, 620, 260], [(CLOSE_GEO.stack.x + CLOSE_GEO.led.x) / 2, CLOSE_GEO.floor - 40, 900, 300], [WHOLE.x, WHOLE.y + 100, 760, 520]] }),
-  /* @__PURE__ */ u2(World, { keys: CL_CAM, f: f4, children: /* @__PURE__ */ u2(Obj, { s: S5, g: "place", children: /* @__PURE__ */ u2(View3D, { name: "close", rect: { x: -500, y: -200, w: 4400, h: 2400 }, eye: eyeAt4(f4), make: closeModel, params: paramsAt4(f4) }) }) })
-] });
-var CloseSet = { id: S5, ground: "dark", Comp: Close, align: () => "centre", focus: [540, 1e3] };
 
 // src/three/obj/c_scale.ts
-var makeScale = (o3 = {}) => {
-  const SPAN = o3.span ?? 760, HT = o3.height ?? 640, R2 = o3.pan ?? 150, DROP = o3.drop ?? 300;
+var makeScale = (o2 = {}) => {
+  const SPAN = o2.span ?? 760, HT = o2.height ?? 640, R2 = o2.pan ?? 150, DROP = o2.drop ?? 300;
   const group = new three_module_exports.Group();
-  const black2 = SM.black(), graphite = SM.graphite(), edge = SM.edge();
-  const foot = mesh(lathe([[0.01, 0], [176, 0], [180, 6], [180, 20], [168, 28], [120, 34], [112, 44], [60, 50], [40, 62], [0.01, 62]], 72), black2);
+  const black = SM.black(), graphite = SM.graphite(), edge = SM.edge();
+  const foot = mesh(lathe([[0.01, 0], [176, 0], [180, 6], [180, 20], [168, 28], [120, 34], [112, 44], [60, 50], [40, 62], [0.01, 62]], 72), black);
   const footRing = mesh(new three_module_exports.TorusGeometry(174, 3.2, 10, 72), edge);
   footRing.rotation.x = Math.PI / 2;
   footRing.position.y = 24;
@@ -47352,7 +47195,7 @@ var makeScale = (o3 = {}) => {
   }
   group.add(foot, footRing, col2);
   const beamY = 56 + HT;
-  const yoke = rbox(44, 46, 30, 6, black2);
+  const yoke = rbox(44, 46, 30, 6, black);
   yoke.position.set(0, beamY - 6, 15);
   group.add(yoke);
   const beam = new three_module_exports.Group();
@@ -47366,23 +47209,23 @@ var makeScale = (o3 = {}) => {
   pointer.position.set(0, -60, 18);
   beam.add(bar, boss, pointer);
   group.add(beam);
-  const plate = rbox(70, 34, 6, 3, black2);
+  const plate = rbox(70, 34, 6, 3, black);
   plate.position.set(0, beamY - 104, 20);
   const tick = rbox(2.5, 20, 2, 0.8, edge, 1);
   tick.position.set(0, beamY - 104, 22.5);
   group.add(plate, tick);
   const seats = [];
-  const hangs = [-1, 1].map((s3) => {
+  const hangs = [-1, 1].map((s2) => {
     const h3 = new three_module_exports.Group();
-    h3.position.set(s3 * SPAN / 2, 0, 0);
+    h3.position.set(s2 * SPAN / 2, 0, 0);
     const eye = mesh(new three_module_exports.TorusGeometry(9, 2.4, 8, 24), edge);
     eye.position.y = -12;
     h3.add(eye);
     for (let k3 = 0; k3 < 3; k3++) {
       const a3 = k3 / 3 * Math.PI * 2 + Math.PI / 2;
       const top = new three_module_exports.Vector3(0, -20, 0), bot = new three_module_exports.Vector3(Math.cos(a3) * (R2 - 8), -DROP + 16, Math.sin(a3) * (R2 - 8) * 0.999);
-      const len = top.distanceTo(bot);
-      const wire = mesh(new three_module_exports.CylinderGeometry(1.5, 1.5, len, 8), edge);
+      const len2 = top.distanceTo(bot);
+      const wire = mesh(new three_module_exports.CylinderGeometry(1.5, 1.5, len2, 8), edge);
       wire.position.copy(top.clone().add(bot).multiplyScalar(0.5));
       wire.quaternion.setFromUnitVectors(new three_module_exports.Vector3(0, 1, 0), bot.clone().sub(top).normalize());
       h3.add(wire);
@@ -47428,9 +47271,9 @@ var fairModel = () => {
   pool(G3.scale.x, 1300, 800, 0.12);
   const fig = plaque("fair:29", 236, 118, [{ t: "$29B", size: 72, weight: 800, color: C3.mint, glow: 18 }, { t: "1 AUG 2021", size: 23, weight: 600, color: C3.white, track: 0.12, gap: 8 }], { pad: 10 });
   fig.position.set(0, 14 + 68, 13);
-  for (const s3 of [-1, 1]) {
+  for (const s2 of [-1, 1]) {
     const ft = rbox(26, 14, 60, 3, SM.edge());
-    ft.position.set(s3 * 84, 7, 30);
+    ft.position.set(s2 * 84, 7, 30);
     scale.seats[0].add(ft);
   }
   scale.seats[0].add(fig);
@@ -47451,11 +47294,11 @@ var fairModel = () => {
   const POST = 150;
   fixed.position.set(G3.desk.x - 150, -G3.desk.y + POST + 66, -250);
   fixed.userData.obj = "fixed";
-  for (const s3 of [-1, 1]) {
+  for (const s2 of [-1, 1]) {
     const post = mesh(new three_module_exports.CylinderGeometry(5, 5, POST, 16), SM.edge());
-    post.position.set(G3.desk.x - 150 + s3 * 200, -G3.desk.y + POST / 2, -262);
+    post.position.set(G3.desk.x - 150 + s2 * 200, -G3.desk.y + POST / 2, -262);
     const foot = rbox(70, 8, 90, 3, SM.graphite());
-    foot.position.set(G3.desk.x - 150 + s3 * 200, -G3.desk.y + 4, -217);
+    foot.position.set(G3.desk.x - 150 + s2 * 200, -G3.desk.y + 4, -217);
     root.add(post, foot);
   }
   const air = halo(900, 420, C3.khaki, 0, false);
@@ -47492,25 +47335,16 @@ var STORY5 = [
 ];
 var FA_DONE = Math.max(cueEnd(S6, 1) + 4, FA.hand[1] + 6);
 var FA_CAM = alive("fair", STORY5, FA_DONE + 40, { amp: 0.45 });
-var eyeAt5 = (f4) => {
-  const v3 = camView(FA_CAM, f4);
-  return { x: v3.x + 240, y: v3.y - 460, D: 2100 };
-};
 var T0 = cue(S6, 0) - 10;
 var TAU = Math.max(8, (REAL - T0) / 4.2);
-var paramsAt5 = (f4) => {
-  const t3 = Math.max(0, f4 - T0);
+var paramsAt5 = (f3) => {
+  const t3 = Math.max(0, f3 - T0);
   return {
     tilt: 8 * Math.exp(-t3 / TAU) * Math.cos(t3 / TAU * 2.1),
-    hand: ramp(f4, FA.hand[0], FA.hand[1], SOFT),
-    label: ramp(f4, FA.label[0], FA.label[1], SETTLE)
+    hand: ramp(f3, FA.hand[0], FA.hand[1], SOFT),
+    label: ramp(f3, FA.label[0], FA.label[1], SETTLE)
   };
 };
-var Fair = ({ f: f4 }) => /* @__PURE__ */ u2(S, { children: [
-  /* @__PURE__ */ u2(Light, { keys: FA_CAM, f: f4, ground: "dark", pools: [[FAIR_GEO.scale.x, FAIR_GEO.floor - 40, 640, 280], [FAIR_GEO.desk.x, FAIR_GEO.desk.y + 60, 900, 320]] }),
-  /* @__PURE__ */ u2(World, { keys: FA_CAM, f: f4, children: /* @__PURE__ */ u2(Obj, { s: S6, g: "place", children: /* @__PURE__ */ u2(View3D, { name: "fair", rect: { x: -500, y: 0, w: 3400, h: 2e3 }, eye: eyeAt5(f4), make: fairModel, params: paramsAt5(f4) }) }) })
-] });
-var FairSet = { id: S6, ground: "dark", Comp: Fair, align: () => "centre", focus: [540, 1e3] };
 
 // src/three/props/verdict.ts
 var VERDICT_GEO = {
@@ -47638,8 +47472,8 @@ var verdictModel = () => {
       const m3 = rate.material;
       m3.opacity = Math.min(1, p3.rating * 2.2);
       rate.visible = p3.rating > 4e-3;
-      const s3 = 1 + 0.55 * (1 - p3.rating);
-      rate.scale.set(s3, s3, 1);
+      const s2 = 1 + 0.55 * (1 - p3.rating);
+      rate.scale.set(s2, s2, 1);
       rate.position.set(0, RATE_Y, 1 + 46 * (1 - p3.rating));
       led.material.opacity = 0.25 + 0.75 * p3.busy;
       led.material.transparent = true;
@@ -47678,136 +47512,638 @@ var STORY6 = [
   // back: the receipt and the tag (the opening)
 ];
 var VD_CAM = alive("verdict", STORY6, TOTAL_FRAMES + 4, { amp: 0.3 });
-for (let f4 = cue(S7, 0) - 80; f4 <= TOTAL_FRAMES; f4++) {
-  const v3 = camView(VD_CAM, f4), y3 = 960 + (VERDICT_GEO.tag.y - 16 - v3.y) * v3.z;
-  if (y3 < 280) throw new Error(`verdict: the tag's rail reaches y ${Math.round(y3)} on screen at f${f4} (the caption line)`);
+for (let f3 = cue(S7, 0) - 80; f3 <= TOTAL_FRAMES; f3++) {
+  const v3 = camView(VD_CAM, f3), y3 = 960 + (VERDICT_GEO.tag.y - 16 - v3.y) * v3.z;
+  if (y3 < 280) throw new Error(`verdict: the tag's rail reaches y ${Math.round(y3)} on screen at f${f3} (the caption line)`);
 }
-var eyeAt6 = (f4) => {
-  const v3 = camView(VD_CAM, f4);
-  return { x: v3.x + 220, y: v3.y - 430, D: 2100 };
-};
-var feedAt = (f4) => {
-  const a3 = ramp(f4, VD.head[0], VD.head[1], SETTLE), b2 = ramp(f4, VD.ann[0], VD.ann[1], SETTLE), c3 = ramp(f4, VD.paid[0], VD.paid[1], SETTLE), d3 = ramp(f4, VD.gap[0], VD.gap[1], SETTLE), e3 = ramp(f4, VD.foot[0], VD.foot[1], SETTLE);
+var feedAt = (f3) => {
+  const a3 = ramp(f3, VD.head[0], VD.head[1], SETTLE), b2 = ramp(f3, VD.ann[0], VD.ann[1], SETTLE), c3 = ramp(f3, VD.paid[0], VD.paid[1], SETTLE), d3 = ramp(f3, VD.gap[0], VD.gap[1], SETTLE), e3 = ramp(f3, VD.foot[0], VD.foot[1], SETTLE);
   return lerp(lerp(lerp(lerp(RECEIPT_LINES.head * a3, RECEIPT_LINES.announced, b2), RECEIPT_LINES.paid, c3), RECEIPT_LINES.gap + 0.02, d3), RECEIPT_LINES.all, e3);
 };
-var feeding = (f4) => [VD.head, VD.ann, VD.paid, VD.gap, VD.foot].some(([a3, b2]) => f4 >= a3 - 2 && f4 <= b2 + 2);
-var paramsAt6 = (f4) => ({
-  feed: feedAt(f4),
-  rating: ramp(f4, VD.rating[0], VD.rating[1], SETTLE),
-  tag: 0.3 + 0.7 * ramp(f4, VD.tag[0], VD.tag[1], SETTLE),
-  swing: 0.7 * Math.sin(f4 / 31) + 0.3 * Math.sin(f4 / 17),
-  busy: feeding(f4) ? Math.floor(f4 / 3) % 2 ? 1 : 0.3 : 0.5
+var feeding = (f3) => [VD.head, VD.ann, VD.paid, VD.gap, VD.foot].some(([a3, b2]) => f3 >= a3 - 2 && f3 <= b2 + 2);
+var paramsAt6 = (f3) => ({
+  feed: feedAt(f3),
+  rating: ramp(f3, VD.rating[0], VD.rating[1], SETTLE),
+  tag: 0.3 + 0.7 * ramp(f3, VD.tag[0], VD.tag[1], SETTLE),
+  swing: 0.7 * Math.sin(f3 / 31) + 0.3 * Math.sin(f3 / 17),
+  busy: feeding(f3) ? Math.floor(f3 / 3) % 2 ? 1 : 0.3 : 0.5
 });
-var Verdict = ({ f: f4 }) => /* @__PURE__ */ u2(S, { children: [
-  /* @__PURE__ */ u2(Light, { keys: VD_CAM, f: f4, ground: "dark", pools: [[VERDICT_GEO.desk.x, VERDICT_GEO.desk.y + 40, 900, 320]] }),
-  /* @__PURE__ */ u2(World, { keys: VD_CAM, f: f4, children: /* @__PURE__ */ u2(Obj, { s: S7, g: "place", children: /* @__PURE__ */ u2(View3D, { name: "verdict", rect: { x: -560, y: -120, w: 2500, h: 2200 }, eye: eyeAt6(f4), make: verdictModel, params: paramsAt6(f4) }) }) })
-] });
-var VerdictSet = { id: S7, ground: "dark", Comp: Verdict, align: () => "centre", focus: [540, 1e3] };
 
 // src/r45/score.ts
-var buildScore = (sets, peaks) => {
+var buildScore = (sets, moves) => {
   const cues = [];
   const w3 = (id) => {
     const x3 = sets.find((y3) => y3.id === id);
     return { at: x3.from, end: x3.to };
   };
-  const add = (c3) => cues.push(c3);
+  const add2 = (c3) => cues.push(c3);
   const pk = (id) => peakOn(w3(id));
   const wi = (id) => within(w3(id));
-  sets.forEach((st, i3) => {
-    if (!st.kind || i3 === 0) return;
-    const both = { at: sets[i3 - 1].from, end: st.to };
-    add(peakOn(both)("airwoosh", peaks[i3], st.t0 + 22, 1.1, `the camera ${st.kind === "truck" ? "trucks" : "cranes"} ${st.side} into ${st.id}`));
-  });
-  const CAMS = [["hook", HK_CAM], ["deal", DL_CAM], ["price", PR_CAM], ["close", CL_CAM], ["fair", FA_CAM], ["verdict", VD_CAM]];
-  for (const [id, keys] of CAMS) keys.forEach((k3, i3) => {
-    if (i3 === 0 || k3.drift) return;
-    const a3 = keys[i3 - 1], travel = Math.hypot(k3.x - a3.x, k3.y - a3.y), zoom = Math.abs(Math.log(k3.z / a3.z));
-    if (travel < 150 && zoom < 0.08) return;
-    add(pk(id)("airwoosh", k3.at + k3.dur / 2, k3.at + k3.dur, travel > 600 ? 0.7 : 0.5, `the camera travels (${id}, key ${i3})`));
-  });
-  HK.lands.forEach((l3, i3) => add(wi("hook")("thud", l3, void 0, 0.3 - 0.04 * i3, `newspaper ${i3 + 1} lands on the desk`)));
-  add(pk("hook")("whooshsoft", HK.flipA + 8, HK.flipB, 0.4, "the tag flips to $13,800,000,000"));
-  add(wi("hook")("click", HK.flipB - 2, void 0, 0.3, "the tag settles on its new face"));
-  add(pk("deal")("whooshsoft", DL.contract[0] + 4, DL.contract[1], 0.4, "the contract slides in"));
-  add(pk("deal")("swoosh", DL.cooler[1] - 6, DL.cooler[1], 0.5, "the cooler of cash slides away"));
-  add(pk("deal")("whooshsoft", DL.certs[0] + 4, DL.certs[1], 0.5, "the share certificates slide in"));
-  add(wi("deal")("click", DL.certs[1], void 0, 0.25, "the stack comes to rest"));
-  add(pk("deal")("whooshsoft", DL.card[0] + 4, DL.card[1], 0.35, "the one certificate slides in on its rail"));
-  add(wi("deal")("tick", DL.flip[0], void 0, 0.35, "the certificate is cut at 0.375"));
-  add(wi("deal")("flick", DL.flip[0] + 6, void 0, 0.4, "the piece turns to 0.375"));
-  add(wi("price")("click", PR.on[0], void 0, 0.3, "the board lights: $247.26"));
-  add(wi("price")("datashort", PR.on[0] + 1, PR.on[1] + 8, 0.25, "the board's dots come up"));
-  add(pk("price")("whooshsoft", PR.stack[0] + 6, PR.stack[1], 0.4, "the stack slides in on its plinth"));
-  add(wi("price")("tick", PR.sum[0], void 0, 0.3, "the sum's signs light: \xD7 and ="));
-  add(pk("price")("whooshsoft", PR.hang[0] + 5, PR.hang[1], 0.3, "the tag slides in on its cord"));
-  add(wi("price")("flick", PR.turn[0] + 6, void 0, 0.35, "the tag turns to face us"));
-  add(wi("price")("pingshort", PR.tag[0] + 6, void 0, 0.3, "the tag lights: $29,000,000,000"));
-  for (let i3 = 0; i3 < 5; i3++) add(wi("close")("flick", CL.cal[0] + (i3 + 0.5) * (CL.cal[1] - CL.cal[0]) / 5, void 0, 0.26, `the calendar's leaf ${i3 + 1} flips`));
-  add(wi("close")("click", CL.swap[0] + 8, void 0, 0.3, "the nameplate rolls to BLOCK"));
-  add(pk("close")("lowwoosh", CL.fall[0] + 20, CL.fall[1], 0.4, "the price falls and the stack shrinks"));
-  add(wi("close")("datashort", CL.fall[0], CL.fall[1], 0.26, "the board counts down to $122.29"));
-  add(wi("close")("click", CL.fall[1], void 0, 0.3, "the board stops, red: $122.29"));
-  add(wi("close")("flick", CL.open[0] + 8, void 0, 0.35, "the filing opens"));
-  add(pk("close")("whooshsoft", CL.hl[0] + 6, CL.hl[1], 0.3, "the highlighter crosses the line"));
-  add(wi("close")("thud", (CL.stamp[0] + CL.stamp[1]) / 2, void 0, 0.5, "the stamp lands: FORM 10-Q | Q1 2022"));
-  add(wi("fair")("chainshort", FA.level[0], FA.level[1], 0.26, "the scale rocks on its chains"));
-  add(wi("fair")("pingshort", FA.level[1], void 0, 0.26, "the scale settles level"));
-  add(wi("fair")("click", FA.label[0] + 4, void 0, 0.3, "FIXED: 0.375 SHARES lights"));
-  add(pk("fair")("whooshsoft", FA.hand[0] + 4, FA.hand[1], 0.4, "the certificates cross the desk"));
-  add(wi("fair")("thud", FA.hand[1] - 2, void 0, 0.28, "the certificates are set down"));
+  const all = { at: 0, end: sets[sets.length - 1].to };
+  for (const m3 of moves) add2(peakOn(all)("airwoosh", m3.mid, m3.end, m3.vol, `the camera travels (${m3.id}: ${m3.why})`));
+  HK.lands.forEach((l3, i3) => add2(wi("hook")("thud", l3, void 0, 0.3 - 0.04 * i3, `newspaper ${i3 + 1} lands on the desk`)));
+  add2(pk("hook")("whooshsoft", HK.flipA + 8, HK.flipB, 0.4, "the tag flips to $13,800,000,000"));
+  add2(wi("hook")("click", HK.flipB - 2, void 0, 0.3, "the tag settles on its new face"));
+  add2(pk("deal")("whooshsoft", DL.contract[0] + 4, DL.contract[1], 0.4, "the contract slides in"));
+  add2(pk("deal")("swoosh", DL.cooler[1] - 6, DL.cooler[1], 0.5, "the cooler of cash slides away"));
+  add2(pk("deal")("whooshsoft", DL.certs[0] + 4, DL.certs[1], 0.5, "the share certificates slide in"));
+  add2(wi("deal")("click", DL.certs[1], void 0, 0.25, "the stack comes to rest"));
+  add2(pk("deal")("whooshsoft", DL.card[0] + 4, DL.card[1], 0.35, "the one certificate slides in on its rail"));
+  add2(wi("deal")("tick", DL.flip[0], void 0, 0.35, "the certificate is cut at 0.375"));
+  add2(wi("deal")("flick", DL.flip[0] + 6, void 0, 0.4, "the piece turns to 0.375"));
+  add2(wi("price")("click", PR.on[0], void 0, 0.3, "the board lights: $247.26"));
+  add2(wi("price")("datashort", PR.on[0] + 1, PR.on[1] + 8, 0.25, "the board's dots come up"));
+  add2(pk("price")("whooshsoft", PR.stack[0] + 6, PR.stack[1], 0.4, "the stack slides in on its plinth"));
+  add2(wi("price")("tick", PR.sum[0], void 0, 0.3, "the sum's signs light: \xD7 and ="));
+  add2(pk("price")("whooshsoft", PR.hang[0] + 5, PR.hang[1], 0.3, "the tag slides in on its cord"));
+  add2(wi("price")("flick", PR.turn[0] + 6, void 0, 0.35, "the tag turns to face us"));
+  add2(wi("price")("pingshort", PR.tag[0] + 6, void 0, 0.3, "the tag lights: $29,000,000,000"));
+  for (let i3 = 0; i3 < 5; i3++) add2(wi("close")("flick", CL.cal[0] + (i3 + 0.5) * (CL.cal[1] - CL.cal[0]) / 5, void 0, 0.26, `the calendar's leaf ${i3 + 1} flips`));
+  add2(wi("close")("click", CL.swap[0] + 8, void 0, 0.3, "the nameplate rolls to BLOCK"));
+  add2(pk("close")("lowwoosh", CL.fall[0] + 20, CL.fall[1], 0.4, "the price falls and the stack shrinks"));
+  add2(wi("close")("datashort", CL.fall[0], CL.fall[1], 0.26, "the board counts down to $122.29"));
+  add2(wi("close")("click", CL.fall[1], void 0, 0.3, "the board stops, red: $122.29"));
+  add2(wi("close")("flick", CL.open[0] + 8, void 0, 0.35, "the filing opens"));
+  add2(pk("close")("whooshsoft", CL.hl[0] + 6, CL.hl[1], 0.3, "the highlighter crosses the line"));
+  add2(wi("close")("thud", (CL.stamp[0] + CL.stamp[1]) / 2, void 0, 0.5, "the stamp lands: FORM 10-Q | Q1 2022"));
+  add2(wi("fair")("chainshort", FA.level[0], FA.level[1], 0.26, "the scale rocks on its chains"));
+  add2(wi("fair")("pingshort", FA.level[1], void 0, 0.26, "the scale settles level"));
+  add2(wi("fair")("click", FA.label[0] + 4, void 0, 0.3, "FIXED: 0.375 SHARES lights"));
+  add2(pk("fair")("whooshsoft", FA.hand[0] + 4, FA.hand[1], 0.4, "the certificates cross the desk"));
+  add2(wi("fair")("thud", FA.hand[1] - 2, void 0, 0.28, "the certificates are set down"));
   for (const [k3, why] of [["head", "its head"], ["ann", "ANNOUNCED"], ["paid", "PAID AT CLOSING"], ["gap", "GAP"], ["foot", "its foot"]])
-    add(wi("verdict")("datashort", VD[k3][0], VD[k3][1] + 2, 0.28, `the receipt prints ${why}`));
-  add(wi("verdict")("thud", VD.rating[1], void 0, 0.5, "the rating lands: INFLATED"));
-  add(wi("verdict")("sub", VD.rating[1], void 0, 0.4, "INFLATED"));
-  add(wi("verdict")("pingshort", VD.tag[0] + 8, void 0, 0.26, "the tag's lamp comes back up"));
+    add2(wi("verdict")("datashort", VD[k3][0], VD[k3][1] + 2, 0.28, `the receipt prints ${why}`));
+  add2(wi("verdict")("thud", VD.rating[1], void 0, 0.5, "the rating lands: INFLATED"));
+  add2(wi("verdict")("sub", VD.rating[1], void 0, 0.4, "INFLATED"));
+  add2(wi("verdict")("pingshort", VD.tag[0] + 8, void 0, 0.26, "the tag's lamp comes back up"));
   const MOVE = /* @__PURE__ */ new Set(["swoosh", "whooshlong", "whooshsoft", "airwoosh", "lowwoosh"]);
   const heard = (c3) => c3.at + PEAK[c3.s];
-  const out = cues.filter((c3) => !(c3.why.startsWith("the camera travels") && cues.some((o3) => o3 !== c3 && MOVE.has(o3.s) && !o3.why.startsWith("the camera travels") && Math.abs(heard(o3) - heard(c3)) <= 6)));
+  const out = cues.filter((c3) => !(c3.why.startsWith("the camera travels") && cues.some((o2) => o2 !== c3 && MOVE.has(o2.s) && !o2.why.startsWith("the camera travels") && Math.abs(heard(o2) - heard(c3)) <= 6)));
   out.sort((a3, b2) => a3.at - b2.at);
   return { cues: out };
 };
 
-// src/audit/bedenv.ts
-var BED_ENV = [
-  [7.71, 1.5],
-  [17.71, 1.4],
-  [27.71, 2.1],
-  [37.71, -0.1],
-  [47.71, 1.4],
-  [48.8, 1.4]
-];
-
-// src/audit/fonts.ts
-var ARCHIVO = '"Archivo", sans-serif';
-
-// src/r45/art.tsx
-var limb = (pts, w3) => {
-  const n2 = pts.length;
-  const dir = (i3) => {
-    const a3 = pts[Math.max(0, i3 - 1)], b2 = pts[Math.min(n2 - 1, i3 + 1)], l3 = Math.hypot(b2[0] - a3[0], b2[1] - a3[1]) || 1;
-    return [(b2[0] - a3[0]) / l3, (b2[1] - a3[1]) / l3];
-  };
-  const side = (s3) => pts.map((p3, i3) => {
-    const d4 = dir(i3);
-    return [p3[0] - d4[1] * s3 * w3[i3] / 2, p3[1] + d4[0] * s3 * w3[i3] / 2];
-  });
-  const L2 = side(1), R2 = side(-1);
-  const curve = (q4) => {
-    let d4 = "";
-    for (let i3 = 0; i3 < q4.length - 1; i3++) {
-      const p0 = q4[Math.max(0, i3 - 1)], p1 = q4[i3], p22 = q4[i3 + 1], p3 = q4[Math.min(q4.length - 1, i3 + 2)];
-      const c1 = [p1[0] + (p22[0] - p0[0]) / 6, p1[1] + (p22[1] - p0[1]) / 6], c22 = [p22[0] - (p3[0] - p1[0]) / 6, p22[1] - (p3[1] - p1[1]) / 6];
-      d4 += ` C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c22[0].toFixed(1)} ${c22[1].toFixed(1)} ${p22[0].toFixed(1)} ${p22[1].toFixed(1)}`;
-    }
-    return d4;
-  };
-  const dt = dir(n2 - 1), wt = w3[n2 - 1], k3 = wt * 0.7;
-  const rl = R2[n2 - 1], ll = L2[n2 - 1];
-  const d3 = `M${R2[0][0].toFixed(1)} ${R2[0][1].toFixed(1)}${curve(R2)} C${(rl[0] + dt[0] * k3).toFixed(1)} ${(rl[1] + dt[1] * k3).toFixed(1)} ${(ll[0] + dt[0] * k3).toFixed(1)} ${(ll[1] + dt[1] * k3).toFixed(1)} ${ll[0].toFixed(1)} ${ll[1].toFixed(1)}` + curve([...L2].reverse()) + " Z";
-  return { d: d3, tip: pts[n2 - 1], dt, wt };
+// src/world/cam.ts
+var add = (a3, b2) => [a3[0] + b2[0], a3[1] + b2[1], a3[2] + b2[2]];
+var sub = (a3, b2) => [a3[0] - b2[0], a3[1] - b2[1], a3[2] - b2[2]];
+var mixV = (a3, b2, t3) => [a3[0] + (b2[0] - a3[0]) * t3, a3[1] + (b2[1] - a3[1]) * t3, a3[2] + (b2[2] - a3[2]) * t3];
+var len = (a3) => Math.hypot(a3[0], a3[1], a3[2]);
+var lerp3 = (a3, b2, t3) => a3 + (b2 - a3) * t3;
+var DEFAULT_FOV = 50;
+var orbitPos = (c3, a3, r3, y3) => {
+  const k3 = a3 * Math.PI / 180;
+  return [c3[0] + Math.sin(k3) * r3, y3, c3[2] + Math.cos(k3) * r3];
 };
-var THUMB = limb([[110, -38], [94, -60], [62, -76], [24, -84], [-2, -80]], [34, 34, 32, 29, 26]);
+var orbitAt = (o2, t3) => orbitPos(o2.c, lerp3(o2.a0, o2.a1, t3), lerp3(o2.r0, o2.r1 ?? o2.r0, t3), lerp3(o2.y0, o2.y1 ?? o2.y0, t3));
+var orbit = (at, dur, o2, x3 = {}) => ({ at, dur, pos: orbitAt(o2, 1), look: x3.look ?? o2.c, fov: x3.fov, ease: x3.ease ?? SOFT, orbit: o2, why: x3.why ?? "orbit" });
+var dolly = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? SETTLE, why: x3.why ?? "dolly" });
+var crane = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? TRAVEL, arc: x3.bulge ?? [0, 0, 120], why: x3.why ?? "crane", whoosh: 0.5 });
+var travel = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? TRAVEL, arc: x3.bulge, why: x3.why ?? "travel", whoosh: x3.vol ?? 0.6 });
+var cut = (at, pos, look, x3 = {}) => ({ at, dur: 0, pos, look, fov: x3.fov, cut: true, dip: x3.dip ?? 0, why: x3.why ?? "cut" });
+var checkPath = (name, keys) => {
+  for (let i3 = 1; i3 < keys.length; i3++) {
+    const a3 = keys[i3 - 1], k3 = keys[i3];
+    if (k3.at < a3.at + a3.dur - 1e-6) throw new Error(`camera ${name}: key ${i3} "${k3.why ?? ""}" (f${k3.at}) starts before key ${i3 - 1} "${a3.why ?? ""}" ends (f${a3.at + a3.dur}): camera keys never overlap`);
+    if (!k3.cut && k3.dur < 1) throw new Error(`camera ${name}: key ${i3} "${k3.why ?? ""}" has no duration (use cut())`);
+  }
+  return keys;
+};
+var BREATH = 7;
+var breath = (f3) => [
+  BREATH * (Math.sin(f3 * 0.0213 + 1.3) + 0.5 * Math.sin(f3 * 91e-4 + 4.1)),
+  BREATH * 0.6 * (Math.sin(f3 * 0.0171 + 2.9) + 0.4 * Math.sin(f3 * 0.0123 + 0.4)),
+  BREATH * 1.2 * Math.sin(f3 * 0.0137 + 5.2)
+];
+var poseAt = (keys, f3) => {
+  let p3 = { pos: keys[0].pos, look: keys[0].look, fov: keys[0].fov ?? DEFAULT_FOV, roll: keys[0].roll ?? 0 };
+  for (let i3 = 1; i3 < keys.length; i3++) {
+    const k3 = keys[i3];
+    if (f3 < k3.at) break;
+    const end = { pos: k3.pos, look: k3.look, fov: k3.fov ?? p3.fov, roll: k3.roll ?? 0 };
+    if (k3.cut || f3 >= k3.at + k3.dur) {
+      p3 = end;
+      continue;
+    }
+    const t3 = (k3.ease ?? SETTLE)(clamp01((f3 - k3.at) / k3.dur));
+    let pos = mixV(p3.pos, k3.pos, t3);
+    if (k3.orbit) {
+      const on2 = orbitAt(k3.orbit, t3), blend = SOFT(clamp01(t3 / 0.34));
+      const start = orbitAt(k3.orbit, 0);
+      pos = len(sub(start, p3.pos)) < 2 ? on2 : mixV(mixV(p3.pos, on2, t3), on2, blend);
+    }
+    if (k3.arc) {
+      const s2 = Math.sin(Math.PI * t3);
+      pos = add(pos, [k3.arc[0] * s2, k3.arc[1] * s2, k3.arc[2] * s2]);
+    }
+    p3 = { pos, look: mixV(p3.look, k3.look, t3), fov: lerp3(p3.fov, end.fov, t3), roll: lerp3(p3.roll, end.roll, t3) };
+    break;
+  }
+  const b2 = breath(f3);
+  return { pos: add(p3.pos, b2), look: add(p3.look, [b2[0] * 0.25, b2[1] * 0.25, 0]), fov: p3.fov, roll: p3.roll };
+};
+
+// src/world/places/hook.ts
+var S8 = "hook";
+var HEAD2 = cue(S8, 1);
+var FILING2 = cue(S8, 2);
+var FLIP2 = word(S8, 2, /^13/);
+var DESK_Y = 300;
+var HANG = [-150, 2080, 60];
+var CORD = 900;
+var TW = 820;
+var TH = 350;
+var TAG = [HANG[0], HANG[1] - CORD - TH / 2, HANG[2]];
+var PAPERS = [
+  { x: -470, z: -10, ry: -0.12, masthead: "THE MORNING LEDGER", tone: "#E6DFCF" },
+  { x: -120, z: 50, ry: 0.14, masthead: "MARKET DAILY", tone: "#DCD5C4" },
+  { x: -300, z: 300, ry: 0.04, masthead: "THE BUSINESS POST", tone: "#E9E2D3" }
+];
+var FILE = [640, DESK_Y, 60];
+var FRAME = [960, DESK_Y, -150];
+var HookPlace = {
+  id: S8,
+  label: "1 Hook: the tag, $29,000,000,000; the filing says $13.8B",
+  enter: 0,
+  shots: ({ to }) => {
+    const k3 = [];
+    const A0 = { c: TAG, a0: -36, a1: -8, r0: 1420, r1: 1260, y0: TAG[1] - 330, y1: TAG[1] - 200 };
+    k3.push({ at: 0, dur: 0, pos: orbitPos(TAG, A0.a0, A0.r0, A0.y0), look: [TAG[0], TAG[1] + 20, TAG[2]], fov: 60, cut: true, why: "frame 0: low and close on the tag" });
+    k3.push(orbit(1, HEAD2 - 12, A0, { look: [TAG[0], TAG[1] + 10, TAG[2]], fov: 60, ease: SOFT, why: "orbit the tag" }));
+    const t22 = HEAD2 - 8;
+    k3.push(crane(t22, 40, [-520, 920, 960], [-290, DESK_Y, 190], { bulge: [-120, 40, 200], fov: 50, why: "down to the newspapers" }));
+    const t3 = t22 + 42, d3 = Math.max(12, FILING2 - 6 - t3);
+    k3.push(dolly(t3, d3, [-440, 860, 850], [-285, DESK_Y, 190], { ease: SOFT, why: "push in on the newspapers" }));
+    const t4 = t3 + d3 + 1;
+    k3.push(travel(t4, 34, [1240, 660, 880], [790, DESK_Y + 150, -40], { bulge: [0, 40, 180], why: "along the desk to the filing", vol: 0.5 }));
+    const t5 = Math.max(FLIP2 - 16, t4 + 35);
+    const A1 = { c: TAG, a0: 28, a1: 8, r0: 1500, r1: 1330, y0: TAG[1] - 190, y1: TAG[1] - 130 };
+    k3.push(crane(t5, 34, orbitPos(TAG, A1.a0, A1.r0, A1.y0), TAG, { bulge: [0, 0, 220], why: "back up to the tag as it flips" }));
+    const t6 = t5 + 35;
+    if (to - 2 - t6 >= 10) k3.push(orbit(t6, to - 2 - t6, A1, { look: TAG, ease: SOFT, why: "orbit the flipped tag" }));
+    return k3;
+  },
+  lights: (f3) => {
+    const p3 = paramsAt(f3);
+    return {
+      amb: 0.12,
+      key: { pos: [TAG[0] - 150, 2500, 760], at: [TAG[0], TAG[1] - 200, TAG[2]], i: 2.6 * p3.lit, color: "#FFC06A", angle: 0.5, soft: 0.85 },
+      rim: { pos: [700, 1300, -1500], at: TAG, i: 3.4, color: "#CFE0FF", angle: 0.8, soft: 0.6 },
+      aux: { pos: [900, 1900, 700], at: [800, DESK_Y + 60, -40], i: 0.25 + 2.6 * p3.desk, color: "#F4F6FF", angle: 0.34, soft: 0.9 },
+      accent: { pos: [TAG[0] - 60, TAG[1] - 320, 420], color: "#F5A524", i: 0.9 },
+      focus: [150, 0],
+      reach: 3200,
+      reflect: 0.5
+    };
+  },
+  build: () => {
+    const group = new Group();
+    const tag = makeTag({ key: "hook3d", w: TW, h: TH, cord: CORD, faces: [
+      { kicker: "AFTERPAY | SOLD FOR", figure: "$29,000,000,000", color: C3.mint },
+      { kicker: "THE FILING SAYS", figure: "$13,800,000,000", color: C3.khaki }
+    ] });
+    tag.group.position.set(...HANG);
+    const desk = makeDesk({ w: 2100, d: 900, drop: DESK_Y - 44 });
+    desk.group.position.set(250, DESK_Y, 0);
+    const papers = PAPERS.map((q4, i3) => {
+      const p3 = makePaper({ key: `hook3d${i3}`, masthead: q4.masthead, tone: q4.tone, w: 330, d: 236, t: 20 });
+      group.add(p3.group);
+      return p3.group;
+    });
+    const filing = makeFiling({ key: "hook3d", w: 320, d: 420, t: 78, cover: ["FORM 10-Q", "BLOCK, INC. | Q1 2022"], line: "" });
+    filing.group.position.set(...FILE);
+    filing.group.rotation.y = 0.1;
+    const frame = makeFrame({ key: "hook3d", photo: HAS_PHOTO ? PHOTO_FILE : null });
+    frame.group.position.set(...FRAME);
+    frame.group.rotation.y = -0.32;
+    desk.group.traverse((n2) => {
+      const m3 = n2.material;
+      if (m3?.isMeshStandardMaterial) {
+        m3.roughness = Math.max(m3.roughness, 0.62);
+        if (m3.isMeshPhysicalMaterial) m3.clearcoat = 0;
+      }
+    });
+    group.add(tag.group, desk.group, filing.group, frame.group);
+    return {
+      group,
+      update: (f3) => {
+        const p3 = paramsAt(f3);
+        tag.update({ flip: p3.flip, swing: p3.swing * 1.4, lit: p3.lit });
+        papers.forEach((g4, i3) => {
+          const q4 = PAPERS[i3], [h3, spin] = p3.drop[i3] ?? [0, 0];
+          g4.position.set(q4.x, DESK_Y + h3, q4.z);
+          g4.rotation.set(0, q4.ry + spin, 0);
+          g4.visible = h3 < 1400;
+        });
+      }
+    };
+  }
+};
+
+// ../034-ohtani/node_modules/three/examples/jsm/geometries/TextGeometry.js
+var TextGeometry = class extends ExtrudeGeometry {
+  /**
+   * Constructs a new text geometry.
+   *
+   * @param {string} text - The text that should be transformed into a geometry.
+   * @param {TextGeometry~Options} [parameters] - The text settings.
+   */
+  constructor(text, parameters = {}) {
+    const font2 = parameters.font;
+    if (font2 === void 0) {
+      super();
+    } else {
+      const shapes = font2.generateShapes(text, parameters.size, parameters.direction);
+      if (parameters.depth === void 0) parameters.depth = 50;
+      if (parameters.bevelThickness === void 0) parameters.bevelThickness = 10;
+      if (parameters.bevelSize === void 0) parameters.bevelSize = 8;
+      if (parameters.bevelEnabled === void 0) parameters.bevelEnabled = false;
+      super(shapes, parameters);
+    }
+    this.type = "TextGeometry";
+  }
+};
+
+// ../034-ohtani/node_modules/three/examples/jsm/loaders/FontLoader.js
+var Font = class {
+  /**
+   * Constructs a new font.
+   *
+   * @param {Object} data - The font data as JSON.
+   */
+  constructor(data) {
+    this.isFont = true;
+    this.type = "Font";
+    this.data = data;
+  }
+  /**
+   * Generates geometry shapes from the given text and size. The result of this method
+   * should be used with {@link ShapeGeometry} to generate the actual geometry data.
+   *
+   * @param {string} text - The text.
+   * @param {number} [size=100] - The text size.
+   * @param {string} [direction='ltr'] - Char direction: ltr(left to right), rtl(right to left) & tb(top bottom).
+   * @return {Array<Shape>} An array of shapes representing the text.
+   */
+  generateShapes(text, size2 = 100, direction = "ltr") {
+    const shapes = [];
+    const paths = createPaths(text, size2, this.data, direction);
+    for (let p3 = 0, pl = paths.length; p3 < pl; p3++) {
+      shapes.push(...paths[p3].toShapes());
+    }
+    return shapes;
+  }
+};
+function createPaths(text, size2, data, direction) {
+  const chars = Array.from(text);
+  const scale = size2 / data.resolution;
+  const line_height = (data.boundingBox.yMax - data.boundingBox.yMin + data.underlineThickness) * scale;
+  const paths = [];
+  let offsetX = 0, offsetY = 0;
+  if (direction == "rtl" || direction == "tb") {
+    chars.reverse();
+  }
+  for (let i3 = 0; i3 < chars.length; i3++) {
+    const char = chars[i3];
+    if (char === "\n") {
+      offsetX = 0;
+      offsetY -= line_height;
+    } else {
+      const ret = createPath(char, scale, offsetX, offsetY, data);
+      if (direction == "tb") {
+        offsetX = 0;
+        offsetY += data.ascender * scale;
+      } else {
+        offsetX += ret.offsetX;
+      }
+      paths.push(ret.path);
+    }
+  }
+  return paths;
+}
+function createPath(char, scale, offsetX, offsetY, data) {
+  const glyph = data.glyphs[char] || data.glyphs["?"];
+  if (!glyph) {
+    console.error('THREE.Font: character "' + char + '" does not exists in font family ' + data.familyName + ".");
+    return;
+  }
+  const path = new ShapePath();
+  let x3, y3, cpx, cpy, cpx1, cpy1, cpx2, cpy2;
+  if (glyph.o) {
+    const outline = glyph._cachedOutline || (glyph._cachedOutline = glyph.o.split(" "));
+    for (let i3 = 0, l3 = outline.length; i3 < l3; ) {
+      const action = outline[i3++];
+      switch (action) {
+        case "m":
+          x3 = outline[i3++] * scale + offsetX;
+          y3 = outline[i3++] * scale + offsetY;
+          path.moveTo(x3, y3);
+          break;
+        case "l":
+          x3 = outline[i3++] * scale + offsetX;
+          y3 = outline[i3++] * scale + offsetY;
+          path.lineTo(x3, y3);
+          break;
+        case "q":
+          cpx = outline[i3++] * scale + offsetX;
+          cpy = outline[i3++] * scale + offsetY;
+          cpx1 = outline[i3++] * scale + offsetX;
+          cpy1 = outline[i3++] * scale + offsetY;
+          path.quadraticCurveTo(cpx1, cpy1, cpx, cpy);
+          break;
+        case "b":
+          cpx = outline[i3++] * scale + offsetX;
+          cpy = outline[i3++] * scale + offsetY;
+          cpx1 = outline[i3++] * scale + offsetX;
+          cpy1 = outline[i3++] * scale + offsetY;
+          cpx2 = outline[i3++] * scale + offsetX;
+          cpy2 = outline[i3++] * scale + offsetY;
+          path.bezierCurveTo(cpx1, cpy1, cpx2, cpy2, cpx, cpy);
+          break;
+      }
+    }
+  }
+  return { offsetX: glyph.ha * scale, path };
+}
+
+// src/three/fonts/archivo500.json
+var archivo500_default = { glyphs: { "0": { ha: 797, x_min: 68, x_max: 729, o: "m 399 -17 l 399 -17 q 260 6 322 -17 q 156 85 199 29 q 91 235 114 140 q 68 476 68 331 l 68 476 q 91 717 68 622 q 156 868 114 813 q 260 947 199 924 q 399 969 322 969 l 399 969 q 538 947 476 969 q 641 868 599 924 q 706 717 683 813 q 729 476 729 622 l 729 476 q 706 235 729 331 q 641 85 683 140 q 538 6 599 29 q 399 -17 476 -17 z m 399 103 l 399 103 q 510 141 472 103 q 564 254 549 179 q 579 440 579 329 l 579 440 l 579 508 q 564 698 579 622 q 510 812 549 774 q 399 850 472 850 l 399 850 q 288 812 326 850 q 233 699 249 774 q 218 511 218 624 l 218 511 l 218 443 q 233 256 218 332 q 288 141 249 179 q 399 103 326 103 z " }, "1": { ha: 760, x_min: 113, x_max: 713, o: "m 713 0 l 113 0 l 113 121 l 349 121 l 349 753 l 113 753 l 113 843 q 214 860 158 846 q 325 897 269 874 q 426 954 381 921 l 426 954 l 494 954 l 494 121 l 713 121 l 713 0 z " }, "2": { ha: 793, x_min: 69, x_max: 729, o: "m 729 0 l 69 0 l 69 43 q 92 153 69 103 q 153 246 115 204 q 239 325 192 288 q 335 397 286 363 l 335 397 q 453 489 399 443 q 541 588 507 535 q 575 706 575 640 l 575 706 q 558 775 575 743 q 504 827 540 807 q 410 847 468 847 l 410 847 q 306 826 346 847 q 248 767 267 804 q 229 682 229 731 l 229 682 l 229 625 l 85 625 q 82 646 83 632 q 81 681 81 660 l 81 681 q 127 847 81 783 q 251 940 174 910 q 417 969 328 969 l 417 969 q 562 945 503 969 q 656 881 621 921 q 708 792 692 840 q 724 697 724 743 l 724 697 q 701 576 724 631 q 637 475 678 522 q 541 384 596 428 q 424 297 486 340 l 424 297 q 348 243 385 271 q 283 187 311 215 q 246 132 256 158 l 246 132 l 729 132 l 729 0 z " }, "3": { ha: 799, x_min: 60, x_max: 733, o: "m 401 -17 l 401 -17 q 215 18 290 -17 q 99 117 139 53 q 60 267 60 181 l 60 267 l 60 285 l 206 285 l 206 264 q 255 144 206 186 q 393 103 304 103 l 393 103 q 531 142 479 103 q 583 267 583 181 l 583 267 q 556 363 583 329 q 482 411 528 397 q 385 425 436 425 l 385 425 l 294 425 l 294 544 l 389 544 q 476 560 436 544 q 540 612 515 576 q 564 703 564 647 l 564 703 q 542 786 564 754 q 483 834 521 818 q 400 850 446 850 l 400 850 q 312 833 351 850 q 250 782 272 815 q 228 697 228 749 l 228 697 l 228 676 l 81 676 l 81 706 q 122 844 81 785 q 234 937 163 904 q 397 969 306 969 l 397 969 q 562 940 490 969 q 673 852 633 910 q 713 711 713 794 l 713 711 q 692 611 713 653 q 635 542 671 569 q 557 494 600 514 l 557 494 l 557 489 q 683 408 632 467 q 733 256 733 350 l 733 256 q 691 110 733 171 q 574 16 649 49 q 401 -17 499 -17 z " }, "4": { ha: 786, x_min: 42, x_max: 740, o: "m 618 0 l 474 0 l 474 224 l 42 224 l 42 343 q 146 539 99 440 q 232 745 193 638 q 297 969 271 853 l 297 969 l 449 969 q 403 816 431 894 q 344 663 376 738 q 279 524 311 588 q 219 413 247 460 q 175 343 192 365 l 175 343 l 474 343 l 474 617 q 494 667 483 640 q 514 723 504 694 q 532 778 524 751 q 547 828 540 804 l 547 828 l 618 828 l 618 343 l 740 343 l 740 224 l 618 224 l 618 0 z " }, "5": { ha: 796, x_min: 67, x_max: 732, o: "m 401 -17 l 401 -17 q 226 21 301 -17 q 108 128 150 58 q 67 296 67 199 l 67 296 l 215 296 q 239 192 215 236 q 305 126 263 149 q 401 103 347 103 l 401 103 q 495 126 454 103 q 559 195 536 149 q 582 311 582 242 l 582 311 q 560 417 582 375 q 499 480 539 460 q 408 500 460 500 l 408 500 q 338 488 371 500 q 279 456 304 476 q 236 406 254 435 l 236 406 l 100 425 l 139 953 l 682 953 l 682 819 l 265 819 l 246 553 q 295 585 268 569 q 359 610 322 600 q 443 619 396 619 l 443 619 q 589 586 524 619 q 693 485 654 553 q 732 313 732 418 l 732 313 q 692 135 732 208 q 578 22 651 61 q 401 -17 504 -17 z " }, "6": { ha: 799, x_min: 69, x_max: 739, o: "m 419 -17 l 419 -17 q 273 7 338 -17 q 163 84 208 31 q 93 227 117 138 q 69 449 69 317 l 69 449 q 92 696 69 596 q 160 856 115 796 q 268 943 204 917 q 414 969 332 969 l 414 969 q 581 931 517 969 q 676 825 646 892 q 706 674 706 758 l 706 674 l 558 674 q 542 770 558 731 q 492 830 526 810 q 407 850 458 850 l 407 850 q 290 809 331 850 q 234 692 249 768 q 218 511 219 617 l 218 511 q 264 557 232 533 q 342 597 296 581 q 444 613 389 613 l 444 613 q 611 572 546 613 q 708 460 676 531 q 739 300 739 389 l 739 300 q 697 133 739 204 q 583 22 656 61 q 419 -17 511 -17 z m 410 103 l 410 103 q 510 130 471 103 q 569 202 550 157 q 589 301 589 247 l 589 301 q 570 399 589 356 q 512 469 551 443 q 411 494 472 494 l 411 494 q 310 469 350 494 q 250 399 269 443 q 231 297 231 354 l 231 297 q 250 199 231 244 q 309 128 269 154 q 410 103 349 103 z " }, "7": { ha: 783, x_min: 58, x_max: 733, o: "m 361 0 l 203 0 q 233 240 203 124 q 316 460 264 356 q 430 656 368 565 q 553 819 492 747 l 553 819 l 58 819 l 58 953 l 733 953 l 733 860 q 632 731 685 801 q 531 582 579 661 q 444 418 482 503 q 383 245 406 333 q 361 68 361 157 l 361 68 l 361 0 z " }, "8": { ha: 799, x_min: 64, x_max: 733, o: "m 400 -17 l 400 -17 q 206 21 281 -17 q 98 122 132 58 q 64 261 64 185 l 64 261 q 101 398 64 339 q 221 489 139 457 l 221 489 q 122 581 156 524 q 89 706 89 638 l 89 706 q 124 839 89 779 q 228 934 158 899 q 400 969 297 969 l 400 969 q 571 934 503 969 q 674 839 639 899 q 710 706 710 779 l 710 706 q 676 581 710 638 q 576 489 642 524 l 576 489 q 697 398 660 457 q 733 261 733 339 l 733 261 q 699 122 733 185 q 592 21 665 58 q 400 -17 518 -17 z m 400 101 l 400 101 q 538 145 490 101 q 585 265 585 189 l 585 265 q 538 385 585 342 q 400 428 490 428 l 400 428 q 260 385 308 428 q 213 265 213 342 l 213 265 q 260 145 213 189 q 400 101 308 101 z m 400 546 l 400 546 q 519 585 475 546 q 563 699 563 625 l 563 699 q 519 811 563 771 q 400 851 476 851 l 400 851 q 278 811 322 851 q 235 699 235 771 l 235 699 q 278 585 235 625 q 400 546 322 546 z " }, "9": { ha: 797, x_min: 60, x_max: 729, o: "m 383 -17 l 383 -17 q 217 22 281 -17 q 122 128 153 61 q 92 279 92 196 l 92 279 l 239 279 q 256 183 239 222 q 306 123 272 143 q 390 103 339 103 l 390 103 q 508 144 468 103 q 563 261 547 185 q 579 442 578 338 l 579 442 q 535 397 567 421 q 457 356 503 372 q 356 340 411 340 l 356 340 q 189 381 254 340 q 92 494 124 422 q 60 653 60 565 l 60 653 q 101 821 60 750 q 215 931 143 892 q 378 969 288 969 l 378 969 q 525 946 460 969 q 636 869 590 922 q 706 726 682 815 q 729 504 729 636 l 729 504 q 706 258 729 358 q 638 97 682 157 q 531 10 594 36 q 383 -17 467 -17 z m 386 458 l 386 458 q 488 484 447 458 q 548 555 528 510 q 568 656 568 600 l 568 656 q 549 754 568 710 q 489 824 529 799 q 388 850 449 850 l 388 850 q 287 823 326 850 q 228 751 247 796 q 208 651 208 707 l 208 651 q 228 553 208 597 q 286 484 247 510 q 386 458 325 458 z " }, "=": { ha: 875, x_min: 110, x_max: 767, o: "m 767 440 l 110 440 l 110 560 l 767 560 l 767 440 z m 767 147 l 110 147 l 110 265 l 767 265 l 767 147 z " }, "+": { ha: 875, x_min: 110, x_max: 765, o: "m 496 0 l 378 0 l 378 294 l 110 294 l 110 414 l 378 414 l 378 710 l 496 710 l 496 414 l 765 414 l 765 294 l 496 294 l 496 0 z " }, " ": { ha: 285, x_min: 0, x_max: 0, o: "" }, A: { ha: 965, x_min: 8, x_max: 956, o: "m 168 0 l 8 0 l 382 953 l 581 953 l 956 0 l 789 0 l 704 221 l 253 221 l 168 0 z m 408 632 l 303 353 l 653 353 l 546 632 q 533 667 542 644 q 516 715 525 689 q 498 769 507 742 q 482 818 489 796 l 482 818 l 474 818 q 453 756 465 792 q 428 686 440 719 q 408 632 417 653 l 408 632 z " }, B: { ha: 975, x_min: 113, x_max: 911, o: "m 618 0 l 113 0 l 113 953 l 618 953 q 757 924 697 953 q 851 843 817 896 q 885 719 885 790 l 885 719 q 865 621 885 665 q 809 546 844 576 q 729 500 774 515 l 729 500 l 729 494 q 822 453 781 483 q 887 376 863 424 q 911 261 911 328 l 911 261 q 872 113 911 171 q 767 27 832 54 q 618 0 701 0 l 618 0 z m 268 424 l 268 133 l 606 133 q 710 167 669 133 q 751 278 751 201 l 751 278 q 734 356 751 324 q 682 406 717 389 q 594 424 647 424 l 594 424 l 268 424 z m 268 819 l 268 554 l 582 554 q 658 571 626 554 q 708 618 690 588 q 725 686 725 649 l 725 686 q 688 787 725 754 q 592 819 651 819 l 592 819 l 268 819 z " }, C: { ha: 1007, x_min: 67, x_max: 946, o: "m 525 -17 l 525 -17 q 277 35 379 -17 q 121 197 175 88 q 67 476 67 307 l 67 476 q 188 848 67 726 q 526 969 310 969 l 526 969 q 741 929 646 969 q 891 809 836 889 q 946 606 946 729 l 946 606 l 788 606 q 756 733 788 682 q 665 811 724 785 q 528 838 606 838 l 528 838 q 363 799 431 838 q 262 685 296 761 q 228 490 228 608 l 228 490 l 228 460 q 262 265 228 342 q 363 152 296 189 q 528 115 429 115 l 528 115 q 668 141 608 115 q 760 218 728 167 q 793 346 793 269 l 793 346 l 946 346 q 891 142 946 222 q 741 22 836 61 q 525 -17 646 -17 z " }, D: { ha: 1015, x_min: 113, x_max: 949, o: "m 481 0 l 113 0 l 113 953 l 481 953 q 732 902 628 953 q 892 747 836 851 q 949 476 949 642 l 949 476 q 892 207 949 313 q 732 51 836 101 q 481 0 628 0 l 481 0 z m 268 819 l 268 133 l 479 133 q 610 153 553 133 q 708 213 668 172 q 767 315 747 253 q 788 461 788 376 l 788 461 l 788 490 q 767 638 788 576 q 708 740 747 700 q 610 800 668 781 q 479 819 553 819 l 479 819 l 268 819 z " }, E: { ha: 936, x_min: 113, x_max: 860, o: "m 860 0 l 113 0 l 113 953 l 851 953 l 851 819 l 268 819 l 268 554 l 790 554 l 790 421 l 268 421 l 268 133 l 860 133 l 860 0 z " }, F: { ha: 849, x_min: 113, x_max: 793, o: "m 268 0 l 113 0 l 113 953 l 793 953 l 793 819 l 268 819 l 268 538 l 743 538 l 743 406 l 268 406 l 268 0 z " }, G: { ha: 1104, x_min: 75, x_max: 1e3, o: "m 544 -17 l 544 -17 q 197 103 318 -17 q 75 476 75 222 l 75 476 q 132 752 75 643 q 297 915 189 861 q 561 969 406 969 l 561 969 q 734 949 654 969 q 874 885 814 928 q 967 779 935 843 q 1000 628 1000 715 l 1000 628 l 842 628 q 820 722 842 682 q 760 788 799 761 q 672 826 722 814 q 564 838 621 838 l 564 838 q 423 817 485 838 q 319 753 361 796 q 257 644 278 710 q 236 490 236 579 l 236 490 l 236 461 q 272 263 236 339 q 377 151 307 186 q 549 115 447 115 l 549 115 q 710 143 644 115 q 810 226 775 171 q 844 363 844 281 l 844 363 l 844 376 l 524 376 l 524 506 l 1000 506 l 1000 0 l 888 0 l 872 114 q 783 40 833 68 q 674 -3 733 11 q 544 -17 615 -17 z " }, H: { ha: 1019, x_min: 113, x_max: 907, o: "m 268 0 l 113 0 l 113 953 l 268 953 l 268 554 l 751 554 l 751 953 l 907 953 l 907 0 l 751 0 l 751 421 l 268 421 l 268 0 z " }, I: { ha: 381, x_min: 113, x_max: 268, o: "m 268 0 l 113 0 l 113 953 l 268 953 l 268 0 z " }, J: { ha: 793, x_min: 49, x_max: 685, o: "m 367 -17 l 367 -17 q 194 15 265 -17 q 86 108 124 47 q 49 261 49 169 l 49 261 l 49 307 l 203 307 l 203 257 q 244 152 203 189 q 367 115 286 115 l 367 115 q 488 168 446 115 q 529 319 529 221 l 529 319 l 529 953 l 685 953 l 685 322 q 647 134 685 210 q 539 21 610 58 q 367 -17 468 -17 z " }, K: { ha: 940, x_min: 113, x_max: 924, o: "m 268 0 l 113 0 l 113 953 l 268 953 l 268 478 l 722 953 l 914 953 l 547 569 l 924 0 l 740 0 l 442 460 l 268 300 l 268 0 z " }, L: { ha: 767, x_min: 113, x_max: 743, o: "m 743 0 l 113 0 l 113 953 l 268 953 l 268 135 l 743 135 l 743 0 z " }, M: { ha: 1175, x_min: 113, x_max: 1061, o: "m 263 0 l 113 0 l 113 953 l 356 953 l 540 375 q 557 318 549 350 q 573 257 565 286 q 585 206 581 228 l 585 206 l 596 206 q 606 256 599 226 q 620 317 613 285 q 636 376 628 349 l 636 376 l 822 953 l 1061 953 l 1061 0 l 907 0 l 907 522 q 908 632 907 575 q 911 733 910 689 q 913 790 913 778 l 913 790 l 901 790 q 888 738 899 775 q 867 660 878 701 q 846 588 856 618 l 846 588 l 653 0 l 515 0 l 322 586 q 304 649 314 613 q 285 722 294 685 q 268 790 275 760 l 268 790 l 257 790 q 259 708 258 757 q 261 610 260 660 q 263 522 263 561 l 263 522 l 263 0 z " }, N: { ha: 1019, x_min: 113, x_max: 907, o: "m 263 0 l 113 0 l 113 953 l 263 953 l 697 356 q 716 332 706 347 q 736 301 726 317 q 750 276 746 286 l 750 276 l 757 276 l 757 953 l 907 953 l 907 0 l 763 0 l 322 604 q 294 647 311 621 q 269 686 278 672 l 269 686 l 263 686 l 263 0 z " }, O: { ha: 1090, x_min: 67, x_max: 1024, o: "m 544 -17 l 544 -17 q 290 38 397 -17 q 124 201 182 92 q 67 476 67 311 l 67 476 q 124 752 67 643 q 290 915 182 861 q 544 969 397 969 l 544 969 q 801 915 694 969 q 966 752 908 861 q 1024 476 1024 643 l 1024 476 q 966 201 1024 311 q 801 38 908 92 q 544 -17 694 -17 z m 544 115 l 544 115 q 680 136 621 115 q 780 200 739 157 q 842 308 821 243 q 864 460 864 374 l 864 460 l 864 490 q 842 644 864 579 q 780 753 821 710 q 680 817 739 796 q 544 838 621 838 l 544 838 q 410 817 469 838 q 310 753 351 796 q 249 644 269 710 q 228 490 228 579 l 228 490 l 228 460 q 249 308 228 374 q 310 200 269 243 q 410 136 351 157 q 544 115 469 115 z " }, P: { ha: 926, x_min: 113, x_max: 890, o: "m 268 0 l 113 0 l 113 953 l 588 953 q 756 915 689 953 q 856 812 822 878 q 890 656 890 746 l 890 656 q 854 497 890 565 q 749 390 818 428 q 582 353 681 353 l 582 353 l 268 353 l 268 0 z m 268 819 l 268 486 l 575 486 q 691 531 649 486 q 733 654 733 575 l 733 654 q 715 744 733 707 q 663 800 697 781 q 575 819 628 819 l 575 819 l 268 819 z " }, Q: { ha: 1090, x_min: 67, x_max: 1024, o: "m 976 -181 l 769 -181 l 606 -14 q 575 -16 590 -15 q 544 -17 560 -17 l 544 -17 q 290 38 397 -17 q 124 201 182 92 q 67 476 67 311 l 67 476 q 124 752 67 643 q 290 915 182 861 q 544 969 397 969 l 544 969 q 801 915 694 969 q 966 752 908 861 q 1024 476 1024 643 l 1024 476 q 956 185 1024 297 q 767 22 889 72 l 767 22 l 976 -181 z m 544 115 l 544 115 q 680 136 621 115 q 780 200 739 157 q 842 308 821 243 q 864 460 864 374 l 864 460 l 864 490 q 842 644 864 579 q 780 753 821 710 q 680 817 739 796 q 544 838 621 838 l 544 838 q 410 817 469 838 q 310 753 351 796 q 249 644 269 710 q 228 490 228 579 l 228 490 l 228 460 q 249 308 228 374 q 310 200 269 243 q 410 136 351 157 q 544 115 469 115 z " }, R: { ha: 1003, x_min: 113, x_max: 949, o: "m 268 0 l 113 0 l 113 953 l 614 953 q 782 917 715 953 q 882 816 849 881 q 915 665 915 751 l 915 665 q 872 499 915 569 q 750 394 829 428 l 750 394 l 949 0 l 779 0 l 599 368 l 268 368 l 268 0 z m 268 819 l 268 499 l 601 499 q 717 543 676 499 q 758 667 758 588 l 758 667 q 740 749 758 715 q 688 801 722 783 q 601 819 653 819 l 601 819 l 268 819 z " }, S: { ha: 931, x_min: 68, x_max: 863, o: "m 465 -17 l 465 -17 q 315 -1 388 -17 q 188 51 243 15 q 100 141 132 86 q 68 272 68 196 l 68 272 q 69 288 68 281 q 69 301 69 296 l 69 301 l 225 301 q 224 289 225 297 q 224 275 224 281 l 224 275 q 254 188 224 224 q 340 133 285 151 q 465 115 394 115 l 465 115 q 540 120 504 115 q 606 135 576 125 q 658 162 636 146 q 693 200 681 178 q 706 251 706 222 l 706 251 q 680 325 706 296 q 610 374 654 354 q 512 408 567 393 q 399 439 457 424 q 285 475 340 454 q 187 526 231 496 q 117 601 143 556 q 92 711 92 646 l 92 711 q 118 822 92 774 q 194 903 144 871 q 314 953 244 936 q 471 969 383 969 l 471 969 q 613 953 546 969 q 729 904 679 938 q 808 819 779 871 q 836 697 836 768 l 836 697 l 836 681 l 682 681 l 682 699 q 656 774 682 743 q 582 821 629 804 q 472 838 535 838 l 472 838 q 349 823 399 838 q 273 783 299 808 q 247 721 247 757 l 247 721 q 274 655 247 681 q 344 611 300 629 q 442 578 388 593 q 555 548 497 564 q 667 511 613 532 q 766 460 722 490 q 836 384 810 429 q 863 274 863 339 l 863 274 q 811 106 863 171 q 670 13 760 42 q 465 -17 581 -17 z " }, T: { ha: 850, x_min: 31, x_max: 819, o: "m 501 0 l 346 0 l 346 819 l 31 819 l 31 953 l 819 953 l 819 819 l 501 819 l 501 0 z " }, U: { ha: 1011, x_min: 108, x_max: 903, o: "m 503 -17 l 503 -17 q 292 23 381 -17 q 156 146 203 63 q 108 357 108 229 l 108 357 l 108 953 l 264 953 l 264 353 q 326 175 264 235 q 503 115 389 115 l 503 115 q 683 175 618 115 q 747 353 747 235 l 747 353 l 747 953 l 903 953 l 903 357 q 855 146 903 229 q 717 23 807 63 q 503 -17 628 -17 z " }, V: { ha: 915, x_min: 14, x_max: 901, o: "m 549 0 l 365 0 l 14 953 l 182 953 l 418 288 q 432 249 425 271 q 446 206 439 226 q 458 171 453 186 l 458 171 l 465 171 q 478 206 471 186 q 492 246 485 225 q 506 286 499 267 l 506 286 l 739 953 l 901 953 l 549 0 z " }, W: { ha: 1303, x_min: 15, x_max: 1288, o: "m 465 0 l 278 0 l 15 953 l 181 953 l 343 325 q 353 283 347 310 q 363 228 358 257 q 372 176 368 200 l 372 176 l 381 176 q 388 215 385 194 q 394 257 390 236 q 402 296 399 278 q 407 325 406 314 l 407 325 l 557 953 l 757 953 l 908 325 q 918 283 913 310 q 928 228 924 257 q 938 176 933 200 l 938 176 l 946 176 q 953 214 949 193 q 961 255 957 235 q 970 293 965 275 q 978 325 975 311 l 978 325 l 1140 953 l 1288 953 l 1025 0 l 843 0 l 683 636 q 674 684 679 657 q 663 740 668 711 q 656 789 658 768 l 656 789 l 649 789 q 642 738 646 767 q 632 681 638 708 q 622 636 626 654 l 622 636 l 465 0 z " }, X: { ha: 949, x_min: 15, x_max: 933, o: "m 196 0 l 15 0 l 374 500 l 49 953 l 239 953 l 476 615 l 482 615 l 718 953 l 897 953 l 574 501 l 933 0 l 744 0 l 474 386 l 465 386 l 196 0 z " }, Y: { ha: 925, x_min: 14, x_max: 911, o: "m 540 0 l 385 0 l 385 392 l 14 953 l 192 953 l 464 531 l 471 531 l 740 953 l 911 953 l 540 392 l 540 0 z " }, Z: { ha: 882, x_min: 43, x_max: 831, o: "m 831 0 l 43 0 l 43 76 l 588 819 l 79 819 l 79 953 l 818 953 l 818 876 l 271 133 l 831 133 l 831 0 z " }, a: { ha: 764, x_min: 47, x_max: 757, o: "m 278 -17 l 278 -17 q 203 -8 243 -17 q 127 22 163 0 q 69 84 92 44 q 47 188 47 124 l 47 188 q 82 311 47 263 q 179 388 117 360 q 328 426 242 415 q 518 438 415 438 l 518 438 l 518 510 q 506 574 518 546 q 463 617 494 601 q 374 632 432 632 q 283 617 315 632 q 237 581 250 603 q 224 535 224 560 l 224 535 l 224 514 l 85 514 q 83 528 83 521 l 83 528 l 83 544 q 120 655 83 610 q 224 724 157 700 q 378 747 290 747 l 378 747 q 535 720 472 747 q 631 643 599 693 q 663 522 663 593 l 663 522 l 663 151 q 676 114 663 125 q 707 103 689 103 l 707 103 l 757 103 l 757 6 q 715 -8 740 -1 q 657 -15 690 -15 l 657 -15 q 594 -2 619 -15 q 552 35 568 11 q 531 90 536 60 l 531 90 l 522 90 q 462 34 497 58 q 381 -3 426 10 q 278 -17 335 -17 z m 318 103 l 318 103 q 398 116 361 103 q 461 153 435 129 q 503 212 488 178 q 518 286 518 246 l 518 286 l 518 335 q 350 324 422 335 q 238 283 278 313 q 197 200 197 253 l 197 200 q 211 147 197 168 q 253 114 225 125 q 318 103 281 103 z " }, b: { ha: 804, x_min: 93, x_max: 749, o: "m 460 -17 l 460 -17 q 329 13 388 -17 q 233 100 271 42 l 233 100 l 224 100 l 211 0 l 93 0 l 93 1004 l 238 1004 l 238 642 l 246 642 q 302 701 269 678 q 376 736 335 725 q 467 747 418 747 l 467 747 q 614 707 550 747 q 713 583 678 667 q 749 368 749 500 l 749 368 q 714 149 749 233 q 615 24 679 64 q 460 -17 550 -17 z m 419 108 l 419 108 q 522 133 482 108 q 581 212 561 158 q 600 351 600 265 l 600 351 l 600 376 q 581 517 600 463 q 522 597 563 571 q 417 622 482 622 l 417 622 q 343 608 376 622 q 286 565 310 594 q 250 488 263 535 q 238 374 238 440 l 238 374 l 238 354 q 256 220 238 275 q 315 137 275 165 q 419 108 356 108 z " }, c: { ha: 739, x_min: 53, x_max: 686, o: "m 383 -17 l 383 -17 q 200 24 274 -17 q 90 150 126 65 q 53 365 53 235 l 53 365 q 90 580 53 496 q 202 706 128 664 q 385 747 276 747 l 385 747 q 515 728 460 747 q 610 673 571 710 q 667 582 649 636 q 686 458 686 528 l 686 458 l 540 458 q 524 554 540 517 q 472 610 507 592 q 382 629 438 629 l 382 629 q 283 602 324 629 q 222 520 243 575 q 201 376 201 465 l 201 376 l 201 353 q 222 212 201 268 q 283 128 242 156 q 388 101 324 101 l 388 101 q 477 122 443 101 q 528 180 511 142 q 546 272 546 218 l 546 272 l 686 272 q 667 154 686 207 q 610 63 649 101 q 515 4 572 25 q 383 -17 458 -17 z " }, d: { ha: 804, x_min: 54, x_max: 711, o: "m 344 -17 l 344 -17 q 190 24 256 -17 q 90 149 125 64 q 54 368 54 233 l 54 368 q 90 583 54 500 q 190 707 126 667 q 338 747 254 747 l 338 747 q 428 736 386 747 q 502 701 469 725 q 557 642 535 678 l 557 642 l 567 642 l 567 1004 l 711 1004 l 711 0 l 593 0 l 579 100 l 569 100 q 474 13 533 42 q 344 -17 415 -17 z m 385 108 l 385 108 q 488 137 449 108 q 547 220 528 165 q 567 354 567 275 l 567 354 l 567 374 q 554 488 567 440 q 518 565 542 535 q 461 608 494 594 q 386 622 428 622 l 386 622 q 282 597 322 622 q 223 517 242 571 q 204 376 204 463 l 204 376 l 204 351 q 224 212 204 265 q 283 133 243 158 q 385 108 322 108 z " }, e: { ha: 769, x_min: 54, x_max: 715, o: "m 396 -17 l 396 -17 q 208 24 283 -17 q 93 150 132 65 q 54 365 54 235 l 54 365 q 93 581 54 497 q 208 706 132 665 q 399 747 285 747 l 399 747 q 573 708 503 747 q 679 588 643 668 q 715 385 715 507 l 715 385 l 715 329 l 203 329 q 226 199 206 251 q 290 123 247 147 q 397 99 332 99 l 397 99 q 469 109 438 99 q 524 140 501 119 q 558 188 546 160 q 571 253 571 217 l 571 253 l 713 253 q 690 138 713 188 q 626 53 668 88 q 525 1 583 19 q 396 -17 467 -17 z m 206 435 l 206 435 l 564 435 q 552 526 564 489 q 518 586 540 563 q 465 620 496 610 q 396 631 435 631 l 396 631 q 297 610 338 631 q 233 545 256 589 q 206 435 211 501 z " }, f: { ha: 407, x_min: 18, x_max: 406, o: "m 269 0 l 125 0 l 125 611 l 18 611 l 18 731 l 125 731 l 125 836 q 140 922 125 882 q 191 989 154 963 q 296 1015 228 1015 l 296 1015 q 335 1013 315 1015 q 374 1007 356 1011 q 406 997 392 1003 l 406 997 l 406 896 l 335 896 q 285 879 301 896 q 269 831 269 863 l 269 831 l 269 731 l 406 731 l 406 611 l 269 611 l 269 0 z " }, g: { ha: 796, x_min: 25, x_max: 779, o: "m 529 -253 l 215 -253 q 122 -232 165 -253 q 51 -172 78 -211 q 25 -78 25 -133 l 25 -78 q 59 22 25 -17 q 139 79 93 60 l 139 79 q 85 124 106 94 q 65 190 65 153 l 65 190 q 103 274 65 242 q 190 315 140 306 l 190 315 q 115 396 142 347 q 88 506 88 444 l 88 506 q 122 633 88 579 q 226 717 157 686 q 393 747 294 747 l 393 747 q 474 741 436 747 q 543 724 513 735 l 543 724 q 613 784 592 749 q 638 850 633 819 l 638 850 l 779 850 q 760 767 779 804 q 709 706 742 731 q 631 672 676 682 l 631 672 q 683 598 665 640 q 700 506 700 556 l 700 506 q 667 379 700 433 q 566 294 633 325 q 400 264 499 264 l 400 264 l 286 264 q 233 250 253 264 q 213 208 213 236 l 213 208 q 232 169 213 185 q 283 154 251 154 l 283 154 l 592 154 q 725 101 672 154 q 778 -36 778 47 l 778 -36 q 747 -147 778 -97 q 659 -224 715 -196 q 529 -253 603 -253 l 529 -253 z m 263 -146 l 263 -146 l 528 -146 q 581 -135 557 -146 q 618 -103 604 -124 q 632 -58 632 -83 l 632 -58 q 606 7 632 -17 q 543 31 581 31 l 543 31 l 263 31 q 197 5 224 31 q 171 -58 171 -21 l 171 -58 q 197 -122 171 -97 q 263 -146 222 -146 z m 394 368 l 394 368 q 517 405 476 368 q 557 506 557 442 l 557 506 q 517 606 557 571 q 394 642 476 642 l 394 642 q 272 606 313 642 q 232 506 232 571 l 232 506 q 249 433 232 464 q 303 385 267 401 q 394 368 340 368 z " }, h: { ha: 796, x_min: 93, x_max: 708, o: "m 238 0 l 93 0 l 93 1004 l 238 1004 l 238 643 l 247 643 q 307 699 274 676 q 382 735 340 722 q 474 747 424 747 l 474 747 q 596 723 543 747 q 678 644 649 699 q 708 499 708 590 l 708 499 l 708 0 l 564 0 l 564 476 q 553 546 564 518 q 524 590 543 574 q 478 614 504 607 q 419 621 451 621 l 419 621 q 328 597 369 621 q 263 531 288 574 q 238 428 238 488 l 238 428 l 238 0 z " }, i: { ha: 331, x_min: 93, x_max: 238, o: "m 238 857 l 93 857 l 93 1004 l 238 1004 l 238 857 z m 238 0 l 93 0 l 93 731 l 238 731 l 238 0 z " }, j: { ha: 328, x_min: -36, x_max: 238, o: "m 238 857 l 93 857 l 93 1004 l 238 1004 l 238 857 z m 71 -253 l 71 -253 q 34 -251 54 -253 q -5 -244 14 -249 q -36 -235 -24 -239 l -36 -235 l -36 -135 l 31 -135 q 77 -118 61 -135 q 93 -71 93 -101 l 93 -71 l 93 731 l 238 731 l 238 -78 q 223 -162 238 -122 q 172 -227 208 -201 q 71 -253 136 -253 z " }, k: { ha: 733, x_min: 93, x_max: 710, o: "m 238 0 l 93 0 l 93 1004 l 238 1004 l 238 397 l 525 731 l 696 731 l 449 447 l 710 0 l 543 0 l 356 342 l 238 225 l 238 0 z " }, l: { ha: 331, x_min: 93, x_max: 238, o: "m 238 0 l 93 0 l 93 1004 l 238 1004 l 238 0 z " }, m: { ha: 1194, x_min: 93, x_max: 1108, o: "m 238 0 l 93 0 l 93 731 l 213 731 l 225 626 l 235 626 q 292 693 260 667 q 366 733 325 719 q 454 747 407 747 l 454 747 q 573 719 522 747 q 650 626 624 692 l 650 626 l 660 626 q 718 692 685 665 q 794 733 751 719 q 885 747 836 747 l 885 747 q 1000 724 950 747 q 1079 648 1050 701 q 1108 506 1108 594 l 1108 506 l 1108 0 l 964 0 l 964 479 q 954 548 964 521 q 928 591 944 575 q 888 614 911 607 q 836 621 864 621 l 836 621 q 754 597 790 621 q 696 529 718 572 q 674 428 674 486 l 674 428 l 674 0 l 529 0 l 529 479 q 519 548 529 521 q 493 591 510 575 q 453 614 476 607 q 403 621 429 621 l 403 621 q 319 597 357 621 q 260 529 282 572 q 238 428 238 486 l 238 428 l 238 0 z " }, n: { ha: 796, x_min: 93, x_max: 708, o: "m 238 0 l 93 0 l 93 731 l 213 731 l 225 626 l 235 626 q 297 693 261 667 q 377 733 333 719 q 474 747 421 747 l 474 747 q 596 723 543 747 q 678 644 649 699 q 708 499 708 590 l 708 499 l 708 0 l 564 0 l 564 476 q 553 546 564 518 q 524 590 543 574 q 478 614 504 607 q 419 621 451 621 l 419 621 q 328 597 369 621 q 263 529 288 572 q 238 428 238 486 l 238 428 l 238 0 z " }, o: { ha: 810, x_min: 54, x_max: 756, o: "m 404 -17 l 404 -17 q 212 24 290 -17 q 94 150 133 65 q 54 365 54 235 l 54 365 q 94 581 54 497 q 212 706 133 665 q 404 747 290 747 l 404 747 q 599 706 521 747 q 716 581 676 665 q 756 365 756 497 l 756 365 q 716 150 756 235 q 599 24 676 65 q 404 -17 521 -17 z m 404 103 l 404 103 q 518 130 474 103 q 584 213 563 157 q 606 353 606 268 l 606 353 l 606 378 q 584 518 606 463 q 518 601 563 574 q 404 628 474 628 l 404 628 q 292 601 336 628 q 226 518 247 574 q 204 378 204 463 l 204 378 l 204 353 q 226 213 204 268 q 292 130 247 157 q 404 103 336 103 z " }, p: { ha: 804, x_min: 93, x_max: 749, o: "m 238 -240 l 93 -240 l 93 731 l 211 731 l 224 631 l 233 631 q 329 718 271 689 q 460 747 388 747 l 460 747 q 615 707 550 747 q 714 582 679 667 q 749 363 749 497 l 749 363 q 713 148 749 232 q 614 24 678 64 q 467 -17 550 -17 l 467 -17 q 376 -6 418 -17 q 302 29 335 6 q 246 89 269 53 l 246 89 l 238 89 l 238 -240 z m 417 108 l 417 108 q 522 134 482 108 q 581 214 563 160 q 600 351 600 268 l 600 351 l 600 376 q 581 518 600 464 q 522 597 561 572 q 419 622 482 622 l 419 622 q 315 594 356 622 q 256 510 275 565 q 238 375 238 454 l 238 375 l 238 356 q 250 243 238 290 q 286 166 263 196 q 343 122 310 136 q 417 108 376 108 z " }, q: { ha: 804, x_min: 54, x_max: 711, o: "m 711 -240 l 567 -240 l 567 89 l 557 89 q 501 29 535 53 q 426 -6 468 6 q 338 -17 385 -17 l 338 -17 q 190 24 254 -17 q 90 148 126 64 q 54 363 54 232 l 54 363 q 90 582 54 497 q 190 707 125 667 q 344 747 256 747 l 344 747 q 475 718 417 747 q 569 631 533 689 l 569 631 l 579 631 l 593 731 l 711 731 l 711 -240 z m 386 108 l 386 108 q 462 122 429 108 q 518 166 494 136 q 554 243 542 196 q 567 356 567 290 l 567 356 l 567 375 q 547 510 567 454 q 488 594 528 565 q 385 622 449 622 l 385 622 q 283 597 322 622 q 224 518 243 572 q 204 376 204 464 l 204 376 l 204 351 q 223 214 204 268 q 282 134 242 160 q 386 108 322 108 z " }, r: { ha: 481, x_min: 93, x_max: 465, o: "m 238 0 l 93 0 l 93 731 l 213 731 l 225 613 l 233 613 q 266 678 246 647 q 319 728 286 708 q 399 747 351 747 l 399 747 q 438 743 421 747 q 465 736 456 739 l 465 736 l 465 600 l 417 600 q 338 586 372 600 q 281 545 304 572 q 248 479 258 518 q 238 392 238 440 l 238 392 l 238 0 z " }, s: { ha: 728, x_min: 51, x_max: 675, o: "m 363 -17 l 363 -17 q 228 0 286 -17 q 131 46 169 17 q 72 116 92 75 q 51 207 51 157 l 51 207 q 52 219 51 214 q 53 229 53 225 l 53 229 l 196 229 l 196 214 q 219 145 196 171 q 283 109 243 119 q 369 99 322 99 l 369 99 q 447 109 411 99 q 505 140 482 119 q 528 193 528 161 l 528 193 q 499 257 528 235 q 422 292 469 279 q 324 321 375 306 l 324 321 q 233 348 278 333 q 151 386 188 363 q 93 446 115 410 q 71 536 71 482 l 71 536 q 93 626 71 588 q 155 692 115 665 q 249 732 194 718 q 369 746 304 746 l 369 746 q 490 731 438 746 q 580 690 543 717 q 636 627 617 664 q 656 549 656 590 l 656 549 q 655 531 656 540 q 654 519 654 522 l 654 519 l 513 519 l 513 532 q 497 582 513 560 q 449 618 482 604 q 363 632 417 632 l 363 632 q 299 626 326 632 q 253 608 271 619 q 226 582 235 597 q 217 547 217 567 l 217 547 q 240 498 217 515 q 300 469 263 481 q 381 443 338 457 l 381 443 q 482 415 431 429 q 577 378 533 400 q 648 317 621 356 q 675 213 675 278 l 675 213 q 651 108 675 153 q 585 37 628 64 q 486 -3 543 10 q 363 -17 429 -17 z " }, t: { ha: 424, x_min: 21, x_max: 389, o: "m 275 -17 l 275 -17 q 177 8 213 -17 q 127 70 142 32 q 113 151 113 108 l 113 151 l 113 611 l 21 611 l 21 731 l 115 731 l 142 935 l 257 935 l 257 731 l 389 731 l 389 611 l 257 611 l 257 168 q 271 119 257 136 q 317 103 285 103 l 317 103 l 389 103 l 389 6 q 355 -5 375 0 q 314 -13 335 -10 q 275 -17 293 -17 z " }, u: { ha: 794, x_min: 86, x_max: 701, o: "m 322 -17 l 322 -17 q 151 40 217 -17 q 86 232 86 96 l 86 232 l 86 731 l 231 731 l 231 254 q 241 185 231 213 q 271 140 251 157 q 317 117 290 124 q 375 110 343 110 l 375 110 q 466 134 425 110 q 532 202 507 158 q 557 303 557 246 l 557 303 l 557 731 l 701 731 l 701 0 l 583 0 l 571 104 l 561 104 q 499 38 535 64 q 419 -3 463 11 q 322 -17 375 -17 z " }, v: { ha: 717, x_min: 13, x_max: 704, o: "m 432 0 l 283 0 l 13 731 l 164 731 l 290 382 q 311 317 299 357 q 336 236 324 278 q 358 161 349 194 l 358 161 l 365 161 q 385 234 374 193 q 410 315 397 275 q 432 382 422 356 l 432 382 l 557 731 l 704 731 l 432 0 z " }, w: { ha: 1028, x_min: 10, x_max: 1017, o: "m 379 0 l 229 0 l 10 731 l 160 731 l 267 331 q 281 269 275 301 q 293 213 288 238 q 301 178 299 188 l 301 178 l 310 178 q 322 235 315 203 q 335 294 329 267 q 343 335 340 321 l 343 335 l 440 731 l 596 731 l 696 333 q 708 283 701 311 q 720 226 714 254 q 729 178 726 199 l 729 178 l 738 178 q 748 224 742 197 q 761 279 754 251 q 774 331 768 307 l 774 331 l 879 731 l 1017 731 l 799 0 l 649 0 l 560 364 q 546 425 554 390 q 531 494 538 460 q 519 556 524 529 l 519 556 l 511 556 q 503 511 508 540 q 490 444 499 482 q 471 364 482 407 l 471 364 l 379 0 z " }, x: { ha: 735, x_min: 17, x_max: 718, o: "m 182 0 l 17 0 l 278 375 l 32 731 l 207 731 l 368 486 l 376 486 l 539 731 l 704 731 l 457 379 l 718 0 l 544 0 l 367 268 l 360 268 l 182 0 z " }, y: { ha: 717, x_min: 13, x_max: 704, o: "m 172 -253 l 172 -253 q 103 -247 131 -253 q 68 -239 75 -240 l 68 -239 l 68 -135 l 138 -135 q 199 -121 168 -135 q 256 -76 231 -107 q 297 0 281 -46 l 297 0 l 13 731 l 164 731 l 306 367 q 327 304 315 342 q 351 228 339 267 q 371 158 363 189 l 371 158 l 378 158 q 392 206 385 179 q 408 263 400 233 q 425 319 417 292 q 439 365 433 346 l 439 365 l 557 731 l 704 731 l 457 28 q 411 -82 436 -31 q 353 -172 386 -133 q 276 -231 321 -210 q 172 -253 232 -253 z " }, z: { ha: 699, x_min: 39, x_max: 656, o: "m 656 0 l 39 0 l 39 72 l 428 611 l 65 611 l 65 731 l 636 731 l 636 660 l 246 119 l 656 119 l 656 0 z " }, ".": { ha: 400, x_min: 122, x_max: 276, o: "m 276 0 l 122 0 l 122 161 l 276 161 l 276 0 z " }, ",": { ha: 400, x_min: 110, x_max: 276, o: "m 110 -214 l 110 -214 l 110 -151 q 159 -124 140 -146 q 187 -71 178 -103 q 196 0 196 -39 l 196 0 l 122 0 l 122 161 l 276 161 l 276 15 q 252 -112 276 -65 q 190 -183 228 -160 q 110 -214 151 -206 z " }, "'": { ha: 315, x_min: 82, x_max: 233, o: "m 206 568 l 103 568 l 82 749 l 82 953 l 233 953 l 233 749 l 206 568 z " }, "\u2019": { ha: 358, x_min: 93, x_max: 261, o: "m 93 578 l 93 578 l 93 642 q 143 669 124 647 q 171 722 163 690 q 179 792 179 754 l 179 792 l 106 792 l 106 953 l 261 953 l 261 807 q 236 680 261 728 q 173 609 211 632 q 93 578 135 586 z " }, "!": { ha: 392, x_min: 111, x_max: 281, o: "m 242 257 l 150 257 l 111 953 l 281 953 l 242 257 z m 274 0 l 118 0 l 118 161 l 274 161 l 274 0 z " }, "?": { ha: 826, x_min: 86, x_max: 724, o: "m 472 256 l 336 256 l 336 328 q 353 420 336 383 q 396 485 369 457 q 452 535 422 513 q 508 581 482 557 q 551 634 533 604 q 568 704 568 664 l 568 704 q 563 744 568 721 q 542 789 558 767 q 494 826 526 811 q 408 840 463 840 l 408 840 q 317 822 351 840 q 265 778 282 804 q 242 724 247 751 q 236 678 236 697 l 236 678 l 236 660 q 238 640 236 650 l 238 640 l 90 640 q 88 658 89 646 q 86 688 86 669 l 86 688 q 98 766 86 726 q 134 842 110 806 q 198 908 158 879 q 292 953 238 936 q 419 969 347 969 l 419 969 q 532 956 482 969 q 617 919 582 943 q 676 865 653 896 q 712 797 700 833 q 724 722 724 761 l 724 722 q 706 612 724 657 q 659 535 688 567 q 599 480 631 504 q 538 433 567 456 q 490 381 508 410 q 472 311 472 353 l 472 311 l 472 256 z m 481 0 l 328 0 l 328 161 l 481 161 l 481 0 z " }, $: { ha: 728, x_min: 51, x_max: 675, o: "m 403 -68 l 333 -68 l 333 94 q 228 111 275 97 l 228 111 q 131 156 169 126 q 72 227 92 186 q 51 318 51 268 l 51 318 q 52 331 51 325 q 53 340 53 336 l 53 340 l 196 340 l 196 325 q 219 256 196 282 q 283 221 243 231 l 283 221 q 333 211 307 214 l 333 211 l 333 428 q 324 431 329 429 l 324 431 q 233 458 278 443 q 151 497 188 474 q 93 556 115 519 q 71 647 71 593 l 71 647 q 93 738 71 699 q 155 803 115 776 q 250 843 194 829 l 250 843 q 333 856 289 853 l 333 856 l 333 1004 l 403 1004 l 403 856 q 490 843 451 853 l 490 843 q 580 801 543 828 q 636 738 617 774 q 656 660 656 701 l 656 660 q 655 642 656 650 q 654 631 654 633 l 654 631 l 513 631 l 513 643 q 497 693 513 671 q 450 729 482 715 l 450 729 q 403 740 431 738 l 403 740 l 403 549 q 482 526 442 538 l 482 526 q 577 489 533 511 q 648 427 621 467 q 675 324 675 388 l 675 324 q 651 219 675 263 q 585 147 628 175 q 486 107 543 119 l 486 107 q 403 96 447 99 l 403 96 l 403 -68 z m 403 408 l 403 211 q 447 219 426 214 l 447 219 q 505 251 482 229 q 528 304 528 272 l 528 304 q 499 368 528 346 q 422 404 469 390 l 422 404 q 403 408 413 406 l 403 408 z m 333 569 l 333 569 l 333 742 q 299 738 315 740 l 299 738 q 253 719 271 731 q 226 692 235 707 q 217 658 217 678 l 217 658 q 240 609 217 626 q 300 581 263 592 l 300 581 q 333 569 317 575 z " }, "%": { ha: 1331, x_min: 125, x_max: 1206, o: "m 381 0 l 260 0 l 953 953 l 1075 953 l 381 0 z m 344 468 l 344 468 q 227 491 276 468 q 151 568 178 514 q 125 718 125 622 l 125 718 q 151 869 125 815 q 227 947 178 924 q 344 969 276 969 l 344 969 q 460 947 413 969 q 535 869 508 924 q 561 718 561 815 l 561 718 q 535 567 561 622 q 460 490 508 513 q 344 468 413 468 z m 344 560 l 344 560 q 424 600 404 560 q 443 711 443 640 l 443 711 l 443 726 q 435 808 443 774 q 405 860 426 842 q 344 878 383 878 l 344 878 q 265 838 285 878 q 244 726 244 797 l 244 726 l 244 711 q 265 600 244 640 q 344 560 285 560 z m 989 -17 l 989 -17 q 873 6 922 -17 q 797 83 824 29 q 771 233 771 138 l 771 233 q 797 385 771 331 q 873 462 824 439 q 989 485 922 485 l 989 485 q 1106 462 1057 485 q 1180 385 1154 439 q 1206 233 1206 331 l 1206 233 q 1180 83 1206 138 q 1106 6 1154 28 q 989 -17 1057 -17 z m 989 75 l 989 75 q 1068 115 1049 75 q 1088 226 1088 156 l 1088 226 l 1088 242 q 1080 323 1088 289 q 1051 375 1072 357 q 989 393 1029 393 l 989 393 q 910 353 931 393 q 890 242 890 313 l 890 242 l 890 226 q 910 115 890 156 q 989 75 931 75 z " }, "&": { ha: 986, x_min: 71, x_max: 931, o: "m 439 -17 l 439 -17 q 248 16 331 -17 q 118 110 165 49 q 71 256 71 171 l 71 256 q 122 410 71 353 q 249 489 172 467 l 249 489 l 249 494 q 138 574 182 525 q 93 708 93 622 l 93 708 q 138 851 93 793 q 265 940 183 910 q 454 969 346 969 l 454 969 q 638 938 558 969 q 763 847 718 906 q 808 708 808 788 l 808 708 l 808 679 l 664 679 l 664 697 q 636 783 663 750 q 563 833 610 817 q 451 849 515 849 l 451 849 q 368 840 407 849 q 301 812 329 831 q 257 764 272 793 q 242 696 242 735 l 242 696 q 267 610 242 644 q 333 560 292 576 q 422 543 375 543 l 422 543 l 513 543 l 513 425 l 426 425 q 326 412 374 425 q 250 365 279 399 q 221 268 221 331 l 221 268 q 249 174 221 210 q 327 121 276 138 q 446 104 378 104 l 446 104 q 567 122 519 104 q 640 178 615 140 q 664 269 664 215 l 664 269 l 664 543 l 931 543 l 931 424 l 808 424 l 808 274 q 767 118 808 183 q 643 18 725 53 q 439 -17 561 -17 z " }, "-": { ha: 463, x_min: 56, x_max: 407, o: "m 407 306 l 56 306 l 56 444 l 407 444 l 407 306 z " }, ":": { ha: 438, x_min: 142, x_max: 296, o: "m 296 569 l 142 569 l 142 731 l 296 731 l 296 569 z m 296 0 l 142 0 l 142 161 l 296 161 l 296 0 z " }, "|": { ha: 340, x_min: 113, x_max: 228, o: "m 228 -260 l 113 -260 l 113 1004 l 228 1004 l 228 -260 z " } }, familyName: "Archivo Medium", ascender: 1219, descender: -292, underlinePosition: -148, underlineThickness: 44, boundingBox: { xMin: -239, xMax: 1319, yMin: -400, yMax: 1087 }, resolution: 1e3 };
+
+// src/three/fonts/archivo800.json
+var archivo800_default = { glyphs: { "0": { ha: 868, x_min: 63, x_max: 806, o: "m 435 -17 l 435 -17 q 264 13 335 -17 q 149 103 193 43 q 83 257 104 164 q 63 478 63 350 l 63 478 q 83 697 63 604 q 149 851 104 790 q 264 941 193 911 q 435 971 335 971 l 435 971 q 605 941 535 971 q 719 851 675 911 q 785 697 764 790 q 806 478 806 604 l 806 478 q 785 257 806 350 q 719 103 764 164 q 605 13 675 43 q 435 -17 535 -17 z m 435 149 l 435 149 q 522 178 490 149 q 565 269 553 208 q 576 422 576 329 l 576 422 l 576 531 q 565 686 576 625 q 522 776 553 747 q 435 806 490 806 l 435 806 q 348 776 379 806 q 304 687 317 747 q 292 532 292 626 l 292 532 l 292 425 q 304 269 292 331 q 348 178 317 208 q 435 149 379 149 z " }, "1": { ha: 868, x_min: 140, x_max: 813, o: "m 813 0 l 142 0 l 142 179 l 369 179 l 369 689 l 140 689 l 140 824 q 262 847 196 828 q 392 895 328 867 q 508 956 457 924 l 508 956 l 597 956 l 597 179 l 813 179 l 813 0 z " }, "2": { ha: 868, x_min: 69, x_max: 803, o: "m 803 0 l 69 0 l 69 57 q 93 169 69 118 q 157 265 117 221 q 247 351 197 310 q 346 429 296 392 l 346 429 q 453 510 403 471 q 534 592 503 549 q 565 688 565 635 l 565 688 q 552 741 565 715 q 510 783 539 767 q 435 800 482 800 l 435 800 q 356 783 388 800 q 307 735 324 765 q 290 663 290 704 l 290 663 l 290 621 l 79 621 q 77 640 78 629 q 76 664 76 650 l 76 664 q 122 832 76 764 q 252 935 168 900 q 453 971 336 971 l 453 971 q 606 947 542 971 q 713 883 671 924 q 774 792 754 843 q 794 688 794 742 l 794 688 q 771 569 794 622 q 706 470 747 517 q 608 381 664 424 q 489 296 553 339 l 489 296 q 431 255 457 274 q 390 222 406 236 q 368 197 375 208 l 368 197 l 803 197 l 803 0 z " }, "3": { ha: 868, x_min: 60, x_max: 807, o: "m 436 -17 l 436 -17 q 227 20 311 -17 q 101 120 143 57 q 60 264 60 183 l 60 264 l 60 289 l 271 289 l 271 263 q 310 181 271 211 q 425 150 349 150 l 425 150 q 539 185 501 150 q 576 286 576 221 l 576 286 q 558 358 576 332 q 510 397 540 385 q 444 408 481 408 l 444 408 l 354 408 l 354 564 l 435 564 q 497 577 469 564 q 540 617 524 590 q 556 683 556 643 l 556 683 q 540 748 556 721 q 495 790 525 775 q 425 804 465 804 l 425 804 q 356 790 388 804 q 308 751 325 776 q 290 693 290 726 l 290 693 l 290 675 l 86 675 l 86 710 q 128 844 86 785 q 250 937 171 903 q 438 971 329 971 l 438 971 q 622 938 544 971 q 742 847 700 906 q 783 711 783 788 l 783 711 q 765 617 783 660 q 713 546 746 575 q 638 499 681 517 l 638 499 l 638 493 q 761 409 715 469 q 807 258 807 349 l 807 258 q 763 116 806 178 q 638 19 719 54 q 436 -17 556 -17 z " }, "4": { ha: 869, x_min: 38, x_max: 829, o: "m 703 0 l 482 0 l 482 203 l 38 203 l 38 379 q 135 551 88 457 q 226 751 183 644 q 299 971 269 858 l 299 971 l 528 971 q 490 845 517 913 q 428 709 464 778 q 353 577 393 640 q 277 462 314 514 q 210 378 240 410 l 210 378 l 482 378 l 482 596 q 515 654 497 621 q 549 724 532 688 q 580 794 567 760 q 601 857 593 828 l 601 857 l 703 857 l 703 378 l 829 378 l 829 203 l 703 203 l 703 0 z " }, "5": { ha: 868, x_min: 58, x_max: 806, o: "m 440 -17 l 440 -17 q 234 23 319 -17 q 103 134 149 63 q 58 303 58 206 l 58 303 l 271 303 q 289 224 271 258 q 342 170 307 189 q 425 151 376 151 l 425 151 q 507 171 474 151 q 558 227 540 190 q 576 314 576 264 l 576 314 q 558 399 576 364 q 507 452 540 433 q 428 471 474 471 l 428 471 q 360 458 388 471 q 317 429 333 446 q 289 397 300 413 l 289 397 l 96 422 l 136 954 l 744 954 l 744 756 l 315 756 l 303 569 q 335 590 311 576 q 401 617 360 604 q 496 629 442 629 l 496 629 q 657 593 588 629 q 766 486 726 557 q 806 313 806 415 l 806 313 q 761 141 806 215 q 635 25 717 67 q 440 -17 553 -17 z " }, "6": { ha: 868, x_min: 64, x_max: 815, o: "m 449 -17 l 449 -17 q 283 10 354 -17 q 162 92 211 36 q 88 237 113 147 q 64 451 64 326 l 64 451 q 88 694 64 594 q 160 854 113 793 q 280 943 208 915 q 444 971 351 971 l 444 971 q 631 933 554 971 q 747 825 707 894 q 788 660 788 756 l 788 660 l 575 660 q 560 740 575 708 q 515 789 544 772 q 444 806 486 806 l 444 806 q 351 775 383 806 q 306 684 318 744 q 294 532 294 624 l 294 532 q 346 569 314 551 q 417 599 378 588 q 499 610 457 610 l 499 610 q 667 573 596 610 q 776 469 738 536 q 815 308 815 401 l 815 308 q 769 133 815 206 q 640 22 722 61 q 449 -17 558 -17 z m 444 149 l 444 149 q 525 167 493 149 q 573 221 557 186 q 589 301 589 256 l 589 301 q 573 383 589 349 q 525 438 557 418 q 444 458 493 458 l 444 458 q 365 439 397 458 q 316 385 332 419 q 300 303 300 351 l 300 303 q 316 222 300 257 q 365 168 332 188 q 444 149 397 149 z " }, "7": { ha: 868, x_min: 63, x_max: 811, o: "m 464 0 l 213 0 q 238 210 213 107 q 307 409 263 313 q 408 592 351 506 q 529 754 465 679 l 529 754 l 63 754 l 63 954 l 811 954 l 811 835 q 711 705 761 774 q 617 562 661 636 q 538 408 572 488 q 483 246 503 329 q 464 76 464 163 l 464 76 l 464 0 z " }, "8": { ha: 868, x_min: 58, x_max: 810, o: "m 433 -17 l 433 -17 q 228 18 311 -17 q 101 115 144 53 q 58 263 58 178 l 58 263 q 98 398 58 344 q 211 486 138 451 l 211 486 q 117 583 144 533 q 89 697 89 633 l 89 697 q 132 842 89 781 q 252 937 175 903 q 433 971 329 971 l 433 971 q 614 937 536 971 q 735 842 692 903 q 779 697 779 781 l 779 697 q 751 581 779 632 q 656 486 722 531 l 656 486 q 770 398 731 451 q 810 263 810 344 l 810 263 q 766 115 810 178 q 639 18 722 53 q 433 -17 556 -17 z m 433 149 l 433 149 q 540 182 500 149 q 579 278 579 215 l 579 278 q 539 374 579 342 q 433 407 499 407 l 433 407 q 329 374 369 407 q 289 278 289 342 l 289 278 q 328 182 289 215 q 433 149 367 149 z m 433 567 l 433 567 q 531 596 492 567 q 571 686 571 625 l 571 686 q 533 776 571 746 q 433 807 494 807 l 433 807 q 335 776 372 807 q 299 686 299 746 l 299 686 q 336 596 299 625 q 433 567 374 567 z " }, "9": { ha: 868, x_min: 54, x_max: 806, o: "m 424 -17 l 424 -17 q 239 22 315 -17 q 122 129 163 60 q 81 294 81 199 l 81 294 l 294 294 q 309 215 294 247 q 353 165 324 182 q 425 149 383 149 l 425 149 q 518 179 486 149 q 562 271 550 210 q 574 422 574 332 l 574 422 q 524 386 556 404 q 452 356 492 368 q 371 344 413 344 l 371 344 q 203 381 274 344 q 93 486 132 418 q 54 646 54 554 l 54 646 q 100 822 54 749 q 228 933 146 894 q 419 971 311 971 l 419 971 q 586 944 514 971 q 707 863 658 918 q 781 718 756 807 q 806 503 806 629 l 806 503 q 781 260 806 360 q 709 100 757 161 q 590 11 661 39 q 424 -17 518 -17 z m 424 497 l 424 497 q 503 516 471 497 q 552 569 536 535 q 568 650 568 603 l 568 650 q 552 732 568 697 q 504 786 536 767 q 424 806 472 806 l 424 806 q 344 786 376 806 q 296 733 313 767 q 279 651 279 699 l 279 651 q 295 569 279 604 q 343 516 311 535 q 424 497 375 497 z " }, "=": { ha: 901, x_min: 101, x_max: 800, o: "m 800 432 l 101 432 l 101 593 l 800 593 l 800 432 z m 800 126 l 101 126 l 101 288 l 800 288 l 800 126 z " }, "+": { ha: 901, x_min: 101, x_max: 800, o: "m 531 0 l 369 0 l 369 281 l 101 281 l 101 442 l 369 442 l 369 722 l 531 722 l 531 442 l 800 442 l 800 281 l 531 281 l 531 0 z " }, " ": { ha: 263, x_min: 0, x_max: 0, o: "" }, A: { ha: 1036, x_min: 11, x_max: 1026, o: "m 267 0 l 11 0 l 369 954 l 668 954 l 1026 0 l 761 0 l 704 165 l 324 165 l 267 0 z m 453 553 l 383 351 l 643 351 l 575 553 q 562 591 569 568 q 547 640 554 614 q 532 692 539 665 q 518 738 525 718 l 518 738 l 508 738 q 493 678 503 711 l 493 678 l 472 611 q 453 553 461 578 l 453 553 z " }, B: { ha: 1035, x_min: 104, x_max: 976, o: "m 692 0 l 104 0 l 104 954 l 688 954 q 821 925 761 954 q 916 843 881 896 q 951 719 951 790 l 951 719 q 930 613 951 657 q 873 540 908 568 q 793 499 838 513 l 793 499 l 793 493 q 886 453 844 482 q 952 376 928 425 q 976 258 976 328 l 976 258 q 938 119 976 176 q 835 31 899 61 q 692 0 771 0 l 692 0 z m 353 399 l 353 192 l 624 192 q 695 218 668 192 q 722 299 722 244 l 722 299 q 710 351 722 328 q 676 386 699 374 q 619 399 653 399 l 619 399 l 353 399 z m 353 769 l 353 575 l 601 575 q 653 588 632 575 q 687 622 675 600 q 699 675 699 644 l 699 675 q 672 744 699 719 q 606 769 646 769 l 606 769 l 353 769 z " }, C: { ha: 1044, x_min: 63, x_max: 985, o: "m 543 -17 l 543 -17 q 281 37 389 -17 q 118 200 174 90 q 63 478 63 310 l 63 478 q 187 848 63 725 q 543 971 311 971 l 543 971 q 772 927 672 971 q 928 797 872 883 q 985 581 985 710 l 985 581 l 742 581 q 717 685 742 642 q 649 753 693 729 q 543 776 606 776 l 543 776 q 415 744 465 776 q 342 653 365 713 q 318 508 318 593 l 318 508 l 318 446 q 342 301 318 361 q 415 209 365 240 q 542 178 464 178 l 542 178 q 655 200 608 178 q 726 266 701 222 q 750 371 750 310 l 750 371 l 985 371 q 930 156 985 242 q 776 26 875 69 q 543 -17 676 -17 z " }, D: { ha: 1049, x_min: 104, x_max: 986, o: "m 503 0 l 104 0 l 104 954 l 503 954 q 766 903 658 954 q 930 747 874 851 q 986 478 986 642 l 986 478 q 930 209 986 315 q 766 51 874 103 q 503 0 658 0 l 503 0 z m 353 760 l 353 194 l 500 194 q 601 211 558 194 q 674 260 644 228 q 717 339 703 292 q 731 447 731 386 l 731 447 l 731 506 q 717 615 731 568 q 674 694 703 663 q 601 743 644 726 q 500 760 558 760 l 500 760 l 353 760 z " }, E: { ha: 971, x_min: 107, x_max: 904, o: "m 904 0 l 107 0 l 107 954 l 894 954 l 894 760 l 356 760 l 356 581 l 826 581 l 826 390 l 356 390 l 356 194 l 904 194 l 904 0 z " }, F: { ha: 890, x_min: 104, x_max: 836, o: "m 353 0 l 104 0 l 104 954 l 836 954 l 836 760 l 353 760 l 353 554 l 778 554 l 778 364 l 353 364 l 353 0 z " }, G: { ha: 1132, x_min: 68, x_max: 1040, o: "m 539 -17 l 539 -17 q 188 106 308 -17 q 68 478 68 228 l 68 478 q 127 752 68 643 q 299 916 186 861 q 572 971 413 971 l 572 971 q 753 949 668 971 q 903 883 838 926 q 1004 773 968 839 q 1040 618 1040 707 l 1040 618 l 796 618 q 779 685 796 656 q 733 735 763 715 q 664 766 703 756 q 582 776 625 776 l 582 776 q 469 760 518 776 q 388 708 419 743 q 340 624 356 674 q 324 507 324 574 l 324 507 l 324 446 q 351 297 324 357 q 435 208 379 238 q 574 178 492 178 l 574 178 q 688 197 638 178 q 769 253 739 217 q 799 342 799 290 l 799 342 l 799 349 l 542 349 l 542 524 l 1040 524 l 1040 0 l 896 0 l 872 100 q 780 35 829 61 q 672 -4 731 8 q 539 -17 613 -17 z " }, H: { ha: 1093, x_min: 104, x_max: 989, o: "m 353 0 l 104 0 l 104 954 l 353 954 l 353 588 l 740 588 l 740 954 l 989 954 l 989 0 l 740 0 l 740 385 l 353 385 l 353 0 z " }, I: { ha: 457, x_min: 104, x_max: 353, o: "m 353 0 l 104 0 l 104 954 l 353 954 l 353 0 z " }, J: { ha: 875, x_min: 40, x_max: 772, o: "m 407 -17 l 407 -17 q 209 17 292 -17 q 83 122 126 51 q 40 301 40 192 l 40 301 l 40 332 l 278 332 l 278 301 q 309 208 278 238 q 401 178 340 178 l 401 178 q 492 215 461 178 q 524 331 524 253 l 524 331 l 524 954 l 772 954 l 772 329 q 729 134 772 211 q 604 20 686 57 q 407 -17 522 -17 z " }, K: { ha: 1069, x_min: 104, x_max: 1046, o: "m 353 0 l 104 0 l 104 954 l 353 954 l 353 531 l 731 954 l 1039 954 l 683 564 l 1046 0 l 751 0 l 511 394 l 353 249 l 353 0 z " }, L: { ha: 865, x_min: 104, x_max: 838, o: "m 838 0 l 104 0 l 104 954 l 353 954 l 353 204 l 838 204 l 838 0 z " }, M: { ha: 1269, x_min: 104, x_max: 1165, o: "m 331 0 l 104 0 l 104 954 l 467 954 l 582 529 q 599 469 589 507 q 618 389 608 431 q 635 314 628 347 l 635 314 l 646 314 q 660 377 651 340 q 678 455 668 414 q 696 531 688 496 l 696 531 l 813 954 l 1165 954 l 1165 0 l 924 0 l 924 407 q 924 528 924 467 q 926 639 925 589 q 928 711 928 689 l 928 711 l 917 711 q 903 651 913 690 q 884 569 894 611 q 865 496 874 526 l 865 496 l 726 0 l 526 0 l 386 496 l 369 563 q 351 642 360 601 q 335 710 342 682 l 335 710 l 324 710 q 326 622 325 674 q 329 513 328 569 q 331 407 331 457 l 331 407 l 331 0 z " }, N: { ha: 1093, x_min: 104, x_max: 989, o: "m 335 0 l 104 0 l 104 954 l 325 954 l 672 511 q 698 479 682 500 q 729 437 714 458 q 751 403 744 415 l 751 403 l 758 404 l 758 954 l 989 954 l 989 0 l 769 0 l 401 467 q 367 513 383 489 q 342 551 351 536 l 342 551 l 335 550 l 335 0 z " }, O: { ha: 1125, x_min: 63, x_max: 1063, o: "m 563 -17 l 563 -17 q 294 38 406 -17 q 122 203 182 93 q 63 478 63 313 l 63 478 q 122 752 63 643 q 294 916 182 861 q 563 971 406 971 l 563 971 q 831 916 719 971 q 1003 752 943 861 q 1063 478 1063 643 l 1063 478 q 1003 203 1063 313 q 831 38 943 93 q 563 -17 719 -17 z m 563 178 l 563 178 q 668 196 622 178 q 745 249 714 214 q 792 333 776 283 q 807 446 807 383 l 807 446 l 807 507 q 792 621 807 571 q 745 706 776 671 q 668 758 714 740 q 563 776 622 776 l 563 776 q 456 758 501 776 q 379 706 410 740 q 333 621 349 671 q 318 507 318 571 l 318 507 l 318 446 q 333 333 318 383 q 379 249 349 283 q 456 196 410 214 q 563 178 501 178 z " }, P: { ha: 969, x_min: 104, x_max: 938, o: "m 353 0 l 104 0 l 104 954 l 629 954 q 795 915 726 954 q 901 805 864 875 q 938 640 938 735 l 938 640 q 899 472 938 543 q 791 362 861 401 q 624 322 721 322 l 624 322 l 353 322 l 353 0 z m 353 761 l 353 514 l 565 514 q 654 547 624 514 q 685 638 685 579 l 685 638 q 672 706 685 679 q 632 747 658 732 q 565 761 606 761 l 565 761 l 353 761 z " }, Q: { ha: 1125, x_min: 63, x_max: 1063, o: "m 1036 -182 l 728 -182 l 575 -12 q 557 -15 567 -14 q 539 -15 547 -15 l 539 -15 q 283 40 390 -15 q 119 206 176 96 q 63 478 63 317 l 63 478 q 122 752 63 643 q 294 916 182 861 q 563 971 406 971 l 563 971 q 831 916 719 971 q 1003 752 943 861 q 1063 478 1063 643 l 1063 478 q 999 198 1063 308 q 821 32 936 88 l 821 32 l 1036 -182 z m 563 178 l 563 178 q 668 196 622 178 q 745 249 714 214 q 792 333 776 283 q 807 446 807 383 l 807 446 l 807 507 q 792 621 807 571 q 745 706 776 671 q 668 758 714 740 q 563 776 622 776 l 563 776 q 456 758 501 776 q 379 706 410 740 q 333 621 349 671 q 318 507 318 571 l 318 507 l 318 446 q 333 333 318 383 q 379 249 349 283 q 456 196 410 214 q 563 178 501 178 z " }, R: { ha: 1042, x_min: 104, x_max: 1007, o: "m 353 0 l 104 0 l 104 954 l 658 954 q 835 915 764 954 q 941 806 906 875 q 976 653 976 738 l 976 653 q 934 490 976 561 q 815 378 892 418 l 815 378 l 1007 0 l 729 0 l 571 336 l 353 336 l 353 0 z m 353 765 l 353 521 l 610 521 q 692 555 661 521 q 724 646 724 589 l 724 646 q 710 710 724 683 q 671 751 696 736 q 610 765 646 765 l 610 765 l 353 765 z " }, S: { ha: 968, x_min: 61, x_max: 913, o: "m 500 -17 l 500 -17 q 331 -1 410 -17 q 191 51 251 15 q 96 147 131 88 q 61 292 61 206 l 61 292 l 61 304 q 63 315 61 311 l 63 315 l 303 315 q 302 305 303 311 q 301 294 301 299 l 301 294 q 324 223 301 250 q 389 184 347 196 q 486 172 431 172 l 486 172 q 543 175 517 172 q 590 185 569 178 q 627 202 611 192 q 651 227 643 213 q 658 261 658 242 l 658 261 q 634 314 658 293 q 569 349 610 335 q 476 375 528 363 q 369 401 425 388 q 263 436 314 415 q 170 489 211 457 q 105 569 129 521 q 81 685 81 617 l 81 685 q 113 815 81 760 q 201 904 144 869 q 331 955 257 939 q 488 971 404 971 l 488 971 q 641 954 569 971 q 768 902 713 938 q 855 813 824 867 q 888 685 886 760 l 888 685 l 888 668 l 649 668 l 649 678 q 631 734 649 710 q 579 773 614 758 q 493 788 544 788 q 406 778 442 788 q 352 750 371 768 q 333 707 333 732 l 333 707 q 358 657 333 676 q 424 624 382 638 q 517 598 465 610 q 623 573 568 586 q 729 540 678 560 q 822 488 781 519 q 888 411 864 457 q 913 300 913 365 l 913 300 q 859 117 913 186 q 712 15 806 47 q 500 -17 618 -17 z " }, T: { ha: 938, x_min: 33, x_max: 901, o: "m 592 0 l 343 0 l 343 750 l 33 750 l 33 954 l 901 954 l 901 750 l 592 750 l 592 0 z " }, U: { ha: 1088, x_min: 101, x_max: 986, o: "m 543 -17 l 543 -17 q 306 26 406 -17 q 154 156 207 69 q 101 369 101 242 l 101 369 l 101 954 l 351 954 l 351 375 q 400 231 351 283 q 543 178 449 178 l 543 178 q 688 231 638 178 q 738 375 738 283 l 738 375 l 738 954 l 986 954 l 986 369 q 933 156 986 242 q 782 26 881 69 q 543 -17 683 -17 z " }, V: { ha: 1013, x_min: 19, x_max: 993, o: "m 651 0 l 363 0 l 19 954 l 286 954 l 461 415 q 475 372 467 399 q 492 316 483 344 q 507 265 501 288 l 507 265 l 517 265 q 531 313 524 286 q 547 367 539 340 q 561 414 556 394 l 561 414 l 736 954 l 993 954 l 651 0 z " }, W: { ha: 1360, x_min: 10, x_max: 1350, o: "m 532 0 l 250 0 l 10 954 l 271 954 l 388 453 q 394 417 390 440 q 403 367 399 393 q 413 318 408 340 l 413 318 l 418 318 q 424 351 421 332 q 430 388 426 369 q 437 424 433 407 q 442 453 440 440 l 442 453 l 551 954 l 822 954 l 935 453 q 943 415 939 439 q 952 365 947 392 q 961 318 957 339 l 961 318 l 967 318 q 973 351 969 333 q 980 387 976 368 q 987 422 983 406 q 993 453 990 439 l 993 453 l 1106 954 l 1350 954 l 1110 0 l 832 0 l 710 528 q 701 572 707 547 q 691 622 696 597 q 683 667 686 647 l 683 667 l 678 667 q 671 622 675 647 q 662 572 667 597 q 653 528 657 547 l 653 528 l 532 0 z " }, X: { ha: 1022, x_min: 10, x_max: 1015, o: "m 292 0 l 10 0 l 353 503 l 43 954 l 344 954 l 519 676 l 526 676 l 701 954 l 983 954 l 672 503 l 1015 0 l 713 0 l 506 329 l 499 329 l 292 0 z " }, Y: { ha: 1017, x_min: 11, x_max: 1004, o: "m 635 0 l 385 0 l 385 378 l 11 954 l 299 954 l 513 597 l 519 597 l 732 954 l 1004 954 l 635 378 l 635 0 z " }, Z: { ha: 947, x_min: 36, x_max: 900, o: "m 900 0 l 36 0 l 36 93 l 510 760 l 71 760 l 71 954 l 889 954 l 889 861 l 415 194 l 900 194 l 900 0 z " }, a: { ha: 856, x_min: 44, x_max: 849, o: "m 290 -17 l 290 -17 q 201 -8 244 -17 q 122 24 157 1 q 65 88 86 47 q 44 189 44 128 l 44 189 q 78 318 44 268 q 174 397 111 368 q 327 436 238 425 q 528 447 417 447 l 528 447 l 528 493 q 515 547 528 525 q 478 580 503 568 q 414 592 454 592 l 414 592 q 351 583 378 592 q 310 559 324 575 q 296 521 296 543 l 296 521 l 296 508 l 74 508 q 72 521 72 515 l 72 521 l 72 533 q 113 647 72 599 q 231 722 154 696 q 415 749 307 749 l 415 749 q 592 724 517 749 q 712 647 668 699 q 756 513 756 596 l 756 513 l 756 200 q 769 163 756 176 q 801 149 782 149 l 801 149 l 849 149 l 849 8 q 801 -8 833 1 q 722 -17 768 -17 l 722 -17 q 640 -5 675 -17 q 581 28 604 7 q 550 79 558 50 l 550 79 l 540 79 q 478 29 514 51 q 397 -5 443 7 q 290 -17 350 -17 z m 375 140 l 375 140 q 436 150 408 140 q 484 177 464 160 q 516 219 504 194 q 528 274 528 244 l 528 274 l 528 322 q 392 311 449 322 q 304 276 335 300 q 274 217 274 253 l 274 217 q 287 173 274 190 q 322 148 300 156 q 375 140 344 140 z " }, b: { ha: 879, x_min: 88, x_max: 826, o: "m 526 -17 l 526 -17 q 396 13 456 -17 q 300 101 336 42 l 300 101 l 290 101 l 274 0 l 88 0 l 88 1006 l 315 1006 l 315 657 l 324 657 q 377 707 346 686 q 447 738 408 728 q 531 749 486 749 l 531 749 q 688 707 621 749 q 790 581 754 665 q 826 368 826 497 l 826 368 q 790 151 826 236 q 687 25 754 67 q 526 -17 619 -17 z m 456 161 l 456 161 q 538 181 507 161 q 583 242 569 201 q 597 340 597 282 l 597 340 l 597 389 q 583 489 597 449 q 538 550 569 529 q 456 571 507 571 l 456 571 q 391 557 418 571 q 347 518 364 543 q 322 458 329 493 q 314 382 314 424 l 314 382 l 314 349 q 328 249 314 292 q 374 184 343 207 q 456 161 406 161 z " }, c: { ha: 850, x_min: 51, x_max: 793, o: "m 432 -17 l 432 -17 q 226 25 311 -17 q 97 152 142 67 q 51 367 51 238 l 51 367 q 97 581 51 496 q 228 708 143 667 q 432 750 313 750 l 432 750 q 576 732 510 750 q 691 676 642 714 q 767 582 740 639 q 793 446 793 525 l 793 446 l 569 446 q 553 524 569 493 q 507 569 538 554 q 431 585 476 585 l 431 585 q 345 563 378 585 q 297 497 313 540 q 282 390 282 454 l 282 390 l 282 340 q 297 235 282 278 q 347 170 313 192 q 436 149 382 149 l 436 149 q 515 163 483 149 q 563 209 546 178 q 579 288 579 240 l 579 288 l 793 288 q 767 153 793 211 q 692 58 740 96 q 576 2 643 21 q 432 -17 510 -17 z " }, d: { ha: 879, x_min: 51, x_max: 792, o: "m 353 -17 l 353 -17 q 192 25 260 -17 q 88 151 124 67 q 51 368 51 236 l 51 368 q 88 581 51 497 q 192 707 125 665 q 349 749 258 749 l 349 749 q 431 739 392 749 q 502 708 471 729 q 556 657 533 688 l 556 657 l 564 657 l 564 1006 l 792 1006 l 792 0 l 606 0 l 589 101 l 579 101 q 483 13 542 42 q 353 -17 425 -17 z m 424 161 l 424 161 q 505 184 474 161 q 551 249 536 207 q 565 349 565 292 l 565 349 l 565 382 q 557 458 565 424 q 532 518 549 493 q 488 557 515 543 q 424 571 461 571 l 424 571 q 341 550 372 571 q 296 489 310 529 q 282 389 282 449 l 282 389 l 282 340 q 296 242 282 282 q 341 181 310 201 q 424 161 372 161 z " }, e: { ha: 860, x_min: 51, x_max: 807, o: "m 444 -17 l 444 -17 q 232 24 319 -17 q 98 150 144 65 q 51 367 51 235 l 51 367 q 97 581 51 496 q 229 707 143 665 q 436 749 315 749 l 436 749 q 638 708 556 749 q 764 585 721 668 q 807 369 807 501 l 807 369 l 807 321 l 282 321 q 299 222 282 263 q 350 161 315 182 q 443 140 385 140 l 443 140 q 504 149 478 140 q 549 173 531 157 q 576 211 567 189 q 586 261 586 233 l 586 261 l 807 261 q 783 142 807 194 q 711 55 758 90 q 597 1 664 19 q 444 -17 529 -17 z m 283 447 l 283 447 l 575 447 q 566 510 575 483 q 540 556 557 538 q 498 583 522 574 q 442 592 474 592 l 442 592 q 358 575 392 592 q 307 526 325 558 q 283 447 289 494 z " }, f: { ha: 489, x_min: 15, x_max: 483, o: "m 346 0 l 119 0 l 119 567 l 15 567 l 15 732 l 119 732 l 119 792 q 145 919 119 868 q 222 994 171 969 q 349 1019 274 1019 l 349 1019 q 394 1017 369 1019 q 444 1008 419 1014 q 483 997 468 1003 l 483 997 l 483 854 l 417 854 q 362 838 378 854 q 346 786 346 821 l 346 786 l 346 732 l 483 732 l 483 567 l 346 567 l 346 0 z " }, g: { ha: 878, x_min: 18, x_max: 864, o: "m 578 -274 l 204 -274 q 113 -252 156 -274 q 44 -191 69 -231 q 18 -99 18 -151 l 18 -99 q 53 -1 18 -40 q 133 58 89 39 l 133 58 q 81 110 101 79 q 61 181 61 142 l 61 181 q 101 272 61 235 q 196 322 142 310 l 196 322 q 115 401 146 354 q 83 507 83 449 l 83 507 q 128 644 83 592 q 253 723 174 697 q 433 749 332 749 l 433 749 q 506 745 474 749 q 565 735 539 742 l 565 735 q 642 804 621 768 q 664 863 663 840 l 664 863 l 863 863 q 843 769 863 807 q 788 707 824 731 q 701 671 751 683 l 701 671 q 760 598 739 640 q 781 507 781 556 l 781 507 q 741 374 781 428 q 632 293 701 321 q 472 265 563 265 l 472 265 l 364 265 q 306 253 325 265 q 288 222 288 242 l 288 222 q 304 191 288 204 q 361 178 321 178 l 361 178 l 643 178 q 807 117 750 178 q 864 -36 864 57 l 864 -36 q 825 -160 864 -107 q 722 -244 786 -214 q 578 -274 657 -274 l 578 -274 z m 314 -135 l 314 -135 l 554 -135 q 596 -126 578 -135 q 624 -101 614 -117 q 635 -64 635 -85 l 635 -64 q 613 -11 635 -29 q 558 7 590 7 l 558 7 l 314 7 q 260 -12 282 7 q 239 -62 239 -31 l 239 -62 q 260 -115 239 -94 q 314 -135 282 -135 z m 432 399 l 432 399 q 524 426 492 399 q 557 507 557 454 l 557 507 q 524 588 557 561 q 432 615 492 615 l 432 615 q 342 588 375 615 q 308 507 308 561 l 308 507 q 322 448 308 472 q 364 411 336 424 q 432 399 392 399 z " }, h: { ha: 874, x_min: 86, x_max: 790, o: "m 314 0 l 86 0 l 86 1006 l 314 1006 l 314 653 l 324 653 q 381 703 347 682 q 457 737 415 725 q 543 749 499 749 l 543 749 q 677 719 622 749 q 761 632 732 690 q 790 483 790 574 l 790 483 l 790 0 l 563 0 l 563 451 q 555 503 563 482 q 533 540 547 525 q 499 563 519 556 q 451 569 478 569 l 451 569 q 381 551 411 569 q 332 501 350 532 q 314 428 314 469 l 314 428 l 314 0 z " }, i: { ha: 400, x_min: 86, x_max: 314, o: "m 314 831 l 86 831 l 86 1006 l 314 1006 l 314 831 z m 314 0 l 86 0 l 86 732 l 314 732 l 314 0 z " }, j: { ha: 397, x_min: -54, x_max: 314, o: "m 314 831 l 86 831 l 86 1006 l 314 1006 l 314 831 z m 93 -274 l 93 -274 q 45 -271 72 -274 q -9 -262 18 -268 q -54 -251 -36 -257 l -54 -251 l -54 -108 l 17 -108 q 69 -88 53 -108 q 86 -31 86 -68 l 86 -31 l 86 732 l 314 732 l 314 -51 q 292 -171 314 -121 q 222 -247 271 -221 q 93 -274 174 -274 z " }, k: { ha: 847, x_min: 86, x_max: 838, o: "m 314 0 l 86 0 l 86 1007 l 314 1007 l 314 438 l 561 732 l 828 732 l 568 442 l 838 0 l 578 0 l 415 285 l 314 186 l 314 0 z " }, l: { ha: 400, x_min: 86, x_max: 314, o: "m 314 0 l 86 0 l 86 1006 l 314 1006 l 314 0 z " }, m: { ha: 1301, x_min: 86, x_max: 1218, o: "m 314 0 l 86 0 l 86 732 l 274 732 l 290 628 l 300 628 q 360 693 325 665 q 439 735 396 721 q 531 749 482 749 l 531 749 q 658 719 606 749 q 739 628 711 689 l 739 628 l 749 628 q 809 693 774 665 q 888 735 844 721 q 979 749 932 749 l 979 749 q 1108 720 1056 749 q 1190 634 1161 692 q 1218 488 1218 576 l 1218 488 l 1218 0 l 990 0 l 990 453 q 983 505 990 483 q 964 541 976 526 q 932 563 951 556 q 890 569 913 569 l 890 569 q 826 551 854 569 q 782 501 797 532 q 767 428 767 469 l 767 428 l 767 0 l 539 0 l 539 453 q 532 505 539 483 q 513 541 525 526 q 481 563 500 556 q 439 569 461 569 l 439 569 q 374 551 403 569 q 330 501 346 532 q 314 428 314 469 l 314 428 l 314 0 z " }, n: { ha: 874, x_min: 86, x_max: 790, o: "m 314 0 l 86 0 l 86 732 l 274 732 l 290 628 l 300 628 q 364 693 328 665 q 446 735 400 721 q 543 749 492 749 l 543 749 q 677 719 622 749 q 761 632 732 690 q 790 483 790 574 l 790 483 l 790 0 l 563 0 l 563 451 q 555 503 563 482 q 533 540 547 525 q 499 563 519 556 q 451 569 478 569 l 451 569 q 381 551 411 569 q 332 501 350 532 q 314 428 314 469 l 314 428 l 314 0 z " }, o: { ha: 882, x_min: 51, x_max: 831, o: "m 440 -17 l 440 -17 q 231 25 318 -17 q 98 152 144 67 q 51 367 51 238 l 51 367 q 98 581 51 496 q 231 707 144 665 q 440 749 318 749 l 440 749 q 651 707 564 749 q 784 581 738 665 q 831 367 831 496 l 831 367 q 784 152 831 238 q 651 25 738 67 q 440 -17 564 -17 z m 440 149 l 440 149 q 533 171 497 149 q 584 235 568 193 q 600 340 600 278 l 600 340 l 600 392 q 584 497 600 454 q 533 562 568 540 q 440 583 497 583 l 440 583 q 349 562 385 583 q 298 497 314 540 q 282 392 282 454 l 282 392 l 282 340 q 298 235 282 278 q 349 171 314 193 q 440 149 385 149 z " }, p: { ha: 879, x_min: 88, x_max: 826, o: "m 315 -258 l 88 -258 l 88 732 l 274 732 l 293 631 l 303 631 q 398 721 340 693 q 526 749 456 749 l 526 749 q 687 707 619 749 q 790 581 754 665 q 826 365 826 496 l 826 365 q 790 151 826 236 q 688 25 754 67 q 531 -17 621 -17 l 531 -17 q 447 -7 486 -17 q 377 24 408 3 q 324 75 346 44 l 324 75 l 315 75 l 315 -258 z m 456 161 l 456 161 q 538 182 507 161 q 583 243 569 203 q 597 342 597 283 l 597 342 l 597 390 q 583 490 597 449 q 538 551 569 531 q 456 571 507 571 l 456 571 q 374 548 406 571 q 328 483 343 525 q 314 383 314 440 l 314 383 l 314 350 q 322 274 314 308 q 347 214 329 239 q 391 175 364 189 q 456 161 418 161 z " }, q: { ha: 879, x_min: 51, x_max: 792, o: "m 792 -258 l 564 -258 l 564 75 l 556 75 q 500 25 531 46 q 431 -6 469 4 q 349 -17 392 -17 l 349 -17 q 192 25 258 -17 q 88 151 125 67 q 51 365 51 236 l 51 365 q 88 581 51 496 q 192 707 124 665 q 353 749 260 749 l 353 749 q 483 719 424 749 q 576 631 542 689 l 576 631 l 586 631 l 606 732 l 792 732 l 792 -258 z m 424 161 l 424 161 q 488 175 461 161 q 532 214 515 189 q 557 274 549 239 q 565 350 565 308 l 565 350 l 565 383 q 551 483 565 440 q 505 548 536 525 q 424 571 474 571 l 424 571 q 341 551 372 571 q 296 490 310 531 q 282 390 282 449 l 282 390 l 282 342 q 296 243 282 283 q 341 182 310 203 q 424 161 372 161 z " }, r: { ha: 565, x_min: 86, x_max: 556, o: "m 314 0 l 86 0 l 86 732 l 274 732 l 290 619 l 300 619 q 341 687 317 657 q 401 733 365 717 q 479 750 436 750 l 479 750 q 525 745 504 750 q 556 735 546 740 l 556 735 l 556 536 l 483 536 q 408 524 440 536 q 354 488 375 513 q 324 429 333 464 q 314 349 314 394 l 314 349 l 314 0 z " }, s: { ha: 804, x_min: 51, x_max: 754, o: "m 400 -17 l 400 -17 q 265 -1 328 -17 q 153 43 201 14 q 78 115 106 72 q 51 215 51 158 l 51 215 l 51 226 q 53 235 51 231 l 53 235 l 268 235 l 268 222 q 288 172 269 192 q 338 142 307 151 q 404 133 368 133 l 404 133 q 460 139 431 133 q 511 158 490 144 q 532 199 532 172 l 532 199 q 506 243 532 228 q 438 269 481 258 q 347 289 396 279 l 347 289 q 249 314 299 300 q 159 352 200 328 q 93 415 118 376 q 68 514 68 454 l 68 514 q 95 623 68 578 q 169 696 122 668 q 278 736 217 724 q 410 749 340 749 l 410 749 q 531 736 474 749 q 635 698 589 724 q 708 633 682 672 q 735 540 735 593 l 735 540 q 734 526 735 533 q 733 515 733 518 l 733 515 l 519 515 l 519 526 q 504 565 519 550 q 463 590 489 581 q 404 599 436 599 l 404 599 q 363 595 383 599 q 326 585 343 592 q 299 568 310 579 q 289 540 289 557 l 289 540 q 307 506 289 519 q 356 485 325 493 q 425 467 388 476 l 425 467 q 533 444 476 456 q 641 410 590 432 q 723 347 692 389 q 754 231 754 304 l 754 231 q 726 113 754 161 q 650 37 699 65 q 538 -4 601 8 q 400 -17 474 -17 z " }, t: { ha: 535, x_min: 29, x_max: 494, o: "m 343 -17 l 343 -17 q 223 5 272 -17 q 149 69 174 26 q 125 174 125 113 l 125 174 l 125 567 l 29 567 l 29 732 l 132 732 l 179 946 l 351 946 l 351 732 l 494 732 l 494 567 l 351 567 l 351 229 q 367 169 351 190 q 422 149 382 149 l 422 149 l 494 149 l 494 7 q 449 -5 476 1 q 394 -14 422 -11 q 343 -17 367 -17 z " }, u: { ha: 874, x_min: 82, x_max: 786, o: "m 329 -17 l 329 -17 q 147 49 211 -17 q 82 249 82 114 l 82 249 l 82 732 l 310 732 l 310 281 q 317 229 310 251 q 339 192 325 207 q 374 169 353 176 q 421 163 396 163 l 421 163 q 492 181 461 163 q 540 233 522 200 q 558 304 558 265 l 558 304 l 558 732 l 786 732 l 786 0 l 599 0 l 585 104 l 575 104 q 512 40 550 68 q 427 -2 474 13 q 329 -17 381 -17 z " }, v: { ha: 797, x_min: 3, x_max: 793, o: "m 517 0 l 278 0 l 3 732 l 246 732 l 339 453 q 357 392 346 432 q 381 310 368 353 q 403 232 393 268 l 403 232 l 411 232 q 433 307 421 265 q 456 388 444 349 q 475 453 467 428 l 475 453 l 567 732 l 793 732 l 517 0 z " }, w: { ha: 1193, x_min: 1, x_max: 1192, o: "m 475 0 l 247 0 l 1 732 l 244 732 l 321 429 q 335 372 328 406 q 351 306 343 338 q 364 253 358 274 l 364 253 l 372 253 q 388 315 381 283 q 403 378 394 347 l 403 378 l 415 431 l 490 732 l 724 732 l 800 429 q 813 378 806 410 q 828 313 819 346 q 842 253 836 279 l 842 253 l 851 253 q 863 307 856 276 q 879 370 871 338 q 893 426 888 403 l 893 426 l 971 732 l 1192 732 l 946 0 l 718 0 l 642 293 q 628 350 636 318 q 613 413 619 382 q 600 465 606 443 l 600 465 l 594 465 q 585 424 592 450 q 572 364 579 397 q 553 294 564 331 l 553 294 l 475 0 z " }, x: { ha: 850, x_min: 10, x_max: 839, o: "m 264 0 l 10 0 l 282 383 l 33 732 l 303 732 l 432 524 l 439 524 l 569 732 l 824 732 l 572 382 l 839 0 l 572 0 l 422 240 l 415 240 l 264 0 z " }, y: { ha: 797, x_min: 3, x_max: 793, o: "m 203 -274 l 203 -274 q 115 -266 153 -274 q 63 -253 78 -258 l 63 -253 l 63 -108 l 158 -108 q 225 -91 197 -108 q 269 -49 253 -74 q 292 0 285 -25 l 292 0 l 3 732 l 246 732 l 354 411 q 373 353 363 389 q 394 281 383 318 q 411 215 404 244 l 411 215 l 419 215 q 432 260 425 235 q 446 313 439 286 q 460 365 453 340 q 474 410 468 390 l 474 410 l 567 732 l 793 732 l 540 29 q 488 -90 517 -35 q 421 -187 460 -146 q 328 -251 382 -228 q 203 -274 275 -274 z " }, z: { ha: 743, x_min: 31, x_max: 707, o: "m 707 0 l 31 0 l 31 85 l 367 567 l 50 567 l 50 732 l 694 732 l 694 650 l 356 165 l 707 165 l 707 0 z " }, ".": { ha: 442, x_min: 100, x_max: 342, o: "m 342 0 l 100 0 l 100 232 l 342 232 l 342 0 z " }, ",": { ha: 442, x_min: 96, x_max: 342, o: "m 96 -249 l 96 -249 l 96 -151 q 158 -126 131 -147 q 201 -72 185 -106 q 218 0 218 -39 l 218 0 l 101 0 l 101 232 l 342 232 l 342 25 q 308 -122 342 -64 q 217 -210 274 -179 q 96 -249 161 -240 z " }, "'": { ha: 365, x_min: 82, x_max: 286, o: "m 236 558 l 128 558 l 82 750 l 82 954 l 286 954 l 286 750 l 236 558 z " }, "\u2019": { ha: 388, x_min: 81, x_max: 307, o: "m 81 496 l 81 496 l 81 585 q 138 610 113 589 q 178 667 164 632 q 193 742 193 701 l 193 742 l 86 742 l 86 954 l 307 954 l 307 764 q 275 620 307 678 q 192 533 243 563 q 81 496 140 503 z " }, "!": { ha: 436, x_min: 96, x_max: 342, o: "m 289 306 l 147 306 l 96 954 l 342 954 l 289 306 z m 333 0 l 104 0 l 104 221 l 333 221 l 333 0 z " }, "?": { ha: 850, x_min: 69, x_max: 769, o: "m 525 307 l 324 307 l 324 375 q 338 444 324 414 q 376 498 353 474 q 425 544 399 522 q 474 587 451 565 q 511 634 496 608 q 526 690 526 660 l 526 690 q 522 726 526 708 q 504 761 517 744 q 470 788 492 778 q 414 799 449 799 l 414 799 q 349 786 374 799 q 313 754 325 774 q 295 713 300 735 q 290 669 290 690 l 290 669 l 290 651 q 292 632 290 642 l 292 632 l 74 632 q 71 654 72 642 q 69 682 69 667 l 69 682 q 85 778 69 733 q 132 858 101 822 q 208 918 163 893 q 309 957 253 943 q 432 971 365 971 l 432 971 q 545 959 493 971 q 639 925 597 947 q 709 870 681 903 q 753 796 738 838 q 769 704 769 754 l 769 704 q 752 608 769 649 q 706 538 735 568 q 647 485 678 508 q 589 440 617 461 q 543 395 561 418 q 525 343 525 372 l 525 343 l 525 307 z m 540 0 l 311 0 l 311 221 l 540 221 l 540 0 z " }, $: { ha: 804, x_min: 51, x_max: 754, o: "m 447 -82 l 357 -82 l 357 96 q 265 110 308 99 l 265 110 q 153 154 201 125 q 78 226 106 183 q 51 326 51 269 l 51 326 l 51 338 q 53 346 51 342 l 53 346 l 268 346 l 268 333 q 288 283 269 303 q 338 254 307 263 l 338 254 q 357 249 347 250 l 357 249 l 357 399 q 347 400 353 399 l 347 400 q 249 425 299 411 q 159 463 200 439 q 93 526 118 488 q 68 625 68 565 l 68 625 q 95 734 68 689 q 169 807 122 779 q 279 847 217 835 l 279 847 q 357 858 317 856 l 357 858 l 357 1029 l 447 1029 l 447 858 q 532 847 490 856 l 532 847 q 635 809 589 835 q 708 744 682 783 q 735 651 735 704 l 735 651 q 734 637 735 644 q 733 626 733 629 l 733 626 l 519 626 l 519 638 q 504 676 519 661 q 463 701 489 692 l 463 701 q 447 706 456 703 l 447 706 l 447 574 q 533 556 489 564 l 533 556 q 641 522 590 543 q 723 458 692 500 q 754 342 754 415 l 754 342 q 726 224 754 272 q 650 148 699 176 q 538 107 601 119 l 538 107 q 447 96 494 99 l 447 96 l 447 -82 z m 447 378 l 447 247 q 461 250 454 249 l 461 250 q 511 269 490 256 q 532 310 532 283 l 532 310 q 507 354 532 339 l 507 354 q 447 378 483 368 l 447 378 z m 357 596 l 357 596 l 357 706 q 326 697 340 701 l 326 697 q 299 679 310 690 q 289 651 289 668 l 289 651 q 307 617 289 631 q 357 596 325 604 l 357 596 q 357 596 357 596 z " }, "%": { ha: 1367, x_min: 94, x_max: 1274, o: "m 440 0 l 296 0 l 931 954 l 1075 954 l 440 0 z m 338 472 l 338 472 q 203 499 257 472 q 122 581 149 526 q 94 721 94 636 l 94 721 q 122 861 94 806 q 203 944 149 917 q 338 971 257 971 l 338 971 q 472 944 418 971 q 551 861 525 917 q 578 721 578 806 l 578 721 q 551 581 578 636 q 472 499 525 526 q 338 472 418 472 z m 338 576 l 338 576 q 406 613 388 576 q 424 706 424 649 l 424 706 l 424 738 q 416 804 424 775 q 390 850 408 833 q 338 867 371 867 l 338 867 q 269 831 288 867 q 250 738 250 794 l 250 738 l 250 706 q 269 613 250 649 q 338 576 288 576 z m 1033 -17 l 1033 -17 q 899 11 953 -17 q 818 94 844 39 q 792 232 792 149 l 792 232 q 818 372 792 317 q 899 455 844 428 q 1033 482 953 482 l 1033 482 q 1168 455 1114 482 q 1248 372 1222 428 q 1274 232 1274 317 l 1274 232 q 1248 93 1274 149 q 1168 10 1222 38 q 1033 -17 1114 -17 z m 1033 88 l 1033 88 q 1101 124 1083 88 q 1119 217 1119 160 l 1119 217 l 1119 249 q 1112 316 1119 288 q 1085 361 1104 344 q 1033 378 1067 378 l 1033 378 q 965 342 983 378 q 946 249 946 307 l 946 249 l 946 217 q 965 124 946 160 q 1033 88 983 88 z " }, "&": { ha: 1133, x_min: 90, x_max: 1107, o: "m 526 -17 l 526 -17 q 287 19 383 -17 q 140 117 190 54 q 90 261 90 179 l 90 261 q 139 411 90 353 q 267 493 188 469 l 267 493 l 267 499 q 159 574 203 524 q 115 703 115 625 l 115 703 q 164 842 115 782 q 305 937 213 903 q 528 971 397 971 l 528 971 q 750 937 657 971 q 893 844 843 903 q 943 710 943 785 l 943 710 l 943 675 l 732 675 l 732 696 q 708 753 731 729 q 644 789 686 776 q 539 801 601 801 l 539 801 q 456 792 492 801 q 396 765 419 782 q 360 724 372 747 q 349 674 349 701 l 349 674 q 367 612 349 636 q 415 576 385 588 q 478 564 444 564 l 478 564 l 599 564 l 599 407 l 463 407 q 394 396 426 407 q 342 359 361 385 q 324 288 324 333 l 324 288 q 345 215 324 244 q 413 169 367 185 q 528 153 458 153 l 528 153 q 648 170 603 153 q 713 219 693 188 q 732 290 732 250 l 732 290 l 732 564 l 1107 564 l 1107 407 l 944 407 l 944 294 q 901 131 944 201 q 764 22 857 60 q 526 -17 671 -17 z " }, "-": { ha: 463, x_min: 56, x_max: 407, o: "m 407 283 l 56 283 l 56 474 l 407 474 l 407 283 z " }, ":": { ha: 464, x_min: 113, x_max: 353, o: "m 353 500 l 113 500 l 113 732 l 353 732 l 353 500 z m 353 0 l 113 0 l 113 232 l 353 232 l 353 0 z " }, "|": { ha: 368, x_min: 104, x_max: 264, o: "m 264 -281 l 104 -281 l 104 1007 l 264 1007 l 264 -281 z " } }, familyName: "Archivo ExtraBold", ascender: 1219, descender: -292, underlinePosition: -148, underlineThickness: 44, boundingBox: { xMin: -220, xMax: 1393, yMin: -405, yMax: 1100 }, resolution: 1e3 };
+
+// src/three/fonts/archivo800i.json
+var archivo800i_default = { glyphs: { "0": { ha: 868, x_min: 64, x_max: 844, o: "m 385 -17 l 385 -17 q 205 17 276 -17 q 99 122 133 51 q 64 299 64 193 l 64 299 q 66 355 64 325 q 72 416 68 385 q 83 482 76 447 l 83 482 q 140 701 106 608 q 228 853 175 793 q 353 942 281 913 q 524 971 426 971 l 524 971 q 705 937 635 971 q 810 833 775 903 q 844 657 844 763 l 844 657 q 842 601 844 631 q 835 540 839 572 q 825 475 832 508 l 825 475 q 768 255 804 347 q 680 102 732 163 q 556 13 628 42 q 385 -17 483 -17 z m 394 149 l 394 149 q 473 167 442 149 q 526 226 504 186 q 565 335 549 267 q 600 499 582 403 l 600 499 q 610 558 606 532 q 617 604 614 583 q 620 642 619 625 q 621 672 621 658 l 621 672 q 596 774 621 742 q 514 806 571 806 l 514 806 q 435 787 467 806 q 381 727 403 768 q 342 619 360 686 q 307 456 325 553 l 307 456 q 297 397 301 422 q 290 351 293 371 q 287 314 288 331 q 286 283 286 297 l 286 283 q 311 182 286 215 q 394 149 336 149 z " }, "1": { ha: 868, x_min: 40, x_max: 743, o: "m 711 0 l 40 0 l 72 179 l 300 179 l 390 689 l 161 689 l 186 824 q 276 838 226 826 q 380 868 326 850 q 484 908 433 886 q 576 956 535 931 l 576 956 l 665 956 l 528 179 l 743 179 l 711 0 z " }, "2": { ha: 868, x_min: -3, x_max: 846, o: "m 729 0 l -3 0 l 8 57 q 60 182 21 125 q 153 288 99 239 q 271 379 208 336 q 394 462 333 422 q 505 542 454 501 q 585 624 556 582 q 615 711 615 665 l 615 711 q 590 772 615 744 q 503 800 564 800 l 503 800 q 420 783 456 800 q 363 735 385 765 q 333 663 342 704 l 333 663 l 326 621 l 113 621 q 155 779 121 713 q 245 888 189 846 q 373 951 301 931 q 525 971 444 971 l 525 971 q 705 938 633 971 q 811 848 776 904 q 846 724 846 792 l 846 724 q 826 610 846 663 q 771 515 806 558 q 692 433 736 471 q 599 363 647 396 q 501 300 550 331 q 410 239 453 269 l 410 239 q 383 219 397 231 q 361 197 369 207 l 361 197 l 764 197 l 729 0 z " }, "3": { ha: 868, x_min: 38, x_max: 849, o: "m 388 -17 l 388 -17 q 192 13 269 -17 q 76 94 115 42 q 38 215 38 147 l 38 215 q 40 247 38 229 q 47 289 42 265 l 47 289 l 258 289 q 254 264 256 274 q 253 246 253 254 l 253 246 q 288 174 253 199 q 388 150 324 150 l 388 150 q 481 169 440 150 q 544 226 521 189 q 567 315 567 263 l 567 315 q 551 370 567 350 q 510 399 536 390 q 453 407 485 407 l 453 407 l 363 407 l 389 564 l 471 564 q 526 574 500 564 q 572 602 551 583 q 604 648 593 621 q 615 710 615 675 l 615 710 q 602 760 615 739 q 563 792 589 781 q 501 804 538 804 l 501 804 q 426 790 458 804 q 374 750 394 775 q 349 693 354 725 l 349 693 l 346 675 l 140 675 l 146 707 q 209 843 160 783 q 340 937 258 903 q 526 971 421 971 l 526 971 q 700 943 628 971 q 810 865 772 915 q 849 744 849 814 l 849 744 q 824 633 849 682 q 756 550 799 583 q 663 499 713 517 l 663 499 l 661 493 q 758 422 722 471 q 793 300 793 372 l 793 300 q 739 128 793 199 q 592 20 685 57 q 388 -17 499 -17 z " }, "4": { ha: 869, x_min: 13, x_max: 835, o: "m 640 0 l 419 0 l 457 203 l 13 203 l 43 379 q 169 551 106 457 q 290 751 232 644 q 397 971 349 858 l 397 971 l 639 971 q 578 845 617 913 q 494 709 540 778 q 398 577 447 640 q 303 462 349 514 q 222 378 257 410 l 222 378 l 488 378 l 522 585 q 567 646 543 611 q 615 718 592 681 q 658 792 639 756 q 690 857 678 828 l 690 857 l 792 857 l 708 378 l 835 378 l 804 203 l 678 203 l 640 0 z " }, "5": { ha: 868, x_min: 40, x_max: 847, o: "m 393 -17 l 393 -17 q 202 15 281 -17 q 82 104 124 46 q 40 242 40 163 l 40 242 q 42 272 40 256 q 46 303 43 288 l 46 303 l 258 303 q 256 285 257 293 q 256 268 256 276 l 256 268 q 270 207 256 233 q 313 166 285 181 q 383 151 342 151 l 383 151 q 456 165 422 151 q 515 204 489 178 q 555 267 540 231 q 569 350 569 304 l 569 350 q 538 439 569 407 q 446 471 506 471 l 446 471 q 376 458 406 471 q 326 429 346 446 q 292 397 306 413 l 292 397 l 104 422 l 238 954 l 847 954 l 813 756 l 382 756 l 336 571 q 378 596 353 582 q 440 619 403 610 q 528 629 478 629 l 528 629 q 671 600 610 629 q 766 513 732 571 q 800 374 800 456 l 800 374 q 746 167 800 254 q 599 31 692 79 q 393 -17 507 -17 z " }, "6": { ha: 868, x_min: 58, x_max: 840, o: "m 393 -17 l 393 -17 q 211 17 286 -17 q 97 121 136 50 q 58 304 58 192 l 58 304 q 62 378 58 339 q 74 460 65 417 l 74 460 q 166 763 107 651 q 315 922 225 874 q 528 971 406 971 l 528 971 q 697 942 628 971 q 803 859 767 914 q 840 728 840 804 l 840 728 q 839 695 840 713 q 835 660 838 678 l 835 660 l 621 660 q 624 683 624 672 q 625 701 625 693 l 625 701 q 598 780 625 754 q 517 806 571 806 l 517 806 q 418 775 456 806 q 358 684 381 744 q 319 533 336 624 l 319 533 q 372 569 340 551 q 442 598 403 586 q 525 610 482 610 l 525 610 q 675 581 613 610 q 772 496 738 551 q 806 363 806 440 l 806 363 q 774 205 806 275 q 688 85 743 135 q 557 10 632 36 q 393 -17 482 -17 z m 401 149 l 401 149 q 474 165 442 149 q 528 206 507 181 l 528 206 q 564 266 551 231 q 576 340 576 301 l 576 340 q 563 403 576 376 q 524 443 550 429 q 457 457 497 457 l 457 457 q 383 442 417 457 q 328 401 350 428 l 328 401 q 292 342 304 376 q 281 265 281 307 l 281 265 q 293 203 281 229 q 333 163 306 176 q 401 149 360 149 z " }, "7": { ha: 868, x_min: 129, x_max: 914, o: "m 411 0 l 136 0 q 199 210 156 107 q 301 409 242 313 q 433 592 361 506 q 581 754 504 679 l 581 754 l 129 754 l 165 954 l 914 954 l 893 835 q 772 705 832 772 q 656 563 711 638 q 553 410 600 489 q 474 249 507 332 q 425 76 440 165 l 425 76 q 417 40 421 57 q 411 0 414 22 l 411 0 z " }, "8": { ha: 868, x_min: 25, x_max: 829, o: "m 371 -17 l 371 -17 q 181 12 258 -17 q 65 93 104 40 q 25 215 25 146 l 25 215 q 49 332 25 279 q 117 424 72 385 q 221 486 161 464 l 221 486 q 154 562 176 518 q 132 657 132 606 l 132 657 q 160 784 132 726 q 241 883 189 842 q 362 948 293 925 q 513 971 431 971 l 513 971 q 680 942 608 971 q 790 860 751 913 q 829 735 829 807 l 829 735 q 810 635 829 682 q 756 551 792 589 q 665 486 719 514 l 665 486 q 752 413 721 460 q 783 300 783 367 l 783 300 q 731 132 783 203 q 587 22 679 61 q 371 -17 494 -17 z m 383 149 l 383 149 q 428 153 407 149 q 469 167 450 158 q 504 189 489 176 l 504 189 q 540 239 526 210 q 554 306 554 268 l 554 306 q 520 381 554 356 q 429 407 486 407 l 429 407 q 385 403 406 407 q 345 390 364 399 q 311 368 326 382 l 311 368 q 274 317 288 347 q 260 249 260 288 l 260 249 q 292 174 260 200 q 383 149 325 149 z m 456 567 l 456 567 q 500 571 479 567 q 539 584 521 575 q 571 606 557 593 l 571 606 q 605 651 593 624 q 617 713 617 678 l 617 713 q 585 783 617 760 q 500 807 553 807 l 500 807 q 456 802 476 807 q 419 789 436 797 q 388 768 401 781 l 388 768 q 354 722 367 750 q 342 657 342 694 l 342 657 q 372 589 342 611 q 456 567 403 567 z " }, "9": { ha: 868, x_min: 61, x_max: 843, o: "m 374 -17 l 374 -17 q 205 13 275 -17 q 98 97 135 42 q 61 226 61 151 l 61 226 q 63 260 61 243 q 67 294 64 276 l 67 294 l 279 294 q 277 272 278 282 q 276 253 276 261 l 276 253 q 303 175 276 201 q 385 149 331 149 l 385 149 q 484 179 447 149 q 544 270 521 210 q 582 421 567 331 l 582 421 q 530 385 561 403 q 460 356 499 368 q 376 344 421 344 l 376 344 q 226 374 289 344 q 130 460 164 404 q 96 592 96 515 l 96 592 q 127 749 96 679 q 214 869 158 819 q 344 944 269 918 q 508 971 419 971 l 508 971 q 690 938 615 971 q 804 833 765 904 q 843 650 843 763 l 843 650 q 840 576 843 615 q 828 494 836 538 l 828 494 q 736 192 796 304 q 586 32 676 81 q 374 -17 496 -17 z m 444 497 l 444 497 q 518 513 485 497 q 574 553 551 528 l 574 553 q 609 613 597 578 q 621 690 621 649 l 621 690 q 608 752 621 726 q 568 792 594 778 q 500 806 542 806 l 500 806 q 427 790 460 806 q 374 749 394 775 l 374 749 q 338 689 350 724 q 325 614 325 654 l 325 614 q 338 552 325 578 q 378 512 351 526 q 444 497 404 497 z " }, "=": { ha: 901, x_min: 60, x_max: 840, o: "m 811 432 l 113 432 l 143 593 l 840 593 l 811 432 z m 757 126 l 60 126 l 88 288 l 786 288 l 757 126 z " }, "+": { ha: 901, x_min: 86, x_max: 814, o: "m 467 0 l 303 0 l 353 281 l 86 281 l 115 442 l 383 442 l 432 722 l 596 722 l 546 442 l 814 442 l 785 281 l 517 281 l 467 0 z " }, " ": { ha: 263, x_min: 0, x_max: 0, o: "" }, A: { ha: 1036, x_min: -53, x_max: 961, o: "m 208 0 l -53 0 l 474 954 l 772 954 l 961 0 l 706 0 l 678 165 l 294 165 l 208 0 z m 489 549 l 389 351 l 649 351 l 615 550 q 608 600 613 575 l 608 600 l 600 649 q 593 694 596 672 q 588 738 590 717 l 588 738 l 582 738 q 551 674 568 708 q 519 608 535 640 l 519 608 l 489 549 z " }, B: { ha: 1035, x_min: 39, x_max: 1017, o: "m 631 0 l 39 0 l 208 954 l 744 954 q 895 926 835 954 q 986 850 956 899 q 1017 739 1017 801 l 1017 739 q 991 631 1017 681 q 921 546 965 581 q 818 499 876 511 l 818 499 l 817 493 q 921 424 879 474 q 963 294 963 375 l 963 294 q 917 133 963 199 q 797 33 872 67 q 631 0 721 0 l 631 0 z m 358 397 l 324 192 l 592 192 q 654 206 626 192 q 697 247 682 219 q 713 311 713 274 l 713 311 q 690 374 713 350 q 615 397 667 397 l 615 397 l 358 397 z m 425 769 l 390 575 l 638 575 q 691 584 668 575 q 728 609 714 593 q 749 645 742 625 q 756 688 756 665 l 756 688 q 733 748 756 726 q 672 769 711 769 l 672 769 l 425 769 z " }, C: { ha: 1044, x_min: 69, x_max: 1031, o: "m 490 -17 l 490 -17 q 177 75 285 -17 q 69 356 69 167 l 69 356 q 73 426 69 390 q 82 497 76 461 l 82 497 q 181 755 110 649 q 364 916 251 861 q 626 971 476 971 l 626 971 q 840 936 749 971 q 981 833 931 901 q 1031 664 1031 765 l 1031 664 q 1028 623 1031 644 q 1024 581 1026 601 l 1024 581 l 779 581 q 783 605 782 593 q 783 626 783 617 l 783 626 q 764 708 783 675 q 708 759 744 742 q 618 776 671 776 l 618 776 q 513 758 558 776 q 433 705 467 739 q 378 622 400 671 q 344 515 356 574 l 344 515 q 333 456 338 479 q 327 415 329 432 q 324 386 325 399 q 324 363 324 374 l 324 363 q 343 263 324 304 q 403 199 363 221 q 504 178 443 178 l 504 178 q 623 201 572 178 q 707 267 674 224 q 751 371 740 310 l 751 371 l 986 371 q 899 156 965 242 q 730 26 833 69 q 490 -17 626 -17 z " }, D: { ha: 1049, x_min: 40, x_max: 1018, o: "m 465 0 l 40 0 l 208 954 l 590 954 q 907 864 796 954 q 1018 583 1018 774 l 1018 583 q 1015 520 1018 553 q 1007 454 1013 488 l 1007 454 q 909 204 981 306 q 726 51 838 103 q 465 0 614 0 l 465 0 z m 422 760 l 324 194 l 465 194 q 571 211 524 194 q 653 260 618 228 q 712 338 689 292 q 744 443 735 385 l 744 443 q 756 509 753 485 q 761 549 760 533 q 763 575 763 564 l 763 575 q 741 677 763 636 q 676 739 719 718 q 568 760 633 760 l 568 760 l 422 760 z " }, E: { ha: 971, x_min: 39, x_max: 997, o: "m 838 0 l 39 0 l 208 954 l 997 954 l 963 760 l 424 760 l 392 581 l 863 581 l 829 390 l 358 390 l 324 194 l 872 194 l 838 0 z " }, F: { ha: 890, x_min: 39, x_max: 942, o: "m 289 0 l 39 0 l 208 954 l 942 954 l 907 760 l 424 760 l 386 554 l 811 554 l 778 364 l 354 364 l 289 0 z " }, G: { ha: 1132, x_min: 71, x_max: 1086, o: "m 479 -17 l 479 -17 q 178 75 285 -17 q 71 353 71 167 l 71 353 q 78 463 71 410 q 99 561 85 515 l 99 561 q 210 785 133 694 q 400 924 288 876 q 651 971 513 971 l 651 971 q 824 953 744 971 q 962 899 903 935 q 1053 808 1021 863 q 1086 681 1086 754 l 1086 681 q 1085 650 1086 665 q 1081 618 1083 635 l 1081 618 l 836 618 q 838 632 838 625 l 838 632 l 838 643 q 824 700 838 675 q 785 742 811 725 q 726 767 760 758 q 654 776 693 776 l 654 776 q 538 759 590 776 q 446 708 485 742 q 381 626 407 674 q 346 515 356 578 l 346 515 q 335 458 339 481 q 331 418 332 435 l 331 418 l 326 390 q 325 368 325 379 l 325 368 q 349 263 325 306 q 417 199 372 221 q 531 178 463 178 l 531 178 q 652 199 596 178 q 746 256 708 219 q 790 342 783 293 l 790 342 l 792 349 l 535 349 l 567 524 l 1064 524 l 972 0 l 828 0 l 819 101 q 721 36 774 63 q 609 -3 668 10 q 479 -17 550 -17 z " }, H: { ha: 1093, x_min: 39, x_max: 1093, o: "m 289 0 l 39 0 l 208 954 l 457 954 l 393 588 l 779 588 l 844 954 l 1093 954 l 925 0 l 675 0 l 743 385 l 357 385 l 289 0 z " }, I: { ha: 457, x_min: 39, x_max: 457, o: "m 289 0 l 39 0 l 208 954 l 457 954 l 289 0 z " }, J: { ha: 875, x_min: 22, x_max: 876, o: "m 356 -17 l 356 -17 q 108 46 193 -17 q 22 233 22 108 l 22 233 q 25 274 22 251 q 35 332 28 297 l 35 332 l 272 332 q 265 288 267 304 q 264 261 264 271 l 264 261 q 288 198 264 218 q 365 178 313 178 l 365 178 q 465 215 425 178 q 518 331 504 253 l 518 331 l 628 954 l 876 954 l 767 325 q 691 130 746 206 q 551 19 636 54 q 356 -17 467 -17 z " }, K: { ha: 1069, x_min: 39, x_max: 1142, o: "m 289 0 l 39 0 l 208 954 l 457 954 l 385 546 l 819 954 l 1142 954 l 719 564 l 981 0 l 697 0 l 524 397 l 331 238 l 289 0 z " }, L: { ha: 865, x_min: 40, x_max: 803, o: "m 767 0 l 40 0 l 208 954 l 457 954 l 325 204 l 803 204 l 767 0 z " }, M: { ha: 1269, x_min: 39, x_max: 1269, o: "m 271 0 l 39 0 l 208 954 l 557 954 l 599 529 q 604 467 601 506 q 610 387 607 428 q 614 313 613 346 l 614 313 l 624 313 q 652 384 638 347 q 682 459 667 421 q 713 531 697 497 l 713 531 l 906 954 l 1269 954 l 1100 0 l 858 0 l 942 467 q 958 554 949 507 q 978 644 968 601 q 994 713 988 688 l 994 713 l 985 713 q 970 675 979 697 q 953 632 961 653 q 938 596 944 611 l 938 596 l 663 0 l 453 0 l 396 589 q 392 652 394 618 q 388 711 389 686 l 388 711 l 378 711 l 372 631 q 363 542 368 585 q 353 467 358 499 l 353 467 l 271 0 z " }, N: { ha: 1093, x_min: 39, x_max: 1093, o: "m 271 0 l 39 0 l 208 954 l 428 954 l 688 503 q 712 463 699 485 q 737 418 725 440 q 758 378 749 396 l 758 378 l 765 381 q 772 431 768 406 q 779 476 776 456 l 779 476 l 863 954 l 1093 954 l 925 0 l 707 0 l 438 461 q 407 515 425 482 q 375 574 389 549 l 375 574 l 368 572 q 360 515 365 546 q 351 464 354 483 l 351 464 l 271 0 z " }, O: { ha: 1125, x_min: 69, x_max: 1094, o: "m 513 -17 l 513 -17 q 273 26 372 -17 q 122 152 174 68 q 69 361 69 236 l 69 361 q 73 424 69 393 q 82 488 76 456 l 82 488 q 180 751 108 643 q 369 915 251 858 q 650 971 486 971 l 650 971 q 891 928 792 971 q 1042 801 990 886 q 1094 590 1094 717 l 1094 590 q 1092 531 1094 561 q 1083 469 1089 500 l 1083 469 q 984 204 1057 313 q 793 40 911 96 q 513 -17 675 -17 z m 525 178 l 525 178 q 638 197 588 178 q 724 250 688 215 q 785 335 761 285 q 821 449 810 385 l 821 449 q 830 503 826 481 q 835 540 833 525 q 838 564 838 554 q 839 583 839 574 l 839 583 q 816 687 839 643 q 748 753 793 731 q 636 776 703 776 l 636 776 q 525 758 575 776 q 438 705 475 740 q 377 619 401 669 q 342 507 353 569 l 342 507 q 333 451 336 474 q 328 415 329 429 q 326 390 326 400 q 325 371 325 381 l 325 371 q 347 268 325 311 q 414 201 369 225 q 525 178 458 178 z " }, P: { ha: 969, x_min: 39, x_max: 993, o: "m 289 0 l 39 0 l 208 954 l 699 954 q 861 921 796 954 q 960 828 926 888 q 993 689 993 768 l 993 689 q 967 540 993 607 q 892 424 940 474 q 775 349 843 375 q 624 322 707 322 l 624 322 l 346 322 l 289 0 z m 424 761 l 381 514 l 588 514 q 668 533 635 514 q 719 585 701 551 q 738 663 738 618 l 738 663 q 710 735 738 710 q 625 761 682 761 l 625 761 l 424 761 z " }, Q: { ha: 1125, x_min: 69, x_max: 1094, o: "m 956 -182 l 668 -182 l 532 -17 l 513 -17 q 273 26 372 -17 q 122 152 174 68 q 69 361 69 236 l 69 361 q 73 424 69 393 q 82 488 76 456 l 82 488 q 180 751 108 643 q 369 915 251 858 q 650 971 486 971 l 650 971 q 891 928 792 971 q 1042 801 990 886 q 1094 590 1094 717 l 1094 590 q 1092 531 1094 561 q 1083 469 1089 500 l 1083 469 q 979 197 1057 308 q 776 33 901 86 l 776 33 l 956 -182 z m 525 178 l 525 178 q 638 197 588 178 q 724 250 688 215 q 785 335 761 285 q 821 449 810 385 l 821 449 q 830 503 826 481 q 835 540 833 525 q 838 564 838 554 q 839 583 839 574 l 839 583 q 816 687 839 643 q 748 753 793 731 q 636 776 703 776 l 636 776 q 525 758 575 776 q 438 705 475 740 q 377 619 401 669 q 342 507 353 569 l 342 507 q 333 451 336 474 q 328 415 329 429 q 326 390 326 400 q 325 371 325 381 l 325 371 q 347 268 325 311 q 414 201 369 225 q 525 178 458 178 z " }, R: { ha: 1042, x_min: 40, x_max: 1035, o: "m 289 0 l 40 0 l 208 954 l 743 954 q 906 923 842 954 q 1003 838 971 892 q 1035 713 1035 783 l 1035 713 q 1008 563 1035 628 q 934 451 982 497 q 818 378 886 406 l 818 378 l 943 0 l 671 0 l 572 336 l 349 336 l 289 0 z m 424 765 l 382 521 l 629 521 q 701 540 668 521 q 756 593 735 558 q 776 672 776 628 l 776 672 q 751 740 776 715 q 682 765 726 765 l 682 765 l 424 765 z " }, S: { ha: 968, x_min: 33, x_max: 938, o: "m 458 -17 l 458 -17 q 292 -3 369 -17 q 156 38 214 10 q 66 115 99 67 q 33 232 33 163 l 33 232 q 36 274 33 251 q 44 315 39 297 l 44 315 l 285 315 q 279 293 282 306 q 276 271 276 281 l 276 271 q 297 215 276 236 q 356 183 318 193 q 443 174 393 174 l 443 174 q 517 179 483 174 q 577 196 551 185 q 617 226 603 207 q 632 274 632 246 l 632 274 q 613 318 632 300 q 560 349 593 336 q 487 373 528 363 q 401 396 446 383 l 401 396 q 301 428 351 410 q 211 474 251 446 q 147 544 171 501 q 122 647 122 586 l 122 647 q 158 795 122 735 q 256 895 194 856 q 394 953 317 935 q 553 971 471 971 q 705 957 635 971 q 827 914 775 943 q 908 840 879 885 q 938 733 938 796 l 938 733 q 936 708 938 722 q 931 668 935 693 l 931 668 l 693 668 q 696 686 696 679 l 696 686 l 696 697 q 661 763 696 738 q 558 788 626 788 l 558 788 q 465 776 504 788 q 404 744 425 764 q 383 696 383 724 l 383 696 q 397 660 383 675 q 433 633 410 644 q 488 611 457 621 q 557 593 519 601 l 557 593 q 670 562 611 579 q 781 515 729 544 q 863 441 832 486 q 894 329 894 396 l 894 329 q 858 174 894 239 q 760 66 822 108 q 621 3 699 24 q 458 -17 543 -17 z " }, T: { ha: 938, x_min: 103, x_max: 1007, o: "m 529 0 l 279 0 l 413 750 l 103 750 l 139 954 l 1007 954 l 971 750 l 661 750 l 529 0 z " }, U: { ha: 1088, x_min: 96, x_max: 1090, o: "m 496 -17 l 496 -17 q 201 60 307 -17 q 96 290 96 138 l 96 290 q 98 333 96 311 q 104 379 100 356 l 104 379 l 206 954 l 454 954 l 353 376 q 349 351 351 365 q 347 325 347 338 l 347 325 q 388 217 347 256 q 510 178 428 178 l 510 178 q 663 231 604 178 q 739 375 722 283 l 739 375 l 842 954 l 1090 954 l 986 363 q 900 151 964 236 q 735 25 836 67 q 496 -17 633 -17 z " }, V: { ha: 1013, x_min: 124, x_max: 1097, o: "m 588 0 l 299 0 l 124 954 l 381 954 l 454 465 q 464 397 458 435 q 474 325 469 360 q 482 264 479 290 l 482 264 l 490 264 q 524 333 506 296 q 560 406 542 369 q 592 471 578 442 l 592 471 l 833 954 l 1097 954 l 588 0 z " }, W: { ha: 1360, x_min: 115, x_max: 1454, o: "m 461 0 l 182 0 l 115 954 l 358 954 l 388 453 q 389 411 389 435 q 390 364 389 388 q 392 318 392 340 l 392 318 l 397 318 q 414 365 406 340 q 431 412 422 389 q 446 453 439 435 l 446 453 l 643 954 l 914 954 l 939 453 q 942 411 940 435 l 942 411 l 943 364 q 943 318 943 340 l 943 318 l 949 318 q 965 363 957 339 l 965 363 l 982 410 q 999 453 990 433 l 999 453 l 1200 954 l 1454 954 l 1043 0 l 764 0 l 735 528 q 733 574 733 550 q 731 622 732 597 q 729 665 731 646 l 729 665 l 724 665 q 708 620 717 644 q 690 572 699 596 q 674 528 682 549 l 674 528 l 461 0 z " }, X: { ha: 1022, x_min: -56, x_max: 1085, o: "m 243 0 l -56 0 l 389 506 l 146 954 l 432 954 l 560 682 l 565 682 l 790 954 l 1085 954 l 682 499 l 949 0 l 664 0 l 515 318 l 508 318 l 243 0 z " }, Y: { ha: 1017, x_min: 117, x_max: 1110, o: "m 571 0 l 322 0 l 389 378 l 117 954 l 385 954 l 544 596 l 551 596 l 831 954 l 1110 954 l 638 378 l 571 0 z " }, Z: { ha: 947, x_min: -25, x_max: 994, o: "m 838 0 l -25 0 l -7 100 l 567 760 l 143 760 l 178 954 l 994 954 l 978 854 l 401 194 l 872 194 l 838 0 z " }, a: { ha: 875, x_min: 33, x_max: 849, o: "m 292 -17 l 292 -17 q 154 15 213 -17 q 65 107 96 46 q 33 257 33 168 l 33 257 q 36 315 33 285 q 44 378 39 344 l 44 378 q 115 586 67 504 q 233 708 163 668 q 393 749 304 749 l 393 749 q 480 738 440 749 q 550 703 519 726 q 601 643 581 681 l 601 643 l 611 643 l 665 732 l 849 732 l 815 553 q 797 451 807 503 q 779 354 788 400 q 764 271 771 308 q 753 210 757 233 q 750 179 750 186 l 750 179 q 760 151 750 160 q 788 142 771 142 l 788 142 l 831 142 l 807 8 q 751 -9 783 -1 q 685 -17 719 -17 l 685 -17 q 612 -5 643 -17 q 561 32 581 7 l 561 32 q 545 60 551 43 q 536 94 539 76 l 536 94 l 526 94 q 421 12 482 40 q 292 -17 360 -17 z m 381 161 l 381 161 q 444 175 415 161 q 496 214 474 189 q 533 274 518 239 q 556 350 549 308 l 556 350 q 563 395 561 378 q 566 424 565 413 q 567 444 567 436 l 567 444 q 555 512 567 483 q 518 556 543 540 q 453 571 493 571 l 453 571 q 367 551 401 571 q 311 490 332 531 q 279 390 290 449 l 279 390 q 269 333 272 354 q 265 299 265 313 q 264 278 264 286 l 264 278 q 291 191 264 221 q 381 161 318 161 z " }, b: { ha: 879, x_min: 24, x_max: 840, o: "m 474 -17 l 474 -17 q 339 13 397 -17 q 253 101 281 42 l 253 101 l 243 101 l 208 0 l 24 0 l 199 1006 l 426 1006 l 365 657 l 375 657 q 434 708 401 688 q 505 738 467 728 q 585 749 543 749 l 585 749 q 721 718 664 749 q 809 626 778 688 q 840 475 840 565 l 840 475 q 838 418 840 449 q 828 354 835 388 l 828 354 q 758 147 807 229 q 636 24 708 64 q 474 -17 564 -17 z m 419 161 l 419 161 q 506 181 471 161 q 561 242 540 201 q 594 342 582 283 l 594 342 q 604 399 601 378 q 608 433 607 419 q 610 454 610 446 l 610 454 q 598 519 610 493 q 560 558 586 544 q 492 571 533 571 l 492 571 q 426 557 456 571 q 376 518 397 543 q 338 458 354 493 q 315 382 322 424 l 315 382 q 308 338 311 356 q 305 308 306 319 q 304 288 304 297 l 304 288 q 316 220 304 249 q 353 176 328 192 q 419 161 378 161 z " }, c: { ha: 850, x_min: 44, x_max: 814, o: "m 389 -17 l 389 -17 q 201 15 278 -17 q 85 113 125 47 q 44 278 44 179 l 44 278 q 48 347 44 313 q 58 411 51 381 l 58 411 q 109 552 74 490 q 198 658 144 614 q 322 726 251 703 q 479 749 393 749 l 479 749 q 654 721 579 749 q 772 640 729 693 q 814 510 814 588 l 814 510 q 813 478 814 494 q 808 446 811 463 l 808 446 l 585 446 q 587 464 586 456 q 588 481 588 472 l 588 481 q 575 537 588 514 q 536 572 563 560 q 469 585 510 585 l 469 585 q 380 561 417 585 q 321 495 343 538 q 289 394 299 453 l 289 394 q 278 336 282 358 q 274 301 275 314 q 272 278 272 288 l 272 278 q 286 206 272 235 q 328 163 300 178 q 400 149 357 149 l 400 149 q 481 165 447 149 q 537 212 515 181 q 567 288 558 243 l 567 288 l 781 288 q 710 117 764 185 q 573 16 656 49 q 389 -17 490 -17 z " }, d: { ha: 879, x_min: 40, x_max: 904, o: "m 299 -17 l 299 -17 q 160 15 218 -17 q 71 110 101 47 q 40 260 40 172 l 40 260 q 43 317 40 288 q 51 381 46 347 l 51 381 q 100 543 68 474 q 176 658 132 613 q 277 726 221 704 q 401 749 333 749 l 401 749 q 488 738 449 749 q 558 708 528 728 q 607 657 589 688 l 607 657 l 615 657 l 676 1006 l 904 1006 l 728 0 l 542 0 l 542 101 l 532 101 q 427 13 488 42 q 299 -17 367 -17 z m 386 161 l 386 161 q 473 184 438 161 q 531 250 508 207 q 563 350 553 293 l 563 350 q 570 394 568 376 q 574 423 572 411 q 575 444 575 435 l 575 444 q 563 512 575 483 q 525 556 550 540 q 460 571 500 571 l 460 571 q 374 551 408 571 q 318 491 339 531 q 288 393 297 451 l 288 393 q 276 335 281 357 q 272 299 272 313 q 271 276 271 286 l 271 276 q 298 190 271 219 q 386 161 325 161 z " }, e: { ha: 860, x_min: 44, x_max: 815, o: "m 403 -17 l 403 -17 q 208 15 288 -17 q 86 111 128 46 q 44 276 44 176 l 44 276 q 47 344 44 311 q 57 408 50 376 l 57 408 q 131 590 76 514 q 273 707 186 665 q 475 749 360 749 l 475 749 q 662 719 586 749 q 776 628 738 689 q 815 471 815 567 l 815 471 q 812 409 815 444 q 797 321 808 374 l 797 321 l 272 321 q 268 294 269 308 q 267 267 267 279 l 267 267 q 281 198 267 226 q 325 156 294 169 q 403 142 356 142 l 403 142 q 467 149 439 142 q 514 173 494 157 q 547 211 533 189 q 564 261 560 233 l 564 261 l 786 261 q 744 142 775 194 q 663 55 713 90 q 549 1 614 19 q 403 -17 483 -17 z m 294 447 l 294 447 l 586 447 q 590 467 589 457 q 590 485 590 478 l 590 485 q 577 544 590 521 q 538 580 564 568 q 478 592 513 592 l 478 592 q 393 574 429 592 q 333 525 357 557 q 294 447 310 493 z " }, f: { ha: 489, x_min: -118, x_max: 608, o: "m 25 -274 l 25 -274 q -23 -271 4 -274 q -75 -262 -50 -268 q -118 -251 -100 -257 l -118 -251 l -92 -107 l -21 -107 q 37 -87 17 -107 q 63 -31 57 -68 l 63 -31 l 167 567 l 64 567 l 93 732 l 197 732 l 207 792 q 253 920 222 869 q 338 995 285 971 q 469 1019 392 1019 l 469 1019 q 519 1017 493 1019 q 569 1008 546 1014 q 608 997 593 1003 l 608 997 l 583 854 l 517 854 q 459 838 478 854 q 433 786 440 821 l 433 786 l 425 732 l 561 732 l 532 567 l 394 567 l 286 -50 q 244 -170 274 -119 q 162 -247 215 -221 q 25 -274 108 -274 z " }, g: { ha: 878, x_min: 6, x_max: 854, o: "m 314 -274 l 314 -274 q 144 -252 213 -274 q 40 -191 75 -231 q 6 -96 6 -151 l 6 -96 q 7 -68 6 -86 q 15 -28 8 -50 l 15 -28 l 236 -28 q 234 -36 235 -32 q 233 -44 233 -40 l 233 -44 q 245 -77 233 -64 q 279 -97 257 -90 q 333 -104 301 -104 l 333 -104 q 424 -85 388 -104 q 480 -32 460 -67 q 508 49 500 3 l 508 49 q 515 87 511 68 q 521 122 518 106 l 521 122 l 511 122 q 448 71 482 92 q 375 40 414 50 q 293 31 336 31 l 293 31 q 160 60 217 31 q 74 148 104 89 q 44 296 44 207 l 44 296 q 47 346 44 319 q 54 401 49 372 l 54 401 q 179 664 86 579 q 408 749 272 749 l 408 749 q 538 719 483 749 q 621 631 593 689 l 621 631 l 631 631 l 668 732 l 854 732 l 738 68 q 660 -129 715 -54 q 518 -239 604 -204 q 314 -274 432 -274 z m 393 206 l 393 206 q 458 219 429 206 q 510 256 488 232 q 546 310 532 279 q 567 379 560 342 l 567 379 q 572 413 569 400 q 574 435 574 425 q 575 453 575 444 l 575 453 q 563 515 575 489 q 524 556 550 542 q 458 571 499 571 l 458 571 q 374 551 410 571 q 317 495 339 532 q 288 406 296 458 l 288 406 q 280 363 282 379 q 277 335 278 346 q 276 317 276 325 l 276 317 q 288 258 276 282 q 325 219 299 233 q 393 206 351 206 z " }, h: { ha: 874, x_min: 24, x_max: 818, o: "m 250 0 l 24 0 l 199 1006 l 426 1006 l 365 653 l 374 653 q 438 703 401 682 q 517 737 475 725 q 601 749 560 749 l 601 749 q 717 727 669 749 q 792 663 765 706 q 818 556 818 621 l 818 556 q 815 512 818 535 q 808 464 813 489 l 808 464 l 726 0 l 499 0 l 576 440 q 579 464 578 453 q 581 485 581 475 l 581 485 q 571 533 581 514 q 542 560 561 551 q 494 569 522 569 l 494 569 q 435 559 464 569 q 383 528 406 549 q 345 478 361 507 q 322 413 329 449 l 322 413 l 250 0 z " }, i: { ha: 400, x_min: 22, x_max: 425, o: "m 394 831 l 167 831 l 197 1006 l 425 1006 l 394 831 z m 250 0 l 22 0 l 151 732 l 379 732 l 250 0 z " }, j: { ha: 397, x_min: -164, x_max: 422, o: "m 392 831 l 164 831 l 194 1006 l 422 1006 l 392 831 z m -8 -274 l -8 -274 q -60 -271 -31 -274 q -118 -262 -90 -268 q -164 -251 -146 -257 l -164 -251 l -139 -107 l -68 -107 q -11 -87 -31 -107 q 15 -31 8 -68 l 15 -31 l 150 732 l 378 732 l 239 -51 q 199 -171 226 -121 q 122 -247 172 -221 q -8 -274 72 -274 z " }, k: { ha: 847, x_min: 22, x_max: 892, o: "m 250 0 l 22 0 l 199 1007 l 426 1007 l 326 438 l 626 732 l 892 732 l 581 443 l 772 0 l 526 0 l 410 294 l 282 186 l 250 0 z " }, l: { ha: 400, x_min: 22, x_max: 426, o: "m 250 0 l 22 0 l 199 1006 l 426 1006 l 250 0 z " }, m: { ha: 1301, x_min: 22, x_max: 1246, o: "m 250 0 l 22 0 l 151 732 l 338 732 l 338 628 l 347 628 q 415 692 376 665 q 497 734 453 719 q 588 749 542 749 l 588 749 q 717 719 667 749 q 785 628 767 689 l 785 628 l 794 628 q 864 692 825 665 q 947 734 903 719 q 1038 749 990 749 l 1038 749 q 1192 702 1138 749 q 1246 558 1246 656 l 1246 558 q 1243 515 1246 538 q 1236 469 1240 493 l 1236 469 l 1153 0 l 925 0 l 1004 443 q 1007 467 1006 456 q 1008 488 1008 478 l 1008 488 q 999 533 1008 515 q 972 560 989 551 q 928 569 954 569 l 928 569 q 858 549 890 569 q 805 495 826 529 q 775 417 783 461 l 775 417 l 701 0 l 474 0 l 553 443 q 556 467 554 456 q 557 488 557 479 l 557 488 q 547 533 557 515 q 520 560 538 551 q 476 569 503 569 l 476 569 q 407 549 439 569 q 353 495 375 529 q 324 417 332 461 l 324 417 l 250 0 z " }, n: { ha: 874, x_min: 22, x_max: 818, o: "m 250 0 l 22 0 l 151 732 l 338 732 l 338 626 l 347 626 q 418 692 378 665 q 505 734 458 719 q 599 749 551 749 l 599 749 q 717 727 668 749 q 792 663 765 706 q 818 556 818 621 l 818 556 q 815 512 818 535 q 808 464 813 489 l 808 464 l 726 0 l 499 0 l 576 440 q 580 465 578 453 q 582 486 582 476 l 582 486 q 572 533 582 514 q 542 560 561 551 q 494 569 522 569 l 494 569 q 435 559 464 569 q 383 528 406 549 q 345 478 361 507 q 324 413 329 449 l 324 413 l 250 0 z " }, o: { ha: 882, x_min: 42, x_max: 840, o: "m 386 -17 l 386 -17 q 201 15 278 -17 q 83 113 124 47 q 42 276 42 178 l 42 276 q 44 333 42 304 q 53 389 47 361 l 53 389 q 132 591 74 511 q 282 710 190 671 q 493 749 374 749 l 493 749 q 681 717 604 749 q 799 619 758 685 q 840 454 840 554 l 840 454 q 826 335 840 389 q 783 236 811 281 l 783 236 q 694 94 750 150 q 563 10 639 38 q 386 -17 486 -17 z m 403 149 l 403 149 q 498 171 460 149 q 560 235 536 193 q 594 340 583 278 l 594 340 q 605 399 601 378 q 609 433 608 421 q 610 456 610 446 l 610 456 q 596 526 610 497 q 553 569 582 554 q 478 583 525 583 l 478 583 q 383 561 421 583 q 321 497 344 539 q 286 392 297 454 l 286 392 q 276 332 279 354 q 271 298 272 310 q 269 276 269 286 l 269 276 q 283 206 269 235 q 327 163 297 178 q 403 149 357 149 z " }, p: { ha: 879, x_min: -22, x_max: 839, o: "m 204 -258 l -22 -258 l 151 732 l 336 732 l 339 631 l 349 631 q 453 721 394 693 q 579 749 513 749 l 579 749 q 720 718 663 749 q 808 626 778 688 q 839 472 839 564 l 839 472 q 836 415 839 446 q 828 351 833 385 l 828 351 q 757 146 806 228 q 638 24 708 64 q 478 -17 567 -17 l 478 -17 q 391 -7 431 -17 q 322 24 351 3 q 272 75 292 44 l 272 75 l 264 75 l 204 -258 z m 419 161 l 419 161 q 506 181 472 161 q 561 242 540 201 q 593 339 582 282 l 593 339 q 603 397 600 375 q 608 433 607 419 q 608 456 608 446 l 608 456 q 597 519 608 494 q 559 558 585 544 q 492 571 533 571 l 492 571 q 407 548 443 571 q 349 483 371 525 q 317 383 326 440 l 317 383 q 308 338 311 356 q 305 308 306 319 q 304 288 304 297 l 304 288 q 316 220 304 249 q 353 176 328 192 q 419 161 379 161 z " }, q: { ha: 879, x_min: 39, x_max: 856, o: "m 682 -258 l 454 -258 l 513 75 l 503 75 q 444 25 476 46 q 373 -6 411 4 q 294 -17 335 -17 l 294 -17 q 158 14 215 -17 q 69 106 100 44 q 39 257 39 167 l 39 257 q 42 315 39 285 q 51 378 46 344 l 51 378 q 122 586 74 504 q 243 708 171 668 q 406 749 315 749 l 406 749 q 539 719 482 749 q 622 631 596 689 l 622 631 l 632 631 l 669 732 l 856 732 l 682 -258 z m 388 161 l 388 161 q 452 175 424 161 q 503 214 481 189 q 540 274 525 239 q 563 350 556 308 l 563 350 q 570 395 568 378 q 573 424 572 413 q 574 444 574 436 l 574 444 q 562 512 574 483 q 525 556 550 540 q 460 571 500 571 l 460 571 q 374 551 408 571 q 318 490 339 531 q 286 390 297 449 l 286 390 q 276 333 279 354 q 271 299 272 313 q 269 278 269 286 l 269 278 q 297 191 269 221 q 388 161 325 161 z " }, r: { ha: 565, x_min: 22, x_max: 621, o: "m 250 0 l 22 0 l 151 732 l 336 732 l 336 619 l 346 619 q 397 687 368 657 q 463 733 426 717 q 544 750 500 750 l 544 750 q 591 745 571 750 q 621 735 611 740 l 621 735 l 586 536 l 514 536 q 436 524 471 536 q 376 488 401 511 q 335 428 351 464 q 311 347 318 393 l 311 347 l 250 0 z " }, s: { ha: 804, x_min: 18, x_max: 765, o: "m 350 -17 l 350 -17 q 220 -4 281 -17 q 115 33 160 8 q 44 94 69 57 q 18 179 18 131 l 18 179 q 21 209 18 193 q 26 235 24 225 l 26 235 l 242 235 q 239 220 240 228 q 238 208 238 213 l 238 208 q 253 166 238 183 q 298 141 269 149 q 360 133 326 133 l 360 133 q 407 137 382 133 q 453 149 432 140 q 488 170 475 157 q 500 204 500 183 l 500 204 q 487 236 500 224 q 451 258 474 249 q 398 275 428 268 q 335 290 368 282 l 335 290 q 248 315 292 301 q 168 349 204 328 q 110 403 132 371 q 88 486 88 436 l 88 486 q 116 604 88 554 q 195 686 144 654 q 313 734 246 718 q 456 750 379 750 l 456 750 q 572 739 517 750 q 672 706 628 728 q 740 650 715 683 q 765 572 765 617 l 765 572 q 762 538 765 554 q 757 515 758 522 l 757 515 l 543 515 q 545 527 544 522 q 546 535 546 532 l 546 535 q 533 571 546 557 q 496 592 519 585 q 439 599 472 599 l 439 599 q 393 594 415 599 q 353 583 371 590 q 326 563 336 575 q 317 536 317 551 l 317 536 q 335 502 317 515 q 385 481 354 489 q 451 463 417 472 l 451 463 q 544 440 496 451 q 635 407 593 428 q 704 351 678 386 q 731 260 731 315 l 731 260 q 701 129 731 182 q 618 44 671 76 q 497 -2 565 13 q 350 -17 428 -17 z " }, t: { ha: 535, x_min: 69, x_max: 564, o: "m 283 -17 l 283 -17 q 178 0 219 -17 q 115 49 136 17 q 94 131 94 82 l 94 131 q 97 167 94 144 q 106 228 100 190 l 106 228 l 165 567 l 69 567 l 97 732 l 201 732 l 286 946 l 458 946 l 421 732 l 564 732 l 535 567 l 392 567 l 336 251 q 333 224 335 239 q 331 201 331 210 l 331 201 q 344 163 331 176 q 389 149 357 149 l 389 149 l 461 149 l 436 7 q 389 -5 417 1 q 333 -14 361 -11 q 283 -17 306 -17 z " }, u: { ha: 874, x_min: 54, x_max: 850, o: "m 272 -18 l 272 -18 q 155 3 204 -18 q 80 67 106 25 q 54 175 54 110 l 54 175 q 57 220 54 197 q 64 268 60 243 l 64 268 l 144 732 l 374 732 l 296 290 q 292 267 293 278 q 290 246 290 256 l 290 246 q 301 198 290 217 q 331 170 311 179 q 378 161 350 161 l 378 161 q 437 172 408 161 q 488 204 465 183 q 526 254 510 225 q 549 318 542 283 l 549 318 l 622 732 l 850 732 l 721 -1 l 535 -1 l 535 104 l 525 104 q 454 39 494 67 q 368 -3 414 11 q 272 -18 322 -18 z " }, v: { ha: 797, x_min: 69, x_max: 858, o: "m 453 0 l 213 0 l 69 732 l 301 732 l 346 453 q 355 391 350 426 q 365 315 360 356 q 375 232 371 274 l 375 232 l 383 232 q 417 313 400 274 q 451 388 435 351 q 482 453 468 424 l 482 453 l 622 732 l 858 732 l 453 0 z " }, w: { ha: 1193, x_min: 67, x_max: 1256, o: "m 410 0 l 182 0 l 67 732 l 300 732 l 322 458 q 327 393 325 431 q 332 318 329 356 q 336 253 335 281 l 336 253 l 344 253 q 372 322 356 283 q 403 397 388 361 q 428 457 418 433 l 428 457 l 546 732 l 779 732 l 800 456 q 804 399 801 436 q 810 324 807 363 q 815 253 813 285 l 815 253 l 822 253 q 849 318 833 281 q 879 392 864 356 q 906 456 894 429 l 906 456 l 1026 732 l 1256 732 l 881 0 l 653 0 l 628 306 q 624 358 626 329 q 620 416 622 388 q 617 465 618 444 l 617 465 l 611 465 q 592 417 603 446 q 568 360 581 389 q 544 307 556 332 l 544 307 l 410 0 z " }, x: { ha: 850, x_min: -56, x_max: 888, o: "m 206 0 l -56 0 l 292 382 l 97 732 l 351 732 l 453 524 l 460 524 l 633 732 l 888 732 l 563 378 l 774 0 l 521 0 l 411 232 l 404 232 l 206 0 z " }, y: { ha: 797, x_min: -46, x_max: 858, o: "m 97 -274 l 97 -274 q 7 -266 44 -274 q -46 -253 -31 -258 l -46 -253 l -21 -107 l 75 -107 q 145 -92 115 -107 q 195 -52 175 -76 q 229 0 215 -28 l 229 0 l 68 732 l 301 732 l 353 418 q 363 351 358 388 q 373 281 368 315 q 381 215 378 246 l 381 215 l 390 215 q 410 265 400 239 q 432 316 421 290 q 453 365 443 342 q 474 410 464 389 l 474 410 l 624 732 l 858 732 l 488 29 q 415 -90 454 -35 q 330 -186 376 -144 q 226 -251 283 -228 q 97 -274 168 -274 z " }, z: { ha: 743, x_min: -32, x_max: 761, o: "m 646 0 l -32 0 l -15 89 l 394 567 l 89 567 l 118 732 l 761 732 l 746 646 l 333 165 l 675 165 l 646 0 z " }, ".": { ha: 442, x_min: 36, x_max: 318, o: "m 276 0 l 36 0 l 78 232 l 318 232 l 276 0 z " }, ",": { ha: 442, x_min: -14, x_max: 315, o: "m -14 -249 l -14 -249 l 3 -151 q 70 -126 39 -147 q 124 -72 101 -106 q 151 0 146 -39 l 151 0 l 35 0 l 76 232 l 315 232 l 279 25 q 240 -93 268 -43 q 172 -176 213 -143 q 85 -226 132 -208 q -14 -249 38 -244 z " }, "'": { ha: 365, x_min: 149, x_max: 389, o: "m 268 558 l 164 558 l 149 750 l 185 954 l 389 954 l 353 750 l 268 558 z " }, "\u2019": { ha: 388, x_min: 100, x_max: 407, o: "m 100 496 l 100 496 l 117 585 q 178 610 149 589 q 229 667 208 632 q 257 742 250 701 l 257 742 l 149 742 l 186 954 l 407 954 l 374 764 q 317 619 358 678 q 219 531 276 561 q 100 496 163 501 z " }, "!": { ha: 436, x_min: 46, x_max: 443, o: "m 274 300 l 138 300 l 203 954 l 443 954 l 274 300 z m 261 0 l 46 0 l 82 207 l 299 207 l 261 0 z " }, "?": { ha: 850, x_min: 124, x_max: 836, o: "m 518 307 l 317 307 l 328 375 q 356 449 335 417 q 408 506 378 481 q 469 556 438 532 q 527 603 500 579 q 572 653 554 626 q 589 714 589 679 l 589 714 q 580 754 589 735 q 549 786 571 774 q 490 799 528 799 l 490 799 q 431 788 457 799 q 388 759 406 778 q 358 717 369 740 q 343 668 347 693 l 343 668 q 341 649 342 658 q 340 632 340 640 l 340 632 l 124 632 q 144 747 124 694 q 200 842 164 800 q 285 913 236 883 q 395 956 335 942 q 522 971 456 971 l 522 971 q 652 954 594 971 q 751 907 710 938 q 815 833 793 876 q 836 733 836 789 l 836 733 q 815 630 836 675 q 760 551 794 585 q 686 490 725 517 q 612 440 647 463 q 552 394 576 417 q 524 343 528 371 l 524 343 l 518 307 z m 483 0 l 254 0 l 293 221 l 522 221 l 483 0 z " }, $: { ha: 803, x_min: 38, x_max: 785, o: "m 360 -82 l 268 -82 l 300 97 q 240 107 268 101 l 240 107 q 134 144 179 119 q 63 206 89 168 q 38 290 38 243 l 38 290 q 40 320 38 304 q 46 346 43 336 l 46 346 l 261 346 q 258 331 260 339 q 257 319 257 324 l 257 319 q 273 277 257 294 q 318 253 289 260 l 318 253 q 328 250 322 251 l 328 250 l 354 401 q 268 426 311 413 l 268 426 q 188 460 224 439 q 129 515 151 482 q 107 597 107 549 l 107 597 q 135 715 107 665 q 215 797 164 765 q 332 846 265 829 l 332 846 q 435 860 381 857 l 435 860 l 465 1029 l 557 1029 l 526 860 q 592 850 560 857 l 592 850 q 691 817 647 839 q 760 761 735 794 q 785 683 785 728 l 785 683 q 781 650 785 667 q 776 626 778 633 l 776 626 l 563 626 q 565 638 564 633 q 565 646 565 643 l 565 646 q 552 682 565 668 q 515 703 539 696 l 515 703 q 500 707 508 706 l 500 707 l 476 572 q 564 551 518 563 l 564 551 q 655 518 613 539 q 724 462 697 497 q 750 371 750 426 l 750 371 q 720 240 750 293 q 638 156 690 188 q 517 110 585 124 l 517 110 q 392 94 457 96 l 392 94 l 360 -82 z m 442 381 l 418 247 q 426 249 422 249 l 426 249 q 473 260 451 251 q 507 281 494 268 q 519 315 519 294 l 519 315 q 506 347 519 335 q 471 369 493 360 l 471 369 q 442 381 457 375 l 442 381 z m 389 597 l 389 597 l 408 704 q 374 694 389 700 l 374 694 q 346 674 356 686 q 336 647 336 663 l 336 647 q 356 614 336 626 l 356 614 q 389 597 368 604 z " }, "%": { ha: 1367, x_min: 151, x_max: 1257, o: "m 376 0 l 232 0 l 1035 954 l 1179 954 l 376 0 z m 368 472 l 368 472 q 206 519 260 472 q 151 656 151 565 l 151 656 q 153 690 151 672 q 158 726 154 708 l 158 726 q 207 861 172 807 q 297 943 242 915 q 433 971 353 971 l 433 971 q 594 925 540 971 q 647 788 647 879 l 647 788 q 646 753 647 771 q 642 717 644 736 l 642 717 q 594 583 628 638 q 504 501 560 529 q 368 472 449 472 z m 975 -17 l 975 -17 q 814 29 868 -17 q 760 165 760 75 l 760 165 q 762 202 760 183 q 767 240 764 221 l 767 240 q 815 373 782 319 q 905 454 849 426 q 1040 482 961 482 l 1040 482 q 1203 436 1149 482 q 1257 297 1257 390 l 1257 297 q 1255 263 1257 282 q 1250 225 1253 244 l 1250 225 q 1201 92 1235 146 q 1112 11 1168 39 q 975 -17 1056 -17 z m 375 576 l 375 576 q 449 613 425 576 q 483 703 472 650 l 483 703 q 490 741 488 726 q 493 766 492 756 q 494 785 494 776 l 494 785 q 478 845 494 824 q 424 867 463 867 l 424 867 q 351 831 375 867 q 315 740 326 794 l 315 740 q 310 703 313 718 q 306 678 307 689 q 304 660 304 668 l 304 660 q 321 599 304 621 q 375 576 338 576 z m 983 88 l 983 88 q 1060 126 1038 88 q 1097 239 1083 165 l 1097 239 q 1101 261 1100 251 q 1102 280 1101 271 q 1103 296 1103 289 l 1103 296 q 1087 356 1103 335 q 1033 378 1071 378 l 1033 378 q 956 338 979 378 q 919 226 933 299 l 919 226 q 916 205 917 215 q 915 187 915 194 q 914 171 914 179 l 914 171 q 930 110 914 132 q 983 88 946 88 z " }, "&": { ha: 1133, x_min: 69, x_max: 1143, o: "m 476 -17 l 476 -17 q 253 14 343 -17 q 116 99 163 44 q 69 226 69 154 l 69 226 q 99 349 69 296 q 179 440 129 403 q 292 493 229 478 l 292 493 l 293 499 q 208 565 242 521 q 175 671 175 608 l 175 671 q 211 801 175 746 q 310 895 247 857 q 454 952 374 933 q 624 971 535 971 l 624 971 q 831 942 744 971 q 965 862 918 913 q 1011 744 1011 811 l 1011 744 q 1009 718 1011 735 q 1001 675 1007 701 l 1001 675 l 789 675 q 793 700 793 692 l 793 700 l 793 711 q 774 759 793 739 q 717 790 754 779 q 621 801 679 801 l 621 801 q 528 790 568 801 q 460 758 488 778 q 419 710 433 738 q 404 651 404 683 l 404 651 q 419 602 404 622 q 459 573 433 582 q 515 564 485 564 l 515 564 l 636 564 l 608 407 l 472 407 q 413 399 442 407 q 360 373 383 390 q 324 328 338 356 q 311 263 311 301 l 311 263 q 330 203 311 228 q 388 166 349 179 q 488 153 426 153 l 488 153 q 613 170 564 153 q 689 219 663 188 q 722 290 715 250 l 722 290 l 769 564 l 1143 564 l 1115 407 l 956 407 l 935 294 q 864 130 918 200 q 714 22 810 60 q 476 -17 618 -17 z " }, "-": { ha: 463, x_min: 42, x_max: 425, o: "m 392 283 l 42 283 l 75 474 l 425 474 l 392 283 z " }, ":": { ha: 464, x_min: 49, x_max: 418, o: "m 376 500 l 136 500 l 178 733 l 418 733 l 376 500 z m 289 0 l 49 0 l 90 232 l 331 232 l 289 0 z " }, "|": { ha: 368, x_min: 104, x_max: 264, o: "m 264 -281 l 104 -281 l 104 1007 l 264 1007 l 264 -281 z " } }, familyName: "Archivo ExtraBold Italic", ascender: 1219, descender: -292, underlinePosition: -148, underlineThickness: 44, boundingBox: { xMin: -268, xMax: 1462, yMin: -405, yMax: 1100 }, resolution: 1e3 };
+
+// src/world/text3d.ts
+var DATA2 = { "500": archivo500_default, "800": archivo800_default, "800i": archivo800i_default };
+var fonts = /* @__PURE__ */ new Map();
+var fontOf = (k3) => {
+  let f3 = fonts.get(k3);
+  if (!f3) {
+    f3 = new Font(DATA2[k3]);
+    fonts.set(k3, f3);
+  }
+  return f3;
+};
+var geos = /* @__PURE__ */ new Map();
+var geoOf = (str, font2, size2, depth, bevel) => {
+  const key2 = `${font2}|${size2}|${depth}|${bevel}|${str}`;
+  let e3 = geos.get(key2);
+  if (!e3) {
+    const g4 = new TextGeometry(str, {
+      font: fontOf(font2),
+      size: size2,
+      depth: Math.max(0.1, depth - 2 * bevel),
+      curveSegments: 6,
+      bevelEnabled: bevel > 0,
+      bevelThickness: bevel,
+      bevelSize: bevel * 0.8,
+      bevelOffset: -bevel * 0.8,
+      bevelSegments: 2
+    });
+    g4.translate(0, 0, bevel);
+    g4.computeBoundingBox();
+    const b2 = g4.boundingBox;
+    e3 = { g: g4, w: Number.isFinite(b2.max.x) ? b2.max.x - Math.min(0, b2.min.x) : 0 };
+    geos.set(key2, e3);
+  }
+  return e3;
+};
+var textWidth = (str, font2, size2) => {
+  const d3 = DATA2[font2];
+  let w3 = 0;
+  for (const ch of str) w3 += (d3.glyphs[ch] ?? d3.glyphs["?"]).ha * size2 / d3.resolution;
+  return w3;
+};
+var text3d = (str, o2) => {
+  const depth = o2.depth ?? o2.size * 0.25, bevel = o2.bevel ?? Math.min(depth * 0.2, o2.size * 0.03);
+  const e3 = geoOf(str, o2.font ?? "800", o2.size, depth, bevel);
+  const m3 = new Mesh(e3.g, [o2.face, o2.side ?? o2.face]);
+  m3.castShadow = true;
+  m3.receiveShadow = true;
+  const g4 = new Group();
+  m3.position.x = o2.align === "left" ? 0 : -textWidth(str, o2.font ?? "800", o2.size) / 2;
+  g4.add(m3);
+  g4.userData.width = textWidth(str, o2.font ?? "800", o2.size);
+  return g4;
+};
+
+// src/world/places/cards.ts
+var PRE = 8;
+var BIG = 190;
+var LEAD = 62;
+var GAP = 26;
+var cardWords = (id) => {
+  const c3 = CUES.find((x3) => x3.scene === id);
+  if (!c3?.w?.length) throw new Error(`turn card ${id}: its cue has no tokens`);
+  return c3.w.map(([t3, a3]) => ({ t: t3, at: F2(a3) - 2 }));
+};
+var card = (id, label, color) => {
+  const words = cardWords(id), big = words[words.length - 1], lead = words.slice(0, -1);
+  const enter = cue(id, 0) - PRE;
+  const bigSize = Math.min(BIG, BIG * 880 / Math.max(1, textWidth(big.t, "800i", BIG)));
+  const leadY = bigSize * 1.02 + 96;
+  const C4 = [0, bigSize * 0.62, 0];
+  return {
+    id,
+    label,
+    enter,
+    shots: ({ from, to }) => [
+      cut(from, [-460, 120, 2160], [0, C4[1] + 80, 0], { fov: 46, dip: 5, why: "the card" }),
+      dolly(from + 1, Math.max(20, to - from - 3), [-260, 150, 1900], [0, C4[1] + 70, 0], { fov: 46, ease: SOFT, why: "push in" })
+    ],
+    lights: (f3) => {
+      const up = ramp(f3, big.at - 2, big.at + 10, SETTLE);
+      return {
+        amb: 0.05,
+        key: { pos: [-500, 1500, 1300], at: C4, i: 0.9, color: "#FFFFFF", angle: 0.5, soft: 0.9 },
+        rim: { pos: [700, 900, -1200], at: [0, C4[1] + 60, 0], i: 0.5 + 0.9 * up, color, angle: 0.36, soft: 0.9 },
+        accent: { pos: [0, 46, 300], color, i: 0.04 + 0.34 * up },
+        focus: [0, 0],
+        reach: 2200,
+        reflect: 0.3,
+        env: 0.6
+      };
+    },
+    build: () => {
+      const group = new Group();
+      const white = new MeshStandardMaterial({ color: 15921902, roughness: 0.5, metalness: 0, emissive: new Color(16777215), emissiveIntensity: 0.55 });
+      const whiteSide = new MeshStandardMaterial({ color: 9409176, roughness: 0.5, metalness: 0.3 });
+      const face = new MeshStandardMaterial({ color: new Color(color), roughness: 0.4, metalness: 0, emissive: new Color(color), emissiveIntensity: 0 });
+      const side = new MeshStandardMaterial({ color: new Color(color).multiplyScalar(0.28), roughness: 0.45, metalness: 0.5 });
+      const space = LEAD * 0.3;
+      const widths = lead.map((w3) => textWidth(w3.t, "500", LEAD));
+      const total = widths.reduce((s2, w3) => s2 + w3, 0) + space * Math.max(0, lead.length - 1);
+      let x3 = -total / 2;
+      const leads = lead.map((w3, i3) => {
+        const g4 = text3d(w3.t, { font: "500", size: LEAD, depth: 16, bevel: 2, face: white, side: whiteSide, align: "left" });
+        g4.userData.x = x3;
+        g4.userData.at = w3.at;
+        x3 += widths[i3] + space;
+        group.add(g4);
+        return g4;
+      });
+      const word2 = text3d(big.t, { font: "800i", size: bigSize, depth: bigSize * 0.34, bevel: bigSize * 0.035, face, side });
+      group.add(word2);
+      void GAP;
+      return {
+        group,
+        update: (f3) => {
+          for (const g4 of leads) {
+            const p4 = ramp(f3, g4.userData.at, g4.userData.at + 8, SETTLE);
+            g4.visible = f3 >= g4.userData.at;
+            g4.position.set(g4.userData.x, leadY + (1 - p4) * 46, 40 + (1 - p4) * 60);
+          }
+          const p3 = ramp(f3, big.at, big.at + 10, SETTLE);
+          word2.visible = f3 >= big.at;
+          word2.position.set(0, (1 - p3) * 120, (1 - p3) * 90);
+          word2.rotation.x = -(1 - p3) * 0.22;
+          face.emissiveIntensity = 0.5 + 1.1 * ramp(f3, big.at + 2, big.at + 14, SETTLE);
+        }
+      };
+    }
+  };
+};
+var ExplainPlace = card("explain", "2 Turn card: Let me explain.", "#F5A524");
+var CatchPlace = card("catch", "5 Turn card: And here's the catch.", "#E5484D");
+
+// src/world/place.ts
+var GLOW = 1.5;
+var prep = (g4, o2 = {}) => {
+  g4.traverse((n2) => {
+    if (n2.userData.isFloor) {
+      n2.visible = false;
+      n2.userData.dropped = true;
+      return;
+    }
+    const mesh2 = n2;
+    if (!mesh2.isMesh) return;
+    const ms = Array.isArray(mesh2.material) ? mesh2.material : [mesh2.material];
+    for (const m3 of ms) {
+      if (m3.isShadowMaterial || m3.isShaderMaterial) {
+        mesh2.visible = false;
+        mesh2.userData.dropped = true;
+        continue;
+      }
+      const b2 = m3;
+      if (b2.isMeshBasicMaterial) {
+        if (b2.blending === AdditiveBlending) {
+          if (!o2.keepHalos) {
+            mesh2.visible = false;
+            mesh2.userData.dropped = true;
+          }
+          continue;
+        }
+        if (b2.toneMapped === false && !b2.userData.hdr) {
+          b2.userData.hdr = true;
+          b2.color.multiplyScalar(GLOW);
+        }
+        mesh2.castShadow = false;
+        continue;
+      }
+      const s2 = m3;
+      if (s2.isMeshStandardMaterial && s2.userData.envBase === void 0) s2.userData.envBase = s2.envMapIntensity;
+    }
+  });
+  return g4;
+};
+var mountLegacy = (make, o2) => {
+  const m3 = make();
+  const group = new Group();
+  m3.root.position.set(-o2.cx, o2.floor, -(o2.cz ?? 0));
+  group.add(m3.root);
+  prep(group);
+  return { group, update: (p3) => m3.update?.(p3) };
+};
+var shotsFromLegacy = (keys, g4, w3, o2 = {}) => {
+  const D3 = o2.D ?? 2059, side = o2.side ?? 420, lift = o2.lift ?? 260, fov2 = o2.fov ?? 50;
+  const pose = (k3) => {
+    const look = [k3.x - g4.cx, g4.floor - k3.y, o2.depth ?? 0];
+    return { look, pos: [look[0] + side / k3.z, look[1] + lift / k3.z, look[2] + D3 / k3.z] };
+  };
+  const t0 = w3.from + (o2.travelIn ?? 0);
+  let k0 = keys[0];
+  for (const k3 of keys) if (k3.at + k3.dur <= t0) k0 = k3;
+  const p0 = pose(k0);
+  const out = [o2.travelIn ? travel(w3.from, o2.travelIn, p0.pos, p0.look, { fov: fov2, why: "travel in through the dark", vol: 0.8 }) : cut(w3.from, p0.pos, p0.look, { fov: fov2, dip: o2.dip ?? 5, why: "enter" })];
+  let last = t0;
+  for (const k3 of keys) {
+    if (k3 === keys[0] || k3.at < last || k3.at + k3.dur > w3.to - 1) continue;
+    const p3 = pose(k3);
+    out.push({
+      at: k3.at,
+      dur: k3.dur,
+      pos: p3.pos,
+      look: p3.look,
+      fov: fov2,
+      ease: k3.drift ? DRIFT : SETTLE,
+      why: k3.drift ? "breath" : "move",
+      whoosh: !k3.drift && Math.hypot(p3.pos[0] - out[out.length - 1].pos[0], p3.pos[1] - out[out.length - 1].pos[1], p3.pos[2] - out[out.length - 1].pos[2]) > 500 ? 0.5 : void 0
+    });
+    last = k3.at + k3.dur;
+  }
+  return out;
+};
+var stdLights = (c3, o2 = {}) => {
+  const s2 = o2.s ?? 1;
+  return {
+    amb: o2.amb ?? 0.16,
+    key: { pos: [c3[0] - 700 * s2, c3[1] + 1900 * s2, c3[2] + 1100 * s2], at: c3, i: o2.key ?? 1.7, color: o2.color ?? "#FFF4E2", angle: 0.62, soft: 0.75 },
+    rim: { pos: [c3[0] + 1100 * s2, c3[1] + 900 * s2, c3[2] - 1500 * s2], at: c3, i: o2.rim ?? 3.2, color: "#CFE0FF", angle: 0.8, soft: 0.6 },
+    aux: { pos: [c3[0] - 1500 * s2, c3[1] + 500 * s2, c3[2] - 900 * s2], at: c3, i: (o2.rim ?? 3.2) * 0.45, color: "#DDE6F5", angle: 0.8, soft: 0.6 },
+    focus: [c3[0], c3[2]],
+    reach: o2.reach ?? 2600 * s2,
+    reflect: 0.5
+  };
+};
+
+// src/world/places/legacy.ts
+var legacy = (id, label, make, params, cam2, g4, o2 = {}) => {
+  let keys = [];
+  return {
+    id,
+    label,
+    enter: cue(id, 0) - (o2.travelIn ? 30 : 8),
+    shots: (w3) => keys = shotsFromLegacy(cam2, g4, w3, { side: o2.side ?? 420, lift: o2.lift ?? 300, travelIn: o2.travelIn, dip: 5 }),
+    // the rig follows what the camera looks at
+    lights: (f3) => stdLights(poseAt(keys, f3).look, { s: o2.s ?? 1, key: o2.key, color: o2.color }),
+    build: () => {
+      const m3 = mountLegacy(make, g4);
+      return { group: m3.group, update: (f3) => m3.update(params(f3)) };
+    }
+  };
+};
+var DealPlace = legacy("deal", "3 The deal: Square agrees to buy Afterpay, paid in shares, 0.375 a share", dealModel, paramsAt2, DL_CAM, { floor: DEAL_GEO.floor, cx: DEAL_GEO.desk.x }, { lift: 620 });
+var PricePlace = legacy("price", "4 The price: $247.26 a share, so $29B", priceModel, paramsAt3, PR_CAM, { floor: PRICE_GEO.floor, cx: PRICE_GEO.cx }, { lift: 260, travelIn: 34 });
+var ClosePlace = legacy("close", "6 The close: six months, Block, the price halves, the 10-Q books $13.8B", closeModel, paramsAt4, CL_CAM, { floor: CLOSE_GEO.floor, cx: 1500 }, { lift: 560 });
+var FairPlace = legacy("fair", "7 To be fair: $29B was real on day one; the shares were fixed", fairModel, paramsAt5, FA_CAM, { floor: FAIR_GEO.floor, cx: 1e3 }, { lift: 420, travelIn: 34 });
+var VerdictPlace = legacy("verdict", "8 The verdict: the receipt, INFLATED, the sign-off", verdictModel, paramsAt6, VD_CAM, { floor: VERDICT_GEO.floor, cx: VERDICT_GEO.desk.x }, { lift: 380, travelIn: 34, color: "#FFE2B8" });
+
+// src/world/film3d.ts
+var PLACES = [HookPlace, ExplainPlace, DealPlace, PricePlace, CatchPlace, ClosePlace, FairPlace, VerdictPlace];
+var SPACING = 14e3;
+var ORIGINS = PLACES.map((_3, i3) => [i3 * SPACING, 0, 0]);
+var WINDOWS = PLACES.map((p3, i3) => ({ id: p3.id, from: i3 === 0 ? 0 : p3.enter, to: i3 + 1 < PLACES.length ? PLACES[i3 + 1].enter : TOTAL_FRAMES }));
+for (let i3 = 1; i3 < WINDOWS.length; i3++) if (WINDOWS[i3].from <= WINDOWS[i3 - 1].from) throw new Error(`037 world: ${WINDOWS[i3].id} enters at f${WINDOWS[i3].from}, not after ${WINDOWS[i3 - 1].id}`);
+var SHOTS = PLACES.map((p3, i3) => {
+  const w3 = WINDOWS[i3], keys = p3.shots({ from: w3.from, to: w3.to });
+  if (!keys.length || Math.round(keys[0].at) !== w3.from && i3 > 0) throw new Error(`037 world: ${p3.id}'s first camera key must start on its enter frame f${w3.from} (it starts at f${keys[0]?.at})`);
+  const last = keys[keys.length - 1];
+  if (last.at + last.dur > w3.to + 1e-6 && i3 + 1 < PLACES.length) throw new Error(`037 world: ${p3.id}'s last camera key ends at f${last.at + last.dur}, after ${PLACES[i3 + 1].id} enters (f${w3.to})`);
+  return keys.map((k3) => ({ ...k3, pos: add(k3.pos, ORIGINS[i3]), look: add(k3.look, ORIGINS[i3]), orbit: k3.orbit && { ...k3.orbit, c: add(k3.orbit.c, ORIGINS[i3]) } }));
+});
+var CAM = checkPath("037", SHOTS.flat());
+var LIT_FROM = PLACES.map((_3, i3) => i3 === 0 ? 0 : SHOTS[i3][0].at + SHOTS[i3][0].dur / 2);
+var MOVES = SHOTS.flatMap((keys, i3) => keys.filter((k3) => k3.whoosh && !k3.cut).map((k3) => ({ id: PLACES[i3].id, mid: k3.at + k3.dur / 2, end: k3.at + k3.dur, vol: k3.whoosh, why: k3.why ?? "move" })));
+var SCORE_CUES = buildScore(WINDOWS.map((w3) => ({ id: w3.id, from: w3.from, to: w3.to })), MOVES).cues;
+var envDb = (t3) => {
+  const E3 = BED_ENV;
+  if (!E3.length) return 0;
+  if (t3 <= E3[0][0]) return E3[0][1];
+  for (let k3 = 1; k3 < E3.length; k3++) if (t3 <= E3[k3][0]) return E3[k3 - 1][1] + (E3[k3][1] - E3[k3 - 1][1]) * (t3 - E3[k3 - 1][0]) / (E3[k3][0] - E3[k3 - 1][0]);
+  return E3[E3.length - 1][1];
+};
+var bedVolume = (fr) => MUSIC_GAIN * 10 ** (envDb(fr / 30) / 20) * clamp01(fr / 12) * clamp01((TOTAL_FRAMES - fr) / 36);
 
 // src/r45/blocks.ts
 var BLOCKS = [
@@ -47856,241 +48192,18 @@ var CHUNKS = BLOCKS.flatMap((b2) => {
   return chunkWords(b2.lines.flat()).map((ws) => ({ text: ws.map((w3) => w3.t).join(" "), a: ws[0].a, cue: b2.cue, scene }));
 });
 
-// src/r45/handover.ts
-var SHAPES = {
-  current: { name: "current", truck: 44, crane: 48, curve: TRAVEL, landZoom: 1, leaveZoom: 1 },
-  glide: { name: "glide", truck: 60, crane: 64, curve: Easing.bezier(0.5, 0, 0.1, 1), landZoom: 1, leaveZoom: 1 },
-  glidePush: { name: "glidePush", truck: 60, crane: 64, curve: Easing.bezier(0.5, 0, 0.1, 1), landZoom: 1.06, leaveZoom: 0.97 },
-  expo: { name: "expo", truck: 64, crane: 68, curve: Easing.bezier(0.3, 0, 0, 1), landZoom: 1, leaveZoom: 1 }
-};
-var HANDOVER_VARIANT = "expo";
-var HO = SHAPES[HANDOVER_VARIANT];
-
-// src/r45/TurnCard.tsx
-var CARD_LEAD = 64;
-var CARD_BIG = 168;
-var CARD_Y = 800;
-var WORD_IN = 7;
-var rgba = (hex, a3) => `rgba(${parseInt(hex.slice(1, 3), 16)},${parseInt(hex.slice(3, 5), 16)},${parseInt(hex.slice(5, 7), 16)},${a3})`;
-var cardWords = (id) => {
-  const c3 = CUES.find((x3) => x3.scene === id);
-  if (!c3?.w?.length) throw new Error(`turn card ${id}: its cue has no tokens`);
-  return c3.w.map(([t3, a3]) => ({ t: t3, at: F2(a3) - 2 }));
-};
-var cardDone = (id) => cueEnd(id, 0) + 2;
-var TurnCard = ({ id, f: f4, glow }) => {
-  const tg = useTag();
-  const pass = x2(Pass);
-  const ws = cardWords(id);
-  const big = ws[ws.length - 1], lead2 = ws.slice(0, -1);
-  const pin = (at) => SOFT(clamp01((f4 - at) / WORD_IN));
-  const g0 = SOFT(clamp01((f4 - (ws[0].at - 6)) / 14)), g1 = pin(big.at);
-  if (pass === "back") {
-    return /* @__PURE__ */ u2("div", { style: {
-      position: "absolute",
-      inset: 0,
-      opacity: 0.55 * g0 + 0.45 * g1,
-      background: `radial-gradient(ellipse 62% 30% at 50% 47%, ${rgba(glow, 0.5)} 0%, ${rgba(glow, 0.2)} 38%, ${rgba(glow, 0)} 72%)`
-    } });
-  }
-  return /* @__PURE__ */ u2(Obj, { s: id, g: "card", children: /* @__PURE__ */ u2("div", { "data-card": "1", style: { position: "absolute", inset: 0 }, children: [
-    /* @__PURE__ */ u2("div", { ...tg("card.lead", "text"), style: {
-      position: "absolute",
-      left: 90,
-      width: 900,
-      top: CARD_Y,
-      textAlign: "center",
-      whiteSpace: "nowrap",
-      fontFamily: ARCHIVO,
-      fontWeight: 500,
-      fontSize: CARD_LEAD,
-      lineHeight: `${CARD_LEAD * 1.2}px`,
-      color: "#FFFFFF",
-      letterSpacing: "0.01em"
-    }, children: lead2.map((w3, i3) => {
-      const p3 = pin(w3.at);
-      return /* @__PURE__ */ u2("span", { style: { display: "inline-block", marginLeft: i3 ? "0.3em" : 0, opacity: p3, filter: p3 < 0.98 ? `blur(${(6 * (1 - p3)).toFixed(2)}px)` : void 0 }, children: w3.t }, i3);
-    }) }),
-    /* @__PURE__ */ u2("div", { ...tg("card.big", "text"), style: {
-      position: "absolute",
-      left: 40,
-      width: 1e3,
-      top: CARD_Y + CARD_LEAD * 1.2 + 26,
-      textAlign: "center",
-      whiteSpace: "nowrap",
-      fontFamily: ARCHIVO,
-      fontWeight: 800,
-      fontSize: CARD_BIG,
-      lineHeight: `${CARD_BIG * 1.1}px`,
-      color: glow,
-      letterSpacing: "-0.01em",
-      opacity: g1,
-      filter: g1 < 0.98 ? `blur(${(10 * (1 - g1)).toFixed(2)}px)` : void 0,
-      textShadow: `0 0 18px ${rgba(glow, 0.75)}, 0 0 60px ${rgba(glow, 0.5)}, 0 0 130px ${rgba(glow, 0.35)}`,
-      transform: "perspective(1200px) rotateX(0.15deg) skewX(-11deg)"
-    }, children: big.t })
-  ] }) });
-};
-
-// src/r45/sets/explain.tsx
-var S8 = "explain";
-var EX_DONE = cardDone(S8);
-var Explain = ({ f: f4 }) => /* @__PURE__ */ u2(TurnCard, { id: S8, f: f4, glow: "#F5A524" });
-var ExplainSet = { id: S8, ground: "dark", Comp: Explain, align: () => "centre", focus: [540, 960] };
-
-// src/r45/sets/catch.tsx
-var S9 = "catch";
-var CT_DONE = cardDone(S9);
-var Catch = ({ f: f4 }) => /* @__PURE__ */ u2(TurnCard, { id: S9, f: f4, glow: "#E5484D" });
-var CatchSet = { id: S9, ground: "dark", Comp: Catch, align: () => "centre", focus: [540, 960] };
-
-// src/r45/Film.tsx
-var TRUCK_DUR = HO.truck;
-var CRANE_DUR = HO.crane;
-var CRANE = 2e3;
-var DIP_DUR = 16;
-var durOf = (tr) => tr.kind === "truck" ? TRUCK_DUR : tr.kind === "crane" ? CRANE_DUR : DIP_DUR;
-var FEATHER_T = 70;
-var FEATHER_C = 40;
-var OPEN = 1400;
-var gapOf = (tr) => tr.kind === "truck" ? Math.max(tr.gap ?? 0, 2 * FEATHER_T) : tr.kind === "crane" ? CRANE - 1920 : 0;
-var prog = (f4, a3, b2) => clamp01((f4 - a3) / (b2 - a3));
-var CARD_PRE = 8;
-var DEFS = [
-  { ...HookSet, at: 0, done: HK_DONE },
-  { ...ExplainSet, at: cue("explain", 0) - CARD_PRE, done: EX_DONE, tr: { kind: "dip" } },
-  { ...DealSet, at: cue("deal", 0) - CARD_PRE, done: DL_DONE, tr: { kind: "dip" } },
-  // ★ ONE WORLD: trucks and cranes alternate (no two consecutive moves alike); each place is bounded by its frame mask
-  { ...PriceSet, at: cue("price", 0) + 4, done: PR_DONE, tr: { kind: "truck", dir: "R", gap: 300 } },
-  { ...CatchSet, at: cue("catch", 0) - CARD_PRE, done: CT_DONE, tr: { kind: "dip" } },
-  { ...CloseSet, at: cue("close", 0) - CARD_PRE, done: CL_DONE, tr: { kind: "dip" } },
-  { ...FairSet, at: cue("fair", 0) + 4, done: FA_DONE, tr: { kind: "crane", dir: "down" } },
-  { ...VerdictSet, at: cue("verdict", 0) + 4, done: TOTAL_FRAMES, tr: { kind: "truck", dir: "R", gap: 300 } }
-];
-var lead = (tr) => !tr ? 0 : durOf(tr) / 2;
-var tail = lead;
-var beatEnds = BLOCKS.map((b2) => F2(b2.lines.flat().at(-1).a));
-var SHOTS = (() => {
-  const out = [];
-  DEFS.forEach((d3, i3) => {
-    if (i3 === 0) {
-      out.push({ ...d3, t0: 0 });
-      return;
-    }
-    const prev = out[i3 - 1], ld = lead(d3.tr);
-    let t0 = Math.ceil(Math.max(d3.at, prev.done + ld, prev.t0 + tail(prev.tr) + ld));
-    for (let guard = 0; guard < 20; guard++) {
-      const late = BLOCKS.map((b2, j4) => ({ b: b2, j: j4 })).filter(({ b: b2, j: j4 }) => CUES[b2.cue].scene === prev.id && F2(b2.a) < t0 - ld && beatEnds[j4] >= t0 - ld);
-      if (!late.length) break;
-      t0 = Math.max(...late.map(({ j: j4 }) => beatEnds[j4])) + 2 + ld;
-    }
-    out.push({ ...d3, t0 });
-  });
-  for (let i3 = 2; i3 < out.length; i3++) {
-    const a3 = out[i3 - 1].tr, b2 = out[i3].tr;
-    if (a3 && b2 && a3.kind !== "dip" && b2.kind !== "dip" && a3.kind === b2.kind && a3.dir === b2.dir)
-      throw new Error(`027 Film: hand-overs into ${out[i3 - 1].id} and ${out[i3].id} are the same move`);
-  }
-  return out;
-})();
-var arrivalStart = (k3) => k3 === 0 ? 0 : SHOTS[k3].t0 - lead(SHOTS[k3].tr);
-var WINDOWS = SHOTS.map((s3, k3) => {
-  const nx = SHOTS[k3 + 1];
-  const to = !nx ? TOTAL_FRAMES : nx.t0 + tail(nx.tr);
-  return { id: s3.id, from: arrivalStart(k3), to };
-});
-{
-  const bad = BLOCKS.map((b2, j4) => ({ b: b2, j: j4 })).filter(({ b: b2 }) => {
-    const k3 = SHOTS.findIndex((s3) => s3.id === CUES[b2.cue].scene);
-    return F2(b2.a) < arrivalStart(k3) - 1;
-  });
-  if (bad.length) throw new Error(`027 Film: ${bad.length} caption beat(s) start before their set arrives (first: beat ${bad[0].j})`);
-}
-var frameOf = (k3) => {
-  const m3 = { l: -OPEN, r: 1080 + OPEN, t: -OPEN, b: 1920 + OPEN, fl: 0, fr: 0, ft: 0, fb: 0 };
-  const face = (tr, arriving) => {
-    if (!tr || tr.kind === "dip") return;
-    const g4 = gapOf(tr) / 2;
-    if (tr.kind === "truck") {
-      if (tr.dir === "R" === arriving) {
-        m3.l = -g4;
-        m3.fl = FEATHER_T;
-      } else {
-        m3.r = 1080 + g4;
-        m3.fr = FEATHER_T;
-      }
-    } else {
-      if (tr.dir === "down" === arriving) {
-        m3.t = -g4;
-        m3.ft = FEATHER_C;
-      } else {
-        m3.b = 1920 + g4;
-        m3.fb = FEATHER_C;
-      }
-    }
-  };
-  face(SHOTS[k3].tr, true);
-  face(SHOTS[k3 + 1]?.tr, false);
-  return m3;
-};
-var FRAMES = SHOTS.map((_3, k3) => frameOf(k3));
-var fastest = (fn2, a3, b2) => {
-  let best = -1, at = a3;
-  for (let f4 = Math.floor(a3); f4 < b2; f4++) {
-    const v3 = Math.abs(fn2(f4 + 1) - fn2(f4));
-    if (v3 > best) {
-      best = v3;
-      at = f4;
-    }
-  }
-  return at + 1;
-};
-var HANDOVER_PEAK = SHOTS.map((s3) => {
-  const tr = s3.tr;
-  if (!tr) return 0;
-  const D3 = durOf(tr);
-  return fastest((f4) => HO.curve(prog(f4, s3.t0 - D3 / 2, s3.t0 + D3 / 2)), s3.t0 - D3 / 2, s3.t0 + D3 / 2) + ("peak" in tr ? tr.peak ?? 0 : 0);
-});
-var HANDOVER_RUNS = SHOTS.map((s3) => {
-  const tr = s3.tr;
-  if (!tr || tr.kind === "dip") return null;
-  const D3 = durOf(tr);
-  return { id: s3.id, kind: tr.kind, a: s3.t0 - D3 / 2, b: s3.t0 + D3 / 2, p: Array.from({ length: D3 + 1 }, (_3, i3) => HO.curve(i3 / D3)) };
-}).filter(Boolean);
-var envDb = (t3) => {
-  const E3 = BED_ENV;
-  if (!E3.length) return 0;
-  if (t3 <= E3[0][0]) return E3[0][1];
-  for (let k3 = 1; k3 < E3.length; k3++) if (t3 <= E3[k3][0]) return E3[k3 - 1][1] + (E3[k3][1] - E3[k3 - 1][1]) * (t3 - E3[k3 - 1][0]) / (E3[k3][0] - E3[k3 - 1][0]);
-  return E3[E3.length - 1][1];
-};
-var bedVolume = (fr) => MUSIC_GAIN * 10 ** (envDb(fr / 30) / 20) * clamp01(fr / 12) * clamp01((TOTAL_FRAMES - fr) / 36);
-var SCORE = buildScore(
-  SHOTS.map((s3, k3) => ({ id: s3.id, from: WINDOWS[k3].from, to: WINDOWS[k3].to, t0: s3.t0, kind: s3.tr && s3.tr.kind !== "dip" ? s3.tr.kind : null, side: s3.tr && "dir" in s3.tr ? s3.tr.dir : null })),
-  HANDOVER_PEAK
-);
-var SCORE_CUES = SCORE.cues;
-
 // src/hf/film.tsx
-var LABEL = {
-  hook: "1 Hook: the tag, $29,000,000,000; the filing says $13.8B",
-  explain: "2 Turn card: Let me explain.",
-  deal: "3 The deal: Square agrees to buy Afterpay, paid in shares, 0.375 a share",
-  price: "4 The price: $247.26 a share, so $29B",
-  catch: "5 Turn card: And here's the catch.",
-  close: "6 The close: six months, Block, the price halves, the 10-Q books $13.8B",
-  fair: "7 To be fair: $29B was real on day one; the shares were fixed",
-  verdict: "8 The verdict: the receipt, INFLATED, the sign-off"
-};
+var WORLD_LAYER = "world";
 var layerSpecs = () => [
-  { id: "ground", from: 0, to: TOTAL_FRAMES, track: 0, z: 1, label: "Ground and light" },
-  ...SHOTS.map((s3, k3) => ({ id: s3.id, from: WINDOWS[k3].from, to: WINDOWS[k3].to, track: 1 + k3, z: 10 + k3, label: LABEL[s3.id] ?? s3.id }))
+  { id: WORLD_LAYER, from: 0, to: TOTAL_FRAMES, track: 0, z: 1, label: "The world: one 3-D scene, one camera" },
+  { id: "captions", from: 0, to: TOTAL_FRAMES, track: 1, z: 30, label: "Captions" },
+  ...PLACES.map((p3, k3) => ({ id: p3.id, from: WINDOWS[k3].from, to: WINDOWS[k3].to, track: 2 + k3, z: 2, label: p3.label }))
 ];
 
 // src/hf/plan.ts
 var plan = () => ({
   total: TOTAL_FRAMES,
-  fps: FPS2,
+  fps: FPS,
   // ★ (030, the template) each track only once it exists: before the take lands the film is picture only (data.ts flags)
   has: { vo: HAS_VO, music: HAS_MUSIC, sfx: HAS_SFX },
   comp: COMPOSITION_ID,
@@ -48104,8 +48217,8 @@ var plan = () => ({
   cues: (HAS_SFX ? SCORE_CUES : []).map((c3) => ({ ...c3, lead: 0, gain: GAIN[c3.s], len: LEN[c3.s] })),
   // the bed's level: MUSIC_GAIN × the measured envelope × its fades, sampled every 3 frames (an automation lane IS the level)
   bed: Array.from({ length: Math.floor(TOTAL_FRAMES / 3) + 1 }, (_3, i3) => {
-    const f4 = Math.min(TOTAL_FRAMES, i3 * 3);
-    return { t: +(f4 / FPS2).toFixed(4), v: +bedVolume(f4).toFixed(5) };
+    const f3 = Math.min(TOTAL_FRAMES, i3 * 3);
+    return { t: +(f3 / FPS).toFixed(4), v: +bedVolume(f3).toFixed(5) };
   })
 });
 export {

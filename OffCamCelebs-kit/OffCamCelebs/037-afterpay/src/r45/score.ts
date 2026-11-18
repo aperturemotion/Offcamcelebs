@@ -1,11 +1,10 @@
 import { within, peakOn, PEAK, type Cue } from "./SfxLayer";
-import { HK, HK_CAM } from "./sets/hook";
-import { DL, DL_CAM } from "./sets/deal";
-import { PR, PR_CAM } from "./sets/price";
-import { CL, CL_CAM } from "./sets/close";
-import { FA, FA_CAM } from "./sets/fair";
-import { VD, VD_CAM } from "./sets/verdict";
-import type { CamKey } from "./camera";
+import { HK } from "./sets/hook";
+import { DL } from "./sets/deal";
+import { PR } from "./sets/price";
+import { CL } from "./sets/close";
+import { FA } from "./sets/fair";
+import { VD } from "./sets/verdict";
 import type { SceneId } from "../audit/data";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -13,29 +12,20 @@ import type { SceneId } from "../audit/data";
 // One cue per acted beat. The references master at −14.1 LUFS with effects and music about 5 dB under the voice
 //   (preferences P9, measured 2026-11-18): the levels are set by the mix loop once the take is wired.
 // ═══════════════════════════════════════════════════════════════════════════
-type SetRow = { id: SceneId; from: number; to: number; t0: number; kind: "truck" | "crane" | "dive" | null; side: string | null };
+type SetRow = { id: SceneId; from: number; to: number };
+/** a camera move that takes a whoosh: its place, its middle and end frames, its level and what it is */
+export type CamMove = { id: SceneId; mid: number; end: number; vol: number; why: string };
 
-export const buildScore = (sets: SetRow[], peaks: number[]) => {
+export const buildScore = (sets: SetRow[], moves: CamMove[]) => {
   const cues: Cue[] = [];
   const w = (id: SceneId) => { const x = sets.find((y) => y.id === id)!; return { at: x.from, end: x.to }; };
   const add = (c: Cue) => cues.push(c);
   const pk = (id: SceneId) => peakOn(w(id));
   const wi = (id: SceneId) => within(w(id));
 
-  // ── the hand-overs: CAMERA MOVES — an airwoosh spanning the move, peaking on its fastest frame (a dip is silent) ──
-  sets.forEach((st, i) => {
-    if (!st.kind || i === 0) return;
-    const both = { at: sets[i - 1].from, end: st.to };
-    add(peakOn(both)("airwoosh", peaks[i], st.t0 + 22, 1.1, `the camera ${st.kind === "truck" ? "trucks" : "cranes"} ${st.side} into ${st.id}`));
-  });
-  // ── ★ RULE 46: the CAMERA's own travels take airwoosh, peaking mid-move; a breath or a small reframe is silent ──
-  const CAMS: [SceneId, CamKey[]][] = [["hook", HK_CAM], ["deal", DL_CAM], ["price", PR_CAM], ["close", CL_CAM], ["fair", FA_CAM], ["verdict", VD_CAM]];
-  for (const [id, keys] of CAMS) keys.forEach((k, i) => {
-    if (i === 0 || k.drift) return;
-    const a = keys[i - 1], travel = Math.hypot(k.x - a.x, k.y - a.y), zoom = Math.abs(Math.log(k.z / a.z));
-    if (travel < 150 && zoom < 0.08) return;
-    add(pk(id)("airwoosh", k.at + k.dur / 2, k.at + k.dur, travel > 600 ? 0.7 : 0.5, `the camera travels (${id}, key ${i})`));
-  });
+  // ── ★ P12: the CAMERA's travels through the world take airwoosh, peaking mid-move; breaths and small pushes are silent ──
+  const all = { at: 0, end: sets[sets.length - 1].to };
+  for (const m of moves) add(peakOn(all)("airwoosh", m.mid, m.end, m.vol, `the camera travels (${m.id}: ${m.why})`));
   // ── 1 · the hook: the newspapers land, the tag flips to the filing's figure ──
   HK.lands.forEach((l, i) => add(wi("hook")("thud", l, undefined, 0.3 - 0.04 * i, `newspaper ${i + 1} lands on the desk`)));
   add(pk("hook")("whooshsoft", HK.flipA + 8, HK.flipB, 0.4, "the tag flips to $13,800,000,000"));

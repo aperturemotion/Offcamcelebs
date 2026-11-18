@@ -33,7 +33,7 @@ export const DL_CAM: CamKey[] = alive("deal", STORY, DL_DONE + 40, { amp: 0.5 })
 
 // the eye rides high: the desk's top is seen as a lit surface, the objects from a little above
 const eyeAt = (f: number) => { const v = camView(DL_CAM, f); return { x: v.x + 240, y: v.y - 760, D: 2000 }; };
-const paramsAt = (f: number): DealP => ({
+export const paramsAt = (f: number): DealP => ({
   contract: ramp(f, DL.contract[0], DL.contract[1], GLIDE),
   cooler: ramp(f, DL.cooler[0], DL.cooler[1], EXIT),
   certs: ramp(f, DL.certs[0], DL.certs[1], GLIDE),

@@ -1,44 +1,35 @@
-// ══════════════════════════════════════════════════════════════════════════════════════════════
-// THE COMPOSITION'S LAYERS — 037 "Afterpay: $29B or $13.8B?" (cloned from 035; the black-studio look).
-// The Remotion film drew, every frame: the ground (one surface, dissolving cream ↔ dark across a hand-over), then every
-// place's BACK pass (its light, fixed in the world), then every place's FRONT pass (its objects and its captions), so no
-// place's light ever painted over another's objects. Here that order is kept as clips:
-//   · "ground" — the ground, the shared SVG defs and every visible place's back pass, for the whole film;
-//   · one clip per place, over its own window (from its arrival's first movement to the end of the next hand-over's move
-//     of it), drawing its front pass. Studio reads the film place by place.
+// ═════════════════════════════════════════════════════════════════════════════════════════════
+// THE COMPOSITION'S LAYERS — 037 "Afterpay: $29B or $13.8B?" (THE PAYOUTS; rule P12: one complete 3-D world).
+//   · "world"    — ONE film-long clip: the whole frame is one rendered 3-D scene filmed by one camera (src/world/world.ts).
+//                  The driver draws it; nothing in it is DOM.
+//   · "captions" — the narration's small phrases, as text above the picture (the only DOM in the film).
+//   · one MARKER clip per place (empty): Studio's timeline reads the film place by place, and plan.json keeps the windows.
 // Each layer draws exactly its own frames [from, to) (CLAUDE.md, V34 HF f3410): the driver gates every host.
-// ══════════════════════════════════════════════════════════════════════════════════════════════
-import { SHOTS, WINDOWS, stagesAt, StageView, GroundFill, MatDefs, P } from "../r45/Film";
+// ═════════════════════════════════════════════════════════════════════════════════════════════
+import { PLACES, WINDOWS } from "../world/film3d";
 import { TOTAL_FRAMES } from "../audit/data";
+import { Caption, CHUNKS, NO_CAPTION } from "../r45/Caption";
+import { F } from "../r45/time";
 
 export type LayerSpec = { id: string; from: number; to: number; track: number; z: number; label: string };
-
-const LABEL: Record<string, string> = {
-  hook: "1 Hook: the tag, $29,000,000,000; the filing says $13.8B", explain: "2 Turn card: Let me explain.",
-  deal: "3 The deal: Square agrees to buy Afterpay, paid in shares, 0.375 a share", price: "4 The price: $247.26 a share, so $29B",
-  catch: "5 Turn card: And here's the catch.", close: "6 The close: six months, Block, the price halves, the 10-Q books $13.8B",
-  fair: "7 To be fair: $29B was real on day one; the shares were fixed", verdict: "8 The verdict: the receipt, INFLATED, the sign-off",
-};
+export const WORLD_LAYER = "world";
 
 export const layerSpecs = (): LayerSpec[] => [
-  { id: "ground", from: 0, to: TOTAL_FRAMES, track: 0, z: 1, label: "Ground and light" },
-  ...SHOTS.map((s, k) => ({ id: s.id, from: WINDOWS[k].from, to: WINDOWS[k].to, track: 1 + k, z: 10 + k, label: LABEL[s.id] ?? s.id })),
+  { id: WORLD_LAYER, from: 0, to: TOTAL_FRAMES, track: 0, z: 1, label: "The world: one 3-D scene, one camera" },
+  { id: "captions", from: 0, to: TOTAL_FRAMES, track: 1, z: 30, label: "Captions" },
+  ...PLACES.map((p, k) => ({ id: p.id, from: WINDOWS[k].from, to: WINDOWS[k].to, track: 2 + k, z: 2, label: p.label })),
 ];
 
+/** the scene whose phrase is on at f: the latest phrase that has begun */
+const sceneAt = (f: number) => {
+  let s = CHUNKS[0].scene;
+  for (const c of CHUNKS) if (f >= F(c.a) - 2) s = c.scene;
+  return s;
+};
+
 export const Layer = ({ id, f }: { id: string; f: number }) => {
-  const { stages, ground } = stagesAt(f);
-  if (id === "ground") {
-    return (
-      <div style={{ position: "absolute", inset: 0, background: ground.base === "dark" ? P.espresso : P.sand }}>
-        <MatDefs />
-        <GroundFill g={ground.base} />
-        {ground.over.op > 0.002 && ground.over.g && (
-          <div style={{ position: "absolute", inset: 0, opacity: ground.over.op }}><GroundFill g={ground.over.g} /></div>
-        )}
-        {stages.map((st) => <StageView key={`b${st.k}`} st={st} f={f} pass="back" />)}
-      </div>
-    );
-  }
-  const st = stages.find((s) => SHOTS[s.k].id === id);
-  return st ? <StageView st={st} f={f} pass="front" /> : null;
+  if (id !== "captions") return null;   // the world is drawn by the driver; the place markers are empty
+  const scene = sceneAt(f);
+  if (NO_CAPTION.has(scene)) return null;
+  return <Caption scene={scene} f={f} ground="dark" align={() => "centre"} />;
 };

@@ -48,7 +48,7 @@ const feedAt = (f: number) => {
   return lerp(lerp(lerp(lerp(L.head * a, L.announced, b), L.paid, c), L.gap + 0.02, d), L.all, e);
 };
 const feeding = (f: number) => [VD.head, VD.ann, VD.paid, VD.gap, VD.foot].some(([a, b]) => f >= a - 2 && f <= b + 2);
-const paramsAt = (f: number): VerdictP => ({
+export const paramsAt = (f: number): VerdictP => ({
   feed: feedAt(f), rating: ramp(f, VD.rating[0], VD.rating[1], SETTLE),
   tag: 0.3 + 0.7 * ramp(f, VD.tag[0], VD.tag[1], SETTLE), swing: 0.7 * Math.sin(f / 31) + 0.3 * Math.sin(f / 17),
   busy: feeding(f) ? (Math.floor(f / 3) % 2 ? 1 : 0.3) : 0.5,

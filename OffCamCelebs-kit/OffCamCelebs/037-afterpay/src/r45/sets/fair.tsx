@@ -32,7 +32,7 @@ const eyeAt = (f: number) => { const v = camView(FA_CAM, f); return { x: v.x + 2
 const T0 = cue(S, 0) - 10;
 // it rocks from a tilt toward the figure and settles LEVEL just before "real value" (a damped swing; level is the point)
 const TAU = Math.max(8, (REAL - T0) / 4.2);
-const paramsAt = (f: number): FairP => {
+export const paramsAt = (f: number): FairP => {
   const t = Math.max(0, f - T0);
   return {
     tilt: 8 * Math.exp(-t / TAU) * Math.cos((t / TAU) * 2.1),

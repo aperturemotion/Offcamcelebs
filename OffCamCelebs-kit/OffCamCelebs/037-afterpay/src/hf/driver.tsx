@@ -7,7 +7,8 @@
 // ══════════════════════════════════════════════════════════════════════════════════════════════
 import { h, render } from "preact";
 import { setFrame } from "../shim/remotion";
-import { Layer, layerSpecs } from "./film";
+import { Layer, layerSpecs, WORLD_LAYER } from "./film";
+import { drawWorld } from "../world/world";
 import { beginFrame, endFrame, setLayer, loadFonts, loadImages } from "../three/stage";
 /** ★ (032) photos printed INTO 3-D textures are decoded before the first frame; 033 prints none (kept for the next film) */
 const HOOK_PHOTOS: string[] = [];
@@ -29,6 +30,8 @@ const draw = (time: number) => {
     const id = el.dataset.filmLayer!;
     const w = WINDOW.get(id);
     setLayer(id);
+    // ★ P12: the WORLD is one WebGL scene drawn straight into its layer (no DOM); every other layer is Preact
+    if (id === WORLD_LAYER) { try { drawWorld(el, f); } catch (err) { console.error("[world] frame", f, "failed:", err); } continue; }
     render(!w || (f >= w.from && f < w.to) ? h(Layer, { id, f }) : null, el);
   }
   endFrame();

@@ -31,7 +31,7 @@ export const PR_DONE = Math.max(cueEnd(S, 1) + 4, PUSH + 40);
 export const PR_CAM: CamKey[] = alive("price", STORY, PR_DONE + 40, { amp: 0.5 });
 
 const eyeAt = (f: number) => { const v = camView(PR_CAM, f); return { x: v.x + 210, y: v.y - 330, D: 2100 }; };
-const paramsAt = (f: number): PriceP => ({
+export const paramsAt = (f: number): PriceP => ({
   on: ramp(f, PR.on[0], PR.on[1], SETTLE), stack: ramp(f, PR.stack[0], PR.stack[1], GLIDE), turn: ramp(f, PR.turn[0], PR.turn[1], SETTLE), sum: ramp(f, PR.sum[0], PR.sum[1], SETTLE), tag: ramp(f, PR.tag[0], PR.tag[1], SETTLE),
   swing: 0.7 * Math.sin(f / 29), hang: ramp(f, PR.hang[0], PR.hang[1], GLIDE),
 });

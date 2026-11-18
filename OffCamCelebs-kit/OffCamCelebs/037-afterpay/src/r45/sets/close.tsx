@@ -59,7 +59,7 @@ const eyeAt = (f: number) => {
   const v = camView(CL_CAM, f), h = high(f);
   return { x: v.x + lerp(EYE_LOW.dx, EYE_HIGH.dx, h), y: v.y + lerp(EYE_LOW.dy, EYE_HIGH.dy, h), D };
 };
-const paramsAt = (f: number): CloseP => ({
+export const paramsAt = (f: number): CloseP => ({
   cal: ramp(f, CL.cal[0], CL.cal[1], (t) => t), swap: ramp(f, CL.swap[0], CL.swap[1], SETTLE), fall: ramp(f, CL.fall[0], CL.fall[1], COUNT),
   open: ramp(f, CL.open[0], CL.open[1], SETTLE), hl: ramp(f, CL.hl[0], CL.hl[1], SETTLE), stamp: ramp(f, CL.stamp[0], CL.stamp[1], (t) => t),
 });

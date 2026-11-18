@@ -50,7 +50,7 @@ const dropAt = (f: number, land: number): [number, number] => {
   if (f < land - FALL) return [9999, 0];
   return [H0 * t * t, 0.5 * t];                                // gravity: the height is quadratic in the time left
 };
-const paramsAt = (f: number): HookP => {
+export const paramsAt = (f: number): HookP => {
   const k = f - HK.flipA;
   return {
     flip: ramp(f, HK.flipA, HK.flipB, SETTLE),
