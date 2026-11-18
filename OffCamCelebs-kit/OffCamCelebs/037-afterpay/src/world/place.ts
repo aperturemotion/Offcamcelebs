@@ -44,6 +44,8 @@ export type Stage = "dark" | "light" | "card";
 export type PlaceCue = { kind: "hit" | "move"; s: SfxName; at: number; end?: number; vol: number; why: string };
 export type Place3 = {
   id: SceneId; label: string; enter: number; stage?: Stage;
+  /** (optional) the stage at frame f, for a place that hard-cuts between a dark and a light set (overrides `stage`) */
+  stageAt?: (f: number) => Stage;
   shots: (w: { from: number; to: number }) => CamKey3[];
   lights: (f: number) => Lights;
   build: () => Built;

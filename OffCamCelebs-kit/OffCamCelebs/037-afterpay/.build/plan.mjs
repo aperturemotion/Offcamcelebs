@@ -360,15 +360,15 @@ function V(n2) {
   };
 }
 function q(n2, u3, t2, i2, r2, o2, e2, f2, c2, a2) {
-  var s2, h2, p2, v2, y2, d2, _2, k2, x2, M, I2, P2, A3, H2, T2, j2, F2 = u3.type;
+  var s2, h2, p2, v2, y2, d2, _2, k2, x2, M, I2, P2, A3, H2, T4, j2, F3 = u3.type;
   if (void 0 !== u3.constructor) return null;
   128 & t2.__u && (c2 = !!(32 & t2.__u), o2 = [f2 = u3.__e = t2.__e]), (s2 = l.__b) && s2(u3);
-  n: if ("function" == typeof F2) {
+  n: if ("function" == typeof F3) {
     h2 = e2.length;
     try {
-      if (x2 = u3.props, M = F2.prototype && F2.prototype.render, I2 = (s2 = F2.contextType) && i2[s2.__c], P2 = s2 ? I2 ? I2.props.value : s2.__ : i2, t2.__c ? k2 = (p2 = u3.__c = t2.__c).__ = p2.__E : (M ? u3.__c = p2 = new F2(x2, P2) : (u3.__c = p2 = new C(x2, P2), p2.constructor = F2, p2.render = Q), I2 && I2.sub(p2), p2.state || (p2.state = {}), p2.__n = i2, v2 = p2.__d = true, p2.__h = [], p2._sb = []), M && null == p2.__s && (p2.__s = p2.state), M && null != F2.getDerivedStateFromProps && (p2.__s == p2.state && (p2.__s = m({}, p2.__s)), m(p2.__s, F2.getDerivedStateFromProps(x2, p2.__s))), y2 = p2.props, d2 = p2.state, p2.__v = u3, v2) M && null == F2.getDerivedStateFromProps && null != p2.componentWillMount && p2.componentWillMount(), M && null != p2.componentDidMount && p2.__h.push(p2.componentDidMount);
+      if (x2 = u3.props, M = F3.prototype && F3.prototype.render, I2 = (s2 = F3.contextType) && i2[s2.__c], P2 = s2 ? I2 ? I2.props.value : s2.__ : i2, t2.__c ? k2 = (p2 = u3.__c = t2.__c).__ = p2.__E : (M ? u3.__c = p2 = new F3(x2, P2) : (u3.__c = p2 = new C(x2, P2), p2.constructor = F3, p2.render = Q), I2 && I2.sub(p2), p2.state || (p2.state = {}), p2.__n = i2, v2 = p2.__d = true, p2.__h = [], p2._sb = []), M && null == p2.__s && (p2.__s = p2.state), M && null != F3.getDerivedStateFromProps && (p2.__s == p2.state && (p2.__s = m({}, p2.__s)), m(p2.__s, F3.getDerivedStateFromProps(x2, p2.__s))), y2 = p2.props, d2 = p2.state, p2.__v = u3, v2) M && null == F3.getDerivedStateFromProps && null != p2.componentWillMount && p2.componentWillMount(), M && null != p2.componentDidMount && p2.__h.push(p2.componentDidMount);
       else {
-        if (M && null == F2.getDerivedStateFromProps && x2 !== y2 && null != p2.componentWillReceiveProps && p2.componentWillReceiveProps(x2, P2), u3.__v == t2.__v || !p2.__e && null != p2.shouldComponentUpdate && false === p2.shouldComponentUpdate(x2, p2.__s, P2)) {
+        if (M && null == F3.getDerivedStateFromProps && x2 !== y2 && null != p2.componentWillReceiveProps && p2.componentWillReceiveProps(x2, P2), u3.__v == t2.__v || !p2.__e && null != p2.shouldComponentUpdate && false === p2.shouldComponentUpdate(x2, p2.__s, P2)) {
           u3.__v != t2.__v && (p2.props = x2, p2.state = p2.__s, p2.__d = false), u3.__e = t2.__e, u3.__k = t2.__k, u3.__k.some(function(n3) {
             n3 && (n3.__ = u3);
           }), w.push.apply(p2.__h, p2._sb), p2._sb = [], p2.__h.length && e2.push(p2), f2 = $(t2);
@@ -382,7 +382,7 @@ function q(n2, u3, t2, i2, r2, o2, e2, f2, c2, a2) {
       else do {
         p2.__d = false, A3 && A3(u3), s2 = p2.render(p2.props, p2.state, p2.context), p2.state = p2.__s;
       } while (p2.__d && ++H2 < 25);
-      p2.state = p2.__s, null != p2.getChildContext && (i2 = m(m({}, i2), p2.getChildContext())), M && !v2 && null != p2.getSnapshotBeforeUpdate && (_2 = p2.getSnapshotBeforeUpdate(y2, d2)), T2 = null != s2 && s2.type === S && null == s2.key ? E(s2.props.children) : s2, f2 = L(n2, g(T2) ? T2 : [T2], u3, t2, i2, r2, o2, e2, f2, c2, a2), p2.base = u3.__e, u3.__u &= -161, p2.__h.length && e2.push(p2), k2 && (p2.__E = p2.__ = null);
+      p2.state = p2.__s, null != p2.getChildContext && (i2 = m(m({}, i2), p2.getChildContext())), M && !v2 && null != p2.getSnapshotBeforeUpdate && (_2 = p2.getSnapshotBeforeUpdate(y2, d2)), T4 = null != s2 && s2.type === S && null == s2.key ? E(s2.props.children) : s2, f2 = L(n2, g(T4) ? T4 : [T4], u3, t2, i2, r2, o2, e2, f2, c2, a2), p2.base = u3.__e, u3.__u &= -161, p2.__h.length && e2.push(p2), k2 && (p2.__E = p2.__ = null);
     } catch (n3) {
       if (e2.length = h2, u3.__v = null, c2 || null != o2) {
         if (n3.then) {
@@ -535,6 +535,26 @@ var Easing = {
   cubic: (t2) => t2 * t2 * t2,
   sin: (t2) => 1 - Math.cos(t2 * Math.PI / 2)
 };
+var interpolate = (input, inputRange, outputRange, opts = {}) => {
+  const { easing = (t3) => t3, extrapolateLeft = "extend", extrapolateRight = "extend" } = opts;
+  let i2 = 1;
+  for (; i2 < inputRange.length - 1; i2++) if (inputRange[i2] >= input) break;
+  const i0 = i2 - 1, i1 = i2;
+  const a2 = inputRange[i0], b2 = inputRange[i1], oa = outputRange[i0], ob = outputRange[i1];
+  let x2 = input;
+  if (x2 < a2) {
+    if (extrapolateLeft === "clamp") x2 = a2;
+    else if (extrapolateLeft === "identity") return x2;
+  }
+  if (x2 > b2) {
+    if (extrapolateRight === "clamp") x2 = b2;
+    else if (extrapolateRight === "identity") return x2;
+  }
+  if (a2 === b2) return oa;
+  let t2 = (x2 - a2) / (b2 - a2);
+  t2 = easing(t2);
+  return oa + (ob - oa) * t2;
+};
 
 // src/r45/tokens.ts
 var SOFT = Easing.bezier(0.5, 0, 0.25, 1);
@@ -547,6 +567,7 @@ var INOUT = Easing.inOut(Easing.sin);
 var COUNT = Easing.bezier(0.45, 0, 0.25, 1);
 var EXIT = Easing.in(Easing.cubic);
 var clamp01 = (x2) => Math.max(0, Math.min(1, x2));
+var ramp = (f2, a2, b2, ease = SOFT) => interpolate(f2, [a2, b2], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
 
 // src/r45/SfxLayer.tsx
 var EVEN = {
@@ -653,22 +674,32 @@ var peakOn = (beat) => (s2, peakAt, visTo, vol, why) => within(beat)(s2, peakAt 
 
 // src/r45/score.ts
 var buildScore = (sets, moves, placeCues) => {
-  const cues = [];
+  const cues3 = [];
   const w2 = (id) => {
     const x2 = sets.find((y2) => y2.id === id);
     return { at: x2.from, end: x2.to };
   };
-  for (const m2 of moves) cues.push(peakOn(w2(m2.id))("airwoosh", m2.mid, m2.end, m2.vol, `the camera moves (${m2.id}: ${m2.why})`));
-  for (const c2 of placeCues) cues.push((c2.kind === "move" ? peakOn : within)(w2(c2.id))(c2.s, c2.at, c2.end, c2.vol, c2.why));
+  for (const m2 of moves) cues3.push(peakOn(w2(m2.id))("airwoosh", m2.mid, m2.end, m2.vol, `the camera moves (${m2.id}: ${m2.why})`));
+  for (const c2 of placeCues) cues3.push((c2.kind === "move" ? peakOn : within)(w2(c2.id))(c2.s, c2.at, c2.end, c2.vol, c2.why));
   const MOVE = /* @__PURE__ */ new Set(["swoosh", "whooshlong", "whooshsoft", "airwoosh", "lowwoosh"]);
   const heard = (c2) => c2.at + PEAK[c2.s];
-  const out = cues.filter((c2) => !(c2.why.startsWith("the camera moves") && cues.some((o2) => o2 !== c2 && MOVE.has(o2.s) && !o2.why.startsWith("the camera moves") && Math.abs(heard(o2) - heard(c2)) <= 6)));
+  const out = cues3.filter((c2) => !(c2.why.startsWith("the camera moves") && cues3.some((o2) => o2 !== c2 && MOVE.has(o2.s) && !o2.why.startsWith("the camera moves") && Math.abs(heard(o2) - heard(c2)) <= 6)));
   out.sort((a2, b2) => a2.at - b2.at);
   return { cues: out };
 };
 
 // src/world/cam.ts
+var mixV = (a2, b2, t2) => [a2[0] + (b2[0] - a2[0]) * t2, a2[1] + (b2[1] - a2[1]) * t2, a2[2] + (b2[2] - a2[2]) * t2];
+var lerp = (a2, b2, t2) => a2 + (b2 - a2) * t2;
+var orbitPos = (c2, a2, r2, y2) => {
+  const k2 = a2 * Math.PI / 180;
+  return [c2[0] + Math.sin(k2) * r2, y2, c2[2] + Math.cos(k2) * r2];
+};
+var orbitAt = (o2, t2) => orbitPos(o2.c, lerp(o2.a0, o2.a1, t2), lerp(o2.r0, o2.r1 ?? o2.r0, t2), lerp(o2.y0, o2.y1 ?? o2.y0, t2));
+var orbit = (at, dur, o2, x2 = {}) => ({ at, dur, pos: orbitAt(o2, 1), look: x2.look ?? o2.c, fov: x2.fov, ease: x2.ease ?? SOFT, orbit: o2, why: x2.why ?? "orbit" });
 var dolly = (at, dur, pos, look, x2 = {}) => ({ at, dur, pos, look, fov: x2.fov, ease: x2.ease ?? SETTLE, why: x2.why ?? "dolly" });
+var crane = (at, dur, pos, look, x2 = {}) => ({ at, dur, pos, look, fov: x2.fov, ease: x2.ease ?? TRAVEL, arc: x2.bulge ?? [0, 0, 120], why: x2.why ?? "crane", whoosh: 0.5 });
+var travel = (at, dur, pos, look, x2 = {}) => ({ at, dur, pos, look, fov: x2.fov, ease: x2.ease ?? TRAVEL, arc: x2.bulge, why: x2.why ?? "travel", whoosh: x2.vol ?? 0.6 });
 var cut = (at, pos, look, x2 = {}) => ({ at, dur: 0, pos, look, fov: x2.fov, roll: x2.roll, cut: true, dip: x2.dip ?? 0, why: x2.why ?? "cut", focus: x2.focus, still: x2.still });
 var checkPath = (name, keys) => {
   for (let i2 = 1; i2 < keys.length; i2++) {
@@ -838,7 +869,7 @@ function clamp(value, min, max) {
 function euclideanModulo(n2, m2) {
   return (n2 % m2 + m2) % m2;
 }
-function lerp(x2, y2, t2) {
+function lerp2(x2, y2, t2) {
   return (1 - t2) * x2 + t2 * y2;
 }
 function denormalize(value, array) {
@@ -1851,10 +1882,10 @@ var Quaternion = class {
    * @param {number} step - The angular step in radians.
    * @return {Quaternion} A reference to this quaternion.
    */
-  rotateTowards(q2, step) {
+  rotateTowards(q2, step2) {
     const angle = this.angleTo(q2);
     if (angle === 0) return this;
-    const t2 = Math.min(1, step / angle);
+    const t2 = Math.min(1, step2 / angle);
     this.slerp(q2, t2);
     return this;
   }
@@ -9466,9 +9497,9 @@ var Color = class {
   lerpHSL(color, alpha) {
     this.getHSL(_hslA);
     color.getHSL(_hslB);
-    const h2 = lerp(_hslA.h, _hslB.h, alpha);
-    const s2 = lerp(_hslA.s, _hslB.s, alpha);
-    const l2 = lerp(_hslA.l, _hslB.l, alpha);
+    const h2 = lerp2(_hslA.h, _hslB.h, alpha);
+    const s2 = lerp2(_hslA.s, _hslB.s, alpha);
+    const l2 = lerp2(_hslA.l, _hslB.l, alpha);
     this.setHSL(h2, s2, l2);
     return this;
   }
@@ -11775,6 +11806,276 @@ var Group = class extends Object3D {
     this.type = "Group";
   }
 };
+var CapsuleGeometry = class _CapsuleGeometry extends BufferGeometry {
+  /**
+   * Constructs a new capsule geometry.
+   *
+   * @param {number} [radius=1] - Radius of the capsule.
+   * @param {number} [height=1] - Height of the middle section.
+   * @param {number} [capSegments=4] - Number of curve segments used to build each cap.
+   * @param {number} [radialSegments=8] - Number of segmented faces around the circumference of the capsule. Must be an integer >= 3.
+   * @param {number} [heightSegments=1] - Number of rows of faces along the height of the middle section. Must be an integer >= 1.
+   */
+  constructor(radius = 1, height = 1, capSegments = 4, radialSegments = 8, heightSegments = 1) {
+    super();
+    this.type = "CapsuleGeometry";
+    this.parameters = {
+      radius,
+      height,
+      capSegments,
+      radialSegments,
+      heightSegments
+    };
+    height = Math.max(0, height);
+    capSegments = Math.max(1, Math.floor(capSegments));
+    radialSegments = Math.max(3, Math.floor(radialSegments));
+    heightSegments = Math.max(1, Math.floor(heightSegments));
+    const indices = [];
+    const vertices = [];
+    const normals = [];
+    const uvs = [];
+    const halfHeight = height / 2;
+    const capArcLength = Math.PI / 2 * radius;
+    const cylinderPartLength = height;
+    const totalArcLength = 2 * capArcLength + cylinderPartLength;
+    const numVerticalSegments = capSegments * 2 + heightSegments;
+    const verticesPerRow = radialSegments + 1;
+    const normal = new Vector3();
+    const vertex = new Vector3();
+    for (let iy = 0; iy <= numVerticalSegments; iy++) {
+      let currentArcLength = 0;
+      let profileY = 0;
+      let profileRadius = 0;
+      let normalYComponent = 0;
+      if (iy <= capSegments) {
+        const segmentProgress = iy / capSegments;
+        const angle = segmentProgress * Math.PI / 2;
+        profileY = -halfHeight - radius * Math.cos(angle);
+        profileRadius = radius * Math.sin(angle);
+        normalYComponent = -radius * Math.cos(angle);
+        currentArcLength = segmentProgress * capArcLength;
+      } else if (iy <= capSegments + heightSegments) {
+        const segmentProgress = (iy - capSegments) / heightSegments;
+        profileY = -halfHeight + segmentProgress * height;
+        profileRadius = radius;
+        normalYComponent = 0;
+        currentArcLength = capArcLength + segmentProgress * cylinderPartLength;
+      } else {
+        const segmentProgress = (iy - capSegments - heightSegments) / capSegments;
+        const angle = segmentProgress * Math.PI / 2;
+        profileY = halfHeight + radius * Math.sin(angle);
+        profileRadius = radius * Math.cos(angle);
+        normalYComponent = radius * Math.sin(angle);
+        currentArcLength = capArcLength + cylinderPartLength + segmentProgress * capArcLength;
+      }
+      const v2 = Math.max(0, Math.min(1, currentArcLength / totalArcLength));
+      let uOffset = 0;
+      if (iy === 0) {
+        uOffset = 0.5 / radialSegments;
+      } else if (iy === numVerticalSegments) {
+        uOffset = -0.5 / radialSegments;
+      }
+      for (let ix = 0; ix <= radialSegments; ix++) {
+        const u3 = ix / radialSegments;
+        const theta = u3 * Math.PI * 2;
+        const sinTheta = Math.sin(theta);
+        const cosTheta = Math.cos(theta);
+        vertex.x = -profileRadius * cosTheta;
+        vertex.y = profileY;
+        vertex.z = profileRadius * sinTheta;
+        vertices.push(vertex.x, vertex.y, vertex.z);
+        normal.set(
+          -profileRadius * cosTheta,
+          normalYComponent,
+          profileRadius * sinTheta
+        );
+        normal.normalize();
+        normals.push(normal.x, normal.y, normal.z);
+        uvs.push(u3 + uOffset, v2);
+      }
+      if (iy > 0) {
+        const prevIndexRow = (iy - 1) * verticesPerRow;
+        for (let ix = 0; ix < radialSegments; ix++) {
+          const i1 = prevIndexRow + ix;
+          const i2 = prevIndexRow + ix + 1;
+          const i3 = iy * verticesPerRow + ix;
+          const i4 = iy * verticesPerRow + ix + 1;
+          indices.push(i1, i2, i3);
+          indices.push(i2, i4, i3);
+        }
+      }
+    }
+    this.setIndex(indices);
+    this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+    this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+  }
+  copy(source) {
+    super.copy(source);
+    this.parameters = Object.assign({}, source.parameters);
+    return this;
+  }
+  /**
+   * Factory method for creating an instance of this class from the given
+   * JSON object.
+   *
+   * @param {Object} data - A JSON object representing the serialized geometry.
+   * @return {CapsuleGeometry} A new instance.
+   */
+  static fromJSON(data) {
+    return new _CapsuleGeometry(data.radius, data.height, data.capSegments, data.radialSegments, data.heightSegments);
+  }
+};
+var CylinderGeometry = class _CylinderGeometry extends BufferGeometry {
+  /**
+   * Constructs a new cylinder geometry.
+   *
+   * @param {number} [radiusTop=1] - Radius of the cylinder at the top.
+   * @param {number} [radiusBottom=1] - Radius of the cylinder at the bottom.
+   * @param {number} [height=1] - Height of the cylinder.
+   * @param {number} [radialSegments=32] - Number of segmented faces around the circumference of the cylinder.
+   * @param {number} [heightSegments=1] - Number of rows of faces along the height of the cylinder.
+   * @param {boolean} [openEnded=false] - Whether the base of the cylinder is open or capped.
+   * @param {number} [thetaStart=0] - Start angle for first segment, in radians.
+   * @param {number} [thetaLength=Math.PI*2] - The central angle, often called theta, of the circular sector, in radians.
+   * The default value results in a complete cylinder.
+   */
+  constructor(radiusTop = 1, radiusBottom = 1, height = 1, radialSegments = 32, heightSegments = 1, openEnded = false, thetaStart = 0, thetaLength = Math.PI * 2) {
+    super();
+    this.type = "CylinderGeometry";
+    this.parameters = {
+      radiusTop,
+      radiusBottom,
+      height,
+      radialSegments,
+      heightSegments,
+      openEnded,
+      thetaStart,
+      thetaLength
+    };
+    const scope = this;
+    radialSegments = Math.floor(radialSegments);
+    heightSegments = Math.floor(heightSegments);
+    const indices = [];
+    const vertices = [];
+    const normals = [];
+    const uvs = [];
+    let index = 0;
+    const indexArray = [];
+    const halfHeight = height / 2;
+    let groupStart = 0;
+    generateTorso();
+    if (openEnded === false) {
+      if (radiusTop > 0) generateCap(true);
+      if (radiusBottom > 0) generateCap(false);
+    }
+    this.setIndex(indices);
+    this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+    this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+    function generateTorso() {
+      const normal = new Vector3();
+      const vertex = new Vector3();
+      let groupCount = 0;
+      const slope = (radiusBottom - radiusTop) / height;
+      for (let y2 = 0; y2 <= heightSegments; y2++) {
+        const indexRow = [];
+        const v2 = y2 / heightSegments;
+        const radius = v2 * (radiusBottom - radiusTop) + radiusTop;
+        for (let x2 = 0; x2 <= radialSegments; x2++) {
+          const u3 = x2 / radialSegments;
+          const theta = u3 * thetaLength + thetaStart;
+          const sinTheta = Math.sin(theta);
+          const cosTheta = Math.cos(theta);
+          vertex.x = radius * sinTheta;
+          vertex.y = -v2 * height + halfHeight;
+          vertex.z = radius * cosTheta;
+          vertices.push(vertex.x, vertex.y, vertex.z);
+          normal.set(sinTheta, slope, cosTheta).normalize();
+          normals.push(normal.x, normal.y, normal.z);
+          uvs.push(u3, 1 - v2);
+          indexRow.push(index++);
+        }
+        indexArray.push(indexRow);
+      }
+      for (let x2 = 0; x2 < radialSegments; x2++) {
+        for (let y2 = 0; y2 < heightSegments; y2++) {
+          const a2 = indexArray[y2][x2];
+          const b2 = indexArray[y2 + 1][x2];
+          const c2 = indexArray[y2 + 1][x2 + 1];
+          const d2 = indexArray[y2][x2 + 1];
+          if (radiusTop > 0 || y2 !== 0) {
+            indices.push(a2, b2, d2);
+            groupCount += 3;
+          }
+          if (radiusBottom > 0 || y2 !== heightSegments - 1) {
+            indices.push(b2, c2, d2);
+            groupCount += 3;
+          }
+        }
+      }
+      scope.addGroup(groupStart, groupCount, 0);
+      groupStart += groupCount;
+    }
+    function generateCap(top) {
+      const centerIndexStart = index;
+      const uv = new Vector2();
+      const vertex = new Vector3();
+      let groupCount = 0;
+      const radius = top === true ? radiusTop : radiusBottom;
+      const sign2 = top === true ? 1 : -1;
+      for (let x2 = 1; x2 <= radialSegments; x2++) {
+        vertices.push(0, halfHeight * sign2, 0);
+        normals.push(0, sign2, 0);
+        uvs.push(0.5, 0.5);
+        index++;
+      }
+      const centerIndexEnd = index;
+      for (let x2 = 0; x2 <= radialSegments; x2++) {
+        const u3 = x2 / radialSegments;
+        const theta = u3 * thetaLength + thetaStart;
+        const cosTheta = Math.cos(theta);
+        const sinTheta = Math.sin(theta);
+        vertex.x = radius * sinTheta;
+        vertex.y = halfHeight * sign2;
+        vertex.z = radius * cosTheta;
+        vertices.push(vertex.x, vertex.y, vertex.z);
+        normals.push(0, sign2, 0);
+        uv.x = cosTheta * 0.5 + 0.5;
+        uv.y = sinTheta * 0.5 * sign2 + 0.5;
+        uvs.push(uv.x, uv.y);
+        index++;
+      }
+      for (let x2 = 0; x2 < radialSegments; x2++) {
+        const c2 = centerIndexStart + x2;
+        const i2 = centerIndexEnd + x2;
+        if (top === true) {
+          indices.push(i2, i2 + 1, c2);
+        } else {
+          indices.push(i2 + 1, i2, c2);
+        }
+        groupCount += 3;
+      }
+      scope.addGroup(groupStart, groupCount, top === true ? 1 : 2);
+      groupStart += groupCount;
+    }
+  }
+  copy(source) {
+    super.copy(source);
+    this.parameters = Object.assign({}, source.parameters);
+    return this;
+  }
+  /**
+   * Factory method for creating an instance of this class from the given
+   * JSON object.
+   *
+   * @param {Object} data - A JSON object representing the serialized geometry.
+   * @return {CylinderGeometry} A new instance.
+   */
+  static fromJSON(data) {
+    return new _CylinderGeometry(data.radiusTop, data.radiusBottom, data.height, data.radialSegments, data.heightSegments, data.openEnded, data.thetaStart, data.thetaLength);
+  }
+};
 var Curve = class {
   /**
    * Constructs a new curve.
@@ -13746,7 +14047,7 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
     this.setAttribute("uv", new Float32BufferAttribute(uvArray, 2));
     this.computeVertexNormals();
     function addShape(shape) {
-      const placeholder2 = [];
+      const placeholder = [];
       const curveSegments = options.curveSegments !== void 0 ? options.curveSegments : 12;
       const steps = options.steps !== void 0 ? options.steps : 1;
       const depth = options.depth !== void 0 ? options.depth : 1;
@@ -14027,9 +14328,9 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
         }
       }
       function v2(x2, y2, z2) {
-        placeholder2.push(x2);
-        placeholder2.push(y2);
-        placeholder2.push(z2);
+        placeholder.push(x2);
+        placeholder.push(y2);
+        placeholder.push(z2);
       }
       function f3(a2, b2, c2) {
         addVertex(a2);
@@ -14058,9 +14359,9 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
         addUV(uvs[3]);
       }
       function addVertex(index) {
-        verticesArray.push(placeholder2[index * 3 + 0]);
-        verticesArray.push(placeholder2[index * 3 + 1]);
-        verticesArray.push(placeholder2[index * 3 + 2]);
+        verticesArray.push(placeholder[index * 3 + 0]);
+        verticesArray.push(placeholder[index * 3 + 1]);
+        verticesArray.push(placeholder[index * 3 + 2]);
       }
       function addUV(vector2) {
         uvArray.push(vector2.x);
@@ -14158,6 +14459,121 @@ function toJSON$1(shapes, options, data) {
   if (options.extrudePath !== void 0) data.options.extrudePath = options.extrudePath.toJSON();
   return data;
 }
+var LatheGeometry = class _LatheGeometry extends BufferGeometry {
+  /**
+   * Constructs a new lathe geometry.
+   *
+   * @param {Array<Vector2|Vector3>} [points] - An array of points in 2D space. The x-coordinate of each point
+   * must be greater than zero.
+   * @param {number} [segments=12] - The number of circumference segments to generate.
+   * @param {number} [phiStart=0] - The starting angle in radians.
+   * @param {number} [phiLength=Math.PI*2] - The radian (0 to 2PI) range of the lathed section 2PI is a
+   * closed lathe, less than 2PI is a portion.
+   */
+  constructor(points = [new Vector2(0, -0.5), new Vector2(0.5, 0), new Vector2(0, 0.5)], segments = 12, phiStart = 0, phiLength = Math.PI * 2) {
+    super();
+    this.type = "LatheGeometry";
+    this.parameters = {
+      points,
+      segments,
+      phiStart,
+      phiLength
+    };
+    segments = Math.floor(segments);
+    phiLength = clamp(phiLength, 0, Math.PI * 2);
+    const indices = [];
+    const vertices = [];
+    const uvs = [];
+    const initNormals = [];
+    const normals = [];
+    const inverseSegments = 1 / segments;
+    const vertex = new Vector3();
+    const uv = new Vector2();
+    const normal = new Vector3();
+    const curNormal = new Vector3();
+    const prevNormal = new Vector3();
+    let dx = 0;
+    let dy = 0;
+    for (let j2 = 0; j2 <= points.length - 1; j2++) {
+      switch (j2) {
+        case 0:
+          dx = points[j2 + 1].x - points[j2].x;
+          dy = points[j2 + 1].y - points[j2].y;
+          normal.x = dy * 1;
+          normal.y = -dx;
+          normal.z = dy * 0;
+          prevNormal.copy(normal);
+          normal.normalize();
+          initNormals.push(normal.x, normal.y, normal.z);
+          break;
+        case points.length - 1:
+          initNormals.push(prevNormal.x, prevNormal.y, prevNormal.z);
+          break;
+        default:
+          dx = points[j2 + 1].x - points[j2].x;
+          dy = points[j2 + 1].y - points[j2].y;
+          normal.x = dy * 1;
+          normal.y = -dx;
+          normal.z = dy * 0;
+          curNormal.copy(normal);
+          normal.x += prevNormal.x;
+          normal.y += prevNormal.y;
+          normal.z += prevNormal.z;
+          normal.normalize();
+          initNormals.push(normal.x, normal.y, normal.z);
+          prevNormal.copy(curNormal);
+      }
+    }
+    for (let i2 = 0; i2 <= segments; i2++) {
+      const phi = phiStart + i2 * inverseSegments * phiLength;
+      const sin = Math.sin(phi);
+      const cos = Math.cos(phi);
+      for (let j2 = 0; j2 <= points.length - 1; j2++) {
+        vertex.x = points[j2].x * sin;
+        vertex.y = points[j2].y;
+        vertex.z = points[j2].x * cos;
+        vertices.push(vertex.x, vertex.y, vertex.z);
+        uv.x = i2 / segments;
+        uv.y = j2 / (points.length - 1);
+        uvs.push(uv.x, uv.y);
+        const x2 = initNormals[3 * j2 + 0] * sin;
+        const y2 = initNormals[3 * j2 + 1];
+        const z2 = initNormals[3 * j2 + 0] * cos;
+        normals.push(x2, y2, z2);
+      }
+    }
+    for (let i2 = 0; i2 < segments; i2++) {
+      for (let j2 = 0; j2 < points.length - 1; j2++) {
+        const base = j2 + i2 * points.length;
+        const a2 = base;
+        const b2 = base + points.length;
+        const c2 = base + points.length + 1;
+        const d2 = base + 1;
+        indices.push(a2, b2, d2);
+        indices.push(c2, d2, b2);
+      }
+    }
+    this.setIndex(indices);
+    this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+    this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+  }
+  copy(source) {
+    super.copy(source);
+    this.parameters = Object.assign({}, source.parameters);
+    return this;
+  }
+  /**
+   * Factory method for creating an instance of this class from the given
+   * JSON object.
+   *
+   * @param {Object} data - A JSON object representing the serialized geometry.
+   * @return {LatheGeometry} A new instance.
+   */
+  static fromJSON(data) {
+    return new _LatheGeometry(data.points, data.segments, data.phiStart, data.phiLength);
+  }
+};
 var PlaneGeometry = class _PlaneGeometry extends BufferGeometry {
   /**
    * Constructs a new plane geometry.
@@ -14305,6 +14721,170 @@ var RingGeometry = class _RingGeometry extends BufferGeometry {
    */
   static fromJSON(data) {
     return new _RingGeometry(data.innerRadius, data.outerRadius, data.thetaSegments, data.phiSegments, data.thetaStart, data.thetaLength);
+  }
+};
+var SphereGeometry = class _SphereGeometry extends BufferGeometry {
+  /**
+   * Constructs a new sphere geometry.
+   *
+   * @param {number} [radius=1] - The sphere radius.
+   * @param {number} [widthSegments=32] - The number of horizontal segments. Minimum value is `3`.
+   * @param {number} [heightSegments=16] - The number of vertical segments. Minimum value is `2`.
+   * @param {number} [phiStart=0] - The horizontal starting angle in radians.
+   * @param {number} [phiLength=Math.PI*2] - The horizontal sweep angle size.
+   * @param {number} [thetaStart=0] - The vertical starting angle in radians.
+   * @param {number} [thetaLength=Math.PI] - The vertical sweep angle size.
+   */
+  constructor(radius = 1, widthSegments = 32, heightSegments = 16, phiStart = 0, phiLength = Math.PI * 2, thetaStart = 0, thetaLength = Math.PI) {
+    super();
+    this.type = "SphereGeometry";
+    this.parameters = {
+      radius,
+      widthSegments,
+      heightSegments,
+      phiStart,
+      phiLength,
+      thetaStart,
+      thetaLength
+    };
+    widthSegments = Math.max(3, Math.floor(widthSegments));
+    heightSegments = Math.max(2, Math.floor(heightSegments));
+    const thetaEnd = Math.min(thetaStart + thetaLength, Math.PI);
+    let index = 0;
+    const grid = [];
+    const vertex = new Vector3();
+    const normal = new Vector3();
+    const indices = [];
+    const vertices = [];
+    const normals = [];
+    const uvs = [];
+    for (let iy = 0; iy <= heightSegments; iy++) {
+      const verticesRow = [];
+      const v2 = iy / heightSegments;
+      let uOffset = 0;
+      if (iy === 0 && thetaStart === 0) {
+        uOffset = 0.5 / widthSegments;
+      } else if (iy === heightSegments && thetaEnd === Math.PI) {
+        uOffset = -0.5 / widthSegments;
+      }
+      for (let ix = 0; ix <= widthSegments; ix++) {
+        const u3 = ix / widthSegments;
+        vertex.x = -radius * Math.cos(phiStart + u3 * phiLength) * Math.sin(thetaStart + v2 * thetaLength);
+        vertex.y = radius * Math.cos(thetaStart + v2 * thetaLength);
+        vertex.z = radius * Math.sin(phiStart + u3 * phiLength) * Math.sin(thetaStart + v2 * thetaLength);
+        vertices.push(vertex.x, vertex.y, vertex.z);
+        normal.copy(vertex).normalize();
+        normals.push(normal.x, normal.y, normal.z);
+        uvs.push(u3 + uOffset, 1 - v2);
+        verticesRow.push(index++);
+      }
+      grid.push(verticesRow);
+    }
+    for (let iy = 0; iy < heightSegments; iy++) {
+      for (let ix = 0; ix < widthSegments; ix++) {
+        const a2 = grid[iy][ix + 1];
+        const b2 = grid[iy][ix];
+        const c2 = grid[iy + 1][ix];
+        const d2 = grid[iy + 1][ix + 1];
+        if (iy !== 0 || thetaStart > 0) indices.push(a2, b2, d2);
+        if (iy !== heightSegments - 1 || thetaEnd < Math.PI) indices.push(b2, c2, d2);
+      }
+    }
+    this.setIndex(indices);
+    this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+    this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+  }
+  copy(source) {
+    super.copy(source);
+    this.parameters = Object.assign({}, source.parameters);
+    return this;
+  }
+  /**
+   * Factory method for creating an instance of this class from the given
+   * JSON object.
+   *
+   * @param {Object} data - A JSON object representing the serialized geometry.
+   * @return {SphereGeometry} A new instance.
+   */
+  static fromJSON(data) {
+    return new _SphereGeometry(data.radius, data.widthSegments, data.heightSegments, data.phiStart, data.phiLength, data.thetaStart, data.thetaLength);
+  }
+};
+var TorusGeometry = class _TorusGeometry extends BufferGeometry {
+  /**
+   * Constructs a new torus geometry.
+   *
+   * @param {number} [radius=1] - Radius of the torus, from the center of the torus to the center of the tube.
+   * @param {number} [tube=0.4] - Radius of the tube. Must be smaller than `radius`.
+   * @param {number} [radialSegments=12] - The number of radial segments.
+   * @param {number} [tubularSegments=48] - The number of tubular segments.
+   * @param {number} [arc=Math.PI*2] - Central angle in radians.
+   */
+  constructor(radius = 1, tube = 0.4, radialSegments = 12, tubularSegments = 48, arc = Math.PI * 2) {
+    super();
+    this.type = "TorusGeometry";
+    this.parameters = {
+      radius,
+      tube,
+      radialSegments,
+      tubularSegments,
+      arc
+    };
+    radialSegments = Math.floor(radialSegments);
+    tubularSegments = Math.floor(tubularSegments);
+    const indices = [];
+    const vertices = [];
+    const normals = [];
+    const uvs = [];
+    const center = new Vector3();
+    const vertex = new Vector3();
+    const normal = new Vector3();
+    for (let j2 = 0; j2 <= radialSegments; j2++) {
+      for (let i2 = 0; i2 <= tubularSegments; i2++) {
+        const u3 = i2 / tubularSegments * arc;
+        const v2 = j2 / radialSegments * Math.PI * 2;
+        vertex.x = (radius + tube * Math.cos(v2)) * Math.cos(u3);
+        vertex.y = (radius + tube * Math.cos(v2)) * Math.sin(u3);
+        vertex.z = tube * Math.sin(v2);
+        vertices.push(vertex.x, vertex.y, vertex.z);
+        center.x = radius * Math.cos(u3);
+        center.y = radius * Math.sin(u3);
+        normal.subVectors(vertex, center).normalize();
+        normals.push(normal.x, normal.y, normal.z);
+        uvs.push(i2 / tubularSegments);
+        uvs.push(j2 / radialSegments);
+      }
+    }
+    for (let j2 = 1; j2 <= radialSegments; j2++) {
+      for (let i2 = 1; i2 <= tubularSegments; i2++) {
+        const a2 = (tubularSegments + 1) * j2 + i2 - 1;
+        const b2 = (tubularSegments + 1) * (j2 - 1) + i2 - 1;
+        const c2 = (tubularSegments + 1) * (j2 - 1) + i2;
+        const d2 = (tubularSegments + 1) * j2 + i2;
+        indices.push(a2, b2, d2);
+        indices.push(b2, c2, d2);
+      }
+    }
+    this.setIndex(indices);
+    this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+    this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+  }
+  copy(source) {
+    super.copy(source);
+    this.parameters = Object.assign({}, source.parameters);
+    return this;
+  }
+  /**
+   * Factory method for creating an instance of this class from the given
+   * JSON object.
+   *
+   * @param {Object} data - A JSON object representing the serialized geometry.
+   * @return {TorusGeometry} A new instance.
+   */
+  static fromJSON(data) {
+    return new _TorusGeometry(data.radius, data.tube, data.radialSegments, data.tubularSegments, data.arc);
   }
 };
 var MeshStandardMaterial = class extends Material {
@@ -18942,6 +19522,12 @@ var F = (sec) => Math.round(sec * FPS2);
 var ofScene = (id) => CUES.filter((c2) => c2.scene === id);
 var cue = (id, i2) => F(ofScene(id)[i2].a);
 var cueEnd = (id, i2) => F(ofScene(id)[i2].b);
+var word = (id, i2, re) => {
+  const c2 = ofScene(id)[i2];
+  const w2 = c2?.w?.find(([t2]) => re.test(t2));
+  if (!w2) throw new Error(`r45 time: no token matching ${re} in ${id}[${i2}] "${c2?.text}"`);
+  return F(w2[1]);
+};
 
 // ../034-ohtani/node_modules/three/examples/jsm/geometries/TextGeometry.js
 var TextGeometry = class extends ExtrudeGeometry {
@@ -19360,6 +19946,11 @@ var block = (w2, h2, d2, r2, mat) => {
   m2.position.y = h2 / 2;
   return m2;
 };
+var cyl = (r2, h2, mat, seg = 64) => {
+  const m2 = shadowed(new Mesh(new CylinderGeometry(r2, r2, h2, seg), mat));
+  m2.position.y = h2 / 2;
+  return m2;
+};
 var wide = (g2, k2 = 1.14) => {
   g2.scale.x *= k2;
   return g2;
@@ -19370,6 +19961,7 @@ var countUp = (f2, a2, b2, from, to) => {
   const t2 = (f2 - a2) / (b2 - a2);
   return from + (to - from) * (1 - Math.pow(1 - t2, 2.6));
 };
+var dollars = (n2) => "$" + Math.round(n2).toLocaleString("en-US");
 var short = (n2) => {
   const a2 = Math.abs(n2);
   if (a2 >= 1e9) return "$" + (a2 >= 1e10 ? Math.round(n2 / 1e9) : Math.round(n2 / 1e8) / 10) + "B";
@@ -19404,7 +19996,7 @@ var litPlate = (lines, o2 = {}) => {
   return { group, face, w: w2, h: h2, d: d2, setLit: (v2) => setLit(face, v2) };
 };
 var ring = (o2 = {}) => {
-  const R = o2.r ?? 900, wdt = (o2.w ?? 12) / R, dur = o2.dur ?? 28;
+  const R2 = o2.r ?? 900, wdt = (o2.w ?? 12) / R2, dur = o2.dur ?? 28;
   const mat = new MeshBasicMaterial({ color: C3(o2.color ?? K2.white).multiplyScalar(1.4), toneMapped: false, transparent: true, opacity: 0, depthWrite: false, blending: AdditiveBlending, fog: false });
   const mesh = new Mesh(new RingGeometry(1 - wdt, 1, 96), mat);
   mesh.rotation.x = -Math.PI / 2;
@@ -19421,17 +20013,18 @@ var ring = (o2 = {}) => {
       }
       mesh.visible = true;
       const p2 = 1 - Math.pow(1 - t2, 2.2);
-      mesh.scale.setScalar(Math.max(1, R * p2));
+      mesh.scale.setScalar(Math.max(1, R2 * p2));
       mat.opacity = Math.pow(1 - t2, 1.4) * 0.9;
     }
   };
 };
+var backGlow = (c2, color, i2) => ({ pos: [c2[0], c2[1] + 900, c2[2] + 600], at: [c2[0], c2[1] + 500, BACKDROP_Z], i: i2, color, angle: 0.85, soft: 1 });
 var dropIn = (f2, land, o2 = {}) => {
-  const h2 = o2.h ?? 1400, T2 = o2.fall ?? 9, bh = h2 * (o2.bounce ?? 1) * 0.045;
+  const h2 = o2.h ?? 1400, T4 = o2.fall ?? 9, bh = h2 * (o2.bounce ?? 1) * 0.045;
   const t2 = f2 - land;
-  if (t2 < -T2) return { y: h2, on: false, fast: false };
+  if (t2 < -T4) return { y: h2, on: false, fast: false };
   if (t2 < 0) {
-    const u3 = (t2 + T2) / T2;
+    const u3 = (t2 + T4) / T4;
     return { y: h2 * (1 - u3 * u3), on: true, fast: true };
   }
   const B1 = 9, B22 = 6;
@@ -19444,6 +20037,23 @@ var dropIn = (f2, land, o2 = {}) => {
     return { y: bh * 0.28 * 4 * u3 * (1 - u3), on: true, fast: false };
   }
   return { y: 0, on: true, fast: false };
+};
+var swingIn = (f2, at, o2 = {}) => {
+  const amp = o2.amp ?? 1.1, P2 = o2.period ?? 30, k2 = o2.damp ?? 0.075;
+  const t2 = f2 - at;
+  if (t2 < 0) return { a: amp, on: false, fast: false };
+  return { a: amp * Math.exp(-k2 * t2) * Math.cos(2 * Math.PI * t2 / P2), on: true, fast: t2 < P2 / 4 };
+};
+var popUp = (f2, at, dur = 11) => {
+  const t2 = (f2 - at) / dur;
+  if (t2 <= 0) return 0;
+  if (t2 >= 1) return 1;
+  if (t2 < 0.62) {
+    const u4 = t2 / 0.62;
+    return 1.08 * (1 - Math.pow(1 - u4, 3));
+  }
+  const u3 = (t2 - 0.62) / 0.38;
+  return 1.08 - 0.08 * (u3 * u3 * (3 - 2 * u3));
 };
 
 // src/world/timeline.ts
@@ -19515,12 +20125,12 @@ var card = (id, label, color, glow) => {
         group.add(g2, b2);
         return { g: g2, b: b2, at: w2.at };
       });
-      const word = text3d(big.t, { font: "800i", size: bigSize, depth: 1, bevel: 0, face });
-      word.position.set(0, bigBase, 2);
+      const word2 = text3d(big.t, { font: "800i", size: bigSize, depth: 1, bevel: 0, face });
+      word2.position.set(0, bigBase, 2);
       const gm = glowMaterial(glow);
       const halo = new Mesh(new PlaneGeometry(1500, 1300), gm);
       halo.position.set(0, bigBase + bigSize * 0.3, -4);
-      group.add(halo, word);
+      group.add(halo, word2);
       group.traverse((n2) => {
         n2.castShadow = false;
       });
@@ -19531,9 +20141,9 @@ var card = (id, label, color, glow) => {
             l2.g.visible = f2 >= l2.at;
             l2.b.visible = f2 >= l2.at - 2 && f2 < l2.at;
           }
-          word.visible = f2 >= big.at;
+          word2.visible = f2 >= big.at;
           const p2 = clamp01((f2 - big.at + 1) / 3);
-          word.scale.set(1, 0.55 + 0.45 * p2, 1);
+          word2.scale.set(1, 0.55 + 0.45 * p2, 1);
           gm.uniforms.a.value = 0.85 * (1 - Math.pow(1 - clamp01((f2 - big.at) / 7), 2));
         }
       };
@@ -19543,54 +20153,1848 @@ var card = (id, label, color, glow) => {
 var ExplainPlace = card("explain", "2 Turn card: Let us explain.", K2.amber, "#743815");
 var CatchPlace = card("catch", "5 Turn card: But here's the catch.", K2.red, "#6c1310");
 
-// src/world/places/placeholders.ts
-var placeholder = (id, label, name, figure, o2 = {}) => {
-  const enter = enterOf(id), land = Math.max(enter + 12, cue(id, 0) + 6);
-  const C4 = [0, 330, 0];
+// src/world/obj/tag.ts
+var L2 = 1500;
+var TAG = { w: 760, h: 470, d: 66, centre: L2 + 150 + 235, chain: L2 };
+var makeTag = (key, words = "SOLD FOR") => {
+  const group = new Group();
+  group.name = `tag-${key}`;
+  const satin = MAT.satin();
+  const link = new TorusGeometry(24, 7, 10, 24);
+  const chain = (g2, y0, y1) => {
+    const n2 = Math.round(Math.abs(y1 - y0) / 58);
+    for (let i2 = 0; i2 < n2; i2++) {
+      const m2 = new Mesh(link, satin);
+      m2.scale.y = 1.55;
+      m2.position.y = y0 + (y1 - y0) * (i2 + 0.5) / n2;
+      m2.rotation.y = i2 % 2 ? Math.PI / 2 : 0;
+      m2.castShadow = true;
+      g2.add(m2);
+    }
+  };
+  const up = new Group();
+  chain(up, 0, 2600);
+  const swing2 = new Group();
+  chain(swing2, -L2, 0);
+  const blockM = new Mesh(new CylinderGeometry(34, 40, 70, 24), MAT.black());
+  blockM.position.y = -L2 - 30;
+  blockM.castShadow = true;
+  const hook = new Mesh(new TorusGeometry(46, 13, 14, 40, Math.PI * 1.45), satin);
+  hook.position.y = -L2 - 106;
+  hook.rotation.z = Math.PI * 0.82;
+  hook.castShadow = true;
+  const w2 = TAG.w, h2 = TAG.h, c2 = 120;
+  const s2 = new Shape();
+  s2.moveTo(-w2 / 2, -h2 / 2);
+  s2.lineTo(w2 / 2, -h2 / 2);
+  s2.lineTo(w2 / 2, h2 / 2 - c2);
+  s2.lineTo(w2 / 2 - c2, h2 / 2);
+  s2.lineTo(-w2 / 2 + c2, h2 / 2);
+  s2.lineTo(-w2 / 2, h2 / 2 - c2);
+  s2.closePath();
+  const hole = new Path();
+  hole.absarc(0, h2 / 2 - 62, 26, 0, Math.PI * 2, true);
+  s2.holes.push(hole);
+  const geo = new ExtrudeGeometry(s2, { depth: TAG.d - 20, bevelEnabled: true, bevelThickness: 10, bevelSize: 10, bevelSegments: 4, curveSegments: 24 });
+  geo.translate(0, 0, -(TAG.d - 20) / 2);
+  const slab = new Mesh(geo, MAT.black());
+  slab.castShadow = true;
+  slab.receiveShadow = true;
+  const grommet = new Mesh(new TorusGeometry(31, 8, 12, 32), satin);
+  grommet.position.set(0, h2 / 2 - 62, TAG.d / 2 - 4);
+  const grommetB = grommet.clone();
+  grommetB.position.z = -TAG.d / 2 + 4;
+  const ringM = new Mesh(new TorusGeometry(40, 7, 10, 32), satin);
+  ringM.position.set(0, h2 / 2 - 22, 0);
+  ringM.rotation.y = Math.PI / 2;
+  ringM.castShadow = true;
+  const face = lit(K2.white, 1);
+  const word2 = wide(text3d(words, { font: "800", size: 92, depth: 6, bevel: 0, face }));
+  word2.position.set(0, -95, TAG.d / 2 + 0.5);
+  const rule = new Mesh(new BoxGeometry(w2 - 220, 6, 3), satin);
+  rule.position.set(0, 60, TAG.d / 2 + 1);
+  const tag = new Group();
+  tag.add(slab, grommet, grommetB, ringM, word2, rule);
+  tag.position.y = -TAG.centre;
+  swing2.add(blockM, hook, tag);
+  group.add(up, swing2);
   return {
-    id,
-    label,
-    enter,
-    stage: o2.stage ?? "dark",
-    shots: ({ from, to }) => [
-      cut(from, [-900, 420, 2500], [0, 360, 0], { fov: 42, focus: C4, why: "enter" }),
-      dolly(from + 1, Math.max(30, to - from - 2), [-520, 470, 1750], [0, 380, 0], { fov: 42, ease: SOFT, why: "slow push-in" })
-    ],
-    lights: () => o2.stage === "light" ? lightStageLights(C4) : stdLights(C4),
-    blur: (f2) => dropIn(f2, land).fast,
-    cues: () => [{ kind: "hit", s: "thud", at: land, vol: 0.4, why: `${name}: the block lands` }],
-    build: () => {
-      const group = new Group();
-      const body = new Group();
-      body.add(block(760, 520, 560, 34, MAT.black()));
-      const plate = litPlate([name], { size: 58, color: K2.white });
-      plate.group.position.set(0, 300, 280 + plate.d / 2);
-      body.add(plate.group);
-      const fig = counter({ size: 90, color: o2.color ?? K2.money });
-      fig.group.position.set(0, 0, 440);
-      const halo = ring({ r: 1100 });
-      group.add(body, fig.group, halo.mesh);
-      return {
-        group,
-        update: (f2) => {
-          const d2 = dropIn(f2, land);
-          body.visible = d2.on;
-          body.position.y = d2.y;
-          plate.setLit((f2 - land) / 10);
-          fig.group.visible = f2 >= land;
-          fig.set(short(countUp(f2, land, land + 26, figure * 0.2, figure)));
-          halo.update(f2, land + 26);
-        }
-      };
+    group,
+    face,
+    update: (p2) => {
+      swing2.rotation.z = p2.swing;
+      setLit(face, p2.lit, 0.16);
     }
   };
 };
-var HookPlace = placeholder("hook", "1 Hook (placeholder)", "HOOK", 29e9);
-var DealPlace = placeholder("deal", "3 The deal (placeholder)", "THE DEAL", 375e6);
-var PricePlace = placeholder("price", "4 The price (placeholder, light stage)", "THE PRICE", 247, { stage: "light" });
-var ClosePlace = placeholder("close", "6 The close (placeholder)", "THE CLOSE", 138e8, { color: K2.red });
-var FairPlace = placeholder("fair", "7 To be fair (placeholder)", "TO BE FAIR", 29e9);
-var VerdictPlace = placeholder("verdict", "8 The verdict (placeholder)", "THE VERDICT", 138e8);
+
+// src/world/obj/bag.ts
+var BAG = { w: 360, h: 420, d: 200 };
+var makeBag = (key) => {
+  const group = new Group();
+  group.name = `bag-${key}`;
+  const body = rbox(BAG.w, BAG.h, BAG.d, 16, MAT.black());
+  body.position.y = BAG.h / 2;
+  const band = rbox(BAG.w + 10, 52, BAG.d + 10, 12, MAT.graphite());
+  band.position.y = BAG.h - 26;
+  group.add(body, band);
+  const satin = MAT.satin();
+  for (const z2 of [62, -62]) {
+    const h2 = new Mesh(new TorusGeometry(74, 9, 14, 40, Math.PI), satin);
+    h2.position.set(0, BAG.h - 4, z2);
+    h2.castShadow = true;
+    group.add(h2);
+  }
+  const face = lit(K2.white, 1);
+  const word2 = wide(text3d("AFTERPAY", { font: "800", size: 46, depth: 5, bevel: 0, face }));
+  word2.position.set(0, 172, BAG.d / 2 + 0.5);
+  group.add(word2);
+  return { group, face };
+};
+
+// src/world/obj/drawer.ts
+var DRAWER = { w: 520, h: 620, d: 600, travel: 430 };
+var makeDrawer = (key) => {
+  const group = new Group();
+  group.name = `drawer-${key}`;
+  const steel = MAT.graphite(), satin = MAT.satin();
+  const body = rbox(DRAWER.w, DRAWER.h, DRAWER.d, 22, steel);
+  body.position.set(0, DRAWER.h / 2, -DRAWER.d / 2);
+  group.add(body);
+  const frontOf = (y2) => {
+    const g2 = new Group();
+    const p2 = rbox(476, 176, 26, 9, MAT.black());
+    p2.position.z = 9;
+    const h2 = rbox(190, 24, 30, 8, satin);
+    h2.position.set(0, -34, 34);
+    const holder = rbox(150, 44, 8, 3, satin);
+    holder.position.set(0, 36, 24);
+    g2.add(p2, h2, holder);
+    g2.position.y = y2;
+    return g2;
+  };
+  group.add(frontOf(110), frontOf(310));
+  const mouth = rbox(470, 170, 6, 2, MAT.rubber());
+  mouth.position.set(0, 510, 0.5);
+  group.add(mouth);
+  const drawer = frontOf(510);
+  const tray = new Group();
+  const floorT = rbox(452, 12, 500, 4, steel);
+  floorT.position.set(0, -78, -250);
+  const sideL = rbox(12, 150, 500, 4, steel);
+  sideL.position.set(-226, -9, -250);
+  const sideR = rbox(12, 150, 500, 4, steel);
+  sideR.position.set(226, -9, -250);
+  const backT = rbox(452, 150, 12, 4, steel);
+  backT.position.set(0, -9, -494);
+  tray.add(floorT, sideL, sideR, backT);
+  const plate = new Group();
+  plate.add(rbox(424, 236, 20, 8, MAT.black()));
+  const big = counter({ size: 84, color: K2.money, depth: 10 });
+  big.group.position.set(0, 12, 10);
+  const small = counter({ size: 34, color: K2.money, depth: 6 });
+  small.group.position.set(0, -58, 10);
+  plate.add(big.group, small.group);
+  plate.position.set(0, 62, -214);
+  plate.rotation.x = -1.05;
+  tray.add(plate);
+  drawer.add(tray);
+  const label = lit(K2.white);
+  const word2 = wide(text3d("FILING", { font: "800", size: 24, depth: 3, bevel: 0, face: label }));
+  word2.position.set(0, 27, 28.5);
+  drawer.add(word2);
+  group.add(drawer);
+  let shown = "";
+  return {
+    group,
+    size: { w: DRAWER.w, h: DRAWER.h, d: DRAWER.d },
+    update: (p2) => {
+      drawer.position.z = Math.max(0, p2.open) * DRAWER.travel;
+      if (p2.value !== shown) {
+        shown = p2.value;
+        const i2 = p2.value.indexOf(" ");
+        big.set(i2 < 0 ? p2.value : p2.value.slice(0, i2));
+        small.set(i2 < 0 ? "" : p2.value.slice(i2 + 1));
+      }
+      big.group.visible = small.group.visible = p2.lit > 1e-3;
+      setLit(big.face, p2.lit);
+      setLit(small.face, p2.lit);
+    }
+  };
+};
+
+// src/world/places/hook.ts
+var HOOK_STAGE = { plinthW: 640, plinthH: 340, plinthD: 560, tagY: 1190, numZ: 610, numW: 1e3, centre: [0, 700, 0] };
+var tagSet = (key) => {
+  const S8 = HOOK_STAGE;
+  const group = new Group();
+  group.add(block(S8.plinthW, S8.plinthH, S8.plinthD, 28, MAT.black()));
+  const bag = makeBag(key);
+  bag.group.scale.setScalar(1.15);
+  bag.group.position.y = S8.plinthH;
+  const tag = makeTag(key);
+  const pivotY = S8.tagY + TAG.centre;
+  tag.group.position.set(0, pivotY, 0);
+  const num = counter({ size: 110, color: K2.money });
+  num.set(dollars(29e9));
+  const k2 = S8.numW / (num.group.userData.width * 1.14);
+  num.group.scale.set(1.14 * k2, k2, k2);
+  num.group.position.set(0, 0.25 * 110 * k2, S8.numZ);
+  const halo = ring({ r: 1500, color: K2.money, dur: 30 });
+  halo.mesh.position.set(0, 1.5, S8.numZ);
+  group.add(bag.group, tag.group, num.group, halo.mesh);
+  return { group, tag, num, halo, pivotY };
+};
+var OPENING = { pos: [-300, 500, 3750], look: [0, 540, 150], fov: 42, push: { pos: [-130, 470, 3420], look: [0, 530, 150] }, numFocus: [0, 80, 610] };
+var S2 = "hook";
+var N29 = word(S2, 0, /^\$29/);
+var LAND29 = word(S2, 0, /^billion/);
+var FILING = word(S2, 1, /^filing/);
+var N138 = word(S2, 1, /^13/);
+var C1 = cue(S2, 1);
+var C22 = cue(S2, 2);
+var RIGHT = word(S2, 2, /^right/);
+var WHIP = C1 - 6;
+var WHIP_DUR = 13;
+var QW = C22 - 7;
+var QW_DUR = 9;
+var QCUT = QW + 5;
+var DROP_A = C22 + 4;
+var DROP_B = C22 + 15;
+var XD = 3e3;
+var XQ = -3200;
+var DS = 1.7;
+var lower = (f2) => {
+  const t2 = clamp01((f2 + 10) / 50);
+  return 900 * Math.pow(1 - t2, 3);
+};
+var sway = (f2) => 0.2 * Math.exp(-0.028 * Math.max(0, f2)) * Math.cos(2 * Math.PI * (f2 + 6) / 44);
+var openAt = (f2) => {
+  const t2 = clamp01((f2 - (FILING - 12)) / 14), e2 = 1 - Math.pow(1 - t2, 3);
+  return e2 - 0.045 * Math.sin(Math.PI * clamp01((f2 - FILING - 2) / 9));
+};
+var HK = { count: [N29 - 6, LAND29], whip: WHIP, open: [FILING - 12, FILING + 2], count138: [N138 - 22, N138], drops: [DROP_A, DROP_B] };
+var HookPlace = {
+  id: S2,
+  label: "1 Hook: the price tag, $29,000,000,000; the filing drawer, $13.8 billion",
+  enter: 0,
+  stage: "dark",
+  shots: ({ to }) => [
+    cut(0, [-520, 1560, 3300], [0, 1620, 0], { fov: 44, focus: [0, 1500, 0], why: "open on the tag, mid-descent" }),
+    { ...crane(1, 46, OPENING.pos, OPENING.look, { fov: OPENING.fov, bulge: [0, 0, 160], why: "crane down with the tag" }), whoosh: void 0 },
+    { ...dolly(48, WHIP - 49, OPENING.push.pos, OPENING.push.look, { fov: 42, ease: SOFT, why: "push in as the figure counts" }), focus: OPENING.numFocus },
+    travel(WHIP, WHIP_DUR, [XD - 1050, 1500, 2900], [XD, 760, 300], { fov: 42, why: "whip along the set to the filing drawer", vol: 0.7 }),
+    dolly(WHIP + WHIP_DUR + 1, QW - (WHIP + WHIP_DUR + 1) - 1, [XD - 560, 1950, 2150], [XD, 800, 420], { fov: 42, ease: SOFT, why: "push in and rise over the open drawer" }),
+    { ...travel(QW, QW_DUR, [XQ - 420, 640, 2950], [XQ - 40, 640, 0], { fov: 42, why: "whip back along the set to the two figures", vol: 0.7 }), focus: [XQ, 700, 60] },
+    { ...dolly(QW + QW_DUR + 1, to - (QW + QW_DUR + 1) - 1, [XQ + 80, 820, 3550], [XQ, 600, 0], { fov: 42, ease: SOFT, why: "pull out and up" }), focus: [XQ, 700, 60] }
+  ],
+  lights: (f2) => {
+    if (f2 >= QCUT) {
+      const sw = Math.sin((f2 - DROP_B) / 7) * clamp01((f2 - DROP_B) / 6) * (1 - clamp01((f2 - (RIGHT - 2)) / 8));
+      const L4 = stdLights([XQ, 640, 0], { s: 1.2, key: 3.8 });
+      L4.key.at = [XQ + 330 * sw, 620, 0];
+      L4.key.angle = 0.3 + 0.12 * clamp01((f2 - (RIGHT - 2)) / 8);
+      return L4;
+    }
+    const t2 = SOFT(clamp01((f2 - WHIP) / WHIP_DUR));
+    const c2 = mixV(HOOK_STAGE.centre, [XD, 640, 250], t2);
+    const p29 = f2 >= LAND29 ? Math.exp(-(f2 - LAND29) / 11) : 0, p138 = f2 >= N138 ? Math.exp(-(f2 - N138) / 11) : 0;
+    const L3 = stdLights(c2, { s: 1.3, key: 3.5 + 1.1 * p29 + 0.9 * p138 });
+    L3.accent = { pos: t2 < 0.5 ? [0, 260, 1100] : [XD, 1200, 900], color: K2.money, i: 2.4 * (t2 < 0.5 ? p29 : p138) };
+    return L3;
+  },
+  blur: (f2) => f2 < 12 || f2 >= FILING - 12 && f2 <= FILING - 3 || dropIn(f2, DROP_A).fast || dropIn(f2, DROP_B).fast,
+  cues: () => [
+    { kind: "hit", s: "chainshort", at: 2, vol: 0.4, why: "the crane lowers the tag on its chain" },
+    { kind: "hit", s: "thud", at: 40, vol: 0.3, why: "the tag settles over the bag" },
+    { kind: "hit", s: "datashort", at: HK.count[0], end: LAND29, vol: 0.35, why: "the floor numerals count up" },
+    { kind: "hit", s: "sub", at: LAND29, vol: 0.5, why: "$29,000,000,000 lands; the ring spreads" },
+    { kind: "hit", s: "pingshort", at: LAND29 + 1, vol: 0.3, why: "the ring of light" },
+    { kind: "move", s: "lowwoosh", at: FILING - 5, end: FILING + 3, vol: 0.4, why: "the drawer rolls open" },
+    { kind: "hit", s: "thud", at: FILING + 2, vol: 0.45, why: "the drawer hits its stop" },
+    { kind: "hit", s: "datashort", at: HK.count138[0], end: N138, vol: 0.3, why: "the plate counts" },
+    { kind: "hit", s: "pingshort", at: N138, vol: 0.35, why: "$13.8 BILLION lands" },
+    { kind: "hit", s: "thud", at: DROP_A, vol: 0.45, why: "the $29B plinth drops in" },
+    { kind: "hit", s: "thud", at: DROP_B, vol: 0.45, why: "the $13.8B plinth drops in" },
+    { kind: "hit", s: "tick", at: RIGHT - 2, vol: 0.3, why: "the spot rests on both" }
+  ],
+  build: () => {
+    const group = new Group();
+    const A3 = tagSet("hook");
+    group.add(A3.group);
+    const drawer = makeDrawer("hook");
+    drawer.group.scale.setScalar(DS);
+    drawer.group.position.set(XD, 0, 0);
+    const haloD = ring({ r: 1300, color: K2.money, dur: 28 });
+    haloD.mesh.position.set(XD, 1.5, 420);
+    group.add(drawer.group, haloD.mesh);
+    const fig = (x2, str, color, size) => {
+      const g2 = new Group();
+      g2.add(block(560, 640, 460, 26, MAT.black()));
+      const n2 = counter({ size, color });
+      n2.set(str);
+      n2.group.position.set(0, 640, 30);
+      g2.add(n2.group);
+      g2.position.x = x2;
+      group.add(g2);
+      return g2;
+    };
+    const figA = fig(XQ - 330, "$29B", K2.money, 132), figB = fig(XQ + 330, "$13.8B", K2.white, 98);
+    void lit;
+    return {
+      group,
+      update: (f2) => {
+        A3.tag.group.position.y = A3.pivotY + lower(f2);
+        A3.tag.update({ swing: sway(f2), lit: 0.35 + 0.65 * clamp01((f2 - 30) / 10) });
+        A3.num.group.visible = f2 >= HK.count[0];
+        A3.num.set(dollars(countUp(f2, HK.count[0], LAND29, 102e8, 29e9)));
+        A3.halo.update(f2, LAND29);
+        const cv = countUp(f2, HK.count138[0], N138, 1.2, 13.8);
+        drawer.update({ open: openAt(f2), value: `$${cv.toFixed(1)} BILLION`, lit: clamp01((f2 - (HK.count138[0] - 4)) / 5) });
+        haloD.update(f2, N138);
+        const a2 = dropIn(f2, DROP_A, { h: 1500 }), b2 = dropIn(f2, DROP_B, { h: 1500 });
+        figA.visible = f2 >= QCUT && a2.on;
+        figA.position.y = a2.y;
+        figB.visible = f2 >= QCUT && b2.on;
+        figB.position.y = b2.y;
+      }
+    };
+  }
+};
+
+// src/world/obj/pawn.ts
+var gloss = () => new MeshPhysicalMaterial({ color: new Color("#0b0b0c"), roughness: 0.2, metalness: 0.1, envMapIntensity: 0.55, clearcoat: 1, clearcoatRoughness: 0.16 });
+var makePawn = (scale = 1) => {
+  const g2 = new Group();
+  const m2 = gloss();
+  const body = new Mesh(new SphereGeometry(105, 48, 32), m2);
+  body.position.y = 105;
+  body.scale.set(1, 1.02, 1);
+  const head = new Mesh(new SphereGeometry(58, 40, 28), m2);
+  head.position.y = 246;
+  const collar = new Mesh(new TorusGeometry(46, 7, 12, 48), MAT.satin());
+  collar.rotation.x = Math.PI / 2;
+  collar.position.y = 198;
+  for (const o2 of [body, head, collar]) {
+    o2.castShadow = true;
+    o2.receiveShadow = true;
+    g2.add(o2);
+  }
+  g2.scale.setScalar(scale);
+  return g2;
+};
+
+// src/world/obj/podium.ts
+var PODIUM = { w: 520, h: 700, d: 400, top: 750 };
+var makePodium = (name) => {
+  const group = new Group();
+  group.add(block(PODIUM.w, PODIUM.h, PODIUM.d, 30, MAT.black()));
+  const top = rbox(600, 50, 470, 16, MAT.graphite());
+  top.position.y = PODIUM.h + 25;
+  group.add(top);
+  const foot = block(580, 36, 450, 14, MAT.graphite());
+  group.add(foot);
+  const plate = litPlate([name], { size: 46, color: K2.white, depth: 26 });
+  plate.group.position.set(0, 440, PODIUM.d / 2 + 13);
+  group.add(plate.group);
+  const pawn = makePawn(2.5);
+  const pawnHome = [-20, 330, -360];
+  group.add(pawn);
+  const mic = new Group();
+  mic.position.set(-170, PODIUM.top, 40);
+  mic.add(cyl(36, 12, MAT.graphite()));
+  const neck = new Mesh(new CylinderGeometry(6, 6, 250, 16), MAT.satin());
+  neck.position.set(34, 118, -56);
+  neck.rotation.set(-0.45, 0, -0.28);
+  neck.castShadow = true;
+  const head = new Mesh(new CapsuleGeometry(27, 44, 8, 24), MAT.graphite());
+  head.position.set(70, 248, -116);
+  head.rotation.set(-0.45, 0, -0.28);
+  head.castShadow = true;
+  const ringMat = lit(K2.amber, 1.15);
+  const ring2 = new Mesh(new TorusGeometry(31, 5.5, 12, 40), ringMat);
+  ring2.position.copy(head.position);
+  ring2.rotation.set(Math.PI / 2 - 0.45, 0, -0.28);
+  mic.add(neck, head, ring2);
+  group.add(mic);
+  const sound = cyl(64, 22, MAT.graphite());
+  sound.position.set(150, PODIUM.top + 11, 70);
+  group.add(sound);
+  const gavel = new Group();
+  gavel.position.set(318, PODIUM.top + 62, 70);
+  const handle = new Mesh(new CylinderGeometry(9, 11, 250, 20), MAT.satin());
+  handle.rotation.z = Math.PI / 2;
+  handle.position.x = -70;
+  const gh = new Mesh(new CylinderGeometry(36, 36, 124, 32), MAT.black());
+  gh.position.x = -168;
+  for (const sy of [-1, 1]) {
+    const band = new Mesh(new CylinderGeometry(37.5, 37.5, 12, 32), MAT.satin());
+    band.position.set(-168, sy * 44, 0);
+    gavel.add(band);
+  }
+  for (const o2 of [handle, gh]) {
+    o2.castShadow = true;
+    gavel.add(o2);
+  }
+  group.add(gavel);
+  return {
+    group,
+    plate,
+    /** `pawn` 0…1 (it rises from behind), `mic` 0…1 the ring's light, `name` 0…1 the nameplate's light, `gavel` 0 (raised)
+     *  …1 (down on its block) */
+    update: (p2) => {
+      pawn.visible = p2.pawn > 1e-3;
+      pawn.position.set(pawnHome[0], pawnHome[1] - (1 - p2.pawn) * 620, pawnHome[2]);
+      setLit(ringMat, p2.mic, 0.05);
+      plate.setLit(p2.name);
+      gavel.rotation.z = -(1 - p2.gavel) * 1 + 0.02;
+    }
+  };
+};
+
+// src/world/obj/briefcase.ts
+var CASE = { w: 780, d: 540, h: 96 };
+var makeBriefcase = () => {
+  const group = new Group();
+  const shell = () => {
+    const s2 = new Group();
+    const m2 = MAT.black();
+    s2.add(block(CASE.w, 30, CASE.d, 12, m2));
+    for (const [w2, d2, x2, z2] of [[CASE.w, 26, 0, CASE.d / 2 - 13], [CASE.w, 26, 0, -CASE.d / 2 + 13], [26, CASE.d, CASE.w / 2 - 13, 0], [26, CASE.d, -CASE.w / 2 + 13, 0]]) {
+      const wall = rbox(w2, CASE.h, d2, 10, m2);
+      wall.position.set(x2, CASE.h / 2, z2);
+      s2.add(wall);
+    }
+    return s2;
+  };
+  group.add(shell());
+  const paper = new MeshStandardMaterial({ color: new Color("#8f8a76"), roughness: 0.95 });
+  const band = MAT.gold();
+  for (let ix = 0; ix < 3; ix++) for (let iz = 0; iz < 2; iz++) {
+    const x2 = (ix - 1) * 236, z2 = (iz - 0.5) * 236;
+    for (let k2 = 0; k2 < 2; k2++) {
+      const b2 = rbox(214, 34, 214, 7, paper);
+      b2.position.set(x2 + (k2 ? 5 : -3), 30 + 17 + k2 * 35, z2 + (k2 ? -4 : 3));
+      group.add(b2);
+    }
+    const s2 = rbox(64, 73, 218, 5, band);
+    s2.position.set(x2, 30 + 36, z2);
+    group.add(s2);
+  }
+  const lid = new Group();
+  lid.position.set(0, CASE.h, -CASE.d / 2);
+  const inner = shell();
+  inner.rotation.x = Math.PI;
+  inner.position.set(0, CASE.h, CASE.d / 2);
+  lid.add(inner);
+  group.add(lid);
+  const handle = new Mesh(new TorusGeometry(64, 9, 10, 32, Math.PI), MAT.satin());
+  handle.rotation.x = Math.PI / 2;
+  handle.position.set(0, CASE.h * 0.6, CASE.d / 2 + 4);
+  group.add(handle);
+  for (const sx of [-1, 1]) {
+    const latch = rbox(46, 26, 12, 4, MAT.satin());
+    latch.position.set(sx * 230, CASE.h - 8, CASE.d / 2 + 5);
+    group.add(latch);
+  }
+  return {
+    group,
+    /** `lid` 0 (thrown open) … 1 (shut) */
+    update: (p2) => {
+      lid.rotation.x = -(1 - p2.lid) * 1.95;
+    }
+  };
+};
+
+// src/world/obj/press.ts
+var PRESS = { die: 150, up: 330, dieZ: 70 };
+var makePress = () => {
+  const group = new Group();
+  group.add(block(640, 150, 560, 30, MAT.black()));
+  const pad = cyl(112, 8, MAT.satin());
+  pad.position.set(0, 154, PRESS.dieZ);
+  group.add(pad);
+  for (const sx of [-1, 1]) {
+    const post = cyl(34, 560, MAT.satin(), 40);
+    post.position.set(sx * 240, 150 + 280, -150);
+    group.add(post);
+  }
+  const beam = rbox(660, 150, 300, 30, MAT.black());
+  beam.position.set(0, 150 + 560 + 60, -110);
+  group.add(beam);
+  const arm = rbox(260, 110, 330, 24, MAT.graphite());
+  arm.position.set(0, 150 + 560 + 40, 20);
+  group.add(arm);
+  const plate = litPlate(["SHARES"], { size: 54, color: K2.white, depth: 20 });
+  plate.group.position.set(0, 150 + 560 + 62, 40 + 10);
+  plate.group.rotation.x = -0.5;
+  plate.group.position.set(0, 150 + 560 + 150, -60);
+  group.add(plate.group);
+  const ram = new Group();
+  const rod = cyl(46, 360, MAT.satin(), 40);
+  rod.position.y = 60 + 180;
+  const head = cyl(104, 60, MAT.graphite(), 56);
+  ram.add(rod, head);
+  ram.position.set(0, PRESS.up, PRESS.dieZ);
+  group.add(ram);
+  return {
+    group,
+    plate,
+    /** `ram` 0 (up) … 1 (down on the die) */
+    update: (p2) => {
+      ram.position.y = PRESS.up - p2.ram * (PRESS.up - (PRESS.die + 8 + 34));
+    }
+  };
+};
+
+// src/world/obj/machine.ts
+var MACHINE = { w: 660, h: 760, d: 520 };
+var makeMachine = () => {
+  const group = new Group();
+  const body = new Group();
+  body.add(block(MACHINE.w, MACHINE.h, MACHINE.d, 44, MAT.black()));
+  const collar = cyl(150, 46, MAT.graphite(), 56);
+  collar.position.set(0, MACHINE.h, 0);
+  collar.position.y = MACHINE.h;
+  body.add(collar);
+  const dark = new MeshStandardMaterial({ color: new Color("#020203"), roughness: 1 });
+  const hole = new Mesh(new CylinderGeometry(118, 118, 4, 48), dark);
+  hole.position.set(0, MACHINE.h + 47, 0);
+  body.add(hole);
+  const screen = rbox(520, 210, 18, 10, new MeshPhysicalMaterial({ color: new Color("#050506"), roughness: 0.22, metalness: 0.3, clearcoat: 0.6, envMapIntensity: 0.7 }));
+  screen.position.set(0, 520, MACHINE.d / 2 + 2);
+  body.add(screen);
+  const fig = counter({ size: 130, color: K2.white, depth: 16 });
+  fig.group.position.set(0, 520 - 45, MACHINE.d / 2 + 12);
+  fig.group.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  body.add(fig.group);
+  const lampMat = lit(K2.amber, 1.15);
+  const lamp = new Mesh(new SphereGeometry(22, 24, 16), lampMat);
+  lamp.position.set(250, 700, MACHINE.d / 2 + 6);
+  body.add(lamp);
+  const mouth = rbox(330, 150, 20, 10, dark);
+  mouth.position.set(0, 150, MACHINE.d / 2 + 1);
+  body.add(mouth);
+  const tray = rbox(350, 24, 330, 10, MAT.graphite());
+  tray.position.set(0, 46, MACHINE.d / 2 + 130);
+  tray.rotation.x = 0.2;
+  body.add(tray);
+  for (const sx of [-1, 1]) {
+    const lip = rbox(22, 60, 330, 8, MAT.graphite());
+    lip.position.set(sx * 175, 62, MACHINE.d / 2 + 130);
+    lip.rotation.x = 0.2;
+    body.add(lip);
+  }
+  group.add(body);
+  return {
+    group,
+    fig,
+    /** `value` the figure on the screen, `on` its light, `lamp` 0…1, `shake` −1…1 (a small rock while it works) */
+    update: (p2) => {
+      fig.set(p2.value);
+      fig.group.visible = p2.on > 0.02;
+      setLit(fig.face, p2.on, 0.05);
+      setLit(lampMat, p2.lamp, 0.06);
+      body.rotation.z = p2.shake * 0.012;
+      body.position.x = p2.shake * 5;
+    }
+  };
+};
+
+// src/world/obj/token.ts
+var TOKEN_R = 90;
+var TOKEN_T = 34;
+var hash = (a2, b2) => {
+  const s2 = Math.sin(a2 * 127.1 + b2 * 311.7) * 43758.5453;
+  return s2 - Math.floor(s2);
+};
+var bodyGeo = null;
+var rimGeo = null;
+var bodyMat = null;
+var rimMat = null;
+var faceMat = null;
+var parts = () => {
+  if (!bodyGeo) {
+    const c2 = 7;
+    bodyGeo = new LatheGeometry([[0, 0], [TOKEN_R - c2, 0], [TOKEN_R, c2], [TOKEN_R, TOKEN_T - c2], [TOKEN_R - c2, TOKEN_T], [TOKEN_R - 16, TOKEN_T], [TOKEN_R - 20, TOKEN_T - 3], [0, TOKEN_T - 3]].map(([r2, y2]) => new Vector2(r2, y2)), 72);
+    rimGeo = new LatheGeometry([[TOKEN_R + 0.6, 10], [TOKEN_R + 0.6, TOKEN_T - 10]].map(([r2, y2]) => new Vector2(r2, y2)), 72);
+    bodyMat = MAT.black();
+    rimMat = new MeshPhysicalMaterial({ color: new Color("#b89a5e"), roughness: 0.3, metalness: 1, envMapIntensity: 1.3, emissive: new Color(K2.money), emissiveIntensity: 0.07 });
+    faceMat = lit(K2.money, 0.86);
+  }
+  return { bodyGeo, rimGeo, bodyMat, rimMat, faceMat };
+};
+var tokenLabel = (label, maxW = 2 * TOKEN_R - 44, y2 = TOKEN_T - 2.5) => {
+  const p2 = parts();
+  const size = Math.min(44, maxW / (textWidth(label, "800", 1) * 1.14));
+  const t2 = wide(text3d(label, { font: "800", size, depth: 2.5, bevel: 0, face: p2.faceMat }));
+  t2.rotation.x = -Math.PI / 2;
+  t2.position.set(0, y2, size * 0.345);
+  t2.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  return t2;
+};
+var makeToken = (label) => {
+  const p2 = parts(), g2 = new Group();
+  const body = new Mesh(p2.bodyGeo, p2.bodyMat);
+  body.castShadow = true;
+  body.receiveShadow = true;
+  const rim = new Mesh(p2.rimGeo, p2.rimMat);
+  g2.add(body, rim, tokenLabel(label));
+  return g2;
+};
+var makeWedge = (frac, label) => {
+  const p2 = parts(), g2 = new Group();
+  const th = frac * Math.PI * 2, a0 = -th / 2;
+  const body = new Mesh(new CylinderGeometry(TOKEN_R, TOKEN_R, TOKEN_T, 48, 1, false, a0, th), p2.bodyMat);
+  body.position.y = TOKEN_T / 2;
+  body.castShadow = true;
+  body.receiveShadow = true;
+  g2.add(body);
+  for (const s2 of [-1, 1]) {
+    const f2 = new Mesh(new PlaneGeometry(TOKEN_R, TOKEN_T), p2.bodyMat);
+    const a2 = s2 * th / 2;
+    f2.position.set(Math.sin(a2) * TOKEN_R / 2, TOKEN_T / 2, Math.cos(a2) * TOKEN_R / 2);
+    f2.rotation.y = a2 + s2 * Math.PI / 2;
+    f2.castShadow = true;
+    g2.add(f2);
+  }
+  const rim = new Mesh(new CylinderGeometry(TOKEN_R + 0.6, TOKEN_R + 0.6, TOKEN_T - 20, 48, 1, true, a0, th), p2.rimMat);
+  rim.position.y = TOKEN_T / 2;
+  g2.add(rim);
+  if (label) {
+    const t2 = tokenLabel(label, 70, TOKEN_T + 0.6);
+    t2.position.z += TOKEN_R * 0.56;
+    g2.add(t2);
+  }
+  return g2;
+};
+var makeTokenStack = (key, n2, label = "SHARE") => {
+  const group = new Group();
+  group.name = `tokens:${key}`;
+  const seed = key.length * 3.7;
+  const toks = Array.from({ length: n2 }, (_2, i2) => {
+    const t2 = makeToken(label);
+    t2.rotation.y = (hash(i2, seed) - 0.5) * 0.5;
+    t2.userData.ox = (hash(i2, seed + 1) - 0.5) * 7;
+    t2.userData.oz = (hash(i2, seed + 2) - 0.5) * 7;
+    group.add(t2);
+    return t2;
+  });
+  const h2 = (count) => Math.max(0, count) * TOKEN_T;
+  return {
+    group,
+    h: h2,
+    update: (p2) => {
+      const c2 = Math.max(0, Math.min(n2, p2.count));
+      toks.forEach((t2, i2) => {
+        const a2 = c2 - i2;
+        t2.visible = a2 > 0;
+        if (!t2.visible) return;
+        const u3 = Math.min(1, a2);
+        t2.position.set(t2.userData.ox, i2 * TOKEN_T + (1 - u3) * (1 - u3) * 520, t2.userData.oz);
+      });
+    }
+  };
+};
+
+// src/world/places/deal.ts
+var S3 = "deal";
+var ENTER = enterOf(S3);
+var AUG = word(S3, 0, /^August/);
+var JACK = word(S3, 0, /^Jack/);
+var SQUARE = word(S3, 0, /^Square/);
+var AGREED = word(S3, 0, /^agreed/);
+var AFTERPAY = word(S3, 0, /^Afterpay/);
+var PLATE_LAND = Math.max(ENTER + 8, AUG + 2);
+var PAWN_UP = JACK - 10;
+var SIGN_IN = SQUARE - 14;
+var SIGN_LIT = SQUARE;
+var GAVEL = AGREED + 1;
+var BAG_LAND = AFTERPAY + 3;
+var LC = Math.max(cueEnd(S3, 0) + 2, cue(S3, 1) - 4);
+var DIDNT = word(S3, 1, /^didn/);
+var CASH = word(S3, 1, /^cash/);
+var CASE_LAND = LC + 4;
+var SLAM = Math.max(DIDNT + 10, CASH - 8);
+var SLIDE = CASH + 3;
+var SLIDE_END = SLIDE + 13;
+var T1 = SLIDE + 1;
+var T1_DUR = 20;
+var SHARES = word(S3, 2, /^shares/);
+var STAMPS = [cue(S3, 2) + 4, cue(S3, 2) + 17, SHARES + 2];
+var T2 = cue(S3, 3) - 8;
+var T2_DUR = 20;
+var AFT3 = word(S3, 3, /^Afterpay/);
+var P375 = word(S3, 3, /^\.375/);
+var SQ3 = word(S3, 3, /^Square/);
+var TOKEN_IN = Math.max(T2 + T2_DUR + 4, AFT3 + 8);
+var WEDGE_OUT = P375 - 6;
+var WEDGE_REST = P375 + 1;
+var WHOLE_LAND = SQ3 + 3;
+var X0 = 0;
+var X1 = 1200;
+var X2 = 2500;
+var STACK_X = 470;
+var gavelAt = (f2) => {
+  if (f2 < AGREED - 14) return 1;
+  if (f2 < GAVEL - 4) return 1 - SOFT(clamp01((f2 - (AGREED - 14)) / (GAVEL - 4 - (AGREED - 14))));
+  if (f2 < GAVEL) return EXIT(clamp01((f2 - (GAVEL - 4)) / 4));
+  const t2 = f2 - GAVEL;
+  return t2 < 6 ? 1 - 0.16 * Math.sin(Math.PI * t2 / 6) : 1;
+};
+var lidAt = (f2) => {
+  if (f2 < SLAM - 9) return 0;
+  if (f2 < SLAM) return EXIT(clamp01((f2 - (SLAM - 9)) / 9));
+  const t2 = f2 - SLAM;
+  return t2 < 5 ? 1 - 0.035 * Math.sin(Math.PI * t2 / 5) : 1;
+};
+var ramAt = (f2) => {
+  let v2 = 0;
+  for (const s2 of STAMPS) {
+    if (f2 >= s2 - 4 && f2 < s2) v2 = Math.max(v2, EXIT(clamp01((f2 - (s2 - 4)) / 4)));
+    else if (f2 >= s2 && f2 < s2 + 7) v2 = Math.max(v2, 1 - SOFT(clamp01((f2 - s2 - 1) / 6)));
+  }
+  const pre = STAMPS[0] - 13;
+  if (f2 >= pre - 4 && f2 < pre) v2 = Math.max(v2, EXIT(clamp01((f2 - (pre - 4)) / 4)));
+  else if (f2 >= pre && f2 < pre + 7) v2 = Math.max(v2, 1 - SOFT(clamp01((f2 - pre - 1) / 6)));
+  return v2;
+};
+var FLING = 10;
+var camX = (f2) => {
+  if (f2 < T1) return X0;
+  if (f2 < T1 + T1_DUR) return X0 + (X1 - X0) * SOFT((f2 - T1) / T1_DUR);
+  if (f2 < T2) return X1;
+  if (f2 < T2 + T2_DUR) return X1 + (X2 - X1) * SOFT((f2 - T2) / T2_DUR);
+  return X2;
+};
+var working = (f2) => f2 >= TOKEN_IN + 3 && f2 < P375;
+var DealPlace = {
+  id: S3,
+  label: "3 The deal: a podium, a briefcase of cash, a press of shares, the exchange machine (0.375)",
+  enter: ENTER,
+  stage: "dark",
+  stageAt: (f2) => f2 >= LC ? "light" : "dark",
+  shots: ({ from, to }) => [
+    // DEAL 1: low and close on the podium as the plate lands; rise to the pawn; pull out for the sign; push to the gavel and bag
+    cut(from, [-620, 470, 2150], [40, 560, 60], { fov: 44, focus: [0, 500, 200], why: "low on the podium" }),
+    dolly(from + 1, Math.max(24, JACK - from - 8), [-470, 760, 2500], [70, 760, 0], { fov: 44, ease: SOFT, why: "rise to the speaker" }),
+    dolly(SIGN_IN - 2, 30, [-330, 1e3, 3350], [120, 900, 0], { fov: 44, why: "pull out: the sign swings in" }),
+    dolly(AGREED - 8, 36, [300, 860, 2900], [130, 760, 20], { fov: 44, why: "push to the gavel and the bag" }),
+    // the light stage: high and slanted over the table
+    cut(LC, [X0 - 190, 1780, 1750], [X0, 110, 20], { fov: 40, focus: [X0, 80, 0], why: "CUT: the table, the briefcase" }),
+    dolly(LC + 1, T1 - LC - 2, [X0 + 40, 1560, 1520], [X0, 110, 20], { fov: 40, ease: SOFT, why: "push on the briefcase" }),
+    travel(T1, T1_DUR, [X1 + 150, 1640, 1700], [X1 + 170, 330, 30], { fov: 40, why: "along the table to the press", vol: 0.5 }),
+    dolly(T1 + T1_DUR + 1, T2 - (T1 + T1_DUR) - 2, [X1 + 210, 1480, 1500], [X1 + 190, 330, 30], { fov: 40, ease: SOFT, why: "push on the press" }),
+    travel(T2, T2_DUR, [X2 - 60, 1950, 2200], [X2, 360, 150], { fov: 40, why: "along the table to the machine", vol: 0.5 }),
+    dolly(T2 + T2_DUR + 1, Math.max(20, P375 - 16 - (T2 + T2_DUR + 1)), [X2 - 110, 1900, 2120], [X2, 330, 170], { fov: 40, ease: SOFT, why: "push on the machine" }),
+    dolly(P375 - 14, Math.max(24, to - (P375 - 14) - 2), [X2 + 70, 1500, 2050], [X2 + 10, 200, 380], { fov: 40, ease: SOFT, why: "down to the chute: the wedge" })
+  ],
+  lights: (f2) => {
+    if (f2 >= LC) return lightStageLights([camX(f2), 160, 0]);
+    const L3 = stdLights([110, 760, 0], { s: 1.15, key: 3.4, rim: 3.2, back: 2.5, amb: 0.15 });
+    const mic = ramp(f2, JACK - 2, JACK + 6, SETTLE), sign2 = ramp(f2, SIGN_LIT - 2, SIGN_LIT + 7, SETTLE);
+    L3.accent = { pos: [-80, 1060, 260], color: K2.amber, i: 0.6 * mic };
+    L3.back.i *= 0.8 + 0.3 * sign2;
+    return L3;
+  },
+  blur: (f2) => {
+    if (dropIn(f2, PLATE_LAND, { h: 900, fall: 12 }).fast || dropIn(f2, BAG_LAND, { h: 1100, fall: 9 }).fast) return true;
+    if (f2 >= GAVEL - 4 && f2 <= GAVEL + 1) return true;
+    if (f2 >= SIGN_IN && f2 < SIGN_IN + 7) return true;
+    if (dropIn(f2, CASE_LAND, { h: 700, fall: 7 }).fast || f2 >= SLAM - 5 && f2 <= SLAM + 1 || f2 >= SLIDE + 3 && f2 <= SLIDE_END) return true;
+    if (STAMPS.some((s2) => f2 >= s2 - 3 && f2 <= s2 + 1 || f2 >= s2 + 3 && f2 <= s2 + 3 + FLING)) return true;
+    if (f2 >= TOKEN_IN - 9 && f2 <= TOKEN_IN + 3) return true;
+    if (f2 >= WEDGE_OUT && f2 <= WEDGE_REST) return true;
+    return dropIn(f2, WHOLE_LAND, { h: 800, fall: 8 }).fast;
+  },
+  cues: () => [
+    { kind: "hit", s: "thud", at: PLATE_LAND, vol: 0.35, why: "the AUG 2021 plate lands" },
+    { kind: "move", s: "whooshsoft", at: PAWN_UP + 5, end: PAWN_UP + 16, vol: 0.3, why: "the pawn rises behind the podium" },
+    { kind: "hit", s: "click", at: JACK, vol: 0.3, why: "the microphone's ring lights: Jack Dorsey" },
+    { kind: "move", s: "swoosh", at: SIGN_IN + 5, end: SIGN_IN + 22, vol: 0.4, why: "the SQUARE sign swings in" },
+    { kind: "hit", s: "pingshort", at: SIGN_LIT, vol: 0.3, why: "SQUARE lights" },
+    { kind: "hit", s: "thud", at: GAVEL, vol: 0.55, why: "the gavel: agreed" },
+    { kind: "hit", s: "thud", at: BAG_LAND, vol: 0.4, why: "the Afterpay bag lands" },
+    { kind: "hit", s: "thud", at: CASE_LAND, vol: 0.4, why: "the briefcase of cash lands" },
+    { kind: "hit", s: "thud", at: SLAM, vol: 0.6, why: "the lid slams: not in cash" },
+    { kind: "move", s: "swoosh", at: SLIDE + 8, end: SLIDE_END + 6, vol: 0.45, why: "the briefcase slides off the table" },
+    ...STAMPS.flatMap((s2, i2) => [
+      { kind: "hit", s: "thud", at: s2, vol: 0.4, why: `the press stamps share ${i2 + 1}` },
+      { kind: "hit", s: "coin", at: s2 + 3 + FLING, vol: 0.3, why: `share ${i2 + 1} lands on the stack` }
+    ]),
+    { kind: "hit", s: "coin", at: TOKEN_IN, vol: 0.4, why: "the Afterpay token drops into the machine" },
+    { kind: "hit", s: "datashort", at: TOKEN_IN + 5, end: P375, vol: 0.3, why: "the machine works: its screen counts" },
+    { kind: "hit", s: "pingshort", at: WEDGE_REST, vol: 0.4, why: "0.375: the wedge slides out" },
+    { kind: "hit", s: "coin", at: WHOLE_LAND, vol: 0.35, why: "a whole Square share lands beside it" }
+  ],
+  build: () => {
+    const group = new Group();
+    const dark = new Group();
+    const podium = makePodium("JACK DORSEY");
+    dark.add(podium.group);
+    const aug = litPlate(["AUG 2021"], { size: 62, color: K2.white, depth: 46 });
+    const augG = new Group();
+    aug.group.position.y = aug.h / 2;
+    aug.group.rotation.x = -0.16;
+    augG.add(aug.group);
+    augG.position.set(-150, 0, PODIUM.d / 2 + 190);
+    augG.rotation.y = 0.14;
+    dark.add(augG);
+    const sign2 = litPlate(["SQUARE"], { size: 128, color: K2.white, depth: 60 });
+    const signPivot = new Group();
+    signPivot.position.set(110, 1960, -520);
+    sign2.group.position.y = -560;
+    signPivot.add(sign2.group);
+    for (const sx of [-1, 1]) {
+      const rod = new Mesh(new CylinderGeometry(7, 7, 440, 12), MAT.satin());
+      rod.position.set(sx * (sign2.w / 2 - 70), -560 + sign2.h / 2 + 220, 0);
+      signPivot.add(rod);
+    }
+    dark.add(signPivot);
+    const plinth = block(380, 250, 300, 24, MAT.black());
+    const bag = makeBag("deal").group;
+    bag.rotation.y = -0.22;
+    bag.position.y = 250;
+    const bagG = new Group();
+    bagG.position.set(520, 0, 150);
+    bagG.add(plinth, bag);
+    dark.add(bagG);
+    group.add(dark);
+    const light = new Group();
+    const caseG = new Group();
+    const bc = makeBriefcase();
+    bc.group.rotation.y = 0.2;
+    caseG.add(bc.group);
+    light.add(caseG);
+    const press = makePress();
+    press.group.position.set(X1, 0, 0);
+    press.group.rotation.y = -0.16;
+    light.add(press.group);
+    const stack = makeTokenStack("deal", 3 + STAMPS.length + 1);
+    stack.group.position.set(X1 + STACK_X, 0, 110);
+    light.add(stack.group);
+    const flying = STAMPS.map(() => {
+      const t2 = makeToken("SHARE");
+      light.add(t2);
+      return t2;
+    });
+    const fresh = makeToken("SHARE");
+    light.add(fresh);
+    const machine = makeMachine();
+    machine.group.position.set(X2, 0, 0);
+    machine.group.rotation.y = 0.1;
+    light.add(machine.group);
+    const inTok = makeToken("AFTERPAY");
+    light.add(inTok);
+    const wedge = makeWedge(0.375);
+    light.add(wedge);
+    const whole = makeToken("SQUARE");
+    light.add(whole);
+    const halo = ring({ r: 900, w: 14, dur: 30 });
+    halo.mesh.position.set(X2 - 90, 2, MACHINE.d / 2 + 360);
+    light.add(halo.mesh);
+    group.add(light);
+    const DIE = [X1, PRESS.die + 8, PRESS.dieZ];
+    return {
+      group,
+      update: (f2) => {
+        const isLight = f2 >= LC;
+        dark.visible = !isLight;
+        light.visible = isLight;
+        if (!isLight) {
+          const pd = dropIn(f2, PLATE_LAND, { h: 900, fall: 12 });
+          augG.visible = pd.on;
+          augG.position.y = pd.y;
+          aug.setLit(0.35 + 0.65 * ramp(f2, PLATE_LAND, PLATE_LAND + 6, SETTLE));
+          podium.update({ pawn: popUp(f2, PAWN_UP, 15), mic: ramp(f2, JACK - 2, JACK + 6, SETTLE), name: 0.25 + 0.75 * ramp(f2, JACK - 2, JACK + 6, SETTLE), gavel: gavelAt(f2) });
+          const sw = swingIn(f2, SIGN_IN, { amp: 1.15, period: 30, damp: 0.11 });
+          signPivot.visible = sw.on;
+          signPivot.rotation.x = -sw.a;
+          sign2.setLit(ramp(f2, SIGN_LIT - 2, SIGN_LIT + 7, SETTLE));
+          const bd = dropIn(f2, BAG_LAND, { h: 1100, fall: 9 });
+          bagG.visible = bd.on;
+          bagG.position.y = bd.y;
+          return;
+        }
+        const cd = dropIn(f2, CASE_LAND, { h: 700, fall: 7 });
+        const slide = f2 < SLIDE ? 0 : EXIT(clamp01((f2 - SLIDE) / (SLIDE_END - SLIDE)));
+        caseG.visible = cd.on && f2 < SLIDE_END + 2;
+        caseG.position.set(X0 - slide * 2300, cd.y, 20 + slide * 260);
+        caseG.rotation.y = slide * 0.5;
+        bc.update({ lid: lidAt(f2) });
+        press.update({ ram: ramAt(f2) });
+        let landed = 3;
+        flying.forEach((t2, i2) => {
+          const s2 = STAMPS[i2], a2 = s2 + 3, u3 = (f2 - a2) / FLING;
+          t2.visible = u3 >= 0 && u3 < 1;
+          if (u3 >= 1) landed++;
+          if (!t2.visible) return;
+          const top = stack.h(3 + i2);
+          t2.position.set(DIE[0] + (STACK_X - 0) * u3 + 0, DIE[1] + (top - DIE[1]) * u3 + 330 * 4 * u3 * (1 - u3) * 0.5 + 0, DIE[2] + (110 - PRESS.dieZ) * u3);
+          t2.rotation.z = -u3 * Math.PI * 2;
+        });
+        stack.update({ count: landed });
+        const onDie = STAMPS.some((s2) => f2 >= s2 + 1 && f2 < s2 + 3) || f2 >= STAMPS[0] - 12 && f2 < STAMPS[0] - 10;
+        fresh.visible = onDie;
+        fresh.position.set(DIE[0], DIE[1], DIE[2]);
+        const tin = f2 - TOKEN_IN;
+        inTok.visible = tin > -12 && tin < 5;
+        if (inTok.visible) {
+          const u3 = clamp01((tin + 12) / 12);
+          inTok.position.set(X2 + 6, MACHINE.h + 60 + (1 - u3 * u3) * 1200 - Math.max(0, tin) * 22, 0);
+          inTok.rotation.y = 0.4;
+        }
+        const w2 = working(f2);
+        machine.update({
+          value: countUp(f2, TOKEN_IN + 6, P375, 0, 0.375).toFixed(3),
+          on: ramp(f2, TOKEN_IN + 2, TOKEN_IN + 9, SETTLE),
+          lamp: w2 ? Math.floor((f2 - TOKEN_IN) / 3) % 2 ? 1 : 0.25 : f2 >= P375 ? 1 : 0,
+          shake: w2 ? Math.sin((f2 - TOKEN_IN) * 1.9) * (1 - 0.6 * clamp01((f2 - TOKEN_IN) / (P375 - TOKEN_IN))) : 0
+        });
+        const wu = GLIDE(clamp01((f2 - WEDGE_OUT) / (WEDGE_REST - WEDGE_OUT)));
+        wedge.visible = f2 >= WEDGE_OUT;
+        const mz = MACHINE.d / 2;
+        wedge.position.set(X2 - 90 - 20 * wu, 150 * (1 - wu) * (1 - wu) + 0.5, mz + 20 + 340 * wu);
+        wedge.rotation.y = 0.5 * (1 - wu) + 0.35;
+        halo.update(f2, WEDGE_REST);
+        const wd = dropIn(f2, WHOLE_LAND, { h: 800, fall: 8 });
+        whole.visible = wd.on;
+        whole.position.set(X2 + 150, wd.y, mz + 350);
+        whole.rotation.y = -0.25;
+      }
+    };
+  }
+};
+
+// src/world/obj/board.ts
+var makeBoard = (key) => {
+  const group = new Group();
+  group.name = `board:${key}`;
+  group.add(block(330, 56, 300, 18, MAT.black()));
+  const post = block(120, 330, 120, 16, MAT.graphite());
+  post.position.y = 56 + 165;
+  group.add(post);
+  const panel = rbox(760, 500, 130, 30, MAT.black());
+  panel.position.y = 386 + 250;
+  group.add(panel);
+  const screen = rbox(676, 300, 16, 8, new MeshPhysicalMaterial({ color: new Color("#050506"), roughness: 0.22, metalness: 0.3, envMapIntensity: 0.7, clearcoat: 0.6, clearcoatRoughness: 0.2 }));
+  screen.position.set(0, 386 + 220, 65 + 3);
+  group.add(screen);
+  const hood = rbox(800, 44, 190, 16, MAT.graphite());
+  hood.position.set(0, 386 + 500 + 22, 12);
+  group.add(hood);
+  for (const sx of [-1, 1]) {
+    const b2 = new Mesh(new CylinderGeometry(11, 11, 8, 24), MAT.satin());
+    b2.rotation.x = Math.PI / 2;
+    b2.position.set(sx * 340, 386 + 446, 66);
+    group.add(b2);
+  }
+  const capFace = lit(K2.white, 0.8);
+  const cap = wide(text3d("SHARE PRICE", { font: "800", size: 34, depth: 3, bevel: 0, face: capFace }));
+  cap.position.set(0, 386 + 414, 66);
+  cap.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  group.add(cap);
+  const fig = counter({ size: 190, color: K2.money, depth: 20 });
+  fig.group.position.set(0, 386 + 220 - 66, 65 + 12);
+  fig.group.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  group.add(fig.group);
+  const money = new Color(K2.money), red = new Color(K2.red), full = fig.face.userData.full;
+  const k2 = full.r / Math.max(1e-6, money.r);
+  return {
+    group,
+    update: (p2) => {
+      fig.set(p2.value);
+      fig.group.visible = p2.on > 0.02;
+      full.copy(money).lerp(red, Math.max(0, Math.min(1, p2.red))).multiplyScalar(k2 * (1 + 0.1 * p2.red));
+      setLit(fig.face, p2.on, 0.05);
+      fig.side.color.copy(full).multiplyScalar(0.2);
+      setLit(capFace, 0.25 + 0.75 * p2.on, 0.05);
+    }
+  };
+};
+
+// src/world/obj/column.ts
+var COLUMN_H = 900;
+var COLUMN_BASE = 26;
+var makeColumn = (key) => {
+  const group = new Group();
+  group.name = `column:${key}`;
+  group.add(block(280, COLUMN_BASE, 280, 10, MAT.black()));
+  const geo = new BoxGeometry(220, 1, 220, 1, 12, 1);
+  const pos = geo.attributes.position, col = new Float32Array(pos.count * 3);
+  for (let i2 = 0; i2 < pos.count; i2++) {
+    const t2 = pos.getY(i2) + 0.5, top = pos.getY(i2) > 0.499 ? 1.08 : 1;
+    const v2 = (0.5 + 0.5 * Math.pow(t2, 0.8)) * top;
+    col[i2 * 3] = v2;
+    col[i2 * 3 + 1] = v2 * (0.9 + 0.1 * t2);
+    col[i2 * 3 + 2] = v2 * (0.62 + 0.38 * t2);
+  }
+  geo.setAttribute("color", new BufferAttribute(col, 3));
+  const full = new Color(K2.money).multiplyScalar(GLOW * 1.05);
+  const mat = new MeshBasicMaterial({ color: full.clone(), vertexColors: true, toneMapped: false });
+  const bar = new Mesh(geo, mat);
+  group.add(bar);
+  const cap = block(232, 10, 232, 4, MAT.graphite());
+  group.add(cap);
+  return {
+    group,
+    update: (p2) => {
+      const H2 = Math.max(1, Math.max(0, Math.min(1.2, p2.h)) * COLUMN_H);
+      bar.visible = cap.visible = p2.h > 4e-3;
+      bar.scale.y = H2;
+      bar.position.y = COLUMN_BASE + H2 / 2;
+      cap.position.y = COLUMN_BASE + H2 + 5;
+      mat.color.copy(full).multiplyScalar(0.3 + 0.7 * Math.max(0, Math.min(1, p2.glow)));
+    }
+  };
+};
+
+// src/world/places/price.ts
+var S4 = "price";
+var ENTER2 = enterOf(S4);
+var EACH = word(S4, 0, /^each/);
+var WORTH = word(S4, 0, /^worth/);
+var W247 = word(S4, 0, /^\$?247/);
+var MULT = cue(S4, 1);
+var OUT = word(S4, 1, /^out/);
+var N292 = word(S4, 1, /^\$?29/);
+var TOKEN_LAND = ENTER2 + 6;
+var BOARD_ON = EACH - 4;
+var COUNT0 = Math.max(BOARD_ON + 4, W247 - 40);
+var MORE = [W247 + 16, W247 + 27];
+var RISE0 = MULT + 3;
+var RISE1 = N292 - 12;
+var COL0 = OUT - 2;
+var FIG0 = N292 - 26;
+var N_STACK = 24;
+var PLINTH = 230;
+var BOARD_X = -240;
+var STACK_X2 = 300;
+var COL_X = 640;
+var countAt = (f2) => {
+  let c2 = clamp01((f2 - (TOKEN_LAND - 9)) / 9);
+  for (const m2 of MORE) c2 += clamp01((f2 - (m2 - 7)) / 7);
+  c2 += (N_STACK - 3) * SOFT(clamp01((f2 - RISE0) / (RISE1 - RISE0)));
+  return c2;
+};
+var colAt = (f2) => f2 < COL0 ? 0 : 1 - Math.pow(1 - clamp01((f2 - COL0) / (N292 - COL0)), 2.4);
+var PricePlace = {
+  id: S4,
+  label: "4 The price: a share on a plinth, the board counts to $247; the stack shoots up into $29B",
+  enter: ENTER2,
+  stage: "dark",
+  shots: ({ from, to }) => [
+    cut(from, [-1200, 260, 1700], [-170, 600, 0], { fov: 46, focus: [BOARD_X, 620, 60], why: "low under the board, the token drops" }),
+    dolly(from + 1, Math.max(30, W247 - from + 4), [-480, 640, 2650], [-110, 640, 0], { fov: 46, ease: SOFT, why: "rise round the board as it counts" }),
+    dolly(W247 + 8, Math.max(20, MULT - 4 - (W247 + 8)), [-120, 600, 2700], [-20, 560, 60], { fov: 46, ease: SOFT, why: "drift toward the share on its plinth" }),
+    crane(MULT - 2, Math.max(30, N292 - 6 - (MULT - 2)), [280, 1e3, 3300], [150, 440, 0], { fov: 46, bulge: [0, 0, 260], why: "crane up and back as the stack shoots up" }),
+    dolly(N292 - 4, Math.max(12, to - (N292 - 4) - 1), [250, 900, 3150], [150, 420, 0], { fov: 46, ease: SOFT, why: "settle on the three: $29B" })
+  ],
+  lights: (f2) => {
+    const c2 = colAt(f2);
+    const L3 = stdLights([120, 620, 0], { s: 1.2, key: 3.5, rim: 3.2, back: 2.4, amb: 0.15 });
+    L3.accent = { pos: [COL_X - 60, 260 + 500 * c2, 320], color: K2.money, i: 2.6 * c2 };
+    L3.back.i *= 1 + 0.25 * c2;
+    return L3;
+  },
+  blur: (f2) => f2 >= TOKEN_LAND - 9 && f2 <= TOKEN_LAND + 1 || MORE.some((m2) => f2 >= m2 - 7 && f2 <= m2 + 1) || f2 >= RISE0 && f2 <= RISE1 + 2,
+  cues: () => [
+    { kind: "hit", s: "coin", at: TOKEN_LAND, vol: 0.4, why: "one Square share lands on its plinth" },
+    { kind: "hit", s: "click", at: BOARD_ON, vol: 0.3, why: "the price board lights" },
+    { kind: "hit", s: "datashort", at: COUNT0, end: W247 + 2, vol: 0.3, why: "the board counts up" },
+    { kind: "hit", s: "pingshort", at: W247, vol: 0.35, why: "$247" },
+    ...MORE.map((m2, i2) => ({ kind: "hit", s: "coin", at: m2, vol: 0.3, why: `share ${i2 + 2} lands` })),
+    { kind: "move", s: "whooshsoft", at: Math.round((RISE0 + RISE1) / 2), end: RISE1 + 6, vol: 0.45, why: "the stack shoots up" },
+    { kind: "hit", s: "data", at: FIG0, end: N292 + 2, vol: 0.3, why: "the numerals count to $29B" },
+    { kind: "hit", s: "ping", at: N292, vol: 0.4, why: "$29B lands: a ring of light" }
+  ],
+  build: () => {
+    const group = new Group();
+    const board = makeBoard("price");
+    board.group.position.set(BOARD_X, 0, -160);
+    board.group.rotation.y = 0.2;
+    group.add(board.group);
+    const plinth = block(300, PLINTH, 300, 26, MAT.black());
+    plinth.position.set(STACK_X2, PLINTH / 2, 160);
+    group.add(plinth);
+    const stack = makeTokenStack("price", N_STACK);
+    stack.group.position.set(STACK_X2, PLINTH, 160);
+    group.add(stack.group);
+    const col = makeColumn("price");
+    col.group.position.set(COL_X, 0, -60);
+    group.add(col.group);
+    const fig = counter({ size: 190, color: K2.money });
+    fig.group.position.set(190, 0, 430);
+    fig.group.rotation.y = -0.06;
+    group.add(fig.group);
+    const halo = ring({ r: 1300, w: 13, dur: 30, color: K2.money });
+    halo.mesh.position.set(190, 2, 420);
+    group.add(halo.mesh);
+    const halo2 = ring({ r: 700, w: 10, dur: 24 });
+    halo2.mesh.position.set(BOARD_X, 2, 60);
+    group.add(halo2.mesh);
+    return {
+      group,
+      update: (f2) => {
+        board.update({ value: "$" + Math.round(countUp(f2, COUNT0, W247, 1, 247)), red: 0, on: ramp(f2, BOARD_ON, BOARD_ON + 8, SETTLE) });
+        halo2.update(f2, W247);
+        stack.update({ count: countAt(f2) });
+        const c2 = colAt(f2);
+        col.update({ h: c2 * Math.min(1.05, (N_STACK * TOKEN_T + PLINTH - 26) / COLUMN_H), glow: 0.35 + 0.65 * c2 });
+        fig.group.visible = f2 >= FIG0;
+        fig.set(short(countUp(f2, FIG0, N292, 1e9, 29e9)));
+        halo.update(f2, N292);
+      }
+    };
+  }
+};
+
+// src/world/obj/calendar.ts
+var CAL = { rod: 850, leafW: 680, leafH: 600, months: [["AUG", "2021"], ["SEP", "2021"], ["OCT", "2021"], ["NOV", "2021"], ["DEC", "2021"], ["JAN", "2022"]] };
+var FRONT = -0.15;
+var BACK = -2 * Math.PI + 0.15;
+var swing = (t2) => t2 <= 0 ? 0 : t2 >= 1 ? 1 : t2 * t2 * (3 - 2 * t2);
+var makeCalendar = () => {
+  const group = new Group();
+  group.add(block(900, 130, 520, 30, MAT.black()));
+  const riser = block(760, 60, 380, 20, MAT.graphite());
+  riser.position.y += 130;
+  group.add(riser);
+  for (const s2 of [-1, 1]) {
+    const post = rbox(56, CAL.rod - 150, 70, 14, MAT.black());
+    post.position.set(s2 * 400, 190 + (CAL.rod - 150) / 2 - 20, 0);
+    group.add(post);
+    const cap = rbox(84, 84, 96, 20, MAT.black());
+    cap.position.set(s2 * 400, CAL.rod, 0);
+    group.add(cap);
+  }
+  const rod = new Mesh(new CylinderGeometry(15, 15, 820, 32), MAT.satin());
+  rod.rotation.z = Math.PI / 2;
+  rod.position.y = CAL.rod;
+  rod.castShadow = true;
+  group.add(rod);
+  const board = rbox(720, CAL.rod - 210, 30, 10, MAT.black());
+  board.position.set(0, 190 + (CAL.rod - 210) / 2, 0);
+  group.add(board);
+  const N2 = CAL.months.length - 1;
+  const zFront = (i2) => 30 + (N2 - i2) * 20, zBack = (i2) => -(48 + i2 * 20);
+  const leaves = CAL.months.map(([m2, y2], i2) => {
+    const pivot = new Group();
+    pivot.position.set(0, CAL.rod, 0);
+    const leaf = new Group();
+    pivot.add(leaf);
+    const card2 = rbox(CAL.leafW, CAL.leafH, 18, 8, MAT.graphite());
+    card2.position.set(0, -CAL.leafH / 2 - 12, 0);
+    leaf.add(card2);
+    for (const s2 of [-1, 1]) {
+      const ring2 = new Mesh(new TorusGeometry(26, 6, 12, 32), MAT.satin());
+      ring2.rotation.y = Math.PI / 2;
+      ring2.position.set(s2 * 230, 0, 0);
+      leaf.add(ring2);
+    }
+    const face = lit(K2.white, 0.86);
+    const month = wide(text3d(m2, { font: "800", size: 196, depth: 5, bevel: 0, face }), 1.12);
+    month.position.set(0, -CAL.leafH / 2 - 12 - 20, 9.5);
+    const year = wide(text3d(y2, { font: "500", size: 70, depth: 4, bevel: 0, face }), 1.3);
+    year.position.set(0, -CAL.leafH / 2 - 12 - 170, 9.5);
+    leaf.add(month, year);
+    leaf.position.z = zFront(i2);
+    group.add(pivot);
+    return { pivot, leaf };
+  });
+  return {
+    group,
+    /** `p[i]`: leaf i's flip, 0 (hanging in front) … 1 (over the top, hanging behind). The last leaf never flips. */
+    update: (p2) => {
+      leaves.forEach((l2, i2) => {
+        const q2 = swing(p2[i2] ?? 0);
+        l2.pivot.rotation.x = FRONT + (BACK - FRONT) * q2;
+        const k2 = Math.max(0, Math.min(1, (q2 - 0.38) / 0.24));
+        l2.leaf.position.z = zFront(i2) + (zBack(i2) - zFront(i2)) * k2 * k2 * (3 - 2 * k2);
+      });
+    }
+  };
+};
+
+// src/world/obj/tiles.ts
+var TILES = { top: 980, cy: 740, pitch: 268, w: 244, h: 300, d: 60, from: "SQUARE", to: "BLOCK" };
+var CAP = 0.69;
+var makeTiles = () => {
+  const group = new Group();
+  for (const s2 of [-1, 1]) {
+    const post = block(80, TILES.top + 40, 80, 18, MAT.black());
+    post.position.x = s2 * 880;
+    group.add(post);
+    const foot = block(260, 46, 260, 14, MAT.black());
+    foot.position.x = s2 * 880;
+    group.add(foot);
+  }
+  const beam = rbox(1900, 70, 96, 20, MAT.black());
+  beam.position.y = TILES.top;
+  group.add(beam);
+  const row = new Group();
+  group.add(row);
+  const size = 215;
+  const tiles = Array.from(TILES.from, (ch, i2) => {
+    const hold = new Group();
+    hold.position.set((i2 - 2.5) * TILES.pitch, TILES.cy, 0);
+    const t2 = new Group();
+    hold.add(t2);
+    t2.add(rbox(TILES.w, TILES.h, TILES.d, 16, MAT.graphite()));
+    const inset = rbox(TILES.w - 34, TILES.h - 34, 8, 6, MAT.graphite());
+    inset.position.z = TILES.d / 2 - 2;
+    t2.add(inset);
+    const fa = lit(K2.white, 0.88);
+    const a2 = wide(text3d(ch, { font: "800", size, depth: 5, bevel: 0, face: fa }), 1.1);
+    a2.position.set(0, -(size * CAP) / 2, TILES.d / 2 + 2.5);
+    t2.add(a2);
+    const to = TILES.to[i2];
+    if (to) {
+      const inset2 = rbox(TILES.w - 34, TILES.h - 34, 8, 6, MAT.graphite());
+      inset2.position.z = -TILES.d / 2 + 2;
+      t2.add(inset2);
+      const b2 = wide(text3d(to, { font: "800", size, depth: 5, bevel: 0, face: lit(K2.white, 0.88) }), 1.1);
+      b2.rotation.x = Math.PI;
+      b2.position.set(0, size * CAP / 2, -TILES.d / 2 - 2.5);
+      t2.add(b2);
+    }
+    const hang = new Group();
+    for (const s2 of [-1, 1]) {
+      const h2 = rbox(12, TILES.top - 35 - (TILES.cy + TILES.h / 2) + 14, 12, 4, MAT.satin());
+      h2.position.set(s2 * 70, TILES.h / 2 + (TILES.top - 35 - (TILES.cy + TILES.h / 2)) / 2, 0);
+      hang.add(h2);
+    }
+    hold.add(hang);
+    (i2 < 5 ? row : group).add(hold);
+    return { hold, t: t2, hang, fa };
+  });
+  return {
+    group,
+    update: (p2) => {
+      tiles.forEach(({ t: t2, fa }, i2) => {
+        if (i2 < 5) t2.rotation.x = -Math.PI * (p2.flip[i2] ?? 0);
+        setLit(fa, p2.on[i2] ?? 1);
+      });
+      row.position.x = p2.shift * TILES.pitch * 0.5;
+      const e2 = tiles[5];
+      e2.hang.visible = p2.dropY > -1;
+      e2.hold.position.set(2.5 * TILES.pitch + p2.dropX, TILES.cy + p2.dropY, p2.dropX * 0.6);
+      e2.t.rotation.x = p2.dropTip * (-Math.PI / 2);
+      e2.t.rotation.z = -p2.dropTip * 0.5 - (p2.dropY < -1 ? Math.min(0.5, -p2.dropY / 1400) : 0);
+    }
+  };
+};
+
+// src/world/places/close.ts
+var S5 = "close";
+var E2 = enterOf(S5);
+var MONTHS = word(S5, 0, /^months/);
+var SQUARE2 = word(S5, 1, /^Square/);
+var RENAMED = word(S5, 1, /^renamed/);
+var BLOCK = word(S5, 1, /^Block/);
+var HALVED = word(S5, 1, /^halved/);
+var SAME = word(S5, 2, /^Same/);
+var HALF = word(S5, 2, /^half/);
+var CLOSED = word(S5, 3, /^closed/);
+var SEC = word(S5, 3, /^SEC/);
+var WORTH2 = word(S5, 3, /^worth/);
+var N1382 = word(S5, 3, /13/);
+var B0 = cue(S5, 1) - 4;
+var C0 = cue(S5, 2) - 3;
+var D0 = cue(S5, 3) - 3;
+var XA = 0;
+var XB = 6e3;
+var XBOARD = XB + 2300;
+var XC = 12e3;
+var XD2 = 18e3;
+var FLIP = 11;
+var FLIPS = CAL.months.length - 1;
+var T0 = E2 - 5;
+var TL = MONTHS + 2 - FLIP;
+var flipAt = (i2) => T0 + i2 * (TL - T0) / (FLIPS - 1);
+var JAN = TL + FLIP;
+var flipP = (f2) => Array.from({ length: FLIPS }, (_2, i2) => clamp01((f2 - flipAt(i2)) / FLIP));
+var ON0 = B0 - 6;
+var DROP = RENAMED - 2;
+var G2 = 3.6;
+var FLOOR_Y = -(TILES.cy - TILES.h / 2);
+var FALL = Math.sqrt(2 * -FLOOR_Y / G2);
+var HIT = DROP + FALL;
+var TFLIP = 10;
+var tflipAt = (i2) => BLOCK + 2 - TFLIP - (4 - i2) * 4;
+var TRACK = BLOCK + 9;
+var TRACK_DUR = 26;
+var COUNT_A = HALVED - 22;
+var COUNT_B = HALVED + 3;
+var NTOK = 16;
+var FIRST = 11;
+var tokLand = (k2) => C0 - 3 + k2 * 5;
+var SINK_A = HALF - 9;
+var SINK_B = HALF + 8;
+var ROLL_A = CLOSED - 10;
+var ROLL_B = CLOSED + 7;
+var FORM = SEC + 3;
+var PLATE_ON = WORTH2 - 8;
+var CNT_A = WORTH2 - 2;
+var CNT_B = N1382 + 12;
+var CL2 = { E: E2, B0, C0, D0, flips: Array.from({ length: FLIPS }, (_2, i2) => flipAt(i2)), jan: JAN, drop: DROP, hit: HIT, tflips: [0, 1, 2, 3, 4].map(tflipAt), track: TRACK, count: [COUNT_A, COUNT_B], toks: [0, 1, 2, 3, 4].map(tokLand), sink: [SINK_A, SINK_B], roll: [ROLL_A, ROLL_B], form: FORM, cnt: [CNT_A, CNT_B] };
+var ORB_A = { c: [XA, 540, 0], a0: -26, a1: 12, r0: 2550, r1: 2050, y0: 520, y1: 640 };
+var ORB_C = { c: [XC + 20, 600, 0], a0: -18, a1: 15, r0: 3350, r1: 2950, y0: 560, y1: 720 };
+var SIGN = [XB + 60, 830, 0];
+var BOARD = [XBOARD, 980, 60];
+var shots = ({ from, to }) => [
+  // 1 the calendar: orbit and push while the leaves flip
+  cut(from, orbitPos(ORB_A.c, ORB_A.a0, ORB_A.r0, ORB_A.y0), ORB_A.c, { fov: 40, why: "cut: the calendar" }),
+  orbit(from + 1, B0 - from - 2, ORB_A, { fov: 40, ease: SOFT, why: "orbit and push on the calendar" }),
+  // 2 the sign: a slow push while the tiles act, then the track to the board and a push on its fall
+  cut(B0, [XB - 420, 560, 4e3], SIGN, { fov: 46, why: "cut: the sign" }),
+  dolly(B0 + 1, TRACK - B0 - 2, [XB - 120, 620, 3550], SIGN, { fov: 46, ease: SOFT, why: "push on the sign" }),
+  travel(TRACK, TRACK_DUR, [XBOARD - 480, 720, 2900], BOARD, { fov: 44, bulge: [0, 40, 260], why: "track from the sign to the board", vol: 0.5 }),
+  dolly(TRACK + TRACK_DUR + 1, C0 - (TRACK + TRACK_DUR) - 2, [XBOARD + 160, 760, 2350], BOARD, { fov: 44, ease: SOFT, why: "push on the falling price" }),
+  // 3 the stack and the column: a slow orbit, both in frame
+  cut(C0, orbitPos(ORB_C.c, ORB_C.a0, ORB_C.r0, ORB_C.y0), ORB_C.c, { fov: 42, why: "cut: the stack and the column" }),
+  orbit(C0 + 1, D0 - C0 - 2, ORB_C, { fov: 42, ease: SOFT, why: "orbit the stack and the column" }),
+  // 4 the drawer: high three-quarter, pushing down into it
+  cut(D0, [XD2 + 850, 1750, 2700], [XD2, 780, 360], { fov: 44, why: "cut: the drawer" }),
+  dolly(D0 + 1, CNT_A - D0 - 2, [XD2 + 520, 2050, 2050], [XD2 + 40, 840, 400], { fov: 44, ease: SOFT, why: "push toward the drawer" }),
+  dolly(CNT_A, Math.max(20, to - CNT_A - 1), [XD2 + 300, 2200, 1650], [XD2 + 60, 930, 400], { fov: 44, ease: SOFT, why: "push onto the plate" })
+];
+var mixHex = (a2, b2, t2) => "#" + new Color(a2).lerp(new Color(b2), clamp01(t2)).getHexString();
+var lights = (f2) => {
+  if (f2 < B0) {
+    const L4 = stdLights([XA, 520, 0], { s: 1.05, key: 3.4 + 0.5 * ramp(f2, JAN - 2, JAN + 8, SETTLE) });
+    return L4;
+  }
+  if (f2 < C0) {
+    const t2 = TRAVEL(clamp01((f2 - TRACK) / TRACK_DUR));
+    const c2 = [SIGN[0] + (BOARD[0] - SIGN[0]) * t2, 820 - 80 * t2, 0];
+    const red = ramp(f2, COUNT_B - 3, COUNT_B + 14, SETTLE);
+    const L4 = stdLights(c2, { s: 1.3 - 0.25 * t2, key: 2.9 + 0.8 * ramp(f2, SQUARE2 - 4, SQUARE2 + 8, SETTLE), back: 3.2 });
+    L4.back = { ...L4.back, color: mixHex("#F2EEEE", K2.red, red * 0.9), i: 3.2 + 2.2 * red };
+    L4.accent = { pos: [XBOARD - 300, 900, 900], color: K2.red, i: 2.4 * red };
+    return L4;
+  }
+  if (f2 < D0) return stdLights([XC, 480, 0], { s: 1.1, key: 3.5 });
+  const warm = ramp(f2, CNT_B - 2, CNT_B + 14, SETTLE);
+  const L3 = stdLights([XD2, 640, -200], { s: 1.2, key: 3.5 });
+  L3.back = { ...L3.back, color: mixHex("#F2EEEE", K2.money, warm * 0.6), i: 3.2 + 1.2 * warm };
+  L3.accent = { pos: [XD2 + 200, 1500, 1200], color: K2.money, i: 1.6 * warm };
+  return L3;
+};
+var cues = () => [
+  ...Array.from({ length: FLIPS }, (_2, i2) => ({ kind: "hit", s: "flick", at: Math.round(flipAt(i2) + 3), vol: 0.34, why: `the calendar: leaf ${CAL.months[i2][0]} whips over` })),
+  { kind: "hit", s: "thud", at: JAN, vol: 0.3, why: "the calendar: JAN lands" },
+  { kind: "hit", s: "datashort", at: ON0 + 2, end: ON0 + 20, vol: 0.22, why: "the sign: its letters light, S-Q-U-A-R-E" },
+  { kind: "hit", s: "thud", at: Math.round(HIT), vol: 0.42, why: "the sign: the last tile hits the floor" },
+  ...[0, 1, 2, 3, 4].map((i2) => ({ kind: "hit", s: "click", at: tflipAt(i2) + 4, vol: 0.3, why: `the sign: tile ${i2 + 1} flips to ${TILES.to[i2]}` })),
+  { kind: "hit", s: "data", at: COUNT_A, end: COUNT_B, vol: 0.3, why: "the board counts down: $247 \u2192 $122" },
+  { kind: "hit", s: "sub", at: COUNT_B, vol: 0.45, why: "the board lands on $122 and turns red" },
+  ...[0, 1, 2, 3, 4].map((k2) => ({ kind: "hit", s: "coin", at: tokLand(k2), vol: 0.3, why: `the stack: token ${FIRST + k2 + 1} lands` })),
+  { kind: "hit", s: "click", at: SAME + 2, vol: 0.28, why: "SAME SHARES lights" },
+  { kind: "move", s: "lowwoosh", at: HALF, end: SINK_B + 6, vol: 0.4, why: "the value column sinks to half" },
+  { kind: "hit", s: "click", at: HALF + 2, vol: 0.28, why: "HALF PRICE lights" },
+  { kind: "move", s: "whooshsoft", at: CLOSED - 2, end: ROLL_B, vol: 0.4, why: "the drawer rolls open" },
+  { kind: "hit", s: "thud", at: ROLL_B - 2, vol: 0.4, why: "the drawer stops on its runners" },
+  { kind: "hit", s: "thud", at: FORM, vol: 0.36, why: "FORM 10-Q drops onto the cabinet" },
+  { kind: "hit", s: "click", at: PLATE_ON + 2, vol: 0.28, why: "the drawer's plate lights" },
+  { kind: "hit", s: "data", at: CNT_A, end: CNT_B, vol: 0.3, why: "the plate counts up to $13.8 BILLION" },
+  { kind: "hit", s: "bloom", at: CNT_B, vol: 0.4, why: "$13.8 BILLION lands: the ring of light" }
+];
+var blur = (f2) => f2 < B0 && flipP(f2).some((p2) => p2 > 0.12 && p2 < 0.9) || f2 >= DROP && f2 < HIT + 3 || [0, 1, 2, 3, 4].some((i2) => f2 > tflipAt(i2) + 2 && f2 < tflipAt(i2) + TFLIP - 2) || [0, 1, 2, 3, 4].some((k2) => dropIn(f2, tokLand(k2), { h: 900, fall: 8 }).fast) || f2 > ROLL_A + 2 && f2 < ROLL_B - 5 || dropIn(f2, FORM, { h: 1300, fall: 8 }).fast;
+var build = () => {
+  const group = new Group();
+  const cal = makeCalendar();
+  cal.group.position.set(XA, 0, 0);
+  cal.group.rotation.y = -0.1;
+  group.add(cal.group);
+  const ringA = ring({ r: 1500, dur: 26 });
+  ringA.mesh.position.set(XA, 1.5, 150);
+  group.add(ringA.mesh);
+  const sign2 = makeTiles();
+  sign2.group.position.set(XB, 0, 0);
+  group.add(sign2.group);
+  const board = makeBoard("close");
+  board.group.position.set(XBOARD, 0, 0);
+  board.group.rotation.y = -0.16;
+  board.group.scale.setScalar(1.15);
+  group.add(board.group);
+  const ringB = ring({ r: 1500, dur: 26, color: K2.red });
+  ringB.mesh.position.set(XBOARD, 1.5, 260);
+  group.add(ringB.mesh);
+  const pair = new Group();
+  pair.position.set(XC, 0, 0);
+  pair.scale.setScalar(1.9);
+  group.add(pair);
+  const stack = makeTokenStack("close", NTOK);
+  stack.group.position.set(-200, 0, 0);
+  pair.add(stack.group);
+  const faller = makeToken("SQ");
+  pair.add(faller);
+  const column = makeColumn("close");
+  column.group.position.set(200, 0, 0);
+  pair.add(column.group);
+  const same = litPlate(["SAME SHARES"], { size: 18, depth: 16 });
+  same.group.position.set(-200, same.h / 2, 150);
+  same.group.rotation.x = -0.32;
+  pair.add(same.group);
+  const half = litPlate(["HALF PRICE"], { size: 18, depth: 16 });
+  half.group.position.set(200, half.h / 2, 200);
+  half.group.rotation.x = -0.32;
+  pair.add(half.group);
+  const H0 = stack.h(NTOK) / 900;
+  const dr = makeDrawer("close");
+  dr.group.position.set(XD2, 0, 0);
+  dr.group.rotation.y = 0.2;
+  dr.group.scale.setScalar(1.7);
+  group.add(dr.group);
+  const form = litPlate(["FORM 10-Q"], { size: 50, depth: 30 });
+  const formHold = new Group();
+  formHold.add(form.group);
+  formHold.rotation.y = 0.2;
+  formHold.position.set(XD2, 0, 0);
+  group.add(formHold);
+  const TOPY = dr.size.h * 1.7, formRest = TOPY + form.h / 2;
+  form.group.position.set(-170, formRest, -45);
+  const ringD = ring({ r: 1700, dur: 30, color: K2.money });
+  ringD.mesh.position.set(XD2 + 120, 1.5, 700);
+  group.add(ringD.mesh);
+  return {
+    group,
+    update: (f2) => {
+      cal.group.visible = f2 < B0;
+      ringA.mesh.visible = false;
+      sign2.group.visible = board.group.visible = f2 >= B0 && f2 < C0;
+      pair.visible = f2 >= C0 && f2 < D0;
+      dr.group.visible = formHold.visible = f2 >= D0;
+      if (f2 < B0) {
+        cal.update(flipP(f2));
+        ringA.update(f2, JAN);
+      } else if (f2 < C0) {
+        const t2 = f2 - DROP;
+        let dropY = 0, tip = 0, dx = 0;
+        if (t2 > 0) {
+          if (f2 < HIT) dropY = -0.5 * G2 * t2 * t2;
+          else {
+            const u3 = f2 - HIT;
+            dropY = FLOOR_Y - (TILES.h / 2 - TILES.d / 2 - 4) * SETTLE(clamp01(u3 / 12)) + 46 * Math.max(0, Math.sin(Math.PI * clamp01(u3 / 9)));
+            tip = SETTLE(clamp01(u3 / 12));
+            dx = 90 * SETTLE(clamp01(u3 / 14));
+          }
+        }
+        sign2.update({
+          flip: [0, 1, 2, 3, 4].map((i2) => SOFT(clamp01((f2 - tflipAt(i2)) / TFLIP))),
+          on: [0, 1, 2, 3, 4, 5].map((i2) => clamp01((f2 - (ON0 + i2 * 3)) / 4)),
+          dropY,
+          dropTip: tip,
+          dropX: dx,
+          shift: ramp(f2, BLOCK + 2, BLOCK + 14, SETTLE)
+        });
+        const v2 = Math.round(countUp(f2, COUNT_A, COUNT_B, 247, 122));
+        board.update({ value: "$" + v2, red: clamp01((f2 - (COUNT_B - 3)) / 5), on: 1 });
+        ringB.update(f2, COUNT_B);
+      } else if (f2 < D0) {
+        let n2 = FIRST;
+        faller.visible = false;
+        for (let k2 = 0; k2 < NTOK - FIRST; k2++) {
+          const d2 = dropIn(f2, tokLand(k2), { h: 900, fall: 8, bounce: 0.6 });
+          if (f2 >= tokLand(k2) + 9) n2 = FIRST + k2 + 1;
+          else if (d2.on && !faller.visible) {
+            faller.visible = true;
+            faller.position.set(-200, stack.h(FIRST + k2) + d2.y, 0);
+            faller.rotation.y = (FIRST + k2) * 0.7;
+          }
+        }
+        stack.update({ count: n2 });
+        same.setLit((f2 - SAME) / 6);
+        half.setLit((f2 - HALF) / 6);
+        const s2 = ramp(f2, SINK_A, SINK_B, SETTLE);
+        column.update({ h: H0 * (1 - 0.5 * s2), glow: 1 - 0.45 * s2 });
+      } else {
+        const o2 = ramp(f2, ROLL_A, ROLL_B, SETTLE) + 0.035 * Math.sin(Math.PI * clamp01((f2 - ROLL_B) / 8)) * (f2 > ROLL_B ? -1 : 0);
+        const v2 = countUp(f2, CNT_A, CNT_B, 0, 13.8);
+        dr.update({ open: o2, value: f2 < PLATE_ON ? "" : `$${v2.toFixed(1)} BILLION`, lit: clamp01((f2 - PLATE_ON) / 8) });
+        const d2 = dropIn(f2, FORM, { h: 1300, fall: 8, bounce: 0.5 });
+        form.group.visible = d2.on;
+        form.group.position.y = formRest + d2.y;
+        form.setLit((f2 - FORM) / 6);
+        ringD.update(f2, CNT_B);
+      }
+    }
+  };
+};
+var ClosePlace = { id: S5, label: "6 The close: six months, Square \u2192 Block, the price halves, $13.8 BILLION", enter: E2, stage: "dark", shots, lights, build, blur, cues };
+
+// src/world/obj/scale.ts
+var SCALE = { pivot: 1040, arm: 440, hang: 470, dish: 205 };
+var makeScale = () => {
+  const group = new Group();
+  group.add(cyl(330, 56, MAT.black(), 96));
+  const b2 = cyl(230, 50, MAT.black(), 96);
+  b2.position.y += 56;
+  group.add(b2);
+  const col = cyl(48, SCALE.pivot - 90, MAT.black(), 48);
+  col.position.y += 100;
+  group.add(col);
+  const knuckle = new Mesh(new SphereGeometry(78, 48, 32), MAT.satin());
+  knuckle.position.y = SCALE.pivot;
+  knuckle.castShadow = true;
+  group.add(knuckle);
+  const beam = new Group();
+  beam.position.y = SCALE.pivot;
+  group.add(beam);
+  beam.add(rbox(SCALE.arm * 2 + 90, 62, 70, 24, MAT.black()));
+  const needle = rbox(14, 190, 14, 5, MAT.satin());
+  needle.position.y = -110;
+  beam.add(needle);
+  const pans = [-1, 1].map((s2) => {
+    const pan = new Group();
+    group.add(pan);
+    const eye = new Mesh(new SphereGeometry(24, 24, 16), MAT.satin());
+    pan.add(eye);
+    for (let k2 = 0; k2 < 3; k2++) {
+      const a2 = k2 / 3 * Math.PI * 2 + Math.PI / 6, rx = Math.cos(a2) * (SCALE.dish - 14), rz = Math.sin(a2) * (SCALE.dish - 14);
+      const len = Math.hypot(rx, SCALE.hang, rz);
+      const w2 = new Mesh(new CylinderGeometry(7, 7, len, 10), MAT.graphite());
+      w2.position.set(rx / 2, -SCALE.hang / 2, rz / 2);
+      w2.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), new Vector3(rx, -SCALE.hang, rz).normalize());
+      pan.add(w2);
+    }
+    const dish = new Mesh(new CylinderGeometry(SCALE.dish, SCALE.dish - 50, 44, 96), MAT.black());
+    dish.position.y = -SCALE.hang - 22;
+    dish.castShadow = true;
+    dish.receiveShadow = true;
+    pan.add(dish);
+    const lip = new Mesh(new TorusGeometry(SCALE.dish, 9, 12, 96), MAT.graphite());
+    lip.rotation.x = Math.PI / 2;
+    lip.position.y = -SCALE.hang;
+    pan.add(lip);
+    const seat = new Group();
+    seat.position.y = -SCALE.hang;
+    pan.add(seat);
+    return { pan, seat, s: s2 };
+  });
+  return {
+    group,
+    left: pans[0].seat,
+    right: pans[1].seat,
+    /** `tilt` radians: positive = the LEFT pan down */
+    update: (p2) => {
+      beam.rotation.z = p2.tilt;
+      for (const { pan, s: s2 } of pans) pan.position.set(s2 * SCALE.arm * Math.cos(p2.tilt), SCALE.pivot + s2 * SCALE.arm * Math.sin(p2.tilt), 0);
+    }
+  };
+};
+
+// src/world/obj/chute.ts
+var RAMP = { x0: -1250, y0: 640, x1: -250, y1: 13 };
+var makeChute = () => {
+  const group = new Group();
+  const dx = RAMP.x1 - RAMP.x0, dy = RAMP.y1 - RAMP.y0, len = Math.hypot(dx, dy), ang = Math.atan2(dy, dx);
+  const tr = new Group();
+  tr.position.set((RAMP.x0 + RAMP.x1) / 2, (RAMP.y0 + RAMP.y1) / 2, 0);
+  tr.rotation.z = ang;
+  group.add(tr);
+  const bed = rbox(len + 60, 26, 150, 10, MAT.black());
+  bed.position.y = -13;
+  tr.add(bed);
+  for (const s2 of [-1, 1]) {
+    const rail = rbox(len + 60, 70, 20, 8, MAT.black());
+    rail.position.set(0, 22, s2 * 76);
+    tr.add(rail);
+  }
+  const hop = rbox(520, 420, 420, 34, MAT.black());
+  hop.position.set(RAMP.x0 - 230, RAMP.y0 + 200, 0);
+  group.add(hop);
+  const mouth = rbox(90, 240, 190, 14, MAT.graphite());
+  mouth.position.set(RAMP.x0 + 20, RAMP.y0 + 110, 0);
+  group.add(mouth);
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+    const leg = block(46, RAMP.y0 + 10, 46, 10, MAT.black());
+    leg.position.x = RAMP.x0 - 230 + sx * 200;
+    leg.position.z = sz * 150;
+    group.add(leg);
+  }
+  const plate = litPlate(["SHARES"], { size: 78, color: K2.white, depth: 30 });
+  plate.group.position.set(RAMP.x0 - 230, RAMP.y0 + 210, 210 + plate.d / 2);
+  group.add(plate.group);
+  for (const u3 of [0.35, 0.7]) {
+    const x2 = RAMP.x0 + dx * u3, y2 = RAMP.y0 + dy * u3;
+    const st = block(34, y2 - 20, 120, 8, MAT.black());
+    st.position.x = x2;
+    group.add(st);
+  }
+  return { group, plate };
+};
+
+// src/world/places/fair.ts
+var S6 = "fair";
+var E3 = enterOf(S6);
+var N293 = word(S6, 0, /29/);
+var REAL = word(S6, 0, /^real/);
+var AND = word(S6, 0, /^and/);
+var HOLDERS = word(S6, 0, /^shareholders/);
+var F2 = AND - 4;
+var KS = 1;
+var LAND = E3 + 4;
+var L29 = N293 + 2;
+var TOK = [REAL - 17, REAL - 10, REAL - 3];
+var LEVEL = REAL + 4;
+var step = (t2, tau = 5.5, P2 = 17) => t2 <= 0 ? 0 : 1 - Math.exp(-t2 / tau) * Math.cos(2 * Math.PI * t2 / P2);
+var tiltAt = (f2) => {
+  const wob = f2 > LAND ? 0.07 * Math.exp(-(f2 - LAND) / 7) * Math.sin(2 * Math.PI * (f2 - LAND) / 15) : 0;
+  return wob + 0.26 * step(f2 - L29) - 0.26 / 3 * TOK.reduce((s2, t2) => s2 + step(f2 - t2), 0);
+};
+var XF = 6e3;
+var NP = 5;
+var R = 90;
+var T3 = 34;
+var pawnX = (i2) => 170 + i2 * 350;
+var rampLen = Math.hypot(RAMP.x1 - RAMP.x0, RAMP.y1 - RAMP.y0);
+var NX = -(RAMP.y1 - RAMP.y0) / rampLen;
+var NY = (RAMP.x1 - RAMP.x0) / rampLen;
+var arrive = (i2) => HOLDERS - 6 + i2 * 10;
+var pathLen = (i2) => rampLen + (pawnX(i2) - (RAMP.x1 + NX * R));
+var rollDur = (i2) => pathLen(i2) / 52;
+var TIP = 8;
+var FA2 = { E: E3, F2, land: LAND, l29: L29, toks: TOK, level: LEVEL, arrive: Array.from({ length: NP }, (_2, i2) => arrive(i2)) };
+var ORB = { c: [0, 640, 0], a0: -12, a1: 13, r0: 3e3, r1: 2650, y0: 420, y1: 540 };
+var shots2 = ({ from, to }) => [
+  cut(from, orbitPos(ORB.c, ORB.a0, ORB.r0, ORB.y0), ORB.c, { fov: 48, why: "cut: the scale" }),
+  orbit(from + 1, F2 - from - 2, ORB, { fov: 48, ease: SOFT, why: "low orbit of the scale" }),
+  cut(F2, [XF - 1500, 700, 2700], [XF - 1e3, 420, 0], { fov: 46, why: "cut: the chute" }),
+  dolly(F2 + 1, Math.max(20, to - F2 - 2), [XF + 1750, 430, 2050], [XF + 1550, 190, -150], { fov: 46, ease: SOFT, why: "travel along the pawns with the tokens" })
+];
+var lights2 = (f2) => {
+  if (f2 < F2) return stdLights([0, 620, 0], { s: 1.25, key: 3.3 + 0.6 * ramp(f2, LEVEL - 2, LEVEL + 10, SETTLE) });
+  const t2 = SOFT(clamp01((f2 - F2) / 80));
+  return stdLights([XF - 800 + 2300 * t2, 320, 0], { s: 1.3, key: 3.5 });
+};
+var cues2 = () => [
+  { kind: "hit", s: "thud", at: LAND, vol: 0.42, why: "the scale lands" },
+  { kind: "hit", s: "thud", at: L29, vol: 0.36, why: "$29B lands on the near pan" },
+  ...TOK.map((t2, k2) => ({ kind: "hit", s: "coin", at: t2, vol: 0.3, why: `token ${k2 + 1} lands on the far pan` })),
+  { kind: "hit", s: "bloom", at: LEVEL, vol: 0.36, why: "the beam comes level: the ring of light" },
+  { kind: "move", s: "whooshsoft", at: F2 + 8, end: F2 + 30, vol: 0.3, why: "the tokens roll down the chute" },
+  ...Array.from({ length: NP }, (_2, i2) => ({ kind: "hit", s: "coin", at: arrive(i2) + TIP - 2, vol: 0.28, why: `pawn ${i2 + 1} gets its token` }))
+];
+var blur2 = (f2) => dropIn(f2, LAND, { h: 1500, fall: 9 }).fast || dropIn(f2, L29, { h: 1200, fall: 8 }).fast || TOK.some((t2) => dropIn(f2, t2, { h: 900, fall: 7 }).fast) || f2 >= F2 && f2 < F2 + 14;
+var build2 = () => {
+  const group = new Group();
+  const sc = makeScale();
+  sc.group.scale.setScalar(KS);
+  sc.group.rotation.y = 0.1;
+  group.add(sc.group);
+  const fig = counter({ size: 76, color: K2.money, depth: 34 });
+  fig.set("$29B");
+  const figHold = new Group();
+  figHold.add(fig.group);
+  sc.left.add(figHold);
+  const toks = TOK.map((_2, k2) => {
+    const t2 = makeToken("SQ");
+    t2.rotation.y = 0.5 + k2 * 1.1;
+    sc.right.add(t2);
+    return t2;
+  });
+  const ringS = ring({ r: 1700, dur: 28 });
+  ringS.mesh.position.set(0, 1.5, 200);
+  group.add(ringS.mesh);
+  const row = new Group();
+  row.position.set(XF, 0, 0);
+  row.scale.setScalar(1.5);
+  group.add(row);
+  const chute = makeChute();
+  row.add(chute.group);
+  const pawns = Array.from({ length: NP }, (_2, i2) => {
+    const p2 = makePawn(1.2);
+    p2.position.set(pawnX(i2), 0, -250);
+    row.add(p2);
+    return p2;
+  });
+  const rollers = Array.from({ length: NP }, () => {
+    const hold = new Group(), inner = makeToken("SQ");
+    inner.position.y = -T3 / 2;
+    const spin = new Group();
+    spin.add(inner);
+    hold.add(spin);
+    row.add(hold);
+    return { hold, spin };
+  });
+  return {
+    group,
+    update: (f2) => {
+      const one = f2 < F2;
+      sc.group.visible = one;
+      ringS.mesh.visible = false;
+      row.visible = !one;
+      if (one) {
+        const d2 = dropIn(f2, LAND, { h: 1500, fall: 9, bounce: 0.5 });
+        sc.group.position.y = d2.y;
+        sc.update({ tilt: tiltAt(f2) });
+        const n2 = dropIn(f2, L29, { h: 1200, fall: 8, bounce: 0.4 });
+        figHold.visible = n2.on;
+        figHold.position.y = n2.y / KS;
+        setLit(fig.face, 1);
+        toks.forEach((t2, k2) => {
+          const q2 = dropIn(f2, TOK[k2], { h: 900, fall: 7, bounce: 0.5 });
+          t2.visible = q2.on;
+          t2.position.set((k2 - 1) * 26, k2 * (T3 + 2) + q2.y / KS, k2 % 2 * 18 - 9);
+        });
+        ringS.update(f2, LEVEL);
+      } else {
+        chute.plate.setLit(1);
+        rollers.forEach(({ hold, spin }, i2) => {
+          const dur = rollDur(i2), st = arrive(i2) - dur, u3 = clamp01((f2 - st) / dur), L3 = pathLen(i2);
+          const s2 = L3 * (1 - Math.pow(1 - u3, 1.7));
+          hold.visible = f2 >= st;
+          let x2, y2;
+          if (s2 < rampLen) {
+            const k2 = s2 / rampLen;
+            x2 = RAMP.x0 + (RAMP.x1 - RAMP.x0) * k2 + NX * R;
+            y2 = RAMP.y0 + (RAMP.y1 - RAMP.y0) * k2 + NY * R;
+          } else {
+            x2 = RAMP.x1 + NX * R + (s2 - rampLen);
+            y2 = R;
+          }
+          const tip = SETTLE(clamp01((f2 - arrive(i2)) / TIP)), th = Math.PI / 2 * (1 - tip);
+          hold.position.set(x2, T3 / 2 + (y2 - T3 / 2) * Math.sin(th) + (tip > 0 && tip < 1 ? 0 : 0), 130 - (R - T3 / 2) * (1 - Math.sin(th)));
+          hold.rotation.x = th;
+          spin.rotation.y = -s2 / R;
+        });
+        pawns.forEach((p2, i2) => {
+          const u3 = clamp01((f2 - (arrive(i2) + TIP - 2)) / 9);
+          p2.position.y = 46 * Math.sin(Math.PI * u3);
+        });
+      }
+    }
+  };
+};
+var FairPlace = { id: S6, label: "7 To be fair: the scale comes level on $29B; the shareholders get their shares", enter: E3, stage: "dark", shots: shots2, lights: lights2, build: build2, blur: blur2, cues: cues2 };
+
+// src/world/obj/stamp.ts
+var STAMP = { w: 600, h: 176, d: 96 };
+var makeStamp = (key) => {
+  const group = new Group();
+  group.name = `stamp-${key}`;
+  const pad = rbox(STAMP.w - 18, STAMP.h - 18, 16, 5, MAT.rubber());
+  pad.position.z = 8;
+  const base = rbox(STAMP.w, STAMP.h, STAMP.d, 20, MAT.black());
+  base.position.z = 16 + STAMP.d / 2;
+  const collar = new Mesh(new CylinderGeometry(58, 74, 46, 40), MAT.satin());
+  collar.rotation.x = Math.PI / 2;
+  collar.position.z = 16 + STAMP.d + 22;
+  const neck = new Mesh(new CylinderGeometry(36, 46, 150, 40), MAT.black());
+  neck.rotation.x = Math.PI / 2;
+  neck.position.z = 16 + STAMP.d + 118;
+  const knob = new Mesh(new SphereGeometry(80, 40, 28), MAT.black());
+  knob.position.z = 16 + STAMP.d + 232;
+  for (const m2 of [base, collar, neck, knob]) {
+    m2.castShadow = true;
+    m2.receiveShadow = true;
+  }
+  group.add(pad, base, collar, neck, knob);
+  return { group };
+};
+
+// src/world/places/verdict.ts
+var S7 = "verdict";
+var ENTER3 = enterOf(S7);
+var TAGW = word(S7, 0, /^price/);
+var NEVER = word(S7, 0, /^never/);
+var PAID = word(S7, 0, /^paid/);
+var INF = word(S7, 1, /^inflated/i);
+var SEND = cue(S7, 2);
+var ROLL = [NEVER - 4, PAID];
+var PLATE_Y = 190;
+var FACE_Z = HOOK_STAGE.plinthD / 2;
+var stampAt = (f2) => {
+  const rest = [1500, 760, 2300], hit = [0, PLATE_Y, FACE_Z + 41];
+  if (f2 < INF - 12) return { pos: rest, yaw: -0.7, on: false, fast: false };
+  if (f2 <= INF) {
+    const u4 = clamp01((f2 - (INF - 12)) / 12), e3 = u4 * u4;
+    return { pos: mixV(rest, hit, e3), yaw: -0.7 * (1 - e3), on: true, fast: u4 > 0.25 };
+  }
+  if (f2 < INF + 3) return { pos: hit, yaw: 0, on: true, fast: false };
+  const u3 = clamp01((f2 - (INF + 3)) / 15), e2 = SOFT(u3);
+  return { pos: mixV(hit, rest, e2), yaw: -0.7 * e2, on: u3 < 1, fast: false };
+};
+var VerdictPlace = {
+  id: S7,
+  label: "8 The verdict: the opening returns; $29,000,000,000 rolls down to $13,800,000,000; INFLATED",
+  enter: ENTER3,
+  stage: "dark",
+  shots: ({ from, to }) => [
+    cut(from, OPENING.pos, OPENING.look, { fov: OPENING.fov, focus: OPENING.numFocus, why: "cut back to the opening shot" }),
+    { ...dolly(from + 1, PAID - 6 - (from + 1), OPENING.push.pos, OPENING.push.look, { fov: 42, ease: SOFT, why: "the opening's push-in" }), focus: OPENING.numFocus },
+    { ...dolly(INF - 20, 22, [-330, 360, 3250], [0, 310, 320], { fov: 42, why: "push in on the plinth for the stamp" }), focus: [0, 190, 330] },
+    dolly(SEND + 2, to - (SEND + 2) - 1, [-460, 1350, 4300], [0, 600, 0], { fov: 42, ease: SOFT, why: "pull up and back" })
+  ],
+  lights: (f2) => {
+    const pPaid = f2 >= PAID ? Math.exp(-(f2 - PAID) / 12) : 0, pInf = f2 >= INF ? Math.exp(-(f2 - INF) / 14) : 0;
+    const L3 = stdLights(HOOK_STAGE.centre, { s: 1.3, key: 3.5 + 0.9 * pPaid + 1.3 * pInf });
+    L3.accent = { pos: [0, 260, 1100], color: K2.red, i: 2.2 * pPaid + 2.6 * pInf };
+    if (f2 >= INF) L3.back = backGlow(HOOK_STAGE.centre, K2.red, 2.2 * (0.35 + 0.65 * pInf));
+    return L3;
+  },
+  blur: (f2) => stampAt(f2).fast,
+  cues: () => [
+    { kind: "hit", s: "chainshort", at: ENTER3 + 1, vol: 0.3, why: "the tag sways on its chain" },
+    { kind: "hit", s: "click", at: TAGW, vol: 0.3, why: "the tag's lamp comes up" },
+    { kind: "hit", s: "datamid", at: ROLL[0], end: PAID, vol: 0.35, why: "the floor numerals roll down" },
+    { kind: "hit", s: "sub", at: PAID, vol: 0.5, why: "$13,800,000,000 lands, red" },
+    { kind: "hit", s: "chainshort", at: INF - 26, vol: 0.3, why: "the crane lifts the tag clear" },
+    { kind: "move", s: "whooshsoft", at: INF - 4, end: INF, vol: 0.4, why: "the stamp comes in" },
+    { kind: "hit", s: "chainshort", at: SEND - 4, vol: 0.3, why: "the tag comes back down" },
+    { kind: "hit", s: "thud", at: INF, vol: 0.55, why: "the stamp slams: INFLATED" },
+    { kind: "hit", s: "sub", at: INF, vol: 0.45, why: "the slam's weight" },
+    { kind: "hit", s: "pingshort", at: INF + 1, vol: 0.3, why: "the red ring" }
+  ],
+  build: () => {
+    const group = new Group();
+    const A3 = tagSet("verdict");
+    group.add(A3.group);
+    const money = new Color(K2.money).multiplyScalar(GLOW), red = new Color(K2.red).multiplyScalar(GLOW);
+    const haloRed = ring({ r: 1500, color: K2.red, dur: 30 });
+    haloRed.mesh.position.set(0, 1.5, HOOK_STAGE.numZ);
+    const plate = litPlate(["INFLATED"], { size: 78, color: K2.red, depth: 40 });
+    plate.group.position.set(0, PLATE_Y, FACE_Z + plate.d / 2 - 2);
+    const stamp = makeStamp("verdict");
+    const haloInf = ring({ r: 1700, color: K2.red, dur: 32 });
+    haloInf.mesh.position.set(0, 1.5, FACE_Z + 200);
+    group.add(haloRed.mesh, plate.group, stamp.group, haloInf.mesh);
+    return {
+      group,
+      update: (f2) => {
+        const t2 = f2 - ENTER3;
+        const nudge = f2 >= SEND ? 0.05 * Math.exp(-0.03 * (f2 - SEND)) * Math.sin(2 * Math.PI * (f2 - SEND) / 44) : 0;
+        const up = (x2) => {
+          const u3 = clamp01(x2);
+          return u3 * u3 * (3 - 2 * u3);
+        };
+        A3.tag.group.position.y = A3.pivotY + 900 * (up((f2 - (INF - 26)) / 16) - up((f2 - (SEND - 4)) / 26));
+        A3.tag.update({ swing: 0.1 * Math.exp(-0.022 * t2) * Math.cos(2 * Math.PI * t2 / 44) + nudge, lit: 0.4 + 0.6 * clamp01((f2 - TAGW) / 6) });
+        A3.num.set(dollars(countUp(f2, ROLL[0], PAID, 29e9, 138e8)));
+        A3.num.face.color.copy(money).lerp(red, clamp01((f2 - (PAID - 5)) / 5));
+        A3.num.side.color.copy(A3.num.face.color).multiplyScalar(0.2);
+        haloRed.update(f2, PAID);
+        const s2 = stampAt(f2);
+        stamp.group.visible = s2.on;
+        stamp.group.position.set(...s2.pos);
+        stamp.group.rotation.y = s2.yaw;
+        plate.group.visible = f2 >= INF;
+        plate.group.scale.setScalar(0.9 + 0.1 * popUp(f2, INF, 8));
+        haloInf.update(f2, INF);
+      }
+    };
+  }
+};
 
 // src/world/film3d.ts
 var PLACES = [HookPlace, ExplainPlace, DealPlace, PricePlace, CatchPlace, ClosePlace, FairPlace, VerdictPlace];
@@ -19613,11 +22017,11 @@ var SCORE_CUES = buildScore(
   PLACES.flatMap((p2, i2) => (p2.cues?.({ from: WINDOWS[i2].from, to: WINDOWS[i2].to }) ?? []).map((c2) => ({ ...c2, id: p2.id })))
 ).cues;
 var envDb = (t2) => {
-  const E2 = BED_ENV;
-  if (!E2.length) return 0;
-  if (t2 <= E2[0][0]) return E2[0][1];
-  for (let k2 = 1; k2 < E2.length; k2++) if (t2 <= E2[k2][0]) return E2[k2 - 1][1] + (E2[k2][1] - E2[k2 - 1][1]) * (t2 - E2[k2 - 1][0]) / (E2[k2][0] - E2[k2 - 1][0]);
-  return E2[E2.length - 1][1];
+  const E4 = BED_ENV;
+  if (!E4.length) return 0;
+  if (t2 <= E4[0][0]) return E4[0][1];
+  for (let k2 = 1; k2 < E4.length; k2++) if (t2 <= E4[k2][0]) return E4[k2 - 1][1] + (E4[k2][1] - E4[k2 - 1][1]) * (t2 - E4[k2 - 1][0]) / (E4[k2][0] - E4[k2 - 1][0]);
+  return E4[E4.length - 1][1];
 };
 var bedVolume = (fr) => MUSIC_GAIN * 10 ** (envDb(fr / 30) / 20) * clamp01(fr / 12) * clamp01((TOTAL_FRAMES - fr) / 36);
 

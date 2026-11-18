@@ -10,7 +10,12 @@ import { buildScore, type CamMove } from "../r45/score";
 import { checkPath, type CamKey3 } from "./cam";
 import type { Place3 } from "./place";
 import { ExplainPlace, CatchPlace } from "./places/cards";
-import { HookPlace, DealPlace, PricePlace, ClosePlace, FairPlace, VerdictPlace } from "./places/placeholders";
+import { HookPlace } from "./places/hook";
+import { DealPlace } from "./places/deal";
+import { PricePlace } from "./places/price";
+import { ClosePlace } from "./places/close";
+import { FairPlace } from "./places/fair";
+import { VerdictPlace } from "./places/verdict";
 
 /** the film's places, in order. ★ Places are joined by HARD CUTS (study rule R23): only the place on screen is in the
  *  scene, and every place stands at the world's origin on the same studio floor */

@@ -37,10 +37,12 @@ export const LOOK = {
   // the stages: the base tone (background and fog), the floor, the backdrop
   // `self`: how much of the base tone the floor and the backdrop give off unlit, so nothing in the studio is ever darker
   //   than its base grey (the references' darkest studio pixels sit at the base tone, not at black)
-  dark: { base: "#151416", floor: "#1d1c1e", wall: "#2a292b", self: 0.1, fogNear: 3600, fogFar: 14000 },
-  light: { base: "#b4b3b0", floor: "#c6c5c2", wall: "#bcbbb8", self: 0.5, fogNear: 5000, fogFar: 16000 },
+  dark: { base: "#0c0b0d", floor: "#121113", wall: "#1a191b", self: 0.06, fogNear: 3600, fogFar: 14000 },
+  light: { base: "#8f8e8c", floor: "#a2a19e", wall: "#989794", self: 0.42, fogNear: 5000, fogFar: 16000 },
   card: { base: "#000000", floor: "#000000", wall: "#000000", self: 0, fogNear: 20000, fogFar: 40000 },
-  floorRough: 0.9, floorSpec: 0.22, env: 0.9, envMetal: 1.0,
+  // ★ the dark stage's contrast (measured 2026-11-19): fill cut, backdrop sweep narrower, key up
+  darkFill: 0.35, darkBack: 0.6, darkKey: 1.25,
+  floorRough: 0.9, floorSpec: 0.22, env: 0.6, envMetal: 1.0,
   hemiSky: "#e9e6e7", hemiGround: "#4a4849",
   // bloom: wide and soft, on self-lit things only (print and letters sit just above the threshold)
   bloom: 0.34, bloomRadius: 0.5, bloomAt: 0.92,
@@ -223,8 +225,10 @@ const setStage = (st: Stage) => {
   floor.visible = wall.visible = mirror.visible = st !== "card";
 };
 const setLights = (L: Lights, st: Stage) => {
-  hemi.intensity = L.amb ?? (st === "card" ? 0 : 0.2);
-  setSpot(key, L.key); setSpot(rim, L.rim); setSpot(aux, L.aux); setSpot(back, L.back);
+  const dk = st === "dark";
+  hemi.intensity = (L.amb ?? (st === "card" ? 0 : 0.2)) * (dk ? LOOK.darkFill : 1);
+  setSpot(key, L.key && dk ? { ...L.key, i: L.key.i * LOOK.darkKey } : L.key); setSpot(rim, L.rim); setSpot(aux, L.aux);
+  setSpot(back, L.back && dk ? { ...L.back, i: L.back.i * LOOK.darkBack } : L.back);
   if (L.accent) { accent.position.set(...L.accent.pos); accent.color.set(L.accent.color); accent.intensity = L.accent.i; } else accent.intensity = 0;
   const u = (mirror.material as THREE.ShaderMaterial).uniforms;
   (u.fadeC.value as THREE.Vector2).set(L.focus?.[0] ?? 0, L.focus?.[1] ?? 0);
@@ -301,7 +305,7 @@ export const drawWorld = (host: HTMLElement, f: number) => {
   for (const [i, b] of built) if (i !== cur) b.group.visible = false;
   const place = PLACES[cur], b = ensurePlace(cur);
   b.group.visible = true;
-  const stage = place.stage ?? "dark";
+  const stage = place.stageAt?.(f) ?? place.stage ?? "dark";   // ★ worker B: a place may change stage on a hard cut inside it
   setStage(stage);
   setLights(place.lights(f), stage);
   worldStats.place = place.id;
@@ -318,12 +322,13 @@ export const drawWorld = (host: HTMLElement, f: number) => {
   r.toneMappingExposure = dbg.exposure ?? LOOK.exposure;
 
   // motion blur: the camera OR the acting is fast (never across a cut: the sub-frames stay inside this place's window)
-  const fast = !dbg.noBlur && (speedAt(CAM, f) > LOOK.blurAt || !!place.blur?.(f));
+  const onCut = CAM.some((k) => k.cut && Math.abs(k.at - f) < 0.5);   // ★ worker B: never blur across a hard cut INSIDE a place
+  const fast = !dbg.noBlur && !onCut && (speedAt(CAM, f) > LOOK.blurAt || !!place.blur?.(f));
   const n = fast ? LOOK.blurN : 1;
   const ctx = out2d.getContext("2d")!;
   for (let s = 0; s < n; s++) {
     let fs = n === 1 ? f : f + ((s + 0.5) / n - 0.5) * LOOK.shutter;
-    if (placeAt(fs) !== cur) fs = f;
+    if (placeAt(fs) !== cur || CAM.some((k) => k.cut && k.at > Math.min(fs, f) && k.at <= Math.max(fs, f))) fs = f;
     b.update(fs);
     setCamera(fs);
     scene.updateMatrixWorld(true);
