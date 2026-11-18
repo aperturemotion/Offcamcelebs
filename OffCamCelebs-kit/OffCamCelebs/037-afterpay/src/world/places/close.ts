@@ -66,17 +66,19 @@ export const CL2 = { E, B0, C0, D0, flips: Array.from({ length: FLIPS }, (_, i) 
 
 // ── the camera ──
 const ORB_A: Orbit = { c: [XA, 540, 0], a0: -26, a1: 12, r0: 2550, r1: 2050, y0: 520, y1: 640 };
-const ORB_C: Orbit = { c: [XC + 20, 600, 0], a0: -18, a1: 15, r0: 3350, r1: 2950, y0: 560, y1: 720 };
+// ★ P14: far enough back that the two plates (SAME SHARES, HALF PRICE) stay whole inside the frame
+const ORB_C: Orbit = { c: [XC + 20, 600, 0], a0: -18, a1: 15, r0: 4350, r1: 4050, y0: 560, y1: 720 };
 const SIGN: Vec = [XB + 60, 830, 0], BOARD: Vec = [XBOARD, 980, 60];
 const shots = ({ from, to }: { from: number; to: number }): CamKey3[] => [
   // 1 the calendar: orbit and push while the leaves flip
   cut(from, orbitPos(ORB_A.c, ORB_A.a0, ORB_A.r0, ORB_A.y0), ORB_A.c, { fov: 40, why: "cut: the calendar" }),
   orbit(from + 1, B0 - from - 2, ORB_A, { fov: 40, ease: SOFT, why: "orbit and push on the calendar" }),
   // 2 the sign: a slow push while the tiles act, then the track to the board and a push on its fall
-  cut(B0, [XB - 420, 560, 4000], SIGN, { fov: 46, why: "cut: the sign" }),
-  dolly(B0 + 1, TRACK - B0 - 2, [XB - 120, 620, 3550], SIGN, { fov: 46, ease: SOFT, why: "push on the sign" }),
-  travel(TRACK, TRACK_DUR, [XBOARD - 480, 720, 2900], BOARD, { fov: 44, bulge: [0, 40, 260], why: "track from the sign to the board", vol: 0.5 }),
-  dolly(TRACK + TRACK_DUR + 1, C0 - (TRACK + TRACK_DUR) - 2, [XBOARD + 160, 760, 2350], BOARD, { fov: 44, ease: SOFT, why: "push on the falling price" }),
+  // ★ P14: the sign grew with its tiles (2,300 wide): the camera stands back so the whole word is in the frame
+  cut(B0, [XB - 420, 600, 5250], SIGN, { fov: 46, why: "cut: the sign" }),
+  dolly(B0 + 1, TRACK - B0 - 2, [XB - 120, 640, 4800], SIGN, { fov: 46, ease: SOFT, why: "push on the sign" }),
+  travel(TRACK, TRACK_DUR, [XBOARD - 480, 720, 3300], BOARD, { fov: 44, bulge: [0, 40, 260], why: "track from the sign to the board", vol: 0.5 }),
+  dolly(TRACK + TRACK_DUR + 1, C0 - (TRACK + TRACK_DUR) - 2, [XBOARD + 160, 760, 2800], BOARD, { fov: 44, ease: SOFT, why: "push on the falling price" }),
   // 3 the stack and the column: a slow orbit, both in frame
   cut(C0, orbitPos(ORB_C.c, ORB_C.a0, ORB_C.r0, ORB_C.y0), ORB_C.c, { fov: 42, why: "cut: the stack and the column" }),
   orbit(C0 + 1, D0 - C0 - 2, ORB_C, { fov: 42, ease: SOFT, why: "orbit the stack and the column" }),
@@ -150,8 +152,8 @@ const build = () => {
   const stack = makeTokenStack("close", NTOK); stack.group.position.set(-200, 0, 0); pair.add(stack.group);
   const faller = makeToken("SQ"); pair.add(faller);
   const column = makeColumn("close"); column.group.position.set(200, 0, 0); pair.add(column.group);
-  const same = litPlate(["SAME SHARES"], { size: 18, depth: 16 }); same.group.position.set(-200, same.h / 2, 150); same.group.rotation.x = -0.32; pair.add(same.group);
-  const half = litPlate(["HALF PRICE"], { size: 18, depth: 16 }); half.group.position.set(200, half.h / 2, 200); half.group.rotation.x = -0.32; pair.add(half.group);
+  const same = litPlate(["SAME SHARES"], { size: 30, depth: 22 }); same.group.position.set(-200, same.h / 2, 150); same.group.rotation.x = -0.32; pair.add(same.group);
+  const half = litPlate(["HALF PRICE"], { size: 30, depth: 22 }); half.group.position.set(200, half.h / 2, 200); half.group.rotation.x = -0.32; pair.add(half.group);
   const H0 = stack.h(NTOK) / 900;                     // the column stands as tall as the stack, then half
   // 4 the drawer
   const dr = makeDrawer("close"); dr.group.position.set(XD, 0, 0); dr.group.rotation.y = 0.2; dr.group.scale.setScalar(1.7); group.add(dr.group);

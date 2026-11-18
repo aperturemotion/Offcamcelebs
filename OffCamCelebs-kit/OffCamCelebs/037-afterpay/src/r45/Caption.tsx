@@ -63,7 +63,7 @@ export const Caption: React.FC<{ scene: SceneId; f: number; ground: Ground; alig
         <div {...tg("cap.0", "cap")} style={{
           position: "absolute", left: 90, width: 860, top: CAP_Y, height: CAP_SIZE * 1.25, lineHeight: `${CAP_SIZE * 1.25}px`,
           textAlign: "center", whiteSpace: "nowrap", color: CAP_COLOR, fontFamily: ARCHIVO, fontSize: CAP_SIZE, fontWeight: CAP_WEIGHT,
-          letterSpacing: "0.005em", opacity: p < 0.999 ? p : undefined, textShadow: "0 1px 6px rgba(0,0,0,0.55)",
+          letterSpacing: "0.005em", opacity: p < 0.999 ? p : undefined, textShadow: "0 0 2px rgba(0,0,0,0.95), 0 0 5px rgba(0,0,0,0.85), 0 1px 12px rgba(0,0,0,0.7), 0 0 26px rgba(0,0,0,0.45)",
           transform: "perspective(1200px) rotateX(0.15deg)",
         }}>{CHUNKS[i].text}</div>
       </div>

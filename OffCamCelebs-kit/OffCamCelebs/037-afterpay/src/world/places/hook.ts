@@ -15,17 +15,20 @@ import { cue, word } from "../../r45/time";
 import { SOFT, clamp01 } from "../../r45/tokens";
 import { cut, dolly, crane, travel, mixV, type CamKey3, type Vec } from "../cam";
 import { stdLights, type Place3, type PlaceCue } from "../place";
-import { MAT, K, block, counter, countUp, dollars, ring, dropIn, lit } from "../kit";
+import { MAT, K, block, counter, countUp, dollars, ring, dropIn, lit, textOn, freeText } from "../kit";
 import { makeTag, TAG } from "../obj/tag";
 import { makeBag } from "../obj/bag";
 import { makeDrawer } from "../obj/drawer";
 
 // ── the set both the hook and the verdict stand on: the plinth, the bag, the tag on its crane, the floor numerals ──
-export const HOOK_STAGE = { plinthW: 640, plinthH: 340, plinthD: 560, tagY: 1190, numZ: 610, numW: 1000, centre: [0, 700, 0] as Vec } as const;
+// ★ P14: the plinth is 800 wide (it was 640): the larger AFTERPAY bag stands on it and the INFLATED plate fits its face
+export const HOOK_STAGE = { plinthW: 800, plinthH: 340, plinthD: 560, tagY: 1190, numZ: 610, numW: 1000, centre: [0, 700, 0] as Vec } as const;
 export const tagSet = (key: string) => {
   const S = HOOK_STAGE;
   const group = new THREE.Group();
-  group.add(block(S.plinthW, S.plinthH, S.plinthD, 28, MAT.black()));
+  const plinth = block(S.plinthW, S.plinthH, S.plinthD, 28, MAT.black());
+  plinth.name = "plinth";
+  group.add(plinth);
   const bag = makeBag(key);
   bag.group.scale.setScalar(1.15);
   bag.group.position.y = S.plinthH;
@@ -38,10 +41,11 @@ export const tagSet = (key: string) => {
   num.group.scale.set(1.14 * k, k, k);
   // lifted by the comma's tail (0.25 em), so the commas stand ON the floor and are not cut by it
   num.group.position.set(0, 0.25 * 110 * k, S.numZ);
+  freeText(num.group, "solid numerals standing on the floor");
   const halo = ring({ r: 1500, color: K.money, dur: 30 });
   halo.mesh.position.set(0, 1.5, S.numZ);
   group.add(bag.group, tag.group, num.group, halo.mesh);
-  return { group, tag, num, halo, pivotY };
+  return { group, tag, num, halo, pivotY, plinth };
 };
 /** the opening framing once the crane has come down: the verdict cuts back to exactly this (the film loops: R31) */
 export const OPENING = { pos: [-300, 500, 3750] as Vec, look: [0, 540, 150] as Vec, fov: 42, push: { pos: [-130, 470, 3420] as Vec, look: [0, 530, 150] as Vec }, numFocus: [0, 80, 610] as Vec } as const;
@@ -118,10 +122,12 @@ export const HookPlace: Place3 = {
     // the two figures
     const fig = (x: number, str: string, color: string, size: number) => {
       const g = new THREE.Group();
-      g.add(block(560, 640, 460, 26, MAT.black()));
+      const pl = block(620, 640, 460, 26, MAT.black());
+      g.add(pl);
       const n = counter({ size, color });
       n.set(str);
       n.group.position.set(0, 640, 30);
+      textOn(n.group, pl, { stand: true, inset: 26 });   // the figure STANDS on its plinth: its footprint lies on the top
       g.add(n.group);
       g.position.x = x;
       group.add(g);

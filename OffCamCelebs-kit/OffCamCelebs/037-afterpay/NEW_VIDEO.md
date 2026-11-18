@@ -166,3 +166,26 @@ Run from the project root, in this order (the tools are the Remotion 029 kit's, 
   - `python scratchpad/vo/gatedsep.py`: the bed under the voice in every window;
   - `python scratchpad/popmp4.py renders/<name>.mp4`: 0 isolated one-frame flashes.
 - Serve it over a range-request host plus a tunnel.
+
+## WORLD-ENGINE CHECKS (The Payouts films, `src/world/*`; 037 on) — run before EVERY handback
+
+Timur, 2026-11-19, on 037 v2: text overhung the bag, the boards and the tiles, and the drawer's plate cut through the
+cabinet's top: "I don't know how you didn't see that. You need to be able to detect things like this." Two automatic checks
+now run over the whole film in Node (no browser): `node scratchpad/worldcheck.mjs [text|pass|all] [--place <id>]`, and
+`scratchpad/render.mjs` (and its `--check`) refuses on any hit. Each runs its CANARIES first.
+
+1. **TEXT-ON-SURFACE.** Every text (anything made by `text3d` / `numeral3d` / `counter` / `litPlate`) must be either
+   registered with the face it sits on or declared free-standing, in `src/world/kit.ts`:
+   - `textOn(text, surfaceMesh, { inset, round, stand })`: it must lie inside that face with a margin of 6% of its height,
+     on every sampled frame and at every value a counter shows (`inset`: the surface's bevel; `round`: a disc face;
+     `stand`: solid numerals STANDING on the surface, whose footprint must lie on it);
+   - `plateOn(plate, surfaceMesh)`: a plate that must lie inside the face of the body it is mounted on;
+   - `freeText(text, why)`: solid numerals on the floor, a turn card's words;
+   - `litPlate` registers its own lines on its own plate.
+   An unregistered text is a fault. **The fix for an overhang is a LARGER OBJECT, never smaller text** (his rule).
+2. **PASS-THROUGH.** Every pair of solid meshes that MOVE relative to each other is tested for real triangle crossings
+   (three-mesh-bvh, both ways, degenerate triangles dropped) deeper than about 1 unit, every 3 frames. Meshes that never
+   move relative to each other are one rigid assembly and are not tested against each other, so a STATIC overlap of two
+   separate objects is not caught: look at those on stills. A pair that crosses by design is declared with
+   `joined(a, b, why)` (a piston in its housing, rings on a rod, a token dropping into a hopper). Build hollow things
+   hollow (037's cabinet is a shell round its drawer's cavity), so the check can tell a clip from the design.

@@ -1,6 +1,6 @@
 // A SHARE, as a thing (R7): a thick matte-black token with a pale-yellow rim and its name on its face.
 import * as THREE from "three";
-import { K, MAT, lit, wide } from "../kit";
+import { K, MAT, lit, wide, textOn } from "../kit";
 import { text3d, textWidth } from "../text3d";
 
 export const TOKEN_R = 90, TOKEN_T = 34;
@@ -35,7 +35,8 @@ export const makeToken = (label: string): THREE.Group => {
   const body = new THREE.Mesh(p.bodyGeo, p.bodyMat);
   body.castShadow = true; body.receiveShadow = true;
   const rim = new THREE.Mesh(p.rimGeo, p.rimMat);
-  g.add(body, rim, tokenLabel(label));
+  // the label lies on the recessed top face (a disc of radius TOKEN_R − 20)
+  g.add(body, rim, textOn(tokenLabel(label), body, { round: TOKEN_R - 20 }));
   return g;
 };
 /** a wedge of a token: `frac` of the disc (0.375 = three-eighths), its point at the origin, opening toward +z */
@@ -58,7 +59,7 @@ export const makeWedge = (frac: number, label?: string): THREE.Group => {
   const rim = new THREE.Mesh(new THREE.CylinderGeometry(TOKEN_R + 0.6, TOKEN_R + 0.6, TOKEN_T - 20, 48, 1, true, a0, th), p.rimMat);
   rim.position.y = TOKEN_T / 2;
   g.add(rim);
-  if (label) { const t = tokenLabel(label, 70, TOKEN_T + 0.6); t.position.z += TOKEN_R * 0.56; g.add(t); }
+  if (label) { const t = tokenLabel(label, 70, TOKEN_T + 0.6); t.position.z += TOKEN_R * 0.56; textOn(t, body, { inset: 4 }); g.add(t); }
   return g;
 };
 /** a hand-squared stack of up to n tokens; origin at floor centre. `count` (fractional) is how many are present: the

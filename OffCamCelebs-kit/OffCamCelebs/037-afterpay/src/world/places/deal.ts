@@ -17,7 +17,7 @@ import { cue, cueEnd, word } from "../../r45/time";
 import { ramp, clamp01, SOFT, SETTLE, EXIT, GLIDE } from "../../r45/tokens";
 import { cut, dolly, travel, type CamKey3, type Vec } from "../cam";
 import { stdLights, lightStageLights, type Place3, type PlaceCue, type Lights } from "../place";
-import { K, MAT, block, litPlate, ring, dropIn, swingIn, popUp, countUp } from "../kit";
+import { K, MAT, block, litPlate, ring, dropIn, swingIn, popUp, countUp, joined } from "../kit";
 import { enterOf } from "../timeline";
 import { makePodium, PODIUM } from "../obj/podium";
 import { makeBag } from "../obj/bag";
@@ -35,7 +35,7 @@ const PLATE_LAND = Math.max(ENTER + 8, AUG + 2), PAWN_UP = JACK - 10, SIGN_IN = 
 const LC = Math.max(cueEnd(S, 0) + 2, cue(S, 1) - 4);
 const DIDNT = word(S, 1, /^didn/), CASH = word(S, 1, /^cash/);
 const CASE_LAND = LC + 4, SLAM = Math.max(DIDNT + 10, CASH - 8), SLIDE = CASH + 3, SLIDE_END = SLIDE + 13;
-const T1 = SLIDE + 1, T1_DUR = 20;
+const T1 = SLIDE + 1, T1_DUR = 12;   // a whip: the table is never left empty for more than a few blurred frames
 const SHARES = word(S, 2, /^shares/);
 const STAMPS = [cue(S, 2) + 4, cue(S, 2) + 17, SHARES + 2];
 const T2 = cue(S, 3) - 8, T2_DUR = 20;
@@ -72,7 +72,7 @@ const ramAt = (f: number) => {
   else if (f >= pre && f < pre + 7) v = Math.max(v, 1 - SOFT(clamp01((f - pre - 1) / 6)));
   return v;
 };
-const FLING = 10;
+const FLING = 6, FL0 = 6;   // ★ P14: a struck token is flung once the ram has lifted clear of it (it used to fly up through the ram's head)
 const camX = (f: number) => {
   if (f < T1) return X0;
   if (f < T1 + T1_DUR) return X0 + (X1 - X0) * SOFT((f - T1) / T1_DUR);
@@ -90,7 +90,7 @@ export const DealPlace: Place3 = {
     cut(from, [-620, 470, 2150], [40, 560, 60], { fov: 44, focus: [0, 500, 200], why: "low on the podium" }),
     dolly(from + 1, Math.max(24, JACK - from - 8), [-470, 760, 2500], [70, 760, 0], { fov: 44, ease: SOFT, why: "rise to the speaker" }),
     dolly(SIGN_IN - 2, 30, [-330, 1000, 3350], [120, 900, 0], { fov: 44, why: "pull out: the sign swings in" }),
-    dolly(AGREED - 8, 36, [300, 860, 2900], [130, 760, 20], { fov: 44, why: "push to the gavel and the bag" }),
+    dolly(AGREED - 8, 36, [560, 900, 3450], [400, 720, 20], { fov: 44, why: "across to the gavel and the bag" }),
     // the light stage: high and slanted over the table
     cut(LC, [X0 - 190, 1780, 1750], [X0, 110, 20], { fov: 40, focus: [X0, 80, 0], why: "CUT: the table, the briefcase" }),
     dolly(LC + 1, T1 - LC - 2, [X0 + 40, 1560, 1520], [X0, 110, 20], { fov: 40, ease: SOFT, why: "push on the briefcase" }),
@@ -113,7 +113,7 @@ export const DealPlace: Place3 = {
     if (f >= GAVEL - 4 && f <= GAVEL + 1) return true;
     if (f >= SIGN_IN && f < SIGN_IN + 7) return true;
     if (dropIn(f, CASE_LAND, { h: 700, fall: 7 }).fast || (f >= SLAM - 5 && f <= SLAM + 1) || (f >= SLIDE + 3 && f <= SLIDE_END)) return true;
-    if (STAMPS.some((s) => (f >= s - 3 && f <= s + 1) || (f >= s + 3 && f <= s + 3 + FLING))) return true;
+    if (STAMPS.some((s) => (f >= s - 3 && f <= s + 1) || (f >= s + FL0 && f <= s + FL0 + FLING))) return true;
     if (f >= TOKEN_IN - 9 && f <= TOKEN_IN + 3) return true;
     if (f >= WEDGE_OUT && f <= WEDGE_REST) return true;
     return dropIn(f, WHOLE_LAND, { h: 800, fall: 8 }).fast;
@@ -131,7 +131,7 @@ export const DealPlace: Place3 = {
     { kind: "move", s: "swoosh", at: SLIDE + 8, end: SLIDE_END + 6, vol: 0.45, why: "the briefcase slides off the table" },
     ...STAMPS.flatMap((s, i): PlaceCue[] => [
       { kind: "hit", s: "thud", at: s, vol: 0.4, why: `the press stamps share ${i + 1}` },
-      { kind: "hit", s: "coin", at: s + 3 + FLING, vol: 0.3, why: `share ${i + 1} lands on the stack` },
+      { kind: "hit", s: "coin", at: s + FL0 + FLING, vol: 0.3, why: `share ${i + 1} lands on the stack` },
     ]),
     { kind: "hit", s: "coin", at: TOKEN_IN, vol: 0.4, why: "the Afterpay token drops into the machine" },
     { kind: "hit", s: "datashort", at: TOKEN_IN + 5, end: P375, vol: 0.3, why: "the machine works: its screen counts" },
@@ -164,12 +164,12 @@ export const DealPlace: Place3 = {
       signPivot.add(rod);
     }
     dark.add(signPivot);
-    const plinth = block(380, 250, 300, 24, MAT.black());
+    const plinth = block(600, 250, 360, 24, MAT.black());   // ★ P14: wider, for the larger bag
     const bag = makeBag("deal").group;
     bag.rotation.y = -0.22;
     bag.position.y = 250;
     const bagG = new THREE.Group();        // the bag stands on its plinth; the two land as one piece
-    bagG.position.set(520, 0, 150);
+    bagG.position.set(880, 0, 150);                 // clear of the podium's top and the gavel
     bagG.add(plinth, bag);
     dark.add(bagG);
     group.add(dark);
@@ -188,8 +188,9 @@ export const DealPlace: Place3 = {
     const stack = makeTokenStack("deal", 3 + STAMPS.length + 1);
     stack.group.position.set(X1 + STACK_X, 0, 110);
     light.add(stack.group);
-    const flying = STAMPS.map(() => { const t = makeToken("SHARE"); light.add(t); return t; });
+    const flying = STAMPS.map((_, i) => { const t = makeToken("SHARE"); t.name = `flung-token-${i}`; light.add(t); return t; });
     const fresh = makeToken("SHARE");            // the token lying on the die between stamps
+    fresh.name = "token-on-die";
     light.add(fresh);
     const machine = makeMachine();
     machine.group.position.set(X2, 0, 0);
@@ -206,7 +207,9 @@ export const DealPlace: Place3 = {
     light.add(halo.mesh);
     group.add(light);
 
-    const DIE: Vec = [X1, PRESS.die + 8, PRESS.dieZ];
+    const DIE: Vec = [X1, PRESS.top + 1, PRESS.dieZ];     // a token lies ON the die pad, never in it
+    joined(inTok, machine.group, "the token drops into the machine's hopper");
+    joined(wedge, machine.group, "the wedge comes out of the machine's chute");
     return {
       group,
       update: (f) => {
@@ -238,17 +241,20 @@ export const DealPlace: Place3 = {
         press.update({ ram: ramAt(f) });
         let landed = 3;
         flying.forEach((t, i) => {
-          const s = STAMPS[i], a = s + 3, u = (f - a) / FLING;
+          const s = STAMPS[i], a = s + FL0, u = (f - a) / FLING;
           t.visible = u >= 0 && u < 1;
           if (u >= 1) landed++;
           if (!t.visible) return;
           const top = stack.h(3 + i);
-          t.position.set(DIE[0] + (STACK_X - 0) * u + 0, DIE[1] + (top - DIE[1]) * u + 330 * 4 * u * (1 - u) * 0.5 + 0, DIE[2] + (110 - PRESS.dieZ) * u);
-          t.rotation.z = -u * Math.PI * 2;
+          t.position.set(DIE[0] + (STACK_X - 0) * u + 0, DIE[1] + (top - DIE[1]) * u + 240 * 4 * u * (1 - u) * 0.5 + 0, DIE[2] + (110 - PRESS.dieZ) * u);
+          // it leaves the die FLAT and low, and tumbles only once it is clear of the ram's head (it used to spin up into it)
+          const tu = clamp01((u - 0.45) / 0.55);
+          t.rotation.z = -tu * tu * (3 - 2 * tu) * Math.PI * 2;
+          t.position.y += 70 * Math.sin(Math.PI * tu);   // it lifts as it turns, clear of the press's base
         });
         stack.update({ count: landed });
         // a struck token lies on the die from the ram's lift until it is flung
-        const onDie = STAMPS.some((s) => f >= s + 1 && f < s + 3) || (f >= STAMPS[0] - 12 && f < STAMPS[0] - 10);
+        const onDie = STAMPS.some((s) => f >= s + 1 && f < s + FL0) || (f >= STAMPS[0] - 12 && f < STAMPS[0] - 10);
         fresh.visible = onDie;
         fresh.position.set(DIE[0], DIE[1], DIE[2]);
         // DEAL 4: the exchange machine
@@ -273,7 +279,7 @@ export const DealPlace: Place3 = {
         halo.update(f, WEDGE_REST);
         const wd = dropIn(f, WHOLE_LAND, { h: 800, fall: 8 });
         whole.visible = wd.on;
-        whole.position.set(X2 + 150, wd.y, mz + 350);
+        whole.position.set(X2 + 330, wd.y, mz + 400);   // beside the chute's tray, clear of its lip
         whole.rotation.y = -0.25;
       },
     };

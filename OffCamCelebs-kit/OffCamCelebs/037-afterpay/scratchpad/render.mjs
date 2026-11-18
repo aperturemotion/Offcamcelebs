@@ -114,6 +114,13 @@ if (hits.length && !ALLOW) {
 if (REVIEW) console.warn(["", `⚠ RENDERING WITH ${hits.length} UNVERIFIED LINE(S) — REVIEW COPY ONLY.`, "", ...report, "⚠ DO NOT POST THIS FILE.", ""].join("\n"));
 console.log(`script-fix guard: ${PATTERNS.length} patterns, each proven live against its brief, spoken and whisper lines; ${texts.length} captions checked; ${hits.length} hit(s).`);
 if (hasVo !== "true" || provisional) console.warn("⚠ HAS_VO is off / cues are PROVISIONAL — a preview, not a deliverable.");
+// ── THE WORLD CHECKS (P14: Timur, 2026-11-19: "text… should actually fit on the object that it's on" / "the flat object
+//    within the drawer literally clips through the top of the cabinet… You need to be able to detect things like this").
+//    Text-on-surface and pass-through over the whole film, each behind its canaries. A hit refuses the render AND --check.
+{
+  const wc = spawnSync(process.execPath, ["scratchpad/worldcheck.mjs", "all"], { stdio: "inherit" });
+  if (wc.status !== 0) refuse(["REFUSING — the world checks failed (scratchpad/worldcheck.mjs): a text overhangs its surface, a text is", "unregistered, or two parts pass through each other. Fix the film; never hand it back with a hit."]);
+}
 if (process.argv.includes("--check")) {
   console.log(`--check: guards passed${REVIEW ? " (REVIEW mode)" : ""}; not rendering.`);
   process.exit(0);

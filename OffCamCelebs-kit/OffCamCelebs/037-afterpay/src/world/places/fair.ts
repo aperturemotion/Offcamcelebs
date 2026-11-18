@@ -12,7 +12,7 @@ import { word } from "../../r45/time";
 import { SOFT, SETTLE, clamp01, ramp } from "../../r45/tokens";
 import { cut, dolly, orbit, orbitPos, type CamKey3, type Vec, type Orbit } from "../cam";
 import { stdLights, type Place3, type PlaceCue, type Lights } from "../place";
-import { K, counter, ring, dropIn, setLit } from "../kit";
+import { K, counter, ring, dropIn, setLit, textOn, joined } from "../kit";
 import { enterOf } from "../timeline";
 import { makeScale, SCALE } from "../obj/scale";
 import { makeChute, RAMP } from "../obj/chute";
@@ -40,14 +40,20 @@ const XF = 6000, NP = 5, R = 90, T = 34;
 const pawnX = (i: number) => 170 + i * 350;
 const rampLen = Math.hypot(RAMP.x1 - RAMP.x0, RAMP.y1 - RAMP.y0);
 const NX = -(RAMP.y1 - RAMP.y0) / rampLen, NY = (RAMP.x1 - RAMP.x0) / rampLen;
-const arrive = (i: number) => HOLDERS - 6 + i * 10;     // token i stops at pawn i
+// ★ P14: the tokens roll at ONE speed, 12 frames apart, and brake over the last 8 frames (each had its own easing over its
+//   own length, so a later token overtook, and rolled THROUGH, the one in front of it)
+const VROLL = 86, BRAKE = 8;
+const arrive = (i: number) => HOLDERS - 10 + i * 13;    // token i stops at pawn i
+/** how far a token still has to roll, τ frames before it stops */
+const toGo = (tau: number) => (tau <= 0 ? 0 : tau >= BRAKE ? VROLL * (tau - BRAKE / 2) : (VROLL * tau * tau) / (2 * BRAKE));
 const pathLen = (i: number) => rampLen + (pawnX(i) - (RAMP.x1 + NX * R));
-const rollDur = (i: number) => pathLen(i) / 52;
-const TIP = 8;
+const rollDur = (i: number) => pathLen(i) / VROLL + BRAKE / 2;
+const TIP = 5;
 
 export const FA2 = { E, F2, land: LAND, l29: L29, toks: TOK, level: LEVEL, arrive: Array.from({ length: NP }, (_, i) => arrive(i)) } as const;
 
-const ORB: Orbit = { c: [0, 640, 0], a0: -12, a1: 13, r0: 3000, r1: 2650, y0: 420, y1: 540 };
+// ★ P14: far enough back that the pans, and $29B on the near one, stay inside the frame through the whole orbit
+const ORB: Orbit = { c: [0, 640, 0], a0: -12, a1: 13, r0: 3300, r1: 3080, y0: 420, y1: 540 };
 const shots = ({ from, to }: { from: number; to: number }): CamKey3[] => [
   cut(from, orbitPos(ORB.c, ORB.a0, ORB.r0, ORB.y0), ORB.c, { fov: 48, why: "cut: the scale" }),
   orbit(from + 1, F2 - from - 2, ORB, { fov: 48, ease: SOFT, why: "low orbit of the scale" }),
@@ -78,14 +84,17 @@ const build = () => {
   const fig = counter({ size: 76, color: K.money, depth: 34 });
   fig.set("$29B");
   const figHold = new THREE.Group(); figHold.add(fig.group); sc.left.add(figHold);
-  const toks = TOK.map((_, k) => { const t = makeToken("SQ"); t.rotation.y = 0.5 + k * 1.1; sc.right.add(t); return t; });
+  textOn(fig.group, sc.leftDish, { stand: true });   // $29B STANDS on its pan
+  const toks = TOK.map((_, k) => { const t = makeToken("SQ"); t.name = `pan-token-${k}`; t.rotation.y = 0.5 + k * 1.1; sc.right.add(t); return t; });
   const ringS = ring({ r: 1700, dur: 28 }); ringS.mesh.position.set(0, 1.5, 200); group.add(ringS.mesh);
   // 2 the chute, the pawns and their tokens
   const row = new THREE.Group(); row.position.set(XF, 0, 0); row.scale.setScalar(1.5); group.add(row);
   const chute = makeChute(); row.add(chute.group);
-  const pawns = Array.from({ length: NP }, (_, i) => { const p = makePawn(1.2); p.position.set(pawnX(i), 0, -250); row.add(p); return p; });
+  const pawns = Array.from({ length: NP }, (_, i) => { const p = makePawn(1.2); p.name = `pawn-${i}`; p.position.set(pawnX(i), 0, -250); row.add(p); return p; });
   const rollers = Array.from({ length: NP }, () => {
     const hold = new THREE.Group(), inner = makeToken("SQ");
+    hold.name = "roller";
+    joined(hold, chute.group, "the tokens come out of the hopper and roll in the trough");
     inner.position.y = -T / 2; const spin = new THREE.Group(); spin.add(inner); hold.add(spin); row.add(hold);
     return { hold, spin };
   });
@@ -101,19 +110,22 @@ const build = () => {
         const n = dropIn(f, L29, { h: 1200, fall: 8, bounce: 0.4 });
         figHold.visible = n.on; figHold.position.y = n.y / KS;
         setLit(fig.face, 1);
-        toks.forEach((t, k) => { const q = dropIn(f, TOK[k], { h: 900, fall: 7, bounce: 0.5 }); t.visible = q.on; t.position.set((k - 1) * 26, k * (T + 2) + q.y / KS, (k % 2) * 18 - 9); });
+        toks.forEach((t, k) => { const q = dropIn(f, TOK[k], { h: 900, fall: 7, bounce: 0.04 });   // a token barely bounces: the next one lands 2 units above it t.visible = q.on; // ★ P14: a token comes down on a SLANT from the front (it used to fall straight down the pan's axis, through the eye,
+          //   the wires and the beam's end): half a unit forward for every unit of height, so it clears them all
+          { const hh = q.y / KS, u = Math.min(1, hh / 100), sm = u * u * (3 - 2 * u); t.position.set((k - 1) * 10, k * (T + 2) + hh, (k % 2) * 18 - 9 + 175 * sm + 0.35 * Math.max(0, hh - 100)); } });
         ringS.update(f, LEVEL);
       } else {
         chute.plate.setLit(1);
         rollers.forEach(({ hold, spin }, i) => {
-          const dur = rollDur(i), st = arrive(i) - dur, u = clamp01((f - st) / dur), L = pathLen(i);
-          const s = L * (1 - Math.pow(1 - u, 1.7));
+          const dur = rollDur(i), st = arrive(i) - dur, L = pathLen(i);
+          const s = Math.max(0, L - toGo(arrive(i) - f));
           hold.visible = f >= st;
           let x: number, y: number;
           if (s < rampLen) { const k = s / rampLen; x = RAMP.x0 + (RAMP.x1 - RAMP.x0) * k + NX * R; y = RAMP.y0 + (RAMP.y1 - RAMP.y0) * k + NY * R; }
           else { x = RAMP.x1 + NX * R + (s - rampLen); y = R; }
           const tip = SETTLE(clamp01((f - arrive(i)) / TIP)), th = (Math.PI / 2) * (1 - tip);
-          hold.position.set(x, T / 2 + (y - T / 2) * Math.sin(th) + (tip > 0 && tip < 1 ? 0 : 0), 130 - (R - T / 2) * (1 - Math.sin(th)));
+          // ★ P14: it tips BACK toward its pawn and lies clear of the lane the next tokens roll in (z 113…147)
+          hold.position.set(x, T / 2 + (y - T / 2) * Math.sin(th), 130 - 150 * (1 - Math.sin(th)));
           hold.rotation.x = th;
           spin.rotation.y = -s / R;
         });

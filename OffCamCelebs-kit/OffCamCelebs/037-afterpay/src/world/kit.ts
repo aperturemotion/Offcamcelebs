@@ -24,6 +24,14 @@
 //             swingIn(f, at, o)       a pendulum that swings in from the side and settles: { a (radians), on, fast }
 //             popUp(f, at, dur?)      a spring scale 0 → 1.08 → 1 (never beyond 8% over): number
 //             (R11: objects ENTER BY ACTING; nothing fades or slides in politely. R12: something happens every 1–1.5 s.)
+//   CHECKS    ★ P14 (Timur, 2026-11-19): "text fits the surface it is on, always" and "nothing clips through anything".
+//             textOn(text, surface, o?)  EVERY text put on a body is registered with the face it sits on (litPlate does
+//                                     its own lines); `o.inset` is the surface's bevel, `o.round` a disc's radius.
+//             plateOn(plate, surface) a plate (or any flat part) that must lie inside the face it is mounted on
+//             freeText(text, why)     a free-standing figure (solid numerals on the floor, a card's words): declared
+//             joined(a, b, why)       two parts that MOVE relative to each other and cross BY DESIGN (a drawer in its
+//                                     cabinet, a token in a machine's slot): declared, with the reason
+//             scratchpad/worldcheck.mjs runs both checks over the whole film (render.mjs --check refuses on a hit).
 //   STAGES    place.stage = "dark" | "light" | "card"; rigs: stdLights(c, o) and lightStageLights(c, o) in ./place;
 //             the backdrop and its sweep are the world's (the rig's `back` spot); `backGlow(c, colour, i)` tints it for a beat.
 // ═════════════════════════════════════════════════════════════════════════════════════════════
@@ -72,6 +80,28 @@ export const cyl = (r: number, h: number, mat: THREE.Material, seg = 64) => { co
 /** the references' type is heavy AND wide: stretch a text3d group in x */
 export const wide = <T extends THREE.Object3D>(g: T, k = 1.14) => { g.scale.x *= k; return g; };
 
+// ── the world checks' registrations (src/world/check.ts) ──
+/** this text sits on `surface` (a Mesh): it must lie inside that face with a margin, on every frame (P14). `inset`: the
+ *  surface's bevel radius (its flat face is that much smaller); `round`: the face is a disc of this radius */
+export const textOn = <T extends THREE.Object3D>(text: T, surface: THREE.Object3D, o: { inset?: number; round?: number; margin?: number; stand?: boolean } = {}) => {
+  text.userData.fitOn = surface; text.userData.fitInset = o.inset ?? 0; text.userData.fitRound = o.round; text.userData.fitMargin = o.margin;
+  // `stand`: solid numerals STANDING on the surface (a plinth's top, a pan): their footprint must lie on it
+  text.userData.fitStand = !!o.stand;
+  return text;
+};
+/** a plate (or any flat part) that must lie inside the face of the body it is mounted on */
+export const plateOn = <T extends THREE.Object3D>(plate: T, surface: THREE.Object3D, o: { inset?: number } = {}) => {
+  plate.userData.fitOn = surface; plate.userData.fitInset = o.inset ?? 0; plate.userData.fitMargin = 0; plate.userData.fitPlate = true;
+  return plate;
+};
+/** a free-standing figure (solid numerals on the floor, a card's words): on no surface, by design */
+export const freeText = <T extends THREE.Object3D>(text: T, why: string) => { text.userData.fitFree = why; return text; };
+/** two parts that move relative to each other and cross BY DESIGN: the pass-through check skips the pair */
+export const joined = (a: THREE.Object3D, b: THREE.Object3D, why: string) => {
+  (a.userData.joinWith ??= []).push(b); (b.userData.joinWith ??= []).push(a);
+  (a.userData.joinWhy ??= []).push(why);
+};
+
 // ── figures ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 /** the value at f of a count from `from` to `to` over [a, b]: fast, then settling; exactly `to` from b on */
 export const countUp = (f: number, a: number, b: number, from: number, to: number) => {
@@ -109,15 +139,17 @@ export const litPlate = (lines: string[], o: { size?: number; color?: string; pa
   const w = o.w ?? Math.max(...widths) + 2 * (o.padX ?? size * 0.55);
   const lineH = size * 1.12, h = lines.length * lineH + 2 * (o.padY ?? size * 0.42), d = o.depth ?? Math.max(40, size * 0.5);
   const group = new THREE.Group();
-  group.add(rbox(w, h, d, Math.min(18, d * 0.3), o.mat ?? MAT.black()));
+  const body = rbox(w, h, d, Math.min(18, d * 0.3), o.mat ?? MAT.black());
+  group.add(body);
   lines.forEach((l, i) => {
     const t = wide(text3d(l, { font, size, depth: 4, bevel: 0, face }), k);
     // the cap height of Archivo is ~0.69 em: centre the line's caps in its row
     t.position.set(0, ((lines.length - 1) / 2 - i) * lineH - size * 0.345, d / 2 + 0.5);
     t.traverse((n) => { (n as THREE.Mesh).castShadow = false; });
+    textOn(t, body, { inset: Math.min(18, d * 0.3) * 0.5 });
     group.add(t);
   });
-  return { group, face, w, h, d, setLit: (v: number) => setLit(face, v) };
+  return { group, body, face, w, h, d, setLit: (v: number) => setLit(face, v) };
 };
 
 // ── light ───────────────────────────────────────────────────────────────────────────────────────────────────────────────

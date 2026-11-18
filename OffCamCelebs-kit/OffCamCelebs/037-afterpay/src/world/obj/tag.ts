@@ -2,11 +2,11 @@
 // crane hook on a chain. Origin: the PIVOT the chain swings from; the chain runs on up out of sight above it.
 //   update({ swing (radians), lit 0…1 })    TAG.centre: the tag's centre below the pivot
 import * as THREE from "three";
-import { MAT, K, lit, setLit, wide } from "../kit";
+import { MAT, K, lit, setLit, wide, textOn, joined } from "../kit";
 import { text3d } from "../text3d";
 
 const L = 1500;
-export const TAG = { w: 760, h: 470, d: 66, centre: L + 150 + 235, chain: L } as const;
+export const TAG = { w: 810, h: 470, d: 66, centre: L + 150 + 235, chain: L } as const;
 export const makeTag = (key: string, words = "SOLD FOR") => {
   const group = new THREE.Group();
   group.name = `tag-${key}`;
@@ -58,6 +58,7 @@ export const makeTag = (key: string, words = "SOLD FOR") => {
   const face = lit(K.white, 1.0);
   const word = wide(text3d(words, { font: "800", size: 92, depth: 6, bevel: 0, face }));
   word.position.set(0, -95, TAG.d / 2 + 0.5);
+  textOn(word, slab, { inset: 10 });
   // a recessed rule above the words, as a price tag has
   const rule = new THREE.Mesh(new THREE.BoxGeometry(w - 220, 6, 3), satin);
   rule.position.set(0, 60, TAG.d / 2 + 1);
@@ -66,6 +67,7 @@ export const makeTag = (key: string, words = "SOLD FOR") => {
   tag.position.y = -TAG.centre;
   swing.add(blockM, hook, tag);
   group.add(up, swing);
+  joined(up, swing, "the chain's links are linked at the pivot");
   return {
     group, face,
     update: (p: { swing: number; lit: number }) => { swing.rotation.z = p.swing; setLit(face, p.lit, 0.16); },

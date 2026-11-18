@@ -10,7 +10,7 @@ import { cue, word } from "../../r45/time";
 import { ramp, clamp01, SOFT, SETTLE } from "../../r45/tokens";
 import { cut, dolly, crane, type CamKey3 } from "../cam";
 import { stdLights, type Place3, type PlaceCue, type Lights } from "../place";
-import { K, MAT, block, counter, countUp, short, ring, dropIn } from "../kit";
+import { K, MAT, block, counter, countUp, short, ring, dropIn, freeText } from "../kit";
 import { enterOf } from "../timeline";
 import { makeBoard } from "../obj/board";
 import { makeColumn, COLUMN_H } from "../obj/column";
@@ -26,7 +26,7 @@ void WORTH;
 const MORE = [W247 + 16, W247 + 27];                                // two more shares land before "Multiply"
 const RISE0 = MULT + 3, RISE1 = N29 - 12, COL0 = OUT - 2, FIG0 = N29 - 26;
 const N_STACK = 24, PLINTH = 230;
-const BOARD_X = -240, STACK_X = 300, COL_X = 640;
+const BOARD_X = -420, STACK_X = 300, COL_X = 640;   // ★ P14: the board grew to 960 wide: it stands further left, clear of the share's plinth
 
 export const PR3 = { token: TOKEN_LAND, on: BOARD_ON, count: [COUNT0, W247] as [number, number], more: MORE, rise: [RISE0, RISE1] as [number, number], col: [COL0, N29] as [number, number], fig: [FIG0, N29] as [number, number] } as const;
 
@@ -41,11 +41,11 @@ const colAt = (f: number) => (f < COL0 ? 0 : 1 - Math.pow(1 - clamp01((f - COL0)
 export const PricePlace: Place3 = {
   id: S, label: "4 The price: a share on a plinth, the board counts to $247; the stack shoots up into $29B", enter: ENTER, stage: "dark",
   shots: ({ from, to }): CamKey3[] => [
-    cut(from, [-1200, 260, 1700], [-170, 600, 0], { fov: 46, focus: [BOARD_X, 620, 60], why: "low under the board, the token drops" }),
-    dolly(from + 1, Math.max(30, W247 - from + 4), [-480, 640, 2650], [-110, 640, 0], { fov: 46, ease: SOFT, why: "rise round the board as it counts" }),
-    dolly(W247 + 8, Math.max(20, MULT - 4 - (W247 + 8)), [-120, 600, 2700], [-20, 560, 60], { fov: 46, ease: SOFT, why: "drift toward the share on its plinth" }),
-    crane(MULT - 2, Math.max(30, N29 - 6 - (MULT - 2)), [280, 1000, 3300], [150, 440, 0], { fov: 46, bulge: [0, 0, 260], why: "crane up and back as the stack shoots up" }),
-    dolly(N29 - 4, Math.max(12, to - (N29 - 4) - 1), [250, 900, 3150], [150, 420, 0], { fov: 46, ease: SOFT, why: "settle on the three: $29B" }),
+    cut(from, [-1380, 260, 1700], [-350, 600, 0], { fov: 46, focus: [BOARD_X, 620, 60], why: "low under the board, the token drops" }),
+    dolly(from + 1, Math.max(30, W247 - from + 4), [-660, 640, 3000], [-320, 640, 0], { fov: 46, ease: SOFT, why: "rise round the board as it counts" }),
+    dolly(W247 + 8, Math.max(20, MULT - 4 - (W247 + 8)), [-300, 600, 3050], [-160, 560, 60], { fov: 46, ease: SOFT, why: "drift toward the share on its plinth" }),
+    crane(MULT - 2, Math.max(30, N29 - 6 - (MULT - 2)), [160, 1000, 3850], [20, 440, 0], { fov: 46, bulge: [0, 0, 260], why: "crane up and back as the stack shoots up" }),
+    dolly(N29 - 4, Math.max(12, to - (N29 - 4) - 1), [130, 900, 3700], [20, 420, 0], { fov: 46, ease: SOFT, why: "settle on the three: $29B" }),
   ],
   lights: (f): Lights => {
     const c = colAt(f);
@@ -82,6 +82,7 @@ export const PricePlace: Place3 = {
     group.add(col.group);
     const fig = counter({ size: 190, color: K.money });
     fig.group.position.set(190, 0, 430);
+    freeText(fig.group, "solid numerals standing on the floor");
     fig.group.rotation.y = -0.06;
     group.add(fig.group);
     const halo = ring({ r: 1300, w: 13, dur: 30, color: K.money });

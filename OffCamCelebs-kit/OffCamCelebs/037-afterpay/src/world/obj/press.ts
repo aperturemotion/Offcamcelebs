@@ -1,8 +1,9 @@
 // THE MINT: a chunky press that stamps share tokens. Origin: its footprint's centre; the die at (0, PRESS.die, 60).
 import * as THREE from "three";
-import { K, MAT, block, rbox, cyl, litPlate } from "../kit";
+import { K, MAT, block, rbox, cyl, litPlate, joined } from "../kit";
 
-export const PRESS = { die: 150, up: 330, dieZ: 70 } as const;
+/** `top`: the die pad's surface (a token lies ON it) */
+export const PRESS = { die: 150, up: 330, dieZ: 70, top: 162.5 } as const;
 export const makePress = () => {
   const group = new THREE.Group();
   group.add(block(640, 150, 560, 30, MAT.black()));
@@ -32,10 +33,13 @@ export const makePress = () => {
   const head = cyl(104, 60, MAT.graphite(), 56);
   ram.add(rod, head);
   ram.position.set(0, PRESS.up, PRESS.dieZ);
+  ram.name = "ram";
   group.add(ram);
+  joined(ram, beam, "the piston runs through the press's head");
+  joined(ram, arm, "the piston runs through the press's arm");
   return {
     group, plate,
     /** `ram` 0 (up) … 1 (down on the die) */
-    update: (p: { ram: number }) => { ram.position.y = PRESS.up - p.ram * (PRESS.up - (PRESS.die + 8 + 34)); },
+    update: (p: { ram: number }) => { ram.position.y = PRESS.up - p.ram * (PRESS.up - (PRESS.top + 34 + 1.5)); },
   };
 };

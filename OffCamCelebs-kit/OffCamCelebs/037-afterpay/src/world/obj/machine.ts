@@ -1,9 +1,10 @@
 // THE EXCHANGE: a chunky machine. A token goes in the top; a wedge comes out of the chute; its plate counts the ratio.
 // Origin: its footprint's centre; the slot at (0, MACHINE.h, 0), the chute's mouth at (0, 90, MACHINE.d / 2).
 import * as THREE from "three";
-import { K, MAT, block, rbox, cyl, counter, lit, setLit } from "../kit";
+import { K, MAT, block, rbox, cyl, counter, lit, setLit, textOn } from "../kit";
 
-export const MACHINE = { w: 660, h: 760, d: 520 } as const;
+// ★ P14: 780 wide (it was 660): its screen grew to carry "0.375" with margin
+export const MACHINE = { w: 780, h: 760, d: 520 } as const;
 export const makeMachine = () => {
   const group = new THREE.Group();
   const body = new THREE.Group();
@@ -17,17 +18,18 @@ export const makeMachine = () => {
   hole.position.set(0, MACHINE.h + 47, 0);
   body.add(hole);
   // the screen: a recessed glass with the counting figure
-  const screen = rbox(520, 210, 18, 10, new THREE.MeshPhysicalMaterial({ color: new THREE.Color("#050506"), roughness: 0.22, metalness: 0.3, clearcoat: 0.6, envMapIntensity: 0.7 }));
+  const screen = rbox(640, 210, 18, 10, new THREE.MeshPhysicalMaterial({ color: new THREE.Color("#050506"), roughness: 0.22, metalness: 0.3, clearcoat: 0.6, envMapIntensity: 0.7 }));
   screen.position.set(0, 520, MACHINE.d / 2 + 2);
   body.add(screen);
   const fig = counter({ size: 130, color: K.white, depth: 16 });
   fig.group.position.set(0, 520 - 45, MACHINE.d / 2 + 12);
   fig.group.traverse((n) => { (n as THREE.Mesh).castShadow = false; });
+  textOn(fig.group, screen, { inset: 10 });
   body.add(fig.group);
   // a lamp that blinks while it works
   const lampMat = lit(K.amber, 1.15);
   const lamp = new THREE.Mesh(new THREE.SphereGeometry(22, 24, 16), lampMat);
-  lamp.position.set(250, 700, MACHINE.d / 2 + 6);
+  lamp.position.set(300, 700, MACHINE.d / 2 + 6);
   body.add(lamp);
   // the chute: a dark mouth and a tray running out onto the table
   const mouth = rbox(330, 150, 20, 10, dark);

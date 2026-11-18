@@ -12,7 +12,7 @@ import { cue, word } from "../../r45/time";
 import { SOFT, clamp01 } from "../../r45/tokens";
 import { cut, dolly, mixV, type CamKey3, type Vec } from "../cam";
 import { stdLights, GLOW, type Place3, type PlaceCue } from "../place";
-import { K, countUp, dollars, ring, litPlate, popUp, backGlow } from "../kit";
+import { K, countUp, dollars, ring, litPlate, popUp, backGlow, plateOn } from "../kit";
 import { makeStamp } from "../obj/stamp";
 import { enterOf } from "../timeline";
 import { tagSet, HOOK_STAGE, OPENING } from "./hook";
@@ -70,7 +70,8 @@ export const VerdictPlace: Place3 = {
     const haloRed = ring({ r: 1500, color: K.red, dur: 30 });
     haloRed.mesh.position.set(0, 1.5, HOOK_STAGE.numZ);
     const plate = litPlate(["INFLATED"], { size: 78, color: K.red, depth: 40 });
-    plate.group.position.set(0, PLATE_Y, FACE_Z + plate.d / 2 - 2);
+    plate.group.position.set(0, PLATE_Y, FACE_Z + plate.d / 2 + 1);   // it stands ON the plinth's face, never in it
+    plateOn(plate.group, A.plinth, { inset: 28 });
     const stamp = makeStamp("verdict");
     const haloInf = ring({ r: 1700, color: K.red, dur: 32 });
     haloInf.mesh.position.set(0, 1.5, FACE_Z + 200);

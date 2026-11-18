@@ -13,9 +13,10 @@ import { Font, type FontData } from "three/examples/jsm/loaders/FontLoader.js";
 import f500 from "../three/fonts/archivo500.json";
 import f800 from "../three/fonts/archivo800.json";
 import f800i from "../three/fonts/archivo800i.json";
+import f300i from "../three/fonts/archivo300i.json";
 
-export type Face3 = "500" | "800" | "800i";
-const DATA: Record<Face3, unknown> = { "500": f500, "800": f800, "800i": f800i };
+export type Face3 = "500" | "800" | "800i" | "300i";
+const DATA: Record<Face3, unknown> = { "500": f500, "800": f800, "800i": f800i, "300i": f300i };
 const fonts = new Map<Face3, Font>();
 const fontOf = (k: Face3) => { let f = fonts.get(k); if (!f) { f = new Font(DATA[k] as FontData); fonts.set(k, f); } return f; };
 
@@ -59,6 +60,7 @@ export const text3d = (str: string, o: Text3Opts) => {
   m.position.x = o.align === "left" ? 0 : -textWidth(str, o.font ?? "800", o.size) / 2;
   g.add(m);
   g.userData.width = textWidth(str, o.font ?? "800", o.size);
+  g.userData.isText = true; g.userData.textSize = o.size; g.userData.textStr = str;   // the world checks find every text by this
   return g;
 };
 
@@ -66,6 +68,7 @@ export const text3d = (str: string, o: Text3Opts) => {
 export const numeral3d = (o: Text3Opts & { max?: number }) => {
   const font = o.font ?? "800", depth = o.depth ?? o.size * 0.25, bevel = o.bevel ?? Math.min(depth * 0.2, o.size * 0.03);
   const group = new THREE.Group();
+  group.userData.isText = true; group.userData.textSize = o.size; group.userData.textStr = "(figure)";
   const pool: THREE.Mesh[] = [];
   const mats = [o.face, o.side ?? o.face];
   const digitW = Math.max(...Array.from("0123456789", (c) => textWidth(c, font, o.size)));
@@ -90,7 +93,7 @@ export const numeral3d = (o: Text3Opts & { max?: number }) => {
       x += a;
     }
     for (; i < pool.length; i++) pool[i].visible = false;
-    group.userData.width = total;
+    group.userData.width = total; group.userData.textStr = str;
   };
   return { group, set };
 };
