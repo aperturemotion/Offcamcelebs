@@ -20,8 +20,10 @@ if (hits("hook", 0, /^zzzcanary$/)) { console.error("REFUSING: the canary anchor
 
 const ANCHOR = /\bword(?:End)?\(\s*S\s*,\s*(\d+)\s*,\s*\/((?:[^/\\\n]|\\.)+)\/([a-z]*)\s*\)/g;
 let n = 0, calls = 0, bad = 0;
-for (const f of fs.readdirSync("src/r45/sets").filter((x) => x.endsWith(".tsx"))) {
-  const src = fs.readFileSync("src/r45/sets/" + f, "utf8").replace(/\/\/[^\n]*/g, (c) => c.replace(/word/g, "w_rd"));
+// ★ 037 (engine v2): the places live in src/world/places/*.ts
+const DIR = "src/world/places";
+for (const f of fs.readdirSync(DIR).filter((x) => x.endsWith(".ts") || x.endsWith(".tsx"))) {
+  const src = fs.readFileSync(DIR + "/" + f, "utf8").replace(/\/\/[^\n]*/g, (c) => c.replace(/word/g, "w_rd"));
   calls += (src.match(/\bword(?:End)?\(\s*S\s*,/g) || []).length;
   const S = (src.match(/const S = "([a-z]+)"/) || [])[1];
   for (const m of src.matchAll(ANCHOR)) {

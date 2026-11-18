@@ -54,8 +54,14 @@ export const PHOTO_FILE = "afterpay_face.jpg";
 // ★ NO TAKE YET (2026-11-18): the cues are PROVISIONAL (scratchpad/vo/provisional.mjs times the corrected script). The take
 //   is generated through ElevenLabs ("Russ", HKFOb9iktHA85uKXydRT, eleven_v4) from VO_SCRIPT.txt, then the VO pipeline.
 // ★ THE BED: the previous film's song unless Timur names another (Big Rich Town), cut once the take is wired.
-export const HAS_VO = false;
-export const HAS_MUSIC = false;
+// ★ THE TAKE (2026-11-18, script v2): GENERATED in-session, ElevenLabs "Russ – Deep, Smooth and Articulate"
+//   (HKFOb9iktHA85uKXydRT), eleven_v4, from VO_SCRIPT.txt v2; take B of two (both read the script exactly; B is the
+//   tighter read: 71.6 s raw, 144 wpm). vo_trim (TEMPO 1.04) 61.2 s → cardpause.py (0.55 s held after each turn card's
+//   last word, as the references hold theirs) 62.3 s → fw → mergetok → silmap → onsets → captions_vo → level_vo.
+// ★ THE BED: the standing song, 50 Cent "Big Rich Town (Instrumental)", cut by scratchpad/vo/mkbed_bigrich.mjs with its
+//   drop on the first "$29 billion" (film 2.24 s); bedenv holds it 5.5 dB under the speech-gated voice (residual 0.1 dB).
+export const HAS_VO = true;
+export const HAS_MUSIC = true;
 export const HAS_SFX = true;
 export const VO_FILE = "vo_leveled.wav";
 export const VO_SKIP_FRAMES = Math.round(VO_START * FPS);
@@ -70,7 +76,7 @@ export const MUSIC_GAIN = 0.505;
 export type SceneId = "hook" | "explain" | "deal" | "price" | "catch" | "close" | "fair" | "verdict";
 export const SCENE_ORDER: SceneId[] = ["hook", "explain", "deal", "price", "catch", "close", "fair", "verdict"];
 /** ★★ WHAT THE FILM INDEXES — a count mismatch refuses at module load */
-export const SCENE_CUES: Record<SceneId, number> = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 3, fair: 2, verdict: 4 };
+export const SCENE_CUES: Record<SceneId, number> = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 4, fair: 1, verdict: 3 };
 {
   const got: Partial<Record<SceneId, number>> = {};
   for (const c of CUES) got[c.scene] = (got[c.scene] ?? 0) + 1;
@@ -78,7 +84,7 @@ export const SCENE_CUES: Record<SceneId, number> = { hook: 3, explain: 1, deal: 
   if (bad.length) throw new Error("037 CUE COUNT MISMATCH — the wired take does not match the film.\n" + bad.map((b) => "  · " + b).join("\n"));
 }
 /** the film ends 0.5 s after the last word — no CTA graphic, logo or handle */
-const OUTRO_SEC = 0.5;
+const OUTRO_SEC = 0.8;   // the references end 0.6–0.9 s after the last word (study R31)
 export const VO_END = Math.round(CUES[CUES.length - 1].b * FPS);
 export const OUTRO_HOLD = Math.round(OUTRO_SEC * FPS);
 export const TOTAL_FRAMES = VO_END + OUTRO_HOLD;

@@ -8,16 +8,15 @@ import { F } from "./time";
 import { Obj, useTag } from "../audit/Probe";
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ★★★ RULE P5 (THE PAYOUTS, 2026-11-18, after @moneydecoded.au) — THE CAPTION IS SMALL, PLAIN AND AT THE TOP.
-//   · ONE short phrase at a time: the sentence's words in chunks of 2–4, breaking at punctuation;
-//   · white Archivo 500, centred, about 12% down the frame; the same place for the whole film; it never moves;
-//   · a chunk swaps in on its first word's spoken onset (a 4-frame fade); no highlight colours, no tiers, no box.
-//   · a TURN CARD (rule P6) carries its own words: its place shows no caption.
-// ★ Timur's open question (2026-11-18): the reference's caption is very small. SIZE and Y are the two constants to turn.
-// ★ (026, still standing) a beat belongs to its SET: it is drawn inside that set's panel and rides its hand-over.
+// ★★★ THE CAPTION (THE PAYOUTS; study rule R28, measured on five references 2026-11-18): ONE PHRASE, SMALL, PLAIN, FIXED.
+//   · one phrase of 1–4 words at a time (the sentence's words, breaking at punctuation);
+//   · colour #e9e2e1, Archivo 500, 30 px, centred, its top 275 px down (14.3% of the frame); it never moves;
+//   · a phrase SWAPS in on its first word's spoken onset in 1–2 frames (no fade-up, no tiers, no box);
+//   · a TURN CARD carries its own words: its place shows no caption.
+// SIZE and Y are the two constants to turn (the references measure 27–33 px and y 266–282 at 1080 wide).
 // ═══════════════════════════════════════════════════════════════════════════
-export const CAP_SIZE = 40, CAP_Y = 235, CAP_WEIGHT = 500;
-export const CAP_IN = 4, CAP_LEAD = 2;
+export const CAP_SIZE = 30, CAP_Y = 275, CAP_WEIGHT = 500, CAP_COLOR = "#e9e2e1";
+export const CAP_IN = 2, CAP_LEAD = 1;
 /** places whose words are drawn by the place itself (the turn cards) */
 export const NO_CAPTION: ReadonlySet<SceneId> = new Set<SceneId>(["explain", "catch"]);
 /** ★ kept for the sweeps and old imports: the band the caption lives in */
@@ -63,8 +62,8 @@ export const Caption: React.FC<{ scene: SceneId; f: number; ground: Ground; alig
       <div data-cap="1" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
         <div {...tg("cap.0", "cap")} style={{
           position: "absolute", left: 90, width: 860, top: CAP_Y, height: CAP_SIZE * 1.25, lineHeight: `${CAP_SIZE * 1.25}px`,
-          textAlign: "center", whiteSpace: "nowrap", color: "#FFFFFF", fontFamily: ARCHIVO, fontSize: CAP_SIZE, fontWeight: CAP_WEIGHT,
-          letterSpacing: "0.005em", opacity: p < 0.999 ? p : undefined, textShadow: "0 2px 14px rgba(0,0,0,0.85)",
+          textAlign: "center", whiteSpace: "nowrap", color: CAP_COLOR, fontFamily: ARCHIVO, fontSize: CAP_SIZE, fontWeight: CAP_WEIGHT,
+          letterSpacing: "0.005em", opacity: p < 0.999 ? p : undefined, textShadow: "0 1px 6px rgba(0,0,0,0.55)",
           transform: "perspective(1200px) rotateX(0.15deg)",
         }}>{CHUNKS[i].text}</div>
       </div>

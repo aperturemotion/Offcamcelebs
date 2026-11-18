@@ -12,7 +12,7 @@
 import { execFileSync } from "child_process";
 const FF = process.env.FFMPEG_DIR;
 const SRC = "assets/audio/music_bigrichtown.mp3", OUT = "assets/audio/music_bigrichtown_bed.wav";
-const DROP = 20.94, WORD = 2.71, LEN = 60;   // ★ 035: the drop on the first "$847" (film 2.71 s), the hook's figure
+const DROP = 20.94, WORD = 2.24, LEN = 64;   // ★ 037: the drop on the first "$29 billion" (film 2.24 s), the hook's figure
 const START = DROP - WORD;
 import { spawnSync } from "child_process";
 const readMean = (file, ss, t) => {

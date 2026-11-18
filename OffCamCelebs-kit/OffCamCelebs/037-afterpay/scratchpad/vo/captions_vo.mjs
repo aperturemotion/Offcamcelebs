@@ -8,38 +8,35 @@
 //   · the place (SET) cue COUNTS match what the film indexes (EXPECT = data.ts SCENE_CUES);
 //   · a beat is the whole sentence (Caption.tsx chunks it into 2–4-word phrases: rule P5), so there are no tier checks.
 //
-// ⚠ NOT YET WIRED TO A TAKE (2026-11-18): PLAN indexes provisional.mjs's tokens. When the take lands: fw.py → mergetok.mjs
-//   → onsets.py → re-index PLAN against the real tokens → this.
 //
 // Usage: node scratchpad/captions_vo.mjs   → writes src/audit/cues.ts and src/r45/blocks.ts
 import fs from "node:fs";
 
 const PLAN = [
-  // ⚠ PROVISIONAL (2026-11-18): the indices are provisional.mjs's timing of the corrected VO_SCRIPT.txt (no take yet).
-  //   When the take lands: fw.py → mergetok → onsets → re-index these 20 cues against the real tokens.
-  ["hook",0,4,"Afterpay sold for $29 billion."],
-  ["hook",5,10,"That's the number in the headlines."],
-  ["hook",11,16,"The buyer's own filing says 13.8."],
-  ["explain",17,19,"Let me explain."],
-  ["deal",20,29,"In August 2021, Jack Dorsey's Square agreed to buy Afterpay."],
-  ["deal",30,35,"But it didn't pay in cash."],
-  ["deal",36,41,"It paid in its own shares."],
-  ["deal",42,49,"Every Afterpay share would become 0.375 Square shares."],
-  ["price",50,58,"At the time, one Square share was worth $247."],
-  ["price",59,64,"That's where 29 billion came from."],
-  ["catch",65,68,"And here's the catch."],
-  ["close",69,75,"The deal took six months to close."],
-  ["close",76,89,"By then, Square had renamed itself Block, and its share price had roughly halved."],
-  ["close",90,107,"So when Block booked the deal with the SEC, the shares it handed over were worth 13.8 billion."],
-  ["fair",108,119,"To be fair, 29 billion was the real value on announcement day."],
-  ["fair",120,135,"The deal fixed the number of shares, not the dollars, and Afterpay's owners got those shares."],
-  ["verdict",136,144,"So 29 billion was the price on day one."],
-  ["verdict",145,148,"Not the price paid."],
-  ["verdict",149,151,"Our rating: inflated."],
-  ["verdict",152,157,"Send us who to audit next."],
+  // ★ WIRED TO THE TAKE (2026-11-18): script v2, ElevenLabs "Russ" eleven_v4, take B of two, vo_trim TEMPO 1.04 → 61.2 s,
+  //   then cardpause.py (0.55 s held after each turn card's last word) → 62.3 s; 168 tokens after mergetok. One cue per sentence of VO_SCRIPT.txt v2.
+  ["hook",0,7,"An American company bought Afterpay for $29 billion."],
+  ["hook",8,20,"But when the deal closed, its own filing put the price at 13.8."],
+  ["hook",21,25,"So which number is right?"],
+  ["explain",26,28,"Let us explain."],
+  ["deal",29,39,"In August 2021, Jack Dorsey's company, Square, agreed to buy Afterpay."],
+  ["deal",40,45,"But Square didn't pay in cash."],
+  ["deal",46,51,"It paid in its own shares."],
+  ["deal",52,62,"For every Afterpay share, you got 0.375 of a Square share."],
+  ["price",63,71,"At the time, each Square share was worth $247."],
+  ["price",72,79,"Multiply it out, and you get 29 billion."],
+  ["catch",80,83,"But here's the catch."],
+  ["close",84,90,"The deal took six months to close."],
+  ["close",91,104,"By then, Square had renamed itself Block, and its share price had roughly halved."],
+  ["close",105,112,"Same number of shares. About half the price."],
+  ["close",113,128,"So when the deal closed, Block told the SEC what those shares were worth: 13.8 billion."],
+  ["fair",129,147,"To be fair, 29 billion was real on day one, and Afterpay's shareholders got the shares they were promised."],
+  ["verdict",148,158,"But the price tag everyone remembers was never the price paid."],
+  ["verdict",159,161,"Our rating: inflated."],
+  ["verdict",162,167,"Send us who to audit next."],
 ];
 // ⚠ what the film indexes, cue(scene, 0…n−1). Mirrored in data.ts's SCENE_CUES, which throws at load if they disagree.
-const EXPECT = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 3, fair: 2, verdict: 4 };
+const EXPECT = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 4, fair: 1, verdict: 3 };
 
 const fail = (msg) => { console.error("REFUSING: " + msg); process.exit(1); };
 if (!fs.existsSync("scratchpad/fw_words.json")) fail("scratchpad/fw_words.json does not exist — run fw.py first.");
@@ -81,6 +78,11 @@ const startOf = (i) => {
 };
 
 const CUES = PLAN.map(([scene, i0, i1, text]) => ({ scene, i0, i1, a: startOf(i0), b: W[i1].b, text }));
+// ★ (037) a MEASURED onset outranks whisper's word END: where the next sentence's first word is heard (onsets.py) before
+//   whisper says the last word ended, the earlier sentence ends at that onset (whisper stretched "13.8." 0.18 s into the
+//   pause). Only a small overlap is healed; a larger one still refuses below.
+for (let i = 1; i < CUES.length; i++)
+  if (CUES[i].a < CUES[i - 1].b && CUES[i - 1].b - CUES[i].a < 0.3 && ONSET[CUES[i].i0] !== undefined) CUES[i - 1].b = CUES[i].a;
 for (let i = 1; i < CUES.length; i++)
   if (CUES[i].a < CUES[i - 1].b - 1e-6) fail(`cue ${i} starts at ${CUES[i].a} before cue ${i - 1} ends at ${CUES[i - 1].b}`);
 const counts = {};
@@ -117,7 +119,7 @@ fs.writeFileSync("src/audit/cues.ts",
 const BLOCKS = PLAN.map((p) => [[p[3]]]);
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 // a token whisper mishears, mapped BY TOKEN INDEX to the word it stands for (none yet: fill from the real take)
-const MIS_AT = {};
+const MIS_AT = { 58: "0375", 140: "afterpays" };
 const tok = (k) => MIS_AT[k] ?? norm(W[k].t);
 const plainLen = (s) => s.replace(/\*\*/g, "").length;
 const boldLen = (s) => (s.match(/\*\*([^*]+)\*\*/g) ?? []).reduce((n, m) => n + m.replace(/\*\*/g, "").replace(/[^A-Za-z0-9$ ]/g, "").trim().length, 0);

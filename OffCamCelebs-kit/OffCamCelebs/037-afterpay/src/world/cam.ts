@@ -8,22 +8,26 @@
 //   fov          vertical field of view, degrees (the frame is 9:16, so the horizontal view is about 0.56 of it)
 //   orbit        the position rides a circle round `c` instead of a straight line (angle in degrees, 0 = +z, toward +x)
 //   arc          a bulge added at the middle of a straight move (a travel that swings out or rises)
-//   cut          the pose jumps on `at` (a hard cut); `dip` = frames of fade to black each side of it
-// Helpers: orbitPos / orbit, dolly, crane, travel, cut.
+//   cut          the pose jumps on `at` (a HARD CUT: the references join places by hard cuts, never by a fade or a travel
+//                through empty space: study rule R23). `dip` is kept for tools but is 0 everywhere in a Payouts film
+//   focus        the point the lens is focused on (depth of field: R26); default: `look`
+//   still        no breath while this key holds (a turn card: R27)
+// Helpers: orbitPos / orbit, dolly, crane, travel (INSIDE one place's set only), cut, whipOut / whipIn (a 6–15-frame
+// blurred pan out of one place and into the next, either side of a hard cut).
 // ═════════════════════════════════════════════════════════════════════════════════════════════
-import { SETTLE, TRAVEL, SOFT, clamp01 } from "../r45/tokens";
+import { SETTLE, TRAVEL, SOFT, EXIT, GLIDE, clamp01 } from "../r45/tokens";
 
 export type Vec = [number, number, number];
 export type Orbit = { c: Vec; a0: number; a1: number; r0: number; r1?: number; y0: number; y1?: number };
 export type CamKey3 = {
   at: number; dur: number; pos: Vec; look: Vec; fov?: number; roll?: number; ease?: (t: number) => number;
-  orbit?: Orbit; arc?: Vec; cut?: boolean; dip?: number;
+  orbit?: Orbit; arc?: Vec; cut?: boolean; dip?: number; focus?: Vec; still?: boolean;
   /** a label for the score and for error messages */
   why?: string;
   /** the score: this move is a travel (it takes a whoosh); set by travel(), or by hand */
   whoosh?: number;
 };
-export type Pose = { pos: Vec; look: Vec; fov: number; roll: number };
+export type Pose = { pos: Vec; look: Vec; fov: number; roll: number; focus: Vec };
 
 export const add = (a: Vec, b: Vec): Vec => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 export const sub = (a: Vec, b: Vec): Vec => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
@@ -54,8 +58,17 @@ export const crane = (at: number, dur: number, pos: Vec, look: Vec, x: { bulge?:
 export const travel = (at: number, dur: number, pos: Vec, look: Vec, x: { bulge?: Vec; fov?: number; ease?: (t: number) => number; why?: string; vol?: number } = {}): CamKey3 =>
   ({ at, dur, pos, look, fov: x.fov, ease: x.ease ?? TRAVEL, arc: x.bulge, why: x.why ?? "travel", whoosh: x.vol ?? 0.6 });
 /** CUT to a pose on `at`, with `dip` frames of fade to black each side (0 = a hard cut) */
-export const cut = (at: number, pos: Vec, look: Vec, x: { fov?: number; dip?: number; why?: string } = {}): CamKey3 =>
-  ({ at, dur: 0, pos, look, fov: x.fov, cut: true, dip: x.dip ?? 0, why: x.why ?? "cut" });
+export const cut = (at: number, pos: Vec, look: Vec, x: { fov?: number; dip?: number; why?: string; focus?: Vec; still?: boolean; roll?: number } = {}): CamKey3 =>
+  ({ at, dur: 0, pos, look, fov: x.fov, roll: x.roll, cut: true, dip: x.dip ?? 0, why: x.why ?? "cut", focus: x.focus, still: x.still });
+/** WHIP OUT: the last `dur` (6–15) frames of a place: the camera accelerates away to `pos`/`look` (its fast frames blur);
+ *  the next place opens with whipIn on the cut */
+export const whipOut = (at: number, dur: number, pos: Vec, look: Vec, x: { fov?: number; why?: string } = {}): CamKey3 =>
+  ({ at, dur, pos, look, fov: x.fov, ease: EXIT, why: x.why ?? "whip out", whoosh: 0.7 });
+/** WHIP IN: a hard cut to a displaced pose, then `dur` (6–15) frames decelerating onto the shot's first pose */
+export const whipIn = (at: number, dur: number, from: { pos: Vec; look: Vec }, to: { pos: Vec; look: Vec }, x: { fov?: number; why?: string; focus?: Vec } = {}): CamKey3[] => [
+  { at, dur: 0, pos: from.pos, look: from.look, fov: x.fov, cut: true, dip: 0, why: "cut (whip)" },
+  { at, dur, pos: to.pos, look: to.look, fov: x.fov, ease: GLIDE, why: x.why ?? "whip in", focus: x.focus },
+];
 
 /** refuse a path whose keys overlap or run backwards */
 export const checkPath = (name: string, keys: CamKey3[]) => {
@@ -77,11 +90,13 @@ const breath = (f: number): Vec => [
 
 /** the camera's pose at frame f (fractional frames allowed) */
 export const poseAt = (keys: CamKey3[], f: number): Pose => {
-  let p: Pose = { pos: keys[0].pos, look: keys[0].look, fov: keys[0].fov ?? DEFAULT_FOV, roll: keys[0].roll ?? 0 };
+  let p: Pose = { pos: keys[0].pos, look: keys[0].look, fov: keys[0].fov ?? DEFAULT_FOV, roll: keys[0].roll ?? 0, focus: keys[0].focus ?? keys[0].look };
+  let still = !!keys[0].still;
   for (let i = 1; i < keys.length; i++) {
     const k = keys[i];
     if (f < k.at) break;
-    const end: Pose = { pos: k.pos, look: k.look, fov: k.fov ?? p.fov, roll: k.roll ?? 0 };
+    const end: Pose = { pos: k.pos, look: k.look, fov: k.fov ?? p.fov, roll: k.roll ?? 0, focus: k.focus ?? k.look };
+    still = !!k.still;
     if (k.cut || f >= k.at + k.dur) { p = end; continue; }
     const t = (k.ease ?? SETTLE)(clamp01((f - k.at) / k.dur));
     let pos = mixV(p.pos, k.pos, t);
@@ -92,11 +107,12 @@ export const poseAt = (keys: CamKey3[], f: number): Pose => {
       pos = len(sub(start, p.pos)) < 2 ? on : mixV(mixV(p.pos, on, t), on, blend);
     }
     if (k.arc) { const s = Math.sin(Math.PI * t); pos = add(pos, [k.arc[0] * s, k.arc[1] * s, k.arc[2] * s]); }
-    p = { pos, look: mixV(p.look, k.look, t), fov: lerp(p.fov, end.fov, t), roll: lerp(p.roll, end.roll, t) };
+    p = { pos, look: mixV(p.look, k.look, t), fov: lerp(p.fov, end.fov, t), roll: lerp(p.roll, end.roll, t), focus: mixV(p.focus, end.focus, t) };
     break;
   }
+  if (still) return p;
   const b = breath(f);
-  return { pos: add(p.pos, b), look: add(p.look, [b[0] * 0.25, b[1] * 0.25, 0]), fov: p.fov, roll: p.roll };
+  return { pos: add(p.pos, b), look: add(p.look, [b[0] * 0.25, b[1] * 0.25, 0]), fov: p.fov, roll: p.roll, focus: p.focus };
 };
 /** 0…1 brightness at f: the dips round the cuts */
 export const fadeAt = (keys: CamKey3[], f: number) => {

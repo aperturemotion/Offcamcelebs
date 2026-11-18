@@ -138,8 +138,8 @@ try {
   //    later must not quietly sabotage a different pattern.
   fs.writeFileSync(CUES, synth("briefSpoken"));
   const sabotaged = JSON.parse(realFixes);
-  const si = sabotaged.fixes.findIndex((fx) => fx.at === "hook c1");   // 037: the hook line ("every headline")
-  if (si < 0) throw new Error("guardtest: the 'hook c1' fix is gone — pick another sabotage");
+  const si = sabotaged.fixes.findIndex((fx) => fx.at === "hook c0");   // 037 v2: the brief's hook line ("every headline")
+  if (si < 0) throw new Error("guardtest: the 'hook c0' fix is gone — pick another sabotage");
   // 025: the one blocking line carries no number, so its spoken form IS its written form and no real pattern can reach
   // the 015 branch. The sabotage breaks the WHOLE pattern instead (CLAUDE.md, Aperture V3: an alternation broken in one
   // branch still matches) — a pattern that cannot match its own line must make the guard refuse ITSELF.
