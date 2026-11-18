@@ -2194,6 +2194,15 @@ _Log every OffCamCelebs preference change and every video build here with a date
       · a place can be a whole environment (the quarry with its terraces, an excavator digging, rocks falling).
       So a Payouts film is built as ONE full-frame Three.js scene inside the HyperFrames composition, with one keyframed
       3-D camera for the whole film; the 2-D place layers, hand-over transforms and CSS grounds are not used.
+    - **P13 ★★★★ THE REFERENCES OUTRANK THE BRIEF'S VISUAL NOTES** (Timur, 2026-11-18, on 037's first 3-D cut: "right
+      now it does not look like I want it to look… Try completely ignoring the visual instructions that the prompt gave
+      you. Just come up with the visuals yourself, and maybe some of the wording you can change yourself… your job is
+      to make it as similar to the 3D style in the reference videos as possible. Note down every single thing about the
+      reference videos. Go through them completely. Note down as many rules as you can… You can deviate from the
+      script itself, from the wording"). For a Payouts film the brief fixes the STORY and the FACTS; the objects, shots
+      and staging are mine and are chosen to look like the references, and the wording may be rewritten for the
+      references' rhythm, with every figure and guardrail still verified. The full shot-by-shot study and its rule list
+      live in `styles/payouts-moneydecoded-study.md` (written 2026-11-18).
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
     often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,
