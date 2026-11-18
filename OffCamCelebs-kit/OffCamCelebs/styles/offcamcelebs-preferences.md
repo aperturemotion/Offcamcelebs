@@ -2168,7 +2168,10 @@ _Log every OffCamCelebs preference change and every video build here with a date
       order, one fact per shot. (4) A "problem"/"twist" card, then the escalation. (5) A "worst part" card, then the
       figure brought down to one person. (6) The ending returns to the OPENING scene and lands the punchline on it.
     - **P9 VOICE AND LENGTH.** Plain spoken sentences, second person, 150–160 words a minute, 60–85 s, the voice starts
-      on frame 1 with no intro. (Their music and effects are not yet measured; measure before copying the mix.)
+      on frame 1 with no intro. MEASURED 2026-11-18 on three of them: every film masters at −14.1 LUFS with a
+      loudness range of about 2 LU (very even); the music and effects in the gaps between words sit about 5 dB under the
+      voice (our 5.5 dB bed rule already matches); the longest pauses, 0.8–0.9 s, are the turn cards; the film ends
+      0.6–0.9 s after the last word.
     - **P10 NO CHROME.** No logo bug, no lower third, no progress bar, no end card of their own.
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
