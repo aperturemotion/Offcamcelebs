@@ -1,7 +1,7 @@
 import { within, peakOn, PEAK, type Cue } from "./SfxLayer";
 import { HK } from "./sets/hook";
 import { DL } from "./sets/deal";
-import { PR } from "./sets/price";
+import { PR3 as PR } from "../world/places/price";
 import { CL } from "./sets/close";
 import { FA } from "./sets/fair";
 import { VD } from "./sets/verdict";
@@ -42,9 +42,8 @@ export const buildScore = (sets: SetRow[], moves: CamMove[]) => {
   add(wi("price")("click", PR.on[0], undefined, 0.3, "the board lights: $247.26"));
   add(wi("price")("datashort", PR.on[0] + 1, PR.on[1] + 8, 0.25, "the board's dots come up"));
   add(pk("price")("whooshsoft", PR.stack[0] + 6, PR.stack[1], 0.4, "the stack slides in on its plinth"));
-  add(wi("price")("tick", PR.sum[0], undefined, 0.3, "the sum's signs light: × and ="));
-  add(pk("price")("whooshsoft", PR.hang[0] + 5, PR.hang[1], 0.3, "the tag slides in on its cord"));
-  add(wi("price")("flick", PR.turn[0] + 6, undefined, 0.35, "the tag turns to face us"));
+  add(wi("price")("tick", PR.times[0], undefined, 0.3, "the × sign lights"));
+  add(wi("price")("tick", PR.eq[0], undefined, 0.3, "the = sign lights"));
   add(wi("price")("pingshort", PR.tag[0] + 6, undefined, 0.3, "the tag lights: $29,000,000,000"));
   // ── 6 · the close ──
   for (let i = 0; i < 5; i++) add(wi("close")("flick", CL.cal[0] + ((i + 0.5) * (CL.cal[1] - CL.cal[0])) / 5, undefined, 0.26, `the calendar's leaf ${i + 1} flips`));

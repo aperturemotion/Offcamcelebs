@@ -25,7 +25,7 @@ const card = (id: SceneId, label: string, color: string): Place3 => {
   const words = cardWords(id), big = words[words.length - 1], lead = words.slice(0, -1);
   const enter = cue(id, 0) - PRE;
   // fit the big word to the frame: the camera sees ~1,150 units across at its opening distance
-  const bigSize = Math.min(BIG, (BIG * 880) / Math.max(1, textWidth(big.t, "800i", BIG)));
+  const bigSize = Math.min(BIG, (BIG * 660) / Math.max(1, textWidth(big.t, "800i", BIG)));
   const leadY = bigSize * 1.02 + 96;
   const C: Vec = [0, bigSize * 0.62, 0];
   return {
@@ -39,9 +39,13 @@ const card = (id: SceneId, label: string, color: string): Place3 => {
       return {
         amb: 0.05,
         key: { pos: [-500, 1500, 1300], at: C, i: 0.9, color: "#FFFFFF", angle: 0.5, soft: 0.9 },
-        rim: { pos: [700, 900, -1200], at: [0, C[1] + 60, 0], i: 0.5 + 0.9 * up, color, angle: 0.36, soft: 0.9 },
-        accent: { pos: [0, 46, 300], color, i: 0.04 + 0.34 * up },
-        focus: [0, 0], reach: 2200, reflect: 0.3, env: 0.6,
+        // no spot rakes the floor (it threw a bright streak under the word): the rim comes from high in FRONT, tight on the
+        //   letters, and the colour on the floor is the accent's soft pool and the lit faces' own reflection
+        rim: { pos: [520, 1500, 1500], at: [0, C[1] + 40, 0], i: 0.25 + 0.5 * up, color: "#FFFFFF", angle: 0.2, soft: 1 },
+        // the coloured light sits HIGH in front: its mirror image in the glossy floor falls below the frame (a low light drew a
+        //   hot streak under the word); the floor's colour is the lit letters' own reflection and their bloom
+        accent: { pos: [0, 900, 700], color, i: 1.3 * up },
+        focus: [0, 60], reach: 1500, reflect: 0.42, env: 0.6,
       };
     },
     build: () => {
@@ -76,9 +80,9 @@ const card = (id: SceneId, label: string, color: string): Place3 => {
           const p = ramp(f, big.at, big.at + 10, SETTLE);
           word.visible = f >= big.at;
           // the big word lands: it comes down onto the floor and its face lights
-          word.position.set(0, (1 - p) * 120, (1 - p) * 90);
-          word.rotation.x = -(1 - p) * 0.22;
-          face.emissiveIntensity = 0.5 + 1.1 * ramp(f, big.at + 2, big.at + 14, SETTLE);
+          word.position.set(0, (1 - p) * 34, (1 - p) * 260);
+          word.rotation.x = (1 - p) * 0.3;
+          face.emissiveIntensity = 0.6 + 1.3 * ramp(f, big.at + 2, big.at + 14, SETTLE);
         },
       };
     },

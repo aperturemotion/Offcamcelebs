@@ -18,7 +18,7 @@ import { dealModel, DEAL_GEO as G, type DealP } from "../../three/props/deal";
 // ═══════════════════════════════════════════════════════════════════════════
 const S = "deal" as const;
 const AGREED = word(S, 0, /^agreed/), CASH = word(S, 1, /^cash/), SHARES = word(S, 2, /^shares/), EVERY = cue(S, 3), RATIO = word(S, 3, /^0\.375/);
-export const DL = { contract: [AGREED - 2, AGREED + 28], cooler: [CASH, CASH + 24], certs: [SHARES - 16, SHARES + 14], card: [EVERY - 6, EVERY + 22], flip: [RATIO - 2, RATIO + 22] } as const;
+export const DL = { contract: [AGREED - 2, AGREED + 28], cooler: [CASH, CASH + 24], certs: [cue(S, 2) - 4, cue(S, 2) + 24], card: [EVERY - 6, EVERY + 22], flip: [RATIO - 2, RATIO + 22] } as const;
 
 const TOP = G.desk.y;
 const STORY: CamKey[] = [

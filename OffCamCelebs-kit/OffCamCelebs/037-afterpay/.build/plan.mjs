@@ -393,25 +393,25 @@ function V(n2) {
   };
 }
 function q(n2, u4, t3, i3, r3, o2, e3, f3, c3, a3) {
-  var s2, h3, p3, v3, y3, d3, _3, k3, x3, M3, I2, P4, A5, H3, T4, j4, F4 = u4.type;
+  var s2, h3, p3, v3, y3, d3, _3, k3, x3, M3, I2, P5, A5, H3, T4, j4, F4 = u4.type;
   if (void 0 !== u4.constructor) return null;
   128 & t3.__u && (c3 = !!(32 & t3.__u), o2 = [f3 = u4.__e = t3.__e]), (s2 = l.__b) && s2(u4);
   n: if ("function" == typeof F4) {
     h3 = e3.length;
     try {
-      if (x3 = u4.props, M3 = F4.prototype && F4.prototype.render, I2 = (s2 = F4.contextType) && i3[s2.__c], P4 = s2 ? I2 ? I2.props.value : s2.__ : i3, t3.__c ? k3 = (p3 = u4.__c = t3.__c).__ = p3.__E : (M3 ? u4.__c = p3 = new F4(x3, P4) : (u4.__c = p3 = new C(x3, P4), p3.constructor = F4, p3.render = Q), I2 && I2.sub(p3), p3.state || (p3.state = {}), p3.__n = i3, v3 = p3.__d = true, p3.__h = [], p3._sb = []), M3 && null == p3.__s && (p3.__s = p3.state), M3 && null != F4.getDerivedStateFromProps && (p3.__s == p3.state && (p3.__s = m({}, p3.__s)), m(p3.__s, F4.getDerivedStateFromProps(x3, p3.__s))), y3 = p3.props, d3 = p3.state, p3.__v = u4, v3) M3 && null == F4.getDerivedStateFromProps && null != p3.componentWillMount && p3.componentWillMount(), M3 && null != p3.componentDidMount && p3.__h.push(p3.componentDidMount);
+      if (x3 = u4.props, M3 = F4.prototype && F4.prototype.render, I2 = (s2 = F4.contextType) && i3[s2.__c], P5 = s2 ? I2 ? I2.props.value : s2.__ : i3, t3.__c ? k3 = (p3 = u4.__c = t3.__c).__ = p3.__E : (M3 ? u4.__c = p3 = new F4(x3, P5) : (u4.__c = p3 = new C(x3, P5), p3.constructor = F4, p3.render = Q), I2 && I2.sub(p3), p3.state || (p3.state = {}), p3.__n = i3, v3 = p3.__d = true, p3.__h = [], p3._sb = []), M3 && null == p3.__s && (p3.__s = p3.state), M3 && null != F4.getDerivedStateFromProps && (p3.__s == p3.state && (p3.__s = m({}, p3.__s)), m(p3.__s, F4.getDerivedStateFromProps(x3, p3.__s))), y3 = p3.props, d3 = p3.state, p3.__v = u4, v3) M3 && null == F4.getDerivedStateFromProps && null != p3.componentWillMount && p3.componentWillMount(), M3 && null != p3.componentDidMount && p3.__h.push(p3.componentDidMount);
       else {
-        if (M3 && null == F4.getDerivedStateFromProps && x3 !== y3 && null != p3.componentWillReceiveProps && p3.componentWillReceiveProps(x3, P4), u4.__v == t3.__v || !p3.__e && null != p3.shouldComponentUpdate && false === p3.shouldComponentUpdate(x3, p3.__s, P4)) {
+        if (M3 && null == F4.getDerivedStateFromProps && x3 !== y3 && null != p3.componentWillReceiveProps && p3.componentWillReceiveProps(x3, P5), u4.__v == t3.__v || !p3.__e && null != p3.shouldComponentUpdate && false === p3.shouldComponentUpdate(x3, p3.__s, P5)) {
           u4.__v != t3.__v && (p3.props = x3, p3.state = p3.__s, p3.__d = false), u4.__e = t3.__e, u4.__k = t3.__k, u4.__k.some(function(n3) {
             n3 && (n3.__ = u4);
           }), w.push.apply(p3.__h, p3._sb), p3._sb = [], p3.__h.length && e3.push(p3), f3 = $(t3);
           break n;
         }
-        null != p3.componentWillUpdate && p3.componentWillUpdate(x3, p3.__s, P4), M3 && null != p3.componentDidUpdate && p3.__h.push(function() {
+        null != p3.componentWillUpdate && p3.componentWillUpdate(x3, p3.__s, P5), M3 && null != p3.componentDidUpdate && p3.__h.push(function() {
           p3.componentDidUpdate(y3, d3, _3);
         });
       }
-      if (p3.context = P4, p3.props = x3, p3.__P = n2, p3.__e = false, A5 = l.__r, H3 = 0, M3) p3.state = p3.__s, p3.__d = false, A5 && A5(u4), s2 = p3.render(p3.props, p3.state, p3.context), w.push.apply(p3.__h, p3._sb), p3._sb = [];
+      if (p3.context = P5, p3.props = x3, p3.__P = n2, p3.__e = false, A5 = l.__r, H3 = 0, M3) p3.state = p3.__s, p3.__d = false, A5 && A5(u4), s2 = p3.render(p3.props, p3.state, p3.context), w.push.apply(p3.__h, p3._sb), p3._sb = [];
       else do {
         p3.__d = false, A5 && A5(u4), s2 = p3.render(p3.props, p3.state, p3.context), p3.state = p3.__s;
       } while (p3.__d && ++H3 < 25);
@@ -15992,8 +15992,8 @@ var InstancedMesh = class extends Mesh {
   getMorphAt(index, object) {
     const objectInfluences = object.morphTargetInfluences;
     const array = this.morphTexture.source.data.data;
-    const len2 = objectInfluences.length + 1;
-    const dataIndex = index * len2 + 1;
+    const len = objectInfluences.length + 1;
+    const dataIndex = index * len + 1;
     for (let i3 = 0; i3 < objectInfluences.length; i3++) {
       objectInfluences[i3] = array[dataIndex + i3];
     }
@@ -16055,9 +16055,9 @@ var InstancedMesh = class extends Mesh {
    */
   setMorphAt(index, object) {
     const objectInfluences = object.morphTargetInfluences;
-    const len2 = objectInfluences.length + 1;
+    const len = objectInfluences.length + 1;
     if (this.morphTexture === null) {
-      this.morphTexture = new DataTexture(new Float32Array(len2 * this.count), len2, this.count, RedFormat, FloatType);
+      this.morphTexture = new DataTexture(new Float32Array(len * this.count), len, this.count, RedFormat, FloatType);
     }
     const array = this.morphTexture.source.data.data;
     let morphInfluencesSum = 0;
@@ -16065,7 +16065,7 @@ var InstancedMesh = class extends Mesh {
       morphInfluencesSum += objectInfluences[i3];
     }
     const morphBaseInfluence = this.geometry.morphTargetsRelative ? 1 : 1 - morphInfluencesSum;
-    const dataIndex = len2 * index;
+    const dataIndex = len * index;
     array[dataIndex] = morphBaseInfluence;
     array.set(objectInfluences, dataIndex + 1);
   }
@@ -16733,13 +16733,13 @@ function copyAttributeData(src, target, targetOffset = 0) {
 }
 function copyArrayContents(src, target) {
   if (src.constructor !== target.constructor) {
-    const len2 = Math.min(src.length, target.length);
-    for (let i3 = 0; i3 < len2; i3++) {
+    const len = Math.min(src.length, target.length);
+    for (let i3 = 0; i3 < len; i3++) {
       target[i3] = src[i3];
     }
   } else {
-    const len2 = Math.min(src.length, target.length);
-    target.set(new src.constructor(src.buffer, 0, len2));
+    const len = Math.min(src.length, target.length);
+    target.set(new src.constructor(src.buffer, 0, len));
   }
 }
 var BatchedMesh = class extends Mesh {
@@ -20725,9 +20725,9 @@ function splitEarcut(start, triangles, dim, minX, minY, invSize) {
 }
 function eliminateHoles(data, holeIndices, outerNode, dim) {
   const queue = [];
-  for (let i3 = 0, len2 = holeIndices.length; i3 < len2; i3++) {
+  for (let i3 = 0, len = holeIndices.length; i3 < len; i3++) {
     const start = holeIndices[i3] * dim;
-    const end = i3 < len2 - 1 ? holeIndices[i3 + 1] * dim : data.length;
+    const end = i3 < len - 1 ? holeIndices[i3 + 1] * dim : data.length;
     const list = linkedList(data, start, end, dim, false);
     if (list === list.next) list.steiner = true;
     queue.push(getLeftmost(list));
@@ -22420,7 +22420,7 @@ var TubeGeometry = class _TubeGeometry extends BufferGeometry {
     const vertex2 = new Vector3();
     const normal = new Vector3();
     const uv = new Vector2();
-    let P4 = new Vector3();
+    let P5 = new Vector3();
     const vertices = [];
     const normals = [];
     const uvs = [];
@@ -22439,7 +22439,7 @@ var TubeGeometry = class _TubeGeometry extends BufferGeometry {
       generateIndices();
     }
     function generateSegment(i3) {
-      P4 = path.getPointAt(i3 / tubularSegments, P4);
+      P5 = path.getPointAt(i3 / tubularSegments, P5);
       const N2 = frames.normals[i3];
       const B5 = frames.binormals[i3];
       for (let j4 = 0; j4 <= radialSegments; j4++) {
@@ -22451,9 +22451,9 @@ var TubeGeometry = class _TubeGeometry extends BufferGeometry {
         normal.z = cos * N2.z + sin * B5.z;
         normal.normalize();
         normals.push(normal.x, normal.y, normal.z);
-        vertex2.x = P4.x + radius * normal.x;
-        vertex2.y = P4.y + radius * normal.y;
-        vertex2.z = P4.z + radius * normal.z;
+        vertex2.x = P5.x + radius * normal.x;
+        vertex2.y = P5.y + radius * normal.y;
+        vertex2.z = P5.z + radius * normal.z;
         vertices.push(vertex2.x, vertex2.y, vertex2.z);
       }
     }
@@ -45304,128 +45304,6 @@ var slabOf = (shape, depth, bevel = 3, curveSegments = 12) => {
   uv.needsUpdate = true;
   return g4;
 };
-var mirrorMaterial = () => new ShaderMaterial({
-  name: "V34ScreenMirror",
-  transparent: true,
-  depthWrite: false,
-  uniforms: {
-    color: { value: new Color(16777215) },
-    tRefl: { value: null },
-    res: { value: new Vector2(1, 1) },
-    strength: { value: 0.3 },
-    fadeC: { value: new Vector2() },
-    fadeR: { value: new Vector2(400, 200) }
-  },
-  vertexShader: (
-    /* glsl */
-    `
-    varying vec3 vWorld;
-    #include <common>
-    #include <logdepthbuf_pars_vertex>
-    void main() {
-      vWorld = ( modelMatrix * vec4( position, 1.0 ) ).xyz;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-      #include <logdepthbuf_vertex>
-    }`
-  ),
-  fragmentShader: (
-    /* glsl */
-    `
-    uniform vec3 color;
-    uniform sampler2D tRefl;
-    uniform vec2 res;
-    uniform float strength;
-    uniform vec2 fadeC;
-    uniform vec2 fadeR;
-    varying vec3 vWorld;
-    #include <logdepthbuf_pars_fragment>
-    void main() {
-      #include <logdepthbuf_fragment>
-      vec4 base = texture2D( tRefl, gl_FragCoord.xy / res );
-      vec2 q = ( vWorld.xz - fadeC ) / fadeR;
-      float a = strength * ( 1.0 - smoothstep( 0.0, 1.0, length( q ) ) );
-      gl_FragColor = vec4( base.rgb * color, base.a * a );
-      #include <tonemapping_fragment>
-      #include <colorspace_fragment>
-    }`
-  )
-});
-var blobTex = null;
-var blobTexture = () => {
-  if (blobTex) return blobTex;
-  const c3 = document.createElement("canvas");
-  c3.width = c3.height = 256;
-  const g4 = c3.getContext("2d");
-  const gr = g4.createRadialGradient(128, 128, 0, 128, 128, 128);
-  g4.fillStyle = "#000";
-  g4.fillRect(0, 0, 256, 256);
-  gr.addColorStop(0, "#fff");
-  gr.addColorStop(0.35, "#bfbfbf");
-  gr.addColorStop(0.7, "#404040");
-  gr.addColorStop(1, "#000");
-  g4.fillStyle = gr;
-  g4.fillRect(0, 0, 256, 256);
-  blobTex = new CanvasTexture(c3);
-  return blobTex;
-};
-var fadeShadow = (m3, axes, c3, r3) => {
-  m3.onBeforeCompile = (sh) => {
-    sh.uniforms.fadeC = { value: new Vector2(...c3) };
-    sh.uniforms.fadeR = { value: new Vector2(...r3) };
-    sh.vertexShader = sh.vertexShader.replace("#include <common>", "#include <common>\nvarying vec3 vFadeW;").replace("#include <fog_vertex>", "#include <fog_vertex>\nvFadeW = ( modelMatrix * vec4( position, 1.0 ) ).xyz;");
-    sh.fragmentShader = sh.fragmentShader.replace("#include <common>", "#include <common>\nuniform vec2 fadeC;\nuniform vec2 fadeR;\nvarying vec3 vFadeW;").replace(
-      "gl_FragColor = vec4( color, opacity * ( 1.0 - getShadowMask() ) );",
-      `gl_FragColor = vec4( color, opacity * ( 1.0 - getShadowMask() ) * ( 1.0 - smoothstep( 0.55, 1.0, length( ( vFadeW.${axes} - fadeC ) / max( fadeR, vec2( 1.0 ) ) ) ) ) );`
-    );
-  };
-  m3.customProgramCacheKey = () => `fadeShadow-${axes}`;
-};
-var makeFloor = (o2) => {
-  const g4 = new Group();
-  g4.userData.noBounds = true;
-  g4.userData.isFloor = true;
-  const w3 = o2.x1 - o2.x0, d3 = o2.z1 - o2.z0;
-  const cx = (o2.x0 + o2.x1) / 2, cz = (o2.z0 + o2.z1) / 2;
-  const shadowMat = new ShadowMaterial({ color: 0, opacity: o2.shadow ?? 0.55, transparent: true, depthWrite: false });
-  const sh = new Mesh(new PlaneGeometry(w3, d3), shadowMat);
-  sh.rotation.x = -Math.PI / 2;
-  sh.position.set(cx, -o2.y + 0.4, cz);
-  fadeShadow(shadowMat, "xz", o2.fadeC ?? [cx, cz], o2.fadeR ?? [w3 / 2, d3 / 2]);
-  sh.receiveShadow = true;
-  sh.renderOrder = 2;
-  g4.add(sh);
-  let refl = null;
-  if ((o2.reflect ?? 0) > 0) {
-    const m3 = mirrorMaterial();
-    m3.uniforms.strength.value = o2.reflect;
-    m3.uniforms.fadeC.value.set(...o2.fadeC ?? [cx, cz]);
-    m3.uniforms.fadeR.value.set(...o2.fadeR ?? [w3 / 2, d3 / 2]);
-    refl = new Mesh(new PlaneGeometry(w3, d3), m3);
-    refl.rotation.x = -Math.PI / 2;
-    refl.position.set(cx, -o2.y, cz);
-    refl.renderOrder = 1;
-    refl.userData.isMirror = true;
-    g4.add(refl);
-  }
-  const blobMats = [];
-  for (const b2 of o2.blobs ?? []) {
-    const m3 = new MeshBasicMaterial({ transparent: true, depthWrite: false, opacity: b2.a ?? 0.7, toneMapped: false, color: 0 });
-    m3.alphaMap = blobTexture();
-    const p3 = new Mesh(new PlaneGeometry(b2.w, b2.d), m3);
-    p3.rotation.x = -Math.PI / 2;
-    p3.position.set(b2.x, -o2.y + 0.25, b2.z);
-    p3.renderOrder = 1.5;
-    g4.add(p3);
-    blobMats.push({ m: m3, a: b2.a ?? 0.7 });
-  }
-  const shadow0 = o2.shadow ?? 0.55, reflect0 = o2.reflect ?? 0;
-  g4.setStage = (white) => {
-    shadowMat.opacity = shadow0 * (1 - 0.55 * white);
-    if (refl) refl.material.uniforms.strength.value = reflect0 * (1 - 0.45 * white);
-    for (const b2 of blobMats) b2.m.opacity = b2.a * (1 - 0.5 * white);
-  };
-  return g4;
-};
 var paints = /* @__PURE__ */ new Map();
 var paintTex = (key2, w3, h3, draw, scale = 2) => {
   const e3 = paints.get(key2);
@@ -45619,8 +45497,8 @@ var typeLines = (g4, x3, y3, w3, n2, gap = 26, h3 = 6, a3 = 0.24, seed = 0) => {
   g4.fillStyle = `rgba(20,14,10,${a3})`;
   for (let i3 = 0; i3 < n2; i3++) {
     const k3 = (i3 * 7 + seed * 13) % 10;
-    const len2 = i3 === n2 - 1 ? w3 * 0.55 : w3 * (0.82 + 0.018 * k3);
-    const r3 = h3 / 2, yy = y3 + i3 * gap, ww = Math.min(w3, len2);
+    const len = i3 === n2 - 1 ? w3 * 0.55 : w3 * (0.82 + 0.018 * k3);
+    const r3 = h3 / 2, yy = y3 + i3 * gap, ww = Math.min(w3, len);
     g4.beginPath();
     g4.moveTo(x3 + r3, yy);
     g4.lineTo(x3 + ww - r3, yy);
@@ -45654,7 +45532,6 @@ var SM = {
   /** the bad figure's red, as a body colour */
   red: () => new three_module_exports.MeshPhysicalMaterial({ color: col("#B3262B"), roughness: 0.5, metalness: 0.1, clearcoat: 0.3, envMapIntensity: 0.9 })
 };
-var STUDIO_RIG = { key: 0.75, fill: 3.2, rim: 4.5, dir: [-0.45, 0.8, 0.55] };
 var textTex = (key2, w3, h3, lines, o2 = {}) => paintTex(`studio:${key2}`, w3, h3, (g4) => {
   const pad = o2.pad ?? Math.round(h3 * 0.12), r3 = o2.r ?? 0;
   if (o2.bg) {
@@ -45732,17 +45609,6 @@ var halo = (w3, h3, hex, op = 0.5, flat = false) => {
   m3.receiveShadow = false;
   return m3;
 };
-var studioFloor = (o2) => makeFloor({
-  y: o2.y,
-  x0: o2.cx - (o2.rx ?? 900) - 600,
-  x1: o2.cx + (o2.rx ?? 900) + 600,
-  z0: (o2.cz ?? 0) - 1400,
-  z1: (o2.cz ?? 0) + 1200,
-  reflect: o2.reflect ?? 0.42,
-  shadow: 0.6,
-  fadeC: [o2.cx, o2.cz ?? 0],
-  fadeR: [(o2.rx ?? 900) * 1.15, o2.rz ?? 760]
-});
 
 // src/three/obj/tag.ts
 var tagShape = (w3, h3, cut2, r3) => {
@@ -45778,11 +45644,11 @@ var makeTag = (o2) => {
     group.add(rail, clamp2);
   }
   const cordM = new three_module_exports.MeshStandardMaterial({ color: 14275266, roughness: 0.8, metalness: 0 });
-  const len2 = cord + (h3 / 2 - EYE_Y) - 8;
+  const len = cord + (h3 / 2 - EYE_Y) - 8;
   for (const s2 of [-1, 1]) {
-    const c3 = mesh(new three_module_exports.CylinderGeometry(1.7, 1.7, Math.hypot(len2, 7), 8), cordM);
-    c3.position.set(s2 * 3.5, -8 - len2 / 2, s2 * 1.5);
-    c3.rotation.z = s2 * Math.atan2(7, len2);
+    const c3 = mesh(new three_module_exports.CylinderGeometry(1.7, 1.7, Math.hypot(len, 7), 8), cordM);
+    c3.position.set(s2 * 3.5, -8 - len / 2, s2 * 1.5);
+    c3.rotation.z = s2 * Math.atan2(7, len);
     sway.add(c3);
   }
   const turn = new three_module_exports.Group();
@@ -45954,13 +45820,13 @@ var makeFiling = (o2) => {
   const spineLine = rbox(3, 3, d3 - 30, 1, SM.edge(), 1);
   spineLine.position.set(-w3 / 2 - 14.5, t3 / 2 + CT, (d3 - 30) / 2);
   group.add(back, spine, spineLine);
-  const leaves = (len2) => {
-    const tx = paintTex(`filing:leaves:${Math.round(len2)}:${Math.round(t3)}`, len2, t3, (g4) => {
+  const leaves = (len) => {
+    const tx = paintTex(`filing:leaves:${Math.round(len)}:${Math.round(t3)}`, len, t3, (g4) => {
       g4.fillStyle = "#E9E2D2";
-      g4.fillRect(0, 0, len2, t3);
+      g4.fillRect(0, 0, len, t3);
       for (let y3 = 0.6; y3 < t3; y3 += 1.7) {
         g4.fillStyle = `rgba(92,82,60,${(0.1 + 0.2 * hash(Math.round(y3 * 10), 2, 9)).toFixed(3)})`;
-        g4.fillRect(0, y3, len2, 0.55);
+        g4.fillRect(0, y3, len, 0.55);
       }
     }, 3);
     return SM.print(tx);
@@ -45969,7 +45835,7 @@ var makeFiling = (o2) => {
   const block = rbox(w3, t3, d3, 1.2, { px: leaves(d3), nx: paper, top: paper, bottom: paper, front: leaves(w3), back: leaves(w3) }, 1);
   block.position.set(0, CT + t3 / 2, d3 / 2);
   group.add(block);
-  const pw = w3 - 24, pd = d3 - 24, PAD = 30 * k3, TW2 = pw - 2 * PAD - 16 * k3;
+  const pw = w3 - 24, pd = d3 - 24, PAD = 30 * k3, TW3 = pw - 2 * PAD - 16 * k3;
   const cut2 = o2.line.indexOf(": ");
   const [label, figure] = cut2 > 0 ? [o2.line.slice(0, cut2 + 1), o2.line.slice(cut2 + 2)] : [o2.line, ""];
   const rows = (() => {
@@ -45985,7 +45851,7 @@ var makeFiling = (o2) => {
     }
     return [ws.slice(0, best).join(" "), ws.slice(best).join(" ")];
   })();
-  const LS = Math.min(34 * k3, TW2 / (Math.max(...rows.map((r3) => r3.length)) * 0.72)), FS = figure ? Math.min(74 * k3, TW2 / (figure.length * 0.72)) : 0;
+  const LS = Math.min(34 * k3, TW3 / (Math.max(...rows.map((r3) => r3.length)) * 0.72)), FS = figure ? Math.min(74 * k3, TW3 / (figure.length * 0.72)) : 0;
   const ROWS1 = 4, P1 = 92 * k3, GAP2 = 22 * k3;
   const lineTop = P1 + ROWS1 * GAP2 + 26 * k3, labelH = LS * 1.22 * rows.length + LS * 0.2, figH = FS * 1.12, lineBot = lineTop + labelH + figH + 8 * k3;
   const pageTex = paintTex(`filing:${o2.key}:page:${Math.round(w3)}`, pw, pd, (g4) => {
@@ -46003,11 +45869,11 @@ var makeFiling = (o2) => {
     greek(g4, PAD, P1, pw - 2 * PAD, ROWS1, 1, GAP2, 8 * k3);
     g4.fillStyle = INK;
     rows.forEach((r3, i3) => {
-      const ls = fitFont(g4, 700, LS, r3, TW2);
+      const ls = fitFont(g4, 700, LS, r3, TW3);
       g4.fillText(r3, PAD + 8 * k3, lineTop + LS * 1.02 + i3 * LS * 1.22 - (LS - ls) / 2);
     });
     if (figure) {
-      const fs = fitFont(g4, 800, FS, figure, TW2);
+      const fs = fitFont(g4, 800, FS, figure, TW3);
       g4.fillText(figure, PAD + 8 * k3, lineTop + labelH + FS * 0.9 - (FS - fs) / 2);
     }
     let y3 = greek(g4, PAD, lineBot + 30 * k3, pw - 2 * PAD, 4, 2, GAP2, 8 * k3);
@@ -46245,7 +46111,7 @@ var makeNameplate = (o2) => {
 var INK2 = "#2A2416";
 var SOFT2 = "#6A6048";
 var LINE = "#8E7C45";
-var certTex = (key2, w3, h3, label, sub2, o2 = {}) => paintTex(`certs:${key2}:${label}:${sub2 ?? ""}:${o2.big ?? ""}`, w3, h3, (g4) => {
+var certTex = (key2, w3, h3, label, sub, o2 = {}) => paintTex(`certs:${key2}:${label}:${sub ?? ""}:${o2.big ?? ""}`, w3, h3, (g4) => {
   const gr = g4.createLinearGradient(0, 0, w3, h3);
   gr.addColorStop(0, "#F4EEDF");
   gr.addColorStop(1, "#E6DDC8");
@@ -46260,9 +46126,9 @@ var certTex = (key2, w3, h3, label, sub2, o2 = {}) => paintTex(`certs:${key2}:${
   g4.stroke();
   g4.lineWidth = 0.7;
   g4.globalAlpha = 0.75;
-  const wave = (x0, y0, len2, horiz, ph) => {
+  const wave = (x0, y0, len, horiz, ph) => {
     g4.beginPath();
-    for (let i3 = 0; i3 <= len2; i3 += 2) {
+    for (let i3 = 0; i3 <= len; i3 += 2) {
       const a3 = band * 0.42 * Math.sin(i3 / band * 2.2 + ph);
       const x3 = horiz ? x0 + i3 : x0 + a3, y4 = horiz ? y0 + a3 : y0 + i3;
       if (i3 === 0) g4.moveTo(x3, y4);
@@ -46311,12 +46177,12 @@ var certTex = (key2, w3, h3, label, sub2, o2 = {}) => paintTex(`certs:${key2}:${
     const z3 = fitFont(g4, 800, Math.round(h3 * 0.21), label, inner);
     y3 += h3 * 0.09 + z3 * 0.84;
     g4.fillText(label, cx, y3);
-    if (sub2) {
+    if (sub) {
       g4.fillStyle = SOFT2;
       track(g4, 3);
-      const z22 = fitFont(g4, 600, Math.round(h3 * 0.058), sub2, inner);
+      const z22 = fitFont(g4, 600, Math.round(h3 * 0.058), sub, inner);
       y3 += h3 * 0.05 + z22;
-      g4.fillText(sub2, cx, y3);
+      g4.fillText(sub, cx, y3);
     }
   }
   track(g4, 0);
@@ -46461,21 +46327,8 @@ var contractTex = (w3, h3) => paintTex("deal:contract2", w3, h3, (g4) => {
     g4.fillRect(x0, 398, w3 / 2 - 54, 1.2);
   }
 }, 3);
-var dealModel = () => {
-  const G3 = DEAL_GEO, Y = -G3.desk.y;
-  const root = new three_module_exports.Group();
-  root.add(studioFloor({ y: G3.floor, cx: G3.desk.x, rx: 1900 }));
-  const desk = makeDesk({ w: G3.desk.w, d: G3.desk.d, drop: G3.floor - G3.desk.y - 44 });
-  desk.group.position.set(G3.desk.x, Y, -G3.desk.d / 2);
-  desk.group.userData.obj = "desk";
-  for (const [x3, z3, w3, d3, o2] of [[G3.plate.x, -40, 1300, 760, 0.12], [G3.swapX, 0, 1200, 760, 0.1], [G3.card.x, 40, 1200, 760, 0.12]]) {
-    const pool = halo(w3, d3, C3.white, o2, true);
-    pool.position.set(x3, Y + 3, z3);
-    root.add(pool);
-  }
-  const plate = makeNameplate({ key: "deal", w: G3.plate.w, h: G3.plate.h, texts: [NAMES.buyer] });
-  plate.group.position.set(G3.plate.x, Y, G3.plate.z);
-  plate.group.userData.obj = "nameplate";
+var buildContract = () => {
+  const G3 = DEAL_GEO;
   const contract = new three_module_exports.Group();
   contract.userData.obj = "contract";
   const cw = G3.contract.w, cd = G3.contract.d;
@@ -46503,6 +46356,10 @@ var dealModel = () => {
   pen.rotation.set(Math.PI / 2, 0, 0.5);
   pen.position.set(cw / 2 + 70, 8, 40);
   contract.add(pen);
+  return contract;
+};
+var buildCooler = () => {
+  const G3 = DEAL_GEO;
   const cooler = new three_module_exports.Group();
   cooler.userData.obj = "cooler";
   const K3 = G3.cooler;
@@ -46552,11 +46409,13 @@ var dealModel = () => {
   const cup = halo(K3.w * 1.5, 380, C3.gold, 0.2);
   cup.position.set(0, K3.h + 120, -K3.d / 2 - 60);
   cooler.add(body, lip, lipLine, lidPivot, bundles, cl, cair, cup);
-  const certs = makeCerts({ key: "deal", w: G3.certs.w, d: G3.certs.d, n: G3.certs.n, t: G3.certs.t, labels: ["SQUARE SHARES"], sub: "CLASS A COMMON STOCK" });
-  certs.group.userData.obj = "certs";
+  return cooler;
+};
+var buildCard = () => {
+  const G3 = DEAL_GEO;
   const card2 = new three_module_exports.Group();
   card2.userData.obj = "card";
-  const CW = G3.card.w, CH = G3.card.h, A5 = CW * DEAL.ratio, B5 = CW - A5, TH2 = 8;
+  const CW = G3.card.w, CH = G3.card.h, A5 = CW * DEAL.ratio, B5 = CW - A5, TH3 = 8;
   const rail = rbox(CW + 70, 12, 46, 4, SM.edge());
   rail.position.set(0, 6, 23);
   const railIn = rbox(CW + 50, 5, 20, 2, SM.black());
@@ -46569,48 +46428,26 @@ var dealModel = () => {
   const frontTex = certTex("deal:one", CW, CH, "AFTERPAY SHARE", void 0, { big: "1" });
   const part = (w3, u0, u1) => {
     const g4 = new three_module_exports.Group();
-    const back = rbox(w3, CH, TH2, 2.5, SM.paper(), 1);
-    back.position.z = TH2 / 2;
+    const back = rbox(w3, CH, TH3, 2.5, SM.paper(), 1);
+    back.position.z = TH3 / 2;
     const geo = new three_module_exports.PlaneGeometry(w3 - 1, CH - 1);
     const uv = geo.attributes.uv;
     for (let i3 = 0; i3 < uv.count; i3++) uv.setX(i3, u0 + (u1 - u0) * uv.getX(i3));
     const f3 = new three_module_exports.Mesh(geo, SM.print(frontTex));
-    f3.position.z = TH2 / 2 + 0.7;
+    f3.position.z = TH3 / 2 + 0.7;
     g4.add(back, f3);
     lean.add(g4);
     return g4;
   };
   const pa = part(A5, 0, DEAL.ratio), pb = part(B5, DEAL.ratio, 1);
   const backFace = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(A5 - 1, CH - 1), SM.print(certTex("deal:frac", A5, CH, "SQUARE SHARE", void 0, { big: String(DEAL.ratio), bigColor: "#8A6410" })));
-  backFace.position.z = -TH2 / 2 - 0.7;
+  backFace.position.z = -TH3 / 2 - 0.7;
   backFace.rotation.y = Math.PI;
   pa.add(backFace);
   const fair = halo(A5 * 2.6, CH * 2, C3.khaki, 0);
   fair.position.set(0, 12 + CH / 2, -50);
   card2.add(fair);
-  root.add(desk.group, plate.group, contract, cooler, certs.group, card2);
-  return {
-    root,
-    rig: STUDIO_RIG,
-    update: (p3) => {
-      contract.position.set(G3.contract.x - 1250 * (1 - p3.contract), Y, G3.contract.z);
-      contract.rotation.y = -0.12 - 0.1 * (1 - p3.contract);
-      cooler.position.set(G3.swapX + 1700 * p3.cooler, Y, -10);
-      cooler.visible = p3.cooler < 0.999;
-      certs.group.position.set(G3.swapX + 1700 * (1 - p3.certs), Y, 20);
-      certs.group.visible = p3.certs > 1e-3;
-      certs.update({ height: 1, glow: p3.certs });
-      card2.position.set(G3.card.x + 1300 * (1 - p3.card), Y, G3.card.z);
-      card2.visible = p3.card > 1e-3;
-      const k3 = p3.flip;
-      pa.position.x = (-CW / 2 + A5 / 2) * (1 - k3);
-      pa.rotation.y = Math.PI * k3;
-      pb.position.x = CW / 2 - B5 / 2 + 1500 * k3 * k3;
-      pb.position.z = -14 * Math.min(1, k3 * 6);
-      pb.visible = k3 < 0.98;
-      fair.material.opacity = 0.3 * k3;
-    }
-  };
+  return { card: card2, pa, pb, fair, CW, CH, A: A5, B: B5 };
 };
 
 // src/r45/sets/deal.tsx
@@ -46620,7 +46457,7 @@ var CASH = word(S3, 1, /^cash/);
 var SHARES = word(S3, 2, /^shares/);
 var EVERY = cue(S3, 3);
 var RATIO = word(S3, 3, /^0\.375/);
-var DL = { contract: [AGREED - 2, AGREED + 28], cooler: [CASH, CASH + 24], certs: [SHARES - 16, SHARES + 14], card: [EVERY - 6, EVERY + 22], flip: [RATIO - 2, RATIO + 22] };
+var DL = { contract: [AGREED - 2, AGREED + 28], cooler: [CASH, CASH + 24], certs: [cue(S3, 2) - 4, cue(S3, 2) + 24], card: [EVERY - 6, EVERY + 22], flip: [RATIO - 2, RATIO + 22] };
 var TOP = DEAL_GEO.desk.y;
 var STORY2 = [
   { at: -9999, x: DEAL_GEO.plate.x, y: TOP - 270, z: 1.36, dur: 1 },
@@ -46647,19 +46484,19 @@ var paramsAt2 = (f3) => ({
 // src/three/obj/led.ts
 var dotsOf = (text, cols, rows, weight = 800, mark = false) => {
   const c3 = document.createElement("canvas");
-  const S9 = 4;
-  c3.width = cols * S9;
-  c3.height = rows * S9;
+  const S13 = 4;
+  c3.width = cols * S13;
+  c3.height = rows * S13;
   const g4 = c3.getContext("2d");
   g4.fillStyle = "#fff";
   g4.textBaseline = "alphabetic";
   g4.textAlign = "center";
-  let size2 = rows * S9 * 1.28;
+  let size2 = rows * S13 * 1.28;
   font(g4, weight, size2);
   track(g4, size2 * 0.03);
-  const mw = mark ? rows * S9 * 0.95 : 0;
+  const mw = mark ? rows * S13 * 0.95 : 0;
   const tw = g4.measureText(text).width + mw;
-  const fit = c3.width - 2 * S9 - size2 * 0.06;
+  const fit = c3.width - 2 * S13 - size2 * 0.06;
   if (tw > fit) {
     size2 *= fit / tw;
     font(g4, weight, size2);
@@ -46667,7 +46504,7 @@ var dotsOf = (text, cols, rows, weight = 800, mark = false) => {
   }
   const w22 = g4.measureText(text).width, x0 = (c3.width - (w22 + mw)) / 2;
   if (mark) {
-    const a3 = rows * S9 * 0.62, mx = x0 + a3 * 0.5, my = c3.height * 0.5;
+    const a3 = rows * S13 * 0.62, mx = x0 + a3 * 0.5, my = c3.height * 0.5;
     g4.beginPath();
     g4.moveTo(mx - a3 / 2, my - a3 * 0.42);
     g4.lineTo(mx + a3 / 2, my - a3 * 0.42);
@@ -46680,8 +46517,8 @@ var dotsOf = (text, cols, rows, weight = 800, mark = false) => {
   const lit = [];
   for (let r3 = 0; r3 < rows; r3++) for (let q4 = 0; q4 < cols; q4++) {
     let a3 = 0;
-    for (let y3 = 0; y3 < S9; y3++) for (let x3 = 0; x3 < S9; x3++) a3 += px2[((r3 * S9 + y3) * c3.width + q4 * S9 + x3) * 4 + 3];
-    lit.push(a3 / (S9 * S9) > 110);
+    for (let y3 = 0; y3 < S13; y3++) for (let x3 = 0; x3 < S13; x3++) a3 += px2[((r3 * S13 + y3) * c3.width + q4 * S13 + x3) * 4 + 3];
+    lit.push(a3 / (S13 * S13) > 110);
   }
   return lit;
 };
@@ -46793,116 +46630,144 @@ var makeLed = (o2) => {
   return { group, update };
 };
 
-// src/three/props/price.ts
-var PRICE_GEO = {
-  floor: 1400,
-  cx: 540,
-  plinth: { w: 560, h: 120, d: 420, z: 290 },
-  certs: { w: 420, d: 290, n: 36, t: 6 },
-  led: { w: 620, h: 300, legs: 480 },
-  times: { y: 1006, z: 96 },
-  equals: { y: 62 },
-  tag: { y: -420, w: 720, h: 300, cord: 120 }
+// src/world/cam.ts
+var add = (a3, b2) => [a3[0] + b2[0], a3[1] + b2[1], a3[2] + b2[2]];
+var mixV = (a3, b2, t3) => [a3[0] + (b2[0] - a3[0]) * t3, a3[1] + (b2[1] - a3[1]) * t3, a3[2] + (b2[2] - a3[2]) * t3];
+var lerp3 = (a3, b2, t3) => a3 + (b2 - a3) * t3;
+var orbitPos = (c3, a3, r3, y3) => {
+  const k3 = a3 * Math.PI / 180;
+  return [c3[0] + Math.sin(k3) * r3, y3, c3[2] + Math.cos(k3) * r3];
 };
-var priceModel = () => {
-  const G3 = PRICE_GEO, Y = -G3.floor, X3 = G3.cx;
-  const root = new three_module_exports.Group();
-  root.add(studioFloor({ y: G3.floor, cx: X3, cz: 120, rx: 900, rz: 820 }));
-  const pool = halo(1500, 1100, C3.white, 0.1, true);
-  pool.position.set(X3, Y + 2, 160);
-  root.add(pool);
-  const P4 = G3.plinth;
-  const plinth = rbox(P4.w, P4.h, P4.d, 10, SM.black());
-  plinth.position.set(X3, Y + P4.h / 2, P4.z + P4.d / 2);
-  const pTop = rbox(P4.w - 30, 3, P4.d - 30, 3, SM.graphite(), 1);
-  pTop.position.set(X3, Y + P4.h + 0.6, P4.z + (P4.d - 30) / 2);
-  pTop.receiveShadow = true;
-  const pLine = rbox(P4.w - 8, 4, 4, 1.4, SM.edge(), 1);
-  pLine.position.set(X3, Y + P4.h - 4, P4.z + P4.d / 2 + 2.4);
-  const certs = makeCerts({ key: "price", w: G3.certs.w, d: G3.certs.d, n: G3.certs.n, t: G3.certs.t, labels: ["SQUARE SHARES"], sub: "0.375 PER AFTERPAY SHARE" });
-  certs.group.position.set(X3, Y + P4.h + 2, P4.z);
-  certs.group.userData.obj = "certs";
-  const led = makeLed({ key: "price", w: G3.led.w, h: G3.led.h, legs: G3.led.legs });
-  led.group.position.set(X3, Y, 0);
-  led.group.userData.obj = "led";
-  const sign2 = (t3, y3, z3, stemTo) => {
-    const g4 = new three_module_exports.Group();
-    const s2 = plaque(`price:${t3}`, 104, 104, [{ t: t3, size: 100, weight: 800, color: C3.white, glow: 14 }], { pad: 4, depth: 20 });
-    const len2 = Math.abs(y3 - stemTo) - 52;
-    if (len2 > 4) {
-      const stem = mesh(new three_module_exports.CylinderGeometry(4, 4, len2, 12), SM.edge());
-      stem.position.y = -(52 + len2 / 2);
-      g4.add(stem);
-    }
-    g4.add(s2);
-    g4.position.set(X3, -y3, z3);
-    g4.userData.obj = `sign${t3}`;
-    root.add(g4);
-    return { g: g4, face: s2.userData.face };
-  };
-  const signs = [sign2("\xD7", G3.times.y, G3.times.z, G3.floor - P4.h), sign2("=", G3.equals.y, 20, G3.equals.y + 60)];
-  const tag = makeTag({ key: "price", w: G3.tag.w, h: G3.tag.h, cord: G3.tag.cord, faces: [
-    { kicker: "ANNOUNCED | 1 AUG 2021", figure: "$29,000,000,000", color: C3.mint },
-    { kicker: "ANNOUNCED | 1 AUG 2021", figure: "$29,000,000,000", color: C3.mint }
-  ] });
-  tag.group.position.set(X3, -G3.tag.y, 20);
-  tag.group.userData.obj = "tag";
-  const stack = new three_module_exports.Group();
-  stack.userData.obj = "stack";
-  stack.add(plinth, pTop, pLine, certs.group);
-  root.add(stack, led.group, tag.group);
-  return {
-    root,
-    rig: STUDIO_RIG,
-    update: (p3) => {
-      led.update({ value: PRICE.announce, date: PRICE.announceDate, on: p3.on });
-      certs.update({ height: 1, glow: 0.25 + 0.75 * p3.sum });
-      stack.position.x = 1500 * (1 - p3.stack);
-      stack.visible = p3.stack > 1e-3;
-      signs.forEach(({ g: g4, face }, i3) => {
-        face.material.opacity = 0.1 + 0.9 * p3.sum;
-        if (i3 === 0) g4.visible = p3.stack > 0.5;
-      });
-      tag.update({ flip: 0.5 * (1 - p3.turn), swing: p3.swing, lit: p3.tag });
-      const off = 1700 * (1 - p3.hang);
-      tag.group.position.x = X3 + off;
-      tag.group.visible = p3.hang > 1e-3;
-      signs[1].g.position.x = X3 + off;
-      signs[1].g.visible = p3.hang > 1e-3;
-    }
-  };
+var orbitAt = (o2, t3) => orbitPos(o2.c, lerp3(o2.a0, o2.a1, t3), lerp3(o2.r0, o2.r1 ?? o2.r0, t3), lerp3(o2.y0, o2.y1 ?? o2.y0, t3));
+var orbit = (at, dur, o2, x3 = {}) => ({ at, dur, pos: orbitAt(o2, 1), look: x3.look ?? o2.c, fov: x3.fov, ease: x3.ease ?? SOFT, orbit: o2, why: x3.why ?? "orbit" });
+var dolly = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? SETTLE, why: x3.why ?? "dolly" });
+var crane = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? TRAVEL, arc: x3.bulge ?? [0, 0, 120], why: x3.why ?? "crane", whoosh: 0.5 });
+var travel = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? TRAVEL, arc: x3.bulge, why: x3.why ?? "travel", whoosh: x3.vol ?? 0.6 });
+var cut = (at, pos, look, x3 = {}) => ({ at, dur: 0, pos, look, fov: x3.fov, cut: true, dip: x3.dip ?? 0, why: x3.why ?? "cut" });
+var checkPath = (name, keys) => {
+  for (let i3 = 1; i3 < keys.length; i3++) {
+    const a3 = keys[i3 - 1], k3 = keys[i3];
+    if (k3.at < a3.at + a3.dur - 1e-6) throw new Error(`camera ${name}: key ${i3} "${k3.why ?? ""}" (f${k3.at}) starts before key ${i3 - 1} "${a3.why ?? ""}" ends (f${a3.at + a3.dur}): camera keys never overlap`);
+    if (!k3.cut && k3.dur < 1) throw new Error(`camera ${name}: key ${i3} "${k3.why ?? ""}" has no duration (use cut())`);
+  }
+  return keys;
 };
 
-// src/r45/sets/price.tsx
+// src/world/places/price.ts
 var S4 = "price";
 var WORTH = word(S4, 0, /^worth/);
 var N247 = word(S4, 0, /^\$247/);
 var N29 = word(S4, 1, /^29/);
+var IN = 34;
+var LED = { w: 820, h: 390, legs: 560 };
+var LED_C = [0, LED.legs + LED.h / 2, 0];
+var PLINTH = { w: 760, h: 150, d: 560 };
+var STK = { w: 600, d: 420, n: 44, t: 7 };
+var STACK = [-1560, 0, 80];
+var STACK_C = [STACK[0], PLINTH.h + 170, STACK[2]];
+var TIMES = [-760, 430, 120];
+var EQ = [780, 430, 120];
+var TW = 800;
+var TH = 340;
+var CORD = 760;
+var TAG_C = [1640, 800, 60];
+var HANG = [TAG_C[0], TAG_C[1] + TH / 2 + CORD, TAG_C[2]];
 var BACK = N247 + 12;
-var TURN = Math.max(BACK + 46, N29 - 20);
-var PUSH = Math.max(TURN + 16, N29);
-var PR = { on: [WORTH - 8, WORTH + 6], stack: [BACK + 2, BACK + 30], sum: [BACK + 24, BACK + 40], turn: [TURN, TURN + 22], tag: [PUSH + 12, PUSH + 30], hang: [BACK + 28, BACK + 50] };
-var LED_CY = PRICE_GEO.floor - PRICE_GEO.led.legs - PRICE_GEO.led.h / 2;
-var TAG_CY2 = PRICE_GEO.tag.y + PRICE_GEO.tag.cord + PRICE_GEO.tag.h / 2;
-var STORY3 = [
-  { at: -9999, x: PRICE_GEO.cx, y: LED_CY + 50, z: 1.42, dur: 1 },
-  // close on the board
-  { at: BACK, x: PRICE_GEO.cx, y: 400, z: 0.75, dur: 40 },
-  // back: the stack × the board (the = just in at the top)
-  { at: PUSH, x: PRICE_GEO.cx, y: TAG_CY2 + 40, z: 1.3, dur: 40 }
-  // up onto the tag
-];
-var PR_DONE = Math.max(cueEnd(S4, 1) + 4, PUSH + 40);
-var PR_CAM = alive("price", STORY3, PR_DONE + 40, { amp: 0.5 });
-var paramsAt3 = (f3) => ({
-  on: ramp(f3, PR.on[0], PR.on[1], SETTLE),
-  stack: ramp(f3, PR.stack[0], PR.stack[1], GLIDE),
-  turn: ramp(f3, PR.turn[0], PR.turn[1], SETTLE),
-  sum: ramp(f3, PR.sum[0], PR.sum[1], SETTLE),
-  tag: ramp(f3, PR.tag[0], PR.tag[1], SETTLE),
-  swing: 0.7 * Math.sin(f3 / 29),
-  hang: ramp(f3, PR.hang[0], PR.hang[1], GLIDE)
-});
+var TRACK = Math.max(BACK + 40, N29 - 40);
+var CLIMB = TRACK + 46;
+var PR3 = { on: [WORTH - 8, WORTH + 6], stack: [BACK + 4, BACK + 32], times: [TRACK + 6, TRACK + 16], eq: [TRACK + 28, TRACK + 38], tag: [Math.min(N29 - 4, CLIMB), Math.min(N29 - 4, CLIMB) + 18] };
+var PricePlace = {
+  id: S4,
+  label: "4 The price: $247.26 a share, so $29B",
+  enter: cue(S4, 0) - 30,
+  shots: ({ from, to }) => {
+    const k3 = [];
+    const A02 = { c: LED_C, a0: -34, a1: -12, r0: 1820, r1: 1640, y0: 200, y1: 520 };
+    k3.push(travel(from, IN, orbitPos(A02.c, A02.a0, A02.r0, A02.y0), [0, LED_C[1] - 30, 0], { fov: 52, bulge: [0, 60, 260], why: "in through the dark, low under the board", vol: 0.8 }));
+    const t1 = from + IN + 1, d1 = Math.max(12, BACK - 2 - t1);
+    k3.push(orbit(t1, d1, A02, { look: [0, LED_C[1] - 20, 0], fov: 52, ease: SOFT, why: "rise round the board as it lights" }));
+    const t22 = t1 + d1 + 1;
+    k3.push(travel(t22, 36, [STACK[0] - 620, 600, 1500], STACK_C, { bulge: [0, 80, 300], fov: 48, why: "back to the stack of shares", vol: 0.5 }));
+    const t3 = Math.max(TRACK, t22 + 37);
+    k3.push(travel(t3, 44, [TAG_C[0] - 1100, 640, 2100], [TAG_C[0] - 260, 640, 60], { bulge: [0, -40, 160], fov: 48, ease: SOFT, why: "track along the sum", vol: 0.5 }));
+    const t4 = t3 + 45, d4 = Math.min(40, to - 2 - t4);
+    if (d4 >= 12) k3.push(dolly(t4, d4, [TAG_C[0] - 560, TAG_C[1] - 130, 1560], TAG_C, { fov: 46, ease: SETTLE, why: "up onto the tag: $29B" }));
+    return k3;
+  },
+  lights: (f3) => {
+    const on2 = ramp(f3, PR3.on[0], PR3.on[1], SETTLE), tag = ramp(f3, PR3.tag[0], PR3.tag[1], SETTLE);
+    const a3 = ramp(f3, BACK, BACK + 30, SETTLE), b2 = ramp(f3, TRACK + 8, TRACK + 50, SETTLE);
+    const at = mixV(mixV(LED_C, STACK_C, a3), TAG_C, b2);
+    return {
+      amb: 0.13,
+      key: { pos: [at[0] - 500, 2300, at[2] + 1100], at, i: 0.7 + 1.5 * a3 * (1 - b2) + 2.3 * tag, color: b2 > 0.5 ? "#FFC06A" : "#FFF4E2", angle: 0.5, soft: 0.85 },
+      rim: { pos: [at[0] + 1100, 1300, -1500], at, i: 2.6, color: "#CFE0FF", angle: 0.45, soft: 0.8 },
+      aux: { pos: [at[0] - 1400, 600, -900], at, i: 1.5, color: "#DDE6F5", angle: 0.8, soft: 0.6 },
+      // the board's own khaki light on the floor, then the tag's amber
+      accent: b2 > 0.5 ? { pos: [TAG_C[0] - 60, TAG_C[1] - 320, 440], color: "#F5A524", i: 0.8 * tag } : { pos: [0, LED_C[1] - 120, 380], color: C3.khaki, i: 0.55 * on2 * (1 - a3 * 0.6) },
+      focus: [at[0], at[2]],
+      reach: 3e3,
+      reflect: 0.5
+    };
+  },
+  build: () => {
+    const group = new Group();
+    const led = makeLed({ key: "price3d", w: LED.w, h: LED.h, legs: LED.legs });
+    led.group.rotation.y = -0.06;
+    const stack = new Group();
+    const plinth = rbox(PLINTH.w, PLINTH.h, PLINTH.d, 10, SM.black());
+    plinth.position.set(0, PLINTH.h / 2, PLINTH.d / 2);
+    const line = rbox(PLINTH.w - 8, 4, 4, 1.4, SM.edge(), 1);
+    line.position.set(0, PLINTH.h - 5, PLINTH.d / 2 + 2.4);
+    const certs = makeCerts({ key: "price3d", w: STK.w, d: STK.d, n: STK.n, t: STK.t, labels: ["SQUARE SHARES"], sub: "0.375 PER AFTERPAY SHARE" });
+    certs.group.position.set(0, PLINTH.h + 1, 0);
+    stack.add(plinth, line, certs.group);
+    stack.rotation.y = 0.14;
+    const sign2 = (kind) => {
+      const g4 = new Group();
+      const face = new MeshStandardMaterial({ color: 15921902, roughness: 0.45, metalness: 0, emissive: new Color(16777215), emissiveIntensity: 0 });
+      const L2 = 300, T4 = 62, D3 = 70;
+      for (const s2 of [-1, 1]) {
+        const bar = rbox(L2, T4, D3, 8, face, 2);
+        bar.position.z = D3 / 2;
+        if (kind === "x") bar.rotation.z = s2 * Math.PI / 4;
+        else bar.position.y = s2 * 62;
+        g4.add(bar);
+      }
+      const stem = rbox(14, 430 - 110, 14, 3, SM.edge(), 1);
+      stem.position.set(0, -110 - (430 - 110) / 2, D3 / 2 + 7 - 28);
+      const foot = rbox(190, 12, 150, 5, SM.black());
+      foot.position.set(0, -430 + 6, D3 / 2 + 75 - 28);
+      g4.add(stem, foot);
+      return { g: g4, face };
+    };
+    const times = sign2("x"), eq = sign2("=");
+    times.g.position.set(...TIMES);
+    eq.g.position.set(...EQ);
+    times.g.rotation.y = 0.2;
+    eq.g.rotation.y = -0.1;
+    const tag = makeTag({ key: "price3d", w: TW, h: TH, cord: CORD, faces: [
+      { kicker: "ANNOUNCED | 1 AUG 2021", figure: "$29,000,000,000", color: C3.mint },
+      { kicker: "ANNOUNCED | 1 AUG 2021", figure: "$29,000,000,000", color: C3.mint }
+    ] });
+    tag.group.position.set(...HANG);
+    tag.group.rotation.y = -0.34;
+    group.add(led.group, stack, times.g, eq.g, tag.group);
+    return {
+      group,
+      update: (f3) => {
+        const on2 = ramp(f3, PR3.on[0], PR3.on[1], SETTLE), st = ramp(f3, PR3.stack[0], PR3.stack[1], GLIDE);
+        led.update({ value: PRICE.announce, date: PRICE.announceDate, on: on2 });
+        stack.position.set(STACK[0] - 2200 * (1 - st), 0, STACK[2] - 200 * (1 - st));
+        stack.visible = st > 1e-3;
+        certs.update({ height: 1, glow: st });
+        times.face.emissiveIntensity = 0.06 + 1 * ramp(f3, PR3.times[0], PR3.times[1], SETTLE);
+        eq.face.emissiveIntensity = 0.06 + 1 * ramp(f3, PR3.eq[0], PR3.eq[1], SETTLE);
+        tag.update({ flip: 0, swing: 1 * Math.sin(f3 / 29), lit: 0.12 + 0.88 * ramp(f3, PR3.tag[0], PR3.tag[1], SETTLE) });
+      }
+    };
+  }
+};
 
 // src/three/obj/c_calendar.ts
 var smooth = (x3) => {
@@ -46960,13 +46825,13 @@ var makeCalendar = (o2) => {
     group.add(pivot);
     return { pivot, body, tab, z0: 13 + (n2 - 1 - i3) * 1.5, z1: -7 - i3 * 1.5 };
   });
-  const A0 = -FRONT, A1 = -(2 * Math.PI - FRONT - 0.02);
+  const A02 = -FRONT, A1 = -(2 * Math.PI - FRONT - 0.02);
   const LEN2 = 1.7;
   const update = (p3) => {
     const u4 = Math.max(0, Math.min(1, p3.cal)) * (n2 - 2 + LEN2);
     leaves.forEach((l3, i3) => {
       const q4 = i3 === n2 - 1 ? 0 : smooth((u4 - i3) / LEN2);
-      l3.pivot.rotation.x = A0 + (A1 - A0) * q4;
+      l3.pivot.rotation.x = A02 + (A1 - A02) * q4;
       const z3 = l3.z0 + (l3.z1 - l3.z0) * smooth((q4 - 0.2) / 0.6);
       l3.body.position.z = z3;
       l3.tab.position.z = z3;
@@ -47060,62 +46925,6 @@ var CLOSE_GEO = {
   filing: { dx: 150, w: 600, d: 760, t: 58, z: 40 },
   stamp: { dx: 138, dz: 326 }
 };
-var MONTHS = ["AUG 2021", "SEP 2021", "OCT 2021", "NOV 2021", "DEC 2021", "JAN 2022"];
-var closeModel = () => {
-  const G3 = CLOSE_GEO, Y = -G3.floor;
-  const root = new three_module_exports.Group();
-  root.add(studioFloor({ y: G3.floor, cx: 1500, rx: 2100 }));
-  const pool = (x3, w3, d3, op = 0.1) => {
-    const h3 = halo(w3, d3, "#B9C4D6", op, true);
-    h3.position.set(x3, Y + 1.2, 60);
-    root.add(h3);
-  };
-  const cal = makeCalendar({ key: "close", months: MONTHS });
-  cal.group.position.set(G3.cal.x, Y, -60);
-  cal.group.rotation.y = 0.12;
-  cal.group.userData.obj = "calendar";
-  pool(G3.cal.x, 1100, 760);
-  const plinth = rbox(470, 150, 350, 8, SM.graphite());
-  plinth.position.set(G3.stack.x, Y + 75, 175);
-  const band = rbox(476, 5, 356, 2, SM.edge(), 1);
-  band.position.set(G3.stack.x, Y + 141, 178);
-  const certs = makeCerts({ key: "close", labels: ["SQUARE SHARES", "BLOCK SHARES"], sub: "ISSUED AT CLOSING" });
-  certs.group.position.set(G3.stack.x, Y + 150, 0);
-  certs.group.userData.obj = "certs";
-  const plate = makeNameplate({ key: "close", w: 380, h: 96, texts: [NAMES.was, NAMES.now] });
-  plate.group.position.set(G3.stack.x, Y, 300);
-  plate.group.userData.obj = "nameplate";
-  const led = makeLed({ key: "close", w: G3.led.w, h: G3.led.h, legs: G3.led.legs });
-  led.group.position.set(G3.led.x, Y, 0);
-  led.group.userData.obj = "led";
-  pool((G3.stack.x + G3.led.x) / 2, 1900, 900);
-  const desk = makeDesk({ w: G3.desk.w, d: G3.desk.d, drop: G3.floor - G3.desk.y - 44 });
-  desk.group.position.set(G3.desk.x, -G3.desk.y, -G3.desk.d / 2 + 60);
-  desk.group.userData.obj = "desk";
-  const sheen = halo(G3.desk.w * 1.05, G3.desk.d * 1.1, "#AEB9CC", 0.13, true);
-  sheen.position.set(G3.desk.x, -G3.desk.y + 0.8, 60);
-  const F4 = G3.filing;
-  const filing = makeFiling({ key: "close", w: F4.w, d: F4.d, t: F4.t, cover: ["FORM 10-Q", "BLOCK, INC. | Q1 2022"], line: FILING_LINE });
-  filing.group.position.set(G3.desk.x + F4.dx, -G3.desk.y, F4.z);
-  filing.group.userData.obj = "filing";
-  const stamp = makeStamp({ key: "close", text: DATES.form, w: 300, h: 80 });
-  stamp.group.position.set(G3.desk.x + F4.dx + G3.stamp.dx, -G3.desk.y + F4.t + 8 + 0.6, F4.z + G3.stamp.dz);
-  stamp.group.userData.obj = "stamp";
-  root.add(cal.group, plinth, band, certs.group, plate.group, led.group, desk.group, sheen, filing.group, stamp.group);
-  void C3;
-  return {
-    root,
-    rig: STUDIO_RIG,
-    update: (p3) => {
-      cal.update({ cal: p3.cal });
-      plate.update({ swap: p3.swap });
-      certs.update({ height: 1 - 0.5 * p3.fall, label: p3.swap > 0.5 ? 1 : 0 });
-      led.update({ value: PRICE.announce + (PRICE.close - PRICE.announce) * p3.fall, date: p3.fall > 0.5 ? PRICE.closeDate : PRICE.announceDate, fall: p3.fall });
-      filing.update({ open: p3.open, hl: p3.hl });
-      stamp.update({ p: p3.stamp });
-    }
-  };
-};
 
 // src/r45/sets/close.tsx
 var S5 = "close";
@@ -47153,7 +46962,7 @@ var FTOP = CLOSE_GEO.filing.t + 8;
 var WHOLE = aimAt(FX - 150, CLOSE_GEO.filing.z, FTOP);
 var LINE2 = aimAt(FX + 10, CLOSE_GEO.filing.z - 40, FTOP);
 var MID_Y = CLOSE_GEO.floor - 330;
-var STORY4 = [
+var STORY3 = [
   { at: -9999, x: CLOSE_GEO.cal.x, y: CLOSE_GEO.floor - 372, z: 1.2, dur: 1 },
   // close on the calendar
   { at: cue(S5, 1) - 6, x: (CLOSE_GEO.stack.x + CLOSE_GEO.led.x) / 2 - 70, y: MID_Y, z: 0.74, dur: 46 },
@@ -47166,8 +46975,8 @@ var STORY4 = [
   // onto its line
 ];
 var CL_DONE = Math.min(Math.max(cueEnd(S5, 2) + 4, LAND + 6), cue("fair", 0) - 1);
-var CL_CAM = alive("close", STORY4, CL_DONE + 40, { amp: 0.45 });
-var paramsAt4 = (f3) => ({
+var CL_CAM = alive("close", STORY3, CL_DONE + 40, { amp: 0.45 });
+var paramsAt3 = (f3) => ({
   cal: ramp(f3, CL.cal[0], CL.cal[1], (t3) => t3),
   swap: ramp(f3, CL.swap[0], CL.swap[1], SETTLE),
   fall: ramp(f3, CL.fall[0], CL.fall[1], COUNT),
@@ -47178,29 +46987,29 @@ var paramsAt4 = (f3) => ({
 
 // src/three/obj/c_scale.ts
 var makeScale = (o2 = {}) => {
-  const SPAN = o2.span ?? 760, HT = o2.height ?? 640, R2 = o2.pan ?? 150, DROP = o2.drop ?? 300;
+  const SPAN2 = o2.span ?? 760, HT2 = o2.height ?? 640, R2 = o2.pan ?? 150, DROP2 = o2.drop ?? 300;
   const group = new three_module_exports.Group();
   const black = SM.black(), graphite = SM.graphite(), edge = SM.edge();
   const foot = mesh(lathe([[0.01, 0], [176, 0], [180, 6], [180, 20], [168, 28], [120, 34], [112, 44], [60, 50], [40, 62], [0.01, 62]], 72), black);
   const footRing = mesh(new three_module_exports.TorusGeometry(174, 3.2, 10, 72), edge);
   footRing.rotation.x = Math.PI / 2;
   footRing.position.y = 24;
-  const col2 = mesh(lathe([[26, 0], [20, 30], [15, 120], [13, HT - 120], [17, HT - 70], [24, HT - 62], [24, HT - 50], [14, HT - 44], [12, HT - 14], [0.01, HT - 10]], 40), graphite);
+  const col2 = mesh(lathe([[26, 0], [20, 30], [15, 120], [13, HT2 - 120], [17, HT2 - 70], [24, HT2 - 62], [24, HT2 - 50], [14, HT2 - 44], [12, HT2 - 14], [0.01, HT2 - 10]], 40), graphite);
   col2.position.y = 56;
-  for (const y3 of [86, 56 + HT - 56]) {
+  for (const y3 of [86, 56 + HT2 - 56]) {
     const c3 = mesh(new three_module_exports.TorusGeometry(y3 < 200 ? 22 : 25, 3, 10, 40), edge);
     c3.rotation.x = Math.PI / 2;
     c3.position.y = y3;
     group.add(c3);
   }
   group.add(foot, footRing, col2);
-  const beamY = 56 + HT;
+  const beamY = 56 + HT2;
   const yoke = rbox(44, 46, 30, 6, black);
   yoke.position.set(0, beamY - 6, 15);
   group.add(yoke);
   const beam = new three_module_exports.Group();
   beam.position.y = beamY;
-  const bar = rbox(SPAN + 40, 13, 13, 4, edge);
+  const bar = rbox(SPAN2 + 40, 13, 13, 4, edge);
   bar.position.z = 6.5;
   const boss = mesh(new three_module_exports.CylinderGeometry(20, 20, 26, 32), edge);
   boss.rotation.x = Math.PI / 2;
@@ -47217,26 +47026,26 @@ var makeScale = (o2 = {}) => {
   const seats = [];
   const hangs = [-1, 1].map((s2) => {
     const h3 = new three_module_exports.Group();
-    h3.position.set(s2 * SPAN / 2, 0, 0);
+    h3.position.set(s2 * SPAN2 / 2, 0, 0);
     const eye = mesh(new three_module_exports.TorusGeometry(9, 2.4, 8, 24), edge);
     eye.position.y = -12;
     h3.add(eye);
     for (let k3 = 0; k3 < 3; k3++) {
       const a3 = k3 / 3 * Math.PI * 2 + Math.PI / 2;
-      const top = new three_module_exports.Vector3(0, -20, 0), bot = new three_module_exports.Vector3(Math.cos(a3) * (R2 - 8), -DROP + 16, Math.sin(a3) * (R2 - 8) * 0.999);
-      const len2 = top.distanceTo(bot);
-      const wire = mesh(new three_module_exports.CylinderGeometry(1.5, 1.5, len2, 8), edge);
+      const top = new three_module_exports.Vector3(0, -20, 0), bot = new three_module_exports.Vector3(Math.cos(a3) * (R2 - 8), -DROP2 + 16, Math.sin(a3) * (R2 - 8) * 0.999);
+      const len = top.distanceTo(bot);
+      const wire = mesh(new three_module_exports.CylinderGeometry(1.5, 1.5, len, 8), edge);
       wire.position.copy(top.clone().add(bot).multiplyScalar(0.5));
       wire.quaternion.setFromUnitVectors(new three_module_exports.Vector3(0, 1, 0), bot.clone().sub(top).normalize());
       h3.add(wire);
     }
     const dish = mesh(lathe([[0.01, 0], [R2 * 0.55, 0], [R2 * 0.9, 9], [R2, 22], [R2 + 3, 26], [R2, 26], [R2 * 0.9, 15], [R2 * 0.55, 7], [0.01, 7]], 72), graphite);
-    dish.position.y = -DROP - 10;
+    dish.position.y = -DROP2 - 10;
     const lip = mesh(new three_module_exports.TorusGeometry(R2 + 1, 2.8, 10, 72), edge);
     lip.rotation.x = Math.PI / 2;
-    lip.position.y = -DROP + 15;
+    lip.position.y = -DROP2 + 15;
     const seat = new three_module_exports.Group();
-    seat.position.y = -DROP - 3;
+    seat.position.y = -DROP2 - 3;
     h3.add(dish, lip, seat);
     seats.push(seat);
     beam.add(h3);
@@ -47255,67 +47064,6 @@ var makeScale = (o2 = {}) => {
 
 // src/three/props/fair.ts
 var FAIR_GEO = { floor: 1420, scale: { x: 430, beam: 696 }, desk: { x: 1700, y: 1180, w: 1560, d: 680 }, from: -330, to: 220, plate: 230 };
-var fairModel = () => {
-  const G3 = FAIR_GEO, Y = -G3.floor;
-  const root = new three_module_exports.Group();
-  root.add(studioFloor({ y: G3.floor, cx: 1e3, rx: 1700 }));
-  const pool = (x3, w3, d3, op = 0.1) => {
-    const h3 = halo(w3, d3, "#B9C4D6", op, true);
-    h3.position.set(x3, Y + 1.2, 60);
-    root.add(h3);
-  };
-  const scale = makeScale({ span: 640, height: 640, pan: 138, drop: 300 });
-  scale.group.userData.obj = "scale";
-  scale.group.position.set(G3.scale.x, Y, 0);
-  scale.group.rotation.y = -0.1;
-  pool(G3.scale.x, 1300, 800, 0.12);
-  const fig = plaque("fair:29", 236, 118, [{ t: "$29B", size: 72, weight: 800, color: C3.mint, glow: 18 }, { t: "1 AUG 2021", size: 23, weight: 600, color: C3.white, track: 0.12, gap: 8 }], { pad: 10 });
-  fig.position.set(0, 14 + 68, 13);
-  for (const s2 of [-1, 1]) {
-    const ft = rbox(26, 14, 60, 3, SM.edge());
-    ft.position.set(s2 * 84, 7, 30);
-    scale.seats[0].add(ft);
-  }
-  scale.seats[0].add(fig);
-  const panCerts = makeCerts({ key: "fair:pan", n: 16, w: 210, d: 150, labels: ["SHARES"] });
-  panCerts.group.position.set(0, 0, 0);
-  scale.seats[1].add(panCerts.group);
-  const desk = makeDesk({ w: G3.desk.w, d: G3.desk.d, drop: G3.floor - G3.desk.y - 44 });
-  desk.group.position.set(G3.desk.x, -G3.desk.y, -G3.desk.d / 2 + 20);
-  desk.group.userData.obj = "desk";
-  const sheen = halo(G3.desk.w * 1.05, G3.desk.d * 1.25, "#AEB9CC", 0.13, true);
-  sheen.position.set(G3.desk.x, -G3.desk.y + 0.8, 20);
-  const certs = makeCerts({ key: "fair", n: 18, labels: ["BLOCK SHARES"], sub: "0.375 PER AFTERPAY SHARE" });
-  certs.group.userData.obj = "certs";
-  const plate = makeNameplate({ key: "fair", w: 600, h: 92, texts: [NAMES.holders] });
-  plate.group.position.set(G3.desk.x + G3.plate, -G3.desk.y, 190);
-  plate.group.userData.obj = "nameplate";
-  const fixed = plaque("fair:fixed", 640, 132, [{ t: "FIXED: 0.375 SHARES", size: 64, weight: 800, color: C3.khaki, glow: 14 }], { pad: 14 });
-  const POST = 150;
-  fixed.position.set(G3.desk.x - 150, -G3.desk.y + POST + 66, -250);
-  fixed.userData.obj = "fixed";
-  for (const s2 of [-1, 1]) {
-    const post = mesh(new three_module_exports.CylinderGeometry(5, 5, POST, 16), SM.edge());
-    post.position.set(G3.desk.x - 150 + s2 * 200, -G3.desk.y + POST / 2, -262);
-    const foot = rbox(70, 8, 90, 3, SM.graphite());
-    foot.position.set(G3.desk.x - 150 + s2 * 200, -G3.desk.y + 4, -217);
-    root.add(post, foot);
-  }
-  const air = halo(900, 420, C3.khaki, 0, false);
-  air.position.set(G3.desk.x - 150, -G3.desk.y + POST + 66, -300);
-  root.add(scale.group, desk.group, sheen, certs.group, plate.group, fixed, air);
-  return {
-    root,
-    rig: STUDIO_RIG,
-    update: (p3) => {
-      scale.update({ tilt: p3.tilt });
-      certs.group.position.set(G3.desk.x + G3.from + (G3.to - G3.from) * p3.hand, -G3.desk.y + 46 * Math.sin(Math.PI * p3.hand), -40 - 90 * p3.hand);
-      certs.group.rotation.y = 0.05 * Math.sin(Math.PI * p3.hand);
-      fixed.userData.face.material.opacity = 0.1 + 0.9 * p3.label;
-      air.material.opacity = 0.16 * p3.label;
-    }
-  };
-};
 
 // src/r45/sets/fair.tsx
 var S6 = "fair";
@@ -47323,7 +47071,7 @@ var REAL = word(S6, 0, /^real/);
 var FIXED = word(S6, 1, /^fixed/);
 var GOT = word(S6, 1, /^got/);
 var FA = { label: [FIXED - 2, FIXED + 14], hand: [GOT - 10, GOT + 30], level: [cue(S6, 0) - 6, REAL - 2] };
-var STORY5 = [
+var STORY4 = [
   { at: -9999, x: FAIR_GEO.scale.x + 40, y: FAIR_GEO.floor - 470, z: 0.94, dur: 1 },
   // the whole scale
   { at: REAL - 4, x: FAIR_GEO.scale.x + 40, y: FAIR_GEO.floor - 500, z: 1.02, dur: 40 },
@@ -47334,10 +47082,10 @@ var STORY5 = [
   // following the certificates across
 ];
 var FA_DONE = Math.max(cueEnd(S6, 1) + 4, FA.hand[1] + 6);
-var FA_CAM = alive("fair", STORY5, FA_DONE + 40, { amp: 0.45 });
+var FA_CAM = alive("fair", STORY4, FA_DONE + 40, { amp: 0.45 });
 var T0 = cue(S6, 0) - 10;
 var TAU = Math.max(8, (REAL - T0) / 4.2);
-var paramsAt5 = (f3) => {
+var paramsAt4 = (f3) => {
   const t3 = Math.max(0, f3 - T0);
   return {
     tilt: 8 * Math.exp(-t3 / TAU) * Math.cos(t3 / TAU * 2.1),
@@ -47354,133 +47102,6 @@ var VERDICT_GEO = {
   receipt: { w: 560, h: 600 },
   frame: { x: 930 },
   tag: { x: 540, y: 225, w: 760, h: 320, cord: 120 }
-};
-var RECEIPT_LINES = { head: 0.17, announced: 0.375, paid: 0.555, gap: 0.735, all: 1 };
-var verdictModel = () => {
-  const G3 = VERDICT_GEO, DY = -G3.desk.y, RW = G3.receipt.w, RH = G3.receipt.h, PW = G3.printer.w, PH = G3.printer.h, PD = G3.printer.d;
-  const root = new three_module_exports.Group();
-  root.add(studioFloor({ y: G3.floor, cx: G3.desk.x, rx: 1300 }));
-  const desk = makeDesk({ w: G3.desk.w, d: G3.desk.d, drop: G3.floor - G3.desk.y - 44 });
-  desk.group.position.set(G3.desk.x, DY, 0);
-  desk.group.userData.obj = "desk";
-  const printer = new three_module_exports.Group();
-  printer.userData.obj = "printer";
-  const SLOT_Z = -40;
-  const pb = rbox(PW, PH, PD, 16, SM.black());
-  pb.position.set(0, PH / 2, PD / 2);
-  const bay = rbox(PW - 40, 46, PD * 0.42, 14, SM.graphite());
-  bay.position.set(0, PH + 18, SLOT_Z - 14);
-  const bar = rbox(RW + 26, 7, 10, 2, SM.edge(), 1);
-  bar.position.set(0, PH + 4, SLOT_Z + 12);
-  const base = rbox(PW - 16, 5, 4, 1.5, SM.edge(), 1);
-  base.position.set(0, 7, PD / 2 + 2.5);
-  const led = mesh(new three_module_exports.CylinderGeometry(6, 6, 3, 20), SM.glow(C3.amber));
-  led.rotation.x = Math.PI / 2;
-  led.position.set(PW / 2 - 46, PH * 0.56, PD / 2 + 1.5);
-  const key2 = rbox(54, 16, 4, 3, SM.graphite(), 1);
-  key2.position.set(PW / 2 - 110, PH * 0.56, PD / 2 + 3);
-  const badge = litFace(190, 22, textTex("verdict:badge", 190, 22, [{ t: "THE PAYOUTS", size: 15, weight: 700, color: C3.dim, track: 0.3 }], { pad: 2 }));
-  badge.position.set(-PW / 2 + 130, PH * 0.56, PD / 2 + 0.8);
-  printer.add(pb, bay, bar, base, led, key2, badge);
-  printer.position.set(G3.printer.x, DY, 0);
-  const slotY = DY + PH + 5;
-  const clip = new three_module_exports.Plane(new three_module_exports.Vector3(0, 1, 0), -slotY);
-  const INK3 = "#1E1A10", SOFT3 = "#5B5443", PAPER = "#EFE8D8";
-  const row = (g4, y3, a3, b2, band) => {
-    track(g4, 0);
-    font(g4, 800, 39);
-    const bw = g4.measureText(b2).width;
-    if (band) {
-      g4.fillStyle = band;
-      g4.fillRect(RW - 34 - bw - 10, y3 - 38, bw + 20, 50);
-    }
-    g4.fillStyle = SOFT3;
-    g4.textAlign = "left";
-    font(g4, 700, 19);
-    track(g4, 2.4);
-    g4.fillText(a3, 34, y3 - 46);
-    g4.fillStyle = INK3;
-    g4.textAlign = "right";
-    font(g4, 800, 39);
-    track(g4, 0);
-    g4.fillText(b2, RW - 34, y3);
-  };
-  const dash = (g4, y3) => {
-    g4.fillStyle = SOFT3;
-    for (let x3 = 34; x3 < RW - 34; x3 += 14) g4.fillRect(x3, y3, 8, 2);
-  };
-  const tex = paintTex("verdict:receipt", RW, RH, (g4) => {
-    g4.fillStyle = PAPER;
-    g4.fillRect(0, 0, RW, RH);
-    g4.fillStyle = INK3;
-    g4.textAlign = "center";
-    font(g4, 800, 27);
-    track(g4, 5);
-    g4.fillText("THE PAYOUTS", RW / 2, RH * 0.08);
-    g4.fillStyle = SOFT3;
-    font(g4, 600, 17);
-    track(g4, 3);
-    g4.fillText("AUDIT 037 | AFTERPAY, THE SALE PRICE", RW / 2, RH * 0.128);
-    dash(g4, RH * 0.165);
-    row(g4, RH * RECEIPT_LINES.announced - 22, "ANNOUNCED | 1 AUG 2021", "$29,000,000,000", C3.mint);
-    row(g4, RH * RECEIPT_LINES.paid - 22, "PAID AT CLOSING | 31 JAN 2022", "$13,800,000,000", C3.khaki);
-    dash(g4, RH * RECEIPT_LINES.paid + 6);
-    row(g4, RH * RECEIPT_LINES.gap - 22, "GAP", "\u2248 $15,000,000,000");
-    dash(g4, RH * RECEIPT_LINES.gap + 8);
-    g4.fillStyle = SOFT3;
-    g4.textAlign = "center";
-    font(g4, 600, 12.5);
-    track(g4, 1.8);
-    g4.fillText("SOURCES: SQUARE RELEASE, 1 AUG 2021 | BLOCK FORM 10-Q, Q1 2022", RW / 2, RH * 0.972);
-    track(g4, 0);
-  }, 3);
-  const receipt = new three_module_exports.Group();
-  receipt.userData.obj = "receipt";
-  const pm = SM.print(tex);
-  pm.clippingPlanes = [clip];
-  pm.side = three_module_exports.DoubleSide;
-  const paper = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(RW, RH), pm);
-  paper.castShadow = true;
-  const SW = RW - 130, SH = 104;
-  const rate = litFace(SW, SH, textTex("verdict:rating", SW, SH, [
-    { t: "OUR RATING", size: 19, weight: 700, color: C3.red, track: 0.34 },
-    { t: "INFLATED", size: 58, weight: 800, color: C3.red, track: 0.07, gap: 6 }
-  ], { border: C3.red, r: 8, pad: 16 }));
-  rate.material.clippingPlanes = [clip];
-  const RATE_Y = RH * (0.5 - 0.862);
-  rate.rotation.z = -0.045;
-  receipt.add(paper, rate);
-  receipt.rotation.x = -0.06;
-  const glow = halo(RW * 1.5, 520, C3.white, 0, true);
-  glow.position.set(G3.printer.x, DY + 0.7, 40);
-  const frame = makeFrame({ key: "verdict", photo: HAS_PHOTO ? PHOTO_FILE : null });
-  frame.group.position.set(G3.frame.x, DY, -90);
-  frame.group.rotation.y = -0.2;
-  frame.group.userData.obj = "frame";
-  const tag = makeTag({ key: "verdict", w: G3.tag.w, h: G3.tag.h, cord: G3.tag.cord, rail: 2600, faces: [
-    { kicker: "AFTERPAY | SOLD FOR", figure: "$29,000,000,000", color: C3.mint },
-    { kicker: "THE FILING SAYS", figure: "$13,800,000,000", color: C3.khaki }
-  ] });
-  tag.group.position.set(G3.tag.x, -G3.tag.y, -40);
-  tag.group.userData.obj = "tag";
-  root.add(desk.group, printer, receipt, glow, frame.group, tag.group);
-  return {
-    root,
-    rig: STUDIO_RIG,
-    update: (p3) => {
-      receipt.position.set(G3.printer.x, slotY + RH * (p3.feed - 0.5), SLOT_Z + 4);
-      const m3 = rate.material;
-      m3.opacity = Math.min(1, p3.rating * 2.2);
-      rate.visible = p3.rating > 4e-3;
-      const s2 = 1 + 0.55 * (1 - p3.rating);
-      rate.scale.set(s2, s2, 1);
-      rate.position.set(0, RATE_Y, 1 + 46 * (1 - p3.rating));
-      led.material.opacity = 0.25 + 0.75 * p3.busy;
-      led.material.transparent = true;
-      glow.material.opacity = 0.1;
-      tag.update({ flip: 0, swing: p3.swing, lit: p3.tag });
-    }
-  };
 };
 
 // src/r45/sets/verdict.tsx
@@ -47501,7 +47122,7 @@ var VD = {
   tag: [SEND - 2, SEND + 22]
 };
 var camY2 = (z3, ry) => VERDICT_GEO.tag.y - 16 + (960 - ry) / z3;
-var STORY6 = [
+var STORY5 = [
   { at: -9999, x: 520, y: camY2(0.92, 300), z: 0.92, dur: 1 },
   // the tag over the printer
   { at: N292 + 14, x: 500, y: camY2(0.95, 296), z: 0.95, dur: 40, drift: true },
@@ -47511,23 +47132,11 @@ var STORY6 = [
   { at: SEND - 2, x: 590, y: camY2(0.86, 330), z: 0.86, dur: 44 }
   // back: the receipt and the tag (the opening)
 ];
-var VD_CAM = alive("verdict", STORY6, TOTAL_FRAMES + 4, { amp: 0.3 });
+var VD_CAM = alive("verdict", STORY5, TOTAL_FRAMES + 4, { amp: 0.3 });
 for (let f3 = cue(S7, 0) - 80; f3 <= TOTAL_FRAMES; f3++) {
   const v3 = camView(VD_CAM, f3), y3 = 960 + (VERDICT_GEO.tag.y - 16 - v3.y) * v3.z;
   if (y3 < 280) throw new Error(`verdict: the tag's rail reaches y ${Math.round(y3)} on screen at f${f3} (the caption line)`);
 }
-var feedAt = (f3) => {
-  const a3 = ramp(f3, VD.head[0], VD.head[1], SETTLE), b2 = ramp(f3, VD.ann[0], VD.ann[1], SETTLE), c3 = ramp(f3, VD.paid[0], VD.paid[1], SETTLE), d3 = ramp(f3, VD.gap[0], VD.gap[1], SETTLE), e3 = ramp(f3, VD.foot[0], VD.foot[1], SETTLE);
-  return lerp(lerp(lerp(lerp(RECEIPT_LINES.head * a3, RECEIPT_LINES.announced, b2), RECEIPT_LINES.paid, c3), RECEIPT_LINES.gap + 0.02, d3), RECEIPT_LINES.all, e3);
-};
-var feeding = (f3) => [VD.head, VD.ann, VD.paid, VD.gap, VD.foot].some(([a3, b2]) => f3 >= a3 - 2 && f3 <= b2 + 2);
-var paramsAt6 = (f3) => ({
-  feed: feedAt(f3),
-  rating: ramp(f3, VD.rating[0], VD.rating[1], SETTLE),
-  tag: 0.3 + 0.7 * ramp(f3, VD.tag[0], VD.tag[1], SETTLE),
-  swing: 0.7 * Math.sin(f3 / 31) + 0.3 * Math.sin(f3 / 17),
-  busy: feeding(f3) ? Math.floor(f3 / 3) % 2 ? 1 : 0.3 : 0.5
-});
 
 // src/r45/score.ts
 var buildScore = (sets, moves) => {
@@ -47551,13 +47160,12 @@ var buildScore = (sets, moves) => {
   add2(pk("deal")("whooshsoft", DL.card[0] + 4, DL.card[1], 0.35, "the one certificate slides in on its rail"));
   add2(wi("deal")("tick", DL.flip[0], void 0, 0.35, "the certificate is cut at 0.375"));
   add2(wi("deal")("flick", DL.flip[0] + 6, void 0, 0.4, "the piece turns to 0.375"));
-  add2(wi("price")("click", PR.on[0], void 0, 0.3, "the board lights: $247.26"));
-  add2(wi("price")("datashort", PR.on[0] + 1, PR.on[1] + 8, 0.25, "the board's dots come up"));
-  add2(pk("price")("whooshsoft", PR.stack[0] + 6, PR.stack[1], 0.4, "the stack slides in on its plinth"));
-  add2(wi("price")("tick", PR.sum[0], void 0, 0.3, "the sum's signs light: \xD7 and ="));
-  add2(pk("price")("whooshsoft", PR.hang[0] + 5, PR.hang[1], 0.3, "the tag slides in on its cord"));
-  add2(wi("price")("flick", PR.turn[0] + 6, void 0, 0.35, "the tag turns to face us"));
-  add2(wi("price")("pingshort", PR.tag[0] + 6, void 0, 0.3, "the tag lights: $29,000,000,000"));
+  add2(wi("price")("click", PR3.on[0], void 0, 0.3, "the board lights: $247.26"));
+  add2(wi("price")("datashort", PR3.on[0] + 1, PR3.on[1] + 8, 0.25, "the board's dots come up"));
+  add2(pk("price")("whooshsoft", PR3.stack[0] + 6, PR3.stack[1], 0.4, "the stack slides in on its plinth"));
+  add2(wi("price")("tick", PR3.times[0], void 0, 0.3, "the \xD7 sign lights"));
+  add2(wi("price")("tick", PR3.eq[0], void 0, 0.3, "the = sign lights"));
+  add2(wi("price")("pingshort", PR3.tag[0] + 6, void 0, 0.3, "the tag lights: $29,000,000,000"));
   for (let i3 = 0; i3 < 5; i3++) add2(wi("close")("flick", CL.cal[0] + (i3 + 0.5) * (CL.cal[1] - CL.cal[0]) / 5, void 0, 0.26, `the calendar's leaf ${i3 + 1} flips`));
   add2(wi("close")("click", CL.swap[0] + 8, void 0, 0.3, "the nameplate rolls to BLOCK"));
   add2(pk("close")("lowwoosh", CL.fall[0] + 20, CL.fall[1], 0.4, "the price falls and the stack shrinks"));
@@ -47581,162 +47189,6 @@ var buildScore = (sets, moves) => {
   const out = cues.filter((c3) => !(c3.why.startsWith("the camera travels") && cues.some((o2) => o2 !== c3 && MOVE.has(o2.s) && !o2.why.startsWith("the camera travels") && Math.abs(heard(o2) - heard(c3)) <= 6)));
   out.sort((a3, b2) => a3.at - b2.at);
   return { cues: out };
-};
-
-// src/world/cam.ts
-var add = (a3, b2) => [a3[0] + b2[0], a3[1] + b2[1], a3[2] + b2[2]];
-var sub = (a3, b2) => [a3[0] - b2[0], a3[1] - b2[1], a3[2] - b2[2]];
-var mixV = (a3, b2, t3) => [a3[0] + (b2[0] - a3[0]) * t3, a3[1] + (b2[1] - a3[1]) * t3, a3[2] + (b2[2] - a3[2]) * t3];
-var len = (a3) => Math.hypot(a3[0], a3[1], a3[2]);
-var lerp3 = (a3, b2, t3) => a3 + (b2 - a3) * t3;
-var DEFAULT_FOV = 50;
-var orbitPos = (c3, a3, r3, y3) => {
-  const k3 = a3 * Math.PI / 180;
-  return [c3[0] + Math.sin(k3) * r3, y3, c3[2] + Math.cos(k3) * r3];
-};
-var orbitAt = (o2, t3) => orbitPos(o2.c, lerp3(o2.a0, o2.a1, t3), lerp3(o2.r0, o2.r1 ?? o2.r0, t3), lerp3(o2.y0, o2.y1 ?? o2.y0, t3));
-var orbit = (at, dur, o2, x3 = {}) => ({ at, dur, pos: orbitAt(o2, 1), look: x3.look ?? o2.c, fov: x3.fov, ease: x3.ease ?? SOFT, orbit: o2, why: x3.why ?? "orbit" });
-var dolly = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? SETTLE, why: x3.why ?? "dolly" });
-var crane = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? TRAVEL, arc: x3.bulge ?? [0, 0, 120], why: x3.why ?? "crane", whoosh: 0.5 });
-var travel = (at, dur, pos, look, x3 = {}) => ({ at, dur, pos, look, fov: x3.fov, ease: x3.ease ?? TRAVEL, arc: x3.bulge, why: x3.why ?? "travel", whoosh: x3.vol ?? 0.6 });
-var cut = (at, pos, look, x3 = {}) => ({ at, dur: 0, pos, look, fov: x3.fov, cut: true, dip: x3.dip ?? 0, why: x3.why ?? "cut" });
-var checkPath = (name, keys) => {
-  for (let i3 = 1; i3 < keys.length; i3++) {
-    const a3 = keys[i3 - 1], k3 = keys[i3];
-    if (k3.at < a3.at + a3.dur - 1e-6) throw new Error(`camera ${name}: key ${i3} "${k3.why ?? ""}" (f${k3.at}) starts before key ${i3 - 1} "${a3.why ?? ""}" ends (f${a3.at + a3.dur}): camera keys never overlap`);
-    if (!k3.cut && k3.dur < 1) throw new Error(`camera ${name}: key ${i3} "${k3.why ?? ""}" has no duration (use cut())`);
-  }
-  return keys;
-};
-var BREATH = 7;
-var breath = (f3) => [
-  BREATH * (Math.sin(f3 * 0.0213 + 1.3) + 0.5 * Math.sin(f3 * 91e-4 + 4.1)),
-  BREATH * 0.6 * (Math.sin(f3 * 0.0171 + 2.9) + 0.4 * Math.sin(f3 * 0.0123 + 0.4)),
-  BREATH * 1.2 * Math.sin(f3 * 0.0137 + 5.2)
-];
-var poseAt = (keys, f3) => {
-  let p3 = { pos: keys[0].pos, look: keys[0].look, fov: keys[0].fov ?? DEFAULT_FOV, roll: keys[0].roll ?? 0 };
-  for (let i3 = 1; i3 < keys.length; i3++) {
-    const k3 = keys[i3];
-    if (f3 < k3.at) break;
-    const end = { pos: k3.pos, look: k3.look, fov: k3.fov ?? p3.fov, roll: k3.roll ?? 0 };
-    if (k3.cut || f3 >= k3.at + k3.dur) {
-      p3 = end;
-      continue;
-    }
-    const t3 = (k3.ease ?? SETTLE)(clamp01((f3 - k3.at) / k3.dur));
-    let pos = mixV(p3.pos, k3.pos, t3);
-    if (k3.orbit) {
-      const on2 = orbitAt(k3.orbit, t3), blend = SOFT(clamp01(t3 / 0.34));
-      const start = orbitAt(k3.orbit, 0);
-      pos = len(sub(start, p3.pos)) < 2 ? on2 : mixV(mixV(p3.pos, on2, t3), on2, blend);
-    }
-    if (k3.arc) {
-      const s2 = Math.sin(Math.PI * t3);
-      pos = add(pos, [k3.arc[0] * s2, k3.arc[1] * s2, k3.arc[2] * s2]);
-    }
-    p3 = { pos, look: mixV(p3.look, k3.look, t3), fov: lerp3(p3.fov, end.fov, t3), roll: lerp3(p3.roll, end.roll, t3) };
-    break;
-  }
-  const b2 = breath(f3);
-  return { pos: add(p3.pos, b2), look: add(p3.look, [b2[0] * 0.25, b2[1] * 0.25, 0]), fov: p3.fov, roll: p3.roll };
-};
-
-// src/world/places/hook.ts
-var S8 = "hook";
-var HEAD2 = cue(S8, 1);
-var FILING2 = cue(S8, 2);
-var FLIP2 = word(S8, 2, /^13/);
-var DESK_Y = 300;
-var HANG = [-150, 2080, 60];
-var CORD = 900;
-var TW = 820;
-var TH = 350;
-var TAG = [HANG[0], HANG[1] - CORD - TH / 2, HANG[2]];
-var PAPERS = [
-  { x: -470, z: -10, ry: -0.12, masthead: "THE MORNING LEDGER", tone: "#E6DFCF" },
-  { x: -120, z: 50, ry: 0.14, masthead: "MARKET DAILY", tone: "#DCD5C4" },
-  { x: -300, z: 300, ry: 0.04, masthead: "THE BUSINESS POST", tone: "#E9E2D3" }
-];
-var FILE = [640, DESK_Y, 60];
-var FRAME = [960, DESK_Y, -150];
-var HookPlace = {
-  id: S8,
-  label: "1 Hook: the tag, $29,000,000,000; the filing says $13.8B",
-  enter: 0,
-  shots: ({ to }) => {
-    const k3 = [];
-    const A0 = { c: TAG, a0: -36, a1: -8, r0: 1420, r1: 1260, y0: TAG[1] - 330, y1: TAG[1] - 200 };
-    k3.push({ at: 0, dur: 0, pos: orbitPos(TAG, A0.a0, A0.r0, A0.y0), look: [TAG[0], TAG[1] + 20, TAG[2]], fov: 60, cut: true, why: "frame 0: low and close on the tag" });
-    k3.push(orbit(1, HEAD2 - 12, A0, { look: [TAG[0], TAG[1] + 10, TAG[2]], fov: 60, ease: SOFT, why: "orbit the tag" }));
-    const t22 = HEAD2 - 8;
-    k3.push(crane(t22, 40, [-520, 920, 960], [-290, DESK_Y, 190], { bulge: [-120, 40, 200], fov: 50, why: "down to the newspapers" }));
-    const t3 = t22 + 42, d3 = Math.max(12, FILING2 - 6 - t3);
-    k3.push(dolly(t3, d3, [-440, 860, 850], [-285, DESK_Y, 190], { ease: SOFT, why: "push in on the newspapers" }));
-    const t4 = t3 + d3 + 1;
-    k3.push(travel(t4, 34, [1240, 660, 880], [790, DESK_Y + 150, -40], { bulge: [0, 40, 180], why: "along the desk to the filing", vol: 0.5 }));
-    const t5 = Math.max(FLIP2 - 16, t4 + 35);
-    const A1 = { c: TAG, a0: 28, a1: 8, r0: 1500, r1: 1330, y0: TAG[1] - 190, y1: TAG[1] - 130 };
-    k3.push(crane(t5, 34, orbitPos(TAG, A1.a0, A1.r0, A1.y0), TAG, { bulge: [0, 0, 220], why: "back up to the tag as it flips" }));
-    const t6 = t5 + 35;
-    if (to - 2 - t6 >= 10) k3.push(orbit(t6, to - 2 - t6, A1, { look: TAG, ease: SOFT, why: "orbit the flipped tag" }));
-    return k3;
-  },
-  lights: (f3) => {
-    const p3 = paramsAt(f3);
-    return {
-      amb: 0.12,
-      key: { pos: [TAG[0] - 150, 2500, 760], at: [TAG[0], TAG[1] - 200, TAG[2]], i: 2.6 * p3.lit, color: "#FFC06A", angle: 0.5, soft: 0.85 },
-      rim: { pos: [700, 1300, -1500], at: TAG, i: 3.4, color: "#CFE0FF", angle: 0.8, soft: 0.6 },
-      aux: { pos: [900, 1900, 700], at: [800, DESK_Y + 60, -40], i: 0.25 + 2.6 * p3.desk, color: "#F4F6FF", angle: 0.34, soft: 0.9 },
-      accent: { pos: [TAG[0] - 60, TAG[1] - 320, 420], color: "#F5A524", i: 0.9 },
-      focus: [150, 0],
-      reach: 3200,
-      reflect: 0.5
-    };
-  },
-  build: () => {
-    const group = new Group();
-    const tag = makeTag({ key: "hook3d", w: TW, h: TH, cord: CORD, faces: [
-      { kicker: "AFTERPAY | SOLD FOR", figure: "$29,000,000,000", color: C3.mint },
-      { kicker: "THE FILING SAYS", figure: "$13,800,000,000", color: C3.khaki }
-    ] });
-    tag.group.position.set(...HANG);
-    const desk = makeDesk({ w: 2100, d: 900, drop: DESK_Y - 44 });
-    desk.group.position.set(250, DESK_Y, 0);
-    const papers = PAPERS.map((q4, i3) => {
-      const p3 = makePaper({ key: `hook3d${i3}`, masthead: q4.masthead, tone: q4.tone, w: 330, d: 236, t: 20 });
-      group.add(p3.group);
-      return p3.group;
-    });
-    const filing = makeFiling({ key: "hook3d", w: 320, d: 420, t: 78, cover: ["FORM 10-Q", "BLOCK, INC. | Q1 2022"], line: "" });
-    filing.group.position.set(...FILE);
-    filing.group.rotation.y = 0.1;
-    const frame = makeFrame({ key: "hook3d", photo: HAS_PHOTO ? PHOTO_FILE : null });
-    frame.group.position.set(...FRAME);
-    frame.group.rotation.y = -0.32;
-    desk.group.traverse((n2) => {
-      const m3 = n2.material;
-      if (m3?.isMeshStandardMaterial) {
-        m3.roughness = Math.max(m3.roughness, 0.62);
-        if (m3.isMeshPhysicalMaterial) m3.clearcoat = 0;
-      }
-    });
-    group.add(tag.group, desk.group, filing.group, frame.group);
-    return {
-      group,
-      update: (f3) => {
-        const p3 = paramsAt(f3);
-        tag.update({ flip: p3.flip, swing: p3.swing * 1.4, lit: p3.lit });
-        papers.forEach((g4, i3) => {
-          const q4 = PAPERS[i3], [h3, spin] = p3.drop[i3] ?? [0, 0];
-          g4.position.set(q4.x, DESK_Y + h3, q4.z);
-          g4.rotation.set(0, q4.ry + spin, 0);
-          g4.visible = h3 < 1400;
-        });
-      }
-    };
-  }
 };
 
 // ../034-ohtani/node_modules/three/examples/jsm/geometries/TextGeometry.js
@@ -47928,6 +47380,142 @@ var text3d = (str, o2) => {
   return g4;
 };
 
+// src/world/places/hook.ts
+var S8 = "hook";
+var HEAD2 = cue(S8, 1);
+var FILING2 = cue(S8, 2);
+var FLIP2 = word(S8, 2, /^13/);
+var DESK_Y = 300;
+var HANG2 = [-150, 2080, 60];
+var CORD2 = 900;
+var TW2 = 820;
+var TH2 = 350;
+var TAG = [HANG2[0], HANG2[1] - CORD2 - TH2 / 2, HANG2[2]];
+var HOOK_STAGE = { deskY: DESK_Y, deskX: 250, deskW: 2100, deskD: 900, hang: HANG2, cord: CORD2, tw: TW2, th: TH2, tag: TAG };
+var PAPERS = [
+  { x: -470, z: -10, ry: -0.12, masthead: "THE MORNING LEDGER", tone: "#E6DFCF" },
+  { x: -120, z: 50, ry: 0.14, masthead: "MARKET DAILY", tone: "#DCD5C4" },
+  { x: -300, z: 300, ry: 0.04, masthead: "THE BUSINESS POST", tone: "#E9E2D3" }
+];
+var FILE = [640, DESK_Y, 60];
+var FRAME = [960, DESK_Y, -150];
+var A0 = { c: TAG, a0: -36, a1: -8, r0: 1520, r1: 1400, y0: TAG[1] - 300, y1: TAG[1] - 220 };
+var LOOK0 = [TAG[0], TAG[1] - 215, TAG[2]];
+var OPENING = { pos: orbitPos(TAG, A0.a0, A0.r0, A0.y0), look: LOOK0, fov: 60 };
+var hitAt = (f3) => {
+  const t3 = f3 - (HK.flipA + 9);
+  return t3 < 0 ? 0 : Math.exp(-t3 / 10) * clamp01(t3 / 3);
+};
+var NUM = { size: 84, z: -170 };
+var HookPlace = {
+  id: S8,
+  label: "1 Hook: the tag, $29,000,000,000; the filing says $13.8B",
+  enter: 0,
+  shots: ({ to }) => {
+    const k3 = [];
+    k3.push({ at: 0, dur: 0, pos: OPENING.pos, look: LOOK0, fov: 60, cut: true, why: "frame 0: low and close on the tag" });
+    k3.push(orbit(1, HEAD2 - 12, A0, { look: [TAG[0], TAG[1] - 190, TAG[2]], fov: 60, ease: SOFT, why: "orbit the tag" }));
+    const t22 = HEAD2 - 8;
+    k3.push(crane(t22, 40, [-520, 920, 960], [-290, DESK_Y, 190], { bulge: [-120, 40, 200], fov: 50, why: "down to the newspapers" }));
+    const t3 = t22 + 42, d3 = Math.max(12, FILING2 - 6 - t3);
+    k3.push(dolly(t3, d3, [-440, 860, 850], [-285, DESK_Y, 190], { ease: SOFT, why: "push in on the newspapers" }));
+    const t4 = t3 + d3 + 1;
+    k3.push(travel(t4, 34, [1240, 660, 880], [790, DESK_Y + 150, -40], { bulge: [0, 40, 180], why: "along the desk to the filing", vol: 0.5 }));
+    const t5 = Math.max(FLIP2 - 16, t4 + 35);
+    const A1 = { c: TAG, a0: 28, a1: 8, r0: 1620, r1: 1480, y0: TAG[1] - 260, y1: TAG[1] - 220 };
+    const LOOK1 = [TAG[0], TAG[1] - 190, TAG[2]];
+    k3.push(crane(t5, 34, orbitPos(TAG, A1.a0, A1.r0, A1.y0), LOOK1, { bulge: [0, 0, 220], fov: 60, why: "back up to the tag as it flips" }));
+    const t6 = t5 + 35;
+    if (to - 2 - t6 >= 10) k3.push(orbit(t6, to - 2 - t6, A1, { look: LOOK1, fov: 60, ease: SOFT, why: "orbit the flipped tag" }));
+    return k3;
+  },
+  lights: (f3) => {
+    const p3 = paramsAt(f3), hit = hitAt(f3);
+    return {
+      amb: 0.12,
+      key: { pos: [TAG[0] - 150, 2500, 760], at: [TAG[0], TAG[1] - 200, TAG[2]], i: (4 + 3.2 * hit) * p3.lit, color: "#FFC06A", angle: 0.5, soft: 0.85 },
+      rim: { pos: [700, 1300, -1500], at: TAG, i: 3.4, color: "#CFE0FF", angle: 0.8, soft: 0.6 },
+      aux: { pos: [900, 1900, 700], at: [800, DESK_Y + 60, -40], i: 0.25 + 2.6 * p3.desk, color: "#F4F6FF", angle: 0.34, soft: 0.9 },
+      accent: { pos: [TAG[0] - 60, TAG[1] - 320, 420], color: "#F5A524", i: 1.7 + 1.5 * hit },
+      focus: [150, 0],
+      reach: 3200,
+      reflect: 0.5
+    };
+  },
+  build: () => {
+    const group = new Group();
+    const tag = makeTag({ key: "hook3d", w: TW2, h: TH2, cord: CORD2, faces: [
+      { kicker: "AFTERPAY | SOLD FOR", figure: "$29,000,000,000", color: C3.mint },
+      { kicker: "THE FILING SAYS", figure: "$13,800,000,000", color: C3.khaki }
+    ] });
+    tag.group.position.set(...HANG2);
+    const desk = makeDesk({ w: 2100, d: 900, drop: DESK_Y - 44 });
+    desk.group.position.set(250, DESK_Y, 0);
+    const papers = PAPERS.map((q4, i3) => {
+      const p3 = makePaper({ key: `hook3d${i3}`, masthead: q4.masthead, tone: q4.tone, w: 330, d: 236, t: 20 });
+      group.add(p3.group);
+      return p3.group;
+    });
+    const filing = makeFiling({ key: "hook3d", w: 320, d: 420, t: 78, cover: ["FORM 10-Q", "BLOCK, INC. | Q1 2022"], line: "" });
+    filing.group.position.set(...FILE);
+    filing.group.rotation.y = 0.1;
+    const frame = makeFrame({ key: "hook3d", photo: HAS_PHOTO ? PHOTO_FILE : null });
+    frame.group.position.set(...FRAME);
+    frame.group.rotation.y = -0.32;
+    desk.group.traverse((n2) => {
+      const m3 = n2.material;
+      if (m3?.isMeshStandardMaterial) {
+        m3.roughness = Math.max(m3.roughness, 0.62);
+        if (m3.isMeshPhysicalMaterial) m3.clearcoat = 0;
+      }
+    });
+    const numFace = new MeshStandardMaterial({ color: new Color(C3.mint), roughness: 0.4, metalness: 0, emissive: new Color(C3.mint), emissiveIntensity: 0.6 });
+    const numSide = new MeshStandardMaterial({ color: new Color("#1F4A3B"), roughness: 0.45, metalness: 0.5 });
+    const num = text3d("$29,000,000,000", { font: "800", size: NUM.size, depth: 34, bevel: 3, face: numFace, side: numSide });
+    const SILL = NUM.size * 0.2;
+    const numG = new Group();
+    num.position.y = SILL;
+    const sill = new Mesh(new BoxGeometry(num.userData.width + 30, SILL, 22), numSide);
+    sill.position.set(0, SILL / 2, 10);
+    numG.add(num, sill);
+    numG.position.set(TAG[0] - 10, DESK_Y + 1, NUM.z);
+    numG.rotation.y = -0.1;
+    const coneTex = (() => {
+      const c3 = document.createElement("canvas");
+      c3.width = 8;
+      c3.height = 256;
+      const g4 = c3.getContext("2d"), gr = g4.createLinearGradient(0, 0, 0, 256);
+      gr.addColorStop(0, "#9a9a9a");
+      gr.addColorStop(0.35, "#4a4a4a");
+      gr.addColorStop(1, "#000000");
+      g4.fillStyle = gr;
+      g4.fillRect(0, 0, 8, 256);
+      return new CanvasTexture(c3);
+    })();
+    const coneM = new MeshBasicMaterial({ color: new Color("#F5A524"), transparent: true, opacity: 0.05, alphaMap: coneTex, depthWrite: false, side: DoubleSide, toneMapped: false, fog: false });
+    const CH = 1500;
+    const cone = new Mesh(new CylinderGeometry(30, 430, CH, 48, 1, true), coneM);
+    cone.position.set(TAG[0], DESK_Y + CH / 2, TAG[2] + 40);
+    cone.renderOrder = 5;
+    group.add(tag.group, desk.group, filing.group, frame.group, numG, cone);
+    return {
+      group,
+      update: (f3) => {
+        const p3 = paramsAt(f3);
+        tag.update({ flip: p3.flip, swing: p3.swing * 1.4, lit: p3.lit });
+        numFace.emissiveIntensity = 0.6 - 0.48 * ramp(f3, HK.flipA, HK.flipB, SETTLE);
+        coneM.opacity = 0.05 * p3.lit * (1 + 0.8 * hitAt(f3));
+        papers.forEach((g4, i3) => {
+          const q4 = PAPERS[i3], [h3, spin] = p3.drop[i3] ?? [0, 0];
+          g4.position.set(q4.x, DESK_Y + h3, q4.z);
+          g4.rotation.set(0, q4.ry + spin, 0);
+          g4.visible = h3 < 1400;
+        });
+      }
+    };
+  }
+};
+
 // src/world/places/cards.ts
 var PRE = 8;
 var BIG = 190;
@@ -47941,7 +47529,7 @@ var cardWords = (id) => {
 var card = (id, label, color) => {
   const words = cardWords(id), big = words[words.length - 1], lead = words.slice(0, -1);
   const enter = cue(id, 0) - PRE;
-  const bigSize = Math.min(BIG, BIG * 880 / Math.max(1, textWidth(big.t, "800i", BIG)));
+  const bigSize = Math.min(BIG, BIG * 660 / Math.max(1, textWidth(big.t, "800i", BIG)));
   const leadY = bigSize * 1.02 + 96;
   const C4 = [0, bigSize * 0.62, 0];
   return {
@@ -47957,11 +47545,15 @@ var card = (id, label, color) => {
       return {
         amb: 0.05,
         key: { pos: [-500, 1500, 1300], at: C4, i: 0.9, color: "#FFFFFF", angle: 0.5, soft: 0.9 },
-        rim: { pos: [700, 900, -1200], at: [0, C4[1] + 60, 0], i: 0.5 + 0.9 * up, color, angle: 0.36, soft: 0.9 },
-        accent: { pos: [0, 46, 300], color, i: 0.04 + 0.34 * up },
-        focus: [0, 0],
-        reach: 2200,
-        reflect: 0.3,
+        // no spot rakes the floor (it threw a bright streak under the word): the rim comes from high in FRONT, tight on the
+        //   letters, and the colour on the floor is the accent's soft pool and the lit faces' own reflection
+        rim: { pos: [520, 1500, 1500], at: [0, C4[1] + 40, 0], i: 0.25 + 0.5 * up, color: "#FFFFFF", angle: 0.2, soft: 1 },
+        // the coloured light sits HIGH in front: its mirror image in the glossy floor falls below the frame (a low light drew a
+        //   hot streak under the word); the floor's colour is the lit letters' own reflection and their bloom
+        accent: { pos: [0, 900, 700], color, i: 1.3 * up },
+        focus: [0, 60],
+        reach: 1500,
+        reflect: 0.42,
         env: 0.6
       };
     },
@@ -47996,9 +47588,9 @@ var card = (id, label, color) => {
           }
           const p3 = ramp(f3, big.at, big.at + 10, SETTLE);
           word2.visible = f3 >= big.at;
-          word2.position.set(0, (1 - p3) * 120, (1 - p3) * 90);
-          word2.rotation.x = -(1 - p3) * 0.22;
-          face.emissiveIntensity = 0.5 + 1.1 * ramp(f3, big.at + 2, big.at + 14, SETTLE);
+          word2.position.set(0, (1 - p3) * 34, (1 - p3) * 260);
+          word2.rotation.x = (1 - p3) * 0.3;
+          face.emissiveIntensity = 0.6 + 1.3 * ramp(f3, big.at + 2, big.at + 14, SETTLE);
         }
       };
     }
@@ -48007,117 +47599,577 @@ var card = (id, label, color) => {
 var ExplainPlace = card("explain", "2 Turn card: Let me explain.", "#F5A524");
 var CatchPlace = card("catch", "5 Turn card: And here's the catch.", "#E5484D");
 
-// src/world/place.ts
-var GLOW = 1.5;
-var prep = (g4, o2 = {}) => {
-  g4.traverse((n2) => {
-    if (n2.userData.isFloor) {
-      n2.visible = false;
-      n2.userData.dropped = true;
-      return;
-    }
-    const mesh2 = n2;
-    if (!mesh2.isMesh) return;
-    const ms = Array.isArray(mesh2.material) ? mesh2.material : [mesh2.material];
-    for (const m3 of ms) {
-      if (m3.isShadowMaterial || m3.isShaderMaterial) {
-        mesh2.visible = false;
-        mesh2.userData.dropped = true;
-        continue;
+// src/world/places/deal.ts
+var S9 = "deal";
+var AGREED2 = DL.contract[0] + 2;
+var CASH2 = DL.cooler[0];
+var SHARES3 = DL.certs[0] + 4;
+var EVERY2 = DL.card[0] + 6;
+var RATIO2 = DL.flip[0] + 2;
+var DY = 300;
+var PLATE = [-1350, DY, -110];
+var PLATE_C = [-1350, DY + 96, -100];
+var CONTRACT = [-1240, DY, 250];
+var SWAP = [-40, DY, 10];
+var KS = 1.25;
+var COOL_C = [SWAP[0], DY + 170, SWAP[2]];
+var STACK2 = { w: 560, d: 390, n: 44, t: 7 };
+var STACK_C2 = [SWAP[0], DY + 170, SWAP[2] + 10];
+var CARD = [1180, DY, 40];
+var CS = 1;
+var CARD_C = [CARD[0], DY + 190, CARD[2]];
+var NUM2 = [CARD[0] - 90, DY, 300];
+var DealPlace = {
+  id: S9,
+  label: "3 The deal: Square agrees to buy Afterpay, paid in shares, 0.375 a share",
+  enter: cue(S9, 0) - 8,
+  shots: ({ from, to }) => {
+    const k3 = [];
+    const A02 = { c: PLATE_C, a0: -46, a1: -24, r0: 1480, r1: 1420, y0: DY + 60, y1: DY + 130 };
+    k3.push(cut(from, orbitPos(A02.c, A02.a0, A02.r0, A02.y0), PLATE_C, { fov: 44, dip: 5, why: "low and close on the nameplate" }));
+    const t1 = from + 1, d1 = Math.max(12, AGREED2 - 8 - t1);
+    k3.push(orbit(t1, d1, A02, { look: PLATE_C, fov: 44, ease: SOFT, why: "orbit the nameplate" }));
+    const t22 = t1 + d1 + 1;
+    k3.push(crane(t22, 36, [-900, DY + 700, 1300], [-1270, DY + 40, 120], { bulge: [0, 40, 120], fov: 46, why: "over the contract as it slides in" }));
+    const t3 = Math.max(cue(S9, 1) - 8, t22 + 37);
+    const A1 = { c: STACK_C2, a0: -42, a1: 18, r0: 1420, r1: 1280, y0: DY + 230, y1: DY + 360 };
+    k3.push(travel(t3, 38, orbitPos(A1.c, A1.a0, A1.r0, A1.y0), COOL_C, { bulge: [0, -60, 220], fov: 48, why: "low along the desk to the cash", vol: 0.5 }));
+    const t4 = Math.max(SHARES3 - 14, t3 + 39), d4 = Math.max(20, EVERY2 - 12 - t4);
+    k3.push(orbit(t4, d4, A1, { look: STACK_C2, fov: 48, ease: SOFT, why: "orbit the stack of shares" }));
+    const t5 = t4 + d4 + 1;
+    k3.push(travel(t5, 38, [CARD[0] - 600, DY + 320, 1330], CARD_C, { bulge: [0, 30, 200], fov: 46, why: "along the desk to the one certificate", vol: 0.5 }));
+    const t6 = Math.max(RATIO2 + 14, t5 + 39), d6 = Math.min(44, to - 2 - t6);
+    if (d6 >= 12) k3.push(dolly(t6, d6, [CARD[0] - 430, DY + 300, 1330], [CARD[0] - 50, DY + 150, 140], { fov: 46, ease: SOFT, why: "in on 0.375" }));
+    return k3;
+  },
+  lights: (f3) => {
+    const p3 = paramsAt2(f3);
+    const a3 = ramp(f3, cue(S9, 1) - 8, cue(S9, 1) + 30, SETTLE), b2 = ramp(f3, EVERY2 - 12, EVERY2 + 26, SETTLE);
+    const at = mixV(mixV(PLATE_C, STACK_C2, a3), CARD_C, b2);
+    const cash = (1 - p3.cooler) * a3 * (1 - b2), shares = p3.certs * (1 - b2);
+    return {
+      amb: 0.13,
+      key: { pos: [at[0] - 500, DY + 1900, at[2] + 1e3], at, i: 0.6 + 0.6 * (1 - a3) + 1 * shares + 0.8 * b2, color: "#FFF4E2", angle: 0.5, soft: 0.85 },
+      rim: { pos: [at[0] + 1e3, DY + 800, at[2] - 1400], at, i: 2.4, color: "#CFE0FF", angle: 0.42, soft: 0.8 },
+      aux: { pos: [at[0] - 1300, DY + 420, at[2] - 800], at, i: 0.9, color: "#DDE6F5", angle: 0.8, soft: 0.6 },
+      // gold on the cash, then khaki on the documented 0.375
+      accent: b2 > 0.5 ? { pos: [NUM2[0], DY + 120, NUM2[2] + 260], color: C3.khaki, i: 0.5 * p3.flip } : { pos: [SWAP[0], DY + 520, SWAP[2] + 120], color: cash > 0.02 ? C3.gold : "#FFE9C4", i: 0.9 * cash + 0.5 * shares },
+      focus: [at[0], at[2]],
+      reach: 2200,
+      reflect: 0.3
+    };
+  },
+  build: () => {
+    const group = new Group();
+    const desk = makeDesk({ w: 4600, d: 1100, drop: DY - 44 });
+    desk.group.position.set(-100, DY, 0);
+    desk.group.traverse((n2) => {
+      const m3 = n2.material;
+      if (m3?.isMeshStandardMaterial) {
+        m3.roughness = Math.max(m3.roughness, 0.78);
+        m3.envMapIntensity *= 0.45;
+        if (m3.isMeshPhysicalMaterial) m3.clearcoat = 0;
       }
-      const b2 = m3;
-      if (b2.isMeshBasicMaterial) {
-        if (b2.blending === AdditiveBlending) {
-          if (!o2.keepHalos) {
-            mesh2.visible = false;
-            mesh2.userData.dropped = true;
-          }
-          continue;
-        }
-        if (b2.toneMapped === false && !b2.userData.hdr) {
-          b2.userData.hdr = true;
-          b2.color.multiplyScalar(GLOW);
-        }
-        mesh2.castShadow = false;
-        continue;
-      }
-      const s2 = m3;
-      if (s2.isMeshStandardMaterial && s2.userData.envBase === void 0) s2.userData.envBase = s2.envMapIntensity;
-    }
-  });
-  return g4;
-};
-var mountLegacy = (make, o2) => {
-  const m3 = make();
-  const group = new Group();
-  m3.root.position.set(-o2.cx, o2.floor, -(o2.cz ?? 0));
-  group.add(m3.root);
-  prep(group);
-  return { group, update: (p3) => m3.update?.(p3) };
-};
-var shotsFromLegacy = (keys, g4, w3, o2 = {}) => {
-  const D3 = o2.D ?? 2059, side = o2.side ?? 420, lift = o2.lift ?? 260, fov2 = o2.fov ?? 50;
-  const pose = (k3) => {
-    const look = [k3.x - g4.cx, g4.floor - k3.y, o2.depth ?? 0];
-    return { look, pos: [look[0] + side / k3.z, look[1] + lift / k3.z, look[2] + D3 / k3.z] };
-  };
-  const t0 = w3.from + (o2.travelIn ?? 0);
-  let k0 = keys[0];
-  for (const k3 of keys) if (k3.at + k3.dur <= t0) k0 = k3;
-  const p0 = pose(k0);
-  const out = [o2.travelIn ? travel(w3.from, o2.travelIn, p0.pos, p0.look, { fov: fov2, why: "travel in through the dark", vol: 0.8 }) : cut(w3.from, p0.pos, p0.look, { fov: fov2, dip: o2.dip ?? 5, why: "enter" })];
-  let last = t0;
-  for (const k3 of keys) {
-    if (k3 === keys[0] || k3.at < last || k3.at + k3.dur > w3.to - 1) continue;
-    const p3 = pose(k3);
-    out.push({
-      at: k3.at,
-      dur: k3.dur,
-      pos: p3.pos,
-      look: p3.look,
-      fov: fov2,
-      ease: k3.drift ? DRIFT : SETTLE,
-      why: k3.drift ? "breath" : "move",
-      whoosh: !k3.drift && Math.hypot(p3.pos[0] - out[out.length - 1].pos[0], p3.pos[1] - out[out.length - 1].pos[1], p3.pos[2] - out[out.length - 1].pos[2]) > 500 ? 0.5 : void 0
     });
-    last = k3.at + k3.dur;
+    const plate = makeNameplate({ key: "deal3d", w: 760, h: 132, texts: [NAMES.buyer] });
+    plate.group.position.set(...PLATE);
+    plate.group.rotation.y = -0.1;
+    const contract = buildContract();
+    contract.scale.setScalar(1.15);
+    const cooler = buildCooler();
+    cooler.scale.setScalar(KS);
+    const certs = makeCerts({ key: "deal3d", w: STACK2.w, d: STACK2.d, n: STACK2.n, t: STACK2.t, labels: ["SQUARE SHARES"], sub: "CLASS A COMMON STOCK" });
+    const { card: card2, pa, pb, CW, A: A5, B: B5 } = buildCard();
+    card2.scale.setScalar(CS);
+    const face = new MeshStandardMaterial({ color: new Color(C3.khaki), roughness: 0.4, metalness: 0, emissive: new Color(C3.khaki), emissiveIntensity: 0 });
+    const side = new MeshStandardMaterial({ color: new Color(C3.khaki).multiplyScalar(0.3), roughness: 0.45, metalness: 0.5 });
+    const num = text3d(String(DEAL.ratio), { font: "800", size: 120, depth: 46, bevel: 4, face, side });
+    num.rotation.y = -0.12;
+    group.add(desk.group, plate.group, contract, cooler, certs.group, card2, num);
+    return {
+      group,
+      update: (f3) => {
+        const p3 = paramsAt2(f3);
+        const c3 = 1 - p3.contract;
+        contract.position.set(CONTRACT[0] - 380 * c3, DY, CONTRACT[2] - 1150 * c3);
+        contract.rotation.y = 0.16 + 0.5 * c3;
+        contract.visible = p3.contract > 1e-3;
+        cooler.position.set(SWAP[0] + 2500 * p3.cooler, DY, SWAP[2] - 160 * p3.cooler);
+        cooler.rotation.y = -0.12;
+        cooler.visible = p3.cooler < 0.999;
+        certs.group.position.set(SWAP[0] + 2500 * (1 - p3.certs), DY, SWAP[2] - STACK2.d * 0 - 160 * (1 - p3.certs));
+        certs.group.rotation.y = 0.1;
+        certs.group.visible = p3.certs > 1e-3;
+        certs.update({ height: 1, glow: p3.certs });
+        card2.position.set(CARD[0] + 1500 * (1 - p3.card), DY, CARD[2]);
+        card2.rotation.y = -0.08;
+        card2.visible = p3.card > 1e-3;
+        const k3 = p3.flip;
+        pa.position.x = (-CW / 2 + A5 / 2) * (1 - k3);
+        pa.rotation.y = Math.PI * k3;
+        pb.position.x = CW / 2 - B5 / 2 + 1500 * k3 * k3;
+        pb.position.z = -14 * Math.min(1, k3 * 6);
+        pb.visible = k3 < 0.98;
+        const r3 = SETTLE(clamp01((k3 - 0.35) / 0.65));
+        num.visible = r3 > 1e-3;
+        num.position.set(NUM2[0], DY - 140 * (1 - r3), NUM2[2]);
+        face.emissiveIntensity = 0.25 + 0.9 * r3;
+      }
+    };
   }
-  return out;
-};
-var stdLights = (c3, o2 = {}) => {
-  const s2 = o2.s ?? 1;
-  return {
-    amb: o2.amb ?? 0.16,
-    key: { pos: [c3[0] - 700 * s2, c3[1] + 1900 * s2, c3[2] + 1100 * s2], at: c3, i: o2.key ?? 1.7, color: o2.color ?? "#FFF4E2", angle: 0.62, soft: 0.75 },
-    rim: { pos: [c3[0] + 1100 * s2, c3[1] + 900 * s2, c3[2] - 1500 * s2], at: c3, i: o2.rim ?? 3.2, color: "#CFE0FF", angle: 0.8, soft: 0.6 },
-    aux: { pos: [c3[0] - 1500 * s2, c3[1] + 500 * s2, c3[2] - 900 * s2], at: c3, i: (o2.rim ?? 3.2) * 0.45, color: "#DDE6F5", angle: 0.8, soft: 0.6 },
-    focus: [c3[0], c3[2]],
-    reach: o2.reach ?? 2600 * s2,
-    reflect: 0.5
-  };
 };
 
-// src/world/places/legacy.ts
-var legacy = (id, label, make, params, cam2, g4, o2 = {}) => {
-  let keys = [];
-  return {
-    id,
-    label,
-    enter: cue(id, 0) - (o2.travelIn ? 30 : 8),
-    shots: (w3) => keys = shotsFromLegacy(cam2, g4, w3, { side: o2.side ?? 420, lift: o2.lift ?? 300, travelIn: o2.travelIn, dip: 5 }),
-    // the rig follows what the camera looks at
-    lights: (f3) => stdLights(poseAt(keys, f3).look, { s: o2.s ?? 1, key: o2.key, color: o2.color }),
-    build: () => {
-      const m3 = mountLegacy(make, g4);
-      return { group: m3.group, update: (f3) => m3.update(params(f3)) };
-    }
-  };
+// src/world/places/close.ts
+var S10 = "close";
+var C1 = cue(S10, 1);
+var C22 = cue(S10, 2);
+var PRICE_W2 = word(S10, 1, /^share/);
+var SHARES4 = word(S10, 2, /^shares/);
+var N1382 = word(S10, 2, /^13/);
+var MONTHS = ["AUG 2021", "SEP 2021", "OCT 2021", "NOV 2021", "DEC 2021", "JAN 2022"];
+var CAL_S = 2.3;
+var CAL = [-2500, 0, 0];
+var CAL_C = [CAL[0], 470, 30];
+var PAIR_S = 1.5;
+var STACK3 = [-260, 0, 260];
+var BOARD = [520, 0, -420];
+var PLINTH_H = 150;
+var BOARD_C = [BOARD[0], (250 + 150) * PAIR_S, BOARD[2]];
+var STACK_C3 = [STACK3[0], PLINTH_H * PAIR_S + 150, STACK3[2]];
+var DESK_Y2 = 430;
+var DESK = [2900, DESK_Y2, 0];
+var FILE_S = 1.45;
+var FW = 600;
+var FD = 760;
+var FT = 58;
+var FILE2 = [DESK[0] + 60, DESK_Y2, 40];
+var PAGE_Y = DESK_Y2 + (FT + 8) * FILE_S;
+var LINE3 = [FILE2[0], PAGE_Y, FILE2[2] - 0.17 * FD * FILE_S];
+var NUM3 = [FILE2[0] + 40, DESK_Y2, FILE2[2] - FD / 2 * FILE_S - 110];
+var CLOSE_ENTER = cue(S10, 0) - 8;
+var ClosePlace = {
+  id: S10,
+  label: "6 The close: six months, Block, the price halves, the 10-Q books $13.8B",
+  enter: CLOSE_ENTER,
+  shots: ({ from, to }) => {
+    const k3 = [];
+    let end = from;
+    const put = (at, dur, mk, limit = to - 2) => {
+      const a3 = Math.max(at, end + 1), d3 = Math.min(dur, limit - a3);
+      if (d3 < 8) return;
+      k3.push(mk(a3, d3));
+      end = a3 + d3;
+    };
+    const A02 = { c: CAL_C, a0: -34, a1: 14, r0: 2050, r1: 1800, y0: 260, y1: 430 };
+    k3.push(cut(from, orbitPos(CAL_C, A02.a0, A02.r0, A02.y0), [CAL_C[0], CAL_C[1] + 250, CAL_C[2]], { fov: 56, dip: 5, why: "low and close on the calendar" }));
+    put(from + 1, C1 - 10 - from, (a3, d3) => orbit(a3, d3, A02, { look: [CAL_C[0], CAL_C[1] + 230, CAL_C[2]], fov: 56, ease: SOFT, why: "orbit the calendar" }));
+    put(C1 - 8, 38, (a3, d3) => travel(a3, d3, [-1300, 600, 2450], [-150, 330, 520], { bulge: [0, 120, 420], fov: 50, why: "to the stack and the board", vol: 0.55 }));
+    put(end + 1, PRICE_W2 - 10 - end - 1, (a3, d3) => dolly(a3, d3, [-1160, 600, 2320], [-140, 340, 510], { ease: SOFT, why: "ease in on the stack" }), PRICE_W2 - 9);
+    put(PRICE_W2 - 8, 42, (a3, d3) => dolly(a3, d3, [-560, 760, 1500], [BOARD_C[0] + 10, BOARD_C[1] + 60, BOARD_C[2]], { fov: 48, why: "push onto the falling board" }));
+    put(end + 1, C22 - 10 - end - 1, (a3, d3) => dolly(a3, d3, [-500, 750, 1440], [BOARD_C[0] - 10, BOARD_C[1] + 60, BOARD_C[2]], { ease: SOFT, why: "hold on the fall" }), C22 - 9);
+    put(C22 - 8, 46, (a3, d3) => crane(a3, d3, [FILE2[0] - 760, DESK_Y2 + 1250, FILE2[2] + 1500], [FILE2[0] - 120, PAGE_Y, FILE2[2] - 40], { bulge: [0, 420, 500], fov: 50, why: "up and over the desk to the filing" }));
+    put(SHARES4 - 8, 44, (a3, d3) => dolly(a3, d3, [LINE3[0] + 110, PAGE_Y + 1330, LINE3[2] + 1480], [LINE3[0], PAGE_Y, LINE3[2] + 30], { fov: 46, why: "down onto the line" }));
+    put(end + 1, to - 3 - end, (a3, d3) => dolly(a3, d3, [LINE3[0] + 150, PAGE_Y + 1260, LINE3[2] + 1400], [LINE3[0] + 5, PAGE_Y, LINE3[2] + 40], { ease: SOFT, why: "ease on the line" }));
+    return k3;
+  },
+  lights: (f3) => {
+    const p3 = paramsAt3(f3);
+    const a3 = ramp(f3, C1 - 8, C1 + 22, SOFT), b2 = ramp(f3, C22 - 8, C22 + 30, SOFT);
+    const c3 = mixV(mixV([CAL_C[0], 300, 0], [150, 420, -60], a3), [FILE2[0], PAGE_Y, FILE2[2]], b2);
+    const fall = p3.fall, hl = p3.hl;
+    return {
+      amb: 0.16,
+      key: { pos: [c3[0] - 650, c3[1] + 2e3, c3[2] + 1250], at: c3, i: 1.9 + 0.5 * b2, color: "#FFF4E2", angle: 0.6, soft: 0.8 },
+      rim: { pos: [c3[0] + 1200, c3[1] + 900, c3[2] - 1600], at: c3, i: 3.4 - 1.6 * b2, color: "#CFE0FF", angle: 0.8, soft: 0.6 },
+      aux: { pos: [c3[0] - 1500, c3[1] + 520, c3[2] - 900], at: c3, i: 1.5 - 0.8 * b2, color: "#DDE6F5", angle: 0.8, soft: 0.6 },
+      // red comes up with the fall; khaki with the highlight
+      accent: b2 < 0.5 ? { pos: [BOARD_C[0] - 120, BOARD_C[1] - 80, BOARD_C[2] + 520], color: C3.red, i: 0.75 * fall * (1 - b2 * 2) } : { pos: [NUM3[0], DESK_Y2 + 260, NUM3[2] + 420], color: C3.khaki, i: 0.5 * hl },
+      focus: [c3[0], c3[2]],
+      reach: 3e3,
+      reflect: 0.5 - 0.3 * b2
+    };
+  },
+  build: () => {
+    const group = new Group();
+    const cal = makeCalendar({ key: "close3d", months: MONTHS });
+    cal.group.position.set(...CAL);
+    cal.group.scale.setScalar(CAL_S);
+    cal.group.rotation.y = 0.1;
+    const pair = new Group();
+    pair.scale.setScalar(PAIR_S);
+    const plinth = rbox(470, PLINTH_H, 350, 8, SM.graphite());
+    plinth.position.set(STACK3[0] / PAIR_S, PLINTH_H / 2, STACK3[2] / PAIR_S + 175);
+    const band = rbox(476, 5, 356, 2, SM.edge(), 1);
+    band.position.set(STACK3[0] / PAIR_S, PLINTH_H - 9, STACK3[2] / PAIR_S + 178);
+    const certs = makeCerts({ key: "close3d", labels: ["SQUARE SHARES", "BLOCK SHARES"], sub: "ISSUED AT CLOSING" });
+    certs.group.position.set(STACK3[0] / PAIR_S, PLINTH_H, STACK3[2] / PAIR_S);
+    const plate = makeNameplate({ key: "close3d", w: 400, h: 100, texts: [NAMES.was, NAMES.now] });
+    plate.group.position.set(STACK3[0] / PAIR_S - 10, 0, STACK3[2] / PAIR_S + 330);
+    plate.group.rotation.y = -0.06;
+    const led = makeLed({ key: "close3d", w: 640, h: 300, legs: 250 });
+    led.group.position.set(BOARD[0] / PAIR_S, 0, BOARD[2] / PAIR_S);
+    led.group.rotation.y = -0.22;
+    pair.add(plinth, band, certs.group, plate.group, led.group);
+    const desk = makeDesk({ w: 2e3, d: 1500, drop: DESK_Y2 - 44 });
+    desk.group.position.set(...DESK);
+    desk.group.traverse((n2) => {
+      const m3 = n2.material;
+      if (m3?.isMeshStandardMaterial) {
+        m3.roughness = Math.max(m3.roughness, 0.62);
+        if (m3.isMeshPhysicalMaterial) m3.clearcoat = 0;
+      }
+    });
+    const file = new Group();
+    file.position.set(...FILE2);
+    file.scale.setScalar(FILE_S);
+    const filing = makeFiling({ key: "close3d", w: FW, d: FD, t: FT, cover: ["FORM 10-Q", "BLOCK, INC. | Q1 2022"], line: FILING_LINE });
+    const stamp = makeStamp({ key: "close3d", text: DATES.form, w: 300, h: 80 });
+    stamp.group.position.set(140, FT + 8 + 0.6, 318);
+    file.add(filing.group, stamp.group);
+    const numFace = new MeshStandardMaterial({ color: new Color(C3.khaki), roughness: 0.4, metalness: 0, emissive: new Color(C3.khaki), emissiveIntensity: 0 });
+    const numSide = new MeshStandardMaterial({ color: new Color(C3.khaki).multiplyScalar(0.3), roughness: 0.45, metalness: 0.5 });
+    const num = text3d("$13.8B", { font: "800", size: 170, depth: 56, bevel: 4, face: numFace, side: numSide });
+    num.position.set(...NUM3);
+    num.rotation.x = -0.12;
+    group.add(cal.group, pair, desk.group, file, num);
+    return {
+      group,
+      update: (f3) => {
+        const p3 = paramsAt3(f3);
+        cal.update({ cal: p3.cal });
+        plate.update({ swap: p3.swap });
+        certs.update({ height: 1 - 0.5 * p3.fall, label: p3.swap > 0.5 ? 1 : 0 });
+        led.update({ value: PRICE.announce + (PRICE.close - PRICE.announce) * p3.fall, date: p3.fall > 0.5 ? PRICE.closeDate : PRICE.announceDate, fall: p3.fall });
+        filing.update({ open: p3.open, hl: p3.hl });
+        stamp.update({ p: p3.stamp });
+        const up = ramp(f3, CL.hl[0], CL.hl[0] + 18, SETTLE);
+        num.visible = up > 1e-3;
+        num.scale.set(1, Math.max(1e-3, up), 1);
+        numFace.emissiveIntensity = 0.1 + 0.8 * ramp(f3, CL.hl[0] + 6, CL.hl[0] + 22, SETTLE);
+      }
+    };
+  }
 };
-var DealPlace = legacy("deal", "3 The deal: Square agrees to buy Afterpay, paid in shares, 0.375 a share", dealModel, paramsAt2, DL_CAM, { floor: DEAL_GEO.floor, cx: DEAL_GEO.desk.x }, { lift: 620 });
-var PricePlace = legacy("price", "4 The price: $247.26 a share, so $29B", priceModel, paramsAt3, PR_CAM, { floor: PRICE_GEO.floor, cx: PRICE_GEO.cx }, { lift: 260, travelIn: 34 });
-var ClosePlace = legacy("close", "6 The close: six months, Block, the price halves, the 10-Q books $13.8B", closeModel, paramsAt4, CL_CAM, { floor: CLOSE_GEO.floor, cx: 1500 }, { lift: 560 });
-var FairPlace = legacy("fair", "7 To be fair: $29B was real on day one; the shares were fixed", fairModel, paramsAt5, FA_CAM, { floor: FAIR_GEO.floor, cx: 1e3 }, { lift: 420, travelIn: 34 });
-var VerdictPlace = legacy("verdict", "8 The verdict: the receipt, INFLATED, the sign-off", verdictModel, paramsAt6, VD_CAM, { floor: VERDICT_GEO.floor, cx: VERDICT_GEO.desk.x }, { lift: 380, travelIn: 34, color: "#FFE2B8" });
+
+// src/world/places/fair.ts
+var S11 = "fair";
+var C02 = cue(S11, 0);
+var C12 = cue(S11, 1);
+var REAL2 = word(S11, 0, /^real/);
+var GOT2 = word(S11, 1, /^got/);
+var SC_S = 1.5;
+var SC = [-1100, 0, 0];
+var SPAN = 760;
+var HT = 640;
+var DROP = 300;
+var BEAM_Y = (56 + HT) * SC_S;
+var PAN_Y = BEAM_Y - DROP * SC_S;
+var SC_C = [SC[0], PAN_Y + 180, 0];
+var DESK_Y3 = 430;
+var DESK2 = [2700, DESK_Y3, 0];
+var DW = 2300;
+var DD = 900;
+var FROM = -520;
+var TO = 330;
+var PLATE_X = 360;
+var DESK_C = [DESK2[0] - 40, DESK_Y3 + 150, 0];
+var FAIR_ENTER = C02 - 34;
+var FairPlace = {
+  id: S11,
+  label: "7 To be fair: $29B was real on day one; the shares were fixed",
+  enter: FAIR_ENTER,
+  shots: ({ from, to }) => {
+    const k3 = [];
+    let end = from;
+    const put = (at, dur, mk, limit = to - 2) => {
+      const a3 = Math.max(at, end + 1), d3 = Math.min(dur, limit - a3);
+      if (d3 < 8) return;
+      k3.push(mk(a3, d3));
+      end = a3 + d3;
+    };
+    const A02 = { c: SC_C, a0: -64, a1: -40, r0: 2550, r1: 2250, y0: 330, y1: 520 };
+    k3.push(travel(from, 34, orbitPos(SC_C, A02.a0, A02.r0, A02.y0), [SC_C[0] - 330, SC_C[1] - 60, 0], { fov: 54, why: "in through the dark, low under the scale", vol: 0.8 }));
+    end = from + 34;
+    put(end + 1, C12 - 10 - end - 1, (a3, d3) => orbit(a3, d3, A02, { look: [SC_C[0] - 340, SC_C[1] - 40, 0], fov: 54, ease: SOFT, why: "orbit low round the scale as it comes level" }), C12 - 9);
+    put(C12 - 8, 40, (a3, d3) => travel(a3, d3, [DESK2[0] - 1300, DESK_Y3 + 980, 2300], [DESK2[0] - 500, DESK_Y3 + 110, -120], { bulge: [0, 160, 380], fov: 48, why: "to the desk", vol: 0.55 }));
+    put(end + 1, GOT2 - 16 - end - 1, (a3, d3) => dolly(a3, d3, [DESK2[0] - 1200, DESK_Y3 + 940, 2200], [DESK2[0] - 490, DESK_Y3 + 110, -120], { ease: SOFT, why: "ease on the fixed shares" }), GOT2 - 15);
+    put(GOT2 - 14, 46, (a3, d3) => dolly(a3, d3, [DESK2[0] + 200, DESK_Y3 + 760, 1900], [DESK2[0] + PLATE_X + 70, DESK_Y3 + 70, 120], { why: "follow the certificates across" }));
+    put(end + 1, to - 3 - end, (a3, d3) => dolly(a3, d3, [DESK2[0] + 260, DESK_Y3 + 720, 1820], [DESK2[0] + PLATE_X + 80, DESK_Y3 + 70, 120], { ease: SOFT, why: "hold on the shareholders' shares" }));
+    return k3;
+  },
+  lights: (f3) => {
+    const p3 = paramsAt4(f3);
+    const b2 = ramp(f3, C12 - 8, C12 + 24, SOFT);
+    const c3 = mixV([SC_C[0], SC_C[1] - 100, 0], DESK_C, b2);
+    return {
+      amb: 0.16,
+      key: { pos: [c3[0] - 700, c3[1] + 2100, c3[2] + 1200], at: c3, i: 1.1 + 0.8 * b2, color: "#FFF4E2", angle: 0.62, soft: 0.8 },
+      rim: { pos: [c3[0] + 1200, c3[1] + 900, c3[2] - 1600], at: c3, i: 3.4, color: "#CFE0FF", angle: 0.8, soft: 0.6 },
+      aux: { pos: [c3[0] - 1500, c3[1] + 500, c3[2] - 900], at: c3, i: 1.5, color: "#DDE6F5", angle: 0.8, soft: 0.6 },
+      // mint under the announced figure; khaki when the fixed number lights
+      accent: b2 < 0.5 ? { pos: [SC[0] - SPAN / 2 * SC_S + 40, PAN_Y + 260, 420], color: C3.mint, i: 0.5 * (1 - b2 * 2) } : { pos: [DESK2[0] - 320, DESK_Y3 + 300, 260], color: C3.khaki, i: 0.45 * p3.label },
+      focus: [c3[0], c3[2]],
+      reach: 2800,
+      reflect: 0.32 + 0.15 * b2
+    };
+  },
+  build: () => {
+    const group = new Group();
+    const scale = makeScale({ span: SPAN, height: HT, pan: 150, drop: DROP });
+    scale.group.position.set(...SC);
+    scale.group.scale.setScalar(SC_S);
+    scale.group.rotation.y = 0.08;
+    const mint = new MeshStandardMaterial({ color: new Color(C3.mint), roughness: 0.4, metalness: 0, emissive: new Color(C3.mint), emissiveIntensity: 0.5 });
+    const mintSide = new MeshStandardMaterial({ color: new Color(C3.mint).multiplyScalar(0.28), roughness: 0.45, metalness: 0.5 });
+    const fig = text3d("$29B", { font: "800", size: 112, depth: 46, bevel: 3, face: mint, side: mintSide });
+    fig.position.set(0, 64, -10);
+    fig.rotation.y = -0.8;
+    const date = plaque("fair3d:date", 230, 46, [{ t: "1 AUG 2021", size: 27, weight: 700, color: C3.white, track: 0.12 }], { pad: 6 });
+    date.position.set(-52, 16 + 23, 50);
+    date.rotation.y = -0.8;
+    scale.seats[0].add(fig, date);
+    const panCerts = makeCerts({ key: "fair3d:pan", n: 18, w: 220, d: 156, labels: ["SHARES"] });
+    scale.seats[1].add(panCerts.group);
+    const desk = makeDesk({ w: DW, d: DD, drop: DESK_Y3 - 44 });
+    desk.group.position.set(...DESK2);
+    desk.group.traverse((n2) => {
+      const m3 = n2.material;
+      if (m3?.isMeshStandardMaterial) {
+        m3.roughness = Math.max(m3.roughness, 0.62);
+        if (m3.isMeshPhysicalMaterial) m3.clearcoat = 0;
+      }
+    });
+    const onDesk2 = new Group();
+    onDesk2.position.set(...DESK2);
+    const certs = makeCerts({ key: "fair3d", n: 20, labels: ["BLOCK SHARES"], sub: "0.375 PER AFTERPAY SHARE" });
+    certs.group.scale.setScalar(1.25);
+    const plate = makeNameplate({ key: "fair3d", w: 700, h: 104, texts: [NAMES.holders] });
+    plate.group.position.set(PLATE_X, 0, 300);
+    plate.group.rotation.y = -0.1;
+    const kh = new MeshStandardMaterial({ color: new Color(C3.khaki), roughness: 0.4, metalness: 0, emissive: new Color(C3.khaki), emissiveIntensity: 0 });
+    const khSide = new MeshStandardMaterial({ color: new Color(C3.khaki).multiplyScalar(0.3), roughness: 0.45, metalness: 0.5 });
+    const fixed = text3d("FIXED: 0.375 SHARES", { font: "800", size: 86, depth: 36, bevel: 3, face: kh, side: khSide });
+    fixed.position.set(-330, 190, -330);
+    fixed.rotation.y = 0.1;
+    const rail = rbox(1120, 190, 60, 6, SM.graphite());
+    rail.position.set(-330, 95, -330);
+    rail.rotation.y = 0.1;
+    onDesk2.add(certs.group, plate.group, fixed, rail);
+    group.add(scale.group, desk.group, onDesk2);
+    return {
+      group,
+      update: (f3) => {
+        const p3 = paramsAt4(f3);
+        scale.update({ tilt: p3.tilt });
+        certs.group.position.set(FROM + (TO - FROM) * p3.hand, 70 * Math.sin(Math.PI * p3.hand), 20 - 60 * p3.hand);
+        certs.group.rotation.y = 0.07 * Math.sin(Math.PI * p3.hand) - 0.04;
+        kh.emissiveIntensity = 0.06 + 1.2 * p3.label;
+        void FA;
+        void SETTLE;
+      }
+    };
+  }
+};
+
+// src/three/obj/c3_printer.ts
+var RECEIPT = { w: 600, h: 840 };
+var RECEIPT_FEED = { head: 0.155, announced: 0.335, paid: 0.505, gap: 0.665, all: 1 };
+var PRINTER = { w: 720, h: 130, d: 320, slotZ: -30 };
+var makePrinter = (o2) => {
+  const RW = RECEIPT.w, RH = RECEIPT.h, PW = PRINTER.w, PH = PRINTER.h, PD = PRINTER.d, SLOT_Z = PRINTER.slotZ;
+  const group = new three_module_exports.Group();
+  const body = rbox(PW, PH, PD, 18, SM.black());
+  body.position.set(0, PH / 2, PD / 2);
+  const bay = rbox(PW - 44, 50, PD * 0.4, 16, SM.graphite());
+  bay.position.set(0, PH + 20, SLOT_Z - 16);
+  const bar = rbox(RW + 30, 8, 12, 2, SM.edge(), 1);
+  bar.position.set(0, PH + 5, SLOT_Z + 14);
+  const kick = rbox(PW - 18, 5, 4, 1.5, SM.edge(), 1);
+  kick.position.set(0, 7, PD / 2 + 2.5);
+  const led = mesh(new three_module_exports.CylinderGeometry(7, 7, 3, 20), SM.glow(C3.amber));
+  led.rotation.x = Math.PI / 2;
+  led.position.set(PW / 2 - 50, PH * 0.56, PD / 2 + 1.5);
+  led.material.transparent = true;
+  const key2 = rbox(60, 18, 4, 3, SM.graphite(), 1);
+  key2.position.set(PW / 2 - 124, PH * 0.56, PD / 2 + 3);
+  const badge = litFace(210, 24, textTex(`${o2.key}:badge`, 210, 24, [{ t: "THE PAYOUTS", size: 16, weight: 700, color: C3.dim, track: 0.3 }], { pad: 2 }));
+  badge.position.set(-PW / 2 + 142, PH * 0.56, PD / 2 + 0.8);
+  group.add(body, bay, bar, kick, led, key2, badge);
+  const slotY = PH + 6;
+  const clip = new three_module_exports.Plane(new three_module_exports.Vector3(0, 1, 0), -(o2.deskY + slotY));
+  const INK3 = "#1E1A10", SOFT3 = "#5B5443", PAPER = "#EFE8D8", L2 = RECEIPT_FEED;
+  const row = (g4, y3, a3, b2, band) => {
+    track(g4, 0);
+    font(g4, 800, 47);
+    const bw = g4.measureText(b2).width;
+    if (band) {
+      g4.fillStyle = band;
+      g4.fillRect(RW - 36 - bw - 12, y3 - 45, bw + 24, 60);
+    }
+    g4.fillStyle = SOFT3;
+    g4.textAlign = "left";
+    font(g4, 700, 21);
+    track(g4, 2.6);
+    g4.fillText(a3, 36, y3 - 58);
+    g4.fillStyle = INK3;
+    g4.textAlign = "right";
+    font(g4, 800, 47);
+    track(g4, 0);
+    g4.fillText(b2, RW - 36, y3);
+  };
+  const dash = (g4, y3) => {
+    g4.fillStyle = SOFT3;
+    for (let x3 = 36; x3 < RW - 36; x3 += 14) g4.fillRect(x3, y3, 8, 2);
+  };
+  const tex = paintTex(`${o2.key}:receipt`, RW, RH, (g4) => {
+    g4.fillStyle = PAPER;
+    g4.fillRect(0, 0, RW, RH);
+    g4.fillStyle = INK3;
+    g4.textAlign = "center";
+    font(g4, 800, 30);
+    track(g4, 6);
+    g4.fillText("THE PAYOUTS", RW / 2, RH * 0.066);
+    g4.fillStyle = SOFT3;
+    font(g4, 600, 18);
+    track(g4, 3);
+    g4.fillText("AUDIT 037 | AFTERPAY, THE SALE PRICE", RW / 2, RH * 0.108);
+    dash(g4, RH * 0.135);
+    row(g4, RH * L2.announced - 22, "ANNOUNCED | 1 AUG 2021", "$29,000,000,000", C3.mint);
+    row(g4, RH * L2.paid - 22, "PAID AT CLOSING | 31 JAN 2022", "$13,800,000,000", C3.khaki);
+    dash(g4, RH * L2.paid + 8);
+    row(g4, RH * L2.gap - 22, "GAP", "\u2248 $15,000,000,000");
+    dash(g4, RH * L2.gap + 10);
+    g4.fillStyle = "#B3262B";
+    g4.textAlign = "center";
+    font(g4, 700, 21);
+    track(g4, 7);
+    g4.fillText("OUR RATING", RW / 2, RH * 0.742);
+    g4.fillStyle = SOFT3;
+    font(g4, 600, 13);
+    track(g4, 1.8);
+    g4.fillText("SOURCES: SQUARE RELEASE, 1 AUG 2021 | BLOCK FORM 10-Q, Q1 2022", RW / 2, RH * 0.975);
+    track(g4, 0);
+  }, 3);
+  const receipt = new three_module_exports.Group();
+  const pm = SM.print(tex);
+  pm.clippingPlanes = [clip];
+  pm.side = three_module_exports.DoubleSide;
+  const paper = new three_module_exports.Mesh(new three_module_exports.PlaneGeometry(RW, RH), pm);
+  paper.castShadow = true;
+  receipt.add(paper);
+  const SIZE = Math.min(104, 104 * (RW - 80) / textWidth("INFLATED", "800", 104));
+  const face = new three_module_exports.MeshStandardMaterial({ color: new three_module_exports.Color("#D8343A"), roughness: 0.42, metalness: 0.05, emissive: new three_module_exports.Color(C3.red), emissiveIntensity: 0.35 });
+  const side = new three_module_exports.MeshStandardMaterial({ color: new three_module_exports.Color("#5E1216"), roughness: 0.5, metalness: 0.3 });
+  face.clippingPlanes = [clip];
+  side.clippingPlanes = [clip];
+  const stamp = text3d("INFLATED", { font: "800", size: SIZE, depth: 26, bevel: 3, face, side });
+  const RATE_Y = RH * (0.5 - 0.875);
+  receipt.add(stamp);
+  receipt.rotation.x = -0.07;
+  group.add(receipt);
+  const update = (p3) => {
+    receipt.position.set(0, slotY + RH * (p3.feed - 0.5), SLOT_Z + 5);
+    stamp.visible = p3.rating > 3e-3;
+    const q4 = 1 - p3.rating;
+    stamp.position.set(0, RATE_Y + 30 * q4, 2 + 260 * q4 * q4);
+    stamp.rotation.set(-0.5 * q4, 0, -0.035 + 0.12 * q4);
+    face.emissiveIntensity = 0.35 + 1.3 * Math.sin(Math.PI * Math.min(1, p3.rating)) ** 2 * (p3.rating < 1 ? 1 : 0) + 0.25 * p3.rating;
+    led.material.opacity = 0.25 + 0.75 * p3.busy;
+  };
+  update({ feed: 0, rating: 0, busy: 0 });
+  return { group, update, ratingY: slotY + RH * 0.125 };
+};
+
+// src/world/places/verdict.ts
+var S12 = "verdict";
+var SEND2 = cue(S12, 3);
+var P4 = [520, HOOK_STAGE.deskY, -60];
+var SLOT = HOOK_STAGE.deskY + PRINTER.h + 6;
+var PZ = P4[2] + PRINTER.slotZ;
+var FRAME2 = [1090, HOOK_STAGE.deskY, -230];
+var feedAt = (f3) => {
+  const a3 = ramp(f3, VD.head[0], VD.head[1], SETTLE), b2 = ramp(f3, VD.ann[0], VD.ann[1], SETTLE), c3 = ramp(f3, VD.paid[0], VD.paid[1], SETTLE), d3 = ramp(f3, VD.gap[0], VD.gap[1], SETTLE), e3 = ramp(f3, VD.foot[0], VD.foot[1], SETTLE);
+  return lerp(lerp(lerp(lerp(RECEIPT_FEED.head * a3, RECEIPT_FEED.announced, b2), RECEIPT_FEED.paid, c3), RECEIPT_FEED.gap + 0.02, d3), RECEIPT_FEED.all, e3);
+};
+var feeding = (f3) => [VD.head, VD.ann, VD.paid, VD.gap, VD.foot].some(([a3, b2]) => f3 >= a3 - 2 && f3 <= b2 + 2);
+var ratingAt = (f3) => ramp(f3, VD.rating[0], VD.rating[1], SETTLE);
+var hitAt2 = (f3) => {
+  const t3 = f3 - VD.rating[1] + 2;
+  return t3 < 0 ? 0 : Math.exp(-t3 / 9) * clamp01(t3 / 2);
+};
+var tagAt = (f3) => ramp(f3, VD.tag[0], VD.tag[1] + 10, SOFT);
+var VerdictPlace = {
+  id: S12,
+  label: "8 The verdict: the receipt, INFLATED, the sign-off",
+  enter: cue(S12, 0) - 30,
+  shots: ({ from, to }) => {
+    const k3 = [];
+    const mid = (u4) => [P4[0] + 70, SLOT + RECEIPT.h * u4, PZ];
+    const at = (dx, y3, dz) => [P4[0] + dx, y3, PZ + dz];
+    k3.push(travel(from, 34, at(470, 470, 1130), mid(0.12), { fov: 50, bulge: [0, 120, 260], why: "travel in, low on the printer", vol: 0.8 }));
+    const t1 = Math.max(VD.ann[0], from + 35), e1 = Math.max(t1 + 30, VD.gap[1]);
+    k3.push(dolly(t1, e1 - t1, at(470, 800, 1700), mid(0.39), { ease: SOFT, why: "rise with the paper" }));
+    const t22 = Math.max(VD.foot[0], e1 + 1), e22 = Math.max(t22 + 16, VD.rating[0] - 2);
+    k3.push(dolly(t22, e22 - t22, at(360, 860, 1500), mid(0.47), { why: "push in for the rating" }));
+    const t3 = Math.max(VD.rating[1] + 9, e22 + 1), e3 = Math.max(t3 + 12, SEND2 - 4);
+    k3.push(dolly(t3, e3 - t3, at(900, 800, 1560), [P4[0] + 300, SLOT + 300, PZ - 80], { ease: SOFT, why: "track to the framed print" }));
+    const t4 = e3 + 1, d4 = Math.min(48, to - 1 - t4);
+    if (d4 >= 12) k3.push(crane(t4, d4, OPENING.pos, OPENING.look, { fov: OPENING.fov, bulge: [0, 0, 260], why: "climb back to the tag: the opening" }));
+    return k3;
+  },
+  lights: (f3) => {
+    const w3 = tagAt(f3), hit = hitAt2(f3);
+    const paperAt = [P4[0], SLOT + 300, PZ], tagAtV = [HOOK_STAGE.tag[0], HOOK_STAGE.tag[1] - 200, HOOK_STAGE.tag[2]];
+    return {
+      amb: 0.12,
+      // the key: on the receipt while it prints (a soft white from the front-left), on the tag for the sign-off (amber)
+      key: {
+        pos: mixV([P4[0] + 700, 1750, 1500], [HOOK_STAGE.tag[0] - 150, 2500, 760], w3),
+        at: mixV(paperAt, tagAtV, w3),
+        i: 2.3 + 1.6 * w3 + 1.4 * hit,
+        color: w3 > 0.5 ? "#FFC06A" : "#FFF4E2",
+        angle: lerp(0.42, 0.5, w3),
+        soft: 0.85
+      },
+      rim: { pos: [1200, 1300, -1500], at: mixV(paperAt, HOOK_STAGE.tag, w3), i: 3.2, color: "#CFE0FF", angle: 0.8, soft: 0.6 },
+      aux: { pos: [1500, 1700, 900], at: [FRAME2[0], HOOK_STAGE.deskY + 160, FRAME2[2]], i: 0.4 + 1.6 * ramp(f3, VD.rating[1], VD.rating[1] + 20, SOFT) * (1 - 0.6 * w3), color: "#F4F6FF", angle: 0.3, soft: 0.9 },
+      accent: hit > 0.01 || w3 < 0.02 ? { pos: [P4[0], SLOT + 110, PZ + 260], color: C3.red, i: 2.4 * hit } : { pos: [HOOK_STAGE.tag[0] - 60, HOOK_STAGE.tag[1] - 320, 420], color: "#F5A524", i: 1.6 * w3 },
+      focus: [200, 100],
+      reach: 3200,
+      reflect: 0.5
+    };
+  },
+  build: () => {
+    const group = new Group();
+    const desk = makeDesk({ w: HOOK_STAGE.deskW, d: HOOK_STAGE.deskD, drop: HOOK_STAGE.deskY - 44 });
+    desk.group.position.set(HOOK_STAGE.deskX, HOOK_STAGE.deskY, 0);
+    desk.group.traverse((n2) => {
+      const m3 = n2.material;
+      if (m3?.isMeshStandardMaterial) {
+        m3.roughness = Math.max(m3.roughness, 0.62);
+        if (m3.isMeshPhysicalMaterial) m3.clearcoat = 0;
+      }
+    });
+    const printer = makePrinter({ key: "verdict3d", deskY: HOOK_STAGE.deskY });
+    printer.group.position.set(...P4);
+    const frame = makeFrame({ key: "verdict3d", photo: HAS_PHOTO ? PHOTO_FILE : null });
+    frame.group.position.set(...FRAME2);
+    frame.group.rotation.y = -0.3;
+    const tag = makeTag({ key: "verdict3d", w: HOOK_STAGE.tw, h: HOOK_STAGE.th, cord: HOOK_STAGE.cord, faces: [
+      { kicker: "AFTERPAY | SOLD FOR", figure: "$29,000,000,000", color: C3.mint },
+      { kicker: "THE FILING SAYS", figure: "$13,800,000,000", color: C3.khaki }
+    ] });
+    tag.group.position.set(...HOOK_STAGE.hang);
+    group.add(desk.group, printer.group, frame.group, tag.group);
+    return {
+      group,
+      update: (f3) => {
+        printer.update({ feed: feedAt(f3), rating: ratingAt(f3), busy: feeding(f3) ? Math.floor(f3 / 3) % 2 ? 1 : 0.3 : 0.5 });
+        tag.update({ flip: 0, swing: 0.9 * Math.sin(f3 / 31) + 0.4 * Math.sin(f3 / 17), lit: -0.3 + 1.3 * tagAt(f3) });
+      }
+    };
+  }
+};
 
 // src/world/film3d.ts
 var PLACES = [HookPlace, ExplainPlace, DealPlace, PricePlace, CatchPlace, ClosePlace, FairPlace, VerdictPlace];

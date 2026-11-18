@@ -42,23 +42,9 @@ const contractTex = (w: number, h: number) => paintTex("deal:contract2", w, h, (
   }
 }, 3);
 
-export const dealModel = (): Model<DealP> => {
-  const G = DEAL_GEO, Y = -G.desk.y;
-  const root = new THREE.Group();
-  root.add(studioFloor({ y: G.floor, cx: G.desk.x, rx: 1900 }));
-  const desk = makeDesk({ w: G.desk.w, d: G.desk.d, drop: G.floor - G.desk.y - 44 });
-  desk.group.position.set(G.desk.x, Y, -G.desk.d / 2);
-  desk.group.userData.obj = "desk";
-  // the light on the desk: a soft pool under each shot's object
-  for (const [x, z, w, d, o] of [[G.plate.x, -40, 1300, 760, 0.12], [G.swapX, 0, 1200, 760, 0.1], [G.card.x, 40, 1200, 760, 0.12]] as const) {
-    const pool = halo(w, d, C.white, o, true);
-    pool.position.set(x, Y + 3, z);
-    root.add(pool);
-  }
-  const plate = makeNameplate({ key: "deal", w: G.plate.w, h: G.plate.h, texts: [NAMES.buyer] });
-  plate.group.position.set(G.plate.x, Y, G.plate.z);
-  plate.group.userData.obj = "nameplate";
-
+/** the contract: three sheets, the top one printed, and a pen beside it (origin: its middle, on the desk) */
+export const buildContract = () => {
+  const G = DEAL_GEO;
   // ── the contract: three sheets, the top one printed, and a pen lying beside it ──
   const contract = new THREE.Group();
   contract.userData.obj = "contract";
@@ -85,6 +71,11 @@ export const dealModel = (): Model<DealP> => {
   pen.position.set(cw / 2 + 70, 8, 40);
   contract.add(pen);
 
+  return contract;
+};
+/** the open cooler box of banded cash (origin: the middle of its foot) */
+export const buildCooler = () => {
+  const G = DEAL_GEO;
   // ── the cooler box of cash: an open box, banded bundles of notes heaped in it, its lid thrown back ──
   const cooler = new THREE.Group();
   cooler.userData.obj = "cooler";
@@ -136,10 +127,11 @@ export const dealModel = (): Model<DealP> => {
   cup.position.set(0, K.h + 120, -K.d / 2 - 60);
   cooler.add(body, lip, lipLine, lidPivot, bundles, cl, cair, cup);
 
-  // ── the stack of share certificates ──
-  const certs = makeCerts({ key: "deal", w: G.certs.w, d: G.certs.d, n: G.certs.n, t: G.certs.t, labels: ["SQUARE SHARES"], sub: "CLASS A COMMON STOCK" });
-  certs.group.userData.obj = "certs";
-
+  return cooler;
+};
+/** the one certificate on its rail, cut at 0.375 of its width: `pa` the 0.375 piece (it turns), `pb` the rest (it leaves) */
+export const buildCard = () => {
+  const G = DEAL_GEO;
   // ── the one certificate, on a rail: cut at 0.375 of its width ──
   const card = new THREE.Group();
   card.userData.obj = "card";
@@ -176,6 +168,32 @@ export const dealModel = (): Model<DealP> => {
   fair.position.set(0, 12 + CH / 2, -50);
   card.add(fair);
 
+  return { card, pa, pb, fair, CW, CH, A, B };
+};
+
+export const dealModel = (): Model<DealP> => {
+  const G = DEAL_GEO, Y = -G.desk.y;
+  const root = new THREE.Group();
+  root.add(studioFloor({ y: G.floor, cx: G.desk.x, rx: 1900 }));
+  const desk = makeDesk({ w: G.desk.w, d: G.desk.d, drop: G.floor - G.desk.y - 44 });
+  desk.group.position.set(G.desk.x, Y, -G.desk.d / 2);
+  desk.group.userData.obj = "desk";
+  // the light on the desk: a soft pool under each shot's object
+  for (const [x, z, w, d, o] of [[G.plate.x, -40, 1300, 760, 0.12], [G.swapX, 0, 1200, 760, 0.1], [G.card.x, 40, 1200, 760, 0.12]] as const) {
+    const pool = halo(w, d, C.white, o, true);
+    pool.position.set(x, Y + 3, z);
+    root.add(pool);
+  }
+  const plate = makeNameplate({ key: "deal", w: G.plate.w, h: G.plate.h, texts: [NAMES.buyer] });
+  plate.group.position.set(G.plate.x, Y, G.plate.z);
+  plate.group.userData.obj = "nameplate";
+
+  const contract = buildContract(), cooler = buildCooler();
+  // ── the stack of share certificates ──
+  const certs = makeCerts({ key: "deal", w: G.certs.w, d: G.certs.d, n: G.certs.n, t: G.certs.t, labels: ["SQUARE SHARES"], sub: "CLASS A COMMON STOCK" });
+  certs.group.userData.obj = "certs";
+
+  const { card, pa, pb, fair, CW, A, B } = buildCard();
   root.add(desk.group, plate.group, contract, cooler, certs.group, card);
   return {
     root, rig: STUDIO_RIG,

@@ -11,7 +11,11 @@ import { add, checkPath, type CamKey3, type Vec } from "./cam";
 import type { Place3 } from "./place";
 import { HookPlace } from "./places/hook";
 import { ExplainPlace, CatchPlace } from "./places/cards";
-import { DealPlace, PricePlace, ClosePlace, FairPlace, VerdictPlace } from "./places/legacy";
+import { DealPlace } from "./places/deal";
+import { PricePlace } from "./places/price";
+import { ClosePlace } from "./places/close";
+import { FairPlace } from "./places/fair";
+import { VerdictPlace } from "./places/verdict";
 
 /** the film's places, in order */
 export const PLACES: Place3[] = [HookPlace, ExplainPlace, DealPlace, PricePlace, CatchPlace, ClosePlace, FairPlace, VerdictPlace];
