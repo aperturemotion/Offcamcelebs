@@ -2208,6 +2208,22 @@ _Log every OffCamCelebs preference change and every video build here with a date
       places (never travel through the dark), turn cards that look like flat words with a glow, a rough floor with no
       mirror image, no glowing outlines, no documents or photos as subjects, figures that count up and land with light,
       something happening every 1–1.5 s. READ THAT README BEFORE BUILDING ANY PAYOUTS FILM.
+    - **P14 ★★★ TIMUR'S FIRST NOTES ON 037 v2 (2026-11-19: the look is accepted as the base; these are standing rules):**
+      · **TEXT FITS THE SURFACE IT IS ON, ALWAYS** ("Afterpay… should actually fit on the object that it's on… this
+        applies to any other text that doesn't fit on the surface that it's on throughout the video. So I need you to do
+        a sweep for that… fix this by making the [bag] larger"). A label, plate or figure never overhangs its body: the
+        OBJECT is made larger (the text is not shrunk to nothing). Seen on the AFTERPAY bag, the $247 board (27 s), the
+        $122 board (40 s). An automatic check measures every text against its surface on every build.
+      · **NOTHING CLIPS THROUGH ANYTHING** ("the flat object within the drawer literally clips through the top of the
+        cabinet… I don't know how you didn't see that. You need to be able to detect things like this"; 5 s and 44 s).
+        An automatic pass-through check runs over the whole film before every handback; a still I did not look at is
+        not a check.
+      · **TURN CARDS: less glow, the OffCamCelebs caption animation, truly centred** ("the glow is way too strong… use
+        the same animation that you used to use with OffCamCelebs for that text… make sure it's actually centred…
+        reduce the glow intensity on all those scenes"): the card's words arrive one at a time on their spoken onsets
+        with the old caption's blur-and-fade (opacity 0→1, blur 8 px→0 over ~10 f, never moving), the block centred on
+        the frame both ways, the glow behind it soft and dim.
+      · The flip calendar's leaves (34 s) are fine as they are.
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
     often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,
