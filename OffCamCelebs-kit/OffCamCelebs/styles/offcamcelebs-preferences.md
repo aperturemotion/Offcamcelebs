@@ -2138,18 +2138,55 @@ _Log every OffCamCelebs preference change and every video build here with a date
   for it… that account style. I want you to try to replicate it, but obviously keep our fonts, personalize it a little bit
   to look like our account. But basically, yeah, just copy their style"). This supersedes the five candidates of
   2026-11-16 (`styles/payouts-style-frames/`, kept as history) and, for the Reels, the 029-HF locked look.
-  - **What is copied from @moneydecoded.au:** layout, backgrounds, how figures are shown, caption treatment, motion, pacing,
-    hook and ending structure. ⚠ NOT YET WRITTEN: the account could not be opened from the cloud session and no
-    screenshots of it have been supplied. These rules are written from its frames, never from memory or a guess.
-  - **What stays ours (the "personalize it a little"):** our fonts (Archivo, the two-weight captions); mint = THE HEADLINE
-    NUMBER as reported, khaki = documented figures; "The Payouts" naming; the one-off verdict label per post; the sign-off
-    "Send us who to audit next."; no "·" separators (use "|").
+  - **THE RULES (P1–P10), written 2026-11-18 from five of their Reels Timur sent** (inland rail, Afterpay, the passport,
+    Norway's gas fund, the RBA's gold; frame sheets in `styles/payouts-moneydecoded-refs/`, one frame every 2 s):
+    - **P1 THE WORLD: a black studio.** Near-black ground and backdrop (#050505–#141414), a soft pool of light on a
+      slightly glossy floor that mirrors the object, deep vignette. Once or twice per film a LIGHT scene breaks it (a grey
+      quarry, a pale extruded map, a blue blueprint grid). No cream grounds, no paper, no room.
+    - **P2 THE OBJECTS: matte-black and graphite 3-D, lit by rim light.** Everything is the literal thing in the story (a
+      locomotive, a price tag, a bulldozer, a silo, a vault, a card terminal, a gavel, scales, a road sign), modelled
+      cleanly and slightly simplified, dark on dark, read by white edge highlights. ONE object per shot.
+    - **P3 COLOUR IS RATIONED.** The film is monochrome; colour appears only where it means something: emissive gold for
+      money itself (bars, coins, a glowing column), red for the bad figure or a "LATE" stamp, and the real colours of
+      real-world signs (a green road sign, a flag, a brand's lozenge). Never decorative colour.
+    - **P4 FIGURES LIVE ON OBJECTS.** Every number is on a thing in the scene: a lit plaque on a wagon, a price tag, a
+      road sign, a screen, a cheque, or thick extruded 3-D numerals standing on the floor and glowing. Heavy, wide
+      capitals ("$4.7 BILLION"). Charts are physical too: glowing columns on a plinth, a donut ring, a ramp of track
+      that climbs with the price, a dial with a needle. No floating 2-D chart, no label that is not on an object.
+    - **P5 CAPTIONS: small, top, plain.** One short phrase at a time (2–4 words), white, regular weight, centred about
+      10% down the frame, about 2.7% of frame height; it swaps phrase by phrase with the voice and never moves. No
+      highlight colours, no big two-weight caption block.
+    - **P6 TURN CARDS.** Two or three times per film the picture cuts to black with a soft coloured glow and two lines:
+      a small white lead-in over one big bold-italic glowing word ("Let us / explain.", "But there was one /
+      problem.", "But here's the / twist.", "And here's the worst / part."), words landing one by one, about 1–1.5 s.
+      Glow colour follows meaning: warm for "explain", gold for a twist, red for the worst part.
+    - **P7 THE CAMERA NEVER STOPS, AND RARELY CUTS.** Slow dollies, orbits and push-ins on every shot; objects arrive by
+      acting (a train rolls in, a tag swings down, a column grows, a drawer slides); places hand over by moving through
+      the dark or by a match move. Their films have only 2–10 hard cuts in 60–85 s. A shot holds about 2–4 s.
+    - **P8 STRUCTURE.** (1) Hook, 0–10 s: the headline with its number said and shown inside the first 5 s, then the turn
+      ("but it never made it"), then why the viewer should care. (2) Turn card "Let us explain." (3) The story in time
+      order, one fact per shot. (4) A "problem"/"twist" card, then the escalation. (5) A "worst part" card, then the
+      figure brought down to one person. (6) The ending returns to the OPENING scene and lands the punchline on it.
+    - **P9 VOICE AND LENGTH.** Plain spoken sentences, second person, 150–160 words a minute, 60–85 s, the voice starts
+      on frame 1 with no intro. (Their music and effects are not yet measured; measure before copying the mix.)
+    - **P10 NO CHROME.** No logo bug, no lower third, no progress bar, no end card of their own.
+  - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
+    029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
+    often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,
+    every place enters on one object, objects act, the camera lives, polished 3-D.
+  - **What stays ours (the "personalize it a little"):** our fonts (Archivo for captions, Archivo Black / heavy Archivo on
+    plaques and numerals, bold-italic Archivo on turn cards); mint neon = THE HEADLINE NUMBER as reported (in place of
+    their cream-yellow glow, for that one figure only), khaki = documented figures on plaques; a turn-card glow in mint
+    for "explain"; the ending adds what theirs lacks and the brief requires: the fairness line, the one-off verdict label
+    as a lit plaque on the returning opening scene, then "Send us who to audit next."; "The Payouts" naming; no "·"
+    separators (use "|").
   - **What never changes with a style:** primary documents first and every figure traced to a named, dated document;
     "alleges" for anything unproven; the operating company named precisely; never "fraud" or "scam"; a fairness caveat;
     estimates labelled "about"/"we estimate"; never name or show private individuals; never download a real person's photo;
     the script check, `script_fixes.json` guards and the voiceover pipeline; Reel safe zones; no MP4 render unless Timur
     asks in that message.
-  - **Next:** Timur sends the first video's prompts; the visual rules are filled in here from the reference frames first.
+  - **Next:** Timur sends the first video's prompts. Open questions for him: caption size (theirs is very small), and whether
+    the verdict plaque + sign-off ending is wanted on Reels.
 
 - **2026-11-16: THE CHANNEL IS RENAMED "THE PAYOUTS" AND GOES TOP-FUNNEL.** Posts now audit one famous MONEY HEADLINE with
   one big number (jackpots, deferred contracts, "up to" sales, valuations, transfer fees, box office, fight purses) and find
