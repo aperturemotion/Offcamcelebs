@@ -1,5 +1,5 @@
 import React from "react";
-import { ramp, SETTLE, GLIDE } from "../tokens";
+import { ramp, SETTLE, SOFT } from "../tokens";
 import { word, cue, cueEnd } from "../time";
 import { Obj } from "../../audit/Probe";
 import { World, Light, alive, camView, type CamKey } from "../camera";
@@ -8,30 +8,37 @@ import { fairModel, FAIR_GEO as G, type FairP } from "../../three/props/fair";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // PLACE 7 · TO BE FAIR (beats 13–14).
-//  0 "To be fair, 29 billion was the real value on announcement day."   the balance scale: $29B | 1 AUG 2021 on one pan, the
-//       shares on the other; it rocks and settles LEVEL.
+//  0 "To be fair, 29 billion was the real value on announcement day."   the BALANCE SCALE: $29B | 1 AUG 2021 (mint) on one
+//       pan, the shares on the other. It arrives tipped toward the figure, rocks, and is LEVEL by "real value"; the camera
+//       pushes in on the level beam.
 //  1 "The deal fixed the number of shares, not the dollars, and Afterpay's owners got those shares."   the desk: on "fixed"
-//       the label FIXED: 0.375 SHARES lights (khaki); on "got" the certificates cross the desk to AFTERPAY SHAREHOLDERS.
-// STUB (foundation).
+//       the label FIXED: 0.375 SHARES lights (khaki); on "got" the certificates are lifted across the desk and set down in
+//       front of AFTERPAY SHAREHOLDERS, the camera following them.
 // ═══════════════════════════════════════════════════════════════════════════
 const S = "fair" as const;
-const FIXED = word(S, 1, /^fixed/), GOT = word(S, 1, /^got/);
-export const FA = { label: [FIXED - 2, FIXED + 14], hand: [GOT - 8, GOT + 30] } as const;
+const REAL = word(S, 0, /^real/), FIXED = word(S, 1, /^fixed/), GOT = word(S, 1, /^got/);
+export const FA = { label: [FIXED - 2, FIXED + 14], hand: [GOT - 10, GOT + 30] } as const;
 
 const STORY: CamKey[] = [
-  { at: -9999, x: G.scale.x, y: G.floor - 400, z: 1.0, dur: 1 },                       // the scale
-  { at: cue(S, 1) - 6, x: G.desk.x - 40, y: G.desk.y - 120, z: 0.86, dur: 48 },        // the desk
+  { at: -9999, x: G.scale.x - 60, y: G.floor - 470, z: 0.96, dur: 1 },                       // the whole scale
+  { at: REAL - 4, x: G.scale.x - 70, y: G.floor - 510, z: 1.1, dur: 40 },                  // in on the level beam and its pans
+  { at: cue(S, 1) - 6, x: G.desk.x, y: G.desk.y - 170, z: 0.98, dur: 48 },        // the desk
+  { at: GOT - 14, x: G.desk.x + 120, y: G.desk.y - 150, z: 1.06, dur: 44 },            // following the certificates across
 ];
-export const FA_DONE = Math.max(cueEnd(S, 1) + 4, FA.hand[1] + 8);
-export const FA_CAM: CamKey[] = alive("fair", STORY, FA_DONE + 40, { amp: 0.5 });
+export const FA_DONE = Math.max(cueEnd(S, 1) + 4, FA.hand[1] + 6);
+export const FA_CAM: CamKey[] = alive("fair", STORY, FA_DONE + 40, { amp: 0.45 });
 
 const eyeAt = (f: number) => { const v = camView(FA_CAM, f); return { x: v.x + 240, y: v.y - 460, D: 2100 }; };
-const T0 = cue(S, 0);
-const paramsAt = (f: number): FairP => ({
-  // it rocks from a tilt and settles level (a damped swing: level is the point)
-  tilt: 7 * Math.exp(-Math.max(0, f - T0) / 18) * Math.cos(Math.max(0, f - T0) / 6.5),
-  hand: ramp(f, FA.hand[0], FA.hand[1], GLIDE), label: ramp(f, FA.label[0], FA.label[1], SETTLE),
-});
+const T0 = cue(S, 0) - 10;
+// it rocks from a tilt toward the figure and settles LEVEL just before "real value" (a damped swing; level is the point)
+const TAU = Math.max(8, (REAL - T0) / 4.2);
+const paramsAt = (f: number): FairP => {
+  const t = Math.max(0, f - T0);
+  return {
+    tilt: 8 * Math.exp(-t / TAU) * Math.cos((t / TAU) * 2.1),
+    hand: ramp(f, FA.hand[0], FA.hand[1], SOFT), label: ramp(f, FA.label[0], FA.label[1], SETTLE),
+  };
+};
 
 export const Fair: React.FC<{ f: number }> = ({ f }) => (
   <>

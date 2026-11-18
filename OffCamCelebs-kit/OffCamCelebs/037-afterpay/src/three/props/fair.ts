@@ -1,71 +1,73 @@
-// PLACE 7 · TO BE FAIR — a balance scale, "$29B | 1 AUG 2021" on one pan against the shares on the other, level; then the
-// certificates are handed across the desk to AFTERPAY SHAREHOLDERS, under the label FIXED: 0.375 SHARES.
-// STUB BUILD: the scale is a placeholder for the place-worker to model.
+// PLACE 7 · TO BE FAIR — a balance scale: "$29B | 1 AUG 2021" on one pan against the shares on the other; it rocks and
+// comes LEVEL (on announcement day the two were the same thing). Then the desk: the certificates are handed across it to
+// AFTERPAY SHAREHOLDERS, under the label FIXED: 0.375 SHARES.
 import { THREE, mesh, type Model } from "../stage";
 import { rbox } from "../kit029";
-import { SM, C, STUDIO_RIG, studioFloor, plaque } from "../studio";
+import { SM, C, STUDIO_RIG, studioFloor, plaque, halo } from "../studio";
 import { makeCerts } from "../obj/certs";
 import { makeNameplate } from "../obj/nameplate";
 import { makeDesk } from "../obj/desk";
+import { makeScale } from "../obj/c_scale";
 import { NAMES } from "../../audit/record";
 
-export const FAIR_GEO = { floor: 1420, scale: { x: 430 }, desk: { x: 1650, y: 1180 } } as const;
+export const FAIR_GEO = { floor: 1420, scale: { x: 430, beam: 696 }, desk: { x: 1700, y: 1180, w: 1560, d: 680 }, from: -330, to: 220, plate: 230 } as const;
 /** tilt: degrees of the beam (0 = level); hand: 0…1 the certificates crossing the desk; label: 0…1 the FIXED plaque lit */
 export type FairP = { tilt: number; hand: number; label: number };
 
 export const fairModel = (): Model<FairP> => {
   const G = FAIR_GEO, Y = -G.floor;
   const root = new THREE.Group();
-  root.add(studioFloor({ y: G.floor, cx: 1000, rx: 1600 }));
-  const scale = new THREE.Group();
-  scale.userData.obj = "scale";
-  const base = mesh(new THREE.CylinderGeometry(130, 150, 30, 48), SM.black());
-  base.position.y = 15;
-  const post = mesh(new THREE.CylinderGeometry(9, 9, 560, 20), SM.edge());
-  post.position.y = 310;
-  const beam = new THREE.Group();
-  beam.position.y = 590;
-  const bar = rbox(700, 14, 14, 5, SM.edge());
-  bar.position.z = 7;
-  beam.add(bar);
-  const pans = [-1, 1].map((s) => {
-    const g = new THREE.Group();
-    g.position.x = s * 330;
-    for (const k of [-1, 1]) { const w = mesh(new THREE.CylinderGeometry(1.4, 1.4, 250, 6), SM.edge()); w.position.set(k * 90, -125, 0); w.rotation.z = -k * 0.34; g.add(w); }
-    const pan = mesh(new THREE.CylinderGeometry(150, 130, 14, 48), SM.graphite());
-    pan.position.y = -250;
-    g.add(pan);
-    beam.add(g);
-    return g;
-  });
-  const fig = plaque("fair:29", 250, 120, [{ t: "$29B", size: 70, weight: 800, color: C.mint, glow: 18 }, { t: "1 AUG 2021", size: 24, weight: 600, color: C.white, track: 0.12, gap: 8 }], { pad: 10 });
-  fig.position.set(0, -180, 0);
-  pans[0].add(fig);
-  const panCerts = makeCerts({ key: "fair:pan", n: 14, w: 220, d: 160, labels: ["SHARES"] });
-  panCerts.group.position.set(0, -243, 0);
-  pans[1].add(panCerts.group);
-  scale.add(base, post, beam);
-  scale.position.set(G.scale.x, Y, 0);
-  // the desk: the certificates cross it to the shareholders' nameplate; the FIXED label stands behind
-  const desk = makeDesk({ w: 1500, d: 640, drop: G.floor - G.desk.y - 44 });
-  desk.group.position.set(G.desk.x, -G.desk.y, -320);
+  root.add(studioFloor({ y: G.floor, cx: 1000, rx: 1700 }));
+  const pool = (x: number, w: number, d: number, op = 0.1) => { const h = halo(w, d, "#B9C4D6", op, true); h.position.set(x, Y + 1.2, 60); root.add(h); };
+  // ── the scale ──
+  const scale = makeScale({ span: 640, height: 640, pan: 138, drop: 300 });
+  scale.group.userData.obj = "scale";
+  scale.group.position.set(G.scale.x, Y, 0);
+  scale.group.rotation.y = -0.1;
+  pool(G.scale.x, 1300, 800, 0.12);
+  // the announced figure, standing on the left pan (mint: the headline number), on two small feet
+  const fig = plaque("fair:29", 236, 118, [{ t: "$29B", size: 72, weight: 800, color: C.mint, glow: 18 }, { t: "1 AUG 2021", size: 23, weight: 600, color: C.white, track: 0.12, gap: 8 }], { pad: 10 });
+  fig.position.set(0, 14 + 68, 13);
+  for (const s of [-1, 1]) { const ft = rbox(26, 14, 60, 3, SM.edge()); ft.position.set(s * 84, 7, 30); scale.seats[0].add(ft); }
+  scale.seats[0].add(fig);
+  // the shares it was paid in, on the right pan
+  const panCerts = makeCerts({ key: "fair:pan", n: 16, w: 210, d: 150, labels: ["SHARES"] });
+  panCerts.group.position.set(0, 0, 0);
+  scale.seats[1].add(panCerts.group);
+  // ── the desk: the certificates cross it to the shareholders' nameplate; the FIXED label stands behind on two posts ──
+  const desk = makeDesk({ w: G.desk.w, d: G.desk.d, drop: G.floor - G.desk.y - 44 });
+  desk.group.position.set(G.desk.x, -G.desk.y, -G.desk.d / 2 + 20);
   desk.group.userData.obj = "desk";
+  const sheen = halo(G.desk.w * 1.05, G.desk.d * 1.25, "#AEB9CC", 0.13, true);
+  sheen.position.set(G.desk.x, -G.desk.y + 0.8, 20);
   const certs = makeCerts({ key: "fair", n: 18, labels: ["BLOCK SHARES"], sub: "0.375 PER AFTERPAY SHARE" });
   certs.group.userData.obj = "certs";
-  const plate = makeNameplate({ key: "fair", w: 640, h: 92, texts: [NAMES.holders] });
-  plate.group.position.set(G.desk.x + 330, -G.desk.y, 150);
+  const plate = makeNameplate({ key: "fair", w: 600, h: 92, texts: [NAMES.holders] });
+  plate.group.position.set(G.desk.x + G.plate, -G.desk.y, 190);
   plate.group.userData.obj = "nameplate";
-  const fixed = plaque("fair:fixed", 520, 110, [{ t: "FIXED: 0.375 SHARES", size: 54, weight: 800, color: C.khaki, glow: 14 }], { pad: 14 });
-  fixed.position.set(G.desk.x, -G.desk.y + 75, -240);
+  const fixed = plaque("fair:fixed", 640, 132, [{ t: "FIXED: 0.375 SHARES", size: 64, weight: 800, color: C.khaki, glow: 14 }], { pad: 14 });
+  const POST = 150;
+  fixed.position.set(G.desk.x - 150, -G.desk.y + POST + 66, -250);
   fixed.userData.obj = "fixed";
-  root.add(scale, desk.group, certs.group, plate.group, fixed);
+  for (const s of [-1, 1]) {
+    const post = mesh(new THREE.CylinderGeometry(5, 5, POST, 16), SM.edge());
+    post.position.set(G.desk.x - 150 + s * 200, -G.desk.y + POST / 2, -262);
+    const foot = rbox(70, 8, 90, 3, SM.graphite());
+    foot.position.set(G.desk.x - 150 + s * 200, -G.desk.y + 4, -217);
+    root.add(post, foot);
+  }
+  const air = halo(900, 420, C.khaki, 0, false);
+  air.position.set(G.desk.x - 150, -G.desk.y + POST + 66, -300);
+  root.add(scale.group, desk.group, sheen, certs.group, plate.group, fixed, air);
   return {
     root, rig: STUDIO_RIG,
     update: (p) => {
-      beam.rotation.z = (p.tilt * Math.PI) / 180;
-      pans.forEach((g) => { g.rotation.z = -beam.rotation.z; });
-      certs.group.position.set(G.desk.x - 480 + 800 * p.hand, -G.desk.y, -60);
-      ((fixed.userData.face as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity = 0.12 + 0.88 * p.label;
+      scale.update({ tilt: p.tilt });
+      // the hand-over: the stack is lifted a little, carried across and set down in front of the nameplate
+      certs.group.position.set(G.desk.x + G.from + (G.to - G.from) * p.hand, -G.desk.y + 46 * Math.sin(Math.PI * p.hand), -40 - 90 * p.hand);
+      certs.group.rotation.y = 0.05 * Math.sin(Math.PI * p.hand);
+      ((fixed.userData.face as THREE.Mesh).material as THREE.MeshBasicMaterial).opacity = 0.1 + 0.9 * p.label;
+      (air.material as THREE.MeshBasicMaterial).opacity = 0.16 * p.label;
     },
   };
 };
