@@ -2201,8 +2201,13 @@ _Log every OffCamCelebs preference change and every video build here with a date
       reference videos. Go through them completely. Note down as many rules as you can… You can deviate from the
       script itself, from the wording"). For a Payouts film the brief fixes the STORY and the FACTS; the objects, shots
       and staging are mine and are chosen to look like the references, and the wording may be rewritten for the
-      references' rhythm, with every figure and guardrail still verified. The full shot-by-shot study and its rule list
-      live in `styles/payouts-moneydecoded-study.md` (written 2026-11-18).
+      references' rhythm, with every figure and guardrail still verified. The full shot-by-shot study (79 shots logged, the render look
+      measured, 188 numbered rules) lives in `styles/payouts-moneydecoded-study/`; its README holds the forty rules that
+      decide the look (R1–R32) and ★ CORRECTS P1, P5, P6, P7 and P11 above where the study proved them wrong: a lit
+      dark-grey studio with a backdrop (not black), captions ~14–15% down at ~28–33 px, hard cuts and whips between
+      places (never travel through the dark), turn cards that look like flat words with a glow, a rough floor with no
+      mirror image, no glowing outlines, no documents or photos as subjects, figures that count up and land with light,
+      something happening every 1–1.5 s. READ THAT README BEFORE BUILDING ANY PAYOUTS FILM.
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
     often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,

@@ -1,32 +1,30 @@
-037 "Afterpay: $29B or $13.8B?" — VO SCRIPT (corrected 2026-11-18; read THIS, not the brief)
+037 "Afterpay: $29B or $13.8B?" — VO SCRIPT v2 (rewritten 2026-11-18 for the references' rhythm; read THIS)
+Timur, 2026-11-18: "You can deviate from the script itself, from the wording." Story, facts and guardrails unchanged.
 
-Afterpay sold for twenty-nine billion dollars. That's the number in the headlines.
-The buyer's own filing says thirteen point eight.
-Let me explain.
-In August twenty twenty-one, Jack Dorsey's Square agreed to buy Afterpay.
-But it didn't pay in cash. It paid in its own shares.
-Every Afterpay share would become point three seven five Square shares.
-At the time, one Square share was worth two hundred and forty-seven dollars. That's where twenty-nine billion came from.
-And here's the catch.
-The deal took six months to close. By then, Square had renamed itself Block, and its share price had roughly halved.
-So when Block booked the deal with the S.E.C., the shares it handed over were worth thirteen point eight billion.
-To be fair, twenty-nine billion was the real value on announcement day. The deal fixed the number of shares, not the dollars, and Afterpay's owners got those shares.
-So twenty-nine billion was the price on day one. Not the price paid.
+An American company bought Afterpay for twenty-nine billion dollars.
+But when the deal closed, its own filing put the price at thirteen point eight.
+So which number is right?
+Let us explain.
+In August twenty twenty-one, Jack Dorsey's company, Square, agreed to buy Afterpay.
+But Square didn't pay in cash.
+It paid in its own shares.
+For every Afterpay share, you got point three seven five of a Square share.
+At the time, each Square share was worth two hundred and forty-seven dollars.
+Multiply it out, and you get twenty-nine billion.
+But here's the catch.
+The deal took six months to close.
+By then, Square had renamed itself Block, and its share price had roughly halved.
+Same number of shares. About half the price.
+So when the deal closed, Block told the S.E.C. what those shares were worth: thirteen point eight billion.
+To be fair, twenty-nine billion was real on day one, and Afterpay's shareholders got the shares they were promised.
+But the price tag everyone remembers was never the price paid.
 Our rating: inflated.
 Send us who to audit next.
 
-CHANGES FROM THE BRIEF (3)
-1. "the number on every headline" -> "the number in the headlines". "Every" cannot be shown; Australian coverage led with A$39 billion.
-2. "That day, one Square share was worth…" -> "At the time, …". US$247.26 is the close of Friday 30 Jul 2021; the deal was announced on Sunday 1 Aug 2021, a day with no trading. The LED board shows the exact date.
-3. "Afterpay's owners kept those shares" -> "got those shares". They received the shares; whether each holder kept them is not documented (and the guardrail says their value kept moving).
-
-VERIFICATION TRAIL (2026-11-18)
-- US$29 billion (A$39 billion), all stock, fixed 0.375 Square Class A shares per Afterpay share, implied A$126.21, Square close US$247.26 on 30 Jul 2021: Square press release, 1 Aug 2021 (square.com/us/en/press/square-announces-plans-to-acquire-afterpay; Business Wire 20210801005042). CONFIRMED.
-- Stock issued in the acquisition, quarter to 31 Mar 2022: US$13,827,929 thousand: Block Form 10-Q for Q1 2022 (accession 0001628280-22-012707), read from the SEC's structured data for that filing (StockIssuedDuringPeriodValueAcquisitions). CONFIRMED.
-- 113,617,352 Class A shares; "aggregate fair value of the shares issued was $13.8 billion", based on the closing price on the acquisition date; US$66,337 thousand expensed post-combination: same 10-Q, acquisitions note. CONFIRMED via search excerpts of the filing; the SEC site refused this session's direct download of the page, so the sentence itself was not read on sec.gov here.
-- Total consideration US$13,836,622 thousand: the brief's figure from the same table. NOT independently read here; not spoken and not shown.
-- US$122.29 per share at closing = (13,827,929 + 66,337) thousand / 113,617,352. DERIVED, arithmetic checked; down 50.5% from US$247.26 ("roughly halved").
-- Closed 31 Jan 2022 (US) / 1 Feb 2022 (Australia): 10-Q acquisitions note. CONFIRMED. 1 Aug 2021 to 31 Jan 2022 is six months.
-- Square renamed Block: announced 1 Dec 2021, legal change "on or about" 10 Dec 2021 (Square press release). CONFIRMED.
-- 8-K/A share counts (113,387,895 + 229,457): NOT read here; not spoken and not shown.
-- Gap: 29 − 13.8 = 15.2, shown as "≈ $15,000,000,000".
+CHECKS ON THE NEW WORDING (the figures and the trail are v1's, unchanged; see git history of this file)
+- "An American company bought Afterpay for twenty-nine billion": the headline as reported (Square press release, 1 Aug 2021: about US$29 billion).
+- "its own filing put the price at thirteen point eight": Block 10-Q, Q1 2022: aggregate fair value of the shares issued, $13.8 billion.
+- "At the time… two hundred and forty-seven dollars": US$247.26, the 30 Jul 2021 close (not "that day": 1 Aug was a Sunday).
+- "roughly halved", "About half the price": US$122.29 at closing, derived from the 10-Q, down 50.5%.
+- "got the shares they were promised": the fixed 0.375 ratio was delivered (113,617,352 shares issued); nothing says who kept them.
+- No one "lost" money, no one misled anyone, no current share price, the two banned words absent, the rating is on the $29 billion figure as the price paid.

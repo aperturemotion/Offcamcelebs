@@ -1,29 +1,29 @@
 {
-  "note": "037 \u2014 brief lines that FAIL verification (CLAUDE.md, V26: armed BEFORE the take). Any caption matching a `bad` pattern means the take was read from the BRIEF. Read with JSON.parse, never regex over source. Verified 2026-11-18; VO_SCRIPT.txt has the trail.",
+  "note": "037 \u2014 script v2 (2026-11-18). Lines the BRIEF had that fail verification: any caption matching a `bad` pattern means a take was read from the brief. Read with JSON.parse.",
   "fixes": [
     {
-      "at": "hook c1",
+      "at": "hook c0",
       "brief": "That's the number on every headline.",
       "briefSpoken": "That's the number on every headline.",
-      "use": "That's the number in the headlines.",
-      "why": "'Every' cannot be shown; Australian coverage led with A$39 billion.",
+      "use": "(line dropped in v2)",
+      "why": "'Every' cannot be shown.",
       "bad": "\\bevery headline\\b"
     },
     {
-      "at": "price c1",
+      "at": "price c0",
       "brief": "That day, one Square share was worth two hundred and forty-seven dollars.",
       "briefSpoken": "That day, one Square share was worth two hundred and forty-seven dollars.",
-      "use": "At the time, one Square share was worth two hundred and forty-seven dollars.",
-      "why": "US$247.26 is the 30 Jul 2021 close; the announcement day, 1 Aug 2021, was a Sunday.",
-      "bad": "\\bthat day,? one square share\\b"
+      "use": "At the time, each Square share was worth two hundred and forty-seven dollars.",
+      "why": "US$247.26 is the 30 Jul 2021 close; 1 Aug 2021 was a Sunday.",
+      "bad": "\\bthat day,? (one|each) square share\\b"
     },
     {
-      "at": "fair c2",
+      "at": "fair c0",
       "brief": "and Afterpay's owners kept those shares.",
       "briefSpoken": "and Afterpay's owners kept those shares.",
-      "use": "and Afterpay's owners got those shares.",
+      "use": "and Afterpay's shareholders got the shares they were promised.",
       "why": "They received the shares; whether holders kept them is undocumented.",
-      "bad": "\\bowners kept those shares\\b"
+      "bad": "\\b(owners|shareholders) kept those shares\\b"
     }
   ],
   "guardrails": [
