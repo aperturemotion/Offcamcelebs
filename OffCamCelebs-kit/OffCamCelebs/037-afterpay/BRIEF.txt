@@ -1,0 +1,68 @@
+NEW VIDEO — "Afterpay: $29B or $13.8B?" (Afterpay / Block, audit #037). ~60 seconds, 1080x1920 @30fps. FOLDER: 037-afterpay | COMPOSITION: InfluencerAudit037
+
+CONTENT-ONLY PROMPT. The look (3-D object studio, captions, pivot cards, motion) follows the MoneyDecoded-style look already in your preferences. This prompt fixes the story, the script, the facts, and which object carries each line.
+
+COVER
+Kicker: AFTERPAY · THE SALE PRICE
+Line 1: SOLD FOR $29B?
+Line 2: THE FILING SAYS $13.8B.
+Hero object: a big hanging price tag under amber light reading $29,000,000,000
+
+WHAT THE VIDEO HAS TO DO
+- First frame: the hanging price tag already lit, reading $29,000,000,000. No intro, no title card.
+- One object and one number per line; the number appears as the VO says it. The objects below are suggestions: swap any for a better metaphor.
+- The core contrast: $29,000,000,000 (announced) → $13,800,000,000 (booked at closing). The whole video is that one tag changing its number.
+- The mechanism must read visually: the price was paid in shares, so show a stack of share certificates next to an LED share-price display. When the display falls, the stack visibly shrinks.
+- One real photo: public/afterpay_face.jpg (Jack Dorsey), shown inside the scene as a framed print on the buyer's desk, at beat 2 and at the verdict. Everyone else named appears as a nameplate.
+- Brand names (Afterpay, Square, Block) in plain type; no logos, app screenshots or stock charts copied from websites.
+- Keep text clear of Instagram's buttons and caption area.
+
+BEATS (VO line → on screen)
+1. HOOK — "Afterpay sold for twenty-nine billion dollars. That's the number on every headline." → Hanging price tag: $29,000,000,000. A few folded newspapers below it, each with "$29B" circled.
+2. HOOK — "The buyer's own filing says thirteen point eight." → The tag flips to $13,800,000,000. Framed print of Jack Dorsey on a desk beside a thick filing.
+3. PIVOT — "Let me explain." → Black pivot card, amber glow.
+4. "In August twenty twenty-one, Jack Dorsey's Square agreed to buy Afterpay." → Nameplate "JACK DORSEY · CEO, SQUARE"; a contract slides across a desk, dated 1 AUG 2021.
+5. "But it didn't pay in cash. It paid in its own shares." → A cooler box of cash slides out of frame; a glowing stack of share certificates labelled "SQUARE SHARES" slides in.
+6. "Every Afterpay share would become point three seven five Square shares." → One certificate labelled "1 AFTERPAY SHARE" turns into a fraction of a Square certificate: "0.375".
+7. "That day, one Square share was worth two hundred and forty-seven dollars." → LED share-price board: $247.26 · 30 JUL 2021.
+8. "That's where twenty-nine billion came from." → Certificate stack × LED price → the hanging tag reads $29B again.
+9. PIVOT — "And here's the catch." → Black pivot card, red glow.
+10. "The deal took six months to close." → Flip calendar: AUG 2021 → JAN 2022.
+11. "By then, Square had renamed itself Block, and its share price had roughly halved." → Nameplate on the stack swaps SQUARE → BLOCK; LED board drops $247.26 → $122.29; the stack shrinks to half height.
+12. "So when Block booked the deal with the S.E.C., the shares it handed over were worth thirteen point eight billion." → 3-D filing open on the desk, one highlighted line: "AGGREGATE FAIR VALUE OF THE SHARES ISSUED: $13.8 BILLION". A stamp lands: "FORM 10-Q · Q1 2022".
+13. FAIRNESS — "To be fair, twenty-nine billion was the real value on announcement day." → Balance scale: "$29B · 1 AUG 2021" on one pan, level for a moment.
+14. FAIRNESS — "The deal fixed the number of shares, not the dollars, and Afterpay's owners kept those shares." → Certificates handed across the desk to a nameplate "AFTERPAY SHAREHOLDERS"; label "FIXED: 0.375 SHARES".
+15. PUNCHLINE — "So twenty-nine billion was the price on day one. Not the price paid." → A receipt prints: ANNOUNCED $29,000,000,000 / PAID AT CLOSING $13,800,000,000 / GAP ≈ $15,000,000,000.
+16. VERDICT — "Our rating: inflated." → Verdict on the receipt; the framed Dorsey print beside it.
+17. CTA — "Send us who to audit next." → Hold on the receipt and the price tag (loops back to the opening shot).
+
+SCRIPT
+Afterpay sold for twenty-nine billion dollars. That's the number on every headline.
+The buyer's own filing says thirteen point eight.
+Let me explain.
+In August twenty twenty-one, Jack Dorsey's Square agreed to buy Afterpay.
+But it didn't pay in cash. It paid in its own shares.
+Every Afterpay share would become point three seven five Square shares.
+That day, one Square share was worth two hundred and forty-seven dollars. That's where twenty-nine billion came from.
+And here's the catch.
+The deal took six months to close. By then, Square had renamed itself Block, and its share price had roughly halved.
+So when Block booked the deal with the SEC, the shares it handed over were worth thirteen point eight billion.
+To be fair, twenty-nine billion was the real value on announcement day. The deal fixed the number of shares, not the dollars, and Afterpay's owners kept those shares.
+So twenty-nine billion was the price on day one. Not the price paid.
+Our rating: inflated.
+Send us who to audit next.
+
+FACTS
+- CLAIMED (Square's own words, press release 1 Aug 2021): "implied value of approximately US$29 billion (A$39 billion)"; fixed exchange ratio of 0.375 Square Class A shares per Afterpay share; implied A$126.21 per Afterpay share, based on Square's US$247.26 close on 30 Jul 2021.
+- HEADLINES: "Square paid Afterpay A$39 billion (US$29 billion)" (Wikipedia, Afterpay article; same figure across press coverage).
+- VERIFIED (Block Form 8-K/A, 2022): completed 31 Jan 2022 (PST) / 1 Feb 2022 (AET); 113,387,895 shares issued plus 229,457 for vested option settlement.
+- VERIFIED (Block Form 10-Q, Q1 2022, Note 9): 113,617,352 Class A shares issued; "The aggregate fair value of the shares issued was $13.8 billion", based on Block's closing price on the acquisition date; total consideration in the table $13,836,622 thousand.
+- DERIVED (from the 10-Q): $13,894,266K stock fair value (incl. $66.3M expensed post-combination) ÷ 113,617,352 shares = $122.29 per share on 31 Jan 2022, vs $247.26 at announcement: down 50.5% ("roughly halved").
+- Square renamed itself Block on 10 Dec 2021.
+
+ACCURACY GUARDRAILS
+- $29B was accurate on announcement day. Never imply Square, Block, Dorsey or the founders misled anyone; the rating is on the headline figure used as the price paid.
+- Don't say the founders or shareholders "lost" $15B: they received Block shares whose value kept moving after closing.
+- No current Block share price anywhere.
+- The two banned words from the standing rules never appear.
+- The verdict rates the $29 billion figure as the price Block paid, not any person or company.

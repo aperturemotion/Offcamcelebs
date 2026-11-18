@@ -1,0 +1,56 @@
+{
+  "note": "037 \u2014 brief lines that FAIL verification (CLAUDE.md, V26: armed BEFORE the take). Any caption matching a `bad` pattern means the take was read from the BRIEF. Read with JSON.parse, never regex over source. Verified 2026-11-18; VO_SCRIPT.txt has the trail.",
+  "fixes": [
+    {
+      "at": "hook c1",
+      "brief": "That's the number on every headline.",
+      "briefSpoken": "That's the number on every headline.",
+      "use": "That's the number in the headlines.",
+      "why": "'Every' cannot be shown; Australian coverage led with A$39 billion.",
+      "bad": "\\bevery headline\\b"
+    },
+    {
+      "at": "price c1",
+      "brief": "That day, one Square share was worth two hundred and forty-seven dollars.",
+      "briefSpoken": "That day, one Square share was worth two hundred and forty-seven dollars.",
+      "use": "At the time, one Square share was worth two hundred and forty-seven dollars.",
+      "why": "US$247.26 is the 30 Jul 2021 close; the announcement day, 1 Aug 2021, was a Sunday.",
+      "bad": "\\bthat day,? one square share\\b"
+    },
+    {
+      "at": "fair c2",
+      "brief": "and Afterpay's owners kept those shares.",
+      "briefSpoken": "and Afterpay's owners kept those shares.",
+      "use": "and Afterpay's owners got those shares.",
+      "why": "They received the shares; whether holders kept them is undocumented.",
+      "bad": "\\bowners kept those shares\\b"
+    }
+  ],
+  "guardrails": [
+    {
+      "why": "$29B was accurate on announcement day: never imply Square, Block, Dorsey or the founders misled anyone (the brief).",
+      "bad": "\\b(lied|lying|misled|mislead\\w*|deceiv\\w*|cover(ed)?[- ]up|hid the|fake)\\b",
+      "example": "Square misled the market."
+    },
+    {
+      "why": "Never say founders or shareholders 'lost' $15B: they received Block shares whose value kept moving (the brief).",
+      "bad": "\\b(lost|losing|wiped out|robbed|cheated)\\b",
+      "example": "Shareholders lost fifteen billion."
+    },
+    {
+      "why": "No current Block share price anywhere (the brief).",
+      "bad": "\\b(today|now|currently)\\b[^.]*\\b(share|stock) price\\b|\\b(share|stock) price\\b[^.]*\\b(today|now|currently)\\b",
+      "example": "Today the share price is sixty dollars."
+    },
+    {
+      "why": "'Fraud' and 'scam' never appear (standing rule).",
+      "bad": "\\b(fraud|scam)\\w*\\b",
+      "example": "The deal was a scam."
+    },
+    {
+      "why": "The verdict rates the $29 billion figure as the price paid, not any person or company (the brief).",
+      "bad": "\\b(afterpay|square|block|dorsey|the founders?) (is|was|are|were) (inflated|overpriced|overvalued|dishonest)\\b",
+      "example": "Afterpay was overvalued."
+    }
+  ]
+}
