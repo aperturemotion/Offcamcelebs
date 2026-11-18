@@ -2178,6 +2178,22 @@ _Log every OffCamCelebs preference change and every video build here with a date
       charts, stamps, highlights, glows, and the TURN CARDS too (solid extruded letters in the studio, not CSS text on a
       CSS glow). Nothing that is a visual is drawn flat in CSS or SVG. The narration captions are text, and the plain
       black ground stays. One HyperFrames composition, no other renderer.
+    - **P12 ★★★★ IT IS ONE COMPLETE 3-D WORLD, FILMED BY A REAL CAMERA** (Timur, 2026-11-18, on 037's first cut,
+      angry: "It's a complete 3D world, not some 2D bullshit like we used to do on OffCamCelebs. Stop doing this. Look
+      through the reference videos"). The first 037 cut put 3-D models in front of a flat camera: frontal views, small
+      objects, pans and zooms done by sliding and scaling a picture, places handed over by 2-D trucks and cranes, a flat
+      ground. That is the old OffCamCelebs staging and it is BANNED for The Payouts. What the references do, frame by
+      frame (dense strips, 2026-11-18):
+      · the whole frame is one rendered scene: floor, walls or terraces, haze, objects, light; nothing is composited flat;
+      · a real perspective camera FLIES: low angles along a rail, orbits round an object, climbs from a floor numeral to
+        a hanging sign, travels from one object to the next through the dark, with strong perspective and motion blur
+        on the fast part;
+      · objects are BIG and close: one object fills the frame's middle, often cropped by the frame, seen three-quarter;
+      · figures are solid things: extruded numerals standing on the floor that count up, lit plaques on wagons;
+      · light acts: spots come up, a ring of light spreads on the floor, a sign's glow sweeps;
+      · a place can be a whole environment (the quarry with its terraces, an excavator digging, rocks falling).
+      So a Payouts film is built as ONE full-frame Three.js scene inside the HyperFrames composition, with one keyframed
+      3-D camera for the whole film; the 2-D place layers, hand-over transforms and CSS grounds are not used.
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
     often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,
