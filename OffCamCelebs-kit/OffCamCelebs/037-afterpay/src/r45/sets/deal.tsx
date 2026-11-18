@@ -22,8 +22,8 @@ export const DL = { contract: [AGREED - 2, AGREED + 28], cooler: [CASH, CASH + 2
 
 const TOP = G.desk.y;
 const STORY: CamKey[] = [
-  { at: -9999, x: G.plate.x, y: TOP - 120, z: 1.36, dur: 1 },                           // close on the nameplate
-  { at: AGREED - 6, x: G.plate.x + 20, y: TOP - 60, z: 1.12, dur: 38 },                 // down and back: the contract arrives
+  { at: -9999, x: G.plate.x, y: TOP - 270, z: 1.36, dur: 1 },                           // close on the nameplate
+  { at: AGREED - 6, x: G.plate.x + 20, y: TOP - 190, z: 1.16, dur: 38 },                 // down and back: the contract arrives
   { at: cue(S, 1) - 6, x: G.swapX, y: TOP - 190, z: 1.34, dur: 46 },                    // along the desk: the cash, then the shares
   { at: EVERY - 8, x: G.card.x, y: TOP - 200, z: 1.36, dur: 46 },                       // on: the one certificate
   { at: RATIO + 24, x: G.card.x, y: TOP - 196, z: 2.25, dur: 40 },                      // in on the fraction

@@ -17,11 +17,11 @@ import { fairModel, FAIR_GEO as G, type FairP } from "../../three/props/fair";
 // ═══════════════════════════════════════════════════════════════════════════
 const S = "fair" as const;
 const REAL = word(S, 0, /^real/), FIXED = word(S, 1, /^fixed/), GOT = word(S, 1, /^got/);
-export const FA = { label: [FIXED - 2, FIXED + 14], hand: [GOT - 10, GOT + 30] } as const;
+export const FA = { label: [FIXED - 2, FIXED + 14], hand: [GOT - 10, GOT + 30], level: [cue(S, 0) - 6, REAL - 2] } as const;
 
 const STORY: CamKey[] = [
-  { at: -9999, x: G.scale.x - 60, y: G.floor - 470, z: 0.96, dur: 1 },                       // the whole scale
-  { at: REAL - 4, x: G.scale.x - 70, y: G.floor - 510, z: 1.1, dur: 40 },                  // in on the level beam and its pans
+  { at: -9999, x: G.scale.x + 40, y: G.floor - 470, z: 0.94, dur: 1 },                       // the whole scale
+  { at: REAL - 4, x: G.scale.x + 40, y: G.floor - 500, z: 1.02, dur: 40 },                  // in on the level beam and its pans
   { at: cue(S, 1) - 6, x: G.desk.x, y: G.desk.y - 170, z: 0.98, dur: 48 },        // the desk
   { at: GOT - 14, x: G.desk.x + 120, y: G.desk.y - 150, z: 1.06, dur: 44 },            // following the certificates across
 ];

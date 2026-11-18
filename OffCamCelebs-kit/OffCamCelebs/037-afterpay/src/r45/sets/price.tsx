@@ -18,13 +18,13 @@ const S = "price" as const;
 const WORTH = word(S, 0, /^worth/), N247 = word(S, 0, /^\$247/), N29 = word(S, 1, /^29/);
 // the place has only the two sentences: the pull-back starts as soon as the figure has been heard, so the tag has turned
 // to face us by "29" and the climb onto it is over before the next card
-const BACK = N247 + 12, TURN = Math.max(BACK + 40, N29 - 20), PUSH = Math.max(TURN + 16, N29);
-export const PR = { on: [WORTH - 8, WORTH + 6], stack: [BACK + 2, BACK + 30], sum: [BACK + 24, BACK + 40], turn: [TURN, TURN + 22], tag: [PUSH + 12, PUSH + 30] } as const;
+const BACK = N247 + 12, TURN = Math.max(BACK + 46, N29 - 20), PUSH = Math.max(TURN + 16, N29);
+export const PR = { on: [WORTH - 8, WORTH + 6], stack: [BACK + 2, BACK + 30], sum: [BACK + 24, BACK + 40], turn: [TURN, TURN + 22], tag: [PUSH + 12, PUSH + 30], hang: [BACK + 28, BACK + 50] } as const;
 
 const LED_CY = G.floor - G.led.legs - G.led.h / 2, TAG_CY = G.tag.y + G.tag.cord + G.tag.h / 2;
 const STORY: CamKey[] = [
   { at: -9999, x: G.cx, y: LED_CY + 50, z: 1.42, dur: 1 },                             // close on the board
-  { at: BACK, x: G.cx, y: 940, z: 1.02, dur: 40 },                                     // back: the stack × the board (the = just in at the top)
+  { at: BACK, x: G.cx, y: 400, z: 0.75, dur: 40 },                                     // back: the stack × the board (the = just in at the top)
   { at: PUSH, x: G.cx, y: TAG_CY + 40, z: 1.3, dur: 40 },                              // up onto the tag
 ];
 export const PR_DONE = Math.max(cueEnd(S, 1) + 4, PUSH + 40);
@@ -33,7 +33,7 @@ export const PR_CAM: CamKey[] = alive("price", STORY, PR_DONE + 40, { amp: 0.5 }
 const eyeAt = (f: number) => { const v = camView(PR_CAM, f); return { x: v.x + 210, y: v.y - 330, D: 2100 }; };
 const paramsAt = (f: number): PriceP => ({
   on: ramp(f, PR.on[0], PR.on[1], SETTLE), stack: ramp(f, PR.stack[0], PR.stack[1], GLIDE), turn: ramp(f, PR.turn[0], PR.turn[1], SETTLE), sum: ramp(f, PR.sum[0], PR.sum[1], SETTLE), tag: ramp(f, PR.tag[0], PR.tag[1], SETTLE),
-  swing: 0.7 * Math.sin(f / 29),
+  swing: 0.7 * Math.sin(f / 29), hang: ramp(f, PR.hang[0], PR.hang[1], GLIDE),
 });
 
 export const Price: React.FC<{ f: number }> = ({ f }) => (

@@ -11,9 +11,9 @@ import { HAS_PHOTO, PHOTO_FILE } from "../../audit/data";
 void SM;
 
 export const HOOK_GEO = {
-  floor: 1844, desk: { x: 600, y: 1560, w: 1500, d: 800 },
+  floor: 1444, desk: { x: 600, y: 1160, w: 1500, d: 800 },
   tag: { x: 540, y: -80, w: 760, h: 320, cord: 200 },
-  papers: { x: 330, y: 1560 }, frame: { x: 1205 }, filing: { x: 880 },
+  papers: { x: 330, y: 1160 }, frame: { x: 1110 }, filing: { x: 830 },
 } as const;
 const PAPERS = [
   { x: 170, z: -285, ry: -0.11, masthead: "THE MORNING LEDGER", tone: "#E6DFCF" },

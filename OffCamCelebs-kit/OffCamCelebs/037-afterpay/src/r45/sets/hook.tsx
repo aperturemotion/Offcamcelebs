@@ -26,13 +26,13 @@ export const HK = { flipA: FLIP - 2, flipB: FLIP + 22, lands: LANDS } as const;
 const TAG_CY = G.tag.y + G.tag.cord + G.tag.h / 2;
 // ★ the tag's rail stays IN FRAME, under the caption line, in every framing (a hanging thing that leaves by the top must
 //   cross the caption to come back): the wide framings put the rail at y ≈ 300 on screen
-const WIDE_Z = 0.7, camY = (z: number, ry: number) => G.tag.y - 16 + (960 - ry) / z;
+const WIDE_Z = 0.9, camY = (z: number, ry: number) => G.tag.y - 16 + (960 - ry) / z;
 const STORY: CamKey[] = [
   { at: -9999, x: G.tag.x, y: TAG_CY - 40, z: 1.14, dur: 1 },                               // close on the tag
   { at: 4, x: G.tag.x + 6, y: TAG_CY - 36, z: 1.2, dur: 64, drift: true },             //   a slow push
   { at: HEAD - 6, x: 520, y: camY(WIDE_Z, 330), z: WIDE_Z, dur: 44 },                             // back and down: the tag over the desk,
                                                                                        //   the newspapers dropping in
-  { at: FILING - 4, x: 640, y: camY(WIDE_Z + 0.04, 330), z: WIDE_Z + 0.04, dur: 46 },               // across to the buyer's side
+  { at: FILING - 4, x: 700, y: camY(WIDE_Z + 0.04, 330), z: WIDE_Z + 0.04, dur: 46 },               // across to the buyer's side
 ];
 export const HK_DONE = Math.max(cueEnd(S, 2) + 4, HK.flipB + 8);
 export const HK_CAM: CamKey[] = alive("hook", STORY, HK_DONE + 30, { amp: 0.4 });

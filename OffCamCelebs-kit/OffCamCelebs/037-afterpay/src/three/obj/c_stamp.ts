@@ -49,10 +49,10 @@ export const makeStamp = (o: StampOpts): Obj3<StampP> => {
   band.position.set(0, 8 + 40, (h + 30) / 2);
   const neck = mesh(lathe([[26, 0], [22, 10], [15, 34], [14, 70], [20, 84], [34, 96], [44, 116], [46, 138], [40, 158], [24, 172], [0.01, 176]], 48), SM.graphite());
   neck.position.y = 52;
-  neck.scale.y = 0.78;
+  neck.scale.y = 0.5;   // a short handle: seen from above it must not reach over the line it stamps under
   const collar = mesh(new THREE.TorusGeometry(21, 3, 10, 40), SM.edge());
   collar.rotation.x = Math.PI / 2;
-  collar.position.y = 52 + 84 * 0.78;
+  collar.position.y = 52 + 84 * 0.5;
   tool.add(die, mount, band, neck, collar);
   group.add(tool);
   const UP = 560;
@@ -62,7 +62,9 @@ export const makeStamp = (o: StampOpts): Obj3<StampP> => {
     if (p <= 0.5) { const u = p / 0.5; y = UP * (1 - u * u); }                 // it falls, gathering speed, and lands
     else if (p <= 0.62) y = 0;                                               // pressed
     else { const u = (p - 0.62) / 0.38; y = UP * 1.15 * u * u * (3 - 2 * u); }  // lifted away
-    tool.position.y = y;
+    // ★ it comes in from the NEAR side (toward the viewer) as it comes down, and leaves the same way: seen from above, a
+    //   tool that falls straight down crosses whatever is printed above its imprint (it covered the highlighted figure)
+    tool.position.set(y * 0.2, y, y * 1.35);
     tool.scale.y = p > 0.5 && p <= 0.62 ? 0.97 : 1;
     tool.visible = p > 0.001 && p < 0.999;
     ink.visible = p >= 0.52;

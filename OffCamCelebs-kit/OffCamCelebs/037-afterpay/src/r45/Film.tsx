@@ -24,23 +24,16 @@ import { FairSet, FA_DONE } from "./sets/fair";
 import { VerdictSet } from "./sets/verdict";
 
 // ═══════════════════════════════════════════════════════════════════════════
-// ★ 037: eight places in THE PAYOUTS' black studio (six object places, two turn cards entered by a DIP).
-// ★★★★★ RULE 45 — THE FILM: seven METAPHOR SETS (the brief's sets 1–7), cream and dark alternating per set; inside a set
-// the objects stay and do a NEW action on each sentence, and (★★★★ RULE 46) the CAMERA travels through the set's place.
-// ★★★★ THE HAND-OVERS ARE 100bps' (user, 2026-10-07: "remove those weird zoom out or sliding animations where you can see
-// the edge of the scenes, use 100bps transitions instead"), after Style 3 E7 and V34 `shot.tsx`: every hand-over is a
-// CAMERA MOVE through one world, never a panel sliding or a scene shrunk to a card:
-//   · TRUCK — the camera travels sideways: both places ride ONE in-out curve, a frame-width apart; the camera yaws ±7° into
-//     the move and backs off ~8% at its middle (the depth arc), the same for both places;
-//   · CRANE — the camera rises or descends 2000 px (a frame's height and a gap: the two frames never overlap), pitching ±5°,
-//     with the same arc.
-// ★★★★ RULE 48 (user, 2026-10-07: "the animations and transitions still don't smooth in and out enough, enforce that
-// further"): every hand-over starts from rest and settles to rest on TRAVEL, over 44 f (a truck) or 48 f (a crane), and
-// its far wall and floor fade on an eased curve. The DIVE is gone: it accelerated into its switch at full speed and the
-// new place opened at full speed (the crown's name beat is now the crown place's own push-in on her face).
-// NO EDGE OF A SCENE IS EVER SEEN: the ground is one surface for the whole film (a cream ↔ dark change dissolves across the
-// move), and each place's far wall rides at 0.4 of the move, the old one gone before the new one shows (rule 41).
-// No two consecutive hand-overs share type and direction. A set may not start to leave while a beat it carries is spoken.
+// ★ 037 — THE FILM: eight places in THE PAYOUTS' black studio (preferences, rules P1–P10): six object places and two
+// turn cards. Inside a place the objects stay and act on each sentence, and the camera travels through it (camera.tsx).
+// THE HAND-OVERS:
+//   · TRUCK — the camera travels sideways: both places ride ONE curve, a frame-width apart; the camera yaws ±7° into the
+//     move and backs off ~8% at its middle (the depth arc);
+//   · CRANE — the camera rises or descends 2000 px (a frame's height and a gap), pitching ±5°, with the same arc;
+//   · DIP — into and out of a turn card: the leaving place fades to black, the arriving one fades up, no travel (P6).
+// Trucks and cranes run on the expo shape (handover.ts; Timur's pick, 2026-11-15) and start and end at rest. The ground is
+// one black surface for the whole film, so no edge of a place is ever seen. No two consecutive trucks or cranes share type
+// and direction. A place may not start to leave while a beat it carries is spoken.
 // ═══════════════════════════════════════════════════════════════════════════
 type Tr =
   | { kind: "truck"; dir: "L" | "R"; gap?: number; peak?: number }   // the direction the CAMERA travels; gap: extra travel

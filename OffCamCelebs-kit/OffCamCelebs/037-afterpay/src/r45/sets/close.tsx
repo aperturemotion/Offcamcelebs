@@ -45,9 +45,9 @@ const WHOLE = aimAt(FX - 150, G.filing.z, FTOP);                 // the open fil
 const LINE = aimAt(FX + 10, G.filing.z - 40, FTOP);              // its line, and the stamp's place under it
 const MID_Y = G.floor - 330;
 const STORY: CamKey[] = [
-  { at: -9999, x: G.cal.x, y: G.floor - 352, z: 1.38, dur: 1 },                                // close on the calendar
-  { at: cue(S, 1) - 6, x: (G.stack.x + G.led.x) / 2 - 20, y: MID_Y, z: 0.84, dur: 46 },        // the stack and the board
-  { at: PRICE_W - 8, x: (G.stack.x + G.led.x) / 2 + 40, y: MID_Y - 10, z: 0.96, dur: 40 },                     // onto the falling board
+  { at: -9999, x: G.cal.x, y: G.floor - 372, z: 1.2, dur: 1 },                                // close on the calendar
+  { at: cue(S, 1) - 6, x: (G.stack.x + G.led.x) / 2 - 70, y: MID_Y, z: 0.74, dur: 46 },        // the stack and the board
+  { at: PRICE_W - 8, x: (G.stack.x + G.led.x) / 2 - 40, y: MID_Y - 10, z: 0.8, dur: 40 },                     // onto the falling board
   { at: DESK_AT, x: WHOLE.x, y: WHOLE.y, z: 0.86, dur: 48 },                                  // the desk: the filing
   { at: SHARES - 8, x: LINE.x, y: LINE.y, z: 1.42, dur: 44 },                                 // onto its line
 ];

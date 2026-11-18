@@ -19,7 +19,10 @@ const dotsOf = (text: string, cols: number, rows: number, weight = 800, mark = f
   font(g, weight, size); track(g, size * 0.03);
   const mw = mark ? rows * S * 0.95 : 0;
   const tw = g.measureText(text).width + mw;
-  if (tw > c.width) { size *= c.width / tw; font(g, weight, size); track(g, size * 0.03); }
+  // ★ the figure and its mark fit INSIDE the matrix with a cell of margin each side (measureText leaves out the last
+  //   glyph's overhang: "$122.29" with the mark lost its last digit at the field's edge)
+  const fit = c.width - 2 * S - size * 0.06;
+  if (tw > fit) { size *= fit / tw; font(g, weight, size); track(g, size * 0.03); }
   const w2 = g.measureText(text).width, x0 = (c.width - (w2 + mw)) / 2;
   if (mark) { const a = rows * S * 0.62, mx = x0 + a * 0.5, my = c.height * 0.5; g.beginPath(); g.moveTo(mx - a / 2, my - a * 0.42); g.lineTo(mx + a / 2, my - a * 0.42); g.lineTo(mx, my + a * 0.46); g.closePath(); g.fill(); }
   g.fillText(text, x0 + mw + w2 / 2, c.height / 2 + size * 0.36);

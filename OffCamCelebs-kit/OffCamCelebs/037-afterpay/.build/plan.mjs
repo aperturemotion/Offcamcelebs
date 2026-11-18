@@ -46201,12 +46201,12 @@ var TOTAL_FRAMES = VO_END + OUTRO_HOLD;
 
 // src/three/props/hook.ts
 var HOOK_GEO = {
-  floor: 1844,
-  desk: { x: 600, y: 1560, w: 1500, d: 800 },
+  floor: 1444,
+  desk: { x: 600, y: 1160, w: 1500, d: 800 },
   tag: { x: 540, y: -80, w: 760, h: 320, cord: 200 },
-  papers: { x: 330, y: 1560 },
-  frame: { x: 1205 },
-  filing: { x: 880 }
+  papers: { x: 330, y: 1160 },
+  frame: { x: 1110 },
+  filing: { x: 830 }
 };
 var PAPERS = [
   { x: 170, z: -285, ry: -0.11, masthead: "THE MORNING LEDGER", tone: "#E6DFCF" },
@@ -46275,7 +46275,7 @@ var FALL = 12;
 var H0 = 620;
 var HK = { flipA: FLIP - 2, flipB: FLIP + 22, lands: LANDS };
 var TAG_CY = HOOK_GEO.tag.y + HOOK_GEO.tag.cord + HOOK_GEO.tag.h / 2;
-var WIDE_Z = 0.7;
+var WIDE_Z = 0.9;
 var camY = (z3, ry) => HOOK_GEO.tag.y - 16 + (960 - ry) / z3;
 var STORY = [
   { at: -9999, x: HOOK_GEO.tag.x, y: TAG_CY - 40, z: 1.14, dur: 1 },
@@ -46285,7 +46285,7 @@ var STORY = [
   { at: HEAD - 6, x: 520, y: camY(WIDE_Z, 330), z: WIDE_Z, dur: 44 },
   // back and down: the tag over the desk,
   //   the newspapers dropping in
-  { at: FILING - 4, x: 640, y: camY(WIDE_Z + 0.04, 330), z: WIDE_Z + 0.04, dur: 46 }
+  { at: FILING - 4, x: 700, y: camY(WIDE_Z + 0.04, 330), z: WIDE_Z + 0.04, dur: 46 }
   // across to the buyer's side
 ];
 var HK_DONE = Math.max(cueEnd(S2, 2) + 4, HK.flipB + 8);
@@ -46747,9 +46747,9 @@ var RATIO = word(S3, 3, /^0\.375/);
 var DL = { contract: [AGREED - 2, AGREED + 28], cooler: [CASH, CASH + 24], certs: [SHARES - 16, SHARES + 14], card: [EVERY - 6, EVERY + 22], flip: [RATIO - 2, RATIO + 22] };
 var TOP = DEAL_GEO.desk.y;
 var STORY2 = [
-  { at: -9999, x: DEAL_GEO.plate.x, y: TOP - 120, z: 1.36, dur: 1 },
+  { at: -9999, x: DEAL_GEO.plate.x, y: TOP - 270, z: 1.36, dur: 1 },
   // close on the nameplate
-  { at: AGREED - 6, x: DEAL_GEO.plate.x + 20, y: TOP - 60, z: 1.12, dur: 38 },
+  { at: AGREED - 6, x: DEAL_GEO.plate.x + 20, y: TOP - 190, z: 1.16, dur: 38 },
   // down and back: the contract arrives
   { at: cue(S3, 1) - 6, x: DEAL_GEO.swapX, y: TOP - 190, z: 1.34, dur: 46 },
   // along the desk: the cash, then the shares
@@ -46796,8 +46796,9 @@ var dotsOf = (text, cols, rows, weight = 800, mark = false) => {
   track(g4, size2 * 0.03);
   const mw = mark ? rows * S10 * 0.95 : 0;
   const tw = g4.measureText(text).width + mw;
-  if (tw > c3.width) {
-    size2 *= c3.width / tw;
+  const fit = c3.width - 2 * S10 - size2 * 0.06;
+  if (tw > fit) {
+    size2 *= fit / tw;
     font(g4, weight, size2);
     track(g4, size2 * 0.03);
   }
@@ -46997,9 +46998,14 @@ var priceModel = () => {
       stack.visible = p3.stack > 1e-3;
       signs.forEach(({ g: g4, face }, i3) => {
         face.material.opacity = 0.1 + 0.9 * p3.sum;
-        g4.visible = i3 === 0 ? p3.stack > 0.5 : true;
+        if (i3 === 0) g4.visible = p3.stack > 0.5;
       });
       tag.update({ flip: 0.5 * (1 - p3.turn), swing: p3.swing, lit: p3.tag });
+      const off = 1700 * (1 - p3.hang);
+      tag.group.position.x = X3 + off;
+      tag.group.visible = p3.hang > 1e-3;
+      signs[1].g.position.x = X3 + off;
+      signs[1].g.visible = p3.hang > 1e-3;
     }
   };
 };
@@ -47010,15 +47016,15 @@ var WORTH = word(S4, 0, /^worth/);
 var N247 = word(S4, 0, /^\$247/);
 var N29 = word(S4, 1, /^29/);
 var BACK = N247 + 12;
-var TURN = Math.max(BACK + 40, N29 - 20);
+var TURN = Math.max(BACK + 46, N29 - 20);
 var PUSH = Math.max(TURN + 16, N29);
-var PR = { on: [WORTH - 8, WORTH + 6], stack: [BACK + 2, BACK + 30], sum: [BACK + 24, BACK + 40], turn: [TURN, TURN + 22], tag: [PUSH + 12, PUSH + 30] };
+var PR = { on: [WORTH - 8, WORTH + 6], stack: [BACK + 2, BACK + 30], sum: [BACK + 24, BACK + 40], turn: [TURN, TURN + 22], tag: [PUSH + 12, PUSH + 30], hang: [BACK + 28, BACK + 50] };
 var LED_CY = PRICE_GEO.floor - PRICE_GEO.led.legs - PRICE_GEO.led.h / 2;
 var TAG_CY2 = PRICE_GEO.tag.y + PRICE_GEO.tag.cord + PRICE_GEO.tag.h / 2;
 var STORY3 = [
   { at: -9999, x: PRICE_GEO.cx, y: LED_CY + 50, z: 1.42, dur: 1 },
   // close on the board
-  { at: BACK, x: PRICE_GEO.cx, y: 940, z: 1.02, dur: 40 },
+  { at: BACK, x: PRICE_GEO.cx, y: 400, z: 0.75, dur: 40 },
   // back: the stack × the board (the = just in at the top)
   { at: PUSH, x: PRICE_GEO.cx, y: TAG_CY2 + 40, z: 1.3, dur: 40 }
   // up onto the tag
@@ -47035,7 +47041,8 @@ var paramsAt3 = (f4) => ({
   turn: ramp(f4, PR.turn[0], PR.turn[1], SETTLE),
   sum: ramp(f4, PR.sum[0], PR.sum[1], SETTLE),
   tag: ramp(f4, PR.tag[0], PR.tag[1], SETTLE),
-  swing: 0.7 * Math.sin(f4 / 29)
+  swing: 0.7 * Math.sin(f4 / 29),
+  hang: ramp(f4, PR.hang[0], PR.hang[1], GLIDE)
 });
 var Price = ({ f: f4 }) => /* @__PURE__ */ u2(S, { children: [
   /* @__PURE__ */ u2(Light, { keys: PR_CAM, f: f4, ground: "dark", pools: [[PRICE_GEO.cx, PRICE_GEO.floor - 20, 820, 300]] }),
@@ -47162,10 +47169,10 @@ var makeStamp = (o3) => {
   band.position.set(0, 8 + 40, (h3 + 30) / 2);
   const neck = mesh(lathe([[26, 0], [22, 10], [15, 34], [14, 70], [20, 84], [34, 96], [44, 116], [46, 138], [40, 158], [24, 172], [0.01, 176]], 48), SM.graphite());
   neck.position.y = 52;
-  neck.scale.y = 0.78;
+  neck.scale.y = 0.5;
   const collar = mesh(new three_module_exports.TorusGeometry(21, 3, 10, 40), SM.edge());
   collar.rotation.x = Math.PI / 2;
-  collar.position.y = 52 + 84 * 0.78;
+  collar.position.y = 52 + 84 * 0.5;
   tool.add(die, mount, band, neck, collar);
   group.add(tool);
   const UP = 560;
@@ -47180,7 +47187,7 @@ var makeStamp = (o3) => {
       const u4 = (p3 - 0.62) / 0.38;
       y3 = UP * 1.15 * u4 * u4 * (3 - 2 * u4);
     }
-    tool.position.y = y3;
+    tool.position.set(y3 * 0.2, y3, y3 * 1.35);
     tool.scale.y = p3 > 0.5 && p3 <= 0.62 ? 0.97 : 1;
     tool.visible = p3 > 1e-3 && p3 < 0.999;
     ink.visible = p3 >= 0.52;
@@ -47197,7 +47204,7 @@ var CLOSE_GEO = {
   led: { x: 1760, w: 560, h: 290, legs: 230 },
   desk: { x: 2760, y: 1200, w: 1180, d: 980 },
   filing: { dx: 150, w: 600, d: 760, t: 58, z: 40 },
-  stamp: { dx: 120, dz: 322 }
+  stamp: { dx: 138, dz: 326 }
 };
 var MONTHS = ["AUG 2021", "SEP 2021", "OCT 2021", "NOV 2021", "DEC 2021", "JAN 2022"];
 var closeModel = () => {
@@ -47237,7 +47244,7 @@ var closeModel = () => {
   const filing = makeFiling({ key: "close", w: F4.w, d: F4.d, t: F4.t, cover: ["FORM 10-Q", "BLOCK, INC. | Q1 2022"], line: FILING_LINE });
   filing.group.position.set(G3.desk.x + F4.dx, -G3.desk.y, F4.z);
   filing.group.userData.obj = "filing";
-  const stamp = makeStamp({ key: "close", text: DATES.form, w: 330, h: 88 });
+  const stamp = makeStamp({ key: "close", text: DATES.form, w: 300, h: 80 });
   stamp.group.position.set(G3.desk.x + F4.dx + G3.stamp.dx, -G3.desk.y + F4.t + 8 + 0.6, F4.z + G3.stamp.dz);
   stamp.group.userData.obj = "stamp";
   root.add(cal.group, plinth, band, certs.group, plate.group, led.group, desk.group, sheen, filing.group, stamp.group);
@@ -47295,11 +47302,11 @@ var WHOLE = aimAt(FX - 150, CLOSE_GEO.filing.z, FTOP);
 var LINE2 = aimAt(FX + 10, CLOSE_GEO.filing.z - 40, FTOP);
 var MID_Y = CLOSE_GEO.floor - 330;
 var STORY4 = [
-  { at: -9999, x: CLOSE_GEO.cal.x, y: CLOSE_GEO.floor - 352, z: 1.38, dur: 1 },
+  { at: -9999, x: CLOSE_GEO.cal.x, y: CLOSE_GEO.floor - 372, z: 1.2, dur: 1 },
   // close on the calendar
-  { at: cue(S5, 1) - 6, x: (CLOSE_GEO.stack.x + CLOSE_GEO.led.x) / 2 - 20, y: MID_Y, z: 0.84, dur: 46 },
+  { at: cue(S5, 1) - 6, x: (CLOSE_GEO.stack.x + CLOSE_GEO.led.x) / 2 - 70, y: MID_Y, z: 0.74, dur: 46 },
   // the stack and the board
-  { at: PRICE_W - 8, x: (CLOSE_GEO.stack.x + CLOSE_GEO.led.x) / 2 + 40, y: MID_Y - 10, z: 0.96, dur: 40 },
+  { at: PRICE_W - 8, x: (CLOSE_GEO.stack.x + CLOSE_GEO.led.x) / 2 - 40, y: MID_Y - 10, z: 0.8, dur: 40 },
   // onto the falling board
   { at: DESK_AT, x: WHOLE.x, y: WHOLE.y, z: 0.86, dur: 48 },
   // the desk: the filing
@@ -47472,11 +47479,11 @@ var S6 = "fair";
 var REAL = word(S6, 0, /^real/);
 var FIXED = word(S6, 1, /^fixed/);
 var GOT = word(S6, 1, /^got/);
-var FA = { label: [FIXED - 2, FIXED + 14], hand: [GOT - 10, GOT + 30] };
+var FA = { label: [FIXED - 2, FIXED + 14], hand: [GOT - 10, GOT + 30], level: [cue(S6, 0) - 6, REAL - 2] };
 var STORY5 = [
-  { at: -9999, x: FAIR_GEO.scale.x - 60, y: FAIR_GEO.floor - 470, z: 0.96, dur: 1 },
+  { at: -9999, x: FAIR_GEO.scale.x + 40, y: FAIR_GEO.floor - 470, z: 0.94, dur: 1 },
   // the whole scale
-  { at: REAL - 4, x: FAIR_GEO.scale.x - 70, y: FAIR_GEO.floor - 510, z: 1.1, dur: 40 },
+  { at: REAL - 4, x: FAIR_GEO.scale.x + 40, y: FAIR_GEO.floor - 500, z: 1.02, dur: 40 },
   // in on the level beam and its pans
   { at: cue(S6, 1) - 6, x: FAIR_GEO.desk.x, y: FAIR_GEO.desk.y - 170, z: 0.98, dur: 48 },
   // the desk
@@ -47719,23 +47726,41 @@ var buildScore = (sets, peaks) => {
     if (travel < 150 && zoom < 0.08) return;
     add(pk(id)("airwoosh", k3.at + k3.dur / 2, k3.at + k3.dur, travel > 600 ? 0.7 : 0.5, `the camera travels (${id}, key ${i3})`));
   });
+  HK.lands.forEach((l3, i3) => add(wi("hook")("thud", l3, void 0, 0.3 - 0.04 * i3, `newspaper ${i3 + 1} lands on the desk`)));
   add(pk("hook")("whooshsoft", HK.flipA + 8, HK.flipB, 0.4, "the tag flips to $13,800,000,000"));
   add(wi("hook")("click", HK.flipB - 2, void 0, 0.3, "the tag settles on its new face"));
   add(pk("deal")("whooshsoft", DL.contract[0] + 4, DL.contract[1], 0.4, "the contract slides in"));
   add(pk("deal")("swoosh", DL.cooler[1] - 6, DL.cooler[1], 0.5, "the cooler of cash slides away"));
   add(pk("deal")("whooshsoft", DL.certs[0] + 4, DL.certs[1], 0.5, "the share certificates slide in"));
-  add(wi("deal")("flick", DL.flip[0] + 6, void 0, 0.4, "the certificate turns to 0.375"));
+  add(wi("deal")("click", DL.certs[1], void 0, 0.25, "the stack comes to rest"));
+  add(pk("deal")("whooshsoft", DL.card[0] + 4, DL.card[1], 0.35, "the one certificate slides in on its rail"));
+  add(wi("deal")("tick", DL.flip[0], void 0, 0.35, "the certificate is cut at 0.375"));
+  add(wi("deal")("flick", DL.flip[0] + 6, void 0, 0.4, "the piece turns to 0.375"));
   add(wi("price")("click", PR.on[0], void 0, 0.3, "the board lights: $247.26"));
+  add(wi("price")("datashort", PR.on[0] + 1, PR.on[1] + 8, 0.25, "the board's dots come up"));
+  add(pk("price")("whooshsoft", PR.stack[0] + 6, PR.stack[1], 0.4, "the stack slides in on its plinth"));
+  add(wi("price")("tick", PR.sum[0], void 0, 0.3, "the sum's signs light: \xD7 and ="));
+  add(pk("price")("whooshsoft", PR.hang[0] + 5, PR.hang[1], 0.3, "the tag slides in on its cord"));
+  add(wi("price")("flick", PR.turn[0] + 6, void 0, 0.35, "the tag turns to face us"));
   add(wi("price")("pingshort", PR.tag[0] + 6, void 0, 0.3, "the tag lights: $29,000,000,000"));
-  add(wi("close")("datashort", CL.cal[0], CL.cal[1], 0.3, "the calendar flips six months"));
+  for (let i3 = 0; i3 < 5; i3++) add(wi("close")("flick", CL.cal[0] + (i3 + 0.5) * (CL.cal[1] - CL.cal[0]) / 5, void 0, 0.26, `the calendar's leaf ${i3 + 1} flips`));
   add(wi("close")("click", CL.swap[0] + 8, void 0, 0.3, "the nameplate rolls to BLOCK"));
   add(pk("close")("lowwoosh", CL.fall[0] + 20, CL.fall[1], 0.4, "the price falls and the stack shrinks"));
+  add(wi("close")("datashort", CL.fall[0], CL.fall[1], 0.26, "the board counts down to $122.29"));
+  add(wi("close")("click", CL.fall[1], void 0, 0.3, "the board stops, red: $122.29"));
   add(wi("close")("flick", CL.open[0] + 8, void 0, 0.35, "the filing opens"));
-  add(wi("close")("thud", CL.stamp[1], void 0, 0.5, "the stamp lands: FORM 10-Q | Q1 2022"));
+  add(pk("close")("whooshsoft", CL.hl[0] + 6, CL.hl[1], 0.3, "the highlighter crosses the line"));
+  add(wi("close")("thud", (CL.stamp[0] + CL.stamp[1]) / 2, void 0, 0.5, "the stamp lands: FORM 10-Q | Q1 2022"));
+  add(wi("fair")("chainshort", FA.level[0], FA.level[1], 0.26, "the scale rocks on its chains"));
+  add(wi("fair")("pingshort", FA.level[1], void 0, 0.26, "the scale settles level"));
+  add(wi("fair")("click", FA.label[0] + 4, void 0, 0.3, "FIXED: 0.375 SHARES lights"));
   add(pk("fair")("whooshsoft", FA.hand[0] + 4, FA.hand[1], 0.4, "the certificates cross the desk"));
-  add(wi("verdict")("datashort", VD.head[0], VD.gap[1], 0.3, "the receipt prints"));
+  add(wi("fair")("thud", FA.hand[1] - 2, void 0, 0.28, "the certificates are set down"));
+  for (const [k3, why] of [["head", "its head"], ["ann", "ANNOUNCED"], ["paid", "PAID AT CLOSING"], ["gap", "GAP"], ["foot", "its foot"]])
+    add(wi("verdict")("datashort", VD[k3][0], VD[k3][1] + 2, 0.28, `the receipt prints ${why}`));
   add(wi("verdict")("thud", VD.rating[1], void 0, 0.5, "the rating lands: INFLATED"));
   add(wi("verdict")("sub", VD.rating[1], void 0, 0.4, "INFLATED"));
+  add(wi("verdict")("pingshort", VD.tag[0] + 8, void 0, 0.26, "the tag's lamp comes back up"));
   const MOVE = /* @__PURE__ */ new Set(["swoosh", "whooshlong", "whooshsoft", "airwoosh", "lowwoosh"]);
   const heard = (c3) => c3.at + PEAK[c3.s];
   const out = cues.filter((c3) => !(c3.why.startsWith("the camera travels") && cues.some((o3) => o3 !== c3 && MOVE.has(o3.s) && !o3.why.startsWith("the camera travels") && Math.abs(heard(o3) - heard(c3)) <= 6)));

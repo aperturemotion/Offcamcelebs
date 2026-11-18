@@ -6,11 +6,10 @@
 // The checks, all of which refuse rather than warn:
 //   · every transcribed word is in EXACTLY ONE cue, contiguous and complete; no cue starts before the previous one ends;
 //   · the place (SET) cue COUNTS match what the film indexes (EXPECT = data.ts SCENE_CUES);
-//   · every BEAT: ≤ 2 lines; an italic-only line ≤ 26 characters; a line's BOLD run ≤ 14 characters.
+//   · a beat is the whole sentence (Caption.tsx chunks it into 2–4-word phrases: rule P5), so there are no tier checks.
 //
-// ★ WIRED TO THE TAKE (2026-10-08): fw.py → mergetok.mjs (whisper's split figures "$1" ".6" and "20" "%" made one token)
-//   → vo_retrim.py → onsets.py → this. PLAN and BLOCKS index those 165 tokens. The provisional transcript is kept as
-//   scratchpad/fw_words_provisional.json.
+// ⚠ NOT YET WIRED TO A TAKE (2026-11-18): PLAN indexes provisional.mjs's tokens. When the take lands: fw.py → mergetok.mjs
+//   → onsets.py → re-index PLAN against the real tokens → this.
 //
 // Usage: node scratchpad/captions_vo.mjs   → writes src/audit/cues.ts and src/r45/blocks.ts
 import fs from "node:fs";
@@ -117,8 +116,7 @@ fs.writeFileSync("src/audit/cues.ts",
 //   sentence's words (2–4 words, breaking at punctuation). So a beat is simply the whole sentence on one line; no tiers.
 const BLOCKS = PLAN.map((p) => [[p[3]]]);
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
-// ★ 035: whisper hears "headline said" for the script's "headlines said" (the s runs into "said"). By TOKEN, not by word:
-//   the verdict's "on the headline" is singular, and right.
+// a token whisper mishears, mapped BY TOKEN INDEX to the word it stands for (none yet: fill from the real take)
 const MIS_AT = {};
 const tok = (k) => MIS_AT[k] ?? norm(W[k].t);
 const plainLen = (s) => s.replace(/\*\*/g, "").length;

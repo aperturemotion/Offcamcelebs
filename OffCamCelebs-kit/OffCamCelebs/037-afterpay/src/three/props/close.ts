@@ -17,7 +17,7 @@ import { PRICE, NAMES, FILING_LINE, DATES } from "../../audit/record";
  *  the highlighted line sits on the layer, for the camera; `stamp` the imprint's centre from the filing's centre (x, z) */
 export const CLOSE_GEO = {
   floor: 1420, cal: { x: 300 }, stack: { x: 1160 }, led: { x: 1760, w: 560, h: 290, legs: 230 },
-  desk: { x: 2760, y: 1200, w: 1180, d: 980 }, filing: { dx: 150, w: 600, d: 760, t: 58, z: 40 }, stamp: { dx: 120, dz: 322 },
+  desk: { x: 2760, y: 1200, w: 1180, d: 980 }, filing: { dx: 150, w: 600, d: 760, t: 58, z: 40 }, stamp: { dx: 138, dz: 326 },
 } as const;
 const MONTHS = ["AUG 2021", "SEP 2021", "OCT 2021", "NOV 2021", "DEC 2021", "JAN 2022"];
 /** cal: 0…1 through the six months; swap: the nameplate 0 SQUARE … 1 BLOCK; fall: 0…1 the price $247.26 → $122.29 and the
@@ -61,7 +61,7 @@ export const closeModel = (): Model<CloseP> => {
   const filing = makeFiling({ key: "close", w: F.w, d: F.d, t: F.t, cover: ["FORM 10-Q", "BLOCK, INC. | Q1 2022"], line: FILING_LINE });
   filing.group.position.set(G.desk.x + F.dx, -G.desk.y, F.z);
   filing.group.userData.obj = "filing";
-  const stamp = makeStamp({ key: "close", text: DATES.form, w: 330, h: 88 });
+  const stamp = makeStamp({ key: "close", text: DATES.form, w: 300, h: 80 });
   stamp.group.position.set(G.desk.x + F.dx + G.stamp.dx, -G.desk.y + F.t + 8 + 0.6, F.z + G.stamp.dz);
   stamp.group.userData.obj = "stamp";
   root.add(cal.group, plinth, band, certs.group, plate.group, led.group, desk.group, sheen, filing.group, stamp.group);

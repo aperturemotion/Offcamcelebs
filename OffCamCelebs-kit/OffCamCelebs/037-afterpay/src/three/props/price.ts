@@ -18,7 +18,10 @@ export const PRICE_GEO = {
 } as const;
 /** on: the board's display 0…1; stack: 0 the stack and its plinth off to the right … 1 in place; sum: 0…1 the × and = signs
  *  lit (and the stack's glow); turn: 0 the tag edge-on to the camera (its print unseen) … 1 turned to face it; tag: 0…1 the tag's lamp */
-export type PriceP = { on: number; stack: number; sum: number; turn: number; tag: number; swing: number };
+export type PriceP = { on: number; stack: number; sum: number; turn: number; tag: number; swing: number;
+  /** 0 the tag and its = sign off to the right … 1 hanging in place (they slide in at their own height, UNDER the caption
+   *  line: a hanging thing that comes down from the top of the frame crosses the caption) */
+  hang: number };
 
 export const priceModel = (): Model<PriceP> => {
   const G = PRICE_GEO, Y = -G.floor, X = G.cx;
@@ -75,8 +78,11 @@ export const priceModel = (): Model<PriceP> => {
       certs.update({ height: 1, glow: 0.25 + 0.75 * p.sum });
       stack.position.x = 1500 * (1 - p.stack);
       stack.visible = p.stack > 0.001;
-      signs.forEach(({ g, face }, i) => { (face.material as THREE.MeshBasicMaterial).opacity = 0.1 + 0.9 * p.sum; g.visible = i === 0 ? p.stack > 0.5 : true; });
+      signs.forEach(({ g, face }, i) => { (face.material as THREE.MeshBasicMaterial).opacity = 0.1 + 0.9 * p.sum; if (i === 0) g.visible = p.stack > 0.5; });
       tag.update({ flip: 0.5 * (1 - p.turn), swing: p.swing, lit: p.tag });
+      const off = 1700 * (1 - p.hang);
+      tag.group.position.x = X + off; tag.group.visible = p.hang > 0.001;
+      signs[1].g.position.x = X + off; signs[1].g.visible = p.hang > 0.001;
     },
   };
 };
