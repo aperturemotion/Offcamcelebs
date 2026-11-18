@@ -2134,6 +2134,23 @@ the rest is provisional until the user reacts — confirmed items then become nu
 _Log every OffCamCelebs preference change and every video build here with a date. Nothing about
 100BasisPoints / Style 3 goes in this file._
 
+- **2026-11-18: ★★★ THE PAYOUTS' NEW REEL STYLE IS @moneydecoded.au's, REPLICATED** (Timur: "We found the right style
+  for it… that account style. I want you to try to replicate it, but obviously keep our fonts, personalize it a little bit
+  to look like our account. But basically, yeah, just copy their style"). This supersedes the five candidates of
+  2026-11-16 (`styles/payouts-style-frames/`, kept as history) and, for the Reels, the 029-HF locked look.
+  - **What is copied from @moneydecoded.au:** layout, backgrounds, how figures are shown, caption treatment, motion, pacing,
+    hook and ending structure. ⚠ NOT YET WRITTEN: the account could not be opened from the cloud session and no
+    screenshots of it have been supplied. These rules are written from its frames, never from memory or a guess.
+  - **What stays ours (the "personalize it a little"):** our fonts (Archivo, the two-weight captions); mint = THE HEADLINE
+    NUMBER as reported, khaki = documented figures; "The Payouts" naming; the one-off verdict label per post; the sign-off
+    "Send us who to audit next."; no "·" separators (use "|").
+  - **What never changes with a style:** primary documents first and every figure traced to a named, dated document;
+    "alleges" for anything unproven; the operating company named precisely; never "fraud" or "scam"; a fairness caveat;
+    estimates labelled "about"/"we estimate"; never name or show private individuals; never download a real person's photo;
+    the script check, `script_fixes.json` guards and the voiceover pipeline; Reel safe zones; no MP4 render unless Timur
+    asks in that message.
+  - **Next:** Timur sends the first video's prompts; the visual rules are filled in here from the reference frames first.
+
 - **2026-11-16: THE CHANNEL IS RENAMED "THE PAYOUTS" AND GOES TOP-FUNNEL.** Posts now audit one famous MONEY HEADLINE with
   one big number (jackpots, deferred contracts, "up to" sales, valuations, transfer fees, box office, fight purses) and find
   the real number behind it. Mint neon marks THE HEADLINE NUMBER as reported; khaki plaques stay the documented figures. A
