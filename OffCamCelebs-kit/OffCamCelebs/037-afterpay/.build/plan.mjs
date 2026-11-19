@@ -208,7 +208,7 @@ var HAS_MUSIC = true;
 var HAS_SFX = true;
 var VO_SKIP_FRAMES = Math.round(VO_START * FPS);
 var VO_GAIN = 1;
-var MUSIC_FILE = "music_bigrichtown_bed.wav";
+var MUSIC_FILE = "music_runaway_bed.wav";
 var MUSIC_GAIN = 0.505;
 var SCENE_ORDER = ["hook", "explain", "deal", "price", "catch", "close", "fair", "verdict"];
 var SCENE_CUES = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 4, fair: 1, verdict: 3 };
@@ -225,12 +225,12 @@ var TOTAL_FRAMES = VO_END + OUTRO_HOLD;
 
 // src/audit/bedenv.ts
 var BED_ENV = [
-  [7.24, 0.4],
-  [17.24, -1.4],
-  [27.24, 0.6],
-  [37.24, -0.6],
-  [47.24, 1],
-  [57.24, -0.9]
+  [7.24, 0],
+  [17.24, 0],
+  [27.24, -0.5],
+  [37.24, -0.2],
+  [47.24, -0.6],
+  [57.24, -1]
 ];
 
 // ../034-ohtani/node_modules/preact/dist/preact.mjs
