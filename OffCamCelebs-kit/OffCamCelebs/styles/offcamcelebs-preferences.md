@@ -2228,6 +2228,32 @@ _Log every OffCamCelebs preference change and every video build here with a date
       cut so its drop lands on the hook's figure, 5.5 dB under the voice. Masters go out at the references' loudness,
       −14 LUFS integrated, true peak −1 dB (two-pass loudnorm in `scratchpad/framemux.sh`); 035 and earlier went out
       near −24 LUFS.
+    - **P16 ★★★★ LOGOS AND ICONS EVERYWHERE; REAL, RECOGNISABLE OBJECTS, NEVER GREY BOXES** (Timur, 2026-11-19, on the
+      037 render: "this video was pretty bad because you can't see anything in the beginning. Nobody knows what Afterpay
+      is, whether it's a company, a process, a system… That's why you have to add logos. Logos everywhere. We don't care
+      if there are logos… People need to understand what the objects are. You can't just be cubes or boxes, random boxes
+      under numbers… everything in this video is practically just a gray box… It's so boring to watch. These need to be
+      real, relevant objects in each scene, and there need to be icons and logos for companies… for products").
+      · EVERY company, brand, product, app, institution or country named in the script appears with its REAL LOGO or
+        icon, on the object that stands for it (the references do this: the Afterpay lozenge on the plinth, the Block
+        mark on the crane, the Newmont sign, flags on screens and boxes). A brand is never just its name in plain type.
+        Supersedes the briefs' "no logos" and "brand names in plain type" lines and the study's reading of R32 (the
+        references carry no CHANNEL logo bug or end card; they are full of brand logos).
+      · The FIRST shot must tell a viewer who has never heard of the subject WHAT it is: the product in use (the app on a
+        phone at a checkout, the card, the shop), with its logo, before or with the number. Afterpay = a phone showing the
+        Afterpay app at a checkout with "4 payments" on screen, not a black bag.
+      · Every object is the REAL, RECOGNISABLE THING, modelled with its real shape, parts and colour accents (a phone, a
+        card terminal, a shopping bag with handles and print, a stock-exchange board, a calendar, a contract on a desk),
+        not a matte box with a word on it. A plinth, crate, box or cabinet only when the story is literally about one. If
+        a still of the scene with all text removed would not say what the objects are, the scene fails.
+      · Each scene carries the logos/icons that identify it: the company's mark on its object, a flag for a country, the
+        exchange's ticker style for a share price, an app icon for an app. Colour from logos is allowed (the brand's own
+        colours), on top of the references' grey studio.
+      · Logos come from official brand assets (press kits, Wikimedia Commons SVGs); they are recreated as clean vector
+        artwork textured onto the 3-D objects, never pasted as flat stickers on the frame. Real photos of people are
+        still never downloaded (people stay as pawns or nameplates unless Timur supplies a photo).
+      · A check before handback: a contact sheet with every caption hidden, judged on "could someone tell what each
+        object is and whose it is?" Any grey box that stands for something else is a fault.
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
     often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,

@@ -19,7 +19,7 @@ Five Reels were logged shot by shot against their words (79 shots) and the rende
 - R6 One palette per film; one accent colour per beat. Colour covers ~2% of the frame.
 
 ### Objects
-- R7 One chunky, literal, toy-like thing per sentence, from the story's world: machines, vehicles, containers, a safe, a scale, a shop front, a card terminal, price tags, coin stacks, a calendar, a gavel. 16 object scenes in 85 s.
+- R7 (★ read with P16: real, recognisable objects with real logos, never grey boxes) One chunky, literal, toy-like thing per sentence, from the story's world: machines, vehicles, containers, a safe, a scale, a shop front, a card terminal, price tags, coin stacks, a calendar, a gavel. 16 object scenes in 85 s.
 - R8 NO documents to read: no newspapers, contracts, certificates, filings, receipts as subjects. In-scene text is at most three words or one figure with a unit.
 - R9 NO people and no photographs: a person is a glossy pawn, or a nameplate with a microphone; a country is a flag ball.
 - R10 Bodies are matte black with broad soft gradients and thin specular lines on bevelled edges (3–10 px). NO glowing outlines, no white edge strips.
@@ -52,7 +52,7 @@ Five Reels were logged shot by shot against their words (79 shots) and the rende
 - R29 The hook is three sentences in 10–15 s: the setup, the number contrast, the stake. The first figure is said and on screen within 1.5–5 s.
 - R30 About 155 words a minute; short plain sentences; second person; numbers rounded.
 - R31 Frame 0 is mid-action. The ending replays the opening shot with one thing changed and a short punchline, and stops 0.6–1.8 s after the last word.
-- R32 They show no logo, verdict card, sources or call to action. (The Payouts keeps a SPOKEN rating and sign-off: Timur's brief.)
+- R32 They show no CHANNEL logo bug, verdict card, sources or call to action (brand logos are everywhere in their scenes: see P16 in the preferences). (The Payouts keeps a SPOKEN rating and sign-off: Timur's brief.)
 
 ## WHERE THESE CORRECT THE RULES WRITTEN EARLIER (P1–P12 in the preferences)
 - P1 said "a black studio": it is a lit DARK-GREY studio with a backdrop (R1–R2).
