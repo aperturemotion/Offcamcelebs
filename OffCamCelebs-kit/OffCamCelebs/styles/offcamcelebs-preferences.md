@@ -2224,6 +2224,10 @@ _Log every OffCamCelebs preference change and every video build here with a date
         with the old caption's blur-and-fade (opacity 0→1, blur 8 px→0 over ~10 f, never moving), the block centred on
         the frame both ways, the glow behind it soft and dim.
       · The flip calendar's leaves (34 s) are fine as they are.
+    - **P15 THE BED AND THE MASTER (2026-11-19, 037).** Timur picked Runaway for 037 ("Let's use Runaway"); the bed is
+      cut so its drop lands on the hook's figure, 5.5 dB under the voice. Masters go out at the references' loudness,
+      −14 LUFS integrated, true peak −1 dB (two-pass loudnorm in `scratchpad/framemux.sh`); 035 and earlier went out
+      near −24 LUFS.
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
     often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,
