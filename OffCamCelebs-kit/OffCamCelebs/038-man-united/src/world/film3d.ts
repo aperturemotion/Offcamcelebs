@@ -10,7 +10,13 @@ import { buildScore, type CamMove } from "../r45/score";
 import { checkPath, type CamKey3 } from "./cam";
 import type { Place3 } from "./place";
 import { ExplainPlace, WorstPlace } from "./places/cards";
-import { HookShowcase as HookPlace, SidesShowcase as SidesPlace, BondsPlace, MoneyShowcase as MoneyPlace, BoardPlace, FairPlace, VerdictPlace } from "./places/placeholders";
+import { HookPlace } from "./places/hook";
+import { SidesPlace } from "./places/sides";
+import { BondsPlace } from "./places/bonds";
+import { MoneyPlace } from "./places/money";
+import { BoardPlace } from "./places/board";
+import { FairPlace } from "./places/fair";
+import { VerdictPlace } from "./places/verdict";
 
 /** the film's places, in order. ★ Places are joined by HARD CUTS (study rule R23): only the place on screen is in the
  *  scene, and every place stands at the world's origin on the same studio floor */

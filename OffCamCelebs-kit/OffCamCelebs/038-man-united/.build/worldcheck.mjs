@@ -418,11 +418,11 @@ var require_three = __commonJS({
         return 0;
       }
     }
-    function lerp2(x2, y2, t2) {
+    function lerp3(x2, y2, t2) {
       return (1 - t2) * x2 + t2 * y2;
     }
     function damp(x2, y2, lambda, dt) {
-      return lerp2(x2, y2, 1 - Math.exp(-lambda * dt));
+      return lerp3(x2, y2, 1 - Math.exp(-lambda * dt));
     }
     function pingpong(x2, length = 1) {
       return length - Math.abs(euclideanModulo2(x2, length * 2) - length);
@@ -615,7 +615,7 @@ var require_three = __commonJS({
        * @param {number} t - The interpolation factor in the closed interval `[0, 1]`.
        * @return {number} The interpolated value.
        */
-      lerp: lerp2,
+      lerp: lerp3,
       /**
        * Smoothly interpolate a number from `x` to `y` in  a spring-like manner using a delta
        * time to maintain frame rate independent movement. For details, see
@@ -9683,9 +9683,9 @@ var require_three = __commonJS({
       lerpHSL(color, alpha) {
         this.getHSL(_hslA2);
         color.getHSL(_hslB2);
-        const h2 = lerp2(_hslA2.h, _hslB2.h, alpha);
-        const s2 = lerp2(_hslA2.s, _hslB2.s, alpha);
-        const l2 = lerp2(_hslA2.l, _hslB2.l, alpha);
+        const h2 = lerp3(_hslA2.h, _hslB2.h, alpha);
+        const s2 = lerp3(_hslA2.s, _hslB2.s, alpha);
+        const l2 = lerp3(_hslA2.l, _hslB2.l, alpha);
         this.setHSL(h2, s2, l2);
         return this;
       }
@@ -12775,14 +12775,14 @@ var require_three = __commonJS({
           blending: NoBlending2
         });
         material.uniforms.tEquirect.value = texture;
-        const mesh = new Mesh2(geometry, material);
+        const mesh2 = new Mesh2(geometry, material);
         const currentMinFilter = texture.minFilter;
         if (texture.minFilter === LinearMipmapLinearFilter2) texture.minFilter = LinearFilter2;
         const camera = new CubeCamera2(1, 10, this);
-        camera.update(renderer, mesh);
+        camera.update(renderer, mesh2);
         texture.minFilter = currentMinFilter;
-        mesh.geometry.dispose();
-        mesh.material.dispose();
+        mesh2.geometry.dispose();
+        mesh2.material.dispose();
         return this;
       }
       /**
@@ -19635,7 +19635,7 @@ var require_three = __commonJS({
         this.setAttribute("uv", new Float32BufferAttribute2(uvArray, 2));
         this.computeVertexNormals();
         function addShape(shape) {
-          const placeholder2 = [];
+          const placeholder = [];
           const curveSegments = options.curveSegments !== void 0 ? options.curveSegments : 12;
           const steps = options.steps !== void 0 ? options.steps : 1;
           const depth = options.depth !== void 0 ? options.depth : 1;
@@ -19916,9 +19916,9 @@ var require_three = __commonJS({
             }
           }
           function v2(x2, y2, z2) {
-            placeholder2.push(x2);
-            placeholder2.push(y2);
-            placeholder2.push(z2);
+            placeholder.push(x2);
+            placeholder.push(y2);
+            placeholder.push(z2);
           }
           function f3(a2, b2, c2) {
             addVertex(a2);
@@ -19947,9 +19947,9 @@ var require_three = __commonJS({
             addUV(uvs[3]);
           }
           function addVertex(index) {
-            verticesArray.push(placeholder2[index * 3 + 0]);
-            verticesArray.push(placeholder2[index * 3 + 1]);
-            verticesArray.push(placeholder2[index * 3 + 2]);
+            verticesArray.push(placeholder[index * 3 + 0]);
+            verticesArray.push(placeholder[index * 3 + 1]);
+            verticesArray.push(placeholder[index * 3 + 2]);
           }
           function addUV(vector2) {
             uvArray.push(vector2.x);
@@ -20869,16 +20869,16 @@ var require_three = __commonJS({
         const P1 = new Vector32();
         const P2 = new Vector32();
         const B3 = new Vector32();
-        const T2 = new Vector32();
+        const T3 = new Vector32();
         const N2 = new Vector32();
         for (let i2 = 0; i2 <= tubularSegments; ++i2) {
           const u3 = i2 / tubularSegments * p2 * Math.PI * 2;
           calculatePositionOnCurve(u3, p2, q2, radius, P1);
           calculatePositionOnCurve(u3 + 0.01, p2, q2, radius, P2);
-          T2.subVectors(P2, P1);
+          T3.subVectors(P2, P1);
           N2.addVectors(P2, P1);
-          B3.crossVectors(T2, N2);
-          N2.crossVectors(B3, T2);
+          B3.crossVectors(T3, N2);
+          N2.crossVectors(B3, T3);
           B3.normalize();
           N2.normalize();
           for (let j2 = 0; j2 <= radialSegments; ++j2) {
@@ -30228,11 +30228,11 @@ var require_three = __commonJS({
        * light being visualized.
        */
       update() {
-        const mesh = this.children[0];
+        const mesh2 = this.children[0];
         if (this.color !== void 0) {
           this.material.color.set(this.color);
         } else {
-          const colors = mesh.geometry.getAttribute("color");
+          const colors = mesh2.geometry.getAttribute("color");
           _color1.copy(this.light.color);
           _color22.copy(this.light.groundColor);
           for (let i2 = 0, l2 = colors.count; i2 < l2; i2++) {
@@ -30242,7 +30242,7 @@ var require_three = __commonJS({
           colors.needsUpdate = true;
         }
         this.light.updateWorldMatrix(true, false);
-        mesh.lookAt(_vector$1.setFromMatrixPosition(this.light.matrixWorld).negate());
+        mesh2.lookAt(_vector$1.setFromMatrixPosition(this.light.matrixWorld).negate());
       }
     };
     var GridHelper2 = class extends LineSegments2 {
@@ -33244,8 +33244,8 @@ var require_three = __commonJS({
         return cubeUVRenderTarget;
       }
       _compileMaterial(material) {
-        const mesh = new Mesh2(new BufferGeometry2(), material);
-        this._renderer.compile(mesh, _flatCamera);
+        const mesh2 = new Mesh2(new BufferGeometry2(), material);
+        this._renderer.compile(mesh2, _flatCamera);
       }
       _sceneToCubeUV(scene, near, far, cubeUVRenderTarget, position) {
         const fov2 = 90;
@@ -33331,14 +33331,14 @@ var require_three = __commonJS({
           }
         }
         const material = isCubeTexture ? this._cubemapMaterial : this._equirectMaterial;
-        const mesh = this._lodMeshes[0];
-        mesh.material = material;
+        const mesh2 = this._lodMeshes[0];
+        mesh2.material = material;
         const uniforms = material.uniforms;
         uniforms["envMap"].value = texture;
         const size2 = this._cubeSize;
         _setViewport(cubeUVRenderTarget, 0, 0, 3 * size2, 2 * size2);
         renderer.setRenderTarget(cubeUVRenderTarget);
-        renderer.render(mesh, _flatCamera);
+        renderer.render(mesh2, _flatCamera);
       }
       _applyPMREM(cubeUVRenderTarget) {
         const renderer = this._renderer;
@@ -35728,7 +35728,7 @@ var require_three = __commonJS({
         if (value === 0) return "uv";
         return `uv${value}`;
       }
-      function getParameters(material, lights, shadows, scene, object) {
+      function getParameters(material, lights3, shadows, scene, object) {
         const fog = scene.fog;
         const geometry = object.geometry;
         const environment = material.isMeshStandardMaterial ? scene.environment : null;
@@ -35907,17 +35907,17 @@ var require_three = __commonJS({
           morphColors: geometry.morphAttributes.color !== void 0,
           morphTargetsCount,
           morphTextureStride,
-          numDirLights: lights.directional.length,
-          numPointLights: lights.point.length,
-          numSpotLights: lights.spot.length,
-          numSpotLightMaps: lights.spotLightMap.length,
-          numRectAreaLights: lights.rectArea.length,
-          numHemiLights: lights.hemi.length,
-          numDirLightShadows: lights.directionalShadowMap.length,
-          numPointLightShadows: lights.pointShadowMap.length,
-          numSpotLightShadows: lights.spotShadowMap.length,
-          numSpotLightShadowsWithMaps: lights.numSpotLightShadowsWithMaps,
-          numLightProbes: lights.numLightProbes,
+          numDirLights: lights3.directional.length,
+          numPointLights: lights3.point.length,
+          numSpotLights: lights3.spot.length,
+          numSpotLightMaps: lights3.spotLightMap.length,
+          numRectAreaLights: lights3.rectArea.length,
+          numHemiLights: lights3.hemi.length,
+          numDirLightShadows: lights3.directionalShadowMap.length,
+          numPointLightShadows: lights3.pointShadowMap.length,
+          numSpotLightShadows: lights3.spotShadowMap.length,
+          numSpotLightShadowsWithMaps: lights3.numSpotLightShadowsWithMaps,
+          numLightProbes: lights3.numLightProbes,
           numClippingPlanes: clipping.numPlanes,
           numClipIntersection: clipping.numIntersection,
           dithering: material.dithering,
@@ -36331,11 +36331,11 @@ var require_three = __commonJS({
       };
     }
     function UniformsCache() {
-      const lights = {};
+      const lights3 = {};
       return {
         get: function(light) {
-          if (lights[light.id] !== void 0) {
-            return lights[light.id];
+          if (lights3[light.id] !== void 0) {
+            return lights3[light.id];
           }
           let uniforms;
           switch (light.type) {
@@ -36380,17 +36380,17 @@ var require_three = __commonJS({
               };
               break;
           }
-          lights[light.id] = uniforms;
+          lights3[light.id] = uniforms;
           return uniforms;
         }
       };
     }
     function ShadowUniformsCache() {
-      const lights = {};
+      const lights3 = {};
       return {
         get: function(light) {
-          if (lights[light.id] !== void 0) {
-            return lights[light.id];
+          if (lights3[light.id] !== void 0) {
+            return lights3[light.id];
           }
           let uniforms;
           switch (light.type) {
@@ -36424,7 +36424,7 @@ var require_three = __commonJS({
               };
               break;
           }
-          lights[light.id] = uniforms;
+          lights3[light.id] = uniforms;
           return uniforms;
         }
       };
@@ -36476,7 +36476,7 @@ var require_three = __commonJS({
       const vector3 = new Vector32();
       const matrix4 = new Matrix42();
       const matrix42 = new Matrix42();
-      function setup(lights) {
+      function setup(lights3) {
         let r2 = 0, g2 = 0, b2 = 0;
         for (let i2 = 0; i2 < 9; i2++) state.probe[i2].set(0, 0, 0);
         let directionalLength = 0;
@@ -36490,9 +36490,9 @@ var require_three = __commonJS({
         let numSpotMaps = 0;
         let numSpotShadowsWithMaps = 0;
         let numLightProbes = 0;
-        lights.sort(shadowCastingAndTexturingLightsFirst);
-        for (let i2 = 0, l2 = lights.length; i2 < l2; i2++) {
-          const light = lights[i2];
+        lights3.sort(shadowCastingAndTexturingLightsFirst);
+        for (let i2 = 0, l2 = lights3.length; i2 < l2; i2++) {
+          const light = lights3[i2];
           const color = light.color;
           const intensity = light.intensity;
           const distance = light.distance;
@@ -36634,15 +36634,15 @@ var require_three = __commonJS({
           state.version = nextVersion++;
         }
       }
-      function setupView(lights, camera) {
+      function setupView(lights3, camera) {
         let directionalLength = 0;
         let pointLength = 0;
         let spotLength = 0;
         let rectAreaLength = 0;
         let hemiLength = 0;
         const viewMatrix = camera.matrixWorldInverse;
-        for (let i2 = 0, l2 = lights.length; i2 < l2; i2++) {
-          const light = lights[i2];
+        for (let i2 = 0, l2 = lights3.length; i2 < l2; i2++) {
+          const light = lights3[i2];
           if (light.isDirectionalLight) {
             const uniforms = state.directional[directionalLength];
             uniforms.direction.setFromMatrixPosition(light.matrixWorld);
@@ -36692,7 +36692,7 @@ var require_three = __commonJS({
       };
     }
     function WebGLRenderState(extensions) {
-      const lights = new WebGLLights(extensions);
+      const lights3 = new WebGLLights(extensions);
       const lightsArray = [];
       const shadowsArray = [];
       function init(camera) {
@@ -36707,16 +36707,16 @@ var require_three = __commonJS({
         shadowsArray.push(shadowLight);
       }
       function setupLights() {
-        lights.setup(lightsArray);
+        lights3.setup(lightsArray);
       }
       function setupLightsView(camera) {
-        lights.setupView(lightsArray, camera);
+        lights3.setupView(lightsArray, camera);
       }
       const state = {
         lightsArray,
         shadowsArray,
         camera: null,
-        lights,
+        lights: lights3,
         transmissionRenderTarget: {}
       };
       return {
@@ -36789,10 +36789,10 @@ var require_three = __commonJS({
       this.needsUpdate = false;
       this.type = PCFShadowMap2;
       let _previousType = this.type;
-      this.render = function(lights, scene, camera) {
+      this.render = function(lights3, scene, camera) {
         if (scope.enabled === false) return;
         if (scope.autoUpdate === false && scope.needsUpdate === false) return;
-        if (lights.length === 0) return;
+        if (lights3.length === 0) return;
         const currentRenderTarget = renderer.getRenderTarget();
         const activeCubeFace = renderer.getActiveCubeFace();
         const activeMipmapLevel = renderer.getActiveMipmapLevel();
@@ -36807,8 +36807,8 @@ var require_three = __commonJS({
         _state.setScissorTest(false);
         const toVSM = _previousType !== VSMShadowMap2 && this.type === VSMShadowMap2;
         const fromVSM = _previousType === VSMShadowMap2 && this.type !== VSMShadowMap2;
-        for (let i2 = 0, il = lights.length; i2 < il; i2++) {
-          const light = lights[i2];
+        for (let i2 = 0, il = lights3.length; i2 < il; i2++) {
+          const light = lights3[i2];
           const shadow = light.shadow;
           if (shadow === void 0) {
             warn2("WebGLShadowMap:", light, "has no shadow.");
@@ -43076,10 +43076,10 @@ void main() {
         function getProgram(material, scene, object) {
           if (scene.isScene !== true) scene = _emptyScene;
           const materialProperties = properties.get(material);
-          const lights = currentRenderState.state.lights;
+          const lights3 = currentRenderState.state.lights;
           const shadowsArray = currentRenderState.state.shadowsArray;
-          const lightsStateVersion = lights.state.version;
-          const parameters2 = programCache.getParameters(material, lights.state, shadowsArray, scene, object);
+          const lightsStateVersion = lights3.state.version;
+          const parameters2 = programCache.getParameters(material, lights3.state, shadowsArray, scene, object);
           const programCacheKey = programCache.getProgramCacheKey(parameters2);
           let programs = materialProperties.programs;
           materialProperties.environment = material.isMeshStandardMaterial ? scene.environment : null;
@@ -43112,25 +43112,25 @@ void main() {
           materialProperties.needsLights = materialNeedsLights(material);
           materialProperties.lightsStateVersion = lightsStateVersion;
           if (materialProperties.needsLights) {
-            uniforms.ambientLightColor.value = lights.state.ambient;
-            uniforms.lightProbe.value = lights.state.probe;
-            uniforms.directionalLights.value = lights.state.directional;
-            uniforms.directionalLightShadows.value = lights.state.directionalShadow;
-            uniforms.spotLights.value = lights.state.spot;
-            uniforms.spotLightShadows.value = lights.state.spotShadow;
-            uniforms.rectAreaLights.value = lights.state.rectArea;
-            uniforms.ltc_1.value = lights.state.rectAreaLTC1;
-            uniforms.ltc_2.value = lights.state.rectAreaLTC2;
-            uniforms.pointLights.value = lights.state.point;
-            uniforms.pointLightShadows.value = lights.state.pointShadow;
-            uniforms.hemisphereLights.value = lights.state.hemi;
-            uniforms.directionalShadowMap.value = lights.state.directionalShadowMap;
-            uniforms.directionalShadowMatrix.value = lights.state.directionalShadowMatrix;
-            uniforms.spotShadowMap.value = lights.state.spotShadowMap;
-            uniforms.spotLightMatrix.value = lights.state.spotLightMatrix;
-            uniforms.spotLightMap.value = lights.state.spotLightMap;
-            uniforms.pointShadowMap.value = lights.state.pointShadowMap;
-            uniforms.pointShadowMatrix.value = lights.state.pointShadowMatrix;
+            uniforms.ambientLightColor.value = lights3.state.ambient;
+            uniforms.lightProbe.value = lights3.state.probe;
+            uniforms.directionalLights.value = lights3.state.directional;
+            uniforms.directionalLightShadows.value = lights3.state.directionalShadow;
+            uniforms.spotLights.value = lights3.state.spot;
+            uniforms.spotLightShadows.value = lights3.state.spotShadow;
+            uniforms.rectAreaLights.value = lights3.state.rectArea;
+            uniforms.ltc_1.value = lights3.state.rectAreaLTC1;
+            uniforms.ltc_2.value = lights3.state.rectAreaLTC2;
+            uniforms.pointLights.value = lights3.state.point;
+            uniforms.pointLightShadows.value = lights3.state.pointShadow;
+            uniforms.hemisphereLights.value = lights3.state.hemi;
+            uniforms.directionalShadowMap.value = lights3.state.directionalShadowMap;
+            uniforms.directionalShadowMatrix.value = lights3.state.directionalShadowMatrix;
+            uniforms.spotShadowMap.value = lights3.state.spotShadowMap;
+            uniforms.spotLightMatrix.value = lights3.state.spotLightMatrix;
+            uniforms.spotLightMap.value = lights3.state.spotLightMap;
+            uniforms.pointShadowMap.value = lights3.state.pointShadowMap;
+            uniforms.pointShadowMatrix.value = lights3.state.pointShadowMatrix;
           }
           materialProperties.currentProgram = program;
           materialProperties.uniformsList = null;
@@ -43183,7 +43183,7 @@ void main() {
           const morphAttribute = geometry.morphAttributes.position || geometry.morphAttributes.normal || geometry.morphAttributes.color;
           const morphTargetsCount = morphAttribute !== void 0 ? morphAttribute.length : 0;
           const materialProperties = properties.get(material);
-          const lights = currentRenderState.state.lights;
+          const lights3 = currentRenderState.state.lights;
           if (_clippingEnabled === true) {
             if (_localClippingEnabled === true || camera !== _currentCamera) {
               const useCache = camera === _currentCamera && material.id === _currentMaterialId;
@@ -43192,7 +43192,7 @@ void main() {
           }
           let needsProgramChange = false;
           if (material.version === materialProperties.__version) {
-            if (materialProperties.needsLights && materialProperties.lightsStateVersion !== lights.state.version) {
+            if (materialProperties.needsLights && materialProperties.lightsStateVersion !== lights3.state.version) {
               needsProgramChange = true;
             } else if (materialProperties.outputColorSpace !== colorSpace) {
               needsProgramChange = true;
@@ -44699,7 +44699,7 @@ var require_index_umd = __commonJS({
       function OFFSET(n32, uint32Array2) {
         return uint32Array2[n32 + 6];
       }
-      function COUNT2(n16, uint16Array2) {
+      function COUNT4(n16, uint16Array2) {
         return uint16Array2[n16 + 14];
       }
       function LEFT_NODE(n32) {
@@ -45719,7 +45719,7 @@ var require_index_umd = __commonJS({
         const isLeaf = IS_LEAF(nodeIndex16, uint16Array2);
         if (isLeaf) {
           const offset = OFFSET(nodeIndex32, uint32Array2);
-          const count = COUNT2(nodeIndex16, uint16Array2);
+          const count = COUNT4(nodeIndex16, uint16Array2);
           arrayToBox(BOUNDING_DATA_INDEX(nodeIndex32), float32Array2, _box1$1);
           return intersectsRangeFunc(offset, count, false, depth, nodeIndexByteOffset + nodeIndex32, _box1$1);
         } else {
@@ -45738,7 +45738,7 @@ var require_index_umd = __commonJS({
               nodeIndex322 = RIGHT_NODE(nodeIndex322, uint32Array3);
               nodeIndex162 = nodeIndex322 * 2;
             }
-            return OFFSET(nodeIndex322, uint32Array3) + COUNT2(nodeIndex162, uint16Array3);
+            return OFFSET(nodeIndex322, uint32Array3) + COUNT4(nodeIndex162, uint16Array3);
           };
           const left = LEFT_NODE(nodeIndex32);
           const right = RIGHT_NODE(nodeIndex32, uint32Array2);
@@ -46247,7 +46247,7 @@ var require_index_umd = __commonJS({
         const isLeaf = IS_LEAF(nodeIndex16, uint16Array2);
         if (isLeaf) {
           const offset = OFFSET(nodeIndex32, uint32Array2);
-          const count = COUNT2(nodeIndex16, uint16Array2);
+          const count = COUNT4(nodeIndex16, uint16Array2);
           intersectTris(bvh, side, ray2, offset, count, intersects2, near, far);
         } else {
           const leftIndex = LEFT_NODE(nodeIndex32);
@@ -46273,7 +46273,7 @@ var require_index_umd = __commonJS({
         const isLeaf = IS_LEAF(nodeIndex16, uint16Array2);
         if (isLeaf) {
           const offset = OFFSET(nodeIndex32, uint32Array2);
-          const count = COUNT2(nodeIndex16, uint16Array2);
+          const count = COUNT4(nodeIndex16, uint16Array2);
           return intersectClosestTri(bvh, side, ray2, offset, count, near, far);
         } else {
           const splitAxis = SPLIT_AXIS(nodeIndex32, uint32Array2);
@@ -46339,7 +46339,7 @@ var require_index_umd = __commonJS({
           const index = otherGeometry.index;
           const pos = otherGeometry.attributes.position;
           const offset = OFFSET(nodeIndex32, uint32Array2);
-          const count = COUNT2(nodeIndex16, uint16Array2);
+          const count = COUNT4(nodeIndex16, uint16Array2);
           invertedMat$1.copy(geometryToBvh).invert();
           if (otherGeometry.boundsTree) {
             arrayToBox(BOUNDING_DATA_INDEX(nodeIndex32), float32Array2, obb2$3);
@@ -46641,7 +46641,7 @@ var require_index_umd = __commonJS({
         const isLeaf = IS_LEAF(nodeIndex16, uint16Array2);
         if (isLeaf) {
           const offset = OFFSET(nodeIndex32, uint32Array2);
-          const count = COUNT2(nodeIndex16, uint16Array2);
+          const count = COUNT4(nodeIndex16, uint16Array2);
           intersectTris_indirect(bvh, side, ray2, offset, count, intersects2, near, far);
         } else {
           const leftIndex = LEFT_NODE(nodeIndex32);
@@ -46667,7 +46667,7 @@ var require_index_umd = __commonJS({
         const isLeaf = IS_LEAF(nodeIndex16, uint16Array2);
         if (isLeaf) {
           const offset = OFFSET(nodeIndex32, uint32Array2);
-          const count = COUNT2(nodeIndex16, uint16Array2);
+          const count = COUNT4(nodeIndex16, uint16Array2);
           return intersectClosestTri_indirect(bvh, side, ray2, offset, count, near, far);
         } else {
           const splitAxis = SPLIT_AXIS(nodeIndex32, uint32Array2);
@@ -46733,7 +46733,7 @@ var require_index_umd = __commonJS({
           const index = otherGeometry.index;
           const pos = otherGeometry.attributes.position;
           const offset = OFFSET(nodeIndex32, uint32Array2);
-          const count = COUNT2(nodeIndex16, uint16Array2);
+          const count = COUNT4(nodeIndex16, uint16Array2);
           invertedMat.copy(geometryToBvh).invert();
           if (otherGeometry.boundsTree) {
             arrayToBox(BOUNDING_DATA_INDEX(nodeIndex32), float32Array2, obb2$1);
@@ -47024,9 +47024,9 @@ var require_index_umd = __commonJS({
           if (reversed) {
             result = intersectsRangesFunc(
               OFFSET(node2Index32, uint32Array2),
-              COUNT2(node2Index32 * 2, uint16Array2),
+              COUNT4(node2Index32 * 2, uint16Array2),
               OFFSET(node1Index32, uint32Array1),
-              COUNT2(node1Index32 * 2, uint16Array1),
+              COUNT4(node1Index32 * 2, uint16Array1),
               depth2,
               node2IndexByteOffset + node2Index32,
               depth1,
@@ -47035,9 +47035,9 @@ var require_index_umd = __commonJS({
           } else {
             result = intersectsRangesFunc(
               OFFSET(node1Index32, uint32Array1),
-              COUNT2(node1Index32 * 2, uint16Array1),
+              COUNT4(node1Index32 * 2, uint16Array1),
               OFFSET(node2Index32, uint32Array2),
-              COUNT2(node2Index32 * 2, uint16Array2),
+              COUNT4(node2Index32 * 2, uint16Array2),
               depth1,
               node1IndexByteOffset + node1Index32,
               depth2,
@@ -47719,11 +47719,11 @@ var require_index_umd = __commonJS({
           this.edgeMaterial.opacity = v2;
           this.meshMaterial.opacity = v2;
         }
-        constructor(mesh = null, bvh = null, depth = 10) {
-          if (mesh instanceof MeshBVH2) {
+        constructor(mesh2 = null, bvh = null, depth = 10) {
+          if (mesh2 instanceof MeshBVH2) {
             depth = bvh || 10;
-            bvh = mesh;
-            mesh = null;
+            bvh = mesh2;
+            mesh2 = null;
           }
           if (typeof bvh === "number") {
             depth = bvh;
@@ -47732,7 +47732,7 @@ var require_index_umd = __commonJS({
           super();
           this.name = "MeshBVHHelper";
           this.depth = depth;
-          this.mesh = mesh;
+          this.mesh = mesh2;
           this.bvh = bvh;
           this.displayParents = false;
           this.displayEdges = true;
@@ -47756,12 +47756,12 @@ var require_index_umd = __commonJS({
           this.update();
         }
         update() {
-          const mesh = this.mesh;
-          let bvh = this.bvh || mesh.geometry.boundsTree || null;
-          if (mesh.isBatchedMesh && mesh.boundsTrees && !bvh) {
-            const drawInfo = mesh._drawInfo[this.objectIndex];
+          const mesh2 = this.mesh;
+          let bvh = this.bvh || mesh2.geometry.boundsTree || null;
+          if (mesh2.isBatchedMesh && mesh2.boundsTrees && !bvh) {
+            const drawInfo = mesh2._drawInfo[this.objectIndex];
             if (drawInfo) {
-              bvh = mesh.boundsTrees[drawInfo.geometryIndex] || bvh;
+              bvh = mesh2.boundsTrees[drawInfo.geometryIndex] || bvh;
             }
           }
           const totalRoots = bvh ? bvh._roots.length : 0;
@@ -47787,17 +47787,17 @@ var require_index_umd = __commonJS({
           }
         }
         updateMatrixWorld(...args) {
-          const mesh = this.mesh;
+          const mesh2 = this.mesh;
           const parent = this.parent;
-          if (mesh !== null) {
-            mesh.updateWorldMatrix(true, false);
+          if (mesh2 !== null) {
+            mesh2.updateWorldMatrix(true, false);
             if (parent) {
-              this.matrix.copy(parent.matrixWorld).invert().multiply(mesh.matrixWorld);
+              this.matrix.copy(parent.matrixWorld).invert().multiply(mesh2.matrixWorld);
             } else {
-              this.matrix.copy(mesh.matrixWorld);
+              this.matrix.copy(mesh2.matrixWorld);
             }
-            if (mesh.isInstancedMesh || mesh.isBatchedMesh) {
-              mesh.getMatrixAt(this.objectIndex, matrix);
+            if (mesh2.isInstancedMesh || mesh2.isBatchedMesh) {
+              mesh2.getMatrixAt(this.objectIndex, matrix);
               this.matrix.multiply(matrix);
             }
             this.matrix.decompose(
@@ -48411,7 +48411,7 @@ var require_index_umd = __commonJS({
             boundsArray[8 * i2 + 4 + b2] = float32Array2[boundsIndex + 3 + b2];
           }
           if (IS_LEAF(nodeIndex16, uint16Array2)) {
-            const count = COUNT2(nodeIndex16, uint16Array2);
+            const count = COUNT4(nodeIndex16, uint16Array2);
             const offset = OFFSET(nodeIndex32, uint32Array2);
             const mergedLeafCount = 4294901760 | count;
             contentsArray[i2 * 2 + 0] = mergedLeafCount;
@@ -48500,9 +48500,9 @@ var require_index_umd = __commonJS({
           targetArray[i2] += matrixArray[i2] * scale;
         }
       }
-      function boneNormalTransform(mesh, index, target) {
-        const skeleton = mesh.skeleton;
-        const geometry = mesh.geometry;
+      function boneNormalTransform(mesh2, index, target) {
+        const skeleton = mesh2.skeleton;
+        const geometry = mesh2.geometry;
         const bones = skeleton.bones;
         const boneInverses = skeleton.boneInverses;
         _skinIndex.fromBufferAttribute(geometry.attributes.skinIndex, index);
@@ -48516,7 +48516,7 @@ var require_index_umd = __commonJS({
             addScaledMatrix(_matrix, _boneMatrix, weight);
           }
         }
-        _matrix.multiply(mesh.bindMatrix).premultiply(mesh.bindMatrixInverse);
+        _matrix.multiply(mesh2.bindMatrix).premultiply(mesh2.bindMatrixInverse);
         target.transformDirection(_matrix);
         return target;
       }
@@ -48662,20 +48662,20 @@ var require_index_umd = __commonJS({
         return geometry;
       }
       class GeometryDiff {
-        constructor(mesh) {
+        constructor(mesh2) {
           this.matrixWorld = new three.Matrix4();
           this.geometryHash = null;
           this.boneMatrices = null;
           this.primitiveCount = -1;
-          this.mesh = mesh;
+          this.mesh = mesh2;
           this.update();
         }
         update() {
-          const mesh = this.mesh;
-          const geometry = mesh.geometry;
-          const skeleton = mesh.skeleton;
+          const mesh2 = this.mesh;
+          const geometry = mesh2.geometry;
+          const skeleton = mesh2.skeleton;
           const primitiveCount = (geometry.index ? geometry.index.count : geometry.attributes.position.count) / 3;
-          this.matrixWorld.copy(mesh.matrixWorld);
+          this.matrixWorld.copy(mesh2.matrixWorld);
           this.geometryHash = geometry.attributes.position.version;
           this.primitiveCount = primitiveCount;
           if (skeleton) {
@@ -48694,10 +48694,10 @@ var require_index_umd = __commonJS({
           }
         }
         didChange() {
-          const mesh = this.mesh;
-          const geometry = mesh.geometry;
+          const mesh2 = this.mesh;
+          const geometry = mesh2.geometry;
           const primitiveCount = (geometry.index ? geometry.index.count : geometry.attributes.position.count) / 3;
-          const identical = this.matrixWorld.equals(mesh.matrixWorld) && this.geometryHash === geometry.attributes.position.version && checkTypedArrayEquality(mesh.skeleton && mesh.skeleton.boneMatrices || null, this.boneMatrices) && this.primitiveCount === primitiveCount;
+          const identical = this.matrixWorld.equals(mesh2.matrixWorld) && this.geometryHash === geometry.attributes.position.version && checkTypedArrayEquality(mesh2.skeleton && mesh2.skeleton.boneMatrices || null, this.boneMatrices) && this.primitiveCount === primitiveCount;
           return !identical;
         }
       }
@@ -48723,11 +48723,11 @@ var require_index_umd = __commonJS({
         }
         getMaterials() {
           const materials = [];
-          this.meshes.forEach((mesh) => {
-            if (Array.isArray(mesh.material)) {
-              materials.push(...mesh.material);
+          this.meshes.forEach((mesh2) => {
+            if (Array.isArray(mesh2.material)) {
+              materials.push(...mesh2.material);
             } else {
-              materials.push(mesh.material);
+              materials.push(mesh2.material);
             }
           });
           return materials;
@@ -48736,14 +48736,14 @@ var require_index_umd = __commonJS({
           let skipAttributes = [];
           const { meshes, useGroups, _intermediateGeometry, _diffMap } = this;
           for (let i2 = 0, l2 = meshes.length; i2 < l2; i2++) {
-            const mesh = meshes[i2];
+            const mesh2 = meshes[i2];
             const geom = _intermediateGeometry[i2];
-            const diff = _diffMap.get(mesh);
-            if (!diff || diff.didChange(mesh)) {
-              this._convertToStaticGeometry(mesh, geom);
+            const diff = _diffMap.get(mesh2);
+            if (!diff || diff.didChange(mesh2)) {
+              this._convertToStaticGeometry(mesh2, geom);
               skipAttributes.push(false);
               if (!diff) {
-                _diffMap.set(mesh, new GeometryDiff(mesh));
+                _diffMap.set(mesh2, new GeometryDiff(mesh2));
               } else {
                 diff.update();
               }
@@ -48768,8 +48768,8 @@ var require_index_umd = __commonJS({
           }
           return targetGeometry;
         }
-        _convertToStaticGeometry(mesh, targetGeometry = new three.BufferGeometry()) {
-          const geometry = mesh.geometry;
+        _convertToStaticGeometry(mesh2, targetGeometry = new three.BufferGeometry()) {
+          const geometry = mesh2.geometry;
           const applyWorldTransforms = this.applyWorldTransforms;
           const includeNormal = this.attributes.includes("normal");
           const includeTangent = this.attributes.includes("tangent");
@@ -48802,9 +48802,9 @@ var require_index_umd = __commonJS({
           const morphNormal = geometry.morphAttributes.normal;
           const morphTangent = geometry.morphAttributes.tangent;
           const morphTargetsRelative = geometry.morphTargetsRelative;
-          const morphInfluences = mesh.morphTargetInfluences;
+          const morphInfluences = mesh2.morphTargetInfluences;
           const normalMatrix = new three.Matrix3();
-          normalMatrix.getNormalMatrix(mesh.matrixWorld);
+          normalMatrix.getNormalMatrix(mesh2.matrixWorld);
           if (geometry.index) {
             targetGeometry.index.array.set(geometry.index.array);
           }
@@ -48828,17 +48828,17 @@ var require_index_umd = __commonJS({
                 applyMorphTarget(morphTangent, morphInfluences, morphTargetsRelative, i2, _tangentVector);
               }
             }
-            if (mesh.isSkinnedMesh) {
-              mesh.applyBoneTransform(i2, _positionVector);
+            if (mesh2.isSkinnedMesh) {
+              mesh2.applyBoneTransform(i2, _positionVector);
               if (normal) {
-                boneNormalTransform(mesh, i2, _normalVector);
+                boneNormalTransform(mesh2, i2, _normalVector);
               }
               if (tangent) {
-                boneNormalTransform(mesh, i2, _tangentVector);
+                boneNormalTransform(mesh2, i2, _tangentVector);
               }
             }
             if (applyWorldTransforms) {
-              _positionVector.applyMatrix4(mesh.matrixWorld);
+              _positionVector.applyMatrix4(mesh2.matrixWorld);
             }
             targetAttributes.position.setXYZ(i2, _positionVector.x, _positionVector.y, _positionVector.z);
             if (normal) {
@@ -48849,7 +48849,7 @@ var require_index_umd = __commonJS({
             }
             if (tangent) {
               if (applyWorldTransforms) {
-                _tangentVector.transformDirection(mesh.matrixWorld);
+                _tangentVector.transformDirection(mesh2.matrixWorld);
               }
               targetAttributes.tangent.setXYZW(i2, _tangentVector.x, _tangentVector.y, _tangentVector.z, _tangentVector4.w);
             }
@@ -48865,7 +48865,7 @@ var require_index_umd = __commonJS({
             validateAttributes(attributes[key2], targetAttributes[key2]);
             copyAttributeContents(attributes[key2], targetAttributes[key2]);
           }
-          if (mesh.matrixWorld.determinant() < 0) {
+          if (mesh2.matrixWorld.determinant() < 0) {
             invertGeometry(targetGeometry);
           }
           return targetGeometry;
@@ -49419,6 +49419,7 @@ struct BVH {
 var REVISION = "181";
 var FrontSide = 0;
 var BackSide = 1;
+var DoubleSide = 2;
 var NormalBlending = 1;
 var AdditiveBlending = 2;
 var AddEquation = 100;
@@ -63630,7 +63631,7 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
     this.setAttribute("uv", new Float32BufferAttribute(uvArray, 2));
     this.computeVertexNormals();
     function addShape(shape) {
-      const placeholder2 = [];
+      const placeholder = [];
       const curveSegments = options.curveSegments !== void 0 ? options.curveSegments : 12;
       const steps = options.steps !== void 0 ? options.steps : 1;
       const depth = options.depth !== void 0 ? options.depth : 1;
@@ -63911,9 +63912,9 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
         }
       }
       function v2(x2, y2, z2) {
-        placeholder2.push(x2);
-        placeholder2.push(y2);
-        placeholder2.push(z2);
+        placeholder.push(x2);
+        placeholder.push(y2);
+        placeholder.push(z2);
       }
       function f3(a2, b2, c2) {
         addVertex(a2);
@@ -63942,9 +63943,9 @@ var ExtrudeGeometry = class _ExtrudeGeometry extends BufferGeometry {
         addUV(uvs[3]);
       }
       function addVertex(index) {
-        verticesArray.push(placeholder2[index * 3 + 0]);
-        verticesArray.push(placeholder2[index * 3 + 1]);
-        verticesArray.push(placeholder2[index * 3 + 2]);
+        verticesArray.push(placeholder[index * 3 + 0]);
+        verticesArray.push(placeholder[index * 3 + 1]);
+        verticesArray.push(placeholder[index * 3 + 2]);
       }
       function addUV(vector2) {
         uvArray.push(vector2.x);
@@ -64042,6 +64043,121 @@ function toJSON$1(shapes, options, data) {
   if (options.extrudePath !== void 0) data.options.extrudePath = options.extrudePath.toJSON();
   return data;
 }
+var LatheGeometry = class _LatheGeometry extends BufferGeometry {
+  /**
+   * Constructs a new lathe geometry.
+   *
+   * @param {Array<Vector2|Vector3>} [points] - An array of points in 2D space. The x-coordinate of each point
+   * must be greater than zero.
+   * @param {number} [segments=12] - The number of circumference segments to generate.
+   * @param {number} [phiStart=0] - The starting angle in radians.
+   * @param {number} [phiLength=Math.PI*2] - The radian (0 to 2PI) range of the lathed section 2PI is a
+   * closed lathe, less than 2PI is a portion.
+   */
+  constructor(points = [new Vector2(0, -0.5), new Vector2(0.5, 0), new Vector2(0, 0.5)], segments = 12, phiStart = 0, phiLength = Math.PI * 2) {
+    super();
+    this.type = "LatheGeometry";
+    this.parameters = {
+      points,
+      segments,
+      phiStart,
+      phiLength
+    };
+    segments = Math.floor(segments);
+    phiLength = clamp(phiLength, 0, Math.PI * 2);
+    const indices = [];
+    const vertices = [];
+    const uvs = [];
+    const initNormals = [];
+    const normals = [];
+    const inverseSegments = 1 / segments;
+    const vertex = new Vector3();
+    const uv = new Vector2();
+    const normal = new Vector3();
+    const curNormal = new Vector3();
+    const prevNormal = new Vector3();
+    let dx = 0;
+    let dy = 0;
+    for (let j2 = 0; j2 <= points.length - 1; j2++) {
+      switch (j2) {
+        case 0:
+          dx = points[j2 + 1].x - points[j2].x;
+          dy = points[j2 + 1].y - points[j2].y;
+          normal.x = dy * 1;
+          normal.y = -dx;
+          normal.z = dy * 0;
+          prevNormal.copy(normal);
+          normal.normalize();
+          initNormals.push(normal.x, normal.y, normal.z);
+          break;
+        case points.length - 1:
+          initNormals.push(prevNormal.x, prevNormal.y, prevNormal.z);
+          break;
+        default:
+          dx = points[j2 + 1].x - points[j2].x;
+          dy = points[j2 + 1].y - points[j2].y;
+          normal.x = dy * 1;
+          normal.y = -dx;
+          normal.z = dy * 0;
+          curNormal.copy(normal);
+          normal.x += prevNormal.x;
+          normal.y += prevNormal.y;
+          normal.z += prevNormal.z;
+          normal.normalize();
+          initNormals.push(normal.x, normal.y, normal.z);
+          prevNormal.copy(curNormal);
+      }
+    }
+    for (let i2 = 0; i2 <= segments; i2++) {
+      const phi = phiStart + i2 * inverseSegments * phiLength;
+      const sin = Math.sin(phi);
+      const cos = Math.cos(phi);
+      for (let j2 = 0; j2 <= points.length - 1; j2++) {
+        vertex.x = points[j2].x * sin;
+        vertex.y = points[j2].y;
+        vertex.z = points[j2].x * cos;
+        vertices.push(vertex.x, vertex.y, vertex.z);
+        uv.x = i2 / segments;
+        uv.y = j2 / (points.length - 1);
+        uvs.push(uv.x, uv.y);
+        const x2 = initNormals[3 * j2 + 0] * sin;
+        const y2 = initNormals[3 * j2 + 1];
+        const z2 = initNormals[3 * j2 + 0] * cos;
+        normals.push(x2, y2, z2);
+      }
+    }
+    for (let i2 = 0; i2 < segments; i2++) {
+      for (let j2 = 0; j2 < points.length - 1; j2++) {
+        const base = j2 + i2 * points.length;
+        const a2 = base;
+        const b2 = base + points.length;
+        const c2 = base + points.length + 1;
+        const d2 = base + 1;
+        indices.push(a2, b2, d2);
+        indices.push(c2, d2, b2);
+      }
+    }
+    this.setIndex(indices);
+    this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+    this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+  }
+  copy(source) {
+    super.copy(source);
+    this.parameters = Object.assign({}, source.parameters);
+    return this;
+  }
+  /**
+   * Factory method for creating an instance of this class from the given
+   * JSON object.
+   *
+   * @param {Object} data - A JSON object representing the serialized geometry.
+   * @return {LatheGeometry} A new instance.
+   */
+  static fromJSON(data) {
+    return new _LatheGeometry(data.points, data.segments, data.phiStart, data.phiLength);
+  }
+};
 var PlaneGeometry = class _PlaneGeometry extends BufferGeometry {
   /**
    * Constructs a new plane geometry.
@@ -64353,6 +64469,119 @@ var TorusGeometry = class _TorusGeometry extends BufferGeometry {
    */
   static fromJSON(data) {
     return new _TorusGeometry(data.radius, data.tube, data.radialSegments, data.tubularSegments, data.arc);
+  }
+};
+var TubeGeometry = class _TubeGeometry extends BufferGeometry {
+  /**
+   * Constructs a new tube geometry.
+   *
+   * @param {Curve} [path=QuadraticBezierCurve3] - A 3D curve defining the path of the tube.
+   * @param {number} [tubularSegments=64] - The number of segments that make up the tube.
+   * @param {number} [radius=1] -The radius of the tube.
+   * @param {number} [radialSegments=8] - The number of segments that make up the cross-section.
+   * @param {boolean} [closed=false] - Whether the tube is closed or not.
+   */
+  constructor(path = new QuadraticBezierCurve3(new Vector3(-1, -1, 0), new Vector3(-1, 1, 0), new Vector3(1, 1, 0)), tubularSegments = 64, radius = 1, radialSegments = 8, closed = false) {
+    super();
+    this.type = "TubeGeometry";
+    this.parameters = {
+      path,
+      tubularSegments,
+      radius,
+      radialSegments,
+      closed
+    };
+    const frames = path.computeFrenetFrames(tubularSegments, closed);
+    this.tangents = frames.tangents;
+    this.normals = frames.normals;
+    this.binormals = frames.binormals;
+    const vertex = new Vector3();
+    const normal = new Vector3();
+    const uv = new Vector2();
+    let P2 = new Vector3();
+    const vertices = [];
+    const normals = [];
+    const uvs = [];
+    const indices = [];
+    generateBufferData();
+    this.setIndex(indices);
+    this.setAttribute("position", new Float32BufferAttribute(vertices, 3));
+    this.setAttribute("normal", new Float32BufferAttribute(normals, 3));
+    this.setAttribute("uv", new Float32BufferAttribute(uvs, 2));
+    function generateBufferData() {
+      for (let i2 = 0; i2 < tubularSegments; i2++) {
+        generateSegment(i2);
+      }
+      generateSegment(closed === false ? tubularSegments : 0);
+      generateUVs();
+      generateIndices();
+    }
+    function generateSegment(i2) {
+      P2 = path.getPointAt(i2 / tubularSegments, P2);
+      const N2 = frames.normals[i2];
+      const B3 = frames.binormals[i2];
+      for (let j2 = 0; j2 <= radialSegments; j2++) {
+        const v2 = j2 / radialSegments * Math.PI * 2;
+        const sin = Math.sin(v2);
+        const cos = -Math.cos(v2);
+        normal.x = cos * N2.x + sin * B3.x;
+        normal.y = cos * N2.y + sin * B3.y;
+        normal.z = cos * N2.z + sin * B3.z;
+        normal.normalize();
+        normals.push(normal.x, normal.y, normal.z);
+        vertex.x = P2.x + radius * normal.x;
+        vertex.y = P2.y + radius * normal.y;
+        vertex.z = P2.z + radius * normal.z;
+        vertices.push(vertex.x, vertex.y, vertex.z);
+      }
+    }
+    function generateIndices() {
+      for (let j2 = 1; j2 <= tubularSegments; j2++) {
+        for (let i2 = 1; i2 <= radialSegments; i2++) {
+          const a2 = (radialSegments + 1) * (j2 - 1) + (i2 - 1);
+          const b2 = (radialSegments + 1) * j2 + (i2 - 1);
+          const c2 = (radialSegments + 1) * j2 + i2;
+          const d2 = (radialSegments + 1) * (j2 - 1) + i2;
+          indices.push(a2, b2, d2);
+          indices.push(b2, c2, d2);
+        }
+      }
+    }
+    function generateUVs() {
+      for (let i2 = 0; i2 <= tubularSegments; i2++) {
+        for (let j2 = 0; j2 <= radialSegments; j2++) {
+          uv.x = i2 / tubularSegments;
+          uv.y = j2 / radialSegments;
+          uvs.push(uv.x, uv.y);
+        }
+      }
+    }
+  }
+  copy(source) {
+    super.copy(source);
+    this.parameters = Object.assign({}, source.parameters);
+    return this;
+  }
+  toJSON() {
+    const data = super.toJSON();
+    data.path = this.parameters.path.toJSON();
+    return data;
+  }
+  /**
+   * Factory method for creating an instance of this class from the given
+   * JSON object.
+   *
+   * @param {Object} data - A JSON object representing the serialized geometry.
+   * @return {TubeGeometry} A new instance.
+   */
+  static fromJSON(data) {
+    return new _TubeGeometry(
+      new Curves[data.path.type]().fromJSON(data.path),
+      data.tubularSegments,
+      data.radius,
+      data.radialSegments,
+      data.closed
+    );
   }
 };
 var MeshStandardMaterial = class extends Material {
@@ -69722,7 +69951,7 @@ function V(n2) {
   };
 }
 function q(n2, u3, t2, i2, r2, o2, e2, f2, c2, a2) {
-  var s2, h2, p2, v2, y2, d2, _2, k2, x2, M, I2, P2, A3, H2, T2, j2, F2 = u3.type;
+  var s2, h2, p2, v2, y2, d2, _2, k2, x2, M, I2, P2, A3, H3, T3, j2, F2 = u3.type;
   if (void 0 !== u3.constructor) return null;
   128 & t2.__u && (c2 = !!(32 & t2.__u), o2 = [f2 = u3.__e = t2.__e]), (s2 = l.__b) && s2(u3);
   n: if ("function" == typeof F2) {
@@ -69740,11 +69969,11 @@ function q(n2, u3, t2, i2, r2, o2, e2, f2, c2, a2) {
           p2.componentDidUpdate(y2, d2, _2);
         });
       }
-      if (p2.context = P2, p2.props = x2, p2.__P = n2, p2.__e = false, A3 = l.__r, H2 = 0, M) p2.state = p2.__s, p2.__d = false, A3 && A3(u3), s2 = p2.render(p2.props, p2.state, p2.context), w.push.apply(p2.__h, p2._sb), p2._sb = [];
+      if (p2.context = P2, p2.props = x2, p2.__P = n2, p2.__e = false, A3 = l.__r, H3 = 0, M) p2.state = p2.__s, p2.__d = false, A3 && A3(u3), s2 = p2.render(p2.props, p2.state, p2.context), w.push.apply(p2.__h, p2._sb), p2._sb = [];
       else do {
         p2.__d = false, A3 && A3(u3), s2 = p2.render(p2.props, p2.state, p2.context), p2.state = p2.__s;
-      } while (p2.__d && ++H2 < 25);
-      p2.state = p2.__s, null != p2.getChildContext && (i2 = m(m({}, i2), p2.getChildContext())), M && !v2 && null != p2.getSnapshotBeforeUpdate && (_2 = p2.getSnapshotBeforeUpdate(y2, d2)), T2 = null != s2 && s2.type === S && null == s2.key ? E(s2.props.children) : s2, f2 = L(n2, g(T2) ? T2 : [T2], u3, t2, i2, r2, o2, e2, f2, c2, a2), p2.base = u3.__e, u3.__u &= -161, p2.__h.length && e2.push(p2), k2 && (p2.__E = p2.__ = null);
+      } while (p2.__d && ++H3 < 25);
+      p2.state = p2.__s, null != p2.getChildContext && (i2 = m(m({}, i2), p2.getChildContext())), M && !v2 && null != p2.getSnapshotBeforeUpdate && (_2 = p2.getSnapshotBeforeUpdate(y2, d2)), T3 = null != s2 && s2.type === S && null == s2.key ? E(s2.props.children) : s2, f2 = L(n2, g(T3) ? T3 : [T3], u3, t2, i2, r2, o2, e2, f2, c2, a2), p2.base = u3.__e, u3.__u &= -161, p2.__h.length && e2.push(p2), k2 && (p2.__E = p2.__ = null);
     } catch (n3) {
       if (e2.length = h2, u3.__v = null, c2 || null != o2) {
         if (n3.then) {
@@ -69897,6 +70126,26 @@ var Easing = {
   cubic: (t2) => t2 * t2 * t2,
   sin: (t2) => 1 - Math.cos(t2 * Math.PI / 2)
 };
+var interpolate = (input, inputRange, outputRange, opts = {}) => {
+  const { easing = (t3) => t3, extrapolateLeft = "extend", extrapolateRight = "extend" } = opts;
+  let i2 = 1;
+  for (; i2 < inputRange.length - 1; i2++) if (inputRange[i2] >= input) break;
+  const i0 = i2 - 1, i1 = i2;
+  const a2 = inputRange[i0], b2 = inputRange[i1], oa = outputRange[i0], ob = outputRange[i1];
+  let x2 = input;
+  if (x2 < a2) {
+    if (extrapolateLeft === "clamp") x2 = a2;
+    else if (extrapolateLeft === "identity") return x2;
+  }
+  if (x2 > b2) {
+    if (extrapolateRight === "clamp") x2 = b2;
+    else if (extrapolateRight === "identity") return x2;
+  }
+  if (a2 === b2) return oa;
+  let t2 = (x2 - a2) / (b2 - a2);
+  t2 = easing(t2);
+  return oa + (ob - oa) * t2;
+};
 
 // src/r45/tokens.ts
 var SOFT = Easing.bezier(0.5, 0, 0.25, 1);
@@ -69909,6 +70158,7 @@ var INOUT = Easing.inOut(Easing.sin);
 var COUNT = Easing.bezier(0.45, 0, 0.25, 1);
 var EXIT = Easing.in(Easing.cubic);
 var clamp01 = (x2) => Math.max(0, Math.min(1, x2));
+var ramp = (f2, a2, b2, ease = SOFT) => interpolate(f2, [a2, b2], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: ease });
 
 // src/r45/SfxLayer.tsx
 var EVEN = {
@@ -70015,22 +70265,31 @@ var peakOn = (beat) => (s2, peakAt, visTo, vol, why) => within(beat)(s2, peakAt 
 
 // src/r45/score.ts
 var buildScore = (sets, moves, placeCues) => {
-  const cues = [];
+  const cues3 = [];
   const w2 = (id) => {
     const x2 = sets.find((y2) => y2.id === id);
     return { at: x2.from, end: x2.to };
   };
-  for (const m2 of moves) cues.push(peakOn(w2(m2.id))("airwoosh", m2.mid, m2.end, m2.vol, `the camera moves (${m2.id}: ${m2.why})`));
-  for (const c2 of placeCues) cues.push((c2.kind === "move" ? peakOn : within)(w2(c2.id))(c2.s, c2.at, c2.end, c2.vol, c2.why));
+  for (const m2 of moves) cues3.push(peakOn(w2(m2.id))("airwoosh", m2.mid, m2.end, m2.vol, `the camera moves (${m2.id}: ${m2.why})`));
+  for (const c2 of placeCues) cues3.push((c2.kind === "move" ? peakOn : within)(w2(c2.id))(c2.s, c2.at, c2.end, c2.vol, c2.why));
   const MOVE = /* @__PURE__ */ new Set(["swoosh", "whooshlong", "whooshsoft", "airwoosh", "lowwoosh"]);
   const heard = (c2) => c2.at + PEAK[c2.s];
-  const out = cues.filter((c2) => !(c2.why.startsWith("the camera moves") && cues.some((o2) => o2 !== c2 && MOVE.has(o2.s) && !o2.why.startsWith("the camera moves") && Math.abs(heard(o2) - heard(c2)) <= 6)));
+  const out = cues3.filter((c2) => !(c2.why.startsWith("the camera moves") && cues3.some((o2) => o2 !== c2 && MOVE.has(o2.s) && !o2.why.startsWith("the camera moves") && Math.abs(heard(o2) - heard(c2)) <= 6)));
   out.sort((a2, b2) => a2.at - b2.at);
   return { cues: out };
 };
 
 // src/world/cam.ts
+var lerp2 = (a2, b2, t2) => a2 + (b2 - a2) * t2;
+var orbitPos = (c2, a2, r2, y2) => {
+  const k2 = a2 * Math.PI / 180;
+  return [c2[0] + Math.sin(k2) * r2, y2, c2[2] + Math.cos(k2) * r2];
+};
+var orbitAt = (o2, t2) => orbitPos(o2.c, lerp2(o2.a0, o2.a1, t2), lerp2(o2.r0, o2.r1 ?? o2.r0, t2), lerp2(o2.y0, o2.y1 ?? o2.y0, t2));
+var orbit = (at, dur, o2, x2 = {}) => ({ at, dur, pos: orbitAt(o2, 1), look: x2.look ?? o2.c, fov: x2.fov, ease: x2.ease ?? SOFT, orbit: o2, why: x2.why ?? "orbit" });
 var dolly = (at, dur, pos, look, x2 = {}) => ({ at, dur, pos, look, fov: x2.fov, ease: x2.ease ?? SETTLE, why: x2.why ?? "dolly" });
+var crane = (at, dur, pos, look, x2 = {}) => ({ at, dur, pos, look, fov: x2.fov, ease: x2.ease ?? TRAVEL, arc: x2.bulge ?? [0, 0, 120], why: x2.why ?? "crane", whoosh: 0.5 });
+var travel = (at, dur, pos, look, x2 = {}) => ({ at, dur, pos, look, fov: x2.fov, ease: x2.ease ?? TRAVEL, arc: x2.bulge, why: x2.why ?? "travel", whoosh: x2.vol ?? 0.6 });
 var cut = (at, pos, look, x2 = {}) => ({ at, dur: 0, pos, look, fov: x2.fov, roll: x2.roll, cut: true, dip: x2.dip ?? 0, why: x2.why ?? "cut", focus: x2.focus, still: x2.still });
 var checkPath = (name, keys) => {
   for (let i2 = 1; i2 < keys.length; i2++) {
@@ -70047,6 +70306,12 @@ var F = (sec) => Math.round(sec * FPS2);
 var ofScene = (id) => CUES.filter((c2) => c2.scene === id);
 var cue = (id, i2) => F(ofScene(id)[i2].a);
 var cueEnd = (id, i2) => F(ofScene(id)[i2].b);
+var word = (id, i2, re) => {
+  const c2 = ofScene(id)[i2];
+  const w2 = c2?.w?.find(([t2]) => re.test(t2));
+  if (!w2) throw new Error(`r45 time: no token matching ${re} in ${id}[${i2}] "${c2?.text}"`);
+  return F(w2[1]);
+};
 
 // ../034-ohtani/node_modules/three/examples/jsm/geometries/TextGeometry.js
 var TextGeometry = class extends ExtrudeGeometry {
@@ -70475,6 +70740,11 @@ var block = (w2, h2, d2, r2, mat) => {
   m2.position.y = h2 / 2;
   return m2;
 };
+var cyl = (r2, h2, mat, seg = 64) => {
+  const m2 = shadowed(new Mesh(new CylinderGeometry(r2, r2, h2, seg), mat));
+  m2.position.y = h2 / 2;
+  return m2;
+};
 var wide = (g2, k2 = 1.14) => {
   g2.scale.x *= k2;
   return g2;
@@ -70486,13 +70756,6 @@ var textOn = (text, surface, o2 = {}) => {
   text.userData.fitMargin = o2.margin;
   text.userData.fitStand = !!o2.stand;
   return text;
-};
-var plateOn = (plate, surface, o2 = {}) => {
-  plate.userData.fitOn = surface;
-  plate.userData.fitInset = o2.inset ?? 0;
-  plate.userData.fitMargin = 0;
-  plate.userData.fitPlate = true;
-  return plate;
 };
 var freeText = (text, why) => {
   text.userData.fitFree = why;
@@ -70510,12 +70773,7 @@ var countUp = (f2, a2, b2, from, to) => {
   const t2 = (f2 - a2) / (b2 - a2);
   return from + (to - from) * (1 - Math.pow(1 - t2, 2.6));
 };
-var short = (n2, cur = "$") => {
-  const a2 = Math.abs(n2);
-  if (a2 >= 1e9) return cur + (a2 >= 1e10 ? Math.round(n2 / 1e9) : Math.round(n2 / 1e8) / 10) + "B";
-  if (a2 >= 1e6) return cur + (a2 >= 1e7 ? Math.round(n2 / 1e6) : Math.round(n2 / 1e5) / 10) + "M";
-  return cur + Math.round(n2).toLocaleString("en-US");
-};
+var pounds = (n2) => "\xA3" + Math.round(n2).toLocaleString("en-US");
 var counter = (o2) => {
   const face = lit(o2.color ?? K2.white);
   const side = new MeshStandardMaterial({ color: C3(o2.color ?? K2.white).multiplyScalar(0.22), roughness: 0.5, metalness: 0.4 });
@@ -70548,32 +70806,33 @@ var litPlate = (lines, o2 = {}) => {
 var ring = (o2 = {}) => {
   const R2 = o2.r ?? 900, wdt = (o2.w ?? 12) / R2, dur = o2.dur ?? 28;
   const mat = new MeshBasicMaterial({ color: C3(o2.color ?? K2.white).multiplyScalar(1.4), toneMapped: false, transparent: true, opacity: 0, depthWrite: false, blending: AdditiveBlending, fog: false });
-  const mesh = new Mesh(new RingGeometry(1 - wdt, 1, 96), mat);
-  mesh.rotation.x = -Math.PI / 2;
-  mesh.position.y = 1.5;
-  mesh.renderOrder = 3;
-  mesh.userData.isFloor = true;
+  const mesh2 = new Mesh(new RingGeometry(1 - wdt, 1, 96), mat);
+  mesh2.rotation.x = -Math.PI / 2;
+  mesh2.position.y = 1.5;
+  mesh2.renderOrder = 3;
+  mesh2.userData.isFloor = true;
   return {
-    mesh,
+    mesh: mesh2,
     update: (f2, at) => {
       const t2 = (f2 - at) / dur;
       if (t2 <= 0 || t2 >= 1) {
-        mesh.visible = false;
+        mesh2.visible = false;
         return;
       }
-      mesh.visible = true;
+      mesh2.visible = true;
       const p2 = 1 - Math.pow(1 - t2, 2.2);
-      mesh.scale.setScalar(Math.max(1, R2 * p2));
+      mesh2.scale.setScalar(Math.max(1, R2 * p2));
       mat.opacity = Math.pow(1 - t2, 1.4) * 0.9;
     }
   };
 };
+var backGlow = (c2, color, i2) => ({ pos: [c2[0], c2[1] + 900, c2[2] + 600], at: [c2[0], c2[1] + 500, BACKDROP_Z], i: i2, color, angle: 0.85, soft: 1 });
 var dropIn = (f2, land, o2 = {}) => {
-  const h2 = o2.h ?? 1400, T2 = o2.fall ?? 9, bh = h2 * (o2.bounce ?? 1) * 0.045;
+  const h2 = o2.h ?? 1400, T3 = o2.fall ?? 9, bh = h2 * (o2.bounce ?? 1) * 0.045;
   const t2 = f2 - land;
-  if (t2 < -T2) return { y: h2, on: false, fast: false };
+  if (t2 < -T3) return { y: h2, on: false, fast: false };
   if (t2 < 0) {
-    const u3 = (t2 + T2) / T2;
+    const u3 = (t2 + T3) / T3;
     return { y: h2 * (1 - u3 * u3), on: true, fast: true };
   }
   const B1 = 9, B22 = 6;
@@ -70586,6 +70845,17 @@ var dropIn = (f2, land, o2 = {}) => {
     return { y: bh * 0.28 * 4 * u3 * (1 - u3), on: true, fast: false };
   }
   return { y: 0, on: true, fast: false };
+};
+var popUp = (f2, at, dur = 11) => {
+  const t2 = (f2 - at) / dur;
+  if (t2 <= 0) return 0;
+  if (t2 >= 1) return 1;
+  if (t2 < 0.62) {
+    const u4 = t2 / 0.62;
+    return 1.08 * (1 - Math.pow(1 - u4, 3));
+  }
+  const u3 = (t2 - 0.62) / 0.38;
+  return 1.08 - 0.08 * (u3 * u3 * (3 - 2 * u3));
 };
 
 // src/world/timeline.ts
@@ -70851,6 +71121,613 @@ var makeFlagBall = (key2, r2 = 180) => {
   return { group, r: r2 };
 };
 
+// src/world/obj/crane.ts
+var CRANE = { legX: 1450, beamY: 3e3, beamH: 320, beamD: 280, legW: 220, trolleyBottom: 2620 };
+var paint = (hex, rough = 0.42) => new MeshPhysicalMaterial({ color: new Color(hex), roughness: rough, metalness: 0.25, clearcoat: 0.35, clearcoatRoughness: 0.4, envMapIntensity: 0.9 });
+var hazard = () => {
+  const m2 = paint("#e2b21c");
+  if (typeof document === "undefined") return m2;
+  const c2 = document.createElement("canvas");
+  c2.width = c2.height = 256;
+  const g2 = c2.getContext("2d");
+  g2.fillStyle = "#e2b21c";
+  g2.fillRect(0, 0, 256, 256);
+  g2.fillStyle = "#141414";
+  for (let i2 = -256; i2 < 512; i2 += 64) {
+    g2.beginPath();
+    g2.moveTo(i2, 0);
+    g2.lineTo(i2 + 32, 0);
+    g2.lineTo(i2 + 32 + 256, 256);
+    g2.lineTo(i2 + 256, 256);
+    g2.closePath();
+    g2.fill();
+  }
+  const t2 = new CanvasTexture(c2);
+  t2.colorSpace = SRGBColorSpace;
+  t2.wrapS = t2.wrapT = RepeatWrapping;
+  m2.map = t2;
+  m2.color.set("#ffffff");
+  return m2;
+};
+var makeCrane = (key2) => {
+  const C5 = CRANE;
+  const group = new Group();
+  group.name = `crane-${key2}`;
+  const yellow = paint("#e2b21c"), black = MAT.black();
+  for (const s2 of [-1, 1]) {
+    const leg = new Group();
+    leg.name = s2 < 0 ? "leg-left" : "leg-right";
+    const col = rbox(C5.legW, C5.beamY - 260, C5.legW, 14, yellow);
+    col.position.y = 260 + (C5.beamY - 260) / 2;
+    const band = rbox(C5.legW + 6, 220, C5.legW + 6, 14, hazard());
+    band.position.y = 260 + 110;
+    const foot = rbox(C5.legW + 220, 150, 520, 22, black);
+    foot.position.y = 75 + 40;
+    for (const z2 of [-170, 170]) {
+      const wheel = new Mesh(new CylinderGeometry(52, 52, 60, 32), MAT.graphite());
+      wheel.rotation.z = Math.PI / 2;
+      wheel.position.set(0, 52, z2);
+      wheel.castShadow = true;
+      leg.add(wheel);
+    }
+    const brace = rbox(70, 900, 70, 10, yellow);
+    brace.position.set(-s2 * 0, 760, 200);
+    brace.rotation.x = -0.32;
+    leg.add(col, band, foot, brace);
+    leg.position.x = s2 * C5.legX;
+    group.add(leg);
+  }
+  const beam = rbox(2 * C5.legX + C5.legW + 60, C5.beamH, C5.beamD, 20, yellow);
+  beam.position.y = C5.beamY;
+  beam.name = "beam";
+  const under = rbox(2 * C5.legX - C5.legW, 40, C5.beamD - 30, 10, black);
+  under.position.y = C5.beamY - C5.beamH / 2 - 10;
+  group.add(beam, under);
+  for (const s2 of [-1, 1]) {
+    const end = rbox(260, C5.beamH + 8, C5.beamD + 8, 18, hazard());
+    end.position.set(s2 * C5.legX, C5.beamY, 0);
+    group.add(end);
+  }
+  const flag = makeFlagPanel(key2, 520, 274);
+  flag.group.position.set(-560, C5.beamY, C5.beamD / 2 + flag.d / 2 + 1);
+  flag.group.name = "flag";
+  group.add(flag.group);
+  const trolley = new Group();
+  trolley.name = "trolley";
+  const tb = rbox(560, 180, 340, 18, black);
+  tb.position.y = C5.beamY - C5.beamH / 2 - 30 - 90;
+  const drum = new Mesh(new CylinderGeometry(70, 70, 420, 32), MAT.satin());
+  drum.rotation.z = Math.PI / 2;
+  drum.position.y = tb.position.y - 40;
+  drum.position.z = 175;
+  trolley.add(tb, drum);
+  group.add(trolley);
+  const hook = new Group();
+  hook.name = "hook";
+  const size2 = 40, k2 = 1.1, tw = textWidth("THE GLAZER FAMILY", "800", size2) * k2;
+  const bw = Math.max(620, tw + 150), bh = 250, bd = 230;
+  const block3 = rbox(bw, bh, bd, 22, yellow);
+  block3.name = "hook-block";
+  const stripe = rbox(bw + 4, 46, bd + 4, 8, hazard());
+  stripe.position.y = bh / 2 - 30;
+  const plate = rbox(tw + 90, 96, 16, 6, black);
+  plate.position.set(0, -24, bd / 2 + 8);
+  const words = wide(text3d("THE GLAZER FAMILY", { font: "800", size: size2, depth: 3, bevel: 0, face: lit(K2.white, 1.05) }), k2);
+  words.position.set(0, -24 - size2 * 0.345, bd / 2 + 16.5);
+  words.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  textOn(words, plate, { inset: 6 });
+  for (const x2 of [-120, 120]) {
+    const sh = new Mesh(new CylinderGeometry(46, 46, 40, 32), MAT.satin());
+    sh.rotation.x = Math.PI / 2;
+    sh.position.set(x2, bh / 2 + 30, 0);
+    hook.add(sh);
+  }
+  const shank = new Mesh(new CylinderGeometry(22, 26, 110, 24), MAT.satin());
+  shank.position.y = -bh / 2 - 55;
+  const c2 = new Mesh(new TorusGeometry(58, 17, 16, 48, Math.PI * 1.55), MAT.satin());
+  c2.rotation.z = Math.PI * 0.73;
+  c2.position.y = -bh / 2 - 110 - 52;
+  for (const m2 of [shank, c2]) {
+    m2.castShadow = true;
+    m2.receiveShadow = true;
+  }
+  const arm = rbox(540, 44, 60, 10, black);
+  arm.position.set(bw / 2 + 250, -bh / 2 + 30, 0);
+  const eye = new Mesh(new TorusGeometry(22, 7, 12, 32), MAT.satin());
+  eye.position.set(bw / 2 + 480, -bh / 2 + 30 - 22 - 22, 0);
+  eye.name = "bracket-eye";
+  eye.rotation.y = Math.PI / 2;
+  hook.add(block3, stripe, plate, words, shank, c2, arm, eye);
+  joined(shank, c2, "the hook's shank runs into its C");
+  const bracket = new Vector3(bw / 2 + 480, -bh / 2 + 30 - 22 - 44, 0);
+  const hookEye = new Vector3(0, -bh / 2 - 110 - 52 - 58 - 17, 0);
+  group.add(hook);
+  const cables = [-120, 120].map((x2) => {
+    const m2 = new Mesh(new CylinderGeometry(7, 7, 1, 12), MAT.graphite());
+    m2.position.x = x2;
+    m2.castShadow = true;
+    m2.name = "cable";
+    group.add(m2);
+    joined(m2, hook, "the cable runs into the block's sheave");
+    joined(m2, trolley, "the cable comes off the trolley's drum");
+    return m2;
+  });
+  const slings = [];
+  const slingTo = (pts, load) => {
+    for (const p2 of pts) {
+      const d2 = new Vector3().subVectors(p2, hookEye), L3 = d2.length();
+      const m2 = new Mesh(new CylinderGeometry(6, 6, L3, 10), MAT.graphite());
+      m2.position.copy(hookEye).addScaledVector(d2, 0.5);
+      m2.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), d2.normalize());
+      m2.castShadow = true;
+      m2.name = "sling";
+      hook.add(m2);
+      joined(m2, load, "the sling is shackled to the crest");
+      joined(m2, c2, "the sling hangs on the hook");
+      slings.push(m2);
+    }
+  };
+  const update = (p2) => {
+    hook.position.y = p2.hookY;
+    const top = p2.hookY + bh / 2 + 30, bottom = C5.trolleyBottom + 20;
+    for (const m2 of cables) {
+      const L3 = Math.max(4, bottom - top);
+      m2.scale.y = L3;
+      m2.position.y = top + L3 / 2;
+    }
+  };
+  update({ hookY: 2e3 });
+  return { group, hook, update, slingTo, bracket, hookEye, blockH: bh, plate, words, eye };
+};
+
+// src/world/obj/plinth.ts
+var PLINTH = { w: 920, h: 720, d: 640, base: 96, cap: 34 };
+var marble = () => {
+  const m2 = new MeshPhysicalMaterial({ color: new Color("#0f0f11"), roughness: 0.22, metalness: 0.05, clearcoat: 0.8, clearcoatRoughness: 0.12, envMapIntensity: 1 });
+  if (typeof document === "undefined") return m2;
+  const c2 = document.createElement("canvas");
+  c2.width = c2.height = 1024;
+  const g2 = c2.getContext("2d");
+  g2.fillStyle = "#121214";
+  g2.fillRect(0, 0, 1024, 1024);
+  let s2 = 7;
+  const rnd = () => {
+    s2 = s2 * 16807 % 2147483647;
+    return s2 / 2147483647;
+  };
+  for (let v2 = 0; v2 < 26; v2++) {
+    g2.strokeStyle = `rgba(${170 + rnd() * 60},${170 + rnd() * 60},${175 + rnd() * 60},${0.05 + rnd() * 0.16})`;
+    g2.lineWidth = 0.6 + rnd() * 2.6;
+    g2.beginPath();
+    let x2 = rnd() * 1024, y2 = rnd() * 1024;
+    g2.moveTo(x2, y2);
+    for (let k2 = 0; k2 < 7; k2++) {
+      const nx = x2 + (rnd() - 0.3) * 260, ny = y2 + (rnd() - 0.5) * 220;
+      g2.quadraticCurveTo(x2 + (rnd() - 0.5) * 160, y2 + (rnd() - 0.5) * 160, nx, ny);
+      x2 = nx;
+      y2 = ny;
+    }
+    g2.stroke();
+  }
+  const t2 = new CanvasTexture(c2);
+  t2.colorSpace = SRGBColorSpace;
+  m2.map = t2;
+  m2.color.set("#ffffff");
+  return m2;
+};
+var makePlinth = (key2) => {
+  const P2 = PLINTH;
+  const group = new Group();
+  group.name = `plinth-${key2}`;
+  const base = rbox(P2.w + 140, P2.base, P2.d + 140, 16, MAT.satin());
+  base.position.y = P2.base / 2;
+  base.name = "plinth-base";
+  const body = rbox(P2.w, P2.h, P2.d, 14, marble());
+  body.position.y = P2.base + P2.h / 2;
+  body.name = "plinth-marble";
+  const cap = rbox(P2.w + 40, P2.cap, P2.d + 40, 10, MAT.satin());
+  cap.position.y = P2.base + P2.h + P2.cap / 2;
+  cap.name = "plinth-cap";
+  const cradle = rbox(400, 46, 170, 10, MAT.satin());
+  cradle.position.y = P2.base + P2.h + P2.cap + 23;
+  cradle.name = "cradle";
+  group.add(base, body, cap, cradle);
+  const top = P2.base + P2.h + P2.cap + 46;
+  const faceZ = P2.d / 2;
+  const PIV = faceZ + 102, SW2 = 820, D2 = 22;
+  const s1 = { y: P2.base + 590, h: 110 }, s2 = { y: P2.base + 590 - 55 - 14 - 95, h: 190 };
+  const bez = new Group();
+  bez.name = "bezel";
+  const top_ = s1.y + s1.h / 2 + 12, bot_ = s2.y - s2.h / 2 - 12;
+  const bar = (w2, h2, x2, y2) => {
+    const m2 = rbox(w2, h2, 150, 6, MAT.satin());
+    m2.position.set(x2, y2, faceZ + 75);
+    bez.add(m2);
+    return m2;
+  };
+  bar(SW2 + 76, 22, 0, top_ + 11);
+  bar(SW2 + 76, 22, 0, bot_ - 11);
+  const sideL = bar(26, top_ - bot_, -(SW2 / 2 + 25), (top_ + bot_) / 2), sideR = bar(26, top_ - bot_, SW2 / 2 + 25, (top_ + bot_) / 2);
+  group.add(bez);
+  const glass = () => new MeshPhysicalMaterial({ color: new Color("#070708"), roughness: 0.4, metalness: 0.15, clearcoat: 0.25, clearcoatRoughness: 0.45, envMapIntensity: 0.6 });
+  const white2 = lit(K2.white, 1.05), money = lit(K2.money, 1.12), red1 = lit(K2.red, 1.1), red2 = lit(K2.red, 1.1);
+  const fitSize = (str, want, room2, k2 = 1.12) => Math.min(want, room2 / (textWidth(str, "800", 1) * k2));
+  const slat = (y2, h2, name) => {
+    const pivot = new Group();
+    pivot.name = name;
+    pivot.position.set(0, y2, PIV);
+    const m2 = rbox(SW2, h2, D2, 5, glass());
+    m2.name = name + "-slat";
+    pivot.add(m2);
+    const axle = new Mesh(new CylinderGeometry(7, 7, SW2 + 46, 12), MAT.satin());
+    axle.rotation.z = Math.PI / 2;
+    axle.name = name + "-axle";
+    pivot.add(axle);
+    joined(axle, sideL, "the slat's axle runs in the bezel");
+    joined(axle, sideR, "the slat's axle runs in the bezel");
+    joined(axle, m2, "the axle runs through the slat");
+    const back = new Group();
+    back.rotation.x = Math.PI;
+    pivot.add(back);
+    group.add(pivot);
+    return { pivot, m: m2, back };
+  };
+  const A3 = slat(s1.y, s1.h, "slat1"), B3 = slat(s2.y, s2.h, "slat2");
+  const word2 = (str, size2, face, onto, surf) => {
+    const t2 = wide(text3d(str, { font: "800", size: size2, depth: 3, bevel: 0, face }), 1.12);
+    t2.position.set(0, -size2 * 0.345, D2 / 2 + 0.5);
+    t2.traverse((n2) => {
+      n2.castShadow = false;
+    });
+    textOn(t2, surf, { inset: 5 });
+    onto.add(t2);
+    return t2;
+  };
+  const room = SW2 - 90;
+  word2("BOUGHT BY: THE GLAZERS", fitSize("BOUGHT BY: THE GLAZERS", 50, room), white2, A3.pivot, A3.m);
+  word2("PAID FOR BY:", fitSize("PAID FOR BY:", 58, room), red1, A3.back, A3.m);
+  word2("MANCHESTER UNITED", fitSize("MANCHESTER UNITED", 96, room), red2, B3.back, B3.m);
+  const digitW = Math.max(...Array.from("0123456789", (c2) => textWidth(c2, "800", 1)));
+  const widest = Array.from("\xA3790,000,000").reduce((s3, c2) => s3 + (/\d/.test(c2) ? digitW : textWidth(c2, "800", 1)), 0);
+  const cs = Math.min(132, room / (widest * 1.12));
+  const num = numeral3d({ font: "800", size: cs, depth: 4, bevel: 0, face: money });
+  num.group.scale.x = 1.12;
+  num.group.position.set(0, -cs * 0.345, D2 / 2 + 0.5);
+  num.group.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  textOn(num.group, B3.m, { inset: 5 });
+  B3.pivot.add(num.group);
+  const ink = new Group();
+  ink.name = "ink";
+  const inkMat = lit(K2.red, 1);
+  const iw = 760, ih = 230, iy = P2.base + 170;
+  const rule = (w2, h2, x2, y2) => {
+    const m2 = new Mesh(new BoxGeometry(w2, h2, 1.2), inkMat);
+    m2.position.set(x2, y2, 0);
+    ink.add(m2);
+    return m2;
+  };
+  rule(iw, 10, 0, ih / 2 - 5);
+  rule(iw, 10, 0, -ih / 2 + 5);
+  rule(10, ih, -iw / 2 + 5, 0);
+  rule(10, ih, iw / 2 - 5, 0);
+  const i1s = fitSize("BILLED TO:", 52, iw - 90, 1.08), i2s = fitSize("MANCHESTER UNITED", 66, iw - 90, 1.08);
+  const i1 = wide(text3d("BILLED TO:", { font: "800", size: i1s, depth: 1.2, bevel: 0, face: inkMat }), 1.08);
+  i1.position.set(0, 26, 0);
+  const i2 = wide(text3d("MANCHESTER UNITED", { font: "800", size: i2s, depth: 1.2, bevel: 0, face: inkMat }), 1.08);
+  i2.position.set(0, -i2s * 0.95, 0);
+  ink.add(i1, i2);
+  ink.position.set(0, iy, faceZ + 0.4);
+  for (const t2 of [i1, i2]) {
+    t2.traverse((n2) => {
+      n2.castShadow = false;
+    });
+    textOn(t2, body, { inset: 14 });
+  }
+  ink.traverse((n2) => {
+    if (n2.isMesh && !n2.parent?.userData.isText && !n2.userData.isText) textOn(n2, body, { inset: 14 });
+  });
+  group.add(ink);
+  const update = (p2) => {
+    num.set(pounds(p2.count));
+    A3.pivot.rotation.x = -Math.PI * p2.flip1;
+    B3.pivot.rotation.x = -Math.PI * p2.flip2;
+    for (const m2 of [white2, money]) setLit(m2, p2.lit, 0.12);
+    for (const m2 of [red1, red2]) setLit(m2, 1, 0.12);
+    ink.visible = p2.ink > 0;
+    setLit(inkMat, p2.ink, 0);
+  };
+  update({ count: 0, flip1: 0, flip2: 0, ink: 0, lit: 1 });
+  return { group, body, top, faceZ, update, signY: (s1.y + s2.y) / 2, inkY: iy, num };
+};
+
+// src/world/obj/loantag.ts
+var makeLoanTag = (key2) => {
+  const group = new Group();
+  group.name = `loantag-${key2}`;
+  const red2 = new MeshPhysicalMaterial({ color: new Color("#a81d18"), roughness: 0.32, metalness: 0.2, clearcoat: 0.7, clearcoatRoughness: 0.2, envMapIntensity: 1 });
+  const k2 = 1.1, s1 = 46, s2 = 58, s3 = 40;
+  const digitW = Math.max(...Array.from("0123456789", (c2) => textWidth(c2, "800", 1)));
+  const widest = Array.from("\xA3540,000,000").reduce((s4, c2) => s4 + (/\d/.test(c2) ? digitW : textWidth(c2, "800", 1)), 0) * s2 * k2;
+  const w2 = Math.max(widest, textWidth("BORROWED:", "800", s1) * k2) + 120, h2 = 330, d2 = 26;
+  const body = rbox(w2, h2, d2, 12, red2);
+  body.name = "tag-body";
+  body.position.y = -60 - h2 / 2;
+  const tab = rbox(140, 90, d2, 12, red2);
+  tab.position.y = -60 - 30;
+  tab.name = "tag-tab";
+  const grommet = new Mesh(new TorusGeometry(24, 8, 12, 32), MAT.satin());
+  grommet.position.y = -60 - 12;
+  joined(grommet, tab, "the grommet is set in the tab");
+  group.add(body, tab, grommet);
+  const face = lit(K2.white, 1.05), money = lit(K2.money, 1.12);
+  const word2 = (str, size2, y2) => {
+    const t2 = wide(text3d(str, { font: "800", size: size2, depth: 3, bevel: 0, face }), k2);
+    t2.position.set(0, y2, d2 / 2 + 0.5);
+    t2.traverse((n2) => {
+      n2.castShadow = false;
+    });
+    textOn(t2, body, { inset: 6 });
+    body.add(t2);
+    return t2;
+  };
+  word2("BORROWED:", s1, 92);
+  word2("2005", s3, -128);
+  const num = numeral3d({ font: "800", size: s2, depth: 4, bevel: 0, face: money });
+  num.group.scale.x = k2;
+  num.group.position.set(0, -s2 * 0.345, d2 / 2 + 0.5);
+  num.group.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  textOn(num.group, body, { inset: 6 });
+  body.add(num.group);
+  const set = (v2) => num.set(pounds(v2));
+  set(54e7);
+  return { group, body, set, w: w2, h: h2, eyelet: new Vector3(0, -60 + 12, 0), ring: grommet, bottom: -60 - h2 };
+};
+var Rr = 15;
+var TUBE = 4.5;
+var SY = 1.6;
+var STEP = 30;
+var STEP_MAX = 34;
+var makeChain = (key2, n2) => {
+  const group = new Group();
+  group.name = `chain-${key2}`;
+  const geo = new TorusGeometry(Rr, TUBE, 10, 28);
+  const mat = MAT.satin();
+  const links = [];
+  for (let i2 = 0; i2 < n2; i2++) {
+    const m2 = new Mesh(geo, mat);
+    m2.castShadow = true;
+    m2.name = "link";
+    links.push(m2);
+    group.add(m2);
+    if (i2 > 0) joined(m2, links[i2 - 1], "chain links interlock");
+  }
+  const up = new Vector3(0, 1, 0), q2 = new Quaternion(), turn = new Quaternion();
+  const setEnds = (a2, b2, shown2 = n2) => {
+    const dir = new Vector3().subVectors(b2, a2);
+    const L3 = dir.length();
+    dir.normalize();
+    q2.setFromUnitVectors(up, dir);
+    const fit2 = Math.max(1, Math.min(n2, Math.floor((L3 - 2 * Rr * SY) / STEP) + 1));
+    const step = fit2 > 1 ? Math.min(STEP_MAX, (L3 - 2 * Rr * SY) / (fit2 - 1)) : 0;
+    links.forEach((m2, i2) => {
+      m2.visible = i2 < Math.min(shown2, fit2);
+      m2.position.copy(a2).addScaledVector(dir, Rr * SY + i2 * step);
+      m2.scale.set(1, SY, 1);
+      turn.setFromAxisAngle(up, i2 % 2 ? Math.PI / 2 : 0);
+      m2.quaternion.copy(q2).multiply(turn);
+    });
+  };
+  const last = () => {
+    let k2 = 0;
+    links.forEach((m2, i2) => {
+      if (m2.visible) k2 = i2;
+    });
+    return links[k2];
+  };
+  return { group, links, setEnds, last, step: STEP, reach: (n2 - 1) * STEP + 2 * Rr * SY };
+};
+
+// src/world/obj/stamp.ts
+var STAMP = { w: 600, h: 176, d: 96 };
+var makeStamp = (key2) => {
+  const group = new Group();
+  group.name = `stamp-${key2}`;
+  const pad = rbox(STAMP.w - 18, STAMP.h - 18, 16, 5, MAT.rubber());
+  pad.position.z = 8;
+  const base = rbox(STAMP.w, STAMP.h, STAMP.d, 20, MAT.black());
+  base.position.z = 16 + STAMP.d / 2;
+  const collar = new Mesh(new CylinderGeometry(58, 74, 46, 40), MAT.satin());
+  collar.rotation.x = Math.PI / 2;
+  collar.position.z = 16 + STAMP.d + 22;
+  const neck = new Mesh(new CylinderGeometry(36, 46, 150, 40), MAT.black());
+  neck.rotation.x = Math.PI / 2;
+  neck.position.z = 16 + STAMP.d + 118;
+  const knob = new Mesh(new SphereGeometry(80, 40, 28), MAT.black());
+  knob.position.z = 16 + STAMP.d + 232;
+  for (const m2 of [base, collar, neck, knob]) {
+    m2.castShadow = true;
+    m2.receiveShadow = true;
+  }
+  group.add(pad, base, collar, neck, knob);
+  return { group };
+};
+
+// src/world/places/hook.ts
+var SET_A = { crest: 600, hookRest: 2120, tagChain: 8 };
+var setA = (key2) => {
+  const group = new Group();
+  const plinth2 = makePlinth(key2);
+  const crane_ = makeCrane(key2);
+  const crest = makeCrest(key2, SET_A.crest);
+  const crestRest = plinth2.top + SET_A.crest * (0.506 + 0.0162) + 3;
+  crest.group.name = "crest";
+  group.add(plinth2.group, crane_.group, crest.group);
+  const dy = crestRest - SET_A.hookRest;
+  crane_.slingTo([new Vector3(-165, dy + 255, 0), new Vector3(165, dy + 255, 0)], crest.group);
+  const tag = makeLoanTag(key2);
+  const tagChain = makeChain(key2 + "-tag", SET_A.tagChain);
+  const crestChain = makeChain(key2 + "-crest", 12);
+  group.add(tag.group, tagChain.group, crestChain.group);
+  joined(tagChain.links[0], crane_.eye, "the tag's chain hangs from the bracket's eye");
+  joined(tagChain.links[SET_A.tagChain - 1], tag.ring, "the tag's chain runs through its grommet");
+  joined(tagChain.links[SET_A.tagChain - 1], tag.group.children[1], "the chain's last link sits in the tab");
+  joined(crestChain.links[0], tag.body, "the chain is shackled to the tag's edge");
+  for (const l2 of crestChain.links) joined(l2, crest.group, "the chain's end is shackled to the crest's rim (only the link that reaches it touches it)");
+  const bracketW = () => new Vector3().copy(crane_.bracket).add(crane_.hook.position);
+  const tagRestEye = () => {
+    const b2 = bracketW();
+    return new Vector3(b2.x, b2.y - tagChain.reach - 4, 0);
+  };
+  return {
+    group,
+    plinth: plinth2,
+    crane: crane_,
+    crest,
+    crestRest,
+    tag,
+    tagChain,
+    crestChain,
+    /** pose the set: the crest's height above its cradle; the tag (shown, its drop height, its swing); the crest chain's
+     *  links shown (0…7) */
+    pose: (p2) => {
+      crane_.update({ hookY: SET_A.hookRest + p2.lift });
+      crest.group.position.set(0, crestRest + p2.lift, 0);
+      tag.group.visible = p2.tagOn;
+      tagChain.group.visible = p2.tagOn;
+      const eye = tagRestEye();
+      eye.y += p2.tagY;
+      tag.group.position.copy(eye);
+      tag.group.rotation.z = p2.tagSwing - 0.05 * p2.tug;
+      tag.group.updateMatrix();
+      const b2 = bracketW();
+      tagChain.setEnds(new Vector3(b2.x, b2.y, 0), new Vector3(eye.x, eye.y + 6, 0));
+      const a2 = new Vector3(-tag.w / 2 - 6, tag.bottom + 60, 0).applyMatrix4(tag.group.matrix);
+      const c2 = new Vector3(SET_A.crest * 0.516 + 4, crestRest + p2.lift - 4, 0);
+      crestChain.group.visible = p2.chain > 0;
+      crestChain.setEnds(a2, c2, Math.round(12 * clamp01(p2.chain)));
+    }
+  };
+};
+var S2 = "hook";
+var N790 = word(S2, 0, /^790/);
+var C1 = cue(S2, 1);
+var BORROWED = word(S2, 1, /^borrowed/);
+var C22 = cue(S2, 2);
+var MOST = word(S2, 2, /^most/);
+var OWN = word(S2, 2, /^own/);
+var LAND = 38;
+var COUNT2 = [LAND + 6, N790];
+var SNAP = [MOST - 4, MOST + 10];
+var SLAM = OWN;
+var OPENING = { pos: [-720, 1480, 3150], look: [0, 1840, 0], fov: 50, focus: [0, 1600, 0] };
+var SIGN = { pos: [-330, 780, 2750], look: [0, 640, 400], fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] };
+var INK = { pos: [-320, 400, 2420], look: [0, 300, 320], fov: 42, focus: [0, 266, PLINTH.d / 2] };
+var lift = (f2) => {
+  if (f2 < LAND) {
+    const t3 = clamp01((f2 + 14) / (LAND + 14));
+    return 300 * Math.pow(1 - t3, 2.2);
+  }
+  const t2 = f2 - LAND;
+  return 7 * Math.exp(-t2 / 5) * Math.sin(Math.min(Math.PI, t2 / 6 * Math.PI));
+};
+var stampAt = (f2, slam) => {
+  if (f2 < slam - 13) return { on: false, k: 0, fast: false };
+  if (f2 <= slam) {
+    const u4 = clamp01((f2 - (slam - 13)) / 13);
+    return { on: true, k: u4 * u4, fast: u4 > 0.3 };
+  }
+  if (f2 < slam + 4) return { on: true, k: 1, fast: false };
+  const u3 = clamp01((f2 - (slam + 4)) / 16);
+  return { on: u3 < 1, k: 1 - SOFT(u3), fast: false };
+};
+var stampPose = (stamp, plinth2, f2, slam) => {
+  const s2 = stampAt(f2, slam);
+  stamp.visible = s2.on;
+  const hit = new Vector3(0, plinth2.inkY, plinth2.faceZ + 0.6), rest = new Vector3(1500, plinth2.inkY, 1650);
+  stamp.position.copy(rest).lerp(hit, s2.k);
+  stamp.rotation.y = -0.8 * (1 - s2.k);
+  return s2;
+};
+var HookPlace = {
+  id: S2,
+  label: "1 Set A: the crane lowers the crest; \xA3790,000,000; BORROWED \xA3540,000,000; BILLED TO: MANCHESTER UNITED",
+  enter: 0,
+  stage: "dark",
+  shots: ({ to }) => [
+    cut(0, OPENING.pos, OPENING.look, { fov: OPENING.fov, focus: OPENING.focus, why: "open on the crane lowering the crest" }),
+    { ...crane(1, LAND + 10, SIGN.pos, SIGN.look, { fov: SIGN.fov, bulge: [0, 0, 140], why: "crane down with the crest onto the sign" }), focus: SIGN.focus },
+    { ...dolly(LAND + 12, C1 - 4 - (LAND + 12), [-180, 720, 2560], [0, 640, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
+    { ...crane(C1 - 2, BORROWED - 10 - (C1 - 2), [1080, 1760, 2900], [720, 1560, 0], { fov: 44, bulge: [80, 0, 160], why: "rise to the hook block" }), focus: [760, 1500, 0] },
+    { ...dolly(BORROWED - 8, C22 + 6 - (BORROWED - 8), [1e3, 1680, 2650], [740, 1480, 0], { fov: 44, ease: SOFT, why: "hold on the tag as it drops" }), focus: [780, 1460, 0] },
+    { ...crane(C22 + 7, SNAP[0] - 2 - (C22 + 7), [940, 1420, 2650], [660, 1360, 0], { fov: 44, bulge: [0, 0, 100], why: "down the tag to the crest" }), focus: [460, 1330, 0] },
+    { ...dolly(SNAP[1] + 2, SLAM - 14 - (SNAP[1] + 2), INK.pos, INK.look, { fov: INK.fov, why: "drop to the plinth's face" }), focus: INK.focus },
+    { ...dolly(SLAM - 10, to - (SLAM - 10) - 1, [-240, 380, 2280], [0, 300, 320], { fov: 42, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus }
+  ],
+  lights: (f2) => {
+    const p790 = f2 >= N790 ? Math.exp(-(f2 - N790) / 12) : 0, pDrop = f2 >= BORROWED ? Math.exp(-(f2 - BORROWED) / 12) : 0, pSlam = f2 >= SLAM ? Math.exp(-(f2 - SLAM) / 14) : 0;
+    const c2 = f2 < C1 - 2 ? [0, 900, 0] : f2 < SNAP[1] + 2 ? [420, 1350, 0] : [0, 500, 0];
+    const L3 = stdLights(c2, { s: 1.35, key: 3.5 + 1 * p790 + 0.8 * pDrop + 1.2 * pSlam });
+    L3.accent = { pos: f2 < C1 ? [0, 500, 1300] : f2 < SNAP[1] ? [600, 1500, 900] : [0, 300, 1200], color: f2 < C1 ? K2.money : K2.red, i: 2.4 * p790 + 2 * pDrop + 2.6 * pSlam };
+    if (f2 >= SLAM) L3.back = backGlow([0, 700, 0], K2.red, 2 * (0.4 + 0.6 * pSlam));
+    return L3;
+  },
+  blur: (f2) => f2 < 6 || dropIn(f2, BORROWED, { h: 230, fall: 8 }).fast || stampAt(f2, SLAM).fast,
+  cues: () => [
+    { kind: "hit", s: "chainshort", at: 1, vol: 0.4, why: "the crane's hoist lowers the crest" },
+    { kind: "hit", s: "thud", at: LAND, vol: 0.5, why: "the crest lands in its cradle" },
+    { kind: "hit", s: "datashort", at: COUNT2[0], end: COUNT2[1], vol: 0.35, why: "the price slat counts" },
+    { kind: "hit", s: "sub", at: N790, vol: 0.5, why: "\xA3790,000,000 lands" },
+    { kind: "hit", s: "pingshort", at: N790 + 1, vol: 0.3, why: "the gold ring" },
+    { kind: "move", s: "whooshsoft", at: C1 + 10, end: BORROWED - 10, vol: 0.3, why: "rise to the hook" },
+    { kind: "hit", s: "chainshort", at: BORROWED - 7, vol: 0.45, why: "the loan tag drops on its chain" },
+    { kind: "hit", s: "thud", at: BORROWED, vol: 0.4, why: "the tag jerks to a stop" },
+    { kind: "hit", s: "datashort", at: BORROWED + 1, end: BORROWED + 16, vol: 0.3, why: "the tag counts to \xA3540,000,000" },
+    { kind: "hit", s: "chain", at: SNAP[0], end: SNAP[1], vol: 0.4, why: "the chain runs out to the crest" },
+    { kind: "hit", s: "click", at: SNAP[1], vol: 0.45, why: "the chain snaps onto the crest" },
+    { kind: "move", s: "whooshsoft", at: SLAM - 3, end: SLAM, vol: 0.4, why: "the stamp swings in" },
+    { kind: "hit", s: "thud", at: SLAM, vol: 0.6, why: "the stamp slams: BILLED TO: MANCHESTER UNITED" },
+    { kind: "hit", s: "sub", at: SLAM, vol: 0.4, why: "the slam's weight" },
+    { kind: "hit", s: "pingshort", at: SLAM + 1, vol: 0.3, why: "the red ring" }
+  ],
+  build: () => {
+    const group = new Group();
+    const A3 = setA("hook");
+    group.add(A3.group);
+    const gold2 = ring({ r: 1500, color: K2.money, dur: 30 });
+    gold2.mesh.position.set(0, 1.5, PLINTH.d / 2 + 300);
+    const redR = ring({ r: 1600, color: K2.red, dur: 30 });
+    redR.mesh.position.set(0, 1.5, PLINTH.d / 2 + 300);
+    const tagR = ring({ r: 1100, color: K2.red, dur: 26 });
+    tagR.mesh.position.set(640, 1.5, 300);
+    const stamp = makeStamp("hook");
+    stamp.group.scale.set(1.32, 1.38, 1);
+    joined(stamp.group, A3.plinth.body, "the stamp's pad meets the marble face");
+    group.add(gold2.mesh, redR.mesh, tagR.mesh, stamp.group);
+    return {
+      group,
+      update: (f2) => {
+        const d2 = dropIn(f2, BORROWED, { h: 230, fall: 8 });
+        const swing2 = f2 >= BORROWED ? 0.07 * Math.exp(-(f2 - BORROWED) / 18) * Math.sin((f2 - BORROWED) / 22 * Math.PI * 2) : 0;
+        const chain = clamp01((f2 - SNAP[0]) / (SNAP[1] - SNAP[0]));
+        const tug = f2 >= SNAP[1] ? Math.exp(-(f2 - SNAP[1]) / 8) : 0;
+        A3.pose({ lift: lift(f2), tagOn: d2.on, tagY: d2.y, tagSwing: swing2, chain, tug });
+        A3.tag.set(countUp(f2, BORROWED + 1, BORROWED + 16, 0, 54e7));
+        A3.plinth.update({ count: f2 < COUNT2[0] ? 0 : countUp(f2, COUNT2[0], COUNT2[1], 0, 79e7), flip1: 0, flip2: 0, ink: f2 >= SLAM ? 1 : 0, lit: 1 });
+        stampPose(stamp.group, A3.plinth, f2, SLAM);
+        gold2.update(f2, N790);
+        tagR.update(f2, BORROWED);
+        redR.update(f2, SLAM);
+      }
+    };
+  }
+};
+
 // src/world/obj/nameplate.ts
 var makeNameplate = (key2, lines, o2 = {}) => {
   void key2;
@@ -70858,20 +71735,20 @@ var makeNameplate = (key2, lines, o2 = {}) => {
   const s1 = o2.size ?? 64, s2 = s1 * 0.62, k2 = 1.12;
   const face = lit(o2.color ?? K2.white, 0.95);
   const D2 = 46, TILT = -0.21;
-  const stand = new Group();
-  group.add(stand);
+  const stand2 = new Group();
+  group.add(stand2);
   const plateG = new Group();
   group.add(plateG);
   let size2 = { w: 0, h: 0, d: D2 };
   const lay = (ls) => {
     plateG.clear();
-    stand.clear();
+    stand2.clear();
     const widths = ls.map((l2, i2) => textWidth(l2, "800", i2 === 0 ? s1 : s2) * k2);
     const w2 = Math.max(o2.minW ?? 0, Math.max(...widths) + s1 * 1.5);
     const h2 = s1 * 1.55 + (ls.length > 1 ? s2 * 1.45 : 0);
     const base = rbox(w2 + 40, 22, 160, 8, MAT.satin());
     base.position.y = 11;
-    stand.add(base);
+    stand2.add(base);
     const plate = rbox(w2, h2, D2, 10, MAT.black());
     plateG.position.set(0, 22 + h2 / 2 * Math.cos(TILT) + 10, 0);
     plateG.rotation.x = TILT;
@@ -70982,12 +71859,12 @@ var R = 430;
 var makeVault = (key2) => {
   void key2;
   const group = new Group();
-  const W = 1300, H2 = 1350, D2 = 420, CY = 640;
+  const W = 1300, H3 = 1350, D2 = 420, CY = 640;
   const wallShape = new Shape();
   wallShape.moveTo(-W / 2, 0);
   wallShape.lineTo(W / 2, 0);
-  wallShape.lineTo(W / 2, H2);
-  wallShape.lineTo(-W / 2, H2);
+  wallShape.lineTo(W / 2, H3);
+  wallShape.lineTo(-W / 2, H3);
   wallShape.lineTo(-W / 2, 0);
   const holePath = new Path();
   holePath.absarc(0, CY, R, 0, Math.PI * 2, true);
@@ -71071,13 +71948,13 @@ var makeVault = (key2) => {
     hinge.add(arm);
   }
   const plateG = new Group();
-  plateG.position.set(0, H2 - 120, 32);
+  plateG.position.set(0, H3 - 120, 32);
   group.add(plateG);
   let plate = litPlate(["VAULT"], { size: 76, color: K2.white });
   plateG.add(plate.group);
   return {
     group,
-    size: { w: W, h: H2, d: D2 },
+    size: { w: W, h: H3, d: D2 },
     mouth: new Vector3(0, CY, 0),
     label: (text) => {
       plateG.clear();
@@ -71176,6 +72053,988 @@ var makeCashStack = (key2, label, o2 = {}) => {
   }
   return { group, size: { w: cols * (NOTE_W + 6), h: n2 * (BRICK_H + 1), d: rows * (NOTE_D + 6) } };
 };
+var CASH = { w: NOTE_W, h: BRICK_H, d: NOTE_D };
+
+// src/world/places/sides.ts
+var S3 = "sides";
+var ENTER = enterOf(S3);
+var AMERICAN = word(S3, 0, /^American/);
+var FAMILY = word(S3, 0, /^family/);
+var Y2005 = word(S3, 0, /^2005/);
+var MOSTLY = word(S3, 0, /^mostly/);
+var LOANS = word(S3, 0, /^loans/);
+var BALL_LAND = Math.max(ENTER + 7, AMERICAN + 2);
+var PLATES_ON = FAMILY;
+var CAL_LAND = Y2005 + 1;
+var WHEEL = [CAL_LAND + 4, CAL_LAND + 16];
+var DOOR = [CAL_LAND + 12, CAL_LAND + 34];
+var CASH_GO = [MOSTLY - 8, MOSTLY - 2, MOSTLY + 4];
+var CASH_DUR = 16;
+var CREST_GO = Math.max(LOANS - 6, CASH_GO[2] + 8);
+var CREST_DUR = 16;
+var LP = { x: -560, w: 760, h: 280, d: 420 };
+var RP = { x: 600, w: 480, h: 280, d: 420 };
+var BALL_R = 150;
+var BALL_X = LP.x - 175;
+var SLOT_X = LP.x + 180;
+var CREST = 300;
+var VS = 0.75;
+var VX = 40;
+var VZ = -1180;
+var MOUTH_Y = 640 * VS;
+var MOUTH_BOTTOM = MOUTH_Y - 430 * VS + 40;
+var PILE = [LP.x - 560, 0, LP.d / 2 - 560];
+var cashAt = (k2, f2) => {
+  const a2 = CASH_GO[k2], t2 = (f2 - a2) / CASH_DUR;
+  const inside = new Vector3(VX, MOUTH_BOTTOM, VZ - 140), lip = new Vector3(VX - 40, MOUTH_BOTTOM, VZ + 60);
+  const rest = new Vector3(PILE[0], k2 * (CASH.h + 1), PILE[2]);
+  if (t2 <= 0) return { p: inside, on: false, fast: false };
+  if (t2 >= 1) return { p: rest, on: true, fast: false };
+  if (t2 < 0.3) {
+    const u4 = SOFT(t2 / 0.3);
+    return { p: inside.clone().lerp(lip, u4), on: true, fast: true };
+  }
+  const u3 = (t2 - 0.3) / 0.7, e2 = 1 - Math.pow(1 - u3, 2.2);
+  const p2 = lip.clone().lerp(rest, e2);
+  const fall = Math.min(1, u3 / 0.35);
+  p2.y = lip.y + (rest.y - lip.y) * fall * fall;
+  return { p: p2, on: true, fast: u3 < 0.6 };
+};
+var crestAt = (f2) => {
+  const t2 = clamp01((f2 - CREST_GO) / CREST_DUR), e2 = SOFT(t2);
+  const x2 = RP.x + (SLOT_X - RP.x) * e2;
+  const y2 = RP.h + CREST * 0.52 + Math.sin(Math.PI * e2) * 260;
+  return { x: x2, y: y2, fast: t2 > 0.1 && t2 < 0.9 };
+};
+var SidesPlace = {
+  id: S3,
+  label: "3 Set B: two sides (the Glazer family, the club), 2005, the loans",
+  enter: ENTER,
+  stage: "dark",
+  shots: ({ from, to }) => [
+    cut(from, [-560, 560, 1500], [BALL_X + 40, 420, 0], { fov: 44, focus: [BALL_X, 380, 0], why: "low on the falling flag ball" }),
+    dolly(from + 1, Math.max(24, CAL_LAND - 8 - from), [-20, 900, 3650], [20, 400, 0], { fov: 44, ease: SOFT, why: "back: both sides" }),
+    crane(CAL_LAND - 2, Math.max(26, DOOR[1] - CAL_LAND - 2), [160, 1450, 4150], [30, 520, -500], { fov: 44, why: "up and back: the vault opens" }),
+    dolly(DOOR[1] + 1, Math.max(20, to - DOOR[1] - 2), [-560, 1150, 3700], [-380, 420, -220], { fov: 44, ease: SOFT, why: "track left: the cash and the crest go to the US side" })
+  ],
+  lights: (f2) => {
+    const L3 = stdLights([0, 480, -300], { s: 1.25, key: 3.5, rim: 3.2, back: 2.6, amb: 0.16 });
+    L3.accent = { pos: [VX, MOUTH_Y + 80, VZ + 380], color: K2.amber, i: 0.9 * ramp(f2, DOOR[0], DOOR[1], SETTLE) };
+    return L3;
+  },
+  blur: (f2) => dropIn(f2, BALL_LAND, { h: 1100, fall: 10 }).fast || dropIn(f2, CAL_LAND, { h: 1e3, fall: 9 }).fast || [0, 1, 2].some((k2) => cashAt(k2, f2).fast) || crestAt(f2).fast,
+  cues: () => [
+    { kind: "hit", s: "thud", at: BALL_LAND, vol: 0.4, why: "the flag ball lands on the Glazer plinth" },
+    { kind: "hit", s: "click", at: PLATES_ON, vol: 0.3, why: "the nameplates light: the American family" },
+    { kind: "hit", s: "thud", at: CAL_LAND, vol: 0.45, why: "the calendar lands on 2005" },
+    { kind: "move", s: "chainshort", at: WHEEL[0] + 4, end: WHEEL[1], vol: 0.3, why: "the vault's wheel spins" },
+    { kind: "move", s: "lowwoosh", at: DOOR[0] + 12, end: DOOR[1] + 4, vol: 0.4, why: "the vault door swings open" },
+    ...CASH_GO.map((a2, k2) => ({ kind: "hit", s: "thud", at: a2 + CASH_DUR, vol: 0.3, why: `loans brick ${k2 + 1} lands on the US side` })),
+    { kind: "move", s: "swoosh", at: CREST_GO + CREST_DUR / 2, end: CREST_GO + CREST_DUR + 4, vol: 0.4, why: "the crest crosses to the US side" },
+    { kind: "hit", s: "thud", at: CREST_GO + CREST_DUR, vol: 0.4, why: "the crest lands beside the flag ball" }
+  ],
+  build: () => {
+    const group = new Group();
+    const lp = block(LP.w, LP.h, LP.d, 26, MAT.black());
+    lp.position.x = LP.x;
+    lp.name = "Glazer plinth";
+    group.add(lp);
+    const rp = block(RP.w, RP.h, RP.d, 26, MAT.black());
+    rp.position.x = RP.x;
+    rp.name = "club plinth";
+    group.add(rp);
+    const ball = makeFlagBall("sides", BALL_R);
+    ball.group.name = "flag ball";
+    group.add(ball.group);
+    const crest = makeCrest("sides", CREST);
+    crest.group.name = "crest";
+    group.add(crest.group);
+    const n1 = makeNameplate("sides-glazer", ["THE GLAZER FAMILY", "TAMPA, FLORIDA"], { size: 34 });
+    n1.group.position.set(LP.x, 0, LP.d / 2 + 150);
+    group.add(n1.group);
+    const n2 = makeNameplate("sides-club", ["MANCHESTER UNITED", "OLD TRAFFORD"], { size: 34 });
+    n2.group.position.set(RP.x, 0, RP.d / 2 + 150);
+    group.add(n2.group);
+    const plateLit = [];
+    for (const n3 of [n1, n2]) n3.group.traverse((o2) => {
+      const m2 = o2.material;
+      if (m2?.isMeshBasicMaterial && !plateLit.includes(m2)) plateLit.push(m2);
+    });
+    const cal = makeCalendar("sides", ["2005", "2010"]);
+    const calG = new Group();
+    calG.scale.setScalar(0.42);
+    calG.position.set((LP.x + LP.w / 2 + RP.x - RP.w / 2) / 2, 0, 20);
+    calG.add(cal.group);
+    group.add(calG);
+    calG.name = "calendar";
+    const vault = makeVault("sides");
+    const plate = vault.label("LOANS");
+    plate.group.parent.scale.x = -1;
+    vault.group.scale.set(-VS, VS, VS);
+    vault.group.position.set(VX, 0, VZ);
+    vault.group.name = "vault";
+    group.add(vault.group);
+    const bricks = [0, 1, 2].map((k2) => {
+      const c2 = makeCashStack(`sides${k2}`, "LOANS");
+      c2.group.name = `loans brick ${k2 + 1}`;
+      group.add(c2.group);
+      return c2;
+    });
+    for (const b2 of bricks) joined(b2.group, vault.group, "the loans slide out through the vault's open mouth");
+    bricks.forEach((a2, i2) => bricks.forEach((b2, j2) => {
+      if (j2 === i2 + 1) joined(a2.group, b2.group, "each brick lands on the one before it");
+    }));
+    const halo = ring({ r: 900 });
+    halo.mesh.position.set(LP.x, 1.5, 0);
+    group.add(halo.mesh);
+    const halo2 = ring({ r: 700 });
+    halo2.mesh.position.set(calG.position.x, 1.5, 20);
+    group.add(halo2.mesh);
+    void freeText;
+    return {
+      group,
+      update: (f2) => {
+        const d2 = dropIn(f2, BALL_LAND, { h: 1100, fall: 10 });
+        ball.group.visible = d2.on;
+        ball.group.position.set(BALL_X, LP.h + BALL_R + d2.y, 0);
+        ball.group.rotation.y = -0.5 + f2 * 0.012;
+        const lv = ramp(f2, PLATES_ON - 2, PLATES_ON + 8, SETTLE);
+        for (const m2 of plateLit) {
+          m2.color.copy(m2.userData.full ?? m2.color).multiplyScalar(0.25 + 0.75 * lv);
+        }
+        const c2 = dropIn(f2, CAL_LAND, { h: 1e3, fall: 9 });
+        calG.visible = c2.on;
+        calG.position.y = c2.y;
+        cal.update({ year: 0, flip: 0 });
+        vault.update({ door: SOFT(clamp01((f2 - DOOR[0]) / (DOOR[1] - DOOR[0]))), wheel: SOFT(clamp01((f2 - WHEEL[0]) / (WHEEL[1] - WHEEL[0]))) });
+        bricks.forEach((b2, k2) => {
+          const s2 = cashAt(k2, f2);
+          b2.group.visible = s2.on;
+          b2.group.position.copy(s2.p);
+          b2.group.rotation.y = 0.35;
+        });
+        const cr = crestAt(f2);
+        crest.group.position.set(cr.x, cr.y, 0);
+        crest.group.rotation.y = f2 < CREST_GO ? -0.15 : -0.15 + 0.3 * SOFT(clamp01((f2 - CREST_GO) / CREST_DUR));
+        halo.update(f2, BALL_LAND);
+        halo2.update(f2, CAL_LAND);
+      }
+    };
+  }
+};
+
+// src/world/obj/bond.ts
+var BOND = { w: 560, d: 400, t: 4 };
+var borderTex = null;
+var paperTexture = () => {
+  if (borderTex) return borderTex;
+  if (typeof document === "undefined") return null;
+  const c2 = document.createElement("canvas");
+  c2.width = 1120;
+  c2.height = 800;
+  const g2 = c2.getContext("2d");
+  g2.fillStyle = "#efe8d6";
+  g2.fillRect(0, 0, 1120, 800);
+  g2.strokeStyle = "rgba(40,90,70,0.10)";
+  g2.lineWidth = 1;
+  for (let k2 = 0; k2 < 18; k2++) {
+    g2.beginPath();
+    for (let a2 = 0; a2 <= Math.PI * 2 + 0.01; a2 += 0.02) {
+      const r2 = 300 + 40 * Math.sin(a2 * 12 + k2 * 0.35);
+      g2.lineTo(560 + Math.cos(a2) * r2, 400 + Math.sin(a2) * r2 * 0.62);
+    }
+    g2.stroke();
+  }
+  const band = (inset, w2) => {
+    g2.strokeStyle = "#2f5e4a";
+    g2.lineWidth = 3;
+    g2.strokeRect(inset, inset, 1120 - 2 * inset, 800 - 2 * inset);
+    g2.strokeRect(inset + w2, inset + w2, 1120 - 2 * (inset + w2), 800 - 2 * (inset + w2));
+    g2.lineWidth = 1.3;
+    g2.strokeStyle = "rgba(47,94,74,0.85)";
+    for (let s2 = 0; s2 < 3; s2++) {
+      const mid = inset + w2 / 2, amp = w2 / 2 - 3, ph = s2 * 2.1;
+      const run = (x0, y0, x1, y1) => {
+        const L3 = Math.hypot(x1 - x0, y1 - y0), nx = -(y1 - y0) / L3, ny = (x1 - x0) / L3;
+        g2.beginPath();
+        for (let t2 = 0; t2 <= L3; t2 += 3) {
+          const o2 = amp * Math.sin(t2 / 9 + ph);
+          g2.lineTo(x0 + (x1 - x0) * t2 / L3 + nx * o2, y0 + (y1 - y0) * t2 / L3 + ny * o2);
+        }
+        g2.stroke();
+      };
+      run(mid, mid, 1120 - mid, mid);
+      run(1120 - mid, mid, 1120 - mid, 800 - mid);
+      run(1120 - mid, 800 - mid, mid, 800 - mid);
+      run(mid, 800 - mid, mid, mid);
+    }
+  };
+  band(18, 44);
+  for (const [x2, y2] of [[40, 40], [1080, 40], [40, 760], [1080, 760]]) {
+    g2.beginPath();
+    g2.arc(x2, y2, 34, 0, Math.PI * 2);
+    g2.fillStyle = "#efe8d6";
+    g2.fill();
+    g2.strokeStyle = "#2f5e4a";
+    g2.lineWidth = 2;
+    for (let k2 = 0; k2 < 8; k2++) {
+      g2.beginPath();
+      g2.ellipse(x2, y2, 30, 12, k2 * Math.PI / 8, 0, Math.PI * 2);
+      g2.stroke();
+    }
+  }
+  g2.fillStyle = "rgba(47,94,74,0.9)";
+  g2.font = "600 22px Archivo, sans-serif";
+  g2.fillText("No. MU 2010 000417", 96, 732);
+  g2.strokeStyle = "rgba(30,40,60,0.8)";
+  g2.lineWidth = 2.2;
+  g2.beginPath();
+  for (let x2 = 0; x2 <= 200; x2 += 4) g2.lineTo(820 + x2, 726 - 10 * Math.sin(x2 / 13) - (x2 > 120 ? (x2 - 120) * 0.2 : 0));
+  g2.stroke();
+  borderTex = new CanvasTexture(c2);
+  borderTex.colorSpace = SRGBColorSpace;
+  borderTex.anisotropy = 8;
+  return borderTex;
+};
+var INK2 = "#1f3d33";
+var sheetGeo = null;
+var makeBond = (key2) => {
+  void key2;
+  const group = new Group();
+  const tex = paperTexture();
+  const face = new MeshStandardMaterial({ map: tex, color: tex ? "#bdb6a6" : "#cfc8b6", roughness: 0.92 });
+  const edge = new MeshStandardMaterial({ color: "#e6dfcc", roughness: 0.9 });
+  sheetGeo ?? (sheetGeo = new BoxGeometry(BOND.w, BOND.t, BOND.d));
+  const sheet = new Mesh(sheetGeo, [edge, edge, face, edge, edge, edge]);
+  sheet.position.y = BOND.t / 2;
+  sheet.castShadow = true;
+  sheet.receiveShadow = true;
+  sheet.name = "bond sheet";
+  group.add(sheet);
+  const crest = new Mesh(new PlaneGeometry(118, 120), printMat("crest", { alphaTest: 0.5, emissive: 0.05, rough: 0.6 }));
+  crest.rotation.x = -Math.PI / 2;
+  crest.position.set(0, BOND.t + 0.4, -BOND.d / 2 + 64 + 60);
+  crest.userData.print = "the Manchester United crest (assets/brand/crest.png) printed on the certificate";
+  group.add(crest);
+  const ink = new MeshStandardMaterial({ color: INK2, roughness: 0.7 });
+  const inner = BOND.w - 2 * 74;
+  const line = (s2, size2, z2, font) => {
+    const sz = Math.min(size2, inner / (textWidth(s2, font, size2) * 1.06) * size2);
+    const t2 = wide(text3d(s2, { font, size: sz, depth: 1.2, bevel: 0, face: ink }), 1.06);
+    t2.rotation.x = -Math.PI / 2;
+    t2.position.set(0, BOND.t, z2);
+    t2.traverse((n2) => {
+      n2.castShadow = false;
+    });
+    textOn(t2, sheet, { inset: 66 });
+    group.add(t2);
+  };
+  line("MANCHESTER UNITED", 40, 26, "800");
+  line("SENIOR SECURED NOTES", 26, 72, "500");
+  line("2010", 34, 118, "800");
+  return { group, sheet };
+};
+var BPRESS = { w: 900, d: 560, base: 200, dieZ: 40, up: 560 };
+var makeBondPress = (key2) => {
+  void key2;
+  const group = new Group();
+  const base = block(BPRESS.w, BPRESS.base, BPRESS.d, 30, MAT.black());
+  base.name = "press base";
+  group.add(base);
+  const pad = rbox(BOND.w + 40, 10, BOND.d + 30, 4, MAT.satin());
+  pad.position.set(0, BPRESS.base + 5, BPRESS.dieZ);
+  group.add(pad);
+  const die = BPRESS.base + 10;
+  for (const sx of [-1, 1]) {
+    const post = cyl(34, 640, MAT.satin(), 40);
+    post.position.set(sx * 380, BPRESS.base + 320, -200);
+    group.add(post);
+  }
+  const beam = rbox(900, 150, 320, 30, MAT.black());
+  beam.position.set(0, BPRESS.base + 640 + 50, -150);
+  group.add(beam);
+  const head = rbox(340, 120, 360, 24, MAT.graphite());
+  head.position.set(0, BPRESS.base + 640 + 20, BPRESS.dieZ - 60);
+  group.add(head);
+  const plate = litPlate(["BONDS"], { size: 64, color: K2.white, depth: 24 });
+  plate.group.position.set(0, BPRESS.base + 640 + 160, -60);
+  plate.group.rotation.x = -0.35;
+  group.add(plate.group);
+  const ram = new Group();
+  ram.name = "press ram";
+  const rod = cyl(44, 420, MAT.satin(), 40);
+  rod.position.y = 50 + 210;
+  const platen = rbox(BOND.w + 20, 50, BOND.d + 10, 10, MAT.graphite());
+  platen.position.y = 25;
+  ram.add(rod, platen);
+  ram.position.set(0, BPRESS.up, BPRESS.dieZ);
+  group.add(ram);
+  joined(rod, beam, "the piston runs through the press's beam");
+  joined(rod, head, "the piston runs through the press's head");
+  const screen = rbox(820, 130, 14, 8, new MeshPhysicalMaterial({ color: "#050506", roughness: 0.22, metalness: 0.3, clearcoat: 0.6 }));
+  screen.position.set(0, BPRESS.base / 2, BPRESS.d / 2 + 6);
+  screen.name = "press screen";
+  group.add(screen);
+  const fig = counter({ size: 62, color: K2.money, depth: 8 });
+  fig.group.position.set(0, BPRESS.base / 2 - 62 * 0.345, BPRESS.d / 2 + 13.5);
+  fig.group.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  textOn(fig.group, screen, { inset: 6 });
+  group.add(fig.group);
+  const capFace = lit(K2.white, 0.7);
+  void capFace;
+  return {
+    group,
+    die,
+    /** `ram` 0 (up) … 1 (down on the sheet); `value` the counter's string; `on` lights the counter */
+    update: (p2) => {
+      ram.position.y = BPRESS.up - p2.ram * (BPRESS.up - (die + BOND.t + 1.5));
+      fig.set(p2.value);
+      setLit(fig.face, p2.on, 0.04);
+    }
+  };
+};
+
+// src/world/places/bonds.ts
+var S4 = "bonds";
+var ENTER2 = enterOf(S4);
+var LATER = word(S4, 0, /^later/);
+var N500 = word(S4, 0, /^500/);
+var BONDS = word(S4, 0, /^bonds/);
+var PAY = word(S4, 0, /^pay/);
+var LOANS2 = word(S4, 0, /^loans/);
+var X0 = 0;
+var X1 = 1400;
+var X2 = 3e3;
+var FLIP = [LATER - 12, LATER + 2];
+var T1 = LATER + 6;
+var T1_DUR = 16;
+var STAMPS = [T1 + T1_DUR + 4, T1 + T1_DUR + 18, N500 - 5];
+var COUNT3 = [STAMPS[0] - 2, N500];
+var T2 = N500 + 8;
+var T2_DUR = 18;
+var WHEEL2 = [T2 + 2, T2 + 14];
+var DOOR2 = [T2 + 10, T2 + 30];
+var FLY = [BONDS - 12, BONDS - 4, BONDS + 4];
+var FLY_DUR = 16;
+var SLAM2 = [PAY - 6, PAY + 2];
+var HIT = LOANS2 + 1;
+var PILE2 = new Vector3(X1 + 640, 0, 120);
+var MOUTH = new Vector3(X2, 640, -150);
+var ramAt = (f2) => {
+  let v2 = 0;
+  for (const s2 of STAMPS) {
+    if (f2 >= s2 - 4 && f2 < s2) v2 = Math.max(v2, EXIT(clamp01((f2 - (s2 - 4)) / 4)));
+    else if (f2 >= s2 && f2 < s2 + 7) v2 = Math.max(v2, 1 - SOFT(clamp01((f2 - s2 - 1) / 6)));
+  }
+  return v2;
+};
+var SLIDE = 8;
+var sheetAt = (k2, f2) => {
+  const s2 = STAMPS[k2], die = new Vector3(X1, BPRESS.base + 10, BPRESS.dieZ), top = new Vector3(PILE2.x, k2 * (BOND.t + 0.6), PILE2.z);
+  if (f2 < s2 - 6) return { p: die, on: false, printed: false, fast: false, rot: 0 };
+  if (f2 < s2 + 7) return { p: die, on: true, printed: f2 >= s2, fast: false, rot: 0 };
+  const t2 = clamp01((f2 - s2 - 7) / SLIDE), e2 = SOFT(t2);
+  const p2 = die.clone().lerp(top, e2);
+  p2.y = die.y + (top.y - die.y) * e2 * e2 + Math.sin(Math.PI * e2) * 120;
+  return { p: p2, on: true, printed: true, fast: t2 > 0 && t2 < 1, rot: -0.2 * e2 };
+};
+var flightAt = (k2, f2) => {
+  const a2 = FLY[2 - k2], t2 = (f2 - a2) / FLY_DUR;
+  if (t2 <= 0) return null;
+  if (t2 >= 1) return { p: MOUTH.clone().add(new Vector3(0, 0, -260)), on: false, fast: false, tilt: 0 };
+  const start = new Vector3(PILE2.x, k2 * (BOND.t + 0.6), PILE2.z), ctrl = new Vector3(X2 - 300, 1900, 500), end = MOUTH.clone().add(new Vector3(0, -40, -260));
+  const u3 = SOFT(t2);
+  const p2 = new Vector3().addScaledVector(start, (1 - u3) * (1 - u3)).addScaledVector(ctrl, 2 * u3 * (1 - u3)).addScaledVector(end, u3 * u3);
+  return { p: p2, on: true, fast: true, tilt: Math.sin(Math.PI * u3) * 0.9 };
+};
+var BondsPlace = {
+  id: S4,
+  label: "4 Set C: the bonds (2010, \xA3504m printed, the bank loans paid off)",
+  enter: ENTER2,
+  stage: "light",
+  shots: ({ from, to }) => [
+    cut(from, [X0 - 260, 1450, 1500], [X0, 380, 40], { fov: 40, focus: [X0, 380, 0], why: "high on the calendar" }),
+    dolly(from + 1, Math.max(20, T1 - from - 2), [X0 - 80, 1250, 1250], [X0, 400, 40], { fov: 40, ease: SOFT, why: "push: 2005 flips to 2010" }),
+    travel(T1, T1_DUR, [X1 - 60, 1800, 2400], [X1 + 160, 280, 60], { fov: 40, why: "along the table to the press", vol: 0.5 }),
+    dolly(T1 + T1_DUR + 1, Math.max(20, T2 - (T1 + T1_DUR) - 2), [X1 + 260, 1750, 3300], [X1 + 260, 300, 120], { fov: 40, ease: SOFT, why: "push on the press: \xA3504m" }),
+    travel(T2, T2_DUR, [X2 - 900, 2e3, 3e3], [X2 - 450, 480, 60], { fov: 40, why: "along the table to the vault", vol: 0.5 }),
+    dolly(T2 + T2_DUR + 1, Math.max(20, SLAM2[1] - (T2 + T2_DUR) - 2), [X2 - 300, 1800, 3500], [X2 - 80, 560, 0], { fov: 40, ease: SOFT, why: "the bonds fly into the vault" }),
+    dolly(SLAM2[1] + 1, Math.max(16, to - SLAM2[1] - 2), [X2 - 60, 1450, 3100], [X2, 620, 150], { fov: 40, ease: SOFT, why: "in on the door: PAID OFF" })
+  ],
+  lights: (f2) => {
+    const cx = f2 < T1 ? X0 : f2 < T2 ? X1 : X2 - 300;
+    return lightStageLights([cx, 300, 0], { key: 1.15 });
+  },
+  blur: (f2) => f2 >= FLIP[0] + 4 && f2 <= FLIP[1] || STAMPS.some((s2) => f2 >= s2 - 3 && f2 <= s2 + 1) || [0, 1, 2].some((k2) => sheetAt(k2, f2).fast || !!flightAt(k2, f2)?.fast) || f2 >= SLAM2[0] + 3 && f2 <= SLAM2[1] || f2 >= HIT - 4 && f2 <= HIT,
+  cues: () => [
+    { kind: "move", s: "flick", at: FLIP[1] - 3, end: FLIP[1] + 4, vol: 0.4, why: "2005 flips over to 2010" },
+    ...STAMPS.map((s2, i2) => ({ kind: "hit", s: "thud", at: s2, vol: 0.4, why: `the press prints bond ${i2 + 1}` })),
+    { kind: "hit", s: "datashort", at: COUNT3[0], end: COUNT3[1], vol: 0.3, why: "the counter rolls" },
+    { kind: "hit", s: "pingshort", at: COUNT3[1], vol: 0.45, why: "\xA3504,000,000 lands" },
+    { kind: "move", s: "chainshort", at: WHEEL2[0] + 4, end: WHEEL2[1], vol: 0.3, why: "the vault's wheel spins" },
+    { kind: "move", s: "lowwoosh", at: DOOR2[0] + 10, end: DOOR2[1] + 4, vol: 0.35, why: "the vault door opens" },
+    ...FLY.map((a2, i2) => ({ kind: "move", s: "swoosh", at: a2 + FLY_DUR / 2, end: a2 + FLY_DUR + 2, vol: 0.3, why: `bond ${i2 + 1} flies into the vault` })),
+    { kind: "hit", s: "thud", at: SLAM2[1], vol: 0.6, why: "the vault door slams shut: pay off" },
+    { kind: "hit", s: "thud", at: HIT, vol: 0.6, why: "PAID OFF is stamped on the door" }
+  ],
+  build: () => {
+    const group = new Group();
+    const cal = makeCalendar("bonds", ["2005", "2010"]);
+    cal.group.position.set(X0, 0, -40);
+    cal.group.scale.setScalar(0.62);
+    cal.group.name = "calendar";
+    group.add(cal.group);
+    const press = makeBondPress("bonds");
+    press.group.position.set(X1, 0, 0);
+    press.group.name = "press";
+    group.add(press.group);
+    const blank = makeBond("blank");
+    blank.group.name = "blank sheet";
+    group.add(blank.group);
+    const sheets = [0, 1, 2].map((k2) => {
+      const b2 = makeBond(`bond${k2}`);
+      b2.group.name = `bond ${k2 + 1}`;
+      group.add(b2.group);
+      return b2;
+    });
+    const vault = makeVault("bonds");
+    vault.label("BANK LOANS");
+    vault.group.position.set(X2, 0, 0);
+    vault.group.name = "vault";
+    group.add(vault.group);
+    for (const b2 of sheets) {
+      joined(b2.group, vault.group, "the bonds fly in through the vault's open mouth");
+      joined(b2.group, press.group, "the sheet lies on the die and the press prints it");
+    }
+    joined(blank.group, press.group, "the blank sheet lies on the die");
+    sheets.forEach((a2, i2) => sheets.forEach((b2, j2) => {
+      if (j2 !== i2) joined(a2.group, b2.group, "the bonds stack on one another");
+    }));
+    const paid = litPlate(["PAID OFF"], { size: 92, color: K2.red, depth: 30 });
+    paid.group.position.set(X2, 640, 300);
+    paid.group.name = "PAID OFF plate";
+    group.add(paid.group);
+    const stamp = makeStamp("bonds");
+    stamp.group.name = "stamp";
+    group.add(stamp.group);
+    joined(stamp.group, paid.group, "the stamp presses the plate onto the door");
+    const halo = ring({ r: 900, color: K2.money });
+    halo.mesh.position.set(X1, 1.5, 300);
+    group.add(halo.mesh);
+    const red2 = ring({ r: 1e3, color: K2.red });
+    red2.mesh.position.set(X2, 1.5, 300);
+    group.add(red2.mesh);
+    return {
+      group,
+      update: (f2) => {
+        cal.update({ year: 0, flip: SOFT(clamp01((f2 - FLIP[0]) / (FLIP[1] - FLIP[0]))) });
+        const on = ramp(f2, COUNT3[0] - 2, COUNT3[0] + 4, SETTLE);
+        press.update({ ram: ramAt(f2), value: pounds(countUp(f2, COUNT3[0], COUNT3[1], 0, 504e6)), on });
+        const next = STAMPS.findIndex((s2) => f2 < s2);
+        blank.group.visible = next >= 0 && f2 >= (next === 0 ? 0 : STAMPS[next - 1] + 7 + SLIDE);
+        blank.group.position.set(X1, BPRESS.base + 10, BPRESS.dieZ);
+        sheets.forEach((b2, k2) => {
+          const fl = flightAt(k2, f2);
+          if (fl) {
+            b2.group.visible = fl.on;
+            b2.group.position.copy(fl.p);
+            b2.group.rotation.set(fl.tilt, 0.3, 0);
+            return;
+          }
+          const s2 = sheetAt(k2, f2);
+          b2.group.visible = s2.on && s2.printed;
+          b2.group.position.copy(s2.p);
+          b2.group.rotation.set(0, s2.rot, 0);
+        });
+        const open = SOFT(clamp01((f2 - DOOR2[0]) / (DOOR2[1] - DOOR2[0])));
+        const shut = EXIT(clamp01((f2 - SLAM2[0]) / (SLAM2[1] - SLAM2[0])));
+        vault.update({ door: open * (1 - shut), wheel: SOFT(clamp01((f2 - WHEEL2[0]) / (WHEEL2[1] - WHEEL2[0]))) });
+        const sIn = clamp01((f2 - (HIT - 7)) / 7), sOut = clamp01((f2 - (HIT + 3)) / 10);
+        const z2 = 316 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
+        stamp.group.visible = f2 >= HIT - 7 && f2 < HIT + 13;
+        stamp.group.position.set(X2, 640, z2);
+        paid.group.visible = f2 >= HIT;
+        halo.update(f2, COUNT3[1]);
+        red2.update(f2, HIT);
+      }
+    };
+  }
+};
+
+// src/world/obj/stadium.ts
+var PITCH = { w: 980, d: 640 };
+var STAND = 230;
+var H2 = 260;
+var STADIUM = { w: PITCH.w + 2 * STAND + 40, d: PITCH.d + 2 * STAND + 40, h: 380, pitch: PITCH };
+var C4 = (h2) => new Color(h2);
+var seatMat = () => new MeshStandardMaterial({ color: C4("#9d1620"), roughness: 0.72, metalness: 0.05 });
+var rowMat = () => new MeshStandardMaterial({ color: C4("#6e0f16"), roughness: 0.8 });
+var roofMat = () => new MeshPhysicalMaterial({ color: C4("#cfd0d3"), roughness: 0.45, metalness: 0.4, clearcoat: 0.2 });
+var brick2 = () => new MeshStandardMaterial({ color: C4("#5b201c"), roughness: 0.85 });
+var pitchTex = null;
+var pitchTexture = () => {
+  if (pitchTex) return pitchTex;
+  if (typeof document === "undefined") return null;
+  const c2 = document.createElement("canvas");
+  c2.width = 980;
+  c2.height = 640;
+  const g2 = c2.getContext("2d");
+  for (let i2 = 0; i2 < 14; i2++) {
+    g2.fillStyle = i2 % 2 ? "#2f7d36" : "#378c3e";
+    g2.fillRect(i2 * 980 / 14, 0, 980 / 14 + 1, 640);
+  }
+  g2.strokeStyle = "rgba(255,255,255,0.9)";
+  g2.lineWidth = 4;
+  g2.strokeRect(40, 40, 900, 560);
+  g2.beginPath();
+  g2.moveTo(490, 40);
+  g2.lineTo(490, 600);
+  g2.stroke();
+  g2.beginPath();
+  g2.arc(490, 320, 72, 0, Math.PI * 2);
+  g2.stroke();
+  for (const x2 of [40, 940]) {
+    const s2 = x2 < 490 ? 1 : -1;
+    g2.strokeRect(Math.min(x2, x2 + s2 * 130), 170, 130, 300);
+    g2.strokeRect(Math.min(x2, x2 + s2 * 46), 250, 46, 140);
+  }
+  pitchTex = new CanvasTexture(c2);
+  pitchTex.colorSpace = SRGBColorSpace;
+  pitchTex.anisotropy = 8;
+  return pitchTex;
+};
+var stand = (len, lights3, main) => {
+  const g2 = new Group();
+  const slope = Math.atan2(H2 - 24, STAND);
+  const L3 = Math.hypot(STAND, H2 - 24);
+  const bank = rbox(len, 26, L3, 6, seatMat());
+  bank.position.set(0, 24 + (H2 - 24) / 2, -STAND / 2);
+  bank.rotation.x = slope;
+  bank.name = main ? "main stand seats" : "stand seats";
+  g2.add(bank);
+  for (let i2 = 1; i2 < 10; i2++) {
+    const row = rbox(len - 30, 3, 5, 1, rowMat());
+    row.position.set(0, 13 + 1, -L3 / 2 + i2 * L3 / 10);
+    bank.add(row);
+  }
+  const front = rbox(len, 30, 14, 4, MAT.black());
+  front.position.set(0, 15, 6);
+  g2.add(front);
+  const back = rbox(len, H2 + 30, 26, 6, brick2());
+  back.position.set(0, (H2 + 30) / 2, -STAND - 13);
+  g2.add(back);
+  const roof = rbox(len + 20, 14, STAND + 70, 5, roofMat());
+  roof.position.set(0, H2 + 110, -STAND / 2 + 20);
+  g2.add(roof);
+  for (let x2 = -len / 2 + 60; x2 <= len / 2 - 60; x2 += Math.max(120, (len - 120) / 6)) {
+    const col = rbox(16, H2 + 110 - 7, 16, 3, roofMat());
+    col.position.set(x2, (H2 + 110 - 7) / 2, -STAND - 34);
+    g2.add(col);
+    if (main) {
+      const tr = rbox(10, 46, STAND + 40, 3, roofMat());
+      tr.position.set(x2, H2 + 110 + 30, -STAND / 2 + 10);
+      g2.add(tr);
+      const tie = rbox(8, 8, Math.hypot(46, STAND) * 0.55, 2, roofMat());
+      tie.position.set(x2, H2 + 110 + 30, -STAND / 2 + 10);
+      tie.rotation.x = 0.2;
+      g2.add(tie);
+    }
+  }
+  const lamp = lit("#fff6e8", 1.05);
+  lights3.push(lamp);
+  const strip = new Mesh(new BoxGeometry(len - 40, 6, 10), lamp);
+  strip.position.set(0, H2 + 100, 50);
+  g2.add(strip);
+  return { group: g2, bank, slope };
+};
+var makeStadium = (key2) => {
+  void key2;
+  const group = new Group();
+  const lights3 = [];
+  const tex = pitchTexture();
+  const pitch = new Mesh(new BoxGeometry(PITCH.w + 60, 8, PITCH.d + 60), [
+    MAT.black(),
+    MAT.black(),
+    new MeshStandardMaterial({ map: tex, color: tex ? "#ffffff" : "#2f7d36", roughness: 0.9 }),
+    MAT.black(),
+    MAT.black(),
+    MAT.black()
+  ]);
+  pitch.position.y = 4;
+  pitch.receiveShadow = true;
+  group.add(pitch);
+  const far = stand(PITCH.w + 2 * STAND, lights3, true);
+  far.group.position.set(0, 0, -PITCH.d / 2 - 30);
+  group.add(far.group);
+  const near = stand(PITCH.w + 2 * STAND, lights3, false);
+  near.group.rotation.y = Math.PI;
+  near.group.position.set(0, 0, PITCH.d / 2 + 30);
+  group.add(near.group);
+  const west = stand(PITCH.d + 60, lights3, false);
+  west.group.rotation.y = Math.PI / 2;
+  west.group.position.set(-PITCH.w / 2 - 30, 0, 0);
+  group.add(west.group);
+  const east = stand(PITCH.d + 60, lights3, false);
+  east.group.rotation.y = -Math.PI / 2;
+  east.group.position.set(PITCH.w / 2 + 30, 0, 0);
+  group.add(east.group);
+  const white2 = new MeshStandardMaterial({ color: C4("#f2efe9"), roughness: 0.7 });
+  const word2 = wide(text3d("MANCHESTER UNITED", { font: "800", size: 70, depth: 2, bevel: 0, face: white2 }), 1.1);
+  word2.rotation.set(-Math.PI / 2, 0, 0);
+  word2.position.set(0, 13 + 2.5, 26);
+  far.bank.add(word2);
+  textOn(word2, far.bank, { inset: 10 });
+  word2.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  const facade = rbox(560, 150, 20, 6, brick2());
+  facade.position.set(0, 210, STADIUM.d / 2 - 20 + 10);
+  facade.name = "near facade";
+  group.add(facade);
+  const crest = new Mesh(new PlaneGeometry(118, 120), printMat("crest", { alphaTest: 0.5, emissive: 0.15, rough: 0.5 }));
+  crest.position.set(-200, 210, STADIUM.d / 2 - 20 + 20.6);
+  crest.userData.print = "the Manchester United crest (assets/brand/crest.png) on Old Trafford's outer wall";
+  group.add(crest);
+  const name = litPlate(["OLD TRAFFORD"], { size: 46, color: K2.white, depth: 18 });
+  name.group.position.set(70, 210, STADIUM.d / 2 - 20 + 20 + 9);
+  group.add(name.group);
+  return {
+    group,
+    size: { w: STADIUM.w, d: STADIUM.d, h: STADIUM.h },
+    lights: (v2) => {
+      for (const m2 of lights3) setLit(m2, v2, 0.25);
+    }
+  };
+};
+
+// src/world/obj/turnstile.ts
+var makeTurnstile = (key2) => {
+  void key2;
+  const group = new Group();
+  const steel2 = new MeshPhysicalMaterial({ color: "#8d9096", roughness: 0.28, metalness: 1, envMapIntensity: 1.1 });
+  const cab = block(250, 560, 300, 24, MAT.black());
+  cab.name = "turnstile cabinet";
+  group.add(cab);
+  const top = rbox(250, 30, 310, 10, steel2);
+  top.position.y = 575;
+  group.add(top);
+  const glow = lit("#5cff8a", 0.9);
+  const reader = rbox(120, 12, 90, 4, glow);
+  reader.position.set(0, 596, 40);
+  group.add(reader);
+  const labelBody = rbox(232, 64, 10, 4, MAT.graphite());
+  labelBody.position.set(0, 470, 155);
+  labelBody.name = "turnstile label";
+  group.add(labelBody);
+  const tFace = lit(K2.white, 0.85);
+  const t2 = wide(text3d("TICKETS", { font: "800", size: 30, depth: 2, bevel: 0, face: tFace }), 1.06);
+  t2.position.set(0, 470 - 30 * 0.345, 160.5);
+  textOn(t2, labelBody, { inset: 4 });
+  group.add(t2);
+  const rotor = new Group();
+  rotor.position.set(150, 470, 0);
+  rotor.rotation.z = -0.62;
+  group.add(rotor);
+  const hub = cyl(46, 156, steel2, 32);
+  hub.rotation.z = Math.PI / 2;
+  hub.position.set(52, 0, 0);
+  rotor.add(hub);
+  const arms = new Group();
+  arms.position.x = 150;
+  rotor.add(arms);
+  for (let i2 = 0; i2 < 3; i2++) {
+    const a2 = i2 / 3 * Math.PI * 2;
+    const arm = new Mesh(new CylinderGeometry(14, 14, 380, 20), steel2);
+    arm.position.set(0, Math.cos(a2) * 190, Math.sin(a2) * 190);
+    arm.rotation.x = a2;
+    arm.castShadow = true;
+    arms.add(arm);
+  }
+  const spoutBody = rbox(90, 70, 90, 12, steel2);
+  spoutBody.position.set(-40, 300, -170);
+  group.add(spoutBody);
+  return {
+    group,
+    spout: new Vector3(-40, 260, -170),
+    update: (p2) => {
+      arms.rotation.x = p2.turn * Math.PI * 2 / 3;
+      setLit(glow, 0.2 + 0.8 * p2.read, 0.1);
+    }
+  };
+};
+
+// src/world/obj/shirtrack.ts
+var red = () => new MeshStandardMaterial({ color: new Color("#c3121d"), roughness: 0.62, metalness: 0 });
+var white = () => new MeshStandardMaterial({ color: new Color("#f1eee8"), roughness: 0.7 });
+var shirtShape = () => {
+  const s2 = new Shape();
+  s2.moveTo(-34, 0);
+  s2.lineTo(-96, -16);
+  s2.lineTo(-136, -78);
+  s2.lineTo(-104, -110);
+  s2.lineTo(-78, -86);
+  s2.lineTo(-80, -330);
+  s2.lineTo(80, -330);
+  s2.lineTo(78, -86);
+  s2.lineTo(104, -110);
+  s2.lineTo(136, -78);
+  s2.lineTo(96, -16);
+  s2.lineTo(34, 0);
+  s2.lineTo(0, -42);
+  s2.lineTo(-34, 0);
+  return s2;
+};
+var makeShirtRack = (key2) => {
+  void key2;
+  const group = new Group();
+  const satin = MAT.satin();
+  const base = block(880, 50, 300, 14, MAT.black());
+  base.name = "rack base";
+  group.add(base);
+  for (const sx of [-1, 1]) {
+    const post = cyl(16, 820, satin, 24);
+    post.position.set(sx * 340, 50, 0);
+    group.add(post);
+  }
+  const rail = new Mesh(new CylinderGeometry(12, 12, 720, 24), satin);
+  rail.rotation.z = Math.PI / 2;
+  rail.position.y = 860;
+  group.add(rail);
+  const geo = new ExtrudeGeometry(shirtShape(), { depth: 26, bevelEnabled: true, bevelThickness: 6, bevelSize: 5, bevelSegments: 3, curveSegments: 4 });
+  geo.translate(0, 0, -13);
+  const shirts = [];
+  for (let i2 = 0; i2 < 4; i2++) {
+    const hang = new Group();
+    hang.position.set(-240 + i2 * 160, 860, 75 - i2 * 50);
+    group.add(hang);
+    const hook = new Mesh(new TorusGeometry(16, 3, 8, 24, Math.PI * 1.3), satin);
+    hook.position.set(0, 4, 0);
+    hook.rotation.z = -0.3;
+    hang.add(hook);
+    joined(hook, rail, "the hanger's hook sits over the rail");
+    const bar = rbox(220, 8, 10, 3, satin);
+    bar.position.y = -34;
+    bar.rotation.z = 0;
+    hang.add(bar);
+    const shirt = new Group();
+    shirt.position.y = -36;
+    hang.add(shirt);
+    const body = new Mesh(geo, red());
+    body.castShadow = true;
+    body.receiveShadow = true;
+    body.name = "shirt";
+    shirt.add(body);
+    const collar = new Mesh(new TorusGeometry(36, 5, 8, 24, Math.PI), white());
+    collar.rotation.z = Math.PI;
+    collar.position.set(0, -6, 20);
+    shirt.add(collar);
+    for (const sx of [-1, 1]) {
+      const cuff = rbox(46, 9, 8, 2, white());
+      cuff.position.set(sx * 118, -96, 20);
+      cuff.rotation.z = sx * 0.85;
+      shirt.add(cuff);
+    }
+    const crest = new Mesh(new PlaneGeometry(52, 53), printMat("crest", { alphaTest: 0.5, emissive: 0.08, rough: 0.6 }));
+    crest.position.set(36, -96, 19.6);
+    crest.userData.print = "the Manchester United crest (assets/brand/crest.png) on the shirt's chest";
+    shirt.add(crest);
+    shirts.push(hang);
+  }
+  const spoutBody = rbox(90, 40, 70, 10, satin);
+  spoutBody.position.set(395, 70, 150);
+  group.add(spoutBody);
+  return {
+    group,
+    spout: new Vector3(410, 170, 150),
+    update: (p2) => {
+      shirts.forEach((h2, i2) => {
+        h2.rotation.z = p2.sway * (i2 % 2 ? -0.8 : 1) * (1 - i2 * 0.12);
+      });
+    }
+  };
+};
+
+// src/world/obj/tvcamera.ts
+var makeTvCamera = (key2) => {
+  void key2;
+  const group = new Group();
+  const satin = MAT.satin();
+  const crownY = 620;
+  for (let i2 = 0; i2 < 3; i2++) {
+    const a2 = i2 / 3 * Math.PI * 2 + Math.PI / 6;
+    const foot = new Vector3(Math.cos(a2) * 300, 0, Math.sin(a2) * 300);
+    const top = new Vector3(Math.cos(a2) * 40, crownY, Math.sin(a2) * 40);
+    const len = foot.distanceTo(top);
+    const leg = new Mesh(new CylinderGeometry(16, 13, len, 16), MAT.black());
+    leg.position.copy(foot).add(top).multiplyScalar(0.5);
+    leg.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), top.clone().sub(foot).normalize());
+    leg.castShadow = true;
+    group.add(leg);
+    const shoe = cyl(24, 14, MAT.rubber(), 20);
+    shoe.position.copy(foot);
+    group.add(shoe);
+  }
+  const crown = cyl(70, 50, MAT.graphite(), 40);
+  crown.position.y = crownY - 25;
+  group.add(crown);
+  const head = new Group();
+  head.position.y = crownY + 25;
+  group.add(head);
+  const bowl = cyl(80, 60, satin, 40);
+  head.add(bowl);
+  const body = rbox(220, 230, 420, 26, MAT.black());
+  body.position.set(0, 180, -20);
+  body.name = "camera body";
+  head.add(body);
+  const barrel = new Mesh(new CylinderGeometry(78, 70, 320, 48), MAT.graphite());
+  barrel.rotation.x = Math.PI / 2;
+  barrel.position.set(0, 170, 340);
+  barrel.castShadow = true;
+  head.add(barrel);
+  for (const z2 of [260, 330, 400]) {
+    const r2 = new Mesh(new TorusGeometry(80, 6, 10, 48), satin);
+    r2.position.set(0, 170, z2);
+    head.add(r2);
+  }
+  const hood = rbox(240, 190, 90, 14, MAT.black());
+  hood.position.set(0, 170, 540);
+  head.add(hood);
+  const glass = new Mesh(new CircleGeometry(62, 48), new MeshPhysicalMaterial({ color: "#10131a", roughness: 0.05, metalness: 0.2, clearcoat: 1, envMapIntensity: 1.6 }));
+  glass.position.set(0, 170, 500.6);
+  head.add(glass);
+  const vf = rbox(160, 110, 150, 14, MAT.black());
+  vf.position.set(0, 360, -90);
+  head.add(vf);
+  const tally = lit("#ff2a2a", 1.1);
+  const lamp = new Mesh(new SphereGeometry(16, 20, 14), tally);
+  lamp.position.set(0, 300, 200);
+  head.add(lamp);
+  for (const sx of [-1, 1]) {
+    const bar = new Mesh(new CylinderGeometry(9, 9, 420, 12), satin);
+    bar.rotation.z = Math.PI / 2 - sx * 0.35;
+    bar.rotation.y = 0.5;
+    bar.position.set(sx * 160, 70, -260);
+    head.add(bar);
+  }
+  const labelBody = rbox(10, 112, 220, 4, MAT.graphite());
+  labelBody.position.set(115, 190, -20);
+  labelBody.name = "camera label";
+  head.add(labelBody);
+  const face = lit("#f8f2f2", 0.9);
+  const t2 = wide(text3d("TV", { font: "800", size: 64, depth: 2, bevel: 0, face }), 1.1);
+  t2.rotation.y = Math.PI / 2;
+  t2.position.set(120.5, 190 - 64 * 0.345, -20);
+  textOn(t2, labelBody, { inset: 4 });
+  head.add(t2);
+  return {
+    group,
+    spout: new Vector3(0, crownY + 25 + 470, -90),
+    update: (p2) => {
+      head.rotation.y = p2.pan;
+      setLit(tally, p2.tally, 0.15);
+    }
+  };
+};
+
+// src/world/obj/pipe.ts
+var makePipe = (key2, pts, r2 = 86) => {
+  void key2;
+  const group = new Group();
+  const curve = new CatmullRomCurve3(pts, false, "catmullrom", 0.2);
+  const glassMat = new MeshPhysicalMaterial({ color: "#d9e6ee", roughness: 0.06, metalness: 0, transparent: true, opacity: 0.2, depthWrite: false, envMapIntensity: 1.4, clearcoat: 1, side: DoubleSide });
+  const segs = Math.max(64, Math.round(curve.getLength() / 20));
+  const tube = new Mesh(new TubeGeometry(curve, segs, r2, 40, false), glassMat);
+  tube.name = "glass pipe";
+  tube.userData.glass = true;
+  tube.renderOrder = 5;
+  group.add(tube);
+  const L3 = curve.getLength(), n2 = Math.max(2, Math.round(L3 / 420));
+  const satin = MAT.satin();
+  for (let i2 = 0; i2 <= n2; i2++) {
+    const u3 = i2 / n2, p2 = curve.getPointAt(u3), t2 = curve.getTangentAt(u3);
+    const collar = new Mesh(new TorusGeometry(r2 + 6, 9, 10, 40), satin);
+    collar.position.copy(p2);
+    collar.quaternion.setFromUnitVectors(new Vector3(0, 0, 1), t2);
+    group.add(collar);
+    if (p2.y < 400 && p2.y - r2 - 9 > 4) {
+      const h2 = p2.y - r2 - 9;
+      const post = new Mesh(new CylinderGeometry(10, 14, h2, 12), MAT.black());
+      post.position.set(p2.x, h2 / 2, p2.z);
+      post.castShadow = true;
+      group.add(post);
+    }
+  }
+  return {
+    group,
+    curve,
+    length: L3,
+    glass: tube,
+    at: (u3) => ({ p: curve.getPointAt(Math.max(0, Math.min(1, u3))), t: curve.getTangentAt(Math.max(0, Math.min(1, u3))) })
+  };
+};
+
+// src/world/obj/odometer.ts
+var ODO = { w: 1440, h: 330, d: 300 };
+var makeOdometer = (key2) => {
+  void key2;
+  const group = new Group();
+  const housing = rbox(ODO.w, ODO.h, ODO.d, 40, MAT.black());
+  housing.position.y = ODO.h / 2;
+  housing.name = "odometer housing";
+  group.add(housing);
+  for (const sx of [-1, 1]) {
+    const cap = rbox(70, ODO.h + 30, ODO.d + 30, 20, MAT.satin());
+    cap.position.set(sx * (ODO.w / 2 + 20), ODO.h / 2, 0);
+    group.add(cap);
+  }
+  const win = rbox(1300, 200, 14, 8, new MeshPhysicalMaterial({ color: "#0b0b0d", roughness: 0.3, metalness: 0.3, clearcoat: 0.5 }));
+  win.position.set(0, ODO.h / 2, ODO.d / 2 + 4);
+  win.name = "odometer window";
+  group.add(win);
+  const bezel = new Mesh(new TorusGeometry(1, 1, 4, 4), MAT.satin());
+  bezel.visible = false;
+  group.add(bezel);
+  for (const [w2, h2, x2, y2] of [[1340, 18, 0, 109], [1340, 18, 0, -109], [18, 236, -670, 0], [18, 236, 670, 0]]) {
+    const b2 = rbox(w2, h2, 26, 6, MAT.satin());
+    b2.position.set(x2, ODO.h / 2 + y2, ODO.d / 2 + 10);
+    group.add(b2);
+  }
+  for (let i2 = -13; i2 <= 13; i2++) {
+    const d2 = rbox(4, 196, 4, 1, MAT.graphite());
+    d2.position.set(i2 * 48, ODO.h / 2, ODO.d / 2 + 12);
+    group.add(d2);
+  }
+  const fig = counter({ size: 84, color: K2.money, depth: 10 });
+  fig.group.position.set(-50, ODO.h / 2 - 84 * 0.345, ODO.d / 2 + 11.5);
+  fig.group.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  textOn(fig.group, win, { inset: 6 });
+  group.add(fig.group);
+  const plusFace = lit(K2.money);
+  const plus = counter({ size: 84, color: K2.money, depth: 10 });
+  plus.set("+");
+  plus.group.position.set(600, ODO.h / 2 - 84 * 0.345, ODO.d / 2 + 11.5);
+  textOn(plus.group, win, { inset: 6 });
+  group.add(plus.group);
+  void plusFace;
+  const top = litPlate(["TAKEOVER COST"], { size: 50, color: K2.white, depth: 26 });
+  top.group.position.set(0, ODO.h + top.h / 2 - 6, -20);
+  group.add(top.group);
+  return {
+    group,
+    size: ODO,
+    update: (p2) => {
+      fig.set(p2.value);
+      setLit(fig.face, p2.on, 0.05);
+      plus.group.visible = p2.plus > 0.01;
+      setLit(plus.face, p2.plus, 0.05);
+      top.setLit(0.3 + 0.7 * p2.on);
+    }
+  };
+};
 
 // src/world/obj/coin.ts
 var COIN = { r: 60, t: 14 };
@@ -71203,163 +73062,1259 @@ var makeCoin = (key2) => {
   return { group };
 };
 
-// src/world/places/placeholders.ts
-var placeholder = (id, label, name, figure, o2 = {}) => {
-  const enter = enterOf(id), land = Math.max(enter + 12, cue(id, 0) + 6);
-  const C4 = [0, 330, 0];
-  return {
-    id,
-    label,
-    enter,
-    stage: o2.stage ?? "dark",
-    shots: ({ from, to }) => [
-      cut(from, [-900, 420, 2500], [0, 360, 0], { fov: 42, focus: C4, why: "enter" }),
-      dolly(from + 1, Math.max(30, to - from - 2), [-520, 470, 1750], [0, 380, 0], { fov: 42, ease: SOFT, why: "slow push-in" })
-    ],
-    lights: () => o2.stage === "light" ? lightStageLights(C4) : stdLights(C4),
-    blur: (f2) => dropIn(f2, land).fast,
-    cues: () => [{ kind: "hit", s: "thud", at: land, vol: 0.4, why: `${name}: the block lands` }],
-    build: () => {
-      const group = new Group();
-      const body = new Group();
-      body.add(block(760, 520, 560, 34, MAT.black()));
-      const plate = litPlate([name], { size: 58, color: K2.white });
-      plate.group.position.set(0, 300, 280 + plate.d / 2);
-      body.add(plate.group);
-      const fig = counter({ size: 90, color: o2.color ?? K2.money });
-      freeText(fig.group, "a placeholder figure standing in front of its block");
-      fig.group.position.set(0, 0, 440);
-      const halo = ring({ r: 1100 });
-      group.add(body, fig.group, halo.mesh);
-      return {
-        group,
-        update: (f2) => {
-          const d2 = dropIn(f2, land);
-          body.visible = d2.on;
-          body.position.y = d2.y;
-          plate.setLit((f2 - land) / 10);
-          fig.group.visible = f2 >= land;
-          fig.set(short(countUp(f2, land, land + 26, figure * 0.2, figure), "\xA3"));
-          halo.update(f2, land + 26);
+// src/world/places/money.ts
+var S5 = "money";
+var ENTER3 = enterOf(S5);
+var TICKET = word(S5, 0, /^ticket/);
+var SHIRT = word(S5, 0, /^shirt/);
+var TV = word(S5, 0, /^TV/);
+var PAYING = word(S5, 0, /^paying/);
+var ESPN = word(S5, 1, /^ESPN/);
+var Y2018 = word(S5, 1, /^2018/);
+var COST = word(S5, 1, /^cost/);
+var BILLION = word(S5, 1, /^billion/);
+var ST = { x: -300, z: -1150 };
+var ITEM_Z = 350;
+var TX = -900;
+var RX = 0;
+var VX_CAM = 780;
+var PIPE_Y = 120;
+var PIPE_Z = -200;
+var PIPE_R = 86;
+var VS2 = 0.8;
+var VX2 = 1700;
+var VZ2 = -300;
+var MOUTH2 = new Vector3(VX2, 640 * VS2, VZ2);
+var SIGN2 = { x: 2380, z: 650 };
+var FEEDS = [TICKET, SHIRT, TV];
+var FLIP_DUR = 14;
+var DROP_DUR = 6;
+var RIDE = 40;
+var PRE = ENTER3 - 20;
+var SIGN_LAND = ESPN + 3;
+var ODO_ON = Y2018;
+var ROLL = [COST, BILLION];
+var PLUS = BILLION + 4;
+var itemX = [TX, RX + 470, VX_CAM];
+var funnelTop = (k2) => new Vector3(itemX[k2], PIPE_Y + PIPE_R + 130, PIPE_Z);
+var srcOf = (k2) => [new Vector3(TX, 640, ITEM_Z), new Vector3(RX + 410, 170, ITEM_Z + 150), new Vector3(VX_CAM, 1130, ITEM_Z)][k2];
+var MoneyPlace = {
+  id: S5,
+  label: "5 Set D: Old Trafford's ticket, shirt and TV money down the pipe into the vault; ESPN: \xA31bn+",
+  enter: ENTER3,
+  stage: "dark",
+  shots: ({ from, to }) => [
+    cut(from, [-1750, 1250, 1750], [-560, 300, -520], { fov: 46, focus: [-560, 300, -300], why: "wide: Old Trafford, its money machines" }),
+    dolly(from + 1, TICKET + 2 - from, [TX - 380, 820, 1450], [TX, 380, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "in on the turnstile" }),
+    dolly(TICKET + 4, SHIRT - TICKET - 5, [RX - 380, 1e3, 2050], [RX + 60, 480, ITEM_Z - 120], { fov: 44, why: "across to the shirts" }),
+    dolly(SHIRT + 1, TV - SHIRT - 2, [VX_CAM - 300, 1e3, 2100], [VX_CAM + 40, 480, ITEM_Z - 120], { fov: 44, why: "across to the TV camera" }),
+    travel(TV + 4, Math.max(30, PAYING + 14 - (TV + 4)), [1250, 1450, 3200], [1650, 760, -150], { fov: 44, why: "with the coins down the pipe to the vault", vol: 0.55 }),
+    dolly(ESPN - 4, Math.max(24, COST - 8 - (ESPN - 4)), [2100, 1500, 4e3], [2120, 820, 150], { fov: 44, ease: SOFT, why: "the vault and the ESPN sign" }),
+    crane(COST - 6, Math.max(26, BILLION + 6 - (COST - 6)), [1820, 1500, 2250], [VX2, 1050, -450], { fov: 44, why: "up to the odometer: \xA31bn+" }),
+    dolly(BILLION + 7, Math.max(12, to - (BILLION + 7) - 1), [1780, 1440, 2e3], [VX2, 1050, -450], { fov: 44, ease: SOFT, why: "hold on the odometer" })
+  ],
+  lights: (f2) => {
+    const cx = f2 < TV + 4 ? -500 : 1300;
+    const L3 = stdLights([cx, 520, -200], { s: 1.35, key: 3.4, rim: 3.2, back: 2.4, amb: 0.16 });
+    L3.accent = { pos: [VX2, 1500, VZ2 + 700], color: K2.amber, i: 1.1 * ramp(f2, ODO_ON, ODO_ON + 10, SETTLE) };
+    return L3;
+  },
+  blur: (f2) => FEEDS.some((a2) => f2 >= a2 - 2 && f2 <= a2 + FLIP_DUR) || dropIn(f2, SIGN_LAND, { h: 900, fall: 9 }).fast || f2 >= ROLL[0] && f2 <= ROLL[1] - 8,
+  cues: () => [
+    { kind: "hit", s: "click", at: TICKET, vol: 0.35, why: "the turnstile turns: ticket money" },
+    { kind: "hit", s: "click", at: SHIRT, vol: 0.3, why: "the shirts swing: shirt money" },
+    { kind: "hit", s: "click", at: TV, vol: 0.3, why: "the TV camera goes on air: TV money" },
+    ...FEEDS.map((a2, k2) => ({ kind: "hit", s: "coin", at: a2 + FLIP_DUR, vol: 0.4, why: `coin ${k2 + 1} drops into the pipe` })),
+    { kind: "move", s: "whooshsoft", at: TV + 30, end: PAYING + 16, vol: 0.3, why: "the coins roll down the pipe" },
+    ...FEEDS.map((a2, k2) => ({ kind: "hit", s: "coin", at: a2 + FLIP_DUR + DROP_DUR + RIDE, vol: 0.3, why: `coin ${k2 + 1} drops into the vault` })),
+    { kind: "hit", s: "thud", at: SIGN_LAND, vol: 0.45, why: "the ESPN sign lands" },
+    { kind: "hit", s: "click", at: ODO_ON, vol: 0.3, why: "the odometer lights" },
+    { kind: "hit", s: "datashort", at: ROLL[0], end: ROLL[1], vol: 0.35, why: "the odometer rolls" },
+    { kind: "hit", s: "pingshort", at: ROLL[1], vol: 0.5, why: "\xA31,000,000,000 lands" },
+    { kind: "hit", s: "click", at: PLUS, vol: 0.3, why: "the + after it" }
+  ],
+  build: () => {
+    const group = new Group();
+    const stadium = makeStadium("money");
+    stadium.group.position.set(ST.x, 0, ST.z);
+    stadium.group.rotation.y = 0.06;
+    stadium.group.name = "Old Trafford";
+    group.add(stadium.group);
+    const turn = makeTurnstile("money");
+    turn.group.position.set(TX, 0, ITEM_Z);
+    turn.group.name = "turnstile";
+    group.add(turn.group);
+    const rack = makeShirtRack("money");
+    rack.group.position.set(RX, 0, ITEM_Z);
+    rack.group.name = "shirt rack";
+    group.add(rack.group);
+    const tv = makeTvCamera("money");
+    tv.group.position.set(VX_CAM, 0, ITEM_Z);
+    tv.group.rotation.y = -0.25;
+    tv.group.name = "TV camera";
+    group.add(tv.group);
+    const path = [
+      new Vector3(-1e3, PIPE_Y, -640),
+      new Vector3(-1e3, PIPE_Y, -330),
+      new Vector3(-930, PIPE_Y, PIPE_Z),
+      new Vector3(-300, PIPE_Y, PIPE_Z),
+      new Vector3(600, PIPE_Y, PIPE_Z),
+      new Vector3(1250, PIPE_Y, PIPE_Z),
+      new Vector3(1520, 260, -170),
+      new Vector3(VX2 - 30, MOUTH2.y - 20, VZ2 + 60),
+      new Vector3(VX2, MOUTH2.y, VZ2 - 200),
+      new Vector3(VX2, MOUTH2.y, VZ2 - 380)
+    ];
+    const pipe = makePipe("money", path, PIPE_R);
+    pipe.group.name = "pipe";
+    group.add(pipe.group);
+    const funnels = [0, 1, 2].map((k2) => {
+      const fm = new Mesh(new CylinderGeometry(96, 40, 130, 40, 1, true), new MeshPhysicalMaterial({ color: "#9a9a9e", roughness: 0.3, metalness: 1, side: DoubleSide }));
+      fm.position.set(itemX[k2], PIPE_Y + PIPE_R + 65 - 6, PIPE_Z);
+      fm.castShadow = true;
+      fm.name = `funnel ${k2 + 1}`;
+      group.add(fm);
+      return fm;
+    });
+    const uOf = (x2) => {
+      let best = 0, d2 = 1e9;
+      for (let i2 = 0; i2 <= 400; i2++) {
+        const u3 = i2 / 400, p2 = pipe.curve.getPointAt(u3);
+        const dd = Math.abs(p2.x - x2) + Math.abs(p2.z - PIPE_Z) * 2;
+        if (dd < d2) {
+          d2 = dd;
+          best = u3;
         }
-      };
-    }
-  };
-};
-var HookPlace = placeholder("hook", "1 Set A: the crane plinth (placeholder)", "THE TAKEOVER", 79e7);
-var SidesPlace = placeholder("sides", "3 Set B: two sides (placeholder)", "2005", 54e7);
-var BondsPlace = placeholder("bonds", "4 Set C: the bonds (placeholder, light stage)", "THE BONDS", 504e6, { stage: "light" });
-var MoneyPlace = placeholder("money", "5 Set D: where the money came from (placeholder)", "THE MONEY", 1e9);
-var BoardPlace = placeholder("board", "7 Set E: the scoreboard (placeholder)", "BORROWINGS", 689e6, { color: K2.red });
-var FairPlace = placeholder("fair", "8 Set F: to be fair (placeholder)", "TO BE FAIR", 6);
-var VerdictPlace = placeholder("verdict", "9 Set A again: the bookend (placeholder)", "THE BILL", 79e7, { color: K2.red });
-var showcase = (id, label, C4, cam2, fill2) => {
-  const enter = enterOf(id);
-  return {
-    id,
-    label,
-    enter,
-    stage: "dark",
-    shots: ({ from, to }) => [
-      cut(from, cam2[0], cam2[1], { fov: 42, focus: C4, why: "enter" }),
-      dolly(from + 1, Math.max(30, to - from - 2), cam2[2], cam2[3], { fov: 42, ease: SOFT, why: "slow push-in" })
-    ],
-    lights: () => stdLights(C4),
-    build: () => {
-      const group = new Group();
-      const up = fill2(group);
-      return { group, update: (f2) => up?.(f2) };
-    }
-  };
-};
-var plinth = (g2, x2, w2, h2) => {
-  const p2 = block(w2, h2, w2 * 0.8, 26, MAT.black());
-  p2.position.x = x2;
-  g2.add(p2);
-  return p2;
-};
-var HookShowcase = showcase(
-  "hook",
-  "1 Set A: the crane plinth (showcase placeholder)",
-  [0, 520, 0],
-  [[-700, 760, 2200], [0, 620, 0], [-420, 700, 1650], [0, 640, 0]],
-  (g2) => {
-    plinth(g2, 0, 640, 300);
-    const crest = makeCrest("hook", 520);
-    crest.group.position.set(0, 300 + 270, 0);
-    g2.add(crest.group);
-    const beam = rbox(1500, 90, 120, 16, MAT.black());
-    beam.position.set(0, 1380, -60);
-    g2.add(beam);
-    const flag = makeFlagPanel("hook", 380, 200);
-    flag.group.position.set(-420, 1380, 10);
-    g2.add(flag.group);
-    const name = makeNameplate("hook", ["THE GLAZER FAMILY", "TAMPA, FLORIDA"], { size: 52 });
-    name.group.position.set(0, 0, 420);
-    g2.add(name.group);
-    return (f2) => {
-      crest.group.rotation.y = Math.sin(f2 / 40) * 0.25;
+      }
+      return best;
     };
-  }
-);
-var SidesShowcase = showcase(
-  "sides",
-  "3 Set B: two sides (showcase placeholder)",
-  [0, 420, 0],
-  [[0, 650, 2600], [0, 520, 0], [0, 600, 2e3], [0, 520, 0]],
-  (g2) => {
-    plinth(g2, -520, 420, 260);
-    plinth(g2, 520, 420, 260);
-    const ball = makeFlagBall("sides", 170);
-    ball.group.position.set(-520, 260 + 170, 0);
-    g2.add(ball.group);
-    const crest = makeCrest("sides", 380);
-    crest.group.position.set(520, 260 + 200, 0);
-    g2.add(crest.group);
-    const n1 = makeNameplate("sides1", ["THE GLAZER FAMILY", "TAMPA, FLORIDA"], { size: 34 });
-    n1.group.position.set(-520, 0, 300);
-    g2.add(n1.group);
-    const n2 = makeNameplate("sides2", ["MANCHESTER UNITED", "OLD TRAFFORD"], { size: 34 });
-    n2.group.position.set(520, 0, 300);
-    g2.add(n2.group);
-    const cal = makeCalendar("sides", ["2005", "2010"]);
-    cal.group.scale.setScalar(0.55);
-    cal.group.position.set(0, 0, -500);
-    g2.add(cal.group);
-    return (f2) => {
-      ball.group.rotation.y = f2 / 60;
-      cal.update({ year: 0, flip: 0 });
+    const U0 = [0, 1, 2].map((k2) => uOf(itemX[k2]));
+    const vault = makeVault("money");
+    const vplate = vault.label("LOANS");
+    vplate.group.parent.scale.x = -1;
+    vault.group.scale.set(-VS2, VS2, VS2);
+    vault.group.position.set(VX2, 0, VZ2);
+    vault.group.name = "vault";
+    group.add(vault.group);
+    joined(pipe.group, vault.group, "the pipe runs into the vault's mouth");
+    const odo = makeOdometer("money");
+    const OS = 0.52;
+    odo.group.scale.setScalar(OS);
+    odo.group.position.set(VX2, 1350 * VS2, VZ2 - 420 * VS2 / 2 + 10);
+    odo.group.name = "odometer";
+    group.add(odo.group);
+    void ODO;
+    const sign2 = new Group();
+    sign2.name = "ESPN sign";
+    const base = block(260, 40, 200, 12, MAT.black());
+    sign2.add(base);
+    const post = cyl(22, 520, MAT.satin(), 24);
+    post.position.y = 40;
+    sign2.add(post);
+    const panelW = 760, panelH = 380;
+    const panel = rbox(panelW, panelH, 40, 16, MAT.black());
+    panel.position.y = 40 + 520 + panelH / 2 - 30;
+    panel.name = "ESPN panel";
+    sign2.add(panel);
+    const logo = new Mesh(new PlaneGeometry(300, 300 * (411 / 1662)), printMat("espn", { alphaTest: 0.4, emissive: 0.55, rough: 0.5 }));
+    logo.position.set(0, panel.position.y + panelH / 2 - 38 - 37, 20.6);
+    logo.userData.print = "the ESPN wordmark (assets/brand/espn.png) on the sign";
+    sign2.add(logo);
+    const face = lit(K2.white, 0.95), gold2 = lit(K2.money, 1);
+    const line = (s2, size2, y2, mat) => {
+      const max = panelW - 90, sz = Math.min(size2, max / (textWidth(s2, "800", size2) * 1.08) * size2);
+      const t2 = wide(text3d(s2, { font: "800", size: sz, depth: 2, bevel: 0, face: mat }), 1.08);
+      t2.position.set(0, y2 - sz * 0.345, 20.5);
+      t2.traverse((n2) => {
+        n2.castShadow = false;
+      });
+      textOn(t2, panel, { inset: 14 });
+      sign2.add(t2);
     };
-  }
-);
-var MoneyShowcase = showcase(
-  "money",
-  "5 Set D: the money (showcase placeholder)",
-  [0, 640, 0],
-  [[-900, 800, 2500], [0, 640, 0], [-500, 760, 1900], [0, 660, 0]],
-  (g2) => {
-    const v2 = makeVault("money");
-    v2.label("LOANS");
-    g2.add(v2.group);
-    const cash = makeCashStack("money", "LOANS", { bricks: 3, cols: 2 });
-    cash.group.position.set(820, 0, 420);
-    g2.add(cash.group);
-    const coins = [0, 1, 2, 3, 4].map((i2) => {
-      const c2 = makeCoin("money" + i2);
-      c2.group.position.set(420 + i2 % 2 * 20, 7 + i2 * 15, 700);
-      g2.add(c2.group);
+    line("COST OF FINANCING", 52, panel.position.y + 20, gold2);
+    line("THE TAKEOVER", 52, panel.position.y - 50, gold2);
+    line("ESPN ESTIMATE, 2018", 34, panel.position.y - 128, face);
+    sign2.position.set(SIGN2.x, 0, SIGN2.z);
+    sign2.rotation.y = -0.3;
+    group.add(sign2);
+    const coins = [0, 1, 2, 3].map((i2) => {
+      const c2 = makeCoin(`money${i2}`);
+      c2.group.name = `coin ${i2 + 1}`;
+      group.add(c2.group);
       return c2;
     });
-    void coins;
-    void plateOn;
-    return (f2) => {
-      v2.update({ door: Math.min(1, Math.max(0, f2 % 120 / 60)), wheel: Math.min(1, f2 % 120 / 30) });
+    for (const c2 of coins) {
+      joined(c2.group, pipe.group, "the coin rolls inside the glass pipe");
+      joined(c2.group, vault.group, "the coin rolls into the vault");
+      for (const fu of funnels) joined(c2.group, fu, "the coin drops through the funnel");
+    }
+    const halo = ring({ r: 1100, color: K2.money });
+    halo.mesh.position.set(VX2 - 200, 1.5, VZ2 + 500);
+    group.add(halo.mesh);
+    const signRing = ring({ r: 700 });
+    signRing.mesh.position.set(SIGN2.x, 1.5, SIGN2.z);
+    group.add(signRing.mesh);
+    const ride = (c2, u3, spin) => {
+      const s2 = pipe.at(u3);
+      c2.position.copy(s2.p);
+      const yaw = Math.atan2(s2.t.x, s2.t.z);
+      c2.rotation.set(0, yaw + Math.PI / 2, Math.PI / 2 + 0);
+      c2.rotateY(spin);
+      c2.position.y -= PIPE_R - 62;
+    };
+    return {
+      group,
+      update: (f2) => {
+        stadium.lights(ramp(f2, ENTER3 - 4, ENTER3 + 14, SETTLE));
+        turn.update({ turn: SOFT(clamp01((f2 - (TICKET - 4)) / 10)), read: f2 >= TICKET - 3 && f2 < TICKET + 8 ? 1 : 0 });
+        const sw = f2 < SHIRT ? 0 : 0.22 * Math.exp(-(f2 - SHIRT) / 14) * Math.sin((f2 - SHIRT) / 9 * Math.PI);
+        rack.update({ sway: sw });
+        tv.update({ pan: -0.18 * SOFT(clamp01((f2 - (TV - 10)) / 14)), tally: f2 >= TV ? 1 : 0.1 });
+        for (let k2 = 0; k2 < 3; k2++) {
+          const c2 = coins[k2].group, a2 = FEEDS[k2];
+          if (f2 < a2) {
+            c2.visible = false;
+            continue;
+          }
+          c2.visible = true;
+          const ft = (f2 - a2) / FLIP_DUR;
+          if (ft < 1) {
+            const s2 = srcOf(k2), e2 = funnelTop(k2), u4 = ft;
+            c2.position.set(s2.x + (e2.x - s2.x) * u4, s2.y + (e2.y - s2.y) * u4 + Math.sin(Math.PI * u4) * [360, 140, 300][k2], s2.z + (e2.z - s2.z) * u4);
+            c2.rotation.set(u4 * 9, 0, u4 * 3);
+            continue;
+          }
+          const dt = (f2 - a2 - FLIP_DUR) / DROP_DUR;
+          if (dt < 1) {
+            const e2 = funnelTop(k2);
+            c2.position.set(e2.x, e2.y + (PIPE_Y - e2.y) * dt * dt, e2.z);
+            c2.rotation.set(Math.PI / 2, 0, 0);
+            continue;
+          }
+          const rt = (f2 - a2 - FLIP_DUR - DROP_DUR) / RIDE;
+          if (rt >= 1) {
+            c2.visible = false;
+            continue;
+          }
+          const u3 = U0[k2] + (1 - U0[k2]) * rt * rt * 0.4 + (1 - U0[k2]) * 0.6 * rt;
+          ride(c2, Math.min(1, u3), (f2 - a2) * 0.5);
+        }
+        {
+          const c2 = coins[3].group, rt = (f2 - PRE) / (RIDE + 30);
+          c2.visible = rt > 0 && rt < 1;
+          if (c2.visible) ride(c2, 0.04 + 0.96 * rt, f2 * 0.5);
+        }
+        vault.update({ door: 1, wheel: 1 });
+        const sd = dropIn(f2, SIGN_LAND, { h: 900, fall: 9 });
+        sign2.visible = sd.on;
+        sign2.position.y = sd.y;
+        const on = ramp(f2, ODO_ON, ODO_ON + 8, SETTLE);
+        const v2 = countUp(f2, ROLL[0], ROLL[1], 0, 1e9);
+        odo.update({ value: pounds(v2), on, plus: ramp(f2, PLUS, PLUS + 6, SETTLE) });
+        halo.update(f2, ROLL[1]);
+        signRing.update(f2, SIGN_LAND);
+      }
     };
   }
-);
+};
+
+// ../034-ohtani/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js
+function mergeGeometries(geometries, useGroups = false) {
+  const isIndexed = geometries[0].index !== null;
+  const attributesUsed = new Set(Object.keys(geometries[0].attributes));
+  const morphAttributesUsed = new Set(Object.keys(geometries[0].morphAttributes));
+  const attributes = {};
+  const morphAttributes = {};
+  const morphTargetsRelative = geometries[0].morphTargetsRelative;
+  const mergedGeometry = new BufferGeometry();
+  let offset = 0;
+  for (let i2 = 0; i2 < geometries.length; ++i2) {
+    const geometry = geometries[i2];
+    let attributesCount = 0;
+    if (isIndexed !== (geometry.index !== null)) {
+      console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ". All geometries must have compatible attributes; make sure index attribute exists among all geometries, or in none of them.");
+      return null;
+    }
+    for (const name in geometry.attributes) {
+      if (!attributesUsed.has(name)) {
+        console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + '. All geometries must have compatible attributes; make sure "' + name + '" attribute exists among all geometries, or in none of them.');
+        return null;
+      }
+      if (attributes[name] === void 0) attributes[name] = [];
+      attributes[name].push(geometry.attributes[name]);
+      attributesCount++;
+    }
+    if (attributesCount !== attributesUsed.size) {
+      console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ". Make sure all geometries have the same number of attributes.");
+      return null;
+    }
+    if (morphTargetsRelative !== geometry.morphTargetsRelative) {
+      console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ". .morphTargetsRelative must be consistent throughout all geometries.");
+      return null;
+    }
+    for (const name in geometry.morphAttributes) {
+      if (!morphAttributesUsed.has(name)) {
+        console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ".  .morphAttributes must be consistent throughout all geometries.");
+        return null;
+      }
+      if (morphAttributes[name] === void 0) morphAttributes[name] = [];
+      morphAttributes[name].push(geometry.morphAttributes[name]);
+    }
+    if (useGroups) {
+      let count;
+      if (isIndexed) {
+        count = geometry.index.count;
+      } else if (geometry.attributes.position !== void 0) {
+        count = geometry.attributes.position.count;
+      } else {
+        console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed with geometry at index " + i2 + ". The geometry must have either an index or a position attribute");
+        return null;
+      }
+      mergedGeometry.addGroup(offset, count, i2);
+      offset += count;
+    }
+  }
+  if (isIndexed) {
+    let indexOffset = 0;
+    const mergedIndex = [];
+    for (let i2 = 0; i2 < geometries.length; ++i2) {
+      const index = geometries[i2].index;
+      for (let j2 = 0; j2 < index.count; ++j2) {
+        mergedIndex.push(index.getX(j2) + indexOffset);
+      }
+      indexOffset += geometries[i2].attributes.position.count;
+    }
+    mergedGeometry.setIndex(mergedIndex);
+  }
+  for (const name in attributes) {
+    const mergedAttribute = mergeAttributes(attributes[name]);
+    if (!mergedAttribute) {
+      console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed while trying to merge the " + name + " attribute.");
+      return null;
+    }
+    mergedGeometry.setAttribute(name, mergedAttribute);
+  }
+  for (const name in morphAttributes) {
+    const numMorphTargets = morphAttributes[name][0].length;
+    if (numMorphTargets === 0) break;
+    mergedGeometry.morphAttributes = mergedGeometry.morphAttributes || {};
+    mergedGeometry.morphAttributes[name] = [];
+    for (let i2 = 0; i2 < numMorphTargets; ++i2) {
+      const morphAttributesToMerge = [];
+      for (let j2 = 0; j2 < morphAttributes[name].length; ++j2) {
+        morphAttributesToMerge.push(morphAttributes[name][j2][i2]);
+      }
+      const mergedMorphAttribute = mergeAttributes(morphAttributesToMerge);
+      if (!mergedMorphAttribute) {
+        console.error("THREE.BufferGeometryUtils: .mergeGeometries() failed while trying to merge the " + name + " morphAttribute.");
+        return null;
+      }
+      mergedGeometry.morphAttributes[name].push(mergedMorphAttribute);
+    }
+  }
+  return mergedGeometry;
+}
+function mergeAttributes(attributes) {
+  let TypedArray;
+  let itemSize;
+  let normalized;
+  let gpuType = -1;
+  let arrayLength = 0;
+  for (let i2 = 0; i2 < attributes.length; ++i2) {
+    const attribute = attributes[i2];
+    if (TypedArray === void 0) TypedArray = attribute.array.constructor;
+    if (TypedArray !== attribute.array.constructor) {
+      console.error("THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.array must be of consistent array types across matching attributes.");
+      return null;
+    }
+    if (itemSize === void 0) itemSize = attribute.itemSize;
+    if (itemSize !== attribute.itemSize) {
+      console.error("THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.itemSize must be consistent across matching attributes.");
+      return null;
+    }
+    if (normalized === void 0) normalized = attribute.normalized;
+    if (normalized !== attribute.normalized) {
+      console.error("THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.normalized must be consistent across matching attributes.");
+      return null;
+    }
+    if (gpuType === -1) gpuType = attribute.gpuType;
+    if (gpuType !== attribute.gpuType) {
+      console.error("THREE.BufferGeometryUtils: .mergeAttributes() failed. BufferAttribute.gpuType must be consistent across matching attributes.");
+      return null;
+    }
+    arrayLength += attribute.count * itemSize;
+  }
+  const array = new TypedArray(arrayLength);
+  const result = new BufferAttribute(array, itemSize, normalized);
+  let offset = 0;
+  for (let i2 = 0; i2 < attributes.length; ++i2) {
+    const attribute = attributes[i2];
+    if (attribute.isInterleavedBufferAttribute) {
+      const tupleOffset = offset / itemSize;
+      for (let j2 = 0, l2 = attribute.count; j2 < l2; j2++) {
+        for (let c2 = 0; c2 < itemSize; c2++) {
+          const value = attribute.getComponent(j2, c2);
+          result.setComponent(j2 + tupleOffset, c2, value);
+        }
+      }
+    } else {
+      array.set(attribute.array, offset);
+    }
+    offset += attribute.count * itemSize;
+  }
+  if (gpuType !== void 0) {
+    result.gpuType = gpuType;
+  }
+  return result;
+}
+
+// src/world/obj/scoreboard.ts
+var SB = {
+  /** the stand: rows, rise and tread of each step, its width */
+  rows: 8,
+  rise: 120,
+  tread: 150,
+  w: 3400,
+  /** the board: its screen's size and centre (in the set's frame) */
+  screenW: 1500,
+  screenH: 760,
+  cx: 250,
+  cy: 1460,
+  cz: 380
+};
+var RED = "#ff3b2f";
+var seatMat2 = () => new MeshPhysicalMaterial({ color: new Color("#b3171c"), roughness: 0.45, metalness: 0.05, clearcoat: 0.35, clearcoatRoughness: 0.4 });
+var concrete = () => new MeshStandardMaterial({ color: new Color("#5b5a5c"), roughness: 0.86, metalness: 0 });
+var ledMat = () => {
+  const m2 = new MeshPhysicalMaterial({ color: new Color("#0b0506"), roughness: 0.55, metalness: 0.1, clearcoat: 0.15, clearcoatRoughness: 0.5 });
+  if (typeof document !== "undefined") {
+    const c2 = document.createElement("canvas");
+    c2.width = c2.height = 64;
+    const g2 = c2.getContext("2d");
+    g2.fillStyle = "#0b0506";
+    g2.fillRect(0, 0, 64, 64);
+    g2.fillStyle = "#3a0d0c";
+    for (let y2 = 0; y2 < 4; y2++) for (let x2 = 0; x2 < 4; x2++) {
+      g2.beginPath();
+      g2.arc(8 + x2 * 16, 8 + y2 * 16, 4.2, 0, Math.PI * 2);
+      g2.fill();
+    }
+    const t2 = new CanvasTexture(c2);
+    t2.wrapS = t2.wrapT = RepeatWrapping;
+    t2.repeat.set(SB.screenW / 26, SB.screenH / 26);
+    t2.colorSpace = SRGBColorSpace;
+    m2.map = t2;
+    m2.color.set("#ffffff");
+  }
+  return m2;
+};
+var fit = (str, font, size2, maxW) => Math.min(size2, maxW / (textWidth(str, font, 1) * 1.14));
+var makeScoreboard = (key2) => {
+  const group = new Group();
+  group.name = `scoreboard:${key2}`;
+  const prof = new Shape();
+  prof.moveTo(0, 0);
+  for (let i2 = 0; i2 < SB.rows; i2++) {
+    prof.lineTo(-(i2 * SB.tread), (i2 + 1) * SB.rise);
+    prof.lineTo(-((i2 + 1) * SB.tread), (i2 + 1) * SB.rise);
+  }
+  const backZ = -SB.rows * SB.tread;
+  prof.lineTo(backZ - 60, SB.rows * SB.rise);
+  prof.lineTo(backZ - 60, 0);
+  prof.lineTo(0, 0);
+  const tg = new ExtrudeGeometry(prof, { depth: SB.w, bevelEnabled: false });
+  tg.translate(0, 0, -SB.w / 2);
+  const terrace = new Mesh(tg, concrete());
+  terrace.rotation.y = -Math.PI / 2;
+  terrace.castShadow = terrace.receiveShadow = true;
+  group.add(terrace);
+  const wall = rbox(SB.w + 40, 150, 40, 8, MAT.black());
+  wall.position.set(0, 75, 22);
+  group.add(wall);
+  const rail = new Mesh(new CylinderGeometry(9, 9, SB.w, 16), MAT.satin());
+  rail.rotation.z = Math.PI / 2;
+  rail.position.set(0, 168, 22);
+  group.add(rail);
+  const seatG = [];
+  const pan = new BoxGeometry(56, 12, 52), back = new BoxGeometry(56, 58, 10);
+  for (let r2 = 0; r2 < SB.rows; r2++) {
+    const y2 = (r2 + 1) * SB.rise, z2 = -(r2 * SB.tread) - SB.tread * 0.55;
+    for (let x2 = -SB.w / 2 + 70; x2 <= SB.w / 2 - 70; x2 += 78) {
+      const a2 = pan.clone();
+      a2.translate(x2, y2 + 30, z2 + 6);
+      seatG.push(a2);
+      const b2 = back.clone();
+      b2.translate(x2, y2 + 58, z2 - 26);
+      seatG.push(b2);
+      const leg = new BoxGeometry(10, 24, 10);
+      leg.translate(x2, y2 + 12.5, z2);
+      seatG.push(leg);
+    }
+  }
+  const seats = new Mesh(mergeGeometries(seatG), seatMat2());
+  seats.castShadow = seats.receiveShadow = true;
+  group.add(seats);
+  const roofY = SB.rows * SB.rise + 780;
+  const roof = rbox(SB.w + 200, 70, 1250, 14, MAT.black());
+  roof.position.set(0, roofY, backZ + 520);
+  group.add(roof);
+  const fascia = rbox(SB.w + 200, 110, 26, 8, MAT.satin());
+  fascia.position.set(0, roofY - 10, backZ + 520 + 625 + 14);
+  group.add(fascia);
+  for (const x2 of [-1500, -500, 500, 1500]) {
+    const col = rbox(70, roofY - SB.rows * SB.rise, 70, 10, MAT.graphite());
+    col.position.set(x2, SB.rows * SB.rise + (roofY - SB.rows * SB.rise) / 2 - 35, backZ - 30);
+    group.add(col);
+  }
+  const board = new Group();
+  board.position.set(SB.cx, SB.cy, SB.cz);
+  group.add(board);
+  const frame = rbox(SB.screenW + 120, SB.screenH + 120, 150, 26, MAT.black());
+  board.add(frame);
+  const screen = new Mesh(new PlaneGeometry(SB.screenW, SB.screenH), ledMat());
+  screen.position.z = 75.5;
+  board.add(screen);
+  const hood = rbox(SB.screenW + 180, 46, 210, 14, MAT.graphite());
+  hood.position.set(0, (SB.screenH + 120) / 2 + 23, 26);
+  board.add(hood);
+  const legH = SB.cy - (SB.screenH + 120) / 2;
+  for (const x2 of [-SB.screenW / 2 + 260, SB.screenW / 2 - 260]) {
+    const leg = block(110, legH, 110, 16, MAT.black());
+    leg.position.set(SB.cx + x2, 0, SB.cz - 20);
+    group.add(leg);
+    const foot = block(260, 30, 260, 10, MAT.satin());
+    foot.position.set(SB.cx + x2, 0, SB.cz - 20);
+    group.add(foot);
+  }
+  const crest = makeCrest(`${key2}-crest`, 380);
+  const hoodTop = SB.cy + (SB.screenH + 120) / 2 + 46;
+  crest.group.position.set(SB.cx, hoodTop + 384 / 2 + 30, SB.cz + 40);
+  group.add(crest.group);
+  const mount = rbox(120, 40, 80, 8, MAT.satin());
+  mount.position.set(SB.cx, hoodTop + 20, SB.cz + 40);
+  group.add(mount);
+  const face = lit(RED, 1.12);
+  const figFace = (c2) => {
+    c2.face.color.set(RED).multiplyScalar(1.18);
+    c2.face.userData.full = c2.face.color.clone();
+  };
+  const IN = SB.screenW - 200;
+  const line = (str, size2, y2, font = "800") => {
+    const s2 = fit(str, font, size2, IN);
+    const t2 = wide(text3d(str, { font, size: s2, depth: 2, bevel: 0, face: face.clone() }), 1.14);
+    t2.position.set(0, y2 - s2 * 0.345, 76.5);
+    t2.traverse((n2) => {
+      n2.castShadow = false;
+    });
+    textOn(t2, screen, { inset: 20 });
+    board.add(t2);
+    return t2;
+  };
+  const fig = (size2, y2, longest) => {
+    const s2 = fit(longest, "800", size2, IN);
+    const c2 = counter({ size: s2, color: RED, depth: 3 });
+    figFace(c2);
+    c2.group.position.set(0, y2 - s2 * 0.345, 76.5);
+    c2.group.traverse((n2) => {
+      n2.castShadow = false;
+    });
+    textOn(c2.group, screen, { inset: 20 });
+    board.add(c2.group);
+    return { ...c2, size: s2 };
+  };
+  const H3 = SB.screenH;
+  const p0 = [line("BORROWINGS", 118, H3 * 0.3), null, line("30 JUN 2026", 90, -H3 * 0.31)];
+  const f0 = fig(270, H3 * 0, "\xA3689M");
+  const p1 = [line("NET FINANCE COSTS", 100, H3 * 0.31), line("2025/26", 84, H3 * 0.11, "500")];
+  const f1 = fig(200, -H3 * 0.17, "\xA369,600,000");
+  const mats = (g2) => {
+    const out = [];
+    g2.traverse((n2) => {
+      const m2 = n2.material;
+      if (m2?.isMeshBasicMaterial && !out.includes(m2)) out.push(m2);
+    });
+    return out;
+  };
+  const rows0 = [mats(p0[0]), mats(f0.group), mats(p0[2])], rows1 = [mats(p1[0]), mats(p1[1]), mats(f1.group)];
+  const light = (rows, groups, v2) => rows.forEach((ms, i2) => {
+    groups[i2].visible = (v2[i2] ?? 0) > 0.01;
+    for (const m2 of ms) setLit(m2, v2[i2] ?? 0, 0);
+  });
+  return {
+    group,
+    screen,
+    crest,
+    SB,
+    /** `p0` / `p1`: each row's light 0…1 (top to bottom); `fig0` / `fig1`: the figures shown */
+    update: (o2) => {
+      f0.set(o2.fig0);
+      f1.set(o2.fig1);
+      light(rows0, [p0[0], f0.group, p0[2]], o2.p0);
+      light(rows1, [p1[0], p1[1], f1.group], o2.p1);
+    }
+  };
+};
+
+// src/world/obj/daycounter.ts
+var DAYC = { w: 1040, h: 980, d: 420 };
+var CARD_W = 210;
+var CARD_H = 300;
+var RED2 = "#ff3b2f";
+var makeDayCounter = (key2) => {
+  void key2;
+  const group = new Group();
+  const plinth2 = block(DAYC.w + 80, 70, DAYC.d + 80, 16, MAT.satin());
+  group.add(plinth2);
+  const body = rbox(DAYC.w, DAYC.h - 70, DAYC.d, 42, MAT.black());
+  body.position.y = 70 + (DAYC.h - 70) / 2;
+  group.add(body);
+  const labFace = lit(K2.white, 0.9);
+  const lab = wide(text3d("DAY", { font: "800", size: 64, depth: 3, bevel: 0, face: labFace }), 1.14);
+  lab.position.set(0, 70 + (DAYC.h - 70) - 120, DAYC.d / 2 + 0.5);
+  textOn(lab, body, { inset: 42 });
+  group.add(lab);
+  const win = rbox(3 * CARD_W + 120, CARD_H + 70, 30, 10, MAT.graphite());
+  const WY = 70 + 470;
+  win.position.set(0, WY, DAYC.d / 2 + 12);
+  group.add(win);
+  const cardFace = lit(K2.white, 0.92);
+  const cardMat = new MeshPhysicalMaterial({ color: new Color("#151517"), roughness: 0.35, metalness: 0.1, clearcoat: 0.6 });
+  const digit = (ch, card2, back = false) => {
+    const t2 = wide(text3d(ch, { font: "800", size: 210, depth: 3, bevel: 0, face: cardFace }), 1);
+    t2.position.set(0, -210 * 0.345, (back ? -1 : 1) * (14 + 0.5));
+    if (back) t2.rotation.y = Math.PI;
+    t2.traverse((n2) => {
+      n2.castShadow = false;
+    });
+    textOn(t2, card2, { inset: 8 });
+    return t2;
+  };
+  const Z = DAYC.d / 2 + 30;
+  const fixed = [];
+  for (let i2 = 0; i2 < 2; i2++) {
+    const hold = new Group();
+    hold.position.set((i2 - 1) * (CARD_W + 20), WY, Z);
+    group.add(hold);
+    const card2 = rbox(CARD_W, CARD_H, 28, 10, cardMat);
+    hold.add(card2);
+    fixed.push({ card: card2, hold });
+  }
+  const pivot = new Group();
+  pivot.position.set(CARD_W + 20, WY - CARD_H / 2, Z + 32);
+  group.add(pivot);
+  const flipCard = rbox(CARD_W, CARD_H, 28, 10, cardMat);
+  flipCard.position.y = CARD_H / 2;
+  pivot.add(flipCard);
+  const under = rbox(CARD_W, CARD_H, 28, 10, cardMat);
+  under.position.set(CARD_W + 20, WY, Z);
+  group.add(under);
+  joined(flipCard, under, "the flipping card falls onto the next card behind it in the window");
+  joined(flipCard, win, "the card turns inside the window's recess");
+  let shown2 = "";
+  let parts2 = [];
+  const lay = (d0, d1) => {
+    const key22 = d0 + "|" + d1;
+    if (key22 === shown2) return;
+    shown2 = key22;
+    for (const p2 of parts2) p2.removeFromParent();
+    parts2 = [];
+    for (let i2 = 0; i2 < 2; i2++) {
+      const t2 = digit(d0[i2] ?? "0", fixed[i2].card);
+      fixed[i2].hold.add(t2);
+      parts2.push(t2);
+    }
+    const front = digit(d0[2] ?? "0", flipCard);
+    flipCard.add(front);
+    parts2.push(front);
+    const nxt = digit(d1[2] ?? "0", under);
+    under.add(nxt);
+    parts2.push(nxt);
+  };
+  const STRIP_W = DAYC.w - 120;
+  const strip = rbox(STRIP_W, 150, 24, 8, new MeshPhysicalMaterial({ color: new Color("#0b0506"), roughness: 0.3, clearcoat: 0.7 }));
+  strip.position.set(0, 70 + 150, DAYC.d / 2 + 8);
+  group.add(strip);
+  const stripFace = lit(RED2, 1.15);
+  let money = "";
+  let moneyT = null;
+  const setMoney = (s2) => {
+    if (s2 === money) return;
+    money = s2;
+    moneyT?.removeFromParent();
+    const size2 = Math.min(84, (STRIP_W - 90) / (textWidth(s2, "800", 1) * 1.1));
+    moneyT = wide(text3d(s2, { font: "800", size: size2, depth: 2, bevel: 0, face: stripFace }), 1.1);
+    moneyT.position.set(0, 70 + 150 - size2 * 0.345, DAYC.d / 2 + 20.5);
+    moneyT.traverse((n2) => {
+      n2.castShadow = false;
+    });
+    textOn(moneyT, strip, { inset: 8 });
+    group.add(moneyT);
+  };
+  const slot = rbox(40, 40, 240, 8, MAT.graphite());
+  slot.position.set(-DAYC.w / 2 - 6, 70 + 120, 40);
+  group.add(slot);
+  return {
+    group,
+    size: DAYC,
+    /** the slot's mouth (the counter's frame): where the coins come out */
+    slot: new Vector3(-DAYC.w / 2 - 120, 70 + 120, 40),
+    update: (o2) => {
+      lay(o2.day0, o2.day1);
+      pivot.rotation.x = Math.PI / 2 * Math.min(1, Math.max(0, o2.flip)) ** 1.6;
+      flipCard.visible = true;
+      setMoney(o2.money);
+      setLit(stripFace, o2.lit, 0);
+      if (moneyT) moneyT.visible = o2.lit > 0.01;
+    }
+  };
+};
+
+// src/world/places/board.ts
+var S6 = "board";
+var E2 = enterOf(S6);
+var RED3 = "#ff3b2f";
+var LATER2 = word(S6, 0, /^later/);
+var BORROW = word(S6, 0, /^borrowing/);
+var N690 = word(S6, 0, /^690/);
+var LAST = word(S6, 1, /^Last/);
+var COSTS = word(S6, 1, /^costs/);
+var N696 = word(S6, 1, /^69/);
+var N190 = word(S6, 2, /^190/);
+var B0 = Math.round((LATER2 + BORROW) / 2) + 2;
+var C0 = cue(S6, 2) - 4;
+var XA = 0;
+var XS = 8e3;
+var CTR = [XS + SB.cx, SB.cy, SB.cz];
+var DC = [XS - 1350, 0, 1700];
+var YEARS = ["2010", "2014", "2018", "2022", "2026"];
+var FLIP2 = 10;
+var FLIPS = YEARS.length - 1;
+var T0 = E2 - 4;
+var TL = LATER2 + 1 - FLIP2;
+var flipAt = (i2) => T0 + i2 * (TL - T0) / (FLIPS - 1);
+var LAND26 = TL + FLIP2;
+var calState = (f2) => {
+  for (let i2 = 0; i2 < FLIPS; i2++) {
+    const p2 = (f2 - flipAt(i2)) / FLIP2;
+    if (p2 < 1) return { year: i2, flip: clamp01(p2) };
+  }
+  return { year: FLIPS, flip: 0 };
+};
+var ROW = 5;
+var ON0 = BORROW - 6;
+var CNT0 = [BORROW + 4, N690 + 1];
+var SW = LAST - 2;
+var ON1 = SW + 3 * ROW + 2;
+var CNT1 = [COSTS - 2, N696 + 1];
+var TICK = N190 - 6;
+var TICK_DUR = 9;
+var CNT2 = [C0 + 2, N190];
+var NCOIN = 12;
+var COIN0 = N190 + 2;
+var COIN_GAP = 4;
+var FLY2 = 7;
+var coinLand = (k2) => COIN0 + k2 * COIN_GAP + FLY2;
+var BD = { E: E2, B0, C0, flips: Array.from({ length: FLIPS }, (_2, i2) => flipAt(i2)), land26: LAND26, on0: ON0, cnt0: CNT0, sw: SW, on1: ON1, cnt1: CNT1, tick: TICK, cnt2: CNT2, coins: [COIN0, coinLand(NCOIN - 1)] };
+var ORB_A = { c: [XA, 470, 0], a0: 22, a1: -10, r0: 2450, r1: 2050, y0: 420, y1: 560 };
+var shots = ({ from, to }) => [
+  // 1 the calendar: orbit and push while the years riffle
+  cut(from, orbitPos(ORB_A.c, ORB_A.a0, ORB_A.r0, ORB_A.y0), ORB_A.c, { fov: 40, why: "cut: the calendar" }),
+  orbit(from + 1, B0 - from - 2, ORB_A, { fov: 40, ease: SOFT, why: "orbit and push on the calendar" }),
+  // 2 the stand: low over the front seats, crane up to the board, push in on it, a slow drift through the page switch
+  cut(B0, [XS - 500, 380, 4300], [XS + 80, 900, 0], { fov: 46, why: "cut: the stand, low at the seats" }),
+  crane(B0 + 1, CNT0[0] + 8 - B0, [XS + 120, 1380, 4600], [CTR[0] - 120, CTR[1] - 30, CTR[2]], { fov: 46, bulge: [0, 0, 300], why: "crane up the stand to the scoreboard" }),
+  dolly(CNT0[0] + 9, SW - CNT0[0] - 10, [XS + 180, 1440, 3950], [CTR[0] - 100, CTR[1] - 10, CTR[2]], { fov: 46, ease: SOFT, why: "push in on the board" }),
+  dolly(SW, C0 - SW - 1, [XS + 330, 1470, 3650], [CTR[0] - 80, CTR[1], CTR[2]], { fov: 46, ease: SOFT, why: "drift on the board through the page switch" }),
+  // 3 the day counter: low three-quarter, the stand and its red board behind; a slow push as the coins pour
+  cut(C0, [DC[0] - 1350, 600, DC[2] + 2950], [DC[0] - 170, 470, DC[2]], { fov: 44, why: "cut: the day counter" }),
+  dolly(C0 + 1, Math.max(20, to - C0 - 2), [DC[0] - 1150, 540, DC[2] + 2650], [DC[0] - 150, 450, DC[2]], { fov: 44, ease: SOFT, why: "push in as the coins pour" })
+];
+var mixHex = (a2, b2, t2) => "#" + new Color(a2).lerp(new Color(b2), clamp01(t2)).getHexString();
+var lights = (f2) => {
+  if (f2 < B0) return stdLights([XA, 470, 0], { s: 1.05, key: 3.4 + 0.5 * ramp(f2, LAND26 - 2, LAND26 + 8, SETTLE) });
+  if (f2 < C0) {
+    const red2 = Math.max(ramp(f2, CNT0[1] - 2, CNT0[1] + 14, SETTLE) * (1 - 0.4 * ramp(f2, SW, SW + 12, SOFT)), ramp(f2, CNT1[1] - 2, CNT1[1] + 14, SETTLE));
+    const L4 = stdLights([XS + 100, 900, 200], { s: 1.6, key: 3.2, back: 2.6 });
+    L4.back = { ...L4.back, color: mixHex("#F2EEEE", K2.red, 0.5 + 0.4 * red2), i: 2.6 + 2.4 * red2 };
+    L4.accent = { pos: [CTR[0] - 900, 500, CTR[2] + 2600], color: RED3, i: 1.6 + 3.4 * red2 };
+    return L4;
+  }
+  const L3 = stdLights([DC[0] + 100, 420, DC[2]], { s: 1.05, key: 3.4 });
+  L3.back = { ...L3.back, color: mixHex("#F2EEEE", K2.red, 0.75), i: 3.4 };
+  L3.accent = { pos: [DC[0] + 300, 700, DC[2] + 700], color: RED3, i: 1.4 + 1.6 * ramp(f2, CNT2[1] - 2, CNT2[1] + 12, SETTLE) };
+  return L3;
+};
+var cues = () => [
+  ...Array.from({ length: FLIPS }, (_2, i2) => ({ kind: "hit", s: "flick", at: Math.round(flipAt(i2) + 3), vol: 0.34, why: `the calendar: ${YEARS[i2]} whips over` })),
+  { kind: "hit", s: "thud", at: Math.round(LAND26), vol: 0.3, why: "the calendar: 2026 lands" },
+  { kind: "hit", s: "datashort", at: ON0, end: ON0 + 3 * ROW + 6, vol: 0.24, why: "the scoreboard lights row by row" },
+  { kind: "hit", s: "data", at: CNT0[0], end: CNT0[1], vol: 0.3, why: "the board counts up to \xA3689M" },
+  { kind: "hit", s: "sub", at: CNT0[1], vol: 0.45, why: "\xA3689M lands red: the ring of light" },
+  { kind: "hit", s: "click", at: SW, vol: 0.3, why: "the board switches page" },
+  { kind: "hit", s: "datashort", at: ON1, end: ON1 + 3 * ROW + 6, vol: 0.22, why: "page 2 lights row by row" },
+  { kind: "hit", s: "data", at: CNT1[0], end: CNT1[1], vol: 0.3, why: "the board counts up to \xA369,600,000" },
+  { kind: "hit", s: "sub", at: CNT1[1], vol: 0.4, why: "\xA369,600,000 lands" },
+  { kind: "hit", s: "click", at: TICK + 4, vol: 0.34, why: "the day counter ticks over: 364 \u2192 365" },
+  { kind: "hit", s: "data", at: CNT2[0], end: CNT2[1], vol: 0.26, why: "the strip counts to \xA3190,000 A DAY" },
+  ...Array.from({ length: 6 }, (_2, k2) => ({ kind: "hit", s: "coin", at: Math.round(coinLand(k2 * 2)), vol: 0.26, why: `coins land on the pile (${k2 * 2 + 1})` }))
+];
+var blur = (f2) => f2 < B0 && Array.from({ length: FLIPS }, (_2, i2) => (f2 - flipAt(i2)) / FLIP2).some((p2) => p2 > 0.15 && p2 < 0.88) || f2 > TICK + 1 && f2 < TICK + TICK_DUR - 1 || f2 >= COIN0 && f2 < coinLand(NCOIN - 1);
+var build = () => {
+  const group = new Group();
+  const cal = makeCalendar("board", YEARS);
+  cal.group.position.set(XA, 0, 0);
+  cal.group.rotation.y = 0.1;
+  group.add(cal.group);
+  const ringA = ring({ r: 1500, dur: 26 });
+  ringA.mesh.position.set(XA, 1.5, 200);
+  group.add(ringA.mesh);
+  const sb = makeScoreboard("board");
+  sb.group.position.set(XS, 0, 0);
+  group.add(sb.group);
+  const ringB = ring({ r: 2200, dur: 30, color: K2.red });
+  ringB.mesh.position.set(CTR[0], 1.5, SB.cz + 400);
+  group.add(ringB.mesh);
+  const dc = makeDayCounter("board");
+  dc.group.position.set(DC[0], 0, DC[2]);
+  dc.group.rotation.y = 0.14;
+  group.add(dc.group);
+  const slotW = dc.slot.clone().applyAxisAngle(new Vector3(0, 1, 0), 0.14).add(new Vector3(DC[0], 0, DC[2]));
+  const pileC = new Vector3(slotW.x - 120, 0, slotW.z + 260);
+  const coins = Array.from({ length: NCOIN }, (_2, k2) => {
+    const c2 = makeCoin("board" + k2);
+    group.add(c2.group);
+    return c2;
+  });
+  const ringC = ring({ r: 1300, dur: 26, color: K2.red });
+  ringC.mesh.position.set(DC[0], 1.5, DC[2] + 300);
+  group.add(ringC.mesh);
+  return {
+    group,
+    update: (f2) => {
+      cal.group.visible = f2 < B0;
+      sb.group.visible = f2 >= B0 && f2 < C0 + 1e9;
+      dc.group.visible = f2 >= C0;
+      for (const c2 of coins) c2.group.visible = f2 >= C0;
+      ringA.update(f2, LAND26);
+      if (f2 < B0) cal.update(calState(f2));
+      const off0 = (i2) => 1 - clamp01((f2 - (SW + i2 * ROW)) / 3);
+      const p0 = [0, 1, 2].map((i2) => clamp01((f2 - (ON0 + i2 * ROW)) / 3) * off0(i2));
+      const p1 = [0, 1, 2].map((i2) => clamp01((f2 - (ON1 + i2 * ROW)) / 3));
+      const v0 = countUp(f2, CNT0[0], CNT0[1], 12e7, 689e6);
+      const v1 = countUp(f2, CNT1[0], CNT1[1], 4e6, 696e5);
+      sb.update({ p0, p1, fig0: `\xA3${Math.round(v0 / 1e6)}M`, fig1: pounds(Math.round(v1 / 1e5) * 1e5) });
+      ringB.update(f2, CNT0[1]);
+      const t2 = SETTLE(clamp01((f2 - TICK) / TICK_DUR));
+      const v2 = countUp(f2, CNT2[0], CNT2[1], 0, 19e4);
+      dc.update({ day0: "364", day1: "365", flip: t2, money: `\xA3${(Math.round(v2 / 1e3) * 1e3).toLocaleString("en-US")} A DAY`, lit: clamp01((f2 - (C0 - 2)) / 5) });
+      ringC.update(f2, CNT2[1]);
+      coins.forEach((c2, k2) => {
+        const t0 = COIN0 + k2 * COIN_GAP, land = coinLand(k2), u3 = f2 - t0;
+        const restY = COIN.t / 2 + 3.4 + k2 * (COIN.t + 7.2), jitter = k2 * 37 % 9 - 4;
+        const rest = new Vector3(pileC.x + jitter, restY, pileC.z + (k2 * 53 % 9 - 4));
+        if (u3 < 0) {
+          c2.group.visible = false;
+          return;
+        }
+        c2.group.visible = true;
+        if (f2 >= land) {
+          c2.group.position.copy(rest);
+          c2.group.rotation.set(0, k2 * 0.9, 0);
+          return;
+        }
+        const p2 = u3 / (land - t0), q2 = Math.min(1, p2 / 0.7);
+        const x2 = slotW.x + (rest.x - slotW.x) * q2, z2 = slotW.z + (rest.z - slotW.z) * q2;
+        const top = rest.y + 90, y2 = p2 < 0.7 ? slotW.y + (top - slotW.y) * q2 + 120 * Math.sin(Math.PI * q2) : top + (rest.y - top) * ((p2 - 0.7) / 0.3) ** 2;
+        c2.group.position.set(x2, y2, z2);
+        c2.group.rotation.set(1.2 * (1 - q2), k2 * 0.9, 0.6 * (1 - q2));
+      });
+    }
+  };
+};
+var BoardPlace = { id: S6, label: "7 Set E: the scoreboard: borrowings \xA3689M, net finance costs \xA369.6M, \xA3190,000 a day", enter: E2, stage: "dark", shots, lights, build, blur, cues };
+
+// src/world/obj/cabinet.ts
+var CAB = { w: 1800, h: 2100, d: 600 };
+var GREEN = "#55d98a";
+var makeCabinet = (key2) => {
+  void key2;
+  const group = new Group();
+  const { w: w2, h: h2, d: d2 } = CAB;
+  const base = block(w2 + 60, 150, d2 + 40, 16, MAT.black());
+  group.add(base);
+  const top = rbox(w2 + 60, 70, d2 + 40, 14, MAT.black());
+  top.position.y = h2 - 35;
+  group.add(top);
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+    const post = rbox(46, h2 - 220, 46, 10, MAT.satin());
+    post.position.set(sx * (w2 / 2 + 4), 150 + (h2 - 220) / 2, sz * (d2 / 2 - 2));
+    group.add(post);
+  }
+  const back = rbox(w2, h2 - 220, 30, 8, new MeshStandardMaterial({ color: new Color("#0c120e"), roughness: 0.7 }));
+  back.position.set(0, 150 + (h2 - 220) / 2, -d2 / 2 + 15);
+  group.add(back);
+  const glass = new MeshPhysicalMaterial({ color: new Color("#cfe9dc"), roughness: 0.05, metalness: 0, transparent: true, opacity: 0.1, depthWrite: false });
+  for (const sx of [-1, 1]) {
+    const g2 = new Mesh(new BoxGeometry(10, h2 - 230, d2 - 60), glass);
+    g2.position.set(sx * (w2 / 2 + 4), 150 + (h2 - 220) / 2, 0);
+    g2.userData.noClip = true;
+    group.add(g2);
+  }
+  const ledFace = lit(GREEN, 1.1);
+  const shelfY = [150, 920, 1460];
+  for (const y2 of shelfY.slice(1)) {
+    const s2 = new Mesh(new BoxGeometry(w2 - 10, 18, d2 - 40), new MeshPhysicalMaterial({ color: new Color("#a7c9b6"), roughness: 0.08, transparent: true, opacity: 0.32, depthWrite: false }));
+    s2.position.set(0, y2 - 9, -10);
+    s2.castShadow = false;
+    s2.receiveShadow = true;
+    group.add(s2);
+    const strip = new Mesh(new BoxGeometry(w2 - 30, 8, 8), ledFace);
+    strip.position.set(0, y2 - 22, d2 / 2 - 34);
+    group.add(strip);
+  }
+  const topStrip = new Mesh(new BoxGeometry(w2 - 30, 8, 8), ledFace);
+  topStrip.position.set(0, h2 - 80, d2 / 2 - 34);
+  group.add(topStrip);
+  return {
+    group,
+    shelf: shelfY,
+    w: w2,
+    d: d2,
+    /** the LED strips' light 0…1 */
+    setGlow: (v2) => setLit(ledFace, v2, 0.12)
+  };
+};
+
+// src/world/obj/cup.ts
+var silver = () => new MeshPhysicalMaterial({ color: new Color("#d9dce2"), roughness: 0.16, metalness: 1, envMapIntensity: 1.35, clearcoat: 0.4, clearcoatRoughness: 0.12 });
+var lathe = (pts, seg = 64) => new LatheGeometry(pts.map(([r2, y2]) => new Vector2(Math.max(0.01, r2), y2)), seg);
+var mesh = (g2, m2) => {
+  const o2 = new Mesh(g2, m2);
+  o2.castShadow = o2.receiveShadow = true;
+  return o2;
+};
+var plinth = (label, size2, minW) => {
+  const g2 = new Group();
+  const w2 = Math.max(minW, textWidth(label, "800", size2) * 1.12 + size2 * 1.6), h2 = size2 * 2.1, d2 = Math.max(150, w2 * 0.55);
+  const body = block(w2, h2, d2, 12, MAT.black());
+  g2.add(body);
+  const face = lit(K2.white, 0.95);
+  const t2 = wide(text3d(label, { font: "800", size: size2, depth: 2, bevel: 0, face }), 1.12);
+  t2.position.set(0, h2 / 2 - size2 * 0.345, d2 / 2 + 0.5);
+  t2.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  textOn(t2, body, { inset: 12 });
+  g2.add(t2);
+  return { g: g2, w: w2, h: h2, d: d2 };
+};
+var makeLeagueCup = (key2, label) => {
+  void key2;
+  const group = new Group();
+  const p2 = plinth(label, 46, 230);
+  group.add(p2.g);
+  const m2 = silver();
+  const cup = new Group();
+  cup.position.y = p2.h;
+  group.add(cup);
+  cup.add(mesh(lathe([[0, 0], [78, 0], [78, 10], [52, 20], [22, 46], [16, 90], [26, 110], [60, 128], [92, 170], [100, 230], [96, 262], [104, 270], [104, 278], [0, 278]]), m2));
+  cup.add(mesh(lathe([[0, 276], [96, 276], [86, 292], [52, 312], [20, 322], [14, 340], [22, 352], [0, 362]]), m2));
+  for (const s2 of [-1, 1]) {
+    const h2 = mesh(new TorusGeometry(46, 9, 12, 32, Math.PI * 1.25), m2);
+    h2.position.set(s2 * 100, 200, 0);
+    h2.rotation.z = s2 > 0 ? -Math.PI * 0.62 : Math.PI * 1.62;
+    cup.add(h2);
+  }
+  return { group, size: { w: Math.max(p2.w, 300), h: p2.h + 362, d: p2.d } };
+};
+var makeEuroCup = (key2, label) => {
+  void key2;
+  const group = new Group();
+  const p2 = plinth(label, 44, 520);
+  group.add(p2.g);
+  const m2 = silver();
+  const cup = new Group();
+  cup.position.y = p2.h;
+  group.add(cup);
+  cup.add(mesh(lathe([[0, 0], [118, 0], [118, 16], [90, 34], [40, 70], [30, 150], [40, 190], [96, 240], [140, 320], [156, 420], [150, 520], [160, 560], [160, 572], [0, 572]]), m2));
+  for (const s2 of [-1, 1]) {
+    const curve = new CatmullRomCurve3([
+      new Vector3(s2 * 150, 540, 0),
+      new Vector3(s2 * 230, 560, 0),
+      new Vector3(s2 * 300, 470, 0),
+      new Vector3(s2 * 290, 330, 0),
+      new Vector3(s2 * 210, 250, 0),
+      new Vector3(s2 * 120, 250, 0)
+    ]);
+    cup.add(mesh(new TubeGeometry(curve, 48, 15, 14, false), m2));
+  }
+  return { group, size: { w: Math.max(p2.w, 620), h: p2.h + 572, d: p2.d } };
+};
+
+// src/world/places/fair.ts
+var S7 = "fair";
+var E3 = enterOf(S7);
+var FAIR = word(S7, 0, /^fair/);
+var GLAZ = word(S7, 0, /^Glazers/);
+var FIVE = word(S7, 0, /^five/);
+var TITLES = word(S7, 0, /^titles/);
+var CHAMP = word(S7, 0, /^Champions/);
+var CUP_T = [FAIR + 3, 0, 0, 0, TITLES].map((v2, i2, a2) => i2 === 0 || i2 === 4 ? v2 : Math.round(a2[0] + (TITLES - a2[0]) * i2 / 4));
+var LABELS = ["2007", "2008", "2009", "2011", "2013"];
+var SLOT = [[-560, 1], [0, 1], [560, 1], [-330, 2], [330, 2]];
+var LAND2 = CHAMP + 1;
+var PED = [0, 0, 820];
+var shots2 = ({ from, to }) => [
+  cut(from, [-950, 1180, 1550], [-520, 1120, 0], { fov: 40, why: "cut: the cabinet, close on shelf one" }),
+  dolly(from + 1, CUP_T[2] + 4 - from, [-40, 1250, 1550], [160, 1160, 0], { fov: 40, ease: SOFT, why: "track along shelf one" }),
+  dolly(CUP_T[2] + 5, CUP_T[4] + 4 - CUP_T[2] - 5, [260, 1560, 1700], [120, 1480, 0], { fov: 40, ease: SOFT, why: "rise to shelf two" }),
+  travel(CUP_T[4] + 5, LAND2 - 8 - CUP_T[4] - 5, [-200, 900, 4400], [0, 720, 300], { fov: 42, bulge: [0, 60, 200], why: "pull back: the cabinet and the plinth", vol: 0.45 }),
+  dolly(LAND2 - 7, Math.max(10, to - LAND2 + 6), [-80, 860, 4e3], [0, 700, 300], { fov: 42, ease: SOFT, why: "push in as the cup lands" })
+];
+var lights2 = (f2) => {
+  const g2 = ramp(f2, E3 - 2, FAIR + 6, SETTLE), hit = ramp(f2, LAND2 - 1, LAND2 + 10, SETTLE) * (1 - 0.5 * ramp(f2, LAND2 + 14, LAND2 + 40, SOFT));
+  const L3 = stdLights([0, 900, 200], { s: 1.25, key: 3.3 });
+  L3.back = { ...L3.back, color: GREEN, i: 2.2 + 1.2 * g2 };
+  L3.accent = { pos: [0, 1300, 1400], color: GREEN, i: 1 * g2 + 2.2 * hit };
+  return L3;
+};
+var cues2 = () => [
+  ...CUP_T.map((t2, i2) => ({ kind: "hit", s: "pingshort", at: t2 + 2, vol: 0.3, why: `cup ${LABELS[i2]} springs up` })),
+  { kind: "move", s: "whooshsoft", at: CUP_T[4] + 14, end: LAND2 - 8, vol: 0.35, why: "pull back from the shelves" },
+  { kind: "hit", s: "thud", at: LAND2, vol: 0.42, why: "the European cup lands on its plinth" },
+  { kind: "hit", s: "bloom", at: LAND2, vol: 0.38, why: "CHAMPIONS LEAGUE 2008: the green ring" }
+];
+var blur2 = (f2) => dropIn(f2, LAND2, { h: 1500, fall: 9, bounce: 0.4 }).fast;
+var build2 = () => {
+  const group = new Group();
+  const cab = makeCabinet("fair");
+  group.add(cab.group);
+  const cups = LABELS.map((l2, i2) => {
+    const c2 = makeLeagueCup("fair" + i2, l2);
+    const [x2, s2] = SLOT[i2];
+    c2.group.position.set(x2, cab.shelf[s2], -10);
+    group.add(c2.group);
+    return c2;
+  });
+  const ped = block(700, 120, 520, 18, MAT.black());
+  ped.position.set(PED[0], 0, PED[2]);
+  group.add(ped);
+  const euro = makeEuroCup("fair-euro", "CHAMPIONS LEAGUE 2008");
+  euro.group.position.set(PED[0], 120, PED[2]);
+  group.add(euro.group);
+  const halo = ring({ r: 1600, dur: 30, color: GREEN });
+  halo.mesh.position.set(PED[0], 1.5, PED[2]);
+  group.add(halo.mesh);
+  void CAB;
+  return {
+    group,
+    update: (f2) => {
+      cab.setGlow(ramp(f2, E3 - 2, FAIR + 4, SETTLE));
+      cups.forEach((c2, i2) => {
+        const s2 = popUp(f2, CUP_T[i2], 12);
+        c2.group.visible = s2 > 1e-3;
+        c2.group.scale.setScalar(Math.max(1e-3, s2));
+      });
+      const d2 = dropIn(f2, LAND2, { h: 1500, fall: 9, bounce: 0.4 });
+      euro.group.visible = d2.on;
+      euro.group.position.y = 120 + d2.y;
+      halo.update(f2, LAND2);
+    }
+  };
+};
+var FairPlace = { id: S7, label: "8 Set F: to be fair: five league titles and the Champions League", enter: E3, stage: "dark", shots: shots2, lights: lights2, build: build2, blur: blur2, cues: cues2 };
+
+// src/world/obj/receipt.ts
+var makeReceipt = (key2) => {
+  const group = new Group();
+  group.name = `receipt-${key2}`;
+  const PW = 680, BH = 230, BD2 = 420, slotZ = -40;
+  const body = rbox(PW + 120, BH, BD2, 26, MAT.black());
+  body.position.y = BH / 2;
+  body.name = "printer";
+  const bar = rbox(PW + 30, 18, 30, 6, MAT.satin());
+  bar.position.set(0, BH + 4, slotZ + 34);
+  bar.name = "tear-bar";
+  const lamp = new Mesh(new CylinderGeometry(12, 12, 8, 20), lit("#7ee08a", 1.1));
+  lamp.rotation.x = Math.PI / 2;
+  lamp.position.set(PW / 2 - 10, BH * 0.55, BD2 / 2 + 3);
+  group.add(body, bar, lamp);
+  joined(bar, body, "the tear bar is fixed on the printer's top");
+  const FULL = 760;
+  const paperMat = new MeshStandardMaterial({ color: new Color("#8e8c87"), roughness: 0.95, metalness: 0 });
+  const paper = new Mesh(new BoxGeometry(PW, 1, 1.6), paperMat);
+  paper.name = "receipt-paper";
+  paper.castShadow = true;
+  paper.receiveShadow = true;
+  const feedG = new Group();
+  feedG.position.set(0, BH - 6, slotZ);
+  feedG.rotation.x = -0.14;
+  const slide = new Group();
+  feedG.add(paper, slide);
+  group.add(feedG);
+  joined(paper, body, "the receipt feeds out of the printer's slot");
+  joined(paper, bar, "the receipt passes the tear bar");
+  const ink = new MeshStandardMaterial({ color: new Color("#0b0b0c"), roughness: 0.8 });
+  const red2 = lit(K2.red, 1);
+  const pad = 46, room = PW - 2 * pad;
+  const fit2 = (s3, want) => Math.min(want, room / textWidth(s3, "800", 1));
+  const lines = [];
+  const bands = [];
+  const two = (l2, r3, y2, size2) => {
+    const g2 = new Group();
+    const a2 = text3d(l2, { font: "800", size: size2, depth: 1, bevel: 0, face: ink, align: "left" });
+    a2.position.x = -room / 2;
+    const b2 = text3d(r3, { font: "800", size: size2, depth: 1, bevel: 0, face: ink, align: "left" });
+    b2.position.x = room / 2 - textWidth(r3, "800", size2);
+    g2.add(a2, b2);
+    g2.position.set(0, y2, 1.3);
+    const band = new Mesh(new BoxGeometry(PW, size2 * 1.9, 0.6), paperMat);
+    band.position.set(0, y2 + size2 * 0.33, 0.95);
+    band.name = "receipt-band";
+    slide.add(band);
+    joined(band, paper, "the printed band is the paper's own face");
+    for (const t2 of [a2, b2]) textOn(t2, band, { inset: 0 });
+    bands.push(band);
+    slide.add(g2);
+    lines.push({ g: g2, y: y2 });
+  };
+  const s2 = fit2("BORROWED  \xA3540,000,000", 46);
+  const top = 0;
+  two("PRICE", "\xA3790,000,000", top - 90, s2);
+  two("BORROWED", "\xA3540,000,000", top - 170, s2);
+  const ruleBand = new Mesh(new BoxGeometry(PW, 30, 0.6), paperMat);
+  ruleBand.position.set(0, top - 215, 0.95);
+  ruleBand.name = "receipt-band";
+  slide.add(ruleBand);
+  joined(ruleBand, paper, "the printed band is the paper's own face");
+  const bandFor = (_y2) => ruleBand;
+  const rule = new Mesh(new BoxGeometry(room, 4, 1), ink);
+  rule.position.set(0, top - 215, 1.3);
+  slide.add(rule);
+  textOn(rule, bandFor(top - 200));
+  const rs = fit2("RATING: INFLATED", 70);
+  const r2 = text3d("RATING: INFLATED", { font: "800", size: rs, depth: 1.2, bevel: 0, face: red2 });
+  r2.position.set(0, top - 310, 1.3);
+  const rband = new Mesh(new BoxGeometry(PW, rs * 1.9, 0.6), paperMat);
+  rband.position.set(0, top - 310 + rs * 0.33, 0.95);
+  rband.name = "receipt-band";
+  slide.add(rband);
+  joined(rband, paper, "the printed band is the paper's own face");
+  bands.push(rband);
+  textOn(r2, rband, { inset: 0 });
+  slide.add(r2);
+  lines.push({ g: r2, y: top - 310 });
+  const lineAt = lines.map((l2) => top - l2.y + 40);
+  const update = (p2) => {
+    const f2 = Math.max(0, Math.min(FULL, p2.feed));
+    paper.scale.y = Math.max(1, f2);
+    paper.position.y = Math.max(1, f2) / 2;
+    slide.position.y = f2;
+    paper.visible = f2 > 1;
+    lines.forEach((l2, i2) => {
+      l2.g.visible = f2 >= lineAt[i2];
+      bands[i2].visible = l2.g.visible;
+    });
+    ruleBand.visible = f2 >= 215 + 20;
+    rule.visible = f2 >= 215 + 20;
+  };
+  update({ feed: 0 });
+  return { group, update, FULL, lineAt, paper, body };
+};
+
+// src/world/places/verdict.ts
+var S8 = "verdict";
+var ENTER4 = enterOf(S8);
+var N7902 = word(S8, 0, /^790/);
+var PRICE = word(S8, 0, /^price/);
+var C12 = cue(S8, 1);
+var BILL = word(S8, 1, /^bill/);
+var INF = word(S8, 2, /^inflated/i);
+var SEND = cue(S8, 3);
+var PRINTER_LAND = BILL + 14;
+var PX = 1e3;
+var PZ = PLINTH.d / 2 + 400;
+var L1 = PRINTER_LAND + 16;
+var L2 = Math.round((L1 + INF) / 2) + 2;
+var feedAt = (f2, at) => {
+  const seg = (a2, b2, v0, v1) => v0 + (v1 - v0) * SOFT(clamp01((f2 - a2) / (b2 - a2)));
+  if (f2 < PRINTER_LAND + 4) return 0;
+  if (f2 < L1) return seg(PRINTER_LAND + 4, L1, 0, at[0]);
+  if (f2 < L2) return seg(L1 + 1, L2, at[0], at[1]);
+  return seg(L2 + 1, INF, at[1], at[2] + 30);
+};
+var VerdictPlace = {
+  id: S8,
+  label: "9 Set A again: the receipt; the sign flips to PAID FOR BY: MANCHESTER UNITED; RATING: INFLATED",
+  enter: ENTER4,
+  stage: "dark",
+  shots: ({ from, to }) => [
+    cut(from, SIGN.pos, SIGN.look, { fov: SIGN.fov, focus: SIGN.focus, why: "cut back to set A, on the sign" }),
+    { ...dolly(from + 1, BILL - 14 - (from + 1), [-200, 740, 2620], [0, 630, 420], { fov: 42, ease: SOFT, why: "the opening's push-in on the sign" }), focus: SIGN.focus },
+    { ...dolly(BILL + 10, INF - 22 - (BILL + 10), [540, 760, 3400], [540, 520, 450], { fov: 50, why: "truck right: the flipped sign and the printer landing" }), focus: [700, 480, 560] },
+    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 140, 610, PZ + 2e3], [PX + 30, 470, PZ], { fov: 42, why: "push in on the receipt" }), focus: [PX, 460, PZ] },
+    { ...crane(SEND - 2, to - (SEND - 2) - 1, OPENING.pos, OPENING.look, { fov: OPENING.fov, bulge: [0, 0, 200], why: "pull up and back to the opening framing" }), focus: OPENING.focus }
+  ],
+  lights: (f2) => {
+    const p790 = f2 >= N7902 ? Math.exp(-(f2 - N7902) / 12) : 0, pBill = f2 >= BILL ? Math.exp(-(f2 - BILL) / 14) : 0, pInf = f2 >= INF ? Math.exp(-(f2 - INF) / 14) : 0;
+    const L3 = stdLights([0, 700, 200], { s: 1.35, key: 3.5 + 0.9 * p790 + 1 * pBill + 1.2 * pInf });
+    L3.accent = { pos: [0, 400, 1400], color: f2 < BILL ? K2.money : K2.red, i: 2.2 * p790 + 2.4 * pBill + 2.6 * pInf };
+    if (f2 >= BILL) L3.back = backGlow([0, 700, 0], K2.red, 2.2 * (0.45 + 0.55 * Math.max(pBill, pInf)));
+    return L3;
+  },
+  blur: (f2) => dropIn(f2, PRINTER_LAND, { h: 1300 }).fast,
+  cues: () => [
+    { kind: "hit", s: "pingshort", at: N7902, vol: 0.3, why: "the price slat flashes on 790" },
+    { kind: "hit", s: "thud", at: PRINTER_LAND, vol: 0.5, why: "the receipt printer lands" },
+    { kind: "hit", s: "datashort", at: PRINTER_LAND + 4, end: L1, vol: 0.3, why: "the receipt prints: PRICE" },
+    { kind: "hit", s: "datashort", at: L1 + 1, end: L2, vol: 0.3, why: "the receipt prints: BORROWED" },
+    { kind: "hit", s: "flick", at: BILL - 3, vol: 0.45, why: "slat 1 flips" },
+    { kind: "hit", s: "flick", at: BILL + 1, vol: 0.45, why: "slat 2 flips: PAID FOR BY: MANCHESTER UNITED" },
+    { kind: "hit", s: "sub", at: BILL + 4, vol: 0.4, why: "the red glow rises" },
+    { kind: "hit", s: "datashort", at: L2 + 1, end: INF, vol: 0.3, why: "the receipt prints: RATING" },
+    { kind: "hit", s: "thud", at: INF, vol: 0.45, why: "RATING: INFLATED lands" },
+    { kind: "hit", s: "pingshort", at: INF + 1, vol: 0.3, why: "the red ring" },
+    { kind: "move", s: "whooshsoft", at: SEND + 12, end: SEND + 30, vol: 0.3, why: "pull back to the opening" }
+  ],
+  build: () => {
+    const group = new Group();
+    const A3 = setA("verdict");
+    group.add(A3.group);
+    const rec = makeReceipt("verdict");
+    rec.group.position.set(PX, 0, PZ);
+    rec.group.rotation.y = -0.32;
+    const redR = ring({ r: 1500, color: K2.red, dur: 30 });
+    redR.mesh.position.set(PX, 1.5, PZ + 160);
+    const billR = ring({ r: 1600, color: K2.red, dur: 30 });
+    billR.mesh.position.set(0, 1.5, PLINTH.d / 2 + 260);
+    group.add(rec.group, redR.mesh, billR.mesh);
+    const at = rec.lineAt;
+    return {
+      group,
+      update: (f2) => {
+        A3.pose({ lift: 0, tagOn: true, tagY: 0, tagSwing: 0.02 * Math.sin((f2 - ENTER4) / 18), chain: 1, tug: 0 });
+        A3.tag.set(54e7);
+        const flash = f2 >= N7902 ? 0.55 + 0.45 * clamp01((f2 - N7902) / 8) : 1;
+        A3.plinth.update({
+          count: 79e7,
+          ink: 1,
+          lit: flash,
+          flip1: SOFT(clamp01((f2 - (BILL - 6)) / 10)),
+          flip2: SOFT(clamp01((f2 - (BILL - 2)) / 11))
+        });
+        const d2 = dropIn(f2, PRINTER_LAND, { h: 1300 });
+        rec.group.visible = d2.on;
+        rec.group.position.y = d2.y;
+        rec.update({ feed: feedAt(f2, at) });
+        billR.update(f2, BILL + 4);
+        redR.update(f2, INF);
+      }
+    };
+  }
+};
 
 // src/world/film3d.ts
-var PLACES = [HookShowcase, ExplainPlace, SidesShowcase, BondsPlace, MoneyShowcase, WorstPlace, BoardPlace, FairPlace, VerdictPlace];
+var PLACES = [HookPlace, ExplainPlace, SidesPlace, BondsPlace, MoneyPlace, WorstPlace, BoardPlace, FairPlace, VerdictPlace];
 var WINDOWS = PLACES.map((p2, i2) => ({ id: p2.id, from: i2 === 0 ? 0 : p2.enter, to: i2 + 1 < PLACES.length ? PLACES[i2 + 1].enter : TOTAL_FRAMES }));
 for (let i2 = 1; i2 < WINDOWS.length; i2++) if (WINDOWS[i2].from <= WINDOWS[i2 - 1].from) throw new Error(`038 world: ${WINDOWS[i2].id} enters at f${WINDOWS[i2].from}, not after ${WINDOWS[i2 - 1].id}`);
 var SHOTS = PLACES.map((p2, i2) => {
@@ -71403,10 +74358,10 @@ var labelOf = (o2, root) => {
 };
 var corners = (b2) => [0, 1, 2, 3, 4, 5, 6, 7].map((i2) => new Vector3(i2 & 1 ? b2.max.x : b2.min.x, i2 & 2 ? b2.max.y : b2.min.y, i2 & 4 ? b2.max.z : b2.min.z));
 var itemsOf = (root) => {
-  const fit = [], free = [], loose = [];
+  const fit2 = [], free = [], loose = [];
   root.traverse((o2) => {
     if (o2.userData.fitOn) {
-      fit.push(o2);
+      fit2.push(o2);
       return;
     }
     if (!o2.userData.isText) return;
@@ -71419,18 +74374,18 @@ var itemsOf = (root) => {
     }
     loose.push(o2);
   });
-  return { fit, free, loose };
+  return { fit: fit2, free, loose };
 };
 var boxIn = (item, inv, root) => {
   const box = new Box3(), v2 = new Vector3(), m4 = new Matrix4();
   let any = false;
   item.traverse((n2) => {
-    const mesh = n2;
-    if (!mesh.isMesh || !mesh.geometry || !shown(mesh, root)) return;
-    if (!mesh.geometry.boundingBox) mesh.geometry.computeBoundingBox();
-    const b2 = mesh.geometry.boundingBox;
+    const mesh2 = n2;
+    if (!mesh2.isMesh || !mesh2.geometry || !shown(mesh2, root)) return;
+    if (!mesh2.geometry.boundingBox) mesh2.geometry.computeBoundingBox();
+    const b2 = mesh2.geometry.boundingBox;
     if (!Number.isFinite(b2.min.x)) return;
-    m4.multiplyMatrices(inv, mesh.matrixWorld);
+    m4.multiplyMatrices(inv, mesh2.matrixWorld);
     for (const c2 of corners(b2)) {
       box.expandByPoint(v2.copy(c2).applyMatrix4(m4));
       any = true;
@@ -71444,8 +74399,8 @@ var textCheck = (places, step = 2) => {
   let texts = 0, freeN = 0, samples = 0;
   for (const pl of places) {
     const b2 = pl.build(), root = b2.group;
-    const { fit, free, loose } = itemsOf(root);
-    texts += fit.length;
+    const { fit: fit2, free, loose } = itemsOf(root);
+    texts += fit2.length;
     freeN += free.length;
     for (const o2 of loose) unregistered.push({ place: pl.id, text: `"${o2.userData.textStr ?? "?"}" ${labelOf(o2, root)}` });
     const inv = new Matrix4(), dir = new Vector3(), up = new Vector3(), q2 = new Quaternion(), sc = new Vector3(), p0 = new Vector3();
@@ -71453,7 +74408,7 @@ var textCheck = (places, step = 2) => {
       b2.update(f2);
       root.updateMatrixWorld(true);
       samples++;
-      for (const item of fit) {
+      for (const item of fit2) {
         const surf = item.userData.fitOn;
         if (!surf.isMesh) throw new Error(`world check: ${pl.id}: "${item.userData.textStr}" is registered on a ${surf.type}, not a Mesh`);
         if (!shown(surf, root)) continue;
@@ -71537,12 +74492,12 @@ var shrinkOf = (g2, s2, scale) => {
     for (let i2 = 0; i2 < pos.count; i2++) pos.setXYZ(i2, c2.x + (pos.getX(i2) - c2.x) * fx, c2.y + (pos.getY(i2) - c2.y) * fy, c2.z + (pos.getZ(i2) - c2.z) * fz);
     pos.needsUpdate = true;
     const idx = geo.index ? Array.from(geo.index.array) : Array.from({ length: pos.count }, (_2, i2) => i2);
-    const keep = [], A3 = new Vector3(), B3 = new Vector3(), C22 = new Vector3(), ab = new Vector3(), ac = new Vector3();
+    const keep = [], A3 = new Vector3(), B3 = new Vector3(), C23 = new Vector3(), ab = new Vector3(), ac = new Vector3();
     for (let i2 = 0; i2 + 2 < idx.length; i2 += 3) {
       A3.fromBufferAttribute(pos, idx[i2]);
       B3.fromBufferAttribute(pos, idx[i2 + 1]);
-      C22.fromBufferAttribute(pos, idx[i2 + 2]);
-      if (ab.subVectors(B3, A3).cross(ac.subVectors(C22, A3)).lengthSq() > 1e-10) keep.push(idx[i2], idx[i2 + 1], idx[i2 + 2]);
+      C23.fromBufferAttribute(pos, idx[i2 + 2]);
+      if (ab.subVectors(B3, A3).cross(ac.subVectors(C23, A3)).lengthSq() > 1e-10) keep.push(idx[i2], idx[i2 + 1], idx[i2 + 2]);
     }
     geo.setIndex(keep);
     geo.computeBoundingBox();
