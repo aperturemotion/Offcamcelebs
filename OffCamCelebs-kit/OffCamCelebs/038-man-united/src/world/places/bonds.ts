@@ -73,11 +73,11 @@ export const BondsPlace: Place3 = {
   shots: ({ from, to }): CamKey3[] => [
     cut(from, [X0 - 260, 1450, 1500], [X0, 380, 40], { fov: 40, focus: [X0, 380, 0], why: "high on the calendar" }),
     dolly(from + 1, Math.max(20, T1 - from - 2), [X0 - 80, 1250, 1250], [X0, 400, 40], { fov: 40, ease: SOFT, why: "push: 2005 flips to 2010" }),
-    travel(T1, T1_DUR, [X1 - 60, 1800, 2400], [X1 + 160, 280, 60], { fov: 40, why: "along the table to the press", vol: 0.5 }),
-    dolly(T1 + T1_DUR + 1, Math.max(20, T2 - (T1 + T1_DUR) - 2), [X1 + 260, 1750, 3300], [X1 + 260, 300, 120], { fov: 40, ease: SOFT, why: "push on the press: £504m" }),
-    travel(T2, T2_DUR, [X2 - 900, 2000, 3000], [X2 - 450, 480, 60], { fov: 40, why: "along the table to the vault", vol: 0.5 }),
-    dolly(T2 + T2_DUR + 1, Math.max(20, SLAM[1] - (T2 + T2_DUR) - 2), [X2 - 300, 1800, 3500], [X2 - 80, 560, 0], { fov: 40, ease: SOFT, why: "the bonds fly into the vault" }),
-    dolly(SLAM[1] + 1, Math.max(16, to - SLAM[1] - 2), [X2 - 60, 1450, 3100], [X2, 620, 150], { fov: 40, ease: SOFT, why: "in on the door: PAID OFF" }),
+    cut(T1, [X1 + 200, 1800, 3750], [X1 + 220, 680, 120], { fov: 40, focus: [X1 + 220, 400, 0], why: "cut to the press" }),
+    dolly(T1 + 1, Math.max(20, T2 - T1 - 2), [X1 + 260, 1750, 3500], [X1 + 260, 680, 120], { fov: 40, ease: SOFT, why: "push on the press: £504m" }),
+    travel(T2, T2_DUR, [X2 - 900, 2000, 3300], [X2 - 350, 820, 60], { fov: 40, why: "along the table to the vault", vol: 0.5 }),
+    dolly(T2 + T2_DUR + 1, Math.max(20, SLAM[1] - (T2 + T2_DUR) - 2), [X2 - 120, 1800, 3800], [X2 + 130, 860, 0], { fov: 40, ease: SOFT, why: "the bonds fly into the vault" }),
+    dolly(SLAM[1] + 1, Math.max(16, to - SLAM[1] - 2), [X2 - 60, 1450, 3400], [X2, 860, 150], { fov: 40, ease: SOFT, why: "in on the door: PAID OFF" }),
   ],
   lights: (f): Lights => {
     const cx = f < T1 ? X0 : f < T2 ? X1 : X2 - 300;

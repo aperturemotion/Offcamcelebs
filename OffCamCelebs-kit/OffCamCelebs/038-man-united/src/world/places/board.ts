@@ -70,13 +70,13 @@ const shots = ({ from, to }: { from: number; to: number }): CamKey3[] => [
   cut(from, orbitPos(ORB_A.c, ORB_A.a0, ORB_A.r0, ORB_A.y0), ORB_A.c, { fov: 40, why: "cut: the calendar" }),
   orbit(from + 1, B0 - from - 2, ORB_A, { fov: 40, ease: SOFT, why: "orbit and push on the calendar" }),
   // 2 the stand: low over the front seats, crane up to the board, push in on it, a slow drift through the page switch
-  cut(B0, [XS - 500, 380, 4300], [XS + 80, 900, 0], { fov: 46, why: "cut: the stand, low at the seats" }),
-  crane(B0 + 1, CNT0[0] + 8 - B0, [XS + 120, 1380, 4600], [CTR[0] - 120, CTR[1] - 30, CTR[2]], { fov: 46, bulge: [0, 0, 300], why: "crane up the stand to the scoreboard" }),
+  cut(B0, [XS + 40, 1360, 4700], [CTR[0] - 140, CTR[1] - 40, CTR[2]], { fov: 46, why: "cut: the scoreboard over the stand" }),
+  dolly(B0 + 1, CNT0[0] + 8 - B0, [XS + 120, 1380, 4600], [CTR[0] - 120, CTR[1] - 30, CTR[2]], { fov: 46, ease: SOFT, why: "drift on the scoreboard" }),
   dolly(CNT0[0] + 9, SW - CNT0[0] - 10, [XS + 180, 1440, 3950], [CTR[0] - 100, CTR[1] - 10, CTR[2]], { fov: 46, ease: SOFT, why: "push in on the board" }),
   dolly(SW, C0 - SW - 1, [XS + 330, 1470, 3650], [CTR[0] - 80, CTR[1], CTR[2]], { fov: 46, ease: SOFT, why: "drift on the board through the page switch" }),
   // 3 the day counter: low three-quarter, the stand and its red board behind; a slow push as the coins pour
-  cut(C0, [DC[0] - 1350, 600, DC[2] + 2950], [DC[0] - 170, 470, DC[2]], { fov: 44, why: "cut: the day counter" }),
-  dolly(C0 + 1, Math.max(20, to - C0 - 2), [DC[0] - 1150, 540, DC[2] + 2650], [DC[0] - 150, 450, DC[2]], { fov: 44, ease: SOFT, why: "push in as the coins pour" }),
+  cut(C0, [DC[0] - 1350, 600, DC[2] + 2950], [DC[0] - 170, 680, DC[2]], { fov: 44, why: "cut: the day counter" }),
+  dolly(C0 + 1, Math.max(20, to - C0 - 2), [DC[0] - 1150, 540, DC[2] + 2650], [DC[0] - 150, 660, DC[2]], { fov: 44, ease: SOFT, why: "push in as the coins pour" }),
 ];
 
 // ── the light: the calendar's rig; then the stand's, red rising as the figures land; the day counter's, red behind ──

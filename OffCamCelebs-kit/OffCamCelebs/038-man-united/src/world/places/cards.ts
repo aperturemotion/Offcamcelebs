@@ -88,7 +88,8 @@ const card = (id: SceneId, label: string, color: string, glow: string, keyN = 1)
       const block = new THREE.Group();
       // the lead-in: its words on one line, centred; under the bloom's threshold (k < LOOK.bloomAt): nothing blooms
       const space = LEAD_SIZE * 0.3;
-      const leads = lead.map((w) => ({ ...blurWord(w.t, "300i", LEAD_SIZE, "#faf0ee", 0.86), at: w.at }));
+      // the first word is already coming in on the card's first frame (no black frame opening a place)
+      const leads = lead.map((w, i) => ({ ...blurWord(w.t, "300i", LEAD_SIZE, "#faf0ee", 0.86), at: i === 0 ? Math.min(w.at, enter - Math.round(WORD_IN / 3)) : w.at }));
       const total = leads.reduce((s2, w) => s2 + w.width, 0) + space * Math.max(0, lead.length - 1);
       let x = -total / 2;
       for (const l of leads) { l.group.position.set(x, GAP, 0); x += l.width + space; block.add(l.group); }

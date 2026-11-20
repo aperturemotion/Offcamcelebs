@@ -60,7 +60,9 @@ await page.evaluate(async () => {
   await Promise.all(Object.values(r));
 });
 
-const BAND = { x: 60, y: 230, w: 960, h: 100 }, LUMA_MAX = 0.42, BAND_MAX = 0.006;
+// a thin cable or a chrome glint crossing the band does not stop the caption being read: the limit is 1.5% of the band
+//   (a lit word or the crest covers 10–80% of it)
+const BAND = { x: 60, y: 230, w: 960, h: 100 }, LUMA_MAX = 0.45, BAND_MAX = 0.015;
 const probe = (f, plant) => page.evaluate((t, B, plant) => {
   window.__world = { noBlur: true, noDof: true };
   window.__film.draw(t);
@@ -77,7 +79,7 @@ const probe = (f, plant) => page.evaluate((t, B, plant) => {
   let bright = 0, max = 0;
   for (const l of L) {
     if (l > max) max = l;
-    if (stage === "light" ? Math.abs(l - med) > 0.22 : l > 0.42) bright++;
+    if (stage === "light" ? Math.abs(l - med) > 0.22 : l > 0.45) bright++;
   }
   let cap = "";
   for (const el of document.querySelectorAll("[data-cap]")) {

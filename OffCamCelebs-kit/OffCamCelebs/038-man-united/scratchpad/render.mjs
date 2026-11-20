@@ -121,6 +121,13 @@ if (hasVo !== "true" || provisional) console.warn("⚠ HAS_VO is off / cues are 
   const wc = spawnSync(process.execPath, ["scratchpad/worldcheck.mjs", "all"], { stdio: "inherit" });
   if (wc.status !== 0) refuse(["REFUSING — the world checks failed (scratchpad/worldcheck.mjs): a text overhangs its surface, a text is", "unregistered, or two parts pass through each other. Fix the film; never hand it back with a hit."]);
 }
+// ── THE CAPTION LINE CLEAR CHECK (038 notes: "nothing bright or readable in the caption band while a caption shows").
+//    Every 3rd frame of the world canvas, the band y 230–330 (x 60–1020): bright pixels (dark stages) or off-median
+//    pixels (light stages) over 1.5% of the band while a caption is on screen → refuse. Behind a planted-rect canary.
+{
+  const cb = spawnSync(process.execPath, ["scratchpad/capbandrun.mjs", "3"], { stdio: "inherit" });
+  if (cb.status !== 0) refuse(["REFUSING — the caption-band check failed (scratchpad/capbandrun.mjs): something bright sits in the caption", "band while a caption shows, or its canary did not fire. Reframe the shot; never hand it back with a hit."]);
+}
 if (process.argv.includes("--check")) {
   console.log(`--check: guards passed${REVIEW ? " (REVIEW mode)" : ""}; not rendering.`);
   process.exit(0);

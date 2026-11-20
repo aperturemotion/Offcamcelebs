@@ -86,7 +86,7 @@ export const OPENING = { pos: [-760, 1560, 4550] as Vec, look: [0, 2150, 0] as V
 /** the sign framing (the count; the verdict's flip) */
 export const SIGN = { pos: [-330, 1060, 2750] as Vec, look: [0, 970, 400] as Vec, fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] as Vec } as const;
 /** the stamp framing */
-export const INK = { pos: [-520, 980, 2950] as Vec, look: [-160, 910, 300] as Vec, fov: 44, focus: [0, 266, PLINTH.d / 2] as Vec } as const;
+export const INK = { pos: [-360, 920, 2760] as Vec, look: [-50, 870, 300] as Vec, fov: 44, focus: [0, 266, PLINTH.d / 2] as Vec } as const;
 
 /** the crane lowers the crest: its height above the cradle (frame 0 is mid-descent), landing on LAND with a small settle */
 const lift = (f: number) => {
@@ -114,15 +114,18 @@ export const stampPose = (stamp: THREE.Group, plinth: { faceZ: number; inkY: num
 
 export const HookPlace: Place3 = {
   id: S, label: "1 Set A: the crane lowers the crest; £790,000,000; BORROWED £540,000,000; BILLED TO: MANCHESTER UNITED", enter: 0, stage: "dark",
+  // ★ (038 review) the caption band stays clear in every frame: the wide opening drifts sideways (no crane down through
+  //   the beam), then HARD CUTS to the sign as the crest lands, and to the hook-block framing as the tag drops (R23: an idea
+  //   changes on a cut); moves inside a framing never sweep a lit object up through the band
   shots: ({ to }): CamKey3[] => [
     cut(0, OPENING.pos, OPENING.look, { fov: OPENING.fov, focus: OPENING.focus, why: "open on the crane lowering the crest" }),
-    { ...crane(1, LAND + 10, SIGN.pos, SIGN.look, { fov: SIGN.fov, bulge: [0, 0, 140], why: "crane down with the crest onto the sign" }), focus: SIGN.focus },
-    { ...dolly(LAND + 12, C1 - 4 - (LAND + 12), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
-    { ...crane(C1 - 2, BORROWED - 10 - (C1 - 2), [560, 1560, 3650], [470, 1620, 0], { fov: 46, bulge: [80, 0, 160], why: "rise to the hook block: nameplate, tag and crest in one frame" }), focus: [500, 1600, 0] as Vec },
-    { ...dolly(BORROWED - 8, C2 + 6 - (BORROWED - 8), [520, 1540, 3500], [460, 1610, 0], { fov: 46, ease: SOFT, why: "hold on the tag as it drops" }), focus: [600, 1600, 0] as Vec },
-    { ...crane(C2 + 7, SNAP[0] - 2 - (C2 + 7), [620, 1360, 3700], [560, 1400, 0], { fov: 46, bulge: [0, 0, 100], why: "down the tag to the crest" }), focus: [400, 1300, 0] as Vec },
-    { ...dolly(SNAP[1] + 2, SLAM - 14 - (SNAP[1] + 2), INK.pos, INK.look, { fov: INK.fov, why: "drop to the plinth's face" }), focus: INK.focus },
-    { ...dolly(SLAM - 10, to - (SLAM - 10) - 1, [-470, 960, 2800], [-150, 910, 300], { fov: 44, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus },
+    { ...dolly(1, LAND - 1, [OPENING.pos[0] + 260, OPENING.pos[1], OPENING.pos[2] - 120], [OPENING.look[0] + 220, OPENING.look[1], 0], { fov: OPENING.fov, ease: SOFT, why: "drift with the crest as it comes down" }), focus: OPENING.focus },
+    cut(LAND, SIGN.pos, SIGN.look, { fov: SIGN.fov, focus: SIGN.focus, why: "cut to the sign as the crest lands" }),
+    { ...dolly(LAND + 1, C1 - 4 - (LAND + 1), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
+    cut(C1 - 2, [350, 1214, 4180], [350, 1214, 0], { fov: 46, focus: [500, 1600, 0] as Vec, why: "cut to the hook block: nameplate, tag and crest in one frame" }),
+    { ...dolly(C1 - 1, SNAP[0] - 2 - (C1 - 1), [440, 1214, 4100], [420, 1214, 0], { fov: 46, ease: SOFT, why: "drift as the tag drops and the chain runs out" }), focus: [450, 1450, 0] as Vec },
+    cut(SNAP[1] + 2, INK.pos, INK.look, { fov: INK.fov, focus: INK.focus, why: "cut to the crest and the plinth's face" }),
+    { ...dolly(SNAP[1] + 3, to - (SNAP[1] + 3) - 1, [-300, 910, 2680], [-40, 875, 300], { fov: 44, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus },
   ],
   lights: (f) => {
     const p790 = f >= N790 ? Math.exp(-(f - N790) / 12) : 0, pDrop = f >= BORROWED ? Math.exp(-(f - BORROWED) / 12) : 0, pSlam = f >= SLAM ? Math.exp(-(f - SLAM) / 14) : 0;

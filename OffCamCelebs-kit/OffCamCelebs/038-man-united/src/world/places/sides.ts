@@ -29,7 +29,8 @@ import { makeCashStack, CASH } from "../obj/cash";
 const S = "sides" as const;
 const ENTER = enterOf(S);
 const AMERICAN = word(S, 0, /^American/), FAMILY = word(S, 0, /^family/), Y2005 = word(S, 0, /^2005/), MOSTLY = word(S, 0, /^mostly/), LOANS = word(S, 0, /^loans/);
-const BALL_LAND = Math.max(ENTER + 7, AMERICAN + 2);
+// ★ (038 review) the ball is already dropping on the cut (a short drop: it stays below the caption band)
+const BALL_LAND = ENTER + 6;
 const PLATES_ON = FAMILY;
 const CAL_LAND = Y2005 + 1;
 const WHEEL = [CAL_LAND + 4, CAL_LAND + 16] as const, DOOR = [CAL_LAND + 12, CAL_LAND + 34] as const;
@@ -69,18 +70,20 @@ const crestAt = (f: number) => {
 
 export const SidesPlace: Place3 = {
   id: S, label: "3 Set B: two sides (the Glazer family, the club), 2005, the loans", enter: ENTER, stage: "dark",
+  // ★ (038 review) staged by DEPTH: a low diagonal along the row, the Glazer side big in front, United behind it, the vault
+  //   between; every lit thing below the caption band
   shots: ({ from, to }): CamKey3[] => [
-    cut(from, [-560, 560, 1500], [BALL_X + 40, 420, 0], { fov: 44, focus: [BALL_X, 380, 0], why: "low on the falling flag ball" }),
-    dolly(from + 1, Math.max(24, CAL_LAND - 8 - from), [-20, 900, 3650], [20, 400, 0], { fov: 44, ease: SOFT, why: "back: both sides" }),
-    crane(CAL_LAND - 2, Math.max(26, DOOR[1] - CAL_LAND - 2), [160, 1450, 4150], [30, 520, -500], { fov: 44, why: "up and back: the vault opens" }),
-    dolly(DOOR[1] + 1, Math.max(20, to - DOOR[1] - 2), [-560, 1150, 3700], [-380, 420, -220], { fov: 44, ease: SOFT, why: "track left: the cash and the crest go to the US side" }),
+    cut(from, [-1950, 720, 2050], [120, 380, -150], { fov: 44, focus: [LP.x, 300, 0], why: "low diagonal: the Glazer side in front, United behind" }),
+    dolly(from + 1, Math.max(24, CAL_LAND - 8 - from), [-1820, 760, 2200], [200, 400, -200], { fov: 44, ease: SOFT, why: "drift along the row" }),
+    crane(CAL_LAND - 2, Math.max(26, DOOR[1] - CAL_LAND - 2), [-1250, 1050, 2700], [60, 440, -500], { fov: 44, why: "up and back: the vault opens" }),
+    dolly(DOOR[1] + 1, Math.max(20, to - DOOR[1] - 2), [-1650, 880, 2350], [-300, 380, -260], { fov: 44, ease: SOFT, why: "track left: the cash and the crest go to the US side" }),
   ],
   lights: (f): Lights => {
     const L = stdLights([0, 480, -300], { s: 1.25, key: 3.5, rim: 3.2, back: 2.6, amb: 0.16 });
     L.accent = { pos: [VX, MOUTH_Y + 80, VZ + 380], color: K.amber, i: 0.9 * ramp(f, DOOR[0], DOOR[1], SETTLE) };
     return L;
   },
-  blur: (f) => dropIn(f, BALL_LAND, { h: 1100, fall: 10 }).fast || dropIn(f, CAL_LAND, { h: 1000, fall: 9 }).fast
+  blur: (f) => dropIn(f, BALL_LAND, { h: 240, fall: 6 }).fast || dropIn(f, CAL_LAND, { h: 300, fall: 7 }).fast
     || [0, 1, 2].some((k) => cashAt(k, f).fast) || crestAt(f).fast,
   cues: (): PlaceCue[] => [
     { kind: "hit", s: "thud", at: BALL_LAND, vol: 0.4, why: "the flag ball lands on the Glazer plinth" },
@@ -126,13 +129,13 @@ export const SidesPlace: Place3 = {
     return {
       group,
       update: (f) => {
-        const d = dropIn(f, BALL_LAND, { h: 1100, fall: 10 });
+        const d = dropIn(f, BALL_LAND, { h: 240, fall: 6 });
         ball.group.visible = d.on;
         ball.group.position.set(BALL_X, LP.h + BALL_R + d.y, 0);
         ball.group.rotation.y = -0.5 + f * 0.012;
         const lv = ramp(f, PLATES_ON - 2, PLATES_ON + 8, SETTLE);
         for (const m of plateLit) { m.color.copy(m.userData.full ?? m.color).multiplyScalar(0.25 + 0.75 * lv); }
-        const c = dropIn(f, CAL_LAND, { h: 1000, fall: 9 });
+        const c = dropIn(f, CAL_LAND, { h: 300, fall: 7 });
         calG.visible = c.on;
         calG.position.y = c.y;
         cal.update({ year: 0, flip: 0 });

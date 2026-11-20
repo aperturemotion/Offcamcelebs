@@ -26,7 +26,7 @@ const N790 = word(S, 0, /^790/), PRICE = word(S, 0, /^price/), C1 = cue(S, 1), B
 const INF = word(S, 2, /^inflated/i), SEND = cue(S, 3);
 // ★ the receipt prints AFTER the flip (the brief's order: the sign flips on "bill", the receipt prints the rating), beside the
 //   plinth on the right, so its paper never covers the sign
-const PRINTER_LAND = BILL + 14, PX = 1000, PZ = PLINTH.d / 2 + 400;
+const PRINTER_LAND = BILL + 14, PX = 760, PZ = PLINTH.d / 2 + 1750;   // ★ (038 review) in from the crane leg (x 1450), which stood in the caption band
 export const VD = { land: PRINTER_LAND, price: PRICE, bill: BILL, inf: INF, send: SEND } as const;
 
 /** the receipt's feed: each line lands on its word */
@@ -43,10 +43,15 @@ export const VerdictPlace: Place3 = {
   id: S, label: "9 Set A again: the receipt; the sign flips to PAID FOR BY: MANCHESTER UNITED; RATING: INFLATED", enter: ENTER, stage: "dark",
   shots: ({ from, to }): CamKey3[] => [
     cut(from, SIGN.pos, SIGN.look, { fov: SIGN.fov, focus: SIGN.focus, why: "cut back to set A, on the sign" }),
-    { ...dolly(from + 1, BILL - 14 - (from + 1), [-200, 740, 2620], [0, 630, 420], { fov: 42, ease: SOFT, why: "the opening's push-in on the sign" }), focus: SIGN.focus },
-    { ...dolly(BILL + 10, INF - 22 - (BILL + 10), [540, 760, 3400], [540, 520, 450], { fov: 50, why: "truck right: the flipped sign and the printer landing" }), focus: [700, 480, 560] as Vec },
-    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 140, 610, PZ + 2000], [PX + 30, 470, PZ], { fov: 42, why: "push in on the receipt" }), focus: [PX, 460, PZ] as Vec },
-    { ...crane(SEND - 2, to - (SEND - 2) - 1, OPENING.pos, OPENING.look, { fov: OPENING.fov, bulge: [0, 0, 200], why: "pull up and back to the opening framing" }), focus: OPENING.focus },
+    { ...dolly(from + 1, BILL - 14 - (from + 1), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "the opening's push-in on the sign" }), focus: SIGN.focus },
+    // ★ (038 review) cut to the printer seen from above (the crest and the tag stay out of the caption band)
+    cut(BILL + 8, [PX - 70, 2190, PZ + 1120], [PX + 30, 300, PZ], { fov: 46, focus: [PX, 420, PZ] as Vec, why: "cut to the printer as it lands" }),
+    { ...dolly(BILL + 9, INF - 22 - (BILL + 9), [PX - 55, 2110, PZ + 1065], [PX + 30, 320, PZ], { fov: 46, ease: SOFT, why: "drift as it prints" }), focus: [PX, 440, PZ] as Vec },
+    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 55, 1860, PZ + 960], [PX + 20, 420, PZ], { fov: 42, why: "push in on the receipt" }), focus: [PX, 460, PZ] as Vec },
+    // ★ (038 review) a crane up from the receipt swept the crest and the beam through the caption band: CUT to the opening's
+    //   framing (drifted the other way) and settle exactly on frame 0's pose, so the loop joins
+    cut(SEND - 2, [OPENING.pos[0] - 220, OPENING.pos[1], OPENING.pos[2] + 120], [OPENING.look[0] - 190, OPENING.look[1], 0], { fov: OPENING.fov, focus: OPENING.focus, why: "cut to the opening framing" }),
+    { ...dolly(SEND - 1, to - (SEND - 1) - 1, OPENING.pos, OPENING.look, { fov: OPENING.fov, ease: SOFT, why: "settle on frame 0's pose (the loop)" }), focus: OPENING.focus },
   ],
   lights: (f) => {
     const p790 = f >= N790 ? Math.exp(-(f - N790) / 12) : 0, pBill = f >= BILL ? Math.exp(-(f - BILL) / 14) : 0, pInf = f >= INF ? Math.exp(-(f - INF) / 14) : 0;
@@ -55,7 +60,7 @@ export const VerdictPlace: Place3 = {
     if (f >= BILL) L.back = backGlow([0, 700, 0], K.red, 2.2 * (0.45 + 0.55 * Math.max(pBill, pInf)));
     return L;
   },
-  blur: (f) => dropIn(f, PRINTER_LAND, { h: 1300 }).fast,
+  blur: (f) => dropIn(f, PRINTER_LAND, { h: 420 }).fast,
   cues: (): PlaceCue[] => [
     { kind: "hit", s: "pingshort", at: N790, vol: 0.3, why: "the price slat flashes on 790" },
     { kind: "hit", s: "thud", at: PRINTER_LAND, vol: 0.5, why: "the receipt printer lands" },
@@ -90,7 +95,7 @@ export const VerdictPlace: Place3 = {
           count: 790e6, ink: 1, lit: flash,
           flip1: SOFT(clamp01((f - (BILL - 6)) / 10)), flip2: SOFT(clamp01((f - (BILL - 2)) / 11)),
         });
-        const d = dropIn(f, PRINTER_LAND, { h: 1300 });
+        const d = dropIn(f, PRINTER_LAND, { h: 420 });
         rec.group.visible = d.on; rec.group.position.y = d.y;
         rec.update({ feed: feedAt(f, at) });
         billR.update(f, BILL + 4); redR.update(f, INF);

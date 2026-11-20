@@ -59,11 +59,15 @@ export const MoneyPlace: Place3 = {
   id: S, label: "5 Set D: Old Trafford's ticket, shirt and TV money down the pipe into the vault; ESPN: £1bn+", enter: ENTER, stage: "dark",
   shots: ({ from, to }): CamKey3[] => [
     cut(from, [-1750, 1250, 1750], [-560, 300, -520], { fov: 46, focus: [-560, 300, -300], why: "wide: Old Trafford, its money machines" }),
-    dolly(from + 1, TICKET + 2 - from, [TX - 380, 820, 1450], [TX, 380, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "in on the turnstile" }),
-    dolly(TICKET + 4, SHIRT - TICKET - 5, [RX - 380, 1000, 2050], [RX + 60, 480, ITEM_Z - 120], { fov: 44, why: "across to the shirts" }),
-    dolly(SHIRT + 1, TV - SHIRT - 2, [VX_CAM - 300, 1000, 2100], [VX_CAM + 40, 480, ITEM_Z - 120], { fov: 44, why: "across to the TV camera" }),
-    travel(TV + 4, Math.max(30, PAYING + 14 - (TV + 4)), [1250, 1450, 3200], [1650, 760, -150], { fov: 44, why: "with the coins down the pipe to the vault", vol: 0.55 }),
-    dolly(ESPN - 4, Math.max(24, COST - 8 - (ESPN - 4)), [2100, 1500, 4000], [2120, 820, 150], { fov: 44, ease: SOFT, why: "the vault and the ESPN sign" }),
+    dolly(from + 1, TICKET + 2 - from, [TX - 420, 820, 1650], [TX, 620, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "in on the turnstile" }),
+    cut(TICKET + 4, [RX - 440, 1000, 2150], [RX + 40, 600, ITEM_Z - 120], { fov: 44, focus: [RX + 300, 400, ITEM_Z], why: "cut to the shirts" }),
+    dolly(TICKET + 5, Math.max(8, SHIRT - TICKET - 6), [RX - 380, 1000, 2050], [RX + 60, 600, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "drift on the shirts" }),
+    cut(SHIRT + 1, [VX_CAM - 340, 1000, 2200], [VX_CAM + 20, 820, ITEM_Z - 120], { fov: 44, focus: [VX_CAM, 900, ITEM_Z], why: "cut to the TV camera" }),
+    dolly(SHIRT + 2, Math.max(8, TV - SHIRT - 3), [VX_CAM - 300, 1000, 2100], [VX_CAM + 40, 820, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "drift on the TV camera" }),
+    cut(TV + 4, [-150, 1650, 4500], [0, 560, -150], { fov: 50, focus: [0, 400, 0], why: "wide: all three feed the pipe" }),
+    dolly(TV + 5, Math.max(30, PAYING + 14 - (TV + 5)), [300, 1650, 4500], [450, 600, -150], { fov: 50, ease: SOFT, why: "drift with the coins toward the vault" }),
+    cut(ESPN - 4, [2250, 1500, 4700], [2250, 860, 150], { fov: 44, focus: [2050, 700, 300], why: "the vault and the ESPN sign, both whole" }),
+    dolly(ESPN - 3, Math.max(48, COST - 8 - (ESPN - 3)), [2230, 1500, 4500], [2250, 880, 150], { fov: 44, ease: SOFT, why: "hold on the vault and the ESPN sign" }),
     crane(COST - 6, Math.max(26, BILLION + 6 - (COST - 6)), [1820, 1500, 2250], [VX, 1050, -450], { fov: 44, why: "up to the odometer: £1bn+" }),
     dolly(BILLION + 7, Math.max(12, to - (BILLION + 7) - 1), [1780, 1440, 2000], [VX, 1050, -450], { fov: 44, ease: SOFT, why: "hold on the odometer" }),
   ],
@@ -113,7 +117,7 @@ export const MoneyPlace: Place3 = {
     const U0 = [0, 1, 2].map((k) => uOf(itemX[k]));
     // the vault (mirrored: hinged on the right, so the pipe comes in from the left, clear of its door), open
     const vault = makeVault("money");
-    const vplate = vault.label("LOANS");
+    const vplate = vault.label("TAKEOVER DEBT");
     vplate.group.parent!.scale.x = -1;
     vault.group.scale.set(-VS, VS, VS); vault.group.position.set(VX, 0, VZ); vault.group.name = "vault"; group.add(vault.group);
     joined(pipe.group, vault.group, "the pipe runs into the vault's mouth");

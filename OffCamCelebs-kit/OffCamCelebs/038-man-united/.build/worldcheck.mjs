@@ -70941,7 +70941,7 @@ var card = (id, label, color, glow, keyN = 1) => {
       const group = new Group();
       const block3 = new Group();
       const space = LEAD_SIZE * 0.3;
-      const leads = lead.map((w2) => ({ ...blurWord(w2.t, "300i", LEAD_SIZE, "#faf0ee", 0.86), at: w2.at }));
+      const leads = lead.map((w2, i2) => ({ ...blurWord(w2.t, "300i", LEAD_SIZE, "#faf0ee", 0.86), at: i2 === 0 ? Math.min(w2.at, enter - Math.round(WORD_IN / 3)) : w2.at }));
       const total = leads.reduce((s2, w2) => s2 + w2.width, 0) + space * Math.max(0, lead.length - 1);
       let x2 = -total / 2;
       for (const l2 of leads) {
@@ -71625,9 +71625,9 @@ var LAND = 38;
 var COUNT2 = [LAND + 6, N790];
 var SNAP = [MOST - 4, MOST + 10];
 var SLAM = OWN;
-var OPENING = { pos: [-720, 1480, 3150], look: [0, 1840, 0], fov: 50, focus: [0, 1600, 0] };
-var SIGN = { pos: [-330, 780, 2750], look: [0, 640, 400], fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] };
-var INK = { pos: [-320, 400, 2420], look: [0, 300, 320], fov: 42, focus: [0, 266, PLINTH.d / 2] };
+var OPENING = { pos: [-760, 1560, 4550], look: [0, 2150, 0], fov: 50, focus: [0, 1500, 0] };
+var SIGN = { pos: [-330, 1060, 2750], look: [0, 970, 400], fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] };
+var INK = { pos: [-360, 920, 2760], look: [-50, 870, 300], fov: 44, focus: [0, 266, PLINTH.d / 2] };
 var lift = (f2) => {
   if (f2 < LAND) {
     const t3 = clamp01((f2 + 14) / (LAND + 14));
@@ -71659,15 +71659,18 @@ var HookPlace = {
   label: "1 Set A: the crane lowers the crest; \xA3790,000,000; BORROWED \xA3540,000,000; BILLED TO: MANCHESTER UNITED",
   enter: 0,
   stage: "dark",
+  // ★ (038 review) the caption band stays clear in every frame: the wide opening drifts sideways (no crane down through
+  //   the beam), then HARD CUTS to the sign as the crest lands, and to the hook-block framing as the tag drops (R23: an idea
+  //   changes on a cut); moves inside a framing never sweep a lit object up through the band
   shots: ({ to }) => [
     cut(0, OPENING.pos, OPENING.look, { fov: OPENING.fov, focus: OPENING.focus, why: "open on the crane lowering the crest" }),
-    { ...crane(1, LAND + 10, SIGN.pos, SIGN.look, { fov: SIGN.fov, bulge: [0, 0, 140], why: "crane down with the crest onto the sign" }), focus: SIGN.focus },
-    { ...dolly(LAND + 12, C1 - 4 - (LAND + 12), [-180, 720, 2560], [0, 640, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
-    { ...crane(C1 - 2, BORROWED - 10 - (C1 - 2), [1080, 1760, 2900], [720, 1560, 0], { fov: 44, bulge: [80, 0, 160], why: "rise to the hook block" }), focus: [760, 1500, 0] },
-    { ...dolly(BORROWED - 8, C22 + 6 - (BORROWED - 8), [1e3, 1680, 2650], [740, 1480, 0], { fov: 44, ease: SOFT, why: "hold on the tag as it drops" }), focus: [780, 1460, 0] },
-    { ...crane(C22 + 7, SNAP[0] - 2 - (C22 + 7), [940, 1420, 2650], [660, 1360, 0], { fov: 44, bulge: [0, 0, 100], why: "down the tag to the crest" }), focus: [460, 1330, 0] },
-    { ...dolly(SNAP[1] + 2, SLAM - 14 - (SNAP[1] + 2), INK.pos, INK.look, { fov: INK.fov, why: "drop to the plinth's face" }), focus: INK.focus },
-    { ...dolly(SLAM - 10, to - (SLAM - 10) - 1, [-240, 380, 2280], [0, 300, 320], { fov: 42, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus }
+    { ...dolly(1, LAND - 1, [OPENING.pos[0] + 260, OPENING.pos[1], OPENING.pos[2] - 120], [OPENING.look[0] + 220, OPENING.look[1], 0], { fov: OPENING.fov, ease: SOFT, why: "drift with the crest as it comes down" }), focus: OPENING.focus },
+    cut(LAND, SIGN.pos, SIGN.look, { fov: SIGN.fov, focus: SIGN.focus, why: "cut to the sign as the crest lands" }),
+    { ...dolly(LAND + 1, C1 - 4 - (LAND + 1), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
+    cut(C1 - 2, [350, 1214, 4180], [350, 1214, 0], { fov: 46, focus: [500, 1600, 0], why: "cut to the hook block: nameplate, tag and crest in one frame" }),
+    { ...dolly(C1 - 1, SNAP[0] - 2 - (C1 - 1), [440, 1214, 4100], [420, 1214, 0], { fov: 46, ease: SOFT, why: "drift as the tag drops and the chain runs out" }), focus: [450, 1450, 0] },
+    cut(SNAP[1] + 2, INK.pos, INK.look, { fov: INK.fov, focus: INK.focus, why: "cut to the crest and the plinth's face" }),
+    { ...dolly(SNAP[1] + 3, to - (SNAP[1] + 3) - 1, [-300, 910, 2680], [-40, 875, 300], { fov: 44, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus }
   ],
   lights: (f2) => {
     const p790 = f2 >= N790 ? Math.exp(-(f2 - N790) / 12) : 0, pDrop = f2 >= BORROWED ? Math.exp(-(f2 - BORROWED) / 12) : 0, pSlam = f2 >= SLAM ? Math.exp(-(f2 - SLAM) / 14) : 0;
@@ -72063,7 +72066,7 @@ var FAMILY = word(S3, 0, /^family/);
 var Y2005 = word(S3, 0, /^2005/);
 var MOSTLY = word(S3, 0, /^mostly/);
 var LOANS = word(S3, 0, /^loans/);
-var BALL_LAND = Math.max(ENTER + 7, AMERICAN + 2);
+var BALL_LAND = ENTER + 6;
 var PLATES_ON = FAMILY;
 var CAL_LAND = Y2005 + 1;
 var WHEEL = [CAL_LAND + 4, CAL_LAND + 16];
@@ -72111,18 +72114,20 @@ var SidesPlace = {
   label: "3 Set B: two sides (the Glazer family, the club), 2005, the loans",
   enter: ENTER,
   stage: "dark",
+  // ★ (038 review) staged by DEPTH: a low diagonal along the row, the Glazer side big in front, United behind it, the vault
+  //   between; every lit thing below the caption band
   shots: ({ from, to }) => [
-    cut(from, [-560, 560, 1500], [BALL_X + 40, 420, 0], { fov: 44, focus: [BALL_X, 380, 0], why: "low on the falling flag ball" }),
-    dolly(from + 1, Math.max(24, CAL_LAND - 8 - from), [-20, 900, 3650], [20, 400, 0], { fov: 44, ease: SOFT, why: "back: both sides" }),
-    crane(CAL_LAND - 2, Math.max(26, DOOR[1] - CAL_LAND - 2), [160, 1450, 4150], [30, 520, -500], { fov: 44, why: "up and back: the vault opens" }),
-    dolly(DOOR[1] + 1, Math.max(20, to - DOOR[1] - 2), [-560, 1150, 3700], [-380, 420, -220], { fov: 44, ease: SOFT, why: "track left: the cash and the crest go to the US side" })
+    cut(from, [-1950, 720, 2050], [120, 380, -150], { fov: 44, focus: [LP.x, 300, 0], why: "low diagonal: the Glazer side in front, United behind" }),
+    dolly(from + 1, Math.max(24, CAL_LAND - 8 - from), [-1820, 760, 2200], [200, 400, -200], { fov: 44, ease: SOFT, why: "drift along the row" }),
+    crane(CAL_LAND - 2, Math.max(26, DOOR[1] - CAL_LAND - 2), [-1250, 1050, 2700], [60, 440, -500], { fov: 44, why: "up and back: the vault opens" }),
+    dolly(DOOR[1] + 1, Math.max(20, to - DOOR[1] - 2), [-1650, 880, 2350], [-300, 380, -260], { fov: 44, ease: SOFT, why: "track left: the cash and the crest go to the US side" })
   ],
   lights: (f2) => {
     const L3 = stdLights([0, 480, -300], { s: 1.25, key: 3.5, rim: 3.2, back: 2.6, amb: 0.16 });
     L3.accent = { pos: [VX, MOUTH_Y + 80, VZ + 380], color: K2.amber, i: 0.9 * ramp(f2, DOOR[0], DOOR[1], SETTLE) };
     return L3;
   },
-  blur: (f2) => dropIn(f2, BALL_LAND, { h: 1100, fall: 10 }).fast || dropIn(f2, CAL_LAND, { h: 1e3, fall: 9 }).fast || [0, 1, 2].some((k2) => cashAt(k2, f2).fast) || crestAt(f2).fast,
+  blur: (f2) => dropIn(f2, BALL_LAND, { h: 240, fall: 6 }).fast || dropIn(f2, CAL_LAND, { h: 300, fall: 7 }).fast || [0, 1, 2].some((k2) => cashAt(k2, f2).fast) || crestAt(f2).fast,
   cues: () => [
     { kind: "hit", s: "thud", at: BALL_LAND, vol: 0.4, why: "the flag ball lands on the Glazer plinth" },
     { kind: "hit", s: "click", at: PLATES_ON, vol: 0.3, why: "the nameplates light: the American family" },
@@ -72194,7 +72199,7 @@ var SidesPlace = {
     return {
       group,
       update: (f2) => {
-        const d2 = dropIn(f2, BALL_LAND, { h: 1100, fall: 10 });
+        const d2 = dropIn(f2, BALL_LAND, { h: 240, fall: 6 });
         ball.group.visible = d2.on;
         ball.group.position.set(BALL_X, LP.h + BALL_R + d2.y, 0);
         ball.group.rotation.y = -0.5 + f2 * 0.012;
@@ -72202,7 +72207,7 @@ var SidesPlace = {
         for (const m2 of plateLit) {
           m2.color.copy(m2.userData.full ?? m2.color).multiplyScalar(0.25 + 0.75 * lv);
         }
-        const c2 = dropIn(f2, CAL_LAND, { h: 1e3, fall: 9 });
+        const c2 = dropIn(f2, CAL_LAND, { h: 300, fall: 7 });
         calG.visible = c2.on;
         calG.position.y = c2.y;
         cal.update({ year: 0, flip: 0 });
@@ -72457,11 +72462,11 @@ var BondsPlace = {
   shots: ({ from, to }) => [
     cut(from, [X0 - 260, 1450, 1500], [X0, 380, 40], { fov: 40, focus: [X0, 380, 0], why: "high on the calendar" }),
     dolly(from + 1, Math.max(20, T1 - from - 2), [X0 - 80, 1250, 1250], [X0, 400, 40], { fov: 40, ease: SOFT, why: "push: 2005 flips to 2010" }),
-    travel(T1, T1_DUR, [X1 - 60, 1800, 2400], [X1 + 160, 280, 60], { fov: 40, why: "along the table to the press", vol: 0.5 }),
-    dolly(T1 + T1_DUR + 1, Math.max(20, T2 - (T1 + T1_DUR) - 2), [X1 + 260, 1750, 3300], [X1 + 260, 300, 120], { fov: 40, ease: SOFT, why: "push on the press: \xA3504m" }),
-    travel(T2, T2_DUR, [X2 - 900, 2e3, 3e3], [X2 - 450, 480, 60], { fov: 40, why: "along the table to the vault", vol: 0.5 }),
-    dolly(T2 + T2_DUR + 1, Math.max(20, SLAM2[1] - (T2 + T2_DUR) - 2), [X2 - 300, 1800, 3500], [X2 - 80, 560, 0], { fov: 40, ease: SOFT, why: "the bonds fly into the vault" }),
-    dolly(SLAM2[1] + 1, Math.max(16, to - SLAM2[1] - 2), [X2 - 60, 1450, 3100], [X2, 620, 150], { fov: 40, ease: SOFT, why: "in on the door: PAID OFF" })
+    cut(T1, [X1 + 200, 1800, 3750], [X1 + 220, 680, 120], { fov: 40, focus: [X1 + 220, 400, 0], why: "cut to the press" }),
+    dolly(T1 + 1, Math.max(20, T2 - T1 - 2), [X1 + 260, 1750, 3500], [X1 + 260, 680, 120], { fov: 40, ease: SOFT, why: "push on the press: \xA3504m" }),
+    travel(T2, T2_DUR, [X2 - 900, 2e3, 3300], [X2 - 350, 820, 60], { fov: 40, why: "along the table to the vault", vol: 0.5 }),
+    dolly(T2 + T2_DUR + 1, Math.max(20, SLAM2[1] - (T2 + T2_DUR) - 2), [X2 - 120, 1800, 3800], [X2 + 130, 860, 0], { fov: 40, ease: SOFT, why: "the bonds fly into the vault" }),
+    dolly(SLAM2[1] + 1, Math.max(16, to - SLAM2[1] - 2), [X2 - 60, 1450, 3400], [X2, 860, 150], { fov: 40, ease: SOFT, why: "in on the door: PAID OFF" })
   ],
   lights: (f2) => {
     const cx = f2 < T1 ? X0 : f2 < T2 ? X1 : X2 - 300;
@@ -73105,11 +73110,15 @@ var MoneyPlace = {
   stage: "dark",
   shots: ({ from, to }) => [
     cut(from, [-1750, 1250, 1750], [-560, 300, -520], { fov: 46, focus: [-560, 300, -300], why: "wide: Old Trafford, its money machines" }),
-    dolly(from + 1, TICKET + 2 - from, [TX - 380, 820, 1450], [TX, 380, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "in on the turnstile" }),
-    dolly(TICKET + 4, SHIRT - TICKET - 5, [RX - 380, 1e3, 2050], [RX + 60, 480, ITEM_Z - 120], { fov: 44, why: "across to the shirts" }),
-    dolly(SHIRT + 1, TV - SHIRT - 2, [VX_CAM - 300, 1e3, 2100], [VX_CAM + 40, 480, ITEM_Z - 120], { fov: 44, why: "across to the TV camera" }),
-    travel(TV + 4, Math.max(30, PAYING + 14 - (TV + 4)), [1250, 1450, 3200], [1650, 760, -150], { fov: 44, why: "with the coins down the pipe to the vault", vol: 0.55 }),
-    dolly(ESPN - 4, Math.max(24, COST - 8 - (ESPN - 4)), [2100, 1500, 4e3], [2120, 820, 150], { fov: 44, ease: SOFT, why: "the vault and the ESPN sign" }),
+    dolly(from + 1, TICKET + 2 - from, [TX - 420, 820, 1650], [TX, 620, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "in on the turnstile" }),
+    cut(TICKET + 4, [RX - 440, 1e3, 2150], [RX + 40, 600, ITEM_Z - 120], { fov: 44, focus: [RX + 300, 400, ITEM_Z], why: "cut to the shirts" }),
+    dolly(TICKET + 5, Math.max(8, SHIRT - TICKET - 6), [RX - 380, 1e3, 2050], [RX + 60, 600, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "drift on the shirts" }),
+    cut(SHIRT + 1, [VX_CAM - 340, 1e3, 2200], [VX_CAM + 20, 820, ITEM_Z - 120], { fov: 44, focus: [VX_CAM, 900, ITEM_Z], why: "cut to the TV camera" }),
+    dolly(SHIRT + 2, Math.max(8, TV - SHIRT - 3), [VX_CAM - 300, 1e3, 2100], [VX_CAM + 40, 820, ITEM_Z - 120], { fov: 44, ease: SOFT, why: "drift on the TV camera" }),
+    cut(TV + 4, [-150, 1650, 4500], [0, 560, -150], { fov: 50, focus: [0, 400, 0], why: "wide: all three feed the pipe" }),
+    dolly(TV + 5, Math.max(30, PAYING + 14 - (TV + 5)), [300, 1650, 4500], [450, 600, -150], { fov: 50, ease: SOFT, why: "drift with the coins toward the vault" }),
+    cut(ESPN - 4, [2250, 1500, 4700], [2250, 860, 150], { fov: 44, focus: [2050, 700, 300], why: "the vault and the ESPN sign, both whole" }),
+    dolly(ESPN - 3, Math.max(48, COST - 8 - (ESPN - 3)), [2230, 1500, 4500], [2250, 880, 150], { fov: 44, ease: SOFT, why: "hold on the vault and the ESPN sign" }),
     crane(COST - 6, Math.max(26, BILLION + 6 - (COST - 6)), [1820, 1500, 2250], [VX2, 1050, -450], { fov: 44, why: "up to the odometer: \xA31bn+" }),
     dolly(BILLION + 7, Math.max(12, to - (BILLION + 7) - 1), [1780, 1440, 2e3], [VX2, 1050, -450], { fov: 44, ease: SOFT, why: "hold on the odometer" })
   ],
@@ -73190,7 +73199,7 @@ var MoneyPlace = {
     };
     const U0 = [0, 1, 2].map((k2) => uOf(itemX[k2]));
     const vault = makeVault("money");
-    const vplate = vault.label("LOANS");
+    const vplate = vault.label("TAKEOVER DEBT");
     vplate.group.parent.scale.x = -1;
     vault.group.scale.set(-VS2, VS2, VS2);
     vault.group.position.set(VX2, 0, VZ2);
@@ -73821,13 +73830,13 @@ var shots = ({ from, to }) => [
   cut(from, orbitPos(ORB_A.c, ORB_A.a0, ORB_A.r0, ORB_A.y0), ORB_A.c, { fov: 40, why: "cut: the calendar" }),
   orbit(from + 1, B0 - from - 2, ORB_A, { fov: 40, ease: SOFT, why: "orbit and push on the calendar" }),
   // 2 the stand: low over the front seats, crane up to the board, push in on it, a slow drift through the page switch
-  cut(B0, [XS - 500, 380, 4300], [XS + 80, 900, 0], { fov: 46, why: "cut: the stand, low at the seats" }),
-  crane(B0 + 1, CNT0[0] + 8 - B0, [XS + 120, 1380, 4600], [CTR[0] - 120, CTR[1] - 30, CTR[2]], { fov: 46, bulge: [0, 0, 300], why: "crane up the stand to the scoreboard" }),
+  cut(B0, [XS + 40, 1360, 4700], [CTR[0] - 140, CTR[1] - 40, CTR[2]], { fov: 46, why: "cut: the scoreboard over the stand" }),
+  dolly(B0 + 1, CNT0[0] + 8 - B0, [XS + 120, 1380, 4600], [CTR[0] - 120, CTR[1] - 30, CTR[2]], { fov: 46, ease: SOFT, why: "drift on the scoreboard" }),
   dolly(CNT0[0] + 9, SW - CNT0[0] - 10, [XS + 180, 1440, 3950], [CTR[0] - 100, CTR[1] - 10, CTR[2]], { fov: 46, ease: SOFT, why: "push in on the board" }),
   dolly(SW, C0 - SW - 1, [XS + 330, 1470, 3650], [CTR[0] - 80, CTR[1], CTR[2]], { fov: 46, ease: SOFT, why: "drift on the board through the page switch" }),
   // 3 the day counter: low three-quarter, the stand and its red board behind; a slow push as the coins pour
-  cut(C0, [DC[0] - 1350, 600, DC[2] + 2950], [DC[0] - 170, 470, DC[2]], { fov: 44, why: "cut: the day counter" }),
-  dolly(C0 + 1, Math.max(20, to - C0 - 2), [DC[0] - 1150, 540, DC[2] + 2650], [DC[0] - 150, 450, DC[2]], { fov: 44, ease: SOFT, why: "push in as the coins pour" })
+  cut(C0, [DC[0] - 1350, 600, DC[2] + 2950], [DC[0] - 170, 680, DC[2]], { fov: 44, why: "cut: the day counter" }),
+  dolly(C0 + 1, Math.max(20, to - C0 - 2), [DC[0] - 1150, 540, DC[2] + 2650], [DC[0] - 150, 660, DC[2]], { fov: 44, ease: SOFT, why: "push in as the coins pour" })
 ];
 var mixHex = (a2, b2, t2) => "#" + new Color(a2).lerp(new Color(b2), clamp01(t2)).getHexString();
 var lights = (f2) => {
@@ -74059,17 +74068,15 @@ var GLAZ = word(S7, 0, /^Glazers/);
 var FIVE = word(S7, 0, /^five/);
 var TITLES = word(S7, 0, /^titles/);
 var CHAMP = word(S7, 0, /^Champions/);
-var CUP_T = [FAIR + 3, 0, 0, 0, TITLES].map((v2, i2, a2) => i2 === 0 || i2 === 4 ? v2 : Math.round(a2[0] + (TITLES - a2[0]) * i2 / 4));
+var CUP_T = [Math.min(FAIR + 3, E3 - 1), 0, 0, 0, TITLES].map((v2, i2, a2) => i2 === 0 || i2 === 4 ? v2 : Math.round(a2[0] + (TITLES - a2[0]) * i2 / 4));
 var LABELS = ["2007", "2008", "2009", "2011", "2013"];
 var SLOT = [[-560, 1], [0, 1], [560, 1], [-330, 2], [330, 2]];
 var LAND2 = CHAMP + 1;
 var PED = [0, 0, 820];
 var shots2 = ({ from, to }) => [
-  cut(from, [-950, 1180, 1550], [-520, 1120, 0], { fov: 40, why: "cut: the cabinet, close on shelf one" }),
-  dolly(from + 1, CUP_T[2] + 4 - from, [-40, 1250, 1550], [160, 1160, 0], { fov: 40, ease: SOFT, why: "track along shelf one" }),
-  dolly(CUP_T[2] + 5, CUP_T[4] + 4 - CUP_T[2] - 5, [260, 1560, 1700], [120, 1480, 0], { fov: 40, ease: SOFT, why: "rise to shelf two" }),
-  travel(CUP_T[4] + 5, LAND2 - 8 - CUP_T[4] - 5, [-200, 900, 4400], [0, 720, 300], { fov: 42, bulge: [0, 60, 200], why: "pull back: the cabinet and the plinth", vol: 0.45 }),
-  dolly(LAND2 - 7, Math.max(10, to - LAND2 + 6), [-80, 860, 4e3], [0, 700, 300], { fov: 42, ease: SOFT, why: "push in as the cup lands" })
+  cut(from, [-160, 1330, 3800], [0, 1340, 300], { fov: 40, focus: [0, 1150, 0], why: "cut: the cabinet, the first cup springing up" }),
+  dolly(from + 1, CUP_T[4] + 4 - from, [-200, 1200, 4300], [0, 1150, 300], { fov: 41, ease: SOFT, why: "slow pull back as the cups spring up, shelf by shelf" }),
+  dolly(CUP_T[4] + 5, Math.max(10, to - CUP_T[4] - 6), [-80, 1100, 4200], [0, 1080, 300], { fov: 42, ease: SOFT, why: "settle on the cabinet and the plinth as the cup lands" })
 ];
 var lights2 = (f2) => {
   const g2 = ramp(f2, E3 - 2, FAIR + 6, SETTLE), hit = ramp(f2, LAND2 - 1, LAND2 + 10, SETTLE) * (1 - 0.5 * ramp(f2, LAND2 + 14, LAND2 + 40, SOFT));
@@ -74080,11 +74087,10 @@ var lights2 = (f2) => {
 };
 var cues2 = () => [
   ...CUP_T.map((t2, i2) => ({ kind: "hit", s: "pingshort", at: t2 + 2, vol: 0.3, why: `cup ${LABELS[i2]} springs up` })),
-  { kind: "move", s: "whooshsoft", at: CUP_T[4] + 14, end: LAND2 - 8, vol: 0.35, why: "pull back from the shelves" },
   { kind: "hit", s: "thud", at: LAND2, vol: 0.42, why: "the European cup lands on its plinth" },
   { kind: "hit", s: "bloom", at: LAND2, vol: 0.38, why: "CHAMPIONS LEAGUE 2008: the green ring" }
 ];
-var blur2 = (f2) => dropIn(f2, LAND2, { h: 1500, fall: 9, bounce: 0.4 }).fast;
+var blur2 = (f2) => dropIn(f2, LAND2, { h: 500, fall: 7, bounce: 0.4 }).fast;
 var build2 = () => {
   const group = new Group();
   const cab = makeCabinet("fair");
@@ -74115,7 +74121,7 @@ var build2 = () => {
         c2.group.visible = s2 > 1e-3;
         c2.group.scale.setScalar(Math.max(1e-3, s2));
       });
-      const d2 = dropIn(f2, LAND2, { h: 1500, fall: 9, bounce: 0.4 });
+      const d2 = dropIn(f2, LAND2, { h: 500, fall: 7, bounce: 0.4 });
       euro.group.visible = d2.on;
       euro.group.position.y = 120 + d2.y;
       halo.update(f2, LAND2);
@@ -74232,8 +74238,8 @@ var BILL = word(S8, 1, /^bill/);
 var INF = word(S8, 2, /^inflated/i);
 var SEND = cue(S8, 3);
 var PRINTER_LAND = BILL + 14;
-var PX = 1e3;
-var PZ = PLINTH.d / 2 + 400;
+var PX = 760;
+var PZ = PLINTH.d / 2 + 1750;
 var L1 = PRINTER_LAND + 16;
 var L2 = Math.round((L1 + INF) / 2) + 2;
 var feedAt = (f2, at) => {
@@ -74250,10 +74256,15 @@ var VerdictPlace = {
   stage: "dark",
   shots: ({ from, to }) => [
     cut(from, SIGN.pos, SIGN.look, { fov: SIGN.fov, focus: SIGN.focus, why: "cut back to set A, on the sign" }),
-    { ...dolly(from + 1, BILL - 14 - (from + 1), [-200, 740, 2620], [0, 630, 420], { fov: 42, ease: SOFT, why: "the opening's push-in on the sign" }), focus: SIGN.focus },
-    { ...dolly(BILL + 10, INF - 22 - (BILL + 10), [540, 760, 3400], [540, 520, 450], { fov: 50, why: "truck right: the flipped sign and the printer landing" }), focus: [700, 480, 560] },
-    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 140, 610, PZ + 2e3], [PX + 30, 470, PZ], { fov: 42, why: "push in on the receipt" }), focus: [PX, 460, PZ] },
-    { ...crane(SEND - 2, to - (SEND - 2) - 1, OPENING.pos, OPENING.look, { fov: OPENING.fov, bulge: [0, 0, 200], why: "pull up and back to the opening framing" }), focus: OPENING.focus }
+    { ...dolly(from + 1, BILL - 14 - (from + 1), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "the opening's push-in on the sign" }), focus: SIGN.focus },
+    // ★ (038 review) cut to the printer seen from above (the crest and the tag stay out of the caption band)
+    cut(BILL + 8, [PX - 70, 2190, PZ + 1120], [PX + 30, 300, PZ], { fov: 46, focus: [PX, 420, PZ], why: "cut to the printer as it lands" }),
+    { ...dolly(BILL + 9, INF - 22 - (BILL + 9), [PX - 55, 2110, PZ + 1065], [PX + 30, 320, PZ], { fov: 46, ease: SOFT, why: "drift as it prints" }), focus: [PX, 440, PZ] },
+    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 55, 1860, PZ + 960], [PX + 20, 420, PZ], { fov: 42, why: "push in on the receipt" }), focus: [PX, 460, PZ] },
+    // ★ (038 review) a crane up from the receipt swept the crest and the beam through the caption band: CUT to the opening's
+    //   framing (drifted the other way) and settle exactly on frame 0's pose, so the loop joins
+    cut(SEND - 2, [OPENING.pos[0] - 220, OPENING.pos[1], OPENING.pos[2] + 120], [OPENING.look[0] - 190, OPENING.look[1], 0], { fov: OPENING.fov, focus: OPENING.focus, why: "cut to the opening framing" }),
+    { ...dolly(SEND - 1, to - (SEND - 1) - 1, OPENING.pos, OPENING.look, { fov: OPENING.fov, ease: SOFT, why: "settle on frame 0's pose (the loop)" }), focus: OPENING.focus }
   ],
   lights: (f2) => {
     const p790 = f2 >= N7902 ? Math.exp(-(f2 - N7902) / 12) : 0, pBill = f2 >= BILL ? Math.exp(-(f2 - BILL) / 14) : 0, pInf = f2 >= INF ? Math.exp(-(f2 - INF) / 14) : 0;
@@ -74262,7 +74273,7 @@ var VerdictPlace = {
     if (f2 >= BILL) L3.back = backGlow([0, 700, 0], K2.red, 2.2 * (0.45 + 0.55 * Math.max(pBill, pInf)));
     return L3;
   },
-  blur: (f2) => dropIn(f2, PRINTER_LAND, { h: 1300 }).fast,
+  blur: (f2) => dropIn(f2, PRINTER_LAND, { h: 420 }).fast,
   cues: () => [
     { kind: "hit", s: "pingshort", at: N7902, vol: 0.3, why: "the price slat flashes on 790" },
     { kind: "hit", s: "thud", at: PRINTER_LAND, vol: 0.5, why: "the receipt printer lands" },
@@ -74302,7 +74313,7 @@ var VerdictPlace = {
           flip1: SOFT(clamp01((f2 - (BILL - 6)) / 10)),
           flip2: SOFT(clamp01((f2 - (BILL - 2)) / 11))
         });
-        const d2 = dropIn(f2, PRINTER_LAND, { h: 1300 });
+        const d2 = dropIn(f2, PRINTER_LAND, { h: 420 });
         rec.group.visible = d2.on;
         rec.group.position.y = d2.y;
         rec.update({ feed: feedAt(f2, at) });
