@@ -10,7 +10,7 @@ import { word } from "../../r45/time";
 import { SOFT, SETTLE, clamp01, ramp } from "../../r45/tokens";
 import { cut, dolly, type CamKey3, type Vec } from "../cam";
 import { stdLights, type Place3, type PlaceCue, type Lights } from "../place";
-import { MAT, block, ring, dropIn, popUp } from "../kit";
+import { MAT, block, ring, dropIn, dropFalls, popUp } from "../kit";
 import { enterOf } from "../timeline";
 import { makeCabinet, GREEN, CAB } from "../obj/cabinet";
 import { makeLeagueCup, makeEuroCup } from "../obj/cup";
@@ -48,7 +48,8 @@ const cues = (): PlaceCue[] => [
   { kind: "hit", s: "bloom", at: LAND, vol: 0.38, why: "CHAMPIONS LEAGUE 2008: the green ring" },
 ];
 
-const blur = (f: number) => dropIn(f, LAND, { h: 500, fall: 7, bounce: 0.4 }).fast;
+const EDROP = { h: 500, fall: 7, bounce: 0.4 } as const;
+const blur = (f: number) => dropIn(f, LAND, EDROP).fast;
 
 const build = () => {
   const group = new THREE.Group();
@@ -60,8 +61,9 @@ const build = () => {
     group.add(c.group);
     return c;
   });
-  const ped = block(700, 120, 520, 18, MAT.black()); ped.position.set(PED[0], 0, PED[2]); group.add(ped);
+  const ped = block(700, 120, 520, 18, MAT.black()); ped.position.set(PED[0], 60, PED[2]); group.add(ped);   // ★ P17: ON the floor (it was centred on it: half sunk, the cup landing 60 over its top)
   const euro = makeEuroCup("fair-euro", "CHAMPIONS LEAGUE 2008"); euro.group.position.set(PED[0], 120, PED[2]); group.add(euro.group);
+  dropFalls(euro.group, LAND, EDROP, "the European cup drops onto its plinth");
   const halo = ring({ r: 1600, dur: 30, color: GREEN }); halo.mesh.position.set(PED[0], 1.5, PED[2]); group.add(halo.mesh);
   void CAB;
   return {
@@ -69,7 +71,7 @@ const build = () => {
     update: (f: number) => {
       cab.setGlow(ramp(f, E - 2, FAIR + 4, SETTLE));
       cups.forEach((c, i) => { const s = popUp(f, CUP_T[i], 12); c.group.visible = s > 0.001; c.group.scale.setScalar(Math.max(0.001, s)); });
-      const d = dropIn(f, LAND, { h: 500, fall: 7, bounce: 0.4 });
+      const d = dropIn(f, LAND, EDROP);
       euro.group.visible = d.on; euro.group.position.y = 120 + d.y;
       halo.update(f, LAND);
     },

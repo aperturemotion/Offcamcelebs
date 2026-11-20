@@ -5,7 +5,8 @@
 import * as THREE from "three";
 import { MAT } from "../kit";
 
-export const makePipe = (key: string, pts: THREE.Vector3[], r = 86) => {
+/** `avoid`: points (a funnel's throat) a collar must keep 170 clear of (★ P17: a coin dropping in crossed one) */
+export const makePipe = (key: string, pts: THREE.Vector3[], r = 86, o: { avoid?: THREE.Vector3[] } = {}) => {
   void key;
   const group = new THREE.Group();
   const curve = new THREE.CatmullRomCurve3(pts, false, "catmullrom", 0.2);
@@ -21,11 +22,14 @@ export const makePipe = (key: string, pts: THREE.Vector3[], r = 86) => {
   const satin = MAT.satin();
   for (let i = 0; i <= n; i++) {
     const u = i / n, p = curve.getPointAt(u), t = curve.getTangentAt(u);
-    const collar = new THREE.Mesh(new THREE.TorusGeometry(r + 6, 9, 10, 40), satin);
+    if ((o.avoid ?? []).some((a) => Math.hypot(a.x - p.x, a.z - p.z) < 170)) continue;
+    // ★ P17: the collar clamps the glass from OUTSIDE (it stood 3 into the tube, across the coins' way)
+    const collar = new THREE.Mesh(new THREE.TorusGeometry(r + 9 + 0.3, 9, 10, 40), satin);
     collar.position.copy(p); collar.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), t);
     group.add(collar);
-    if (p.y < 400 && p.y - r - 9 > 4) {
-      const h = p.y - r - 9;
+    // the floor post runs up into the collar's tube (13 under the glass: it stood up into the tube, across the coins' way)
+    if (p.y < 400 && p.y - r - 13 > 4) {
+      const h = p.y - r - 13;
       const post = new THREE.Mesh(new THREE.CylinderGeometry(10, 14, h, 12), MAT.black());
       post.position.set(p.x, h / 2, p.z); post.castShadow = true; group.add(post);
     }

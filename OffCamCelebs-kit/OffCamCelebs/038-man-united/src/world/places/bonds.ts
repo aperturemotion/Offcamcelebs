@@ -13,7 +13,7 @@ import { word } from "../../r45/time";
 import { ramp, clamp01, SOFT, SETTLE, EXIT } from "../../r45/tokens";
 import { cut, dolly, travel, type CamKey3 } from "../cam";
 import { lightStageLights, type Place3, type PlaceCue, type Lights } from "../place";
-import { K, litPlate, ring, countUp, pounds, joined } from "../kit";
+import { K, litPlate, ring, countUp, pounds, falling, mounted } from "../kit";
 import { enterOf } from "../timeline";
 import { makeCalendar } from "../obj/calendar";
 import { makeBond, makeBondPress, BOND, BPRESS } from "../obj/bond";
@@ -24,21 +24,31 @@ const S = "bonds" as const;
 const ENTER = enterOf(S);
 const LATER = word(S, 0, /^later/), N500 = word(S, 0, /^500/), BONDS = word(S, 0, /^bonds/), PAY = word(S, 0, /^pay/), LOANS = word(S, 0, /^loans/);
 // the stations along the table (x)
-const X0 = 0, X1 = 1400, X2 = 3000;
+const X0 = 0, X1 = 1400, X2 = 3200;   // (★ P17: the vault 200 further on, so the pile of certificates fits between it and the press)
 const FLIP = [LATER - 12, LATER + 2] as const;
 const T1 = LATER + 6, T1_DUR = 16;
 const STAMPS = [T1 + T1_DUR + 4, T1 + T1_DUR + 18, N500 - 5];
 const COUNT = [STAMPS[0] - 2, N500] as const;
 const T2 = N500 + 8, T2_DUR = 18;
 const WHEEL = [T2 + 2, T2 + 14] as const, DOOR = [T2 + 10, T2 + 30] as const;
-const FLY = [BONDS - 12, BONDS - 4, BONDS + 4], FLY_DUR = 16;
+// (★ P17: all three are inside before the door starts to shut on them)
+const FLY = [BONDS - 14, BONDS - 8, BONDS - 2], FLY_DUR = 14;
 const SLAM = [PAY - 6, PAY + 2] as const;
 const HIT = LOANS + 1;
 export const BD = { flip: FLIP, stamps: STAMPS, count: COUNT, door: DOOR, fly: FLY, slam: SLAM, hit: HIT } as const;
 
-const PILE = new THREE.Vector3(X1 + 640, 0, 120);
-const MOUTH = new THREE.Vector3(X2, 640, -150);   // the vault's mouth (unscaled vault at x X2, front face z = 0)
-
+const PILE = new THREE.Vector3(X1 + 790, 0, 120);   // ★ P17: clear of the press's base (the pile sat 90 into it)
+// ★ P17 (Timur: "the notes at 19 seconds… they're glitching through the object… and through the vault as well"). The vault
+//   here is DEEP (its tunnel runs 900 back): the certificates fly up off the pile, over the open door (it swings out to the
+//   left, toward the camera), level off in front of the vault's mouth and glide straight in along its axis, flat, through
+//   the round opening, to land on the drum's floor inside, one on another. The door then shuts on them. Nothing crosses the
+//   door, the frame or the walls (the pass-through check runs against all of them, no exemption).
+const VDEPTH = 900, VR = 430, VCY = 640;
+const SHEET_YAW = 0.3, SHEET_HX = (BOND.w / 2) * Math.cos(SHEET_YAW) + (BOND.d / 2) * Math.sin(SHEET_YAW);
+/** where the j-th certificate in comes to rest: its corners on the drum's curved floor, the next on top of it */
+const restIn = (j: number) => new THREE.Vector3(X2, VCY - Math.sqrt((VR - 0.3) ** 2 - SHEET_HX * SHEET_HX) + j * (BOND.t + 0.3), -470 - 20 * j);
+const ENTRY = new THREE.Vector3(X2, 700, 640);   // level, on the vault's axis, in front of its mouth
+const PILE_STEP = BOND.t + 0.3;
 const ramAt = (f: number) => {
   let v = 0;
   for (const s of STAMPS) {
@@ -53,19 +63,34 @@ const sheetAt = (k: number, f: number) => {
   const s = STAMPS[k], die = new THREE.Vector3(X1, BPRESS.base + 10, BPRESS.dieZ), top = new THREE.Vector3(PILE.x, k * (BOND.t + 0.6), PILE.z);
   if (f < s - 6) return { p: die, on: false, printed: false, fast: false, rot: 0 };
   if (f < s + 7) return { p: die, on: true, printed: f >= s, fast: false, rot: 0 };
-  const t = clamp01((f - s - 7) / SLIDE), e = SOFT(t);
-  const p = die.clone().lerp(top, e); p.y = die.y + (top.y - die.y) * e * e + Math.sin(Math.PI * e) * 120;
+  // slid off sideways, lifted a little, over the base's edge; only once clear of the base does it drop onto the pile
+  const t = clamp01((f - s - 7) / SLIDE), e = SOFT(t), CLEAR = 0.78;
+  const p = die.clone();
+  if (e < CLEAR) { const w = e / CLEAR; p.x = die.x + (top.x - die.x) * w; p.z = die.z + (top.z - die.z) * w; p.y = die.y + Math.sin(Math.PI * w) * 40; }
+  else { const w = (e - CLEAR) / (1 - CLEAR); p.set(top.x, die.y + (top.y - die.y) * w * w, top.z); }
   return { p, on: true, printed: true, fast: t > 0 && t < 1, rot: -0.2 * e };
 };
-/** the k-th sheet's flight from the pile into the vault: up over the open door, down into the mouth */
+/** the k-th sheet's flight from the pile into the vault: up off the pile and over the open door (a cubic arc, tumbling a
+ *  little), down level onto the vault's axis in front of its mouth, then straight in, flat, to its rest on the drum floor */
+const bez3 = (a: THREE.Vector3, b: THREE.Vector3, c: THREE.Vector3, d: THREE.Vector3, u: number) => {
+  const v = 1 - u;
+  return new THREE.Vector3().addScaledVector(a, v * v * v).addScaledVector(b, 3 * v * v * u).addScaledVector(c, 3 * v * u * u).addScaledVector(d, u * u * u);
+};
 const flightAt = (k: number, f: number) => {
   const a = FLY[2 - k], t = (f - a) / FLY_DUR;   // the TOP sheet goes first
+  const j = 2 - k, rest = restIn(j);
   if (t <= 0) return null;
-  if (t >= 1) return { p: MOUTH.clone().add(new THREE.Vector3(0, 0, -260)), on: false, fast: false, tilt: 0 };
-  const start = new THREE.Vector3(PILE.x, k * (BOND.t + 0.6), PILE.z), ctrl = new THREE.Vector3(X2 - 300, 1900, 500), end = MOUTH.clone().add(new THREE.Vector3(0, -40, -260));
-  const u = SOFT(t);
-  const p = new THREE.Vector3().addScaledVector(start, (1 - u) * (1 - u)).addScaledVector(ctrl, 2 * u * (1 - u)).addScaledVector(end, u * u);
-  return { p, on: true, fast: true, tilt: Math.sin(Math.PI * u) * 0.9 };
+  if (t >= 1) return { p: rest, on: true, fast: false, tilt: 0, yaw: SHEET_YAW };
+  const start = new THREE.Vector3(PILE.x, k * PILE_STEP, PILE.z);
+  const u = SOFT(t), SPLIT = 0.62;
+  if (u < SPLIT) {
+    const w = u / SPLIT;
+    // straight UP off the pile first: the open door swings out over the floor between the pile and the vault
+    const p = bez3(start, new THREE.Vector3(start.x - 60, 2500, start.z + 40), new THREE.Vector3(X2 - 40, 2100, 780), ENTRY, w);
+    return { p, on: true, fast: true, tilt: Math.sin(Math.PI * w) * 0.7, yaw: -0.2 + (SHEET_YAW + 0.2) * w };   // (it left the pile turned −0.2)
+  }
+  const w = (u - SPLIT) / (1 - SPLIT);
+  return { p: ENTRY.clone().lerp(rest, w), on: true, fast: true, tilt: 0, yaw: SHEET_YAW };
 };
 
 export const BondsPlace: Place3 = {
@@ -104,16 +129,23 @@ export const BondsPlace: Place3 = {
     press.group.position.set(X1, 0, 0); press.group.name = "press"; group.add(press.group);
     const blank = makeBond("blank"); blank.group.name = "blank sheet"; group.add(blank.group);
     const sheets = [0, 1, 2].map((k) => { const b = makeBond(`bond${k}`); b.group.name = `bond ${k + 1}`; group.add(b.group); return b; });
-    const vault = makeVault("bonds"); vault.label("BANK LOANS");
+    const vault = makeVault("bonds", { depth: VDEPTH }); vault.label("BANK LOANS");
     vault.group.position.set(X2, 0, 0); vault.group.name = "vault"; group.add(vault.group);
-    for (const b of sheets) { joined(b.group, vault.group, "the bonds fly in through the vault's open mouth"); joined(b.group, press.group, "the sheet lies on the die and the press prints it"); }
-    joined(blank.group, press.group, "the blank sheet lies on the die");
-    sheets.forEach((a, i) => sheets.forEach((b, j) => { if (j !== i) joined(a.group, b.group, "the bonds stack on one another"); }));
+    // the support check: each sheet in flight is declared, no longer than its flight; on the die, the pile and the drum it rests
+    sheets.forEach((b, k) => {
+      falling(b.group, STAMPS[k] + 7, STAMPS[k] + 7 + SLIDE, "the printed sheet is slid off the die onto the pile");
+      falling(b.group, FLY[2 - k], FLY[2 - k] + FLY_DUR, "the certificate flies into the vault");
+    });
+    mounted(press.rod, press.head, "the press's piston runs in its head");
     // the PAID OFF plate the stamp leaves on the door, and the stamp
+    // ★ P17: the plate is stamped flat ON the shut door's wheel (its back against the wheel's knobs), not 30 in front of it
+    const WHEEL_FRONT = 120 + 108 + 26;
     const paid = litPlate(["PAID OFF"], { size: 92, color: K.red, depth: 30 });
-    paid.group.position.set(X2, 640, 300); paid.group.name = "PAID OFF plate"; group.add(paid.group);
+    paid.group.position.set(X2, 640, WHEEL_FRONT + 15 - 0.3); paid.group.name = "PAID OFF plate"; group.add(paid.group);
+    paid.body.name = "PAID OFF plate body";
+    mounted(paid.body, vault.knobs[0], "the PAID OFF plate is stamped onto the door's wheel (against its knobs)");
     const stamp = makeStamp("bonds"); stamp.group.name = "stamp"; group.add(stamp.group);
-    joined(stamp.group, paid.group, "the stamp presses the plate onto the door");
+    falling(stamp.group, HIT - 7, HIT + 13, "the stamp is swung in, slams PAID OFF onto the door, and is swung away");
     const halo = ring({ r: 900, color: K.money }); halo.mesh.position.set(X1, 1.5, 300); group.add(halo.mesh);
     const red = ring({ r: 1000, color: K.red }); red.mesh.position.set(X2, 1.5, 300); group.add(red.mesh);
     return {
@@ -128,18 +160,19 @@ export const BondsPlace: Place3 = {
         blank.group.position.set(X1, BPRESS.base + 10, BPRESS.dieZ);
         sheets.forEach((b, k) => {
           const fl = flightAt(k, f);
-          if (fl) { b.group.visible = fl.on; b.group.position.copy(fl.p); b.group.rotation.set(fl.tilt, 0.3, 0); return; }
+          if (fl) { b.group.visible = fl.on; b.group.position.copy(fl.p); b.group.rotation.set(fl.tilt, fl.yaw, 0, "YXZ"); return; }
           const s = sheetAt(k, f);
           b.group.visible = s.on && s.printed;
           b.group.position.copy(s.p);
-          b.group.rotation.set(0, s.rot, 0);
+          b.group.rotation.set(0, s.rot, 0, "YXZ");
         });
         const open = SOFT(clamp01((f - DOOR[0]) / (DOOR[1] - DOOR[0])));
         const shut = EXIT(clamp01((f - SLAM[0]) / (SLAM[1] - SLAM[0])));
-        vault.update({ door: open * (1 - shut), wheel: SOFT(clamp01((f - WHEEL[0]) / (WHEEL[1] - WHEEL[0]))) });
+        // (it opens 95°, not 105°: wide open it swung out over the pile of certificates)
+        vault.update({ door: 0.905 * open * (1 - shut), wheel: SOFT(clamp01((f - WHEEL[0]) / (WHEEL[1] - WHEEL[0]))) });
         // the stamp: comes in from the camera side, slams on "loans", recoils away
         const sIn = clamp01((f - (HIT - 7)) / 7), sOut = clamp01((f - (HIT + 3)) / 10);
-        const z = 316 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
+        const z = WHEEL_FRONT + 30 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
         stamp.group.visible = f >= HIT - 7 && f < HIT + 13;
         stamp.group.position.set(X2, 640, z);
         paid.group.visible = f >= HIT;

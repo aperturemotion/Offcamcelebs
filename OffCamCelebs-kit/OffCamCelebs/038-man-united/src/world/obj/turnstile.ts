@@ -5,7 +5,7 @@
 //   rotate), `read` 0…1 lights the reader. `spout`: where its coin drops out (group space). Origin: the floor centre of the
 //   cabinet; the arms point toward +x (the way in is from −x).
 import * as THREE from "three";
-import { MAT, K, lit, setLit, rbox, block, cyl, wide, textOn } from "../kit";
+import { MAT, K, lit, setLit, rbox, block, cyl, wide, textOn, joined, mounted } from "../kit";
 import { text3d } from "../text3d";
 
 export const makeTurnstile = (key: string) => {
@@ -24,12 +24,15 @@ export const makeTurnstile = (key: string) => {
   t.position.set(0, 470 - 30 * 0.345, 160.5); textOn(t, labelBody, { inset: 4 }); group.add(t);
   // the rotor: a hub on the cabinet's +x side, three arms at 120°
   const rotor = new THREE.Group(); rotor.position.set(150, 470, 0); rotor.rotation.z = -0.62; group.add(rotor);
-  const hub = cyl(46, 156, steel, 32); hub.rotation.z = Math.PI / 2; hub.position.set(52, 0, 0); rotor.add(hub);
-  const arms = new THREE.Group(); arms.position.x = 150; rotor.add(arms);
+  // ★ P17: the hub turns WITH the arms (their roots are set in its end: they stopped 6 short of it), in a bearing in the cabinet
+  const arms = new THREE.Group(); arms.position.x = 250; rotor.add(arms);   // (★ P17: further out: the lowest arm swept through the cabinet)
+  const hub = cyl(46, 300, steel, 32); hub.rotation.z = Math.PI / 2; hub.position.set(-140, 0, 0); hub.name = "turnstile hub"; arms.add(hub);
+  joined(hub, cab, "the rotor's hub turns in its bearing inside the cabinet");
+  mounted(hub, cab, "the rotor's hub is carried by its bearing in the cabinet");
   for (let i = 0; i < 3; i++) {
     const a = (i / 3) * Math.PI * 2;
-    const arm = new THREE.Mesh(new THREE.CylinderGeometry(14, 14, 380, 20), steel);
-    arm.position.set(0, Math.cos(a) * 190, Math.sin(a) * 190);
+    const arm = new THREE.Mesh(new THREE.CylinderGeometry(14, 14, 300, 20), steel);
+    arm.position.set(0, Math.cos(a) * 150, Math.sin(a) * 150);
     arm.rotation.x = a;
     arm.castShadow = true;
     arms.add(arm);

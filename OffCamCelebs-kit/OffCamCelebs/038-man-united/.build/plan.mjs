@@ -749,6 +749,8 @@ var InterpolateSmooth = 2302;
 var ZeroCurvatureEnding = 2400;
 var ZeroSlopeEnding = 2401;
 var WrapAroundEnding = 2402;
+var BasicDepthPacking = 3200;
+var RGBADepthPacking = 3201;
 var TangentSpaceNormalMap = 0;
 var NoColorSpace = "";
 var SRGBColorSpace = "srgb";
@@ -16168,6 +16170,43 @@ var MeshPhysicalMaterial = class extends MeshStandardMaterial {
     return this;
   }
 };
+var MeshDepthMaterial = class extends Material {
+  /**
+   * Constructs a new mesh depth material.
+   *
+   * @param {Object} [parameters] - An object with one or more properties
+   * defining the material's appearance. Any property of the material
+   * (including any property from inherited materials) can be passed
+   * in here. Color values can be passed any type of value accepted
+   * by {@link Color#set}.
+   */
+  constructor(parameters) {
+    super();
+    this.isMeshDepthMaterial = true;
+    this.type = "MeshDepthMaterial";
+    this.depthPacking = BasicDepthPacking;
+    this.map = null;
+    this.alphaMap = null;
+    this.displacementMap = null;
+    this.displacementScale = 1;
+    this.displacementBias = 0;
+    this.wireframe = false;
+    this.wireframeLinewidth = 1;
+    this.setValues(parameters);
+  }
+  copy(source) {
+    super.copy(source);
+    this.depthPacking = source.depthPacking;
+    this.map = source.map;
+    this.alphaMap = source.alphaMap;
+    this.displacementMap = source.displacementMap;
+    this.displacementScale = source.displacementScale;
+    this.displacementBias = source.displacementBias;
+    this.wireframe = source.wireframe;
+    this.wireframeLinewidth = source.wireframeLinewidth;
+    return this;
+  }
+};
 function convertArray(array, type) {
   if (!array || array.constructor === type) return array;
   if (typeof type.BYTES_PER_ELEMENT === "number") {
@@ -21362,11 +21401,39 @@ var freeText = (text, why) => {
   text.userData.fitFree = why;
   return text;
 };
+var oneMesh = (o2, what, why) => {
+  if (!o2.isMesh) throw new Error(`${what}: "${why}" names a ${o2.type}${o2.name ? ` (${o2.name})` : ""}, not a Mesh. Declare the two specific MESHES that meet (P17: never a whole group)`);
+  let kids = 0;
+  o2.traverse((n2) => {
+    if (n2 !== o2 && n2.isMesh) kids++;
+  });
+  if (kids) throw new Error(`${what}: "${why}" names a mesh with ${kids} mesh(es) under it${o2.name ? ` (${o2.name})` : ""}: name the one mesh that meets (P17)`);
+};
 var joined = (a2, b2, why) => {
   var _a, _b, _c;
+  oneMesh(a2, "joined", why);
+  oneMesh(b2, "joined", why);
   ((_a = a2.userData).joinWith ?? (_a.joinWith = [])).push(b2);
   ((_b = b2.userData).joinWith ?? (_b.joinWith = [])).push(a2);
   ((_c = a2.userData).joinWhy ?? (_c.joinWhy = [])).push(why);
+};
+var hangs = (child, parent, why, o2 = {}) => {
+  var _a;
+  oneMesh(child, "hangs", why);
+  oneMesh(parent, "hangs", why);
+  ((_a = child.userData).heldBy ?? (_a.heldBy = [])).push({ by: parent, kind: "hangs", why, linked: !!o2.linked });
+};
+var mounted = (child, parent, why) => {
+  var _a;
+  oneMesh(child, "mounted", why);
+  oneMesh(parent, "mounted", why);
+  ((_a = child.userData).heldBy ?? (_a.heldBy = [])).push({ by: parent, kind: "mounted", why });
+};
+var FALL_MAX = 20;
+var falling = (part, from, to, why) => {
+  var _a;
+  if (to - from > FALL_MAX) throw new Error(`falling: "${why}" lasts ${to - from} frames (f${from}\u2013f${to}); a thing may be unsupported for at most ${FALL_MAX} (P17)`);
+  ((_a = part.userData).falling ?? (_a.falling = [])).push([from, to, why]);
 };
 var countUp = (f2, a2, b2, from, to) => {
   if (f2 >= b2) return to;
@@ -21436,7 +21503,7 @@ var dropIn = (f2, land, o2 = {}) => {
     const u3 = (t2 + T3) / T3;
     return { y: h2 * (1 - u3 * u3), on: true, fast: true };
   }
-  const B1 = 9, B22 = 6;
+  const B1 = DROP_B1, B22 = DROP_B2;
   if (t2 < B1) {
     const u3 = t2 / B1;
     return { y: bh * 4 * u3 * (1 - u3), on: true, fast: t2 < 2 };
@@ -21447,6 +21514,9 @@ var dropIn = (f2, land, o2 = {}) => {
   }
   return { y: 0, on: true, fast: false };
 };
+var DROP_B1 = 8;
+var DROP_B2 = 4;
+var dropFalls = (part, land, o2 = {}, why = "it drops in and bounces") => falling(part, land - (o2.fall ?? 9), land + ((o2.bounce ?? 1) > 0 ? DROP_B1 + DROP_B2 : 0), why);
 var popUp = (f2, at, dur = 11) => {
   const t2 = (f2 - at) / dur;
   if (t2 <= 0) return 0;
@@ -21684,14 +21754,15 @@ var makeCrest = (key2, size2 = 600) => {
     m2.side = FrontSide;
     m2.color.setScalar(0.82);
     const q2 = new Mesh(new PlaneGeometry(size2, size2 * aspect), m2);
-    q2.position.z = (front ? 1 : -1) * (depth / 2 + 0.6);
+    q2.position.z = (front ? 1 : -1) * (depth / 2 + 0.4);
     if (!front) q2.rotation.y = Math.PI;
     q2.receiveShadow = true;
     q2.userData.print = "the Manchester United crest (assets/brand/crest.png), printed on the badge's face";
     return q2;
   };
   group.add(art(true), art(false));
-  return { group, size: size2, depth };
+  body.name = "crest body";
+  return { group, size: size2, depth, body };
 };
 
 // src/world/obj/flag.ts
@@ -21701,7 +21772,7 @@ var makeFlagPanel = (key2, w2, h2) => {
   const frame = rbox(w2 + 44, h2 + 44, 40, 12, MAT.black());
   group.add(frame);
   const face = new Mesh(new PlaneGeometry(w2, h2), printMat("usflag", { emissive: 0.3, rough: 0.6 }));
-  face.position.z = 20.6;
+  face.position.z = 20.4;
   face.userData.print = "the US flag (assets/brand/usflag.png), the panel's lit face";
   group.add(face);
   return { group, w: w2 + 44, h: h2 + 44, d: 40 };
@@ -21762,8 +21833,9 @@ var makeCrane = (key2) => {
     col.position.y = 260 + (C5.beamY - 260) / 2;
     const band = rbox(C5.legW + 6, 220, C5.legW + 6, 14, hazard());
     band.position.y = 260 + 110;
-    const foot = rbox(C5.legW + 220, 150, 520, 22, black);
-    foot.position.y = 75 + 40;
+    const foot = rbox(C5.legW + 220, 224, 520, 22, black);
+    foot.position.y = 40 + 112;
+    foot.name = "foot";
     for (const z2 of [-170, 170]) {
       const wheel = new Mesh(new CylinderGeometry(52, 52, 60, 32), MAT.graphite());
       wheel.rotation.z = Math.PI / 2;
@@ -21771,9 +21843,10 @@ var makeCrane = (key2) => {
       wheel.castShadow = true;
       leg.add(wheel);
     }
-    const brace = rbox(70, 900, 70, 10, yellow);
-    brace.position.set(-s2 * 0, 760, 200);
-    brace.rotation.x = -0.32;
+    const brace = rbox(70, 890, 70, 10, yellow);
+    brace.position.set(0, 681, 170);
+    brace.rotation.x = -0.142;
+    brace.name = "knee brace";
     leg.add(col, band, foot, brace);
     leg.position.x = s2 * C5.legX;
     group.add(leg);
@@ -21783,6 +21856,7 @@ var makeCrane = (key2) => {
   beam.name = "beam";
   const under = rbox(2 * C5.legX - C5.legW, 40, C5.beamD - 30, 10, black);
   under.position.y = C5.beamY - C5.beamH / 2 - 10;
+  under.name = "beam rail";
   group.add(beam, under);
   for (const s2 of [-1, 1]) {
     const end = rbox(260, C5.beamH + 8, C5.beamD + 8, 18, hazard());
@@ -21790,13 +21864,14 @@ var makeCrane = (key2) => {
     group.add(end);
   }
   const flag = makeFlagPanel(key2, 520, 274);
-  flag.group.position.set(-560, C5.beamY, C5.beamD / 2 + flag.d / 2 + 1);
+  flag.group.position.set(-560, C5.beamY, C5.beamD / 2 + flag.d / 2 - 0.5);
   flag.group.name = "flag";
   group.add(flag.group);
   const trolley = new Group();
   trolley.name = "trolley";
   const tb = rbox(560, 180, 340, 18, black);
   tb.position.y = C5.beamY - C5.beamH / 2 - 30 - 90;
+  tb.name = "hoist housing";
   const drum = new Mesh(new CylinderGeometry(70, 70, 420, 32), MAT.satin());
   drum.rotation.z = Math.PI / 2;
   drum.position.y = tb.position.y - 40;
@@ -21819,56 +21894,108 @@ var makeCrane = (key2) => {
     n2.castShadow = false;
   });
   textOn(words, plate, { inset: 6 });
+  const sheaves = [];
   for (const x2 of [-120, 120]) {
     const sh = new Mesh(new CylinderGeometry(46, 46, 40, 32), MAT.satin());
     sh.rotation.x = Math.PI / 2;
     sh.position.set(x2, bh / 2 + 30, 0);
+    sh.castShadow = true;
+    sh.name = "sheave";
     hook.add(sh);
+    sheaves.push(sh);
   }
-  const shank = new Mesh(new CylinderGeometry(22, 26, 110, 24), MAT.satin());
-  shank.position.y = -bh / 2 - 55;
-  const c2 = new Mesh(new TorusGeometry(58, 17, 16, 48, Math.PI * 1.55), MAT.satin());
-  c2.rotation.z = Math.PI * 0.73;
-  c2.position.y = -bh / 2 - 110 - 52;
-  for (const m2 of [shank, c2]) {
+  const nut = new Mesh(new CylinderGeometry(40, 44, 34, 32), MAT.satin());
+  nut.position.y = -bh / 2 - 17 + 1;
+  nut.name = "swivel nut";
+  const shank = new Mesh(new CylinderGeometry(22, 24, 96, 24), MAT.satin());
+  shank.position.y = -bh / 2 - 34 - 48 + 4;
+  shank.name = "hook shank";
+  const SY0 = -bh / 2 - 34 - 92;
+  const BOWL = { x: 0, y: SY0 - 92, r: 58, t: 19 };
+  const jPts = [
+    [0, SY0 + 10],
+    [0, SY0 - 8],
+    [-14, SY0 - 26],
+    [-44, SY0 - 52],
+    [-BOWL.r, BOWL.y],
+    [-41, BOWL.y - 41],
+    [0, BOWL.y - BOWL.r],
+    [41, BOWL.y - 41],
+    [BOWL.r, BOWL.y],
+    [50, BOWL.y + 30],
+    [36, BOWL.y + 46]
+  ].map(([x2, y2]) => new Vector3(x2, y2, 0));
+  const jCurve = new CatmullRomCurve3(jPts, false, "centripetal");
+  const jGeo = new TubeGeometry(jCurve, 90, BOWL.t, 20, false);
+  {
+    const pos = jGeo.attributes.position, n2 = 90, ring2 = 21;
+    for (let i2 = 0; i2 <= n2; i2++) {
+      const u3 = i2 / n2, c3 = jCurve.getPointAt(u3), k3 = u3 < 0.18 ? 1 + (22 / BOWL.t - 1) * (1 - u3 / 0.18) ** 2 : u3 > 0.8 ? 1 - 0.45 * (u3 - 0.8) / 0.2 : 1;
+      for (let j2 = 0; j2 < ring2; j2++) {
+        const v2 = i2 * ring2 + j2;
+        pos.setXYZ(v2, c3.x + (pos.getX(v2) - c3.x) * k3, c3.y + (pos.getY(v2) - c3.y) * k3, c3.z + (pos.getZ(v2) - c3.z) * k3);
+      }
+    }
+    pos.needsUpdate = true;
+    jGeo.computeVertexNormals();
+  }
+  const c2 = new Mesh(jGeo, MAT.satin());
+  c2.name = "hook";
+  const tip = new Mesh(new SphereGeometry(BOWL.t * 0.55, 16, 12), MAT.satin());
+  tip.position.copy(jPts[jPts.length - 1]);
+  tip.name = "hook tip";
+  const RR = 36, RT2 = 10;
+  const bowlTop = BOWL.y - BOWL.r + BOWL.t;
+  const master = new Mesh(new TorusGeometry(RR, RT2, 16, 48), MAT.satin());
+  master.rotation.y = Math.PI / 2;
+  master.position.set(0, bowlTop - (RR - RT2) + 0.2, 0);
+  master.name = "master ring";
+  for (const m2 of [nut, shank, c2, tip, master]) {
     m2.castShadow = true;
     m2.receiveShadow = true;
   }
   const arm = rbox(540, 44, 60, 10, black);
   arm.position.set(bw / 2 + 250, -bh / 2 + 30, 0);
+  arm.name = "bracket arm";
   const eye = new Mesh(new TorusGeometry(22, 7, 12, 32), MAT.satin());
-  eye.position.set(bw / 2 + 480, -bh / 2 + 30 - 22 - 22, 0);
+  eye.position.set(bw / 2 + 480, -bh / 2 + 30 - 22 - 22 + 4, 0);
   eye.name = "bracket-eye";
-  eye.rotation.y = Math.PI / 2;
-  hook.add(block3, stripe, plate, words, shank, c2, arm, eye);
-  joined(shank, c2, "the hook's shank runs into its C");
-  const bracket = new Vector3(bw / 2 + 480, -bh / 2 + 30 - 22 - 44, 0);
-  const hookEye = new Vector3(0, -bh / 2 - 110 - 52 - 58 - 17, 0);
+  hook.add(block3, stripe, plate, words, nut, shank, c2, tip, master, arm, eye);
+  mounted(nut, block3, "the swivel nut is bolted under the hook block");
+  mounted(shank, nut, "the shank comes down out of the swivel nut");
+  mounted(c2, shank, "the hook is forged on the shank's foot");
+  hangs(master, c2, "the slings' master ring hangs in the hook's bowl, its inside resting on it");
+  mounted(eye, arm, "the tag's eye is welded under the bracket arm");
+  const bracket = new Vector3(bw / 2 + 480, -bh / 2 + 30 - 22 - 44 + 4, 0);
+  const hookEye = new Vector3(0, master.position.y - RR, 0);
   group.add(hook);
-  const cables = [-120, 120].map((x2) => {
+  const cables = [-120, 120].map((x2, i2) => {
     const m2 = new Mesh(new CylinderGeometry(7, 7, 1, 12), MAT.graphite());
     m2.position.x = x2;
     m2.castShadow = true;
     m2.name = "cable";
     group.add(m2);
-    joined(m2, hook, "the cable runs into the block's sheave");
-    joined(m2, trolley, "the cable comes off the trolley's drum");
+    joined(m2, sheaves[i2], "the cable wraps the block's sheave");
+    joined(m2, tb, "the cable runs up into the hoist housing");
+    hangs(m2, tb, "the hoist cable comes down out of the trolley");
+    hangs(sheaves[i2], m2, "the hook block hangs on its cables by the sheaves");
     return m2;
   });
   const slings = [];
   const slingTo = (pts, load) => {
     for (const p2 of pts) {
-      const d2 = new Vector3().subVectors(p2, hookEye), L3 = d2.length();
+      const top = hookEye.clone().add(new Vector3(0, RT2 * 0.6, 0));
+      const d2 = new Vector3().subVectors(p2, top), L3 = d2.length();
       const m2 = new Mesh(new CylinderGeometry(6, 6, L3, 10), MAT.graphite());
-      m2.position.copy(hookEye).addScaledVector(d2, 0.5);
+      m2.position.copy(top).addScaledVector(d2, 0.5);
       m2.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), d2.normalize());
       m2.castShadow = true;
       m2.name = "sling";
       hook.add(m2);
-      joined(m2, load, "the sling is shackled to the crest");
-      joined(m2, c2, "the sling hangs on the hook");
+      hangs(m2, master, "the sling hangs from the master ring");
       slings.push(m2);
     }
+    hangs(load, slings[0], "the crest hangs from its slings");
   };
   const update = (p2) => {
     hook.position.y = p2.hookY;
@@ -21880,7 +22007,7 @@ var makeCrane = (key2) => {
     }
   };
   update({ hookY: 2e3 });
-  return { group, hook, update, slingTo, bracket, hookEye, blockH: bh, plate, words, eye };
+  return { group, hook, update, slingTo, bracket, hookEye, blockH: bh, plate, words, eye, master, hookMesh: c2 };
 };
 
 // src/world/obj/plinth.ts
@@ -21969,6 +22096,8 @@ var makePlinth = (key2) => {
     joined(axle, sideL, "the slat's axle runs in the bezel");
     joined(axle, sideR, "the slat's axle runs in the bezel");
     joined(axle, m2, "the axle runs through the slat");
+    mounted(axle, sideL, "the slat's axle is held in the bezel's sides");
+    mounted(m2, axle, "the slat turns on its axle");
     const back = new Group();
     back.rotation.x = Math.PI;
     pivot.add(back);
@@ -21988,8 +22117,7 @@ var makePlinth = (key2) => {
   };
   const room = SW2 - 90;
   word2("BOUGHT BY: THE GLAZERS", fitSize("BOUGHT BY: THE GLAZERS", 50, room), white2, A3.pivot, A3.m);
-  word2("PAID FOR BY:", fitSize("PAID FOR BY:", 58, room), red1, A3.back, A3.m);
-  word2("MANCHESTER UNITED", fitSize("MANCHESTER UNITED", 96, room), red2, B3.back, B3.m);
+  void red1;
   const digitW = Math.max(...Array.from("0123456789", (c2) => textWidth(c2, "800", 1)));
   const widest = Array.from("\xA3790,000,000").reduce((s3, c2) => s3 + (/\d/.test(c2) ? digitW : textWidth(c2, "800", 1)), 0);
   const cs = Math.min(132, room / (widest * 1.12));
@@ -22001,6 +22129,13 @@ var makePlinth = (key2) => {
   });
   textOn(num.group, B3.m, { inset: 5 });
   B3.pivot.add(num.group);
+  const redPrice = wide(text3d("\xA3790,000,000", { font: "800", size: cs, depth: 4, bevel: 0, face: red2 }), 1.12);
+  redPrice.position.set(0, -cs * 0.345, D2 / 2 + 0.5);
+  redPrice.traverse((n2) => {
+    n2.castShadow = false;
+  });
+  textOn(redPrice, B3.m, { inset: 5 });
+  B3.back.add(redPrice);
   const ink = new Group();
   ink.name = "ink";
   const inkMat = lit(K2.red, 1);
@@ -22057,13 +22192,35 @@ var makeLoanTag = (key2) => {
   const body = rbox(w2, h2, d2, 12, red2);
   body.name = "tag-body";
   body.position.y = -60 - h2 / 2;
-  const tab = rbox(140, 90, d2, 12, red2);
-  tab.position.y = -60 - 30;
+  const tabShape = new Shape();
+  {
+    const x0 = -70, x1 = 70, y0 = -72, y1 = 12, r2 = 12;
+    tabShape.moveTo(x0 + r2, y0);
+    tabShape.lineTo(x1 - r2, y0);
+    tabShape.quadraticCurveTo(x1, y0, x1, y0 + r2);
+    tabShape.lineTo(x1, y1 - r2);
+    tabShape.quadraticCurveTo(x1, y1, x1 - r2, y1);
+    tabShape.lineTo(x0 + r2, y1);
+    tabShape.quadraticCurveTo(x0, y1, x0, y1 - r2);
+    tabShape.lineTo(x0, y0 + r2);
+    tabShape.quadraticCurveTo(x0, y0, x0 + r2, y0);
+  }
+  const hole = new Path();
+  hole.absarc(0, -16, 20, 0, Math.PI * 2, true);
+  tabShape.holes.push(hole);
+  const tg = new ExtrudeGeometry(tabShape, { depth: 2, bevelEnabled: true, bevelThickness: 2, bevelSize: 2, bevelSegments: 2, curveSegments: 32 });
+  tg.translate(0, 0, -1);
+  const tab = new Mesh(tg, red2);
   tab.name = "tag-tab";
-  const grommet = new Mesh(new TorusGeometry(24, 8, 12, 32), MAT.satin());
-  grommet.position.y = -60 - 12;
-  joined(grommet, tab, "the grommet is set in the tab");
-  group.add(body, tab, grommet);
+  tab.castShadow = true;
+  tab.receiveShadow = true;
+  const grommet = new Mesh(new TorusGeometry(22, 6, 12, 32), MAT.satin());
+  grommet.position.y = -16;
+  const sideEye = new Mesh(new TorusGeometry(15, 5, 10, 28), MAT.satin());
+  sideEye.position.set(-w2 / 2 - 14, -60 - h2 + 60, 0);
+  sideEye.rotation.x = Math.PI / 2;
+  sideEye.name = "tag side eye";
+  group.add(body, tab, grommet, sideEye);
   const face = lit(K2.white, 1.05), money = lit(K2.money, 1.12);
   const word2 = (str, size2, y2) => {
     const t2 = wide(text3d(str, { font: "800", size: size2, depth: 3, bevel: 0, face }), k2);
@@ -22087,14 +22244,14 @@ var makeLoanTag = (key2) => {
   body.add(num.group);
   const set = (v2) => num.set(pounds(v2));
   set(54e7);
-  return { group, body, set, w: w2, h: h2, eyelet: new Vector3(0, -60 + 12, 0), ring: grommet, bottom: -60 - h2 };
+  return { group, body, set, w: w2, h: h2, eyelet: new Vector3(0, 0, 0), ring: grommet, sideEye, bottom: -60 - h2 };
 };
 var Rr = 15;
 var TUBE = 4.5;
 var SY = 1.6;
 var STEP = 30;
 var STEP_MAX = 34;
-var makeChain = (key2, n2) => {
+var makeChain = (key2, n2, turn0 = false) => {
   const group = new Group();
   group.name = `chain-${key2}`;
   const geo = new TorusGeometry(Rr, TUBE, 10, 28);
@@ -22106,21 +22263,24 @@ var makeChain = (key2, n2) => {
     m2.name = "link";
     links.push(m2);
     group.add(m2);
-    if (i2 > 0) joined(m2, links[i2 - 1], "chain links interlock");
+    if (i2 > 0) {
+      joined(m2, links[i2 - 1], "chain links interlock");
+      hangs(m2, links[i2 - 1], "each link hangs through the one above it", { linked: true });
+    }
   }
-  const up = new Vector3(0, 1, 0), q2 = new Quaternion(), turn = new Quaternion();
+  const up = new Vector3(0, 1, 0), down = new Vector3(0, -1, 0), flip = new Quaternion().setFromAxisAngle(new Vector3(0, 0, 1), Math.PI), q2 = new Quaternion(), turn = new Quaternion();
   const setEnds = (a2, b2, shown = n2) => {
     const dir = new Vector3().subVectors(b2, a2);
     const L3 = dir.length();
     dir.normalize();
-    q2.setFromUnitVectors(up, dir);
-    const fit2 = Math.max(1, Math.min(n2, Math.floor((L3 - 2 * Rr * SY) / STEP) + 1));
+    q2.setFromUnitVectors(down, dir).multiply(flip);
+    const fit2 = Math.max(1, Math.min(n2, Math.floor((L3 - 2 * Rr * SY) / STEP + 1e-6) + 1));
     const step = fit2 > 1 ? Math.min(STEP_MAX, (L3 - 2 * Rr * SY) / (fit2 - 1)) : 0;
     links.forEach((m2, i2) => {
       m2.visible = i2 < Math.min(shown, fit2);
       m2.position.copy(a2).addScaledVector(dir, Rr * SY + i2 * step);
       m2.scale.set(1, SY, 1);
-      turn.setFromAxisAngle(up, i2 % 2 ? Math.PI / 2 : 0);
+      turn.setFromAxisAngle(up, (i2 + (turn0 ? 1 : 0)) % 2 ? Math.PI / 2 : 0);
       m2.quaternion.copy(q2).multiply(turn);
     });
   };
@@ -22131,7 +22291,7 @@ var makeChain = (key2, n2) => {
     });
     return links[k2];
   };
-  return { group, links, setEnds, last, step: STEP, reach: (n2 - 1) * STEP + 2 * Rr * SY };
+  return { group, links, setEnds, last, step: STEP, reach: (n2 - 1) * STEP + 2 * Rr * SY, end: Rr * SY, hangGap: (Rr - TUBE) * SY };
 };
 
 // src/world/obj/stamp.ts
@@ -22160,30 +22320,43 @@ var makeStamp = (key2) => {
 };
 
 // src/world/places/hook.ts
-var SET_A = { crest: 600, hookRest: 2120, tagChain: 8 };
+var SET_A = { crest: 600, hookRest: 2120, tagChain: 7 };
 var setA = (key2) => {
   const group = new Group();
   const plinth2 = makePlinth(key2);
   const crane_ = makeCrane(key2);
   const crest = makeCrest(key2, SET_A.crest);
-  const crestRest = plinth2.top + SET_A.crest * (0.506 + 0.0162) + 3;
+  const crestRest = plinth2.top + SET_A.crest * (0.506 + 0.0162) - 0.3;
   crest.group.name = "crest";
   group.add(plinth2.group, crane_.group, crest.group);
-  const dy = crestRest - SET_A.hookRest;
-  crane_.slingTo([new Vector3(-165, dy + 255, 0), new Vector3(165, dy + 255, 0)], crest.group);
+  const dy = crestRest - SET_A.hookRest, sh = SET_A.crest * 0.275, shY = SET_A.crest * (0.363 + 0.0162) - 6;
+  crane_.slingTo([new Vector3(-sh, dy + shY, 0), new Vector3(sh, dy + shY, 0)], crest.body);
   const tag = makeLoanTag(key2);
-  const tagChain = makeChain(key2 + "-tag", SET_A.tagChain);
+  const tagChain = makeChain(key2 + "-tag", SET_A.tagChain, true);
   const crestChain = makeChain(key2 + "-crest", 12);
+  const crestEye = new Mesh(new TorusGeometry(15, 5, 10, 28), crane_.eye.material);
+  crestEye.position.set(SET_A.crest * 0.4847 + SET_A.crest * 0.0162 + 11, 0, 0);
+  crestEye.rotation.x = Math.PI / 2;
+  crestEye.name = "crest eye";
+  crestEye.castShadow = true;
+  crest.group.add(crestEye);
+  mounted(crestEye, crest.body, "the chain's eye is fixed in the crest's rim");
   group.add(tag.group, tagChain.group, crestChain.group);
-  joined(tagChain.links[0], crane_.eye, "the tag's chain hangs from the bracket's eye");
-  joined(tagChain.links[SET_A.tagChain - 1], tag.ring, "the tag's chain runs through its grommet");
-  joined(tagChain.links[SET_A.tagChain - 1], tag.group.children[1], "the chain's last link sits in the tab");
-  joined(crestChain.links[0], tag.body, "the chain is shackled to the tag's edge");
-  for (const l2 of crestChain.links) joined(l2, crest.group, "the chain's end is shackled to the crest's rim (only the link that reaches it touches it)");
-  const bracketW = () => new Vector3().copy(crane_.bracket).add(crane_.hook.position);
+  joined(tagChain.links[0], crane_.eye, "the tag's chain runs through the bracket's eye");
+  hangs(tagChain.links[0], crane_.eye, "the tag's chain hangs from the bracket's eye", { linked: true });
+  joined(tagChain.links[SET_A.tagChain - 1], tag.ring, "the chain's last link runs through the tag's grommet");
+  hangs(tag.ring, tagChain.links[SET_A.tagChain - 1], "the tag hangs on the chain's last link by its grommet", { linked: true });
+  joined(crestChain.links[0], tag.sideEye, "the crest chain runs through the tag's side eye");
+  hangs(crestChain.links[0], tag.sideEye, "the crest chain is shackled to the tag's side eye", { linked: true });
+  for (const l2 of crestChain.links) joined(l2, crestEye, "the crest chain's end link runs through the crest's eye");
+  const eyeW = () => crane_.eye.position.clone().add(crane_.hook.position);
+  const chainTop = () => {
+    const e2 = eyeW();
+    return new Vector3(e2.x, e2.y - (22 - 7) - tagChain.hangGap + tagChain.end, 0);
+  };
   const tagRestEye = () => {
-    const b2 = bracketW();
-    return new Vector3(b2.x, b2.y - tagChain.reach - 4, 0);
+    const a2 = chainTop();
+    return new Vector3(a2.x, a2.y - tagChain.reach + tagChain.end - tagChain.hangGap, 0);
   };
   return {
     group,
@@ -22194,23 +22367,28 @@ var setA = (key2) => {
     tag,
     tagChain,
     crestChain,
-    /** pose the set: the crest's height above its cradle; the tag (shown, its drop height, its swing); the crest chain's
-     *  links shown (0…7) */
+    crestEye,
+    /** pose the set: the crest's height above its cradle; the tag (shown; `tagAngle`: the tag and its taut chain swung
+     *  about the bracket eye, radians, + to the right); the crest chain's links shown (0…1) */
     pose: (p2) => {
       crane_.update({ hookY: SET_A.hookRest + p2.lift });
       crest.group.position.set(0, crestRest + p2.lift, 0);
+      crest.group.updateMatrix();
       tag.group.visible = p2.tagOn;
       tagChain.group.visible = p2.tagOn;
-      const eye = tagRestEye();
-      eye.y += p2.tagY;
+      const e2 = eyeW(), pivot = new Vector3(e2.x, e2.y - (22 - 7), 0);
+      const th = p2.tagAngle, tz = -0.05 * p2.tug;
+      const qr = new Quaternion().setFromEuler(new Euler(th, 0, tz));
+      const rot = (v2) => v2.clone().sub(pivot).applyQuaternion(qr).add(pivot);
+      const rest = tagRestEye();
+      const eye = rot(rest);
       tag.group.position.copy(eye);
-      tag.group.rotation.z = p2.tagSwing - 0.05 * p2.tug;
+      tag.group.quaternion.copy(qr);
       tag.group.updateMatrix();
-      const b2 = bracketW();
-      tagChain.setEnds(new Vector3(b2.x, b2.y, 0), new Vector3(eye.x, eye.y + 6, 0));
-      const a2 = new Vector3(-tag.w / 2 - 6, tag.bottom + 60, 0).applyMatrix4(tag.group.matrix);
-      const c2 = new Vector3(SET_A.crest * 0.516 + 4, crestRest + p2.lift - 4, 0);
-      crestChain.group.visible = p2.chain > 0;
+      tagChain.setEnds(rot(chainTop()), rot(new Vector3(rest.x, rest.y + tagChain.hangGap - tagChain.end, 0)));
+      const a2 = tag.sideEye.position.clone().applyMatrix4(tag.group.matrix);
+      const c2 = crestEye.position.clone().applyMatrix4(crest.group.matrix);
+      crestChain.group.visible = p2.tagOn && p2.chain > 0;
       crestChain.setEnds(a2, c2, Math.round(12 * clamp01(p2.chain)));
     }
   };
@@ -22226,6 +22404,7 @@ var LAND = 38;
 var COUNT2 = [LAND + 6, N790];
 var SNAP = [MOST - 4, MOST + 10];
 var SLAM = OWN;
+var FLIP_OFF = OWN - 11;
 var OPENING = { pos: [-760, 1560, 4550], look: [0, 2150, 0], fov: 50, focus: [0, 1500, 0] };
 var SIGN = { pos: [-330, 1060, 2750], look: [0, 970, 400], fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] };
 var INK = { pos: [-360, 920, 2760], look: [-50, 870, 300], fov: 44, focus: [0, 266, PLINTH.d / 2] };
@@ -22237,16 +22416,30 @@ var lift = (f2) => {
   const t2 = f2 - LAND;
   return 7 * Math.exp(-t2 / 5) * Math.sin(Math.min(Math.PI, t2 / 6 * Math.PI));
 };
+var SWING = 8;
+var tagSwing = (f2) => {
+  if (f2 < BORROWED - SWING) return { on: false, a: 1.45, fast: false };
+  if (f2 < BORROWED) {
+    const u3 = (f2 - (BORROWED - SWING)) / SWING;
+    return { on: true, a: 1.45 * Math.cos(u3 * Math.PI / 2), fast: true };
+  }
+  const t2 = f2 - BORROWED;
+  return { on: true, a: -0.16 * Math.exp(-t2 / 16) * Math.sin(t2 / 24 * Math.PI * 2), fast: false };
+};
+var STAMP_IN = 8;
+var STAMP_HOLD = 3;
+var STAMP_OUT = 8;
 var stampAt = (f2, slam) => {
-  if (f2 < slam - 13) return { on: false, k: 0, fast: false };
+  if (f2 < slam - STAMP_IN) return { on: false, k: 0, fast: false };
   if (f2 <= slam) {
-    const u4 = clamp01((f2 - (slam - 13)) / 13);
+    const u4 = clamp01((f2 - (slam - STAMP_IN)) / STAMP_IN);
     return { on: true, k: u4 * u4, fast: u4 > 0.3 };
   }
-  if (f2 < slam + 4) return { on: true, k: 1, fast: false };
-  const u3 = clamp01((f2 - (slam + 4)) / 16);
+  if (f2 < slam + STAMP_HOLD) return { on: true, k: 1, fast: false };
+  const u3 = clamp01((f2 - (slam + STAMP_HOLD)) / STAMP_OUT);
   return { on: u3 < 1, k: 1 - SOFT(u3), fast: false };
 };
+var stampFalls = (stamp, slam) => falling(stamp, slam - STAMP_IN, slam + STAMP_HOLD + STAMP_OUT, "the stamp is swung in, slams, and is swung away");
 var stampPose = (stamp, plinth2, f2, slam) => {
   const s2 = stampAt(f2, slam);
   stamp.visible = s2.on;
@@ -22268,8 +22461,10 @@ var HookPlace = {
     { ...dolly(1, LAND - 1, [OPENING.pos[0] + 260, OPENING.pos[1], OPENING.pos[2] - 120], [OPENING.look[0] + 220, OPENING.look[1], 0], { fov: OPENING.fov, ease: SOFT, why: "drift with the crest as it comes down" }), focus: OPENING.focus },
     cut(LAND, SIGN.pos, SIGN.look, { fov: SIGN.fov, focus: SIGN.focus, why: "cut to the sign as the crest lands" }),
     { ...dolly(LAND + 1, C1 - 4 - (LAND + 1), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
-    cut(C1 - 2, [350, 1214, 4180], [350, 1214, 0], { fov: 46, focus: [500, 1600, 0], why: "cut to the hook block: nameplate, tag and crest in one frame" }),
-    { ...dolly(C1 - 1, SNAP[0] - 2 - (C1 - 1), [440, 1214, 4100], [420, 1214, 0], { fov: 46, ease: SOFT, why: "drift as the tag drops and the chain runs out" }), focus: [450, 1450, 0] },
+    // ★ P17 (one label, one figure): framed from the crest's shoulders up, so the plinth's sign (BOUGHT BY, the price) is
+    //   below the frame while the nameplate and the tag are in it
+    cut(C1 - 2, [450, 2330, 4700], [450, 2330, 0], { fov: 36, focus: [500, 1600, 0], why: "cut to the hook block: nameplate, tag and crest in one frame" }),
+    { ...dolly(C1 - 1, SNAP[0] - 2 - (C1 - 1), [520, 2330, 4620], [500, 2330, 0], { fov: 36, ease: SOFT, why: "drift as the tag swings down and the chain runs out" }), focus: [450, 1450, 0] },
     cut(SNAP[1] + 2, INK.pos, INK.look, { fov: INK.fov, focus: INK.focus, why: "cut to the crest and the plinth's face" }),
     { ...dolly(SNAP[1] + 3, to - (SNAP[1] + 3) - 1, [-300, 910, 2680], [-40, 875, 300], { fov: 44, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus }
   ],
@@ -22281,7 +22476,7 @@ var HookPlace = {
     if (f2 >= SLAM) L3.back = backGlow([0, 700, 0], K2.red, 2 * (0.4 + 0.6 * pSlam));
     return L3;
   },
-  blur: (f2) => f2 < 6 || dropIn(f2, BORROWED, { h: 230, fall: 8 }).fast || stampAt(f2, SLAM).fast,
+  blur: (f2) => f2 < 6 || tagSwing(f2).fast || stampAt(f2, SLAM).fast,
   cues: () => [
     { kind: "hit", s: "chainshort", at: 1, vol: 0.4, why: "the crane's hoist lowers the crest" },
     { kind: "hit", s: "thud", at: LAND, vol: 0.5, why: "the crest lands in its cradle" },
@@ -22289,11 +22484,12 @@ var HookPlace = {
     { kind: "hit", s: "sub", at: N790, vol: 0.5, why: "\xA3790,000,000 lands" },
     { kind: "hit", s: "pingshort", at: N790 + 1, vol: 0.3, why: "the gold ring" },
     { kind: "move", s: "whooshsoft", at: C1 + 10, end: BORROWED - 10, vol: 0.3, why: "rise to the hook" },
-    { kind: "hit", s: "chainshort", at: BORROWED - 7, vol: 0.45, why: "the loan tag drops on its chain" },
+    { kind: "hit", s: "chainshort", at: BORROWED - 7, vol: 0.45, why: "the loan tag swings down on its chain" },
     { kind: "hit", s: "thud", at: BORROWED, vol: 0.4, why: "the tag jerks to a stop" },
     { kind: "hit", s: "datashort", at: BORROWED + 1, end: BORROWED + 16, vol: 0.3, why: "the tag counts to \xA3540,000,000" },
     { kind: "hit", s: "chain", at: SNAP[0], end: SNAP[1], vol: 0.4, why: "the chain runs out to the crest" },
     { kind: "hit", s: "click", at: SNAP[1], vol: 0.45, why: "the chain snaps onto the crest" },
+    { kind: "hit", s: "flick", at: FLIP_OFF + 3, vol: 0.35, why: "BOUGHT BY: THE GLAZERS flips away to a blank slat" },
     { kind: "move", s: "whooshsoft", at: SLAM - 3, end: SLAM, vol: 0.4, why: "the stamp swings in" },
     { kind: "hit", s: "thud", at: SLAM, vol: 0.6, why: "the stamp slams: BILLED TO: MANCHESTER UNITED" },
     { kind: "hit", s: "sub", at: SLAM, vol: 0.4, why: "the slam's weight" },
@@ -22311,18 +22507,17 @@ var HookPlace = {
     tagR.mesh.position.set(640, 1.5, 300);
     const stamp = makeStamp("hook");
     stamp.group.scale.set(1.32, 1.38, 1);
-    joined(stamp.group, A3.plinth.body, "the stamp's pad meets the marble face");
+    stampFalls(stamp.group, SLAM);
     group.add(gold2.mesh, redR.mesh, tagR.mesh, stamp.group);
     return {
       group,
       update: (f2) => {
-        const d2 = dropIn(f2, BORROWED, { h: 230, fall: 8 });
-        const swing2 = f2 >= BORROWED ? 0.07 * Math.exp(-(f2 - BORROWED) / 18) * Math.sin((f2 - BORROWED) / 22 * Math.PI * 2) : 0;
+        const sw = tagSwing(f2);
         const chain = clamp01((f2 - SNAP[0]) / (SNAP[1] - SNAP[0]));
         const tug = f2 >= SNAP[1] ? Math.exp(-(f2 - SNAP[1]) / 8) : 0;
-        A3.pose({ lift: lift(f2), tagOn: d2.on, tagY: d2.y, tagSwing: swing2, chain, tug });
+        A3.pose({ lift: lift(f2), tagOn: sw.on, tagAngle: sw.a, chain, tug });
         A3.tag.set(countUp(f2, BORROWED + 1, BORROWED + 16, 0, 54e7));
-        A3.plinth.update({ count: f2 < COUNT2[0] ? 0 : countUp(f2, COUNT2[0], COUNT2[1], 0, 79e7), flip1: 0, flip2: 0, ink: f2 >= SLAM ? 1 : 0, lit: 1 });
+        A3.plinth.update({ count: f2 < COUNT2[0] ? 0 : countUp(f2, COUNT2[0], COUNT2[1], 0, 79e7), flip1: SOFT(clamp01((f2 - FLIP_OFF) / 6)), flip2: 0, ink: f2 >= SLAM ? 1 : 0, lit: 1 });
         stampPose(stamp.group, A3.plinth, f2, SLAM);
         gold2.update(f2, N790);
         tagR.update(f2, BORROWED);
@@ -22354,9 +22549,26 @@ var makeNameplate = (key2, lines, o2 = {}) => {
     base.position.y = 11;
     stand2.add(base);
     const plate = rbox(w2, h2, D2, 10, MAT.black());
-    plateG.position.set(0, 22 + h2 / 2 * Math.cos(TILT) + 10, 0);
+    plate.name = "nameplate";
+    plateG.position.set(0, 22 + h2 / 2 * Math.cos(TILT) + D2 / 2 * Math.sin(-TILT) - 0.3, 0);
     plateG.rotation.x = TILT;
     plateG.add(plate);
+    plateG.updateMatrixWorld(true);
+    {
+      const lo = new Box3().setFromObject(plate, true).min.y - group.position.y;
+      plateG.position.y += 22 - 0.3 - lo;
+      plateG.updateMatrix();
+    }
+    for (const sx of [-1, 1]) {
+      const top = new Vector3(sx * w2 * 0.3, -h2 * 0.05, -D2 / 2 + 3).applyMatrix4(plateG.matrix), foot = new Vector3(top.x, 20, top.z - 70);
+      const d2 = new Vector3().subVectors(top, foot), L3 = d2.length();
+      const strut = new Mesh(new CylinderGeometry(7, 7, L3, 12), MAT.satin());
+      strut.name = "nameplate strut";
+      strut.position.copy(foot).addScaledVector(d2, 0.5);
+      strut.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), d2.normalize());
+      strut.castShadow = true;
+      stand2.add(strut);
+    }
     ls.forEach((l2, i2) => {
       const sz = i2 === 0 ? s1 : s2;
       const y2 = ls.length === 1 ? -sz * 0.345 : i2 === 0 ? h2 / 2 - s1 * 0.5 - s1 * 0.69 : -h2 / 2 + s2 * 0.7;
@@ -22377,18 +22589,25 @@ var makeNameplate = (key2, lines, o2 = {}) => {
 };
 
 // src/world/obj/calendar.ts
-var CAL = { rod: 850, leafW: 780, leafH: 600 };
+var CAL = { rod: 920, leafW: 780, leafH: 600 };
 var FRONT = -0.15;
 var BACK = -2 * Math.PI + 0.15;
 var swing = (t2) => t2 <= 0 ? 0 : t2 >= 1 ? 1 : t2 * t2 * (3 - 2 * t2);
+var RING = 75;
+var RT = 6;
+var LEAF_T = 8;
+var GAP2 = 10;
 var makeCalendar = (key2, years = ["2005", "2010", "2018", "2026"]) => {
   void key2;
   const months = years.map((y2) => [y2, "MANCHESTER UNITED"]);
   const group = new Group();
-  group.add(block(1010, 130, 520, 30, MAT.black()));
+  const base = block(1010, 130, 520, 30, MAT.black());
+  base.name = "calendar base";
+  group.add(base);
   const riser = block(870, 60, 380, 20, MAT.graphite());
   riser.position.y += 130;
   group.add(riser);
+  const caps = [];
   for (const s2 of [-1, 1]) {
     const post = rbox(56, CAL.rod - 150, 70, 14, MAT.black());
     post.position.set(s2 * 455, 190 + (CAL.rod - 150) / 2 - 20, 0);
@@ -22396,53 +22615,57 @@ var makeCalendar = (key2, years = ["2005", "2010", "2018", "2026"]) => {
     const cap = rbox(84, 84, 96, 20, MAT.black());
     cap.position.set(s2 * 455, CAL.rod, 0);
     group.add(cap);
+    caps.push(cap);
   }
   const rod = new Mesh(new CylinderGeometry(15, 15, 930, 32), MAT.satin());
   rod.rotation.z = Math.PI / 2;
   rod.position.y = CAL.rod;
   rod.castShadow = true;
+  rod.name = "calendar rod";
   group.add(rod);
-  const board = rbox(820, CAL.rod - 236, 30, 10, MAT.black());
-  board.position.set(0, 190 + (CAL.rod - 236) / 2, 0);
-  group.add(board);
+  const CY = CAL.rod + 15 - (RING - RT) + 0.2;
+  const rings = [-1, 1].map((s2) => {
+    const r2 = new Mesh(new TorusGeometry(RING, RT, 14, 64), MAT.satin());
+    r2.rotation.y = Math.PI / 2;
+    r2.position.set(s2 * 270, CY, 0);
+    r2.castShadow = true;
+    r2.name = "binder ring";
+    group.add(r2);
+    hangs(r2, rod, "the binder ring hangs on the rod");
+    return r2;
+  });
   const N2 = months.length - 1;
-  const zFront = (i2) => 30 + (N2 - i2) * 20, zBack = (i2) => -(48 + i2 * 20);
+  const zFront = (i2) => GAP2 * (N2 / 2 - i2), zBack = (i2) => zFront(N2) - GAP2 * (i2 + 1);
   const leaves = months.map(([m2, y2], i2) => {
     const pivot = new Group();
-    pivot.position.set(0, CAL.rod, 0);
+    pivot.position.set(0, CY, 0);
     const leaf = new Group();
     pivot.add(leaf);
-    const card2 = rbox(CAL.leafW, CAL.leafH, 18, 8, MAT.graphite());
-    card2.position.set(0, -CAL.leafH / 2 - 12, 0);
+    const card2 = rbox(CAL.leafW, CAL.leafH, LEAF_T, 3, MAT.graphite());
+    card2.position.set(0, -(RING - RT + 1) - CAL.leafH / 2, 0);
+    card2.name = "calendar leaf";
     leaf.add(card2);
-    const rings = [];
-    for (const s2 of [-1, 1]) {
-      const ring2 = new Mesh(new TorusGeometry(26, 6, 12, 32), MAT.satin());
-      ring2.rotation.y = Math.PI / 2;
-      ring2.position.set(s2 * (270 + (i2 - 2.5) * 14), 0, 0);
-      leaf.add(ring2);
-      rings.push(ring2);
-    }
     const face = lit(K2.white, 0.86);
     const month = wide(text3d(m2, { font: "800", size: 200, depth: 5, bevel: 0, face }), 1.08);
-    month.position.set(0, -CAL.leafH / 2 - 12 - 20, 9.5);
+    month.position.set(0, card2.position.y - 20, LEAF_T / 2 + 0.3);
     const year = wide(text3d(y2, { font: "500", size: 40, depth: 4, bevel: 0, face }), 1.1);
-    year.position.set(0, -CAL.leafH / 2 - 12 - 170, 9.5);
-    textOn(month, card2, { inset: 8 });
-    textOn(year, card2, { inset: 8 });
+    year.position.set(0, card2.position.y - 170, LEAF_T / 2 + 0.3);
+    textOn(month, card2, { inset: 3 });
+    textOn(year, card2, { inset: 3 });
     leaf.add(month, year);
-    leaf.position.z = zFront(i2);
     group.add(pivot);
-    for (const r2 of rings) joined(r2, rod, "the leaf's rings hang on the rod");
-    return { pivot, leaf, rings, card: card2 };
+    for (const r2 of rings) joined(card2, r2, "the binder ring runs through the leaf's punched hole");
+    hangs(card2, rings[0], "the leaf hangs on the binder rings", { linked: true });
+    return { pivot, leaf, card: card2 };
   });
-  for (const a2 of leaves) for (const b2 of leaves) if (a2 !== b2) for (const r2 of a2.rings) joined(r2, b2.card, "the rings run through the leaves' punched holes");
+  const onRing = (z2) => RING - Math.sqrt(Math.max(0, RING * RING - z2 * z2));
   const setP = (p2) => {
     leaves.forEach((l2, i2) => {
       const q2 = swing(p2[i2] ?? 0);
       l2.pivot.rotation.x = FRONT + (BACK - FRONT) * q2;
       const k2 = Math.max(0, Math.min(1, (q2 - 0.38) / 0.24));
-      l2.leaf.position.z = zFront(i2) + (zBack(i2) - zFront(i2)) * k2 * k2 * (3 - 2 * k2);
+      const z2 = zFront(i2) + (zBack(i2) - zFront(i2)) * k2 * k2 * (3 - 2 * k2);
+      l2.leaf.position.set(0, onRing(z2), z2);
     });
   };
   return {
@@ -22460,10 +22683,10 @@ var makeCalendar = (key2, years = ["2005", "2010", "2018", "2026"]) => {
 // src/world/obj/vault.ts
 var steel = () => new MeshPhysicalMaterial({ color: new Color("#5e6066"), roughness: 0.3, metalness: 1, envMapIntensity: 1.1, clearcoat: 0.2 });
 var R = 430;
-var makeVault = (key2) => {
+var makeVault = (key2, o2 = {}) => {
   void key2;
   const group = new Group();
-  const W = 1300, H3 = 1350, D2 = 420, CY = 640;
+  const W = 1300, H3 = 1350, D2 = o2.depth ?? 420, CY = 640;
   const wallShape = new Shape();
   wallShape.moveTo(-W / 2, 0);
   wallShape.lineTo(W / 2, 0);
@@ -22478,20 +22701,24 @@ var makeVault = (key2) => {
   const wall = new Mesh(wg, MAT.black());
   wall.castShadow = true;
   wall.receiveShadow = true;
+  wall.name = "vault wall";
   group.add(wall);
   const frame = new Mesh(new TorusGeometry(R + 40, 40, 32, 96), steel());
   frame.position.set(0, CY, 18);
+  frame.name = "vault frame";
   frame.castShadow = true;
   frame.receiveShadow = true;
   group.add(frame);
   const inner = new MeshStandardMaterial({ color: "#1b1b1e", roughness: 0.6, metalness: 0.6, side: BackSide });
-  const drum = new Mesh(new CylinderGeometry(R - 1, R - 1, D2 - 20, 96, 1, true), inner);
+  const drum = new Mesh(new CylinderGeometry(R - 0.3, R - 0.3, D2 - 20, 96, 1, true), inner);
+  drum.name = "vault drum";
   drum.rotation.x = Math.PI / 2;
   drum.position.set(0, CY, -D2 / 2 - 2);
   drum.receiveShadow = true;
   group.add(drum);
   const back = new Mesh(new CircleGeometry(R, 96), new MeshStandardMaterial({ color: "#121214", roughness: 0.8 }));
-  back.position.set(0, CY, -D2 + 14);
+  back.position.set(0, CY, -D2 + 12);
+  back.name = "vault back";
   group.add(back);
   for (const y2 of [-160, 40, 220]) {
     const shelf = rbox(560, 12, 120, 4, steel());
@@ -22512,10 +22739,12 @@ var makeVault = (key2) => {
   const disc = new Mesh(new CylinderGeometry(R, R, 110, 96), steel());
   disc.rotation.x = Math.PI / 2;
   disc.position.z = 0;
+  disc.name = "vault door";
   disc.castShadow = true;
   disc.receiveShadow = true;
   door.add(disc);
   const face = new Mesh(new CylinderGeometry(R - 60, R - 40, 30, 96), steel());
+  face.name = "door face";
   face.rotation.x = Math.PI / 2;
   face.position.z = 68;
   door.add(face);
@@ -22527,18 +22756,23 @@ var makeVault = (key2) => {
     door.add(bolt);
   }
   const wheel = new Group();
-  wheel.position.z = 110;
+  wheel.position.z = 108;
   door.add(wheel);
   const hub = new Mesh(new CylinderGeometry(60, 60, 50, 48), MAT.satin());
   hub.rotation.x = Math.PI / 2;
+  hub.name = "wheel hub";
   wheel.add(hub);
+  mounted(hub, face, "the wheel's hub turns on the door's face");
   const rim2 = new Mesh(new TorusGeometry(200, 16, 16, 64), MAT.satin());
   wheel.add(rim2);
+  const knobs = [];
   for (let i2 = 0; i2 < 4; i2++) {
     const spoke = new Mesh(new CylinderGeometry(12, 12, 400, 16), MAT.satin());
     spoke.rotation.z = i2 * Math.PI / 4 * 2;
     wheel.add(spoke);
     const knob = new Mesh(new SphereGeometry(26, 24, 16), MAT.satin());
+    knob.name = "wheel knob";
+    knobs.push(knob);
     const a2 = i2 / 4 * Math.PI * 2;
     knob.position.set(Math.cos(a2) * 200, Math.sin(a2) * 200, 0);
     wheel.add(knob);
@@ -22546,13 +22780,21 @@ var makeVault = (key2) => {
   for (const y2 of [-260, 260]) {
     const b2 = new Mesh(new CylinderGeometry(38, 38, 150, 32), steel());
     b2.position.set(0, y2, 0);
+    b2.name = "hinge barrel";
     hinge.add(b2);
-    const arm = rbox(120, 60, 50, 10, steel());
-    arm.position.set(70, y2, 0);
+    const arm = rbox(175, 60, 50, 10, steel());
+    arm.position.set(97, y2, 0);
+    arm.name = "hinge arm";
     hinge.add(arm);
+    const bracket = rbox(90, 150, 83, 8, steel());
+    bracket.position.set(-R - 60, CY + y2, 41.5);
+    bracket.name = "hinge bracket";
+    bracket.castShadow = true;
+    group.add(bracket);
+    mounted(b2, bracket, "the hinge barrel turns against its bracket on the wall");
   }
   const plateG = new Group();
-  plateG.position.set(0, H3 - 120, 32);
+  plateG.position.set(0, H3 - 120, 20);
   group.add(plateG);
   let plate = litPlate(["VAULT"], { size: 76, color: K2.white });
   plateG.add(plate.group);
@@ -22560,6 +22802,12 @@ var makeVault = (key2) => {
     group,
     size: { w: W, h: H3, d: D2 },
     mouth: new Vector3(0, CY, 0),
+    R,
+    CY,
+    D: D2,
+    drum,
+    hub,
+    knobs,
     label: (text) => {
       plateG.clear();
       plate = litPlate(text.split(" | "), { size: 76, color: K2.white });
@@ -22633,14 +22881,14 @@ var brick = (label) => {
     g2.add(l2);
   }
   const bandW = 92;
-  const band = rbox(bandW, BRICK_H + 4, NOTE_D + 4, 2, MAT.gold());
-  band.position.y = BRICK_H / 2;
+  const band = rbox(bandW, BRICK_H + 2, NOTE_D + 4, 2, MAT.gold());
+  band.position.y = BRICK_H / 2 + 1;
   g2.add(band);
   if (label) {
     const size2 = Math.min(26, (NOTE_D - 20) / Math.max(1, textWidth(label, "800", 26) * 1.08) * 26);
     const t2 = wide(text3d(label, { font: "800", size: size2, depth: 1.5, bevel: 0, face: lit(K2.cream, 0.95) }), 1.08);
     t2.rotation.set(-Math.PI / 2, 0, Math.PI / 2);
-    t2.position.set(0, BRICK_H + 3.2, 0);
+    t2.position.set(0, BRICK_H + 2.3, 0);
     textOn(t2, band, { inset: 2 });
     g2.add(t2);
   }
@@ -22652,12 +22900,12 @@ var makeCashStack = (key2, label, o2 = {}) => {
   const n2 = o2.bricks ?? 1, cols = o2.cols ?? 1, rows = o2.rows ?? 1;
   for (let k2 = 0; k2 < n2; k2++) for (let i2 = 0; i2 < cols; i2++) for (let j2 = 0; j2 < rows; j2++) {
     const b2 = brick(label);
-    b2.position.set((i2 - (cols - 1) / 2) * (NOTE_W + 6), k2 * (BRICK_H + 1), (j2 - (rows - 1) / 2) * (NOTE_D + 6));
+    b2.position.set((i2 - (cols - 1) / 2) * (NOTE_W + 6), k2 * (BRICK_H + 2.2), (j2 - (rows - 1) / 2) * (NOTE_D + 6));
     group.add(b2);
   }
   return { group, size: { w: cols * (NOTE_W + 6), h: n2 * (BRICK_H + 1), d: rows * (NOTE_D + 6) } };
 };
-var CASH = { w: NOTE_W, h: BRICK_H, d: NOTE_D };
+var CASH = { w: NOTE_W, h: BRICK_H, d: NOTE_D, stack: BRICK_H + 2.2 };
 
 // src/world/places/sides.ts
 var S3 = "sides";
@@ -22668,6 +22916,8 @@ var Y2005 = word(S3, 0, /^2005/);
 var MOSTLY = word(S3, 0, /^mostly/);
 var LOANS = word(S3, 0, /^loans/);
 var BALL_LAND = ENTER + 6;
+var BALL_DROP = { h: 240, fall: 6 };
+var CAL_DROP = { h: 300, fall: 7 };
 var PLATES_ON = FAMILY;
 var CAL_LAND = Y2005 + 1;
 var WHEEL = [CAL_LAND + 4, CAL_LAND + 16];
@@ -22686,19 +22936,19 @@ var VS = 0.75;
 var VX = 40;
 var VZ = -1180;
 var MOUTH_Y = 640 * VS;
-var MOUTH_BOTTOM = MOUTH_Y - 430 * VS + 40;
+var MOUTH_BOTTOM = MOUTH_Y - Math.sqrt((430 * VS) ** 2 - 176 ** 2) + 2;
 var PILE = [LP.x - 560, 0, LP.d / 2 - 560];
 var cashAt = (k2, f2) => {
   const a2 = CASH_GO[k2], t2 = (f2 - a2) / CASH_DUR;
-  const inside = new Vector3(VX, MOUTH_BOTTOM, VZ - 140), lip = new Vector3(VX - 40, MOUTH_BOTTOM, VZ + 60);
-  const rest = new Vector3(PILE[0], k2 * (CASH.h + 1), PILE[2]);
+  const inside = new Vector3(VX, MOUTH_BOTTOM, VZ - 140), lip = new Vector3(VX, MOUTH_BOTTOM, VZ + 185);
+  const rest = new Vector3(PILE[0], k2 * CASH.stack, PILE[2]);
   if (t2 <= 0) return { p: inside, on: false, fast: false };
   if (t2 >= 1) return { p: rest, on: true, fast: false };
-  if (t2 < 0.3) {
-    const u4 = SOFT(t2 / 0.3);
+  if (t2 < 0.36) {
+    const u4 = SOFT(t2 / 0.36);
     return { p: inside.clone().lerp(lip, u4), on: true, fast: true };
   }
-  const u3 = (t2 - 0.3) / 0.7, e2 = 1 - Math.pow(1 - u3, 2.2);
+  const u3 = (t2 - 0.36) / 0.64, e2 = 1 - Math.pow(1 - u3, 2.2);
   const p2 = lip.clone().lerp(rest, e2);
   const fall = Math.min(1, u3 / 0.35);
   p2.y = lip.y + (rest.y - lip.y) * fall * fall;
@@ -22728,7 +22978,7 @@ var SidesPlace = {
     L3.accent = { pos: [VX, MOUTH_Y + 80, VZ + 380], color: K2.amber, i: 0.9 * ramp(f2, DOOR[0], DOOR[1], SETTLE) };
     return L3;
   },
-  blur: (f2) => dropIn(f2, BALL_LAND, { h: 240, fall: 6 }).fast || dropIn(f2, CAL_LAND, { h: 300, fall: 7 }).fast || [0, 1, 2].some((k2) => cashAt(k2, f2).fast) || crestAt(f2).fast,
+  blur: (f2) => dropIn(f2, BALL_LAND, BALL_DROP).fast || dropIn(f2, CAL_LAND, CAL_DROP).fast || [0, 1, 2].some((k2) => cashAt(k2, f2).fast) || crestAt(f2).fast,
   cues: () => [
     { kind: "hit", s: "thud", at: BALL_LAND, vol: 0.4, why: "the flag ball lands on the Glazer plinth" },
     { kind: "hit", s: "click", at: PLATES_ON, vol: 0.3, why: "the nameplates light: the American family" },
@@ -22786,10 +23036,10 @@ var SidesPlace = {
       group.add(c2.group);
       return c2;
     });
-    for (const b2 of bricks) joined(b2.group, vault.group, "the loans slide out through the vault's open mouth");
-    bricks.forEach((a2, i2) => bricks.forEach((b2, j2) => {
-      if (j2 === i2 + 1) joined(a2.group, b2.group, "each brick lands on the one before it");
-    }));
+    bricks.forEach((b2, k2) => falling(b2.group, CASH_GO[k2], CASH_GO[k2] + CASH_DUR, "the loans brick slides out of the vault, drops and skids to the pile"));
+    dropFalls(ball.group, BALL_LAND, BALL_DROP, "the flag ball drops onto the Glazer plinth");
+    dropFalls(calG, CAL_LAND, CAL_DROP, "the calendar drops in between the plinths");
+    falling(crest.group, CREST_GO, CREST_GO + CREST_DUR, "the crest lifts off its plinth and glides across to the US side");
     const halo = ring({ r: 900 });
     halo.mesh.position.set(LP.x, 1.5, 0);
     group.add(halo.mesh);
@@ -22800,7 +23050,7 @@ var SidesPlace = {
     return {
       group,
       update: (f2) => {
-        const d2 = dropIn(f2, BALL_LAND, { h: 240, fall: 6 });
+        const d2 = dropIn(f2, BALL_LAND, BALL_DROP);
         ball.group.visible = d2.on;
         ball.group.position.set(BALL_X, LP.h + BALL_R + d2.y, 0);
         ball.group.rotation.y = -0.5 + f2 * 0.012;
@@ -22808,7 +23058,7 @@ var SidesPlace = {
         for (const m2 of plateLit) {
           m2.color.copy(m2.userData.full ?? m2.color).multiplyScalar(0.25 + 0.75 * lv);
         }
-        const c2 = dropIn(f2, CAL_LAND, { h: 300, fall: 7 });
+        const c2 = dropIn(f2, CAL_LAND, CAL_DROP);
         calG.visible = c2.on;
         calG.position.y = c2.y;
         cal.update({ year: 0, flip: 0 });
@@ -22968,8 +23218,8 @@ var makeBondPress = (key2) => {
   group.add(plate.group);
   const ram = new Group();
   ram.name = "press ram";
-  const rod = cyl(44, 420, MAT.satin(), 40);
-  rod.position.y = 50 + 210;
+  const rod = cyl(44, 590, MAT.satin(), 40);
+  rod.position.y = 50 + 295;
   const platen = rbox(BOND.w + 20, 50, BOND.d + 10, 10, MAT.graphite());
   platen.position.y = 25;
   ram.add(rod, platen);
@@ -22977,6 +23227,8 @@ var makeBondPress = (key2) => {
   group.add(ram);
   joined(rod, beam, "the piston runs through the press's beam");
   joined(rod, head, "the piston runs through the press's head");
+  rod.name = "press rod";
+  head.name = "press head";
   const screen = rbox(820, 130, 14, 8, new MeshPhysicalMaterial({ color: "#050506", roughness: 0.22, metalness: 0.3, clearcoat: 0.6 }));
   screen.position.set(0, BPRESS.base / 2, BPRESS.d / 2 + 6);
   screen.name = "press screen";
@@ -22993,6 +23245,8 @@ var makeBondPress = (key2) => {
   return {
     group,
     die,
+    rod,
+    head,
     /** `ram` 0 (up) … 1 (down on the sheet); `value` the counter's string; `on` lights the counter */
     update: (p2) => {
       ram.position.y = BPRESS.up - p2.ram * (BPRESS.up - (die + BOND.t + 1.5));
@@ -23012,7 +23266,7 @@ var PAY = word(S4, 0, /^pay/);
 var LOANS2 = word(S4, 0, /^loans/);
 var X0 = 0;
 var X1 = 1400;
-var X2 = 3e3;
+var X2 = 3200;
 var FLIP = [LATER - 12, LATER + 2];
 var T1 = LATER + 6;
 var T1_DUR = 16;
@@ -23022,12 +23276,19 @@ var T2 = N500 + 8;
 var T2_DUR = 18;
 var WHEEL2 = [T2 + 2, T2 + 14];
 var DOOR2 = [T2 + 10, T2 + 30];
-var FLY = [BONDS - 12, BONDS - 4, BONDS + 4];
-var FLY_DUR = 16;
+var FLY = [BONDS - 14, BONDS - 8, BONDS - 2];
+var FLY_DUR = 14;
 var SLAM2 = [PAY - 6, PAY + 2];
 var HIT = LOANS2 + 1;
-var PILE2 = new Vector3(X1 + 640, 0, 120);
-var MOUTH = new Vector3(X2, 640, -150);
+var PILE2 = new Vector3(X1 + 790, 0, 120);
+var VDEPTH = 900;
+var VR = 430;
+var VCY = 640;
+var SHEET_YAW = 0.3;
+var SHEET_HX = BOND.w / 2 * Math.cos(SHEET_YAW) + BOND.d / 2 * Math.sin(SHEET_YAW);
+var restIn = (j2) => new Vector3(X2, VCY - Math.sqrt((VR - 0.3) ** 2 - SHEET_HX * SHEET_HX) + j2 * (BOND.t + 0.3), -470 - 20 * j2);
+var ENTRY = new Vector3(X2, 700, 640);
+var PILE_STEP = BOND.t + 0.3;
 var ramAt = (f2) => {
   let v2 = 0;
   for (const s2 of STAMPS) {
@@ -23041,19 +23302,37 @@ var sheetAt = (k2, f2) => {
   const s2 = STAMPS[k2], die = new Vector3(X1, BPRESS.base + 10, BPRESS.dieZ), top = new Vector3(PILE2.x, k2 * (BOND.t + 0.6), PILE2.z);
   if (f2 < s2 - 6) return { p: die, on: false, printed: false, fast: false, rot: 0 };
   if (f2 < s2 + 7) return { p: die, on: true, printed: f2 >= s2, fast: false, rot: 0 };
-  const t2 = clamp01((f2 - s2 - 7) / SLIDE), e2 = SOFT(t2);
-  const p2 = die.clone().lerp(top, e2);
-  p2.y = die.y + (top.y - die.y) * e2 * e2 + Math.sin(Math.PI * e2) * 120;
+  const t2 = clamp01((f2 - s2 - 7) / SLIDE), e2 = SOFT(t2), CLEAR = 0.78;
+  const p2 = die.clone();
+  if (e2 < CLEAR) {
+    const w2 = e2 / CLEAR;
+    p2.x = die.x + (top.x - die.x) * w2;
+    p2.z = die.z + (top.z - die.z) * w2;
+    p2.y = die.y + Math.sin(Math.PI * w2) * 40;
+  } else {
+    const w2 = (e2 - CLEAR) / (1 - CLEAR);
+    p2.set(top.x, die.y + (top.y - die.y) * w2 * w2, top.z);
+  }
   return { p: p2, on: true, printed: true, fast: t2 > 0 && t2 < 1, rot: -0.2 * e2 };
+};
+var bez3 = (a2, b2, c2, d2, u3) => {
+  const v2 = 1 - u3;
+  return new Vector3().addScaledVector(a2, v2 * v2 * v2).addScaledVector(b2, 3 * v2 * v2 * u3).addScaledVector(c2, 3 * v2 * u3 * u3).addScaledVector(d2, u3 * u3 * u3);
 };
 var flightAt = (k2, f2) => {
   const a2 = FLY[2 - k2], t2 = (f2 - a2) / FLY_DUR;
+  const j2 = 2 - k2, rest = restIn(j2);
   if (t2 <= 0) return null;
-  if (t2 >= 1) return { p: MOUTH.clone().add(new Vector3(0, 0, -260)), on: false, fast: false, tilt: 0 };
-  const start = new Vector3(PILE2.x, k2 * (BOND.t + 0.6), PILE2.z), ctrl = new Vector3(X2 - 300, 1900, 500), end = MOUTH.clone().add(new Vector3(0, -40, -260));
-  const u3 = SOFT(t2);
-  const p2 = new Vector3().addScaledVector(start, (1 - u3) * (1 - u3)).addScaledVector(ctrl, 2 * u3 * (1 - u3)).addScaledVector(end, u3 * u3);
-  return { p: p2, on: true, fast: true, tilt: Math.sin(Math.PI * u3) * 0.9 };
+  if (t2 >= 1) return { p: rest, on: true, fast: false, tilt: 0, yaw: SHEET_YAW };
+  const start = new Vector3(PILE2.x, k2 * PILE_STEP, PILE2.z);
+  const u3 = SOFT(t2), SPLIT = 0.62;
+  if (u3 < SPLIT) {
+    const w3 = u3 / SPLIT;
+    const p2 = bez3(start, new Vector3(start.x - 60, 2500, start.z + 40), new Vector3(X2 - 40, 2100, 780), ENTRY, w3);
+    return { p: p2, on: true, fast: true, tilt: Math.sin(Math.PI * w3) * 0.7, yaw: -0.2 + (SHEET_YAW + 0.2) * w3 };
+  }
+  const w2 = (u3 - SPLIT) / (1 - SPLIT);
+  return { p: ENTRY.clone().lerp(rest, w2), on: true, fast: true, tilt: 0, yaw: SHEET_YAW };
 };
 var BondsPlace = {
   id: S4,
@@ -23105,27 +23384,27 @@ var BondsPlace = {
       group.add(b2.group);
       return b2;
     });
-    const vault = makeVault("bonds");
+    const vault = makeVault("bonds", { depth: VDEPTH });
     vault.label("BANK LOANS");
     vault.group.position.set(X2, 0, 0);
     vault.group.name = "vault";
     group.add(vault.group);
-    for (const b2 of sheets) {
-      joined(b2.group, vault.group, "the bonds fly in through the vault's open mouth");
-      joined(b2.group, press.group, "the sheet lies on the die and the press prints it");
-    }
-    joined(blank.group, press.group, "the blank sheet lies on the die");
-    sheets.forEach((a2, i2) => sheets.forEach((b2, j2) => {
-      if (j2 !== i2) joined(a2.group, b2.group, "the bonds stack on one another");
-    }));
+    sheets.forEach((b2, k2) => {
+      falling(b2.group, STAMPS[k2] + 7, STAMPS[k2] + 7 + SLIDE, "the printed sheet is slid off the die onto the pile");
+      falling(b2.group, FLY[2 - k2], FLY[2 - k2] + FLY_DUR, "the certificate flies into the vault");
+    });
+    mounted(press.rod, press.head, "the press's piston runs in its head");
+    const WHEEL_FRONT = 120 + 108 + 26;
     const paid = litPlate(["PAID OFF"], { size: 92, color: K2.red, depth: 30 });
-    paid.group.position.set(X2, 640, 300);
+    paid.group.position.set(X2, 640, WHEEL_FRONT + 15 - 0.3);
     paid.group.name = "PAID OFF plate";
     group.add(paid.group);
+    paid.body.name = "PAID OFF plate body";
+    mounted(paid.body, vault.knobs[0], "the PAID OFF plate is stamped onto the door's wheel (against its knobs)");
     const stamp = makeStamp("bonds");
     stamp.group.name = "stamp";
     group.add(stamp.group);
-    joined(stamp.group, paid.group, "the stamp presses the plate onto the door");
+    falling(stamp.group, HIT - 7, HIT + 13, "the stamp is swung in, slams PAID OFF onto the door, and is swung away");
     const halo = ring({ r: 900, color: K2.money });
     halo.mesh.position.set(X1, 1.5, 300);
     group.add(halo.mesh);
@@ -23146,19 +23425,19 @@ var BondsPlace = {
           if (fl) {
             b2.group.visible = fl.on;
             b2.group.position.copy(fl.p);
-            b2.group.rotation.set(fl.tilt, 0.3, 0);
+            b2.group.rotation.set(fl.tilt, fl.yaw, 0, "YXZ");
             return;
           }
           const s2 = sheetAt(k2, f2);
           b2.group.visible = s2.on && s2.printed;
           b2.group.position.copy(s2.p);
-          b2.group.rotation.set(0, s2.rot, 0);
+          b2.group.rotation.set(0, s2.rot, 0, "YXZ");
         });
         const open = SOFT(clamp01((f2 - DOOR2[0]) / (DOOR2[1] - DOOR2[0])));
         const shut = EXIT(clamp01((f2 - SLAM2[0]) / (SLAM2[1] - SLAM2[0])));
-        vault.update({ door: open * (1 - shut), wheel: SOFT(clamp01((f2 - WHEEL2[0]) / (WHEEL2[1] - WHEEL2[0]))) });
+        vault.update({ door: 0.905 * open * (1 - shut), wheel: SOFT(clamp01((f2 - WHEEL2[0]) / (WHEEL2[1] - WHEEL2[0]))) });
         const sIn = clamp01((f2 - (HIT - 7)) / 7), sOut = clamp01((f2 - (HIT + 3)) / 10);
-        const z2 = 316 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
+        const z2 = WHEEL_FRONT + 30 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
         stamp.group.visible = f2 >= HIT - 7 && f2 < HIT + 13;
         stamp.group.position.set(X2, 640, z2);
         paid.group.visible = f2 >= HIT;
@@ -23236,16 +23515,12 @@ var stand = (len, lights3, main) => {
   g2.add(roof);
   for (let x2 = -len / 2 + 60; x2 <= len / 2 - 60; x2 += Math.max(120, (len - 120) / 6)) {
     const col = rbox(16, H2 + 110 - 7, 16, 3, roofMat());
-    col.position.set(x2, (H2 + 110 - 7) / 2, -STAND - 34);
+    col.position.set(x2, (H2 + 110 - 7) / 2, -STAND - 6);
     g2.add(col);
     if (main) {
       const tr = rbox(10, 46, STAND + 40, 3, roofMat());
-      tr.position.set(x2, H2 + 110 + 30, -STAND / 2 + 10);
+      tr.position.set(x2, H2 + 110 + 30 - 0.3, -STAND / 2 + 10);
       g2.add(tr);
-      const tie = rbox(8, 8, Math.hypot(46, STAND) * 0.55, 2, roofMat());
-      tie.position.set(x2, H2 + 110 + 30, -STAND / 2 + 10);
-      tie.rotation.x = 0.2;
-      g2.add(tie);
     }
   }
   const lamp = lit("#fff6e8", 1.05);
@@ -23289,7 +23564,7 @@ var makeStadium = (key2) => {
   const white2 = new MeshStandardMaterial({ color: C4("#f2efe9"), roughness: 0.7 });
   const word2 = wide(text3d("MANCHESTER UNITED", { font: "800", size: 70, depth: 2, bevel: 0, face: white2 }), 1.1);
   word2.rotation.set(-Math.PI / 2, 0, 0);
-  word2.position.set(0, 13 + 2.5, 26);
+  word2.position.set(0, 13 + 0.3, 26);
   far.bank.add(word2);
   textOn(word2, far.bank, { inset: 10 });
   word2.traverse((n2) => {
@@ -23300,7 +23575,7 @@ var makeStadium = (key2) => {
   facade.name = "near facade";
   group.add(facade);
   const crest = new Mesh(new PlaneGeometry(118, 120), printMat("crest", { alphaTest: 0.5, emissive: 0.15, rough: 0.5 }));
-  crest.position.set(-200, 210, STADIUM.d / 2 - 20 + 20.6);
+  crest.position.set(-200, 210, STADIUM.d / 2 - 20 + 20.4);
   crest.userData.print = "the Manchester United crest (assets/brand/crest.png) on Old Trafford's outer wall";
   group.add(crest);
   const name = litPlate(["OLD TRAFFORD"], { size: 46, color: K2.white, depth: 18 });
@@ -23343,17 +23618,20 @@ var makeTurnstile = (key2) => {
   rotor.position.set(150, 470, 0);
   rotor.rotation.z = -0.62;
   group.add(rotor);
-  const hub = cyl(46, 156, steel2, 32);
-  hub.rotation.z = Math.PI / 2;
-  hub.position.set(52, 0, 0);
-  rotor.add(hub);
   const arms = new Group();
-  arms.position.x = 150;
+  arms.position.x = 250;
   rotor.add(arms);
+  const hub = cyl(46, 300, steel2, 32);
+  hub.rotation.z = Math.PI / 2;
+  hub.position.set(-140, 0, 0);
+  hub.name = "turnstile hub";
+  arms.add(hub);
+  joined(hub, cab, "the rotor's hub turns in its bearing inside the cabinet");
+  mounted(hub, cab, "the rotor's hub is carried by its bearing in the cabinet");
   for (let i2 = 0; i2 < 3; i2++) {
     const a2 = i2 / 3 * Math.PI * 2;
-    const arm = new Mesh(new CylinderGeometry(14, 14, 380, 20), steel2);
-    arm.position.set(0, Math.cos(a2) * 190, Math.sin(a2) * 190);
+    const arm = new Mesh(new CylinderGeometry(14, 14, 300, 20), steel2);
+    arm.position.set(0, Math.cos(a2) * 150, Math.sin(a2) * 150);
     arm.rotation.x = a2;
     arm.castShadow = true;
     arms.add(arm);
@@ -23392,40 +23670,72 @@ var shirtShape = () => {
   s2.lineTo(-34, 0);
   return s2;
 };
+var RACK = { postX: 380, railY: 880, railR: 12, step: 250, shirtK: 0.8 };
 var makeShirtRack = (key2) => {
   void key2;
   const group = new Group();
   const satin = MAT.satin();
-  const base = block(880, 50, 300, 14, MAT.black());
+  const base = block(840, 50, 300, 14, MAT.black());
   base.name = "rack base";
   group.add(base);
-  for (const sx of [-1, 1]) {
-    const post = cyl(16, 820, satin, 24);
-    post.position.set(sx * 340, 50, 0);
+  const H3 = RACK.railY, R2 = RACK.railR;
+  const sleeves = [];
+  const posts = [-1, 1].map((sx) => {
+    const post = new Mesh(new CylinderGeometry(16, 16, H3 - 50 + 4, 24), satin);
+    post.position.set(sx * RACK.postX, 50 - 2 + (H3 - 50 + 4) / 2, 0);
+    post.name = "rack upright";
+    post.castShadow = true;
     group.add(post);
-  }
-  const rail = new Mesh(new CylinderGeometry(12, 12, 720, 24), satin);
+    const foot = cyl(30, 10, satin, 24);
+    foot.position.set(sx * RACK.postX, 50 - 0.3 + 5, 0);
+    foot.name = "upright foot";
+    group.add(foot);
+    const sleeve = new Mesh(new CylinderGeometry(R2 + 9, R2 + 9, 70, 24), satin);
+    sleeve.rotation.z = Math.PI / 2;
+    sleeve.position.set(sx * RACK.postX, H3, 0);
+    sleeve.name = "rail sleeve";
+    sleeve.castShadow = true;
+    group.add(sleeve);
+    sleeves.push(sleeve);
+    mounted(post, base, "the upright stands on the rack's base");
+    mounted(sleeve, post, "the T-sleeve is fixed on the upright's top");
+    return post;
+  });
+  const rail = new Mesh(new CylinderGeometry(R2, R2, 2 * RACK.postX + 40, 24), satin);
   rail.rotation.z = Math.PI / 2;
-  rail.position.y = 860;
+  rail.position.y = H3;
+  rail.name = "rack rail";
+  rail.castShadow = true;
   group.add(rail);
+  mounted(rail, sleeves[0], "the rail's ends sit in the T-sleeves");
+  void posts;
   const geo = new ExtrudeGeometry(shirtShape(), { depth: 26, bevelEnabled: true, bevelThickness: 6, bevelSize: 5, bevelSegments: 3, curveSegments: 4 });
   geo.translate(0, 0, -13);
   const shirts = [];
-  for (let i2 = 0; i2 < 4; i2++) {
+  const WIRE = 2.6, HOOK = R2 + WIRE + 0.25;
+  for (let i2 = 0; i2 < 3; i2++) {
     const hang = new Group();
-    hang.position.set(-240 + i2 * 160, 860, 75 - i2 * 50);
+    hang.position.set((i2 - 1) * RACK.step, H3, 0);
     group.add(hang);
-    const hook = new Mesh(new TorusGeometry(16, 3, 8, 24, Math.PI * 1.3), satin);
-    hook.position.set(0, 4, 0);
-    hook.rotation.z = -0.3;
+    const hook = new Mesh(new TorusGeometry(HOOK, WIRE, 8, 32, Math.PI * 1.25), satin);
+    hook.rotation.y = -Math.PI / 2;
+    hook.position.set(0, -0.25, 0);
+    hook.rotation.order = "YXZ";
+    hook.name = "hanger hook";
     hang.add(hook);
-    joined(hook, rail, "the hanger's hook sits over the rail");
-    const bar = rbox(220, 8, 10, 3, satin);
-    bar.position.y = -34;
-    bar.rotation.z = 0;
+    const nTop = new Vector3(0, -0.25, HOOK), nBot = new Vector3(0, -50, 0), nd = nBot.clone().sub(nTop);
+    const neck = new Mesh(new CylinderGeometry(WIRE, WIRE, nd.length() + 2, 8), satin);
+    neck.position.copy(nTop).addScaledVector(nd, 0.5);
+    neck.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), nd.clone().normalize());
+    neck.name = "hanger neck";
+    hang.add(neck);
+    const bar = rbox(220 * RACK.shirtK, 8, 10, 3, satin);
+    bar.position.y = -52;
     hang.add(bar);
+    hangs(hook, rail, "the hanger's hook wraps the rail, its inside resting on the rail's top");
     const shirt = new Group();
-    shirt.position.y = -36;
+    shirt.position.y = -52 - 2;
+    shirt.scale.setScalar(RACK.shirtK);
     hang.add(shirt);
     const body = new Mesh(geo, red());
     body.castShadow = true;
@@ -23434,29 +23744,32 @@ var makeShirtRack = (key2) => {
     shirt.add(body);
     const collar = new Mesh(new TorusGeometry(36, 5, 8, 24, Math.PI), white());
     collar.rotation.z = Math.PI;
-    collar.position.set(0, -6, 20);
+    collar.position.set(0, -6, 19);
     shirt.add(collar);
     for (const sx of [-1, 1]) {
       const cuff = rbox(46, 9, 8, 2, white());
-      cuff.position.set(sx * 118, -96, 20);
+      cuff.position.set(sx * 118, -96, 19);
       cuff.rotation.z = sx * 0.85;
       shirt.add(cuff);
     }
     const crest = new Mesh(new PlaneGeometry(52, 53), printMat("crest", { alphaTest: 0.5, emissive: 0.08, rough: 0.6 }));
-    crest.position.set(36, -96, 19.6);
+    crest.position.set(36, -96, 19.4);
     crest.userData.print = "the Manchester United crest (assets/brand/crest.png) on the shirt's chest";
     shirt.add(crest);
     shirts.push(hang);
   }
   const spoutBody = rbox(90, 40, 70, 10, satin);
-  spoutBody.position.set(395, 70, 150);
+  spoutBody.position.set(445, 50 + 20 - 0.3, 0);
+  spoutBody.name = "rack spout";
   group.add(spoutBody);
+  mounted(spoutBody, base, "the spout is fixed on the base's end");
   return {
     group,
-    spout: new Vector3(410, 170, 150),
+    spout: new Vector3(470, 100, 0),
+    /** `sway`: the shirts swing on the rail (radians about its axis), alternate ones the other way */
     update: (p2) => {
       shirts.forEach((h2, i2) => {
-        h2.rotation.z = p2.sway * (i2 % 2 ? -0.8 : 1) * (1 - i2 * 0.12);
+        h2.rotation.x = p2.sway * (i2 % 2 ? -0.8 : 1) * (1 - i2 * 0.12);
       });
     }
   };
@@ -23471,7 +23784,7 @@ var makeTvCamera = (key2) => {
   for (let i2 = 0; i2 < 3; i2++) {
     const a2 = i2 / 3 * Math.PI * 2 + Math.PI / 6;
     const foot = new Vector3(Math.cos(a2) * 300, 0, Math.sin(a2) * 300);
-    const top = new Vector3(Math.cos(a2) * 40, crownY, Math.sin(a2) * 40);
+    const top = new Vector3(Math.cos(a2) * 40, crownY - 10, Math.sin(a2) * 40);
     const len = foot.distanceTo(top);
     const leg = new Mesh(new CylinderGeometry(16, 13, len, 16), MAT.black());
     leg.position.copy(foot).add(top).multiplyScalar(0.5);
@@ -23484,14 +23797,17 @@ var makeTvCamera = (key2) => {
   }
   const crown = cyl(70, 50, MAT.graphite(), 40);
   crown.position.y = crownY - 25;
+  crown.name = "tripod crown";
   group.add(crown);
   const head = new Group();
-  head.position.y = crownY + 25;
+  head.position.y = crownY + 0.2;
   group.add(head);
   const bowl = cyl(80, 60, satin, 40);
+  bowl.name = "fluid head";
   head.add(bowl);
+  mounted(bowl, crown, "the fluid head pans on the tripod's crown");
   const body = rbox(220, 230, 420, 26, MAT.black());
-  body.position.set(0, 180, -20);
+  body.position.set(0, 60 + 115 - 0.3, -20);
   body.name = "camera body";
   head.add(body);
   const barrel = new Mesh(new CylinderGeometry(78, 70, 320, 48), MAT.graphite());
@@ -23500,7 +23816,8 @@ var makeTvCamera = (key2) => {
   barrel.castShadow = true;
   head.add(barrel);
   for (const z2 of [260, 330, 400]) {
-    const r2 = new Mesh(new TorusGeometry(80, 6, 10, 48), satin);
+    const br = 70 + 8 * (z2 - 180) / 320;
+    const r2 = new Mesh(new TorusGeometry(br + 6 - 0.3, 6, 10, 48), satin);
     r2.position.set(0, 170, z2);
     head.add(r2);
   }
@@ -23508,20 +23825,21 @@ var makeTvCamera = (key2) => {
   hood.position.set(0, 170, 540);
   head.add(hood);
   const glass = new Mesh(new CircleGeometry(62, 48), new MeshPhysicalMaterial({ color: "#10131a", roughness: 0.05, metalness: 0.2, clearcoat: 1, envMapIntensity: 1.6 }));
-  glass.position.set(0, 170, 500.6);
+  glass.position.set(0, 170, 500.4);
   head.add(glass);
   const vf = rbox(160, 110, 150, 14, MAT.black());
-  vf.position.set(0, 360, -90);
+  vf.position.set(0, body.position.y + 115 + 55 - 0.3, -90);
   head.add(vf);
   const tally = lit("#ff2a2a", 1.1);
   const lamp = new Mesh(new SphereGeometry(16, 20, 14), tally);
-  lamp.position.set(0, 300, 200);
+  lamp.position.set(0, body.position.y + 115 + 14, 120);
   head.add(lamp);
   for (const sx of [-1, 1]) {
-    const bar = new Mesh(new CylinderGeometry(9, 9, 420, 12), satin);
-    bar.rotation.z = Math.PI / 2 - sx * 0.35;
-    bar.rotation.y = 0.5;
-    bar.position.set(sx * 160, 70, -260);
+    const a2 = new Vector3(sx * 70, 32, -30), b2 = new Vector3(sx * 210, -50, -330), d2 = b2.clone().sub(a2);
+    const bar = new Mesh(new CylinderGeometry(9, 9, d2.length(), 12), satin);
+    bar.position.copy(a2).addScaledVector(d2, 0.5);
+    bar.quaternion.setFromUnitVectors(new Vector3(0, 1, 0), d2.normalize());
+    bar.castShadow = true;
     head.add(bar);
   }
   const labelBody = rbox(10, 112, 220, 4, MAT.graphite());
@@ -23545,7 +23863,7 @@ var makeTvCamera = (key2) => {
 };
 
 // src/world/obj/pipe.ts
-var makePipe = (key2, pts, r2 = 86) => {
+var makePipe = (key2, pts, r2 = 86, o2 = {}) => {
   void key2;
   const group = new Group();
   const curve = new CatmullRomCurve3(pts, false, "catmullrom", 0.2);
@@ -23560,12 +23878,13 @@ var makePipe = (key2, pts, r2 = 86) => {
   const satin = MAT.satin();
   for (let i2 = 0; i2 <= n2; i2++) {
     const u3 = i2 / n2, p2 = curve.getPointAt(u3), t2 = curve.getTangentAt(u3);
-    const collar = new Mesh(new TorusGeometry(r2 + 6, 9, 10, 40), satin);
+    if ((o2.avoid ?? []).some((a2) => Math.hypot(a2.x - p2.x, a2.z - p2.z) < 170)) continue;
+    const collar = new Mesh(new TorusGeometry(r2 + 9 + 0.3, 9, 10, 40), satin);
     collar.position.copy(p2);
     collar.quaternion.setFromUnitVectors(new Vector3(0, 0, 1), t2);
     group.add(collar);
-    if (p2.y < 400 && p2.y - r2 - 9 > 4) {
-      const h2 = p2.y - r2 - 9;
+    if (p2.y < 400 && p2.y - r2 - 13 > 4) {
+      const h2 = p2.y - r2 - 13;
       const post = new Mesh(new CylinderGeometry(10, 14, h2, 12), MAT.black());
       post.position.set(p2.x, h2 / 2, p2.z);
       post.castShadow = true;
@@ -23681,8 +24000,8 @@ var COST = word(S5, 1, /^cost/);
 var BILLION = word(S5, 1, /^billion/);
 var ST = { x: -300, z: -1150 };
 var ITEM_Z = 350;
-var TX = -900;
-var RX = 0;
+var TX = -940;
+var RX = 40;
 var VX_CAM = 780;
 var PIPE_Y = 120;
 var PIPE_Z = -200;
@@ -23690,20 +24009,50 @@ var PIPE_R = 86;
 var VS2 = 0.8;
 var VX2 = 1700;
 var VZ2 = -300;
-var MOUTH2 = new Vector3(VX2, 640 * VS2, VZ2);
+var MOUTH = new Vector3(VX2, 640 * VS2, VZ2);
 var SIGN2 = { x: 2380, z: 650 };
 var FEEDS = [TICKET, SHIRT, TV];
 var FLIP_DUR = 14;
 var DROP_DUR = 6;
+var OUT = 8;
+var PIPE_PATH = [
+  new Vector3(-1e3, PIPE_Y, -640),
+  new Vector3(-1e3, PIPE_Y, -330),
+  new Vector3(-930, PIPE_Y, PIPE_Z),
+  new Vector3(-300, PIPE_Y, PIPE_Z),
+  new Vector3(600, PIPE_Y, PIPE_Z),
+  new Vector3(1250, PIPE_Y, PIPE_Z),
+  new Vector3(1520, 260, -170),
+  new Vector3(VX2 - 30, MOUTH.y - 20, VZ2 + 60),
+  new Vector3(VX2, MOUTH.y, VZ2 - 30),
+  new Vector3(VX2, MOUTH.y, VZ2 - 60)
+];
+var PIPE_CURVE = new CatmullRomCurve3(PIPE_PATH, false, "catmullrom", 0.2);
+var uOf = (x2) => {
+  let best = 0, d2 = 1e9;
+  for (let i2 = 0; i2 <= 400; i2++) {
+    const u3 = i2 / 400, p2 = PIPE_CURVE.getPointAt(u3);
+    const dd = Math.abs(p2.x - x2) + Math.abs(p2.z - PIPE_Z) * 2;
+    if (dd < d2) {
+      d2 = dd;
+      best = u3;
+    }
+  }
+  return best;
+};
 var RIDE = 40;
+var U0 = [TX, RX + 470, VX_CAM].map(uOf);
+var V_RIDE = (1 - U0[0]) / RIDE;
+var RIDES = U0.map((u3) => Math.round((1 - u3) / V_RIDE));
 var PRE = ENTER3 - 20;
 var SIGN_LAND = ESPN + 3;
+var SDROP = { h: 900, fall: 8 };
 var ODO_ON = Y2018;
 var ROLL = [COST, BILLION];
 var PLUS = BILLION + 4;
 var itemX = [TX, RX + 470, VX_CAM];
 var funnelTop = (k2) => new Vector3(itemX[k2], PIPE_Y + PIPE_R + 130, PIPE_Z);
-var srcOf = (k2) => [new Vector3(TX, 640, ITEM_Z), new Vector3(RX + 410, 170, ITEM_Z + 150), new Vector3(VX_CAM, 1130, ITEM_Z)][k2];
+var srcOf = (k2) => [new Vector3(TX, 670, ITEM_Z), new Vector3(RX + 470, 156, ITEM_Z), new Vector3(VX_CAM, 1130, ITEM_Z)][k2];
 var MoneyPlace = {
   id: S5,
   label: "5 Set D: Old Trafford's ticket, shirt and TV money down the pipe into the vault; ESPN: \xA31bn+",
@@ -23729,14 +24078,14 @@ var MoneyPlace = {
     L3.accent = { pos: [VX2, 1500, VZ2 + 700], color: K2.amber, i: 1.1 * ramp(f2, ODO_ON, ODO_ON + 10, SETTLE) };
     return L3;
   },
-  blur: (f2) => FEEDS.some((a2) => f2 >= a2 - 2 && f2 <= a2 + FLIP_DUR) || dropIn(f2, SIGN_LAND, { h: 900, fall: 9 }).fast || f2 >= ROLL[0] && f2 <= ROLL[1] - 8,
+  blur: (f2) => FEEDS.some((a2) => f2 >= a2 - 2 && f2 <= a2 + FLIP_DUR) || dropIn(f2, SIGN_LAND, SDROP).fast || f2 >= ROLL[0] && f2 <= ROLL[1] - 8,
   cues: () => [
     { kind: "hit", s: "click", at: TICKET, vol: 0.35, why: "the turnstile turns: ticket money" },
     { kind: "hit", s: "click", at: SHIRT, vol: 0.3, why: "the shirts swing: shirt money" },
     { kind: "hit", s: "click", at: TV, vol: 0.3, why: "the TV camera goes on air: TV money" },
     ...FEEDS.map((a2, k2) => ({ kind: "hit", s: "coin", at: a2 + FLIP_DUR, vol: 0.4, why: `coin ${k2 + 1} drops into the pipe` })),
     { kind: "move", s: "whooshsoft", at: TV + 30, end: PAYING + 16, vol: 0.3, why: "the coins roll down the pipe" },
-    ...FEEDS.map((a2, k2) => ({ kind: "hit", s: "coin", at: a2 + FLIP_DUR + DROP_DUR + RIDE, vol: 0.3, why: `coin ${k2 + 1} drops into the vault` })),
+    ...FEEDS.map((a2, k2) => ({ kind: "hit", s: "coin", at: a2 + FLIP_DUR + DROP_DUR + RIDES[k2], vol: 0.3, why: `coin ${k2 + 1} drops into the vault` })),
     { kind: "hit", s: "thud", at: SIGN_LAND, vol: 0.45, why: "the ESPN sign lands" },
     { kind: "hit", s: "click", at: ODO_ON, vol: 0.3, why: "the odometer lights" },
     { kind: "hit", s: "datashort", at: ROLL[0], end: ROLL[1], vol: 0.35, why: "the odometer rolls" },
@@ -23763,42 +24112,17 @@ var MoneyPlace = {
     tv.group.rotation.y = -0.25;
     tv.group.name = "TV camera";
     group.add(tv.group);
-    const path = [
-      new Vector3(-1e3, PIPE_Y, -640),
-      new Vector3(-1e3, PIPE_Y, -330),
-      new Vector3(-930, PIPE_Y, PIPE_Z),
-      new Vector3(-300, PIPE_Y, PIPE_Z),
-      new Vector3(600, PIPE_Y, PIPE_Z),
-      new Vector3(1250, PIPE_Y, PIPE_Z),
-      new Vector3(1520, 260, -170),
-      new Vector3(VX2 - 30, MOUTH2.y - 20, VZ2 + 60),
-      new Vector3(VX2, MOUTH2.y, VZ2 - 200),
-      new Vector3(VX2, MOUTH2.y, VZ2 - 380)
-    ];
-    const pipe = makePipe("money", path, PIPE_R);
+    const pipe = makePipe("money", PIPE_PATH, PIPE_R, { avoid: [0, 1, 2].map((k2) => funnelTop(k2)) });
     pipe.group.name = "pipe";
     group.add(pipe.group);
     const funnels = [0, 1, 2].map((k2) => {
-      const fm = new Mesh(new CylinderGeometry(96, 40, 130, 40, 1, true), new MeshPhysicalMaterial({ color: "#9a9a9e", roughness: 0.3, metalness: 1, side: DoubleSide }));
+      const fm = new Mesh(new CylinderGeometry(112, 64, 130, 40, 1, true), new MeshPhysicalMaterial({ color: "#9a9a9e", roughness: 0.3, metalness: 1, side: DoubleSide }));
       fm.position.set(itemX[k2], PIPE_Y + PIPE_R + 65 - 6, PIPE_Z);
       fm.castShadow = true;
       fm.name = `funnel ${k2 + 1}`;
       group.add(fm);
       return fm;
     });
-    const uOf = (x2) => {
-      let best = 0, d2 = 1e9;
-      for (let i2 = 0; i2 <= 400; i2++) {
-        const u3 = i2 / 400, p2 = pipe.curve.getPointAt(u3);
-        const dd = Math.abs(p2.x - x2) + Math.abs(p2.z - PIPE_Z) * 2;
-        if (dd < d2) {
-          d2 = dd;
-          best = u3;
-        }
-      }
-      return best;
-    };
-    const U0 = [0, 1, 2].map((k2) => uOf(itemX[k2]));
     const vault = makeVault("money");
     const vplate = vault.label("TAKEOVER DEBT");
     vplate.group.parent.scale.x = -1;
@@ -23806,7 +24130,6 @@ var MoneyPlace = {
     vault.group.position.set(VX2, 0, VZ2);
     vault.group.name = "vault";
     group.add(vault.group);
-    joined(pipe.group, vault.group, "the pipe runs into the vault's mouth");
     const odo = makeOdometer("money");
     const OS = 0.52;
     odo.group.scale.setScalar(OS);
@@ -23819,15 +24142,18 @@ var MoneyPlace = {
     const base = block(260, 40, 200, 12, MAT.black());
     sign2.add(base);
     const post = cyl(22, 520, MAT.satin(), 24);
-    post.position.y = 40;
+    post.position.y = 40 - 0.3 + 260;
+    post.name = "ESPN post";
     sign2.add(post);
     const panelW = 760, panelH = 380;
     const panel = rbox(panelW, panelH, 40, 16, MAT.black());
     panel.position.y = 40 + 520 + panelH / 2 - 30;
     panel.name = "ESPN panel";
     sign2.add(panel);
+    mounted(post, base, "the sign's post stands on its base");
+    mounted(panel, post, "the sign's panel is fixed on its post, the post running into its frame");
     const logo = new Mesh(new PlaneGeometry(300, 300 * (411 / 1662)), printMat("espn", { alphaTest: 0.4, emissive: 0.55, rough: 0.5 }));
-    logo.position.set(0, panel.position.y + panelH / 2 - 38 - 37, 20.6);
+    logo.position.set(0, panel.position.y + panelH / 2 - 38 - 37, 20.4);
     logo.userData.print = "the ESPN wordmark (assets/brand/espn.png) on the sign";
     sign2.add(logo);
     const face = lit(K2.white, 0.95), gold2 = lit(K2.money, 1);
@@ -23853,11 +24179,13 @@ var MoneyPlace = {
       group.add(c2.group);
       return c2;
     });
-    for (const c2 of coins) {
-      joined(c2.group, pipe.group, "the coin rolls inside the glass pipe");
-      joined(c2.group, vault.group, "the coin rolls into the vault");
-      for (const fu of funnels) joined(c2.group, fu, "the coin drops through the funnel");
-    }
+    coins.forEach((c2, i2) => {
+      if (i2 < 3) {
+        falling(c2.group, FEEDS[i2], FEEDS[i2] + FLIP_DUR + DROP_DUR, "the coin flips out of its source and drops down the funnel");
+        falling(c2.group, FEEDS[i2] + FLIP_DUR + DROP_DUR + RIDES[i2], FEEDS[i2] + FLIP_DUR + DROP_DUR + RIDES[i2] + OUT, "the coin drops out of the pipe's end onto the vault's floor");
+      } else falling(c2.group, PRE + RIDE + 30, PRE + RIDE + 30 + OUT, "the coin drops out of the pipe's end onto the vault's floor");
+    });
+    dropFalls(sign2, SIGN_LAND, SDROP, "the ESPN sign drops in by the vault");
     const halo = ring({ r: 1100, color: K2.money });
     halo.mesh.position.set(VX2 - 200, 1.5, VZ2 + 500);
     group.add(halo.mesh);
@@ -23870,7 +24198,22 @@ var MoneyPlace = {
       const yaw = Math.atan2(s2.t.x, s2.t.z);
       c2.rotation.set(0, yaw + Math.PI / 2, Math.PI / 2 + 0);
       c2.rotateY(spin);
-      c2.position.y -= PIPE_R - 62;
+      c2.position.y -= PIPE_R - COIN.r;
+    };
+    const RIM = COIN.t / 2 + 3.2, endP = pipe.at(1).p, floorY = MOUTH.y - Math.sqrt((430 * VS2 - 0.3) ** 2 - 58.2 ** 2) + RIM - 0.2;
+    const outOfPipe = (c2, k2, t2) => {
+      c2.visible = true;
+      const rest = new Vector3(VX2 + [-6, 5, -3, 2][k2], floorY + [1, 2, 3, 0][k2] * (2 * RIM + 0.2), VZ2 - 140 + [4, -3, 2, 0][k2]);
+      const tan = pipe.at(1).t, OUT1 = 3;
+      if (t2 < OUT1) {
+        ride(c2, 1, (RIDE + t2) * 0.5);
+        c2.position.addScaledVector(tan, t2 / OUT1 * 85);
+        return;
+      }
+      const u3 = Math.min(1, (t2 - OUT1) / (OUT - OUT1));
+      const start = new Vector3(endP.x, endP.y - (PIPE_R - COIN.r), endP.z).addScaledVector(tan, 85);
+      c2.position.set(start.x + (rest.x - start.x) * u3, start.y + (rest.y - start.y) * u3 * u3, start.z + (rest.z - start.z) * u3);
+      c2.rotation.set((1 - u3) * (Math.PI / 2), k2 * 0.7, 0);
     };
     return {
       group,
@@ -23890,8 +24233,8 @@ var MoneyPlace = {
           const ft = (f2 - a2) / FLIP_DUR;
           if (ft < 1) {
             const s2 = srcOf(k2), e2 = funnelTop(k2), u4 = ft;
-            c2.position.set(s2.x + (e2.x - s2.x) * u4, s2.y + (e2.y - s2.y) * u4 + Math.sin(Math.PI * u4) * [360, 140, 300][k2], s2.z + (e2.z - s2.z) * u4);
-            c2.rotation.set(u4 * 9, 0, u4 * 3);
+            c2.position.set(s2.x + (e2.x - s2.x) * u4, s2.y + (e2.y - s2.y) * u4 + Math.sin(Math.PI * u4) * [360, 300, 440][k2], s2.z + (e2.z - s2.z) * u4);
+            c2.rotation.set(Math.PI / 2 + 4 * Math.PI * (1 - u4) * (1 - u4), 0, 3 * (1 - u4));
             continue;
           }
           const dt = (f2 - a2 - FLIP_DUR) / DROP_DUR;
@@ -23901,21 +24244,22 @@ var MoneyPlace = {
             c2.rotation.set(Math.PI / 2, 0, 0);
             continue;
           }
-          const rt = (f2 - a2 - FLIP_DUR - DROP_DUR) / RIDE;
+          const rt = (f2 - a2 - FLIP_DUR - DROP_DUR) / RIDES[k2];
           if (rt >= 1) {
-            c2.visible = false;
+            outOfPipe(c2, k2, f2 - a2 - FLIP_DUR - DROP_DUR - RIDES[k2]);
             continue;
           }
-          const u3 = U0[k2] + (1 - U0[k2]) * rt * rt * 0.4 + (1 - U0[k2]) * 0.6 * rt;
+          const u3 = U0[k2] + (1 - U0[k2]) * rt;
           ride(c2, Math.min(1, u3), (f2 - a2) * 0.5);
         }
         {
           const c2 = coins[3].group, rt = (f2 - PRE) / (RIDE + 30);
-          c2.visible = rt > 0 && rt < 1;
-          if (c2.visible) ride(c2, 0.04 + 0.96 * rt, f2 * 0.5);
+          c2.visible = rt > 0;
+          if (rt >= 1) outOfPipe(c2, 3, f2 - PRE - RIDE - 30);
+          else if (c2.visible) ride(c2, 0.04 + 0.96 * rt, f2 * 0.5);
         }
         vault.update({ door: 1, wheel: 1 });
-        const sd = dropIn(f2, SIGN_LAND, { h: 900, fall: 9 });
+        const sd = dropIn(f2, SIGN_LAND, SDROP);
         sign2.visible = sd.on;
         sign2.position.y = sd.y;
         const on = ramp(f2, ODO_ON, ODO_ON + 8, SETTLE);
@@ -24143,7 +24487,7 @@ var makeScoreboard = (key2) => {
   group.add(wall);
   const rail = new Mesh(new CylinderGeometry(9, 9, SB.w, 16), MAT.satin());
   rail.rotation.z = Math.PI / 2;
-  rail.position.set(0, 168, 22);
+  rail.position.set(0, 150 + 9 - 0.3, 22);
   group.add(rail);
   const seatG = [];
   const pan = new BoxGeometry(56, 12, 52), back = new BoxGeometry(56, 58, 10);
@@ -24169,7 +24513,7 @@ var makeScoreboard = (key2) => {
   roof.position.set(0, roofY, backZ + 520);
   group.add(roof);
   const fascia = rbox(SB.w + 200, 110, 26, 8, MAT.satin());
-  fascia.position.set(0, roofY - 10, backZ + 520 + 625 + 14);
+  fascia.position.set(0, roofY - 10, backZ + 520 + 625 + 13 - 0.3);
   group.add(fascia);
   for (const x2 of [-1500, -500, 500, 1500]) {
     const col = rbox(70, roofY - SB.rows * SB.rise, 70, 10, MAT.graphite());
@@ -24180,6 +24524,7 @@ var makeScoreboard = (key2) => {
   board.position.set(SB.cx, SB.cy, SB.cz);
   group.add(board);
   const frame = rbox(SB.screenW + 120, SB.screenH + 120, 150, 26, MAT.black());
+  frame.name = "board frame";
   board.add(frame);
   const screen = new Mesh(new PlaneGeometry(SB.screenW, SB.screenH), ledMat());
   screen.position.z = 75.5;
@@ -24188,14 +24533,18 @@ var makeScoreboard = (key2) => {
   hood.position.set(0, (SB.screenH + 120) / 2 + 23, 26);
   board.add(hood);
   const legH = SB.cy - (SB.screenH + 120) / 2;
+  const pylons = [];
   for (const x2 of [-SB.screenW / 2 + 260, SB.screenW / 2 - 260]) {
-    const leg = block(110, legH, 110, 16, MAT.black());
-    leg.position.set(SB.cx + x2, 0, SB.cz - 20);
+    const leg = block(110, legH + 40, 110, 16, MAT.black());
+    leg.position.set(SB.cx + x2, (legH + 40) / 2, SB.cz - 20);
+    leg.name = "board pylon";
     group.add(leg);
     const foot = block(260, 30, 260, 10, MAT.satin());
-    foot.position.set(SB.cx + x2, 0, SB.cz - 20);
+    foot.position.set(SB.cx + x2, 15, SB.cz - 20);
     group.add(foot);
+    pylons.push(leg);
   }
+  mounted(frame, pylons[0], "the board's frame is fixed on its two pylons, which run up into it");
   const crest = makeCrest(`${key2}-crest`, 380);
   const hoodTop = SB.cy + (SB.screenH + 120) / 2 + 46;
   crest.group.position.set(SB.cx, hoodTop + 384 / 2 + 30, SB.cz + 40);
@@ -24212,7 +24561,7 @@ var makeScoreboard = (key2) => {
   const line = (str, size2, y2, font = "800") => {
     const s2 = fit(str, font, size2, IN);
     const t2 = wide(text3d(str, { font, size: s2, depth: 2, bevel: 0, face: face.clone() }), 1.14);
-    t2.position.set(0, y2 - s2 * 0.345, 76.5);
+    t2.position.set(0, y2 - s2 * 0.345, 76);
     t2.traverse((n2) => {
       n2.castShadow = false;
     });
@@ -24224,7 +24573,7 @@ var makeScoreboard = (key2) => {
     const s2 = fit(longest, "800", size2, IN);
     const c2 = counter({ size: s2, color: RED, depth: 3 });
     figFace(c2);
-    c2.group.position.set(0, y2 - s2 * 0.345, 76.5);
+    c2.group.position.set(0, y2 - s2 * 0.345, 76);
     c2.group.traverse((n2) => {
       n2.castShadow = false;
     });
@@ -24320,6 +24669,20 @@ var makeDayCounter = (key2) => {
   group.add(under);
   joined(flipCard, under, "the flipping card falls onto the next card behind it in the window");
   joined(flipCard, win, "the card turns inside the window's recess");
+  const pin = new Mesh(new CylinderGeometry(7, 7, CARD_W + 24, 16), MAT.satin());
+  pin.rotation.z = Math.PI / 2;
+  pin.position.copy(pivot.position);
+  pin.name = "flip hinge pin";
+  group.add(pin);
+  for (const sx of [-1, 1]) {
+    const br = rbox(14, 22, 38, 3, MAT.satin());
+    br.position.set(pivot.position.x + sx * (CARD_W / 2 + 9), pivot.position.y, (DAYC.d / 2 + 27 + pivot.position.z) / 2 + 2);
+    br.name = "hinge bracket";
+    group.add(br);
+  }
+  joined(flipCard, pin, "the card turns on its hinge pin");
+  mounted(flipCard, pin, "the flip card turns on its hinge pin along its bottom edge");
+  group.userData.plate = true;
   let shown = "";
   let parts2 = [];
   const lay = (d0, d1) => {
@@ -24493,6 +24856,7 @@ var build = () => {
   const coins = Array.from({ length: NCOIN }, (_2, k2) => {
     const c2 = makeCoin("board" + k2);
     group.add(c2.group);
+    falling(c2.group, COIN0 + k2 * COIN_GAP, coinLand(k2), "the coin is thrown out of the counter's slot onto the pile");
     return c2;
   });
   const ringC = ring({ r: 1300, dur: 26, color: K2.red });
@@ -24520,7 +24884,7 @@ var build = () => {
       ringC.update(f2, CNT2[1]);
       coins.forEach((c2, k2) => {
         const t0 = COIN0 + k2 * COIN_GAP, land = coinLand(k2), u3 = f2 - t0;
-        const restY = COIN.t / 2 + 3.4 + k2 * (COIN.t + 7.2), jitter = k2 * 37 % 9 - 4;
+        const restY = COIN.t / 2 + 3.2 + k2 * (COIN.t + 6.4 + 0.2), jitter = k2 * 37 % 9 - 4;
         const rest = new Vector3(pileC.x + jitter, restY, pileC.z + (k2 * 53 % 9 - 4));
         if (u3 < 0) {
           c2.group.visible = false;
@@ -24565,7 +24929,7 @@ var makeCabinet = (key2) => {
   group.add(back);
   const glass = new MeshPhysicalMaterial({ color: new Color("#cfe9dc"), roughness: 0.05, metalness: 0, transparent: true, opacity: 0.1, depthWrite: false });
   for (const sx of [-1, 1]) {
-    const g2 = new Mesh(new BoxGeometry(10, h2 - 230, d2 - 60), glass);
+    const g2 = new Mesh(new BoxGeometry(10, h2 - 220, d2 - 60), glass);
     g2.position.set(sx * (w2 / 2 + 4), 150 + (h2 - 220) / 2, 0);
     g2.userData.noClip = true;
     group.add(g2);
@@ -24583,8 +24947,7 @@ var makeCabinet = (key2) => {
     group.add(strip);
   }
   const topStrip = new Mesh(new BoxGeometry(w2 - 30, 8, 8), ledFace);
-  topStrip.position.set(0, h2 - 80, d2 / 2 - 34);
-  group.add(topStrip);
+  topStrip.position.set(0, h2 - 70 - 4 + 0.3, d2 / 2 - 34);
   return {
     group,
     shelf: shelfY,
@@ -24605,9 +24968,10 @@ var mesh = (g2, m2) => {
 };
 var plinth = (label, size2, minW) => {
   const g2 = new Group();
-  const w2 = Math.max(minW, textWidth(label, "800", size2) * 1.12 + size2 * 1.6), h2 = size2 * 2.1, d2 = Math.max(150, w2 * 0.55);
+  const w2 = Math.max(minW, label ? textWidth(label, "800", size2) * 1.12 + size2 * 1.6 : 0), h2 = size2 * 2.1, d2 = Math.max(150, w2 * 0.55);
   const body = block(w2, h2, d2, 12, MAT.black());
   g2.add(body);
+  if (!label) return { g: g2, w: w2, h: h2, d: d2 };
   const face = lit(K2.white, 0.95);
   const t2 = wide(text3d(label, { font: "800", size: size2, depth: 2, bevel: 0, face }), 1.12);
   t2.position.set(0, h2 / 2 - size2 * 0.345, d2 / 2 + 0.5);
@@ -24621,7 +24985,8 @@ var plinth = (label, size2, minW) => {
 var makeLeagueCup = (key2, label) => {
   void key2;
   const group = new Group();
-  const p2 = plinth(label, 46, 230);
+  void label;
+  const p2 = plinth("", 46, 230);
   group.add(p2.g);
   const m2 = silver();
   const cup = new Group();
@@ -24691,7 +25056,8 @@ var cues2 = () => [
   { kind: "hit", s: "thud", at: LAND2, vol: 0.42, why: "the European cup lands on its plinth" },
   { kind: "hit", s: "bloom", at: LAND2, vol: 0.38, why: "CHAMPIONS LEAGUE 2008: the green ring" }
 ];
-var blur2 = (f2) => dropIn(f2, LAND2, { h: 500, fall: 7, bounce: 0.4 }).fast;
+var EDROP = { h: 500, fall: 7, bounce: 0.4 };
+var blur2 = (f2) => dropIn(f2, LAND2, EDROP).fast;
 var build2 = () => {
   const group = new Group();
   const cab = makeCabinet("fair");
@@ -24704,11 +25070,12 @@ var build2 = () => {
     return c2;
   });
   const ped = block(700, 120, 520, 18, MAT.black());
-  ped.position.set(PED[0], 0, PED[2]);
+  ped.position.set(PED[0], 60, PED[2]);
   group.add(ped);
   const euro = makeEuroCup("fair-euro", "CHAMPIONS LEAGUE 2008");
   euro.group.position.set(PED[0], 120, PED[2]);
   group.add(euro.group);
+  dropFalls(euro.group, LAND2, EDROP, "the European cup drops onto its plinth");
   const halo = ring({ r: 1600, dur: 30, color: GREEN });
   halo.mesh.position.set(PED[0], 1.5, PED[2]);
   group.add(halo.mesh);
@@ -24722,7 +25089,7 @@ var build2 = () => {
         c2.group.visible = s2 > 1e-3;
         c2.group.scale.setScalar(Math.max(1e-3, s2));
       });
-      const d2 = dropIn(f2, LAND2, { h: 500, fall: 7, bounce: 0.4 });
+      const d2 = dropIn(f2, LAND2, EDROP);
       euro.group.visible = d2.on;
       euro.group.position.y = 120 + d2.y;
       halo.update(f2, LAND2);
@@ -24732,101 +25099,198 @@ var build2 = () => {
 var FairPlace = { id: S7, label: "8 Set F: to be fair: five league titles and the Champions League", enter: E3, stage: "dark", shots: shots2, lights: lights2, build: build2, blur: blur2, cues: cues2 };
 
 // src/world/obj/receipt.ts
+var PW = 380;
+var BW = 640;
+var BH = 210;
+var BD2 = 440;
+var SLOT_Z = -30;
+var TEX_K = 2.7;
+var MARGIN = 26;
+var LINES = [
+  { y: 56, text: "AUDIT RECEIPT", size: 11, weight: "700", align: "c" },
+  { y: 72, text: "THE PAYOUTS", size: 9, align: "c" },
+  { y: 88, text: "", size: 9, rule: true },
+  { y: 104, text: "MANCHESTER UNITED", size: 9, align: "l" },
+  { y: 118, text: "TAKEOVER, 2005", size: 9, align: "l" },
+  { y: 134, text: "", size: 9, rule: true },
+  { y: 156, text: "PRICE", right: "\xA3790,000,000", size: 10, align: "lr" },
+  { y: 176, text: "BORROWED", right: "\xA3540,000,000", size: 10, align: "lr" },
+  { y: 194, text: "", size: 9, rule: true },
+  { y: 236, text: "RATING: INFLATED", size: 25, weight: "800", color: "#c8221b", align: "c" },
+  { y: 256, text: "", size: 9, rule: true }
+];
+var LINE_AT = [176 + 12, 194 + 10, 236 + 14];
+var RECEIPT = { PW, BW, BH, BD: BD2, FULL: 300 };
+var paperTex = null;
+var drawPaper = () => {
+  if (paperTex) return paperTex;
+  if (typeof document === "undefined") return null;
+  const W = Math.round(PW * TEX_K), H3 = Math.round(RECEIPT.FULL * TEX_K);
+  const c2 = document.createElement("canvas");
+  c2.width = W;
+  c2.height = H3;
+  const g2 = c2.getContext("2d");
+  g2.fillStyle = "#f2f0ea";
+  g2.fillRect(0, 0, W, H3);
+  let s2 = 11;
+  const rnd = () => {
+    s2 = s2 * 16807 % 2147483647;
+    return s2 / 2147483647;
+  };
+  const img = g2.getImageData(0, 0, W, H3), d2 = img.data;
+  for (let i2 = 0; i2 < d2.length; i2 += 4) {
+    const n2 = (rnd() - 0.5) * 9;
+    d2[i2] += n2;
+    d2[i2 + 1] += n2;
+    d2[i2 + 2] += n2 - 1;
+  }
+  g2.putImageData(img, 0, 0);
+  g2.globalAlpha = 0.05;
+  g2.fillStyle = "#8a877e";
+  for (let k2 = 0; k2 < 140; k2++) {
+    const x2 = rnd() * W, y2 = rnd() * H3;
+    g2.fillRect(x2, y2, 1 + rnd() * 2, 6 + rnd() * 30);
+  }
+  g2.globalAlpha = 0.035;
+  g2.fillRect(W * 0.31, 0, 3, H3);
+  g2.fillRect(W * 0.77, 0, 2, H3);
+  g2.globalAlpha = 1;
+  g2.globalCompositeOperation = "destination-out";
+  g2.beginPath();
+  g2.moveTo(0, 0);
+  g2.lineTo(W, 0);
+  for (let x2 = W; x2 >= 0; x2 -= 6) g2.lineTo(x2, (10 + 5 * Math.sin(x2 * 0.21) + 4 * rnd()) * TEX_K / 2.7);
+  g2.closePath();
+  g2.fill();
+  for (let x2 = 8; x2 < W; x2 += 17) {
+    g2.beginPath();
+    g2.arc(x2, 20, 2.6, 0, Math.PI * 2);
+    g2.fill();
+  }
+  g2.globalCompositeOperation = "source-over";
+  const mono = (sz, w2 = "500") => `${w2} ${Math.round(sz * TEX_K)}px "DejaVu Sans Mono", "Consolas", "Courier New", monospace`;
+  const L3 = MARGIN * TEX_K, R2 = W - MARGIN * TEX_K;
+  for (const l2 of LINES) {
+    const y2 = l2.y * TEX_K;
+    if (l2.rule) {
+      g2.fillStyle = "#3a3936";
+      g2.font = mono(l2.size);
+      let x2 = L3;
+      while (x2 < R2 - 4) {
+        g2.fillText("-", x2, y2);
+        x2 += g2.measureText("-").width;
+      }
+      continue;
+    }
+    g2.fillStyle = l2.color ?? "#2e2d2a";
+    g2.font = mono(l2.size, l2.weight);
+    if (l2.align === "c") {
+      g2.textAlign = "center";
+      g2.fillText(l2.text, W / 2, y2);
+      g2.textAlign = "left";
+    } else if (l2.align === "lr") {
+      g2.fillText(l2.text, L3, y2);
+      g2.textAlign = "right";
+      g2.fillText(l2.right ?? "", R2, y2);
+      g2.textAlign = "left";
+    } else g2.fillText(l2.text, L3, y2);
+  }
+  paperTex = new CanvasTexture(c2);
+  paperTex.colorSpace = SRGBColorSpace;
+  paperTex.anisotropy = 8;
+  return paperTex;
+};
 var makeReceipt = (key2) => {
   const group = new Group();
   group.name = `receipt-${key2}`;
-  const PW = 680, BH = 230, BD2 = 420, slotZ = -40;
-  const body = rbox(PW + 120, BH, BD2, 26, MAT.black());
+  const body = rbox(BW, BH, BD2, 40, MAT.black());
   body.position.y = BH / 2;
   body.name = "printer";
-  const bar = rbox(PW + 30, 18, 30, 6, MAT.satin());
-  bar.position.set(0, BH + 4, slotZ + 34);
-  bar.name = "tear-bar";
-  const lamp = new Mesh(new CylinderGeometry(12, 12, 8, 20), lit("#7ee08a", 1.1));
+  const deck = rbox(BW - 60, 16, 150, 6, MAT.graphite());
+  deck.position.set(0, BH - 2, SLOT_Z + 20);
+  deck.name = "printer deck";
+  const lid = rbox(BW - 90, 70, 190, 30, new MeshPhysicalMaterial({ color: "#16161a", roughness: 0.15, metalness: 0.1, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.2 }));
+  lid.position.set(0, BH + 20, SLOT_Z - 125);
+  lid.name = "printer lid";
+  const slot = rbox(PW + 30, 10, 18, 3, new MeshStandardMaterial({ color: "#020203", roughness: 0.9 }));
+  slot.position.set(0, BH + 2, SLOT_Z);
+  slot.name = "paper slot";
+  const bar = rbox(PW + 50, 14, 16, 3, MAT.satin());
+  bar.position.set(0, BH + 10, SLOT_Z + 20);
+  bar.name = "tear bar";
+  const teeth = new Mesh(new BoxGeometry(PW + 40, 5, 4), MAT.satin());
+  teeth.position.set(0, BH + 19, SLOT_Z + 17);
+  teeth.name = "tear teeth";
+  const lamp = new Mesh(new CylinderGeometry(10, 10, 6, 20), new MeshBasicMaterial({ color: new Color("#7ee08a").multiplyScalar(1.1), toneMapped: false }));
   lamp.rotation.x = Math.PI / 2;
-  lamp.position.set(PW / 2 - 10, BH * 0.55, BD2 / 2 + 3);
-  group.add(body, bar, lamp);
-  joined(bar, body, "the tear bar is fixed on the printer's top");
-  const FULL = 760;
-  const paperMat = new MeshStandardMaterial({ color: new Color("#8e8c87"), roughness: 0.95, metalness: 0 });
-  const paper = new Mesh(new BoxGeometry(PW, 1, 1.6), paperMat);
-  paper.name = "receipt-paper";
+  lamp.position.set(BW / 2 - 70, BH * 0.62, BD2 / 2 + 2.5);
+  lamp.name = "status lamp";
+  const feet = [-1, 1].flatMap((sx) => [-1, 1].map((sz) => {
+    const f2 = rbox(60, 8, 60, 3, MAT.rubber());
+    f2.position.set(sx * (BW / 2 - 70), 4, sz * (BD2 / 2 - 70));
+    return f2;
+  }));
+  for (const m2 of [body, deck, lid, slot, bar, teeth]) {
+    m2.castShadow = true;
+    m2.receiveShadow = true;
+  }
+  group.add(body, deck, lid, slot, bar, teeth, lamp, ...feet);
+  for (const m2 of [body, deck, lid, slot, bar, teeth, lamp]) m2.position.y += 8;
+  mounted(teeth, bar, "the tear bar's teeth are its own edge");
+  const tex = drawPaper();
+  const paperMat = new MeshStandardMaterial({ color: "#ffffff", map: tex, roughness: 0.82, metalness: 0, side: DoubleSide, alphaTest: tex ? 0.5 : 0, envMapIntensity: 0.25 });
+  if (!tex) paperMat.color.set("#f2f0ea");
+  const SEG = 72, COLS = 8;
+  const geo = new PlaneGeometry(PW, 1, COLS, SEG);
+  const paper = new Mesh(geo, paperMat);
+  paper.name = "receipt paper";
   paper.castShadow = true;
   paper.receiveShadow = true;
-  const feedG = new Group();
-  feedG.position.set(0, BH - 6, slotZ);
-  feedG.rotation.x = -0.14;
-  const slide = new Group();
-  feedG.add(paper, slide);
-  group.add(feedG);
-  joined(paper, body, "the receipt feeds out of the printer's slot");
-  joined(paper, bar, "the receipt passes the tear bar");
-  const ink = new MeshStandardMaterial({ color: new Color("#0b0b0c"), roughness: 0.8 });
-  const red2 = lit(K2.red, 1);
-  const pad = 46, room = PW - 2 * pad;
-  const fit2 = (s3, want) => Math.min(want, room / textWidth(s3, "800", 1));
-  const lines = [];
-  const bands = [];
-  const two = (l2, r3, y2, size2) => {
-    const g2 = new Group();
-    const a2 = text3d(l2, { font: "800", size: size2, depth: 1, bevel: 0, face: ink, align: "left" });
-    a2.position.x = -room / 2;
-    const b2 = text3d(r3, { font: "800", size: size2, depth: 1, bevel: 0, face: ink, align: "left" });
-    b2.position.x = room / 2 - textWidth(r3, "800", size2);
-    g2.add(a2, b2);
-    g2.position.set(0, y2, 1.3);
-    const band = new Mesh(new BoxGeometry(PW, size2 * 1.9, 0.6), paperMat);
-    band.position.set(0, y2 + size2 * 0.33, 0.95);
-    band.name = "receipt-band";
-    slide.add(band);
-    joined(band, paper, "the printed band is the paper's own face");
-    for (const t2 of [a2, b2]) textOn(t2, band, { inset: 0 });
-    bands.push(band);
-    slide.add(g2);
-    lines.push({ g: g2, y: y2 });
-  };
-  const s2 = fit2("BORROWED  \xA3540,000,000", 46);
-  const top = 0;
-  two("PRICE", "\xA3790,000,000", top - 90, s2);
-  two("BORROWED", "\xA3540,000,000", top - 170, s2);
-  const ruleBand = new Mesh(new BoxGeometry(PW, 30, 0.6), paperMat);
-  ruleBand.position.set(0, top - 215, 0.95);
-  ruleBand.name = "receipt-band";
-  slide.add(ruleBand);
-  joined(ruleBand, paper, "the printed band is the paper's own face");
-  const bandFor = (_y2) => ruleBand;
-  const rule = new Mesh(new BoxGeometry(room, 4, 1), ink);
-  rule.position.set(0, top - 215, 1.3);
-  slide.add(rule);
-  textOn(rule, bandFor(top - 200));
-  const rs = fit2("RATING: INFLATED", 70);
-  const r2 = text3d("RATING: INFLATED", { font: "800", size: rs, depth: 1.2, bevel: 0, face: red2 });
-  r2.position.set(0, top - 310, 1.3);
-  const rband = new Mesh(new BoxGeometry(PW, rs * 1.9, 0.6), paperMat);
-  rband.position.set(0, top - 310 + rs * 0.33, 0.95);
-  rband.name = "receipt-band";
-  slide.add(rband);
-  joined(rband, paper, "the printed band is the paper's own face");
-  bands.push(rband);
-  textOn(r2, rband, { inset: 0 });
-  slide.add(r2);
-  lines.push({ g: r2, y: top - 310 });
-  const lineAt = lines.map((l2) => top - l2.y + 40);
+  paper.customDepthMaterial = new MeshDepthMaterial({ depthPacking: RGBADepthPacking, map: tex, alphaTest: 0.5 });
+  group.add(paper);
+  const slotTop = new Vector3(0, BH + 8 + 2, SLOT_Z);
+  const printLines = LINES.filter((l2) => !l2.rule).map((l2) => ({ text: l2.right ? `${l2.text} ${l2.right}` : l2.text, cap: l2.size * 0.73, w: PW - 2 * MARGIN, y: l2.y }));
+  paper.userData.printLines = [];
+  mounted(paper, slot, "the receipt comes up out of the printer's slot");
+  const FULL = RECEIPT.FULL;
   const update = (p2) => {
-    const f2 = Math.max(0, Math.min(FULL, p2.feed));
-    paper.scale.y = Math.max(1, f2);
-    paper.position.y = Math.max(1, f2) / 2;
-    slide.position.y = f2;
-    paper.visible = f2 > 1;
-    lines.forEach((l2, i2) => {
-      l2.g.visible = f2 >= lineAt[i2];
-      bands[i2].visible = l2.g.visible;
+    const feed = Math.max(0, Math.min(FULL, p2.feed));
+    paper.visible = feed > 1;
+    const pos = geo.attributes.position, uv = geo.attributes.uv;
+    let y2 = slotTop.y - 6, z2 = slotTop.z, prevS = 0;
+    const spine = [];
+    for (let r2 = 0; r2 <= SEG; r2++) {
+      const sArc = (feed + 6) * (r2 / SEG);
+      const a2 = 0.14 + 0.85 * Math.pow(Math.max(0, sArc - 40) / 520, 2);
+      const ds = sArc - prevS;
+      prevS = sArc;
+      y2 += Math.cos(a2) * ds;
+      z2 -= Math.sin(a2) * ds;
+      spine.push({ y: y2, z: z2, a: a2 });
+    }
+    for (let r2 = 0; r2 <= SEG; r2++) {
+      const sp = spine[r2], sArc = (feed + 6) * (r2 / SEG);
+      for (let c2 = 0; c2 <= COLS; c2++) {
+        const i2 = (SEG - r2) * (COLS + 1) + c2;
+        const xn = c2 / COLS - 0.5, x2 = xn * PW;
+        const cup = 7 * (xn * xn * 4) * Math.min(1, sArc / 200);
+        pos.setXYZ(i2, x2, sp.y, sp.z + cup);
+        const fromTop = feed + 6 - sArc;
+        uv.setXY(i2, c2 / COLS, 1 - fromTop / FULL);
+      }
+    }
+    pos.needsUpdate = true;
+    uv.needsUpdate = true;
+    geo.computeVertexNormals();
+    geo.computeBoundingBox();
+    geo.computeBoundingSphere();
+    paper.userData.printLines = printLines.filter((l2) => l2.y + 8 <= feed).map((l2) => {
+      const sArc = feed + 6 - l2.y, k2 = Math.max(0, Math.min(SEG, Math.round(sArc / (feed + 6) * SEG))), sp = spine[k2];
+      return { text: l2.text, cap: l2.cap, w: l2.w, at: [0, sp.y, sp.z], up: [0, Math.cos(sp.a), -Math.sin(sp.a)] };
     });
-    ruleBand.visible = f2 >= 215 + 20;
-    rule.visible = f2 >= 215 + 20;
   };
   update({ feed: 0 });
-  return { group, update, FULL, lineAt, paper, body };
+  return { group, update, FULL, lineAt: LINE_AT, paper, body, slot };
 };
 
 // src/world/places/verdict.ts
@@ -24838,6 +25302,7 @@ var C12 = cue(S8, 1);
 var BILL = word(S8, 1, /^bill/);
 var INF = word(S8, 2, /^inflated/i);
 var SEND = cue(S8, 3);
+var PDROP = { h: 420, fall: 8 };
 var PRINTER_LAND = BILL + 14;
 var PX = 760;
 var PZ = PLINTH.d / 2 + 1750;
@@ -24852,7 +25317,7 @@ var feedAt = (f2, at) => {
 };
 var VerdictPlace = {
   id: S8,
-  label: "9 Set A again: the receipt; the sign flips to PAID FOR BY: MANCHESTER UNITED; RATING: INFLATED",
+  label: "9 Set A again: \xA3790,000,000 BILLED TO: MANCHESTER UNITED; the price turns red; the receipt: RATING: INFLATED",
   enter: ENTER4,
   stage: "dark",
   shots: ({ from, to }) => [
@@ -24874,14 +25339,13 @@ var VerdictPlace = {
     if (f2 >= BILL) L3.back = backGlow([0, 700, 0], K2.red, 2.2 * (0.45 + 0.55 * Math.max(pBill, pInf)));
     return L3;
   },
-  blur: (f2) => dropIn(f2, PRINTER_LAND, { h: 420 }).fast,
+  blur: (f2) => dropIn(f2, PRINTER_LAND, PDROP).fast,
   cues: () => [
     { kind: "hit", s: "pingshort", at: N7902, vol: 0.3, why: "the price slat flashes on 790" },
     { kind: "hit", s: "thud", at: PRINTER_LAND, vol: 0.5, why: "the receipt printer lands" },
     { kind: "hit", s: "datashort", at: PRINTER_LAND + 4, end: L1, vol: 0.3, why: "the receipt prints: PRICE" },
     { kind: "hit", s: "datashort", at: L1 + 1, end: L2, vol: 0.3, why: "the receipt prints: BORROWED" },
-    { kind: "hit", s: "flick", at: BILL - 3, vol: 0.45, why: "slat 1 flips" },
-    { kind: "hit", s: "flick", at: BILL + 1, vol: 0.45, why: "slat 2 flips: PAID FOR BY: MANCHESTER UNITED" },
+    { kind: "hit", s: "flick", at: BILL + 1, vol: 0.45, why: "the price slat flips: \xA3790,000,000 comes round in red" },
     { kind: "hit", s: "sub", at: BILL + 4, vol: 0.4, why: "the red glow rises" },
     { kind: "hit", s: "datashort", at: L2 + 1, end: INF, vol: 0.3, why: "the receipt prints: RATING" },
     { kind: "hit", s: "thud", at: INF, vol: 0.45, why: "RATING: INFLATED lands" },
@@ -24899,22 +25363,16 @@ var VerdictPlace = {
     redR.mesh.position.set(PX, 1.5, PZ + 160);
     const billR = ring({ r: 1600, color: K2.red, dur: 30 });
     billR.mesh.position.set(0, 1.5, PLINTH.d / 2 + 260);
+    dropFalls(rec.group, PRINTER_LAND, PDROP, "the receipt printer drops in beside the plinth");
     group.add(rec.group, redR.mesh, billR.mesh);
     const at = rec.lineAt;
     return {
       group,
       update: (f2) => {
-        A3.pose({ lift: 0, tagOn: true, tagY: 0, tagSwing: 0.02 * Math.sin((f2 - ENTER4) / 18), chain: 1, tug: 0 });
-        A3.tag.set(54e7);
+        A3.pose({ lift: 0, tagOn: false, tagAngle: 0, chain: 0, tug: 0 });
         const flash = f2 >= N7902 ? 0.55 + 0.45 * clamp01((f2 - N7902) / 8) : 1;
-        A3.plinth.update({
-          count: 79e7,
-          ink: 1,
-          lit: flash,
-          flip1: SOFT(clamp01((f2 - (BILL - 6)) / 10)),
-          flip2: SOFT(clamp01((f2 - (BILL - 2)) / 11))
-        });
-        const d2 = dropIn(f2, PRINTER_LAND, { h: 420 });
+        A3.plinth.update({ count: 79e7, ink: 1, lit: flash, flip1: 1, flip2: SOFT(clamp01((f2 - (BILL - 2)) / 11)) });
+        const d2 = dropIn(f2, PRINTER_LAND, PDROP);
         rec.group.visible = d2.on;
         rec.group.position.y = d2.y;
         rec.update({ feed: feedAt(f2, at) });

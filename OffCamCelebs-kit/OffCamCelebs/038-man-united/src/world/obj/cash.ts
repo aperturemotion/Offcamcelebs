@@ -37,13 +37,14 @@ const brick = (label?: string) => {
   for (let i = 1; i < 10; i++) { const l = new THREE.Mesh(new THREE.BoxGeometry(NOTE_W + 0.5, 0.8, NOTE_D + 0.5), new THREE.MeshStandardMaterial({ color: "#b9aead" })); l.position.y = (i * BRICK_H) / 10; g.add(l); }
   // the gold band
   const bandW = 92;
-  const band = rbox(bandW, BRICK_H + 4, NOTE_D + 4, 2, MAT.gold()); band.position.y = BRICK_H / 2; g.add(band);
+  // the paper band: flush with the brick's underside, 2 proud of its top (★ P17: it stuck out under it, so bricks stacked through it)
+  const band = rbox(bandW, BRICK_H + 2, NOTE_D + 4, 2, MAT.gold()); band.position.y = BRICK_H / 2 + 1; g.add(band);
   if (label) {
     const size = Math.min(26, ((NOTE_D - 20) / Math.max(1, textWidth(label, "800", 26) * 1.08)) * 26);
     const t = wide(text3d(label, { font: "800", size, depth: 1.5, bevel: 0, face: lit(K.cream, 0.95) }), 1.08);
     // on the band's top, reading along the note's short side
     t.rotation.set(-Math.PI / 2, 0, Math.PI / 2);
-    t.position.set(0, BRICK_H + 3.2, 0);
+    t.position.set(0, BRICK_H + 2.3, 0);   // on the band's top (★ P17: 1.2 over it before)
     textOn(t, band, { inset: 2 });
     g.add(t);
   }
@@ -55,8 +56,8 @@ export const makeCashStack = (key: string, label?: string, o: { bricks?: number;
   const group = new THREE.Group();
   const n = o.bricks ?? 1, cols = o.cols ?? 1, rows = o.rows ?? 1;
   for (let k = 0; k < n; k++) for (let i = 0; i < cols; i++) for (let j = 0; j < rows; j++) {
-    const b = brick(label); b.position.set((i - (cols - 1) / 2) * (NOTE_W + 6), k * (BRICK_H + 1), (j - (rows - 1) / 2) * (NOTE_D + 6)); group.add(b);
+    const b = brick(label); b.position.set((i - (cols - 1) / 2) * (NOTE_W + 6), k * (BRICK_H + 2.2), (j - (rows - 1) / 2) * (NOTE_D + 6)); group.add(b);
   }
   return { group, size: { w: cols * (NOTE_W + 6), h: n * (BRICK_H + 1), d: rows * (NOTE_D + 6) } };
 };
-export const CASH = { w: NOTE_W, h: BRICK_H, d: NOTE_D } as const;
+export const CASH = { w: NOTE_W, h: BRICK_H, d: NOTE_D, stack: BRICK_H + 2.2 } as const;   // `stack`: one brick on another

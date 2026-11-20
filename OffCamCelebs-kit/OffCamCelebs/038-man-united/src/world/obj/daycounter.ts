@@ -6,7 +6,7 @@
 //   money: the LED strip's text ("£190,000 A DAY"); lit 0…1 lights the strip.
 // Origin: the floor centre of its plinth; it faces +z. About 1,040 wide, 980 tall.
 import * as THREE from "three";
-import { MAT, K, lit, setLit, rbox, block, wide, textOn, joined } from "../kit";
+import { MAT, K, lit, setLit, rbox, block, wide, textOn, joined, mounted } from "../kit";
 import { text3d, textWidth } from "../text3d";
 
 export const DAYC = { w: 1040, h: 980, d: 420 } as const;
@@ -49,6 +49,15 @@ export const makeDayCounter = (key: string) => {
   const under = rbox(CARD_W, CARD_H, 28, 10, cardMat); under.position.set(CARD_W + 20, WY, Z); group.add(under);
   joined(flipCard, under, "the flipping card falls onto the next card behind it in the window");
   joined(flipCard, win, "the card turns inside the window's recess");
+  // ★ P17: the card turns on a real hinge: a satin pin along its bottom edge, held off the window's face by two brackets
+  //   (the card's hinge hung 35 in front of the window, on nothing)
+  const pin = new THREE.Mesh(new THREE.CylinderGeometry(7, 7, CARD_W + 24, 16), MAT.satin()); pin.rotation.z = Math.PI / 2; pin.position.copy(pivot.position); pin.name = "flip hinge pin"; group.add(pin);
+  for (const sx of [-1, 1]) {
+    const br = rbox(14, 22, 38, 3, MAT.satin()); br.position.set(pivot.position.x + sx * (CARD_W / 2 + 9), pivot.position.y, (DAYC.d / 2 + 27 + pivot.position.z) / 2 + 2); br.name = "hinge bracket"; group.add(br);
+  }
+  joined(flipCard, pin, "the card turns on its hinge pin");
+  mounted(flipCard, pin, "the flip card turns on its hinge pin along its bottom edge");
+  group.userData.plate = true;   // one instrument: its day cards and its money strip are one readout (the density probe)
   let shown = "";
   let parts: THREE.Group[] = [];
   const lay = (d0: string, d1: string) => {

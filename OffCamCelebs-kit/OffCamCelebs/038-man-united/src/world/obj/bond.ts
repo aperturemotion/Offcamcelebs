@@ -111,13 +111,15 @@ export const makeBondPress = (key: string) => {
   group.add(plate.group);
   // the ram: a piston and a flat platen the size of a sheet
   const ram = new THREE.Group(); ram.name = "press ram";
-  const rod = cyl(44, 420, MAT.satin(), 40); rod.position.y = 50 + 210;
+  // ★ P17: the piston is long enough to stay in its head at the bottom of the stroke (it slid out of it, 114 short)
+  const rod = cyl(44, 590, MAT.satin(), 40); rod.position.y = 50 + 295;
   const platen = rbox(BOND.w + 20, 50, BOND.d + 10, 10, MAT.graphite()); platen.position.y = 25;
   ram.add(rod, platen);
   ram.position.set(0, BPRESS.up, BPRESS.dieZ);
   group.add(ram);
   joined(rod, beam, "the piston runs through the press's beam");
   joined(rod, head, "the piston runs through the press's head");
+  rod.name = "press rod"; head.name = "press head";
   // the counter screen on the base's front: the money the bonds raise
   const screen = rbox(820, 130, 14, 8, new THREE.MeshPhysicalMaterial({ color: "#050506", roughness: 0.22, metalness: 0.3, clearcoat: 0.6 }));
   screen.position.set(0, BPRESS.base / 2, BPRESS.d / 2 + 6); screen.name = "press screen";
@@ -130,7 +132,7 @@ export const makeBondPress = (key: string) => {
   const capFace = lit(K.white, 0.7);
   void capFace;
   return {
-    group, die,
+    group, die, rod, head,
     /** `ram` 0 (up) … 1 (down on the sheet); `value` the counter's string; `on` lights the counter */
     update: (p: { ram: number; value: string; on: number }) => {
       ram.position.y = BPRESS.up - p.ram * (BPRESS.up - (die + BOND.t + 1.5));

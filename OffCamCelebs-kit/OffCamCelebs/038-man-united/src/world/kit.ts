@@ -30,9 +30,12 @@
 //                                     its own lines); `o.inset` is the surface's bevel, `o.round` a disc's radius.
 //             plateOn(plate, surface) a plate (or any flat part) that must lie inside the face it is mounted on
 //             freeText(text, why)     a free-standing figure (solid numerals on the floor, a card's words): declared
-//             joined(a, b, why)       two parts that MOVE relative to each other and cross BY DESIGN (a drawer in its
-//                                     cabinet, a token in a machine's slot): declared, with the reason
-//             scratchpad/worldcheck.mjs runs both checks over the whole film (render.mjs --check refuses on a hit).
+//             joined(a, b, why)       two MESHES (never groups: P17) that cross BY DESIGN where the camera cannot see it
+//                                     (an axle in its bearing, a piston in its sleeve, chain links)
+//             ★ P17 hangs(child, parent, why) / mounted(child, parent, why): what holds a part that does not stand on the
+//                                     floor or rest on a top (meshes; verified touching on every frame); falling(part,
+//                                     from, to, why): a part mid-fall or mid-throw, at most 20 frames
+//             scratchpad/worldcheck.mjs runs the checks over the whole film (render.mjs --check refuses on a hit).
 //   STAGES    place.stage = "dark" | "light" | "card"; rigs: stdLights(c, o) and lightStageLights(c, o) in ./place;
 //             the backdrop and its sweep are the world's (the rig's `back` spot); `backGlow(c, colour, i)` tints it for a beat.
 // ═════════════════════════════════════════════════════════════════════════════════════════════
@@ -97,10 +100,43 @@ export const plateOn = <T extends THREE.Object3D>(plate: T, surface: THREE.Objec
 };
 /** a free-standing figure (solid numerals on the floor, a card's words): on no surface, by design */
 export const freeText = <T extends THREE.Object3D>(text: T, why: string) => { text.userData.fitFree = why; return text; };
-/** two parts that move relative to each other and cross BY DESIGN: the pass-through check skips the pair */
+/** ★ P17 (Timur, 2026-11-20): a declaration names ONE MESH, never a group. 038 went out with bonds flying through a vault
+ *  door and hangers sitting through their rail because `joined(bond.group, vault.group)` switched the pass-through check
+ *  off for everything in both. A Group, or a mesh with meshes under it, is refused here (and the canary proves it). */
+const oneMesh = (o: THREE.Object3D, what: string, why: string) => {
+  if (!(o as THREE.Mesh).isMesh) throw new Error(`${what}: "${why}" names a ${o.type}${o.name ? ` (${o.name})` : ""}, not a Mesh. Declare the two specific MESHES that meet (P17: never a whole group)`);
+  let kids = 0;
+  o.traverse((n) => { if (n !== o && (n as THREE.Mesh).isMesh) kids++; });
+  if (kids) throw new Error(`${what}: "${why}" names a mesh with ${kids} mesh(es) under it${o.name ? ` (${o.name})` : ""}: name the one mesh that meets (P17)`);
+};
+/** two MESHES that cross BY DESIGN where the camera cannot see it (an axle in its bearing, a piston in its sleeve, chain
+ *  links through each other): the pass-through check skips that one pair. A prop entering a vault or a slot is NEVER joined:
+ *  it goes in through a modelled opening and the check still runs against the door, the frame and the walls (P17) */
 export const joined = (a: THREE.Object3D, b: THREE.Object3D, why: string) => {
+  oneMesh(a, "joined", why); oneMesh(b, "joined", why);
   (a.userData.joinWith ??= []).push(b); (b.userData.joinWith ??= []).push(a);
   (a.userData.joinWhy ??= []).push(why);
+};
+/** ★ P17 SUPPORT declarations (src/world/check.ts `supportCheck`). Every rigid part that does not stand on the floor must rest
+ *  on a supporting part's top, or be declared here; the check VERIFIES each declaration on every sampled frame (the two
+ *  meshes' surfaces within 0.5 units: a declared hang that does not touch is a fault, not an excuse).
+ *  `hangs(child, parent)`: the child hangs from the parent (a ring on a hook, a link on a link, a hanger on its rail, a
+ *  cable from a drum). `mounted(child, parent)`: the child is fixed onto the parent (a sign on its posts, a rail in its
+ *  upright, a plate screwed to a wall). Both name MESHES. */
+export const hangs = (child: THREE.Mesh, parent: THREE.Mesh, why: string, o: { linked?: boolean } = {}) => {
+  oneMesh(child, "hangs", why); oneMesh(parent, "hangs", why);
+  // `linked`: two closed loops through each other (chain links, a ring through an eye): captive without touching
+  (child.userData.heldBy ??= []).push({ by: parent, kind: "hangs", why, linked: !!o.linked });
+};
+export const mounted = (child: THREE.Mesh, parent: THREE.Mesh, why: string) => {
+  oneMesh(child, "mounted", why); oneMesh(parent, "mounted", why);
+  (child.userData.heldBy ??= []).push({ by: parent, kind: "mounted", why });
+};
+/** a part caught mid-fall or mid-throw from frame `from` to `to` (absolute frames, at most 20): unsupported, by design */
+export const FALL_MAX = 20;
+export const falling = (part: THREE.Object3D, from: number, to: number, why: string) => {
+  if (to - from > FALL_MAX) throw new Error(`falling: "${why}" lasts ${to - from} frames (f${from}–f${to}); a thing may be unsupported for at most ${FALL_MAX} (P17)`);
+  (part.userData.falling ??= []).push([from, to, why]);
 };
 
 // ── figures ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -189,11 +225,15 @@ export const dropIn = (f: number, land: number, o: { h?: number; fall?: number; 
   const t = f - land;
   if (t < -T) return { y: h, on: false, fast: false };
   if (t < 0) { const u = (t + T) / T; return { y: h * (1 - u * u), on: true, fast: true }; }
-  const B1 = 9, B2 = 6;
+  const B1 = DROP_B1, B2 = DROP_B2;
   if (t < B1) { const u = t / B1; return { y: bh * 4 * u * (1 - u), on: true, fast: t < 2 }; }
   if (t < B1 + B2) { const u = (t - B1) / B2; return { y: bh * 0.28 * 4 * u * (1 - u), on: true, fast: false }; }
   return { y: 0, on: true, fast: false };
 };
+/** ★ P17: the bounces are in the air too: a drop's whole flight (fall + bounces) is declared `falling`, at most 20 frames */
+export const DROP_B1 = 8, DROP_B2 = 4;
+export const dropFalls = (part: THREE.Object3D, land: number, o: { fall?: number; bounce?: number } = {}, why = "it drops in and bounces") =>
+  falling(part, land - (o.fall ?? 9), land + ((o.bounce ?? 1) > 0 ? DROP_B1 + DROP_B2 : 0), why);
 /** a pendulum that swings in and settles: at `at` it is at `amp` radians (off to the side), then damps to 0 */
 export const swingIn = (f: number, at: number, o: { amp?: number; period?: number; damp?: number } = {}) => {
   const amp = o.amp ?? 1.1, P = o.period ?? 30, k = o.damp ?? 0.075;

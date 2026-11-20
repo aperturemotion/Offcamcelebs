@@ -1,4 +1,5 @@
-// A NAMEPLATE (the brief: "no faces: people appear as nameplates"): a heavy bevelled desk plate on a satin stand, its
+// A NAMEPLATE (the brief: "no faces: people appear as nameplates"): a heavy bevelled desk plate standing on a satin foot
+// and leaning back on two satin struts, its
 // lines engraved-and-lit in heavy wide capitals, first line large, second smaller. It is sized FROM its text (P14: the text
 // fits the surface it is on, with margin), and `setText` re-lays it (the plate grows if the new text needs it).
 // makeNameplate(key, lines: string[], o?) → { group, setText(lines), size: { w, h, d } }
@@ -26,10 +27,21 @@ export const makeNameplate = (key: string, lines: string[], o: { size?: number; 
     const h = s1 * 1.55 + (ls.length > 1 ? s2 * 1.45 : 0);
     // the stand: a satin foot and two posts, the plate leaning back on them
     const base = rbox(w + 40, 22, 160, 8, MAT.satin()); base.position.y = 11; stand.add(base);
-    const plate = rbox(w, h, D, 10, MAT.black());
-    plateG.position.set(0, 22 + h / 2 * Math.cos(TILT) + 10, 0);
+    const plate = rbox(w, h, D, 10, MAT.black()); plate.name = "nameplate";
+    // ★ P17: the plate STANDS on the foot (its lowest, back edge on it: it hung 7 units over it) and leans back against two
+    //   satin struts that rise from the foot behind it
+    plateG.position.set(0, 22 + (h / 2) * Math.cos(TILT) + (D / 2) * Math.sin(-TILT) - 0.3, 0);
     plateG.rotation.x = TILT;
     plateG.add(plate);
+    plateG.updateMatrixWorld(true);
+    { const lo = new THREE.Box3().setFromObject(plate, true).min.y - group.position.y; plateG.position.y += 22 - 0.3 - lo; plateG.updateMatrix(); }   // (its rounded edge, exactly)
+    for (const sx of [-1, 1]) {
+      const top = new THREE.Vector3(sx * w * 0.3, -h * 0.05, -D / 2 + 3).applyMatrix4(plateG.matrix), foot = new THREE.Vector3(top.x, 20, top.z - 70);
+      const d = new THREE.Vector3().subVectors(top, foot), L = d.length();
+      const strut = new THREE.Mesh(new THREE.CylinderGeometry(7, 7, L, 12), MAT.satin()); strut.name = "nameplate strut";
+      strut.position.copy(foot).addScaledVector(d, 0.5); strut.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()); strut.castShadow = true;
+      stand.add(strut);
+    }
     ls.forEach((l, i) => {
       const sz = i === 0 ? s1 : s2;
       const y = ls.length === 1 ? -sz * 0.345 : i === 0 ? h / 2 - s1 * 0.5 - s1 * 0.69 : -h / 2 + s2 * 0.7;

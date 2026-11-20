@@ -17,7 +17,7 @@ import { cue, word } from "../../r45/time";
 import { SOFT, SETTLE, clamp01, ramp } from "../../r45/tokens";
 import { cut, dolly, orbit, orbitPos, crane, type CamKey3, type Vec, type Orbit } from "../cam";
 import { stdLights, type Place3, type PlaceCue, type Lights } from "../place";
-import { K, ring, countUp, pounds } from "../kit";
+import { K, ring, countUp, pounds, falling } from "../kit";
 import { enterOf } from "../timeline";
 import { makeCalendar, CAL } from "../obj/calendar";
 import { makeScoreboard, SB } from "../obj/scoreboard";
@@ -128,7 +128,7 @@ const build = () => {
   const dc = makeDayCounter("board"); dc.group.position.set(DC[0], 0, DC[2]); dc.group.rotation.y = 0.14; group.add(dc.group);
   const slotW = dc.slot.clone().applyAxisAngle(new THREE.Vector3(0, 1, 0), 0.14).add(new THREE.Vector3(DC[0], 0, DC[2]));
   const pileC = new THREE.Vector3(slotW.x - 120, 0, slotW.z + 260);
-  const coins = Array.from({ length: NCOIN }, (_, k) => { const c = makeCoin("board" + k); group.add(c.group); return c; });
+  const coins = Array.from({ length: NCOIN }, (_, k) => { const c = makeCoin("board" + k); group.add(c.group); falling(c.group, COIN0 + k * COIN_GAP, coinLand(k), "the coin is thrown out of the counter's slot onto the pile"); return c; });
   const ringC = ring({ r: 1300, dur: 26, color: K.red }); ringC.mesh.position.set(DC[0], 1.5, DC[2] + 300); group.add(ringC.mesh);
 
   return {
@@ -156,7 +156,8 @@ const build = () => {
       // the coins: out of the slot, a short arc, a fall onto the pile (each settles on the one before)
       coins.forEach((c, k) => {
         const t0 = COIN0 + k * COIN_GAP, land = coinLand(k), u = f - t0;
-        const restY = COIN.t / 2 + 3.4 + k * (COIN.t + 7.2), jitter = ((k * 37) % 9) - 4;
+        // (a coin's rims stand 3.2 proud of its faces: it lies on them, each on the one before: ★ P17, they hovered 0.8 apart)
+        const restY = COIN.t / 2 + 3.2 + k * (COIN.t + 6.4 + 0.2), jitter = ((k * 37) % 9) - 4;
         const rest = new THREE.Vector3(pileC.x + jitter, restY, pileC.z + (((k * 53) % 9) - 4));
         if (u < 0) { c.group.visible = false; return; }
         c.group.visible = true;

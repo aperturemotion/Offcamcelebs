@@ -15,7 +15,7 @@ export const makeFlagPanel = (key: string, w: number, h: number) => {
   const frame = rbox(w + 44, h + 44, 40, 12, MAT.black());
   group.add(frame);
   const face = new THREE.Mesh(new THREE.PlaneGeometry(w, h), printMat("usflag", { emissive: 0.3, rough: 0.6 }));
-  face.position.z = 20.6;
+  face.position.z = 20.4;   // ★ P17: printed on the face (≤ 0.5 off it)
   face.userData.print = "the US flag (assets/brand/usflag.png), the panel's lit face";
   group.add(face);
   return { group, w: w + 44, h: h + 44, d: 40 };

@@ -17,7 +17,7 @@ import { word } from "../../r45/time";
 import { ramp, clamp01, SOFT, SETTLE } from "../../r45/tokens";
 import { cut, dolly, crane, type CamKey3, type Vec } from "../cam";
 import { stdLights, type Place3, type PlaceCue, type Lights } from "../place";
-import { K, MAT, block, ring, dropIn, joined, freeText } from "../kit";
+import { K, MAT, block, ring, dropIn, dropFalls, falling, freeText } from "../kit";
 import { enterOf } from "../timeline";
 import { makeFlagBall } from "../obj/flag";
 import { makeCrest } from "../obj/crest";
@@ -30,7 +30,7 @@ const S = "sides" as const;
 const ENTER = enterOf(S);
 const AMERICAN = word(S, 0, /^American/), FAMILY = word(S, 0, /^family/), Y2005 = word(S, 0, /^2005/), MOSTLY = word(S, 0, /^mostly/), LOANS = word(S, 0, /^loans/);
 // ★ (038 review) the ball is already dropping on the cut (a short drop: it stays below the caption band)
-const BALL_LAND = ENTER + 6;
+const BALL_LAND = ENTER + 6, BALL_DROP = { h: 240, fall: 6 }, CAL_DROP = { h: 300, fall: 7 };
 const PLATES_ON = FAMILY;
 const CAL_LAND = Y2005 + 1;
 const WHEEL = [CAL_LAND + 4, CAL_LAND + 16] as const, DOOR = [CAL_LAND + 12, CAL_LAND + 34] as const;
@@ -43,19 +43,22 @@ export const SD = { ball: BALL_LAND, plates: PLATES_ON, cal: CAL_LAND, door: DOO
 const LP = { x: -560, w: 760, h: 280, d: 420 }, RP = { x: 600, w: 480, h: 280, d: 420 };
 const BALL_R = 150, BALL_X = LP.x - 175, SLOT_X = LP.x + 180, CREST = 300;
 const VS = 0.75, VX = 40, VZ = -1180;            // the vault: scaled, mirrored (hinged on the right)
-const MOUTH_Y = 640 * VS, MOUTH_BOTTOM = MOUTH_Y - 430 * VS + 40;
+// ★ P17: the brick rides on its corners in the round tunnel, clear of the frame: its corners (176 out, turned 0.35) need
+//   the floor of the circle there, not at its centre (it ran through the frame's lower rim)
+const MOUTH_Y = 640 * VS, MOUTH_BOTTOM = MOUTH_Y - Math.sqrt((430 * VS) ** 2 - 176 ** 2) + 2;
 const PILE: Vec = [LP.x - 560, 0, LP.d / 2 - 560];   // behind and left of the Glazer plinth
 
 /** the cash brick k's position at f */
 const cashAt = (k: number, f: number): { p: THREE.Vector3; on: boolean; fast: boolean } => {
   const a = CASH_GO[k], t = (f - a) / CASH_DUR;
-  const inside = new THREE.Vector3(VX, MOUTH_BOTTOM, VZ - 140), lip = new THREE.Vector3(VX - 40, MOUTH_BOTTOM, VZ + 60);
-  const rest = new THREE.Vector3(PILE[0], k * (CASH.h + 1), PILE[2]);
+  // (it slides right out past the frame before it tips off and drops: ★ P17, its back end fell through the frame's rim)
+  const inside = new THREE.Vector3(VX, MOUTH_BOTTOM, VZ - 140), lip = new THREE.Vector3(VX, MOUTH_BOTTOM, VZ + 185);   // (straight out along the tunnel)
+  const rest = new THREE.Vector3(PILE[0], k * CASH.stack, PILE[2]);
   if (t <= 0) return { p: inside, on: false, fast: false };
   if (t >= 1) return { p: rest, on: true, fast: false };
-  if (t < 0.3) { const u = SOFT(t / 0.3); return { p: inside.clone().lerp(lip, u), on: true, fast: true }; }
+  if (t < 0.36) { const u = SOFT(t / 0.36); return { p: inside.clone().lerp(lip, u), on: true, fast: true }; }
   // off the lip: it falls to its pile height while skidding left, decelerating
-  const u = (t - 0.3) / 0.7, e = 1 - Math.pow(1 - u, 2.2);
+  const u = (t - 0.36) / 0.64, e = 1 - Math.pow(1 - u, 2.2);
   const p = lip.clone().lerp(rest, e);
   const fall = Math.min(1, u / 0.35);
   p.y = lip.y + (rest.y - lip.y) * fall * fall;
@@ -83,7 +86,7 @@ export const SidesPlace: Place3 = {
     L.accent = { pos: [VX, MOUTH_Y + 80, VZ + 380], color: K.amber, i: 0.9 * ramp(f, DOOR[0], DOOR[1], SETTLE) };
     return L;
   },
-  blur: (f) => dropIn(f, BALL_LAND, { h: 240, fall: 6 }).fast || dropIn(f, CAL_LAND, { h: 300, fall: 7 }).fast
+  blur: (f) => dropIn(f, BALL_LAND, BALL_DROP).fast || dropIn(f, CAL_LAND, CAL_DROP).fast
     || [0, 1, 2].some((k) => cashAt(k, f).fast) || crestAt(f).fast,
   cues: (): PlaceCue[] => [
     { kind: "hit", s: "thud", at: BALL_LAND, vol: 0.4, why: "the flag ball lands on the Glazer plinth" },
@@ -121,21 +124,25 @@ export const SidesPlace: Place3 = {
     group.add(vault.group);
     // the cash bricks
     const bricks = [0, 1, 2].map((k) => { const c = makeCashStack(`sides${k}`, "LOANS"); c.group.name = `loans brick ${k + 1}`; group.add(c.group); return c; });
-    for (const b of bricks) joined(b.group, vault.group, "the loans slide out through the vault's open mouth");
-    bricks.forEach((a, i) => bricks.forEach((b, j) => { if (j === i + 1) joined(a.group, b.group, "each brick lands on the one before it"); }));
+    // ★ P17: no exemptions: each brick slides out through the open mouth (the check runs against the door, the frame and the
+    //   walls), drops off the lip and skids to the pile, landing on the one before it; its flight is declared, 16 frames
+    bricks.forEach((b, k) => falling(b.group, CASH_GO[k], CASH_GO[k] + CASH_DUR, "the loans brick slides out of the vault, drops and skids to the pile"));
+    dropFalls(ball.group, BALL_LAND, BALL_DROP, "the flag ball drops onto the Glazer plinth");
+    dropFalls(calG, CAL_LAND, CAL_DROP, "the calendar drops in between the plinths");
+    falling(crest.group, CREST_GO, CREST_GO + CREST_DUR, "the crest lifts off its plinth and glides across to the US side");
     const halo = ring({ r: 900 }); halo.mesh.position.set(LP.x, 1.5, 0); group.add(halo.mesh);
     const halo2 = ring({ r: 700 }); halo2.mesh.position.set(calG.position.x, 1.5, 20); group.add(halo2.mesh);
     void freeText;
     return {
       group,
       update: (f) => {
-        const d = dropIn(f, BALL_LAND, { h: 240, fall: 6 });
+        const d = dropIn(f, BALL_LAND, BALL_DROP);
         ball.group.visible = d.on;
         ball.group.position.set(BALL_X, LP.h + BALL_R + d.y, 0);
         ball.group.rotation.y = -0.5 + f * 0.012;
         const lv = ramp(f, PLATES_ON - 2, PLATES_ON + 8, SETTLE);
         for (const m of plateLit) { m.color.copy(m.userData.full ?? m.color).multiplyScalar(0.25 + 0.75 * lv); }
-        const c = dropIn(f, CAL_LAND, { h: 300, fall: 7 });
+        const c = dropIn(f, CAL_LAND, CAL_DROP);
         calG.visible = c.on;
         calG.position.y = c.y;
         cal.update({ year: 0, flip: 0 });

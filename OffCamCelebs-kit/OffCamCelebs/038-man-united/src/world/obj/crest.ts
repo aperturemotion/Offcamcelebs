@@ -28,12 +28,13 @@ export const makeCrest = (key: string, size = 600) => {
     // the printed yellow sits near the bloom threshold under the key: a hair darker, so the badge reads as print, not a lamp
     m.color.setScalar(0.82);
     const q = new THREE.Mesh(new THREE.PlaneGeometry(size, size * aspect), m);
-    q.position.z = (front ? 1 : -1) * (depth / 2 + 0.6);
+    q.position.z = (front ? 1 : -1) * (depth / 2 + 0.4);   // ★ P17: printed ON the face (≤ 0.5 units off it)
     if (!front) q.rotation.y = Math.PI;
     q.receiveShadow = true;
     q.userData.print = "the Manchester United crest (assets/brand/crest.png), printed on the badge's face";
     return q;
   };
   group.add(art(true), art(false));
-  return { group, size, depth };
+  body.name = "crest body";
+  return { group, size, depth, body };
 };

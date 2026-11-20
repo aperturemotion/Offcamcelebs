@@ -270,8 +270,12 @@ const drawMirror = (r: THREE.WebGLRenderer) => {
   (u.eye.value as THREE.Vector3).copy(camera.position);
 };
 
+/** ★ (P17 tools) a still's camera may be overridden from the page: `window.__world.cam = { pos, look, fov }` (the close-up
+ *  sheet, scratchpad/closeups.mjs). Never set in the film. */
+type CamOverride = { pos: Vec; look: Vec; fov?: number };
 const setCamera = (f: number) => {
-  const p = poseAt(CAM, f);
+  const ov = (window as unknown as { __world?: { cam?: CamOverride } }).__world?.cam;
+  const p = ov ? { pos: ov.pos, look: ov.look, fov: ov.fov ?? 30, roll: 0, focus: ov.look } : poseAt(CAM, f);
   camera.position.set(...p.pos);
   camera.up.set(0, 1, 0);
   camera.lookAt(v3.set(...p.look));
@@ -325,7 +329,7 @@ export const drawWorld = (host: HTMLElement, f: number) => {
 
   // motion blur: the camera OR the acting is fast (never across a cut: the sub-frames stay inside this place's window)
   const onCut = CAM.some((k) => k.cut && Math.abs(k.at - f) < 0.5);   // ★ worker B: never blur across a hard cut INSIDE a place
-  const fast = !dbg.noBlur && !onCut && (speedAt(CAM, f) > LOOK.blurAt || !!place.blur?.(f));
+  const fast = !dbg.noBlur && !(dbg as { cam?: unknown }).cam && !onCut && (speedAt(CAM, f) > LOOK.blurAt || !!place.blur?.(f));
   const n = fast ? LOOK.blurN : 1;
   const ctx = out2d.getContext("2d")!;
   for (let s = 0; s < n; s++) {
@@ -342,6 +346,8 @@ export const drawWorld = (host: HTMLElement, f: number) => {
     ctx.drawImage(r.domElement, 0, 0, W, H);
   }
   ctx.globalAlpha = 1;
+  // ★ (P17 tools) the probes (the text-density count, the close-up sheet) read the scene as drawn
+  (window as unknown as { __worldDebug?: unknown }).__worldDebug = { THREE, scene, camera, renderer: r, group: b.group, place: place.id, stage, frame: f };
   worldStats.ms = performance.now() - t0;
   worldStats.samples = n;
 };

@@ -9,7 +9,7 @@
 // Origin: the floor centre of the stand's FRONT edge; the stand rises toward −z; the board stands at +z in front of it.
 import * as THREE from "three";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { MAT, K, lit, setLit, rbox, block, wide, textOn, counter } from "../kit";
+import { MAT, K, lit, setLit, rbox, block, wide, textOn, counter, mounted } from "../kit";
 import { text3d, textWidth, type Face3 } from "../text3d";
 import { makeCrest } from "./crest";
 
@@ -60,7 +60,7 @@ export const makeScoreboard = (key: string) => {
   group.add(terrace);
   // a black front wall (the pitch-side hoarding) and the satin rail on it
   const wall = rbox(SB.w + 40, 150, 40, 8, MAT.black()); wall.position.set(0, 75, 22); group.add(wall);
-  const rail = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, SB.w, 16), MAT.satin()); rail.rotation.z = Math.PI / 2; rail.position.set(0, 168, 22); group.add(rail);
+  const rail = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, SB.w, 16), MAT.satin()); rail.rotation.z = Math.PI / 2; rail.position.set(0, 150 + 9 - 0.3, 22); group.add(rail);   // ON the wall's top (9 over it)
   // ── the seats: red tip-ups on every step (merged into one mesh: one rigid part) ──
   const seatG: THREE.BufferGeometry[] = [];
   const pan = new THREE.BoxGeometry(56, 12, 52), back = new THREE.BoxGeometry(56, 58, 10);
@@ -78,19 +78,24 @@ export const makeScoreboard = (key: string) => {
   // ── the roof: a black cantilever slab on rear columns, a satin fascia along its front edge ──
   const roofY = SB.rows * SB.rise + 780;
   const roof = rbox(SB.w + 200, 70, 1250, 14, MAT.black()); roof.position.set(0, roofY, backZ + 520); group.add(roof);
-  const fascia = rbox(SB.w + 200, 110, 26, 8, MAT.satin()); fascia.position.set(0, roofY - 10, backZ + 520 + 625 + 14); group.add(fascia);
+  const fascia = rbox(SB.w + 200, 110, 26, 8, MAT.satin()); fascia.position.set(0, roofY - 10, backZ + 520 + 625 + 13 - 0.3); group.add(fascia);   // against the roof's edge
   for (const x of [-1500, -500, 500, 1500]) { const col = rbox(70, roofY - SB.rows * SB.rise, 70, 10, MAT.graphite()); col.position.set(x, SB.rows * SB.rise + (roofY - SB.rows * SB.rise) / 2 - 35, backZ - 30); group.add(col); }
 
   // ── the scoreboard on its pylons ──
   const board = new THREE.Group(); board.position.set(SB.cx, SB.cy, SB.cz); group.add(board);
-  const frame = rbox(SB.screenW + 120, SB.screenH + 120, 150, 26, MAT.black()); board.add(frame);
+  const frame = rbox(SB.screenW + 120, SB.screenH + 120, 150, 26, MAT.black()); frame.name = "board frame"; board.add(frame);
   const screen = new THREE.Mesh(new THREE.PlaneGeometry(SB.screenW, SB.screenH), ledMat()); screen.position.z = 75.5; board.add(screen);
   const hood = rbox(SB.screenW + 180, 46, 210, 14, MAT.graphite()); hood.position.set(0, (SB.screenH + 120) / 2 + 23, 26); board.add(hood);
   const legH = SB.cy - (SB.screenH + 120) / 2;
+  // ★ P17 (Timur: "the sign at 37 seconds is floating too"): the pylons stand on the floor and run 40 up INTO the board's
+  //   frame (they were centred on the floor: half under it, their tops 510 short of the board)
+  const pylons: THREE.Mesh[] = [];
   for (const x of [-SB.screenW / 2 + 260, SB.screenW / 2 - 260]) {
-    const leg = block(110, legH, 110, 16, MAT.black()); leg.position.set(SB.cx + x, 0, SB.cz - 20); group.add(leg);
-    const foot = block(260, 30, 260, 10, MAT.satin()); foot.position.set(SB.cx + x, 0, SB.cz - 20); group.add(foot);
+    const leg = block(110, legH + 40, 110, 16, MAT.black()); leg.position.set(SB.cx + x, (legH + 40) / 2, SB.cz - 20); leg.name = "board pylon"; group.add(leg);
+    const foot = block(260, 30, 260, 10, MAT.satin()); foot.position.set(SB.cx + x, 15, SB.cz - 20); group.add(foot);
+    pylons.push(leg);
   }
+  mounted(frame, pylons[0], "the board's frame is fixed on its two pylons, which run up into it");
   // the real crest standing on top of the board's hood, centred (in frame whenever the board is: P16)
   const crest = makeCrest(`${key}-crest`, 380);
   const hoodTop = SB.cy + (SB.screenH + 120) / 2 + 46;
@@ -105,7 +110,7 @@ export const makeScoreboard = (key: string) => {
   const line = (str: string, size: number, y: number, font: Face3 = "800") => {
     const s = fit(str, font, size, IN);
     const t = wide(text3d(str, { font, size: s, depth: 2, bevel: 0, face: face.clone() }), 1.14);
-    t.position.set(0, y - s * 0.345, 76.5);
+    t.position.set(0, y - s * 0.345, 76.0);   // on the LED face (1 off it before)
     t.traverse((n) => { (n as THREE.Mesh).castShadow = false; });
     textOn(t, screen, { inset: 20 });
     board.add(t);
@@ -115,7 +120,7 @@ export const makeScoreboard = (key: string) => {
     const s = fit(longest, "800", size, IN);
     const c = counter({ size: s, color: RED, depth: 3 });
     figFace(c);
-    c.group.position.set(0, y - s * 0.345, 76.5);
+    c.group.position.set(0, y - s * 0.345, 76.0);
     c.group.traverse((n) => { (n as THREE.Mesh).castShadow = false; });
     textOn(c.group, screen, { inset: 20 });
     board.add(c.group);

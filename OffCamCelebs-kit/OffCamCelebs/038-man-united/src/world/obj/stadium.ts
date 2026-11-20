@@ -62,10 +62,10 @@ const stand = (len: number, lights: THREE.MeshBasicMaterial[], main: boolean) =>
   const roof = rbox(len + 20, 14, STAND + 70, 5, roofMat()); roof.position.set(0, H + 110, -STAND / 2 + 20); g.add(roof);
   // the roof's supports at the back
   for (let x = -len / 2 + 60; x <= len / 2 - 60; x += Math.max(120, (len - 120) / 6)) {
-    const col = rbox(16, H + 110 - 7, 16, 3, roofMat()); col.position.set(x, (H + 110 - 7) / 2, -STAND - 34); g.add(col);
+    // ★ P17: the columns stand UNDER the roof's back edge (they stood 11 behind it: the roof hung on nothing)
+    const col = rbox(16, H + 110 - 7, 16, 3, roofMat()); col.position.set(x, (H + 110 - 7) / 2, -STAND - 6); g.add(col);
     if (main) {   // the main stand's trusses on top of the roof (Old Trafford's cantilever)
-      const tr = rbox(10, 46, STAND + 40, 3, roofMat()); tr.position.set(x, H + 110 + 30, -STAND / 2 + 10); g.add(tr);
-      const tie = rbox(8, 8, Math.hypot(46, STAND) * 0.55, 2, roofMat()); tie.position.set(x, H + 110 + 30, -STAND / 2 + 10); tie.rotation.x = 0.2; g.add(tie);
+      const tr = rbox(10, 46, STAND + 40, 3, roofMat()); tr.position.set(x, H + 110 + 30 - 0.3, -STAND / 2 + 10); g.add(tr);
     }
   }
   // the floodlight strip under the roof's front edge
@@ -94,7 +94,7 @@ export const makeStadium = (key: string) => {
   const word = wide(text3d("MANCHESTER UNITED", { font: "800", size: 70, depth: 2, bevel: 0, face: white }), 1.1);
   // on the bank's upper face (its local +y, uphill is local −z), just above its middle
   word.rotation.set(-Math.PI / 2, 0, 0);
-  word.position.set(0, 13 + 2.5, 26);
+  word.position.set(0, 13 + 0.3, 26);   // ON the bank's face (★ P17: 2.5 over it)
   far.bank.add(word);
   textOn(word, far.bank, { inset: 10 });
   word.traverse((n) => { (n as THREE.Mesh).castShadow = false; });
@@ -102,7 +102,7 @@ export const makeStadium = (key: string) => {
   const facade = rbox(560, 150, 20, 6, brick()); facade.position.set(0, 210, STADIUM.d / 2 - 20 + 10); facade.name = "near facade";
   group.add(facade);
   const crest = new THREE.Mesh(new THREE.PlaneGeometry(118, 120), printMat("crest", { alphaTest: 0.5, emissive: 0.15, rough: 0.5 }));
-  crest.position.set(-200, 210, STADIUM.d / 2 - 20 + 20.6);
+  crest.position.set(-200, 210, STADIUM.d / 2 - 20 + 20.4);
   crest.userData.print = "the Manchester United crest (assets/brand/crest.png) on Old Trafford's outer wall";
   group.add(crest);
   const name = litPlate(["OLD TRAFFORD"], { size: 46, color: K.white, depth: 18 });

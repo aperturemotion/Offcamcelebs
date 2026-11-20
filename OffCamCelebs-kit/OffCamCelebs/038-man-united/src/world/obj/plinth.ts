@@ -1,13 +1,13 @@
 // THE CRANE PLINTH (038, set A; worker A). A black-marble plinth with satin steel cap and base, a steel cradle on top for
 // the crest, and on its front a FLIP SIGN of two slats in a steel bezel (an airport-style split-flap board):
-//   front  slat 1  BOUGHT BY: THE GLAZERS   (warm white)       back  slat 1  PAID FOR BY:        (red)
-//          slat 2  £790,000,000 (a counter, money yellow)            slat 2  MANCHESTER UNITED   (red)
+//   front  slat 1  BOUGHT BY: THE GLAZERS   (warm white)       back  slat 1  (blank: ★ P17, it flips away before the stamp)
+//          slat 2  £790,000,000 (a counter, money yellow)            slat 2  £790,000,000 in red (the verdict's flip)
 // Below the sign, the face is bare marble: the stamp's red ink BILLED TO: MANCHESTER UNITED lands there.
 // makePlinth(key) → { group, body, top, faceZ, update({ count, flip1, flip2, ink, lit }) }
 //   Origin: the floor centre. `top` is the cradle's top (the crest stands there); `faceZ` the marble face's z.
 //   count: the £ value slat 2 shows · flip1/flip2: 0 front … 1 back · ink: 0 none … 1 stamped · lit: the sign's light 0…1
 import * as THREE from "three";
-import { MAT, K, lit, setLit, rbox, wide, textOn, joined, pounds } from "../kit";
+import { MAT, K, lit, setLit, rbox, wide, textOn, joined, mounted, pounds } from "../kit";
 import { text3d, numeral3d, textWidth } from "../text3d";
 
 export const PLINTH = { w: 920, h: 720, d: 640, base: 96, cap: 34 } as const;
@@ -69,6 +69,7 @@ export const makePlinth = (key: string) => {
     pivot.add(axle);
     joined(axle, sideL, "the slat's axle runs in the bezel"); joined(axle, sideR, "the slat's axle runs in the bezel");
     joined(axle, m, "the axle runs through the slat");
+    mounted(axle, sideL, "the slat's axle is held in the bezel's sides"); mounted(m, axle, "the slat turns on its axle");
     const back = new THREE.Group(); back.rotation.x = Math.PI; pivot.add(back);
     group.add(pivot);
     return { pivot, m, back };
@@ -84,8 +85,9 @@ export const makePlinth = (key: string) => {
   };
   const room = SW - 90;
   word("BOUGHT BY: THE GLAZERS", fitSize("BOUGHT BY: THE GLAZERS", 50, room), white, A.pivot, A.m);
-  word("PAID FOR BY:", fitSize("PAID FOR BY:", 58, room), red1, A.back, A.m);
-  word("MANCHESTER UNITED", fitSize("MANCHESTER UNITED", 96, room), red2, B.back, B.m);
+  // ★ P17 (one label and one figure a frame): slat 1's back is BLANK (it flips away before the stamp lands, so BOUGHT BY and
+  //   BILLED TO never share a frame); slat 2's back carries the same price in RED (the verdict flips it on "bill")
+  void red1;
   // slat 2's front: the counting price (fixed-advance digits; sized for its widest value)
   const digitW = Math.max(...Array.from("0123456789", (c) => textWidth(c, "800", 1)));
   const widest = Array.from("£790,000,000").reduce((s, c) => s + (/\d/.test(c) ? digitW : textWidth(c, "800", 1)), 0);
@@ -96,6 +98,10 @@ export const makePlinth = (key: string) => {
   num.group.traverse((n) => { (n as THREE.Mesh).castShadow = false; });
   textOn(num.group, B.m, { inset: 5 });
   B.pivot.add(num.group);
+  const redPrice = wide(text3d("£790,000,000", { font: "800", size: cs, depth: 4, bevel: 0, face: red2 }), 1.12);
+  redPrice.position.set(0, -cs * 0.345, D / 2 + 0.5); redPrice.traverse((n) => { (n as THREE.Mesh).castShadow = false; });
+  textOn(redPrice, B.m, { inset: 5 });
+  B.back.add(redPrice);
 
   // ── the stamp's ink on the bare marble below the sign: BILLED TO: / MANCHESTER UNITED in a red ruled frame ──
   const ink = new THREE.Group(); ink.name = "ink";

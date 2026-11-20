@@ -5,62 +5,73 @@
 //   (leaves before it are already over). A riffle is a run of `year` steps with `flip` going 0 → 1 on each.
 // Origin: the floor centre of its base. About 1,010 wide, 900 tall. Each leaf: the year big, "MANCHESTER UNITED" small.
 import * as THREE from "three";
-import { MAT, K, lit, block, rbox, wide, textOn, joined } from "../kit";
+import { MAT, K, lit, block, rbox, wide, textOn, joined, hangs } from "../kit";
 import { text3d } from "../text3d";
 
 // ★ P14: the leaves are 780 wide (they were 680 and "AUG" overhung them); the frame grew with them
-export const CAL = { rod: 850, leafW: 780, leafH: 600 } as const;
+export const CAL = { rod: 920, leafW: 780, leafH: 600 } as const;   // (★ P17: 70 higher: the leaves now hang below binder rings)
 const FRONT = -0.15, BACK = -2 * Math.PI + 0.15;
 /** the leaf's swing: it leaves slowly, whips over the top and drops onto the back (heavier at the end) */
 const swing = (t: number) => (t <= 0 ? 0 : t >= 1 ? 1 : t * t * (3 - 2 * t));
+// ★ P17 (2026-11-20): REAL BINDER RINGS. The leaves' rings used to sit 30–110 units in front of the rod they "hung" on.
+//   Now two big satin rings hang ON the rod (their inside top resting on it), every leaf hangs on both rings through punched
+//   holes, and a leaf flips ABOUT THE RINGS' centre, its holes sliding round them from the front of the stack to the back.
+const RING = 75, RT = 6, LEAF_T = 8, GAP = 10;
 
 export const makeCalendar = (key: string, years: string[] = ["2005", "2010", "2018", "2026"]) => {
   void key;
   const months = years.map((y) => [y, "MANCHESTER UNITED"] as const);
   const group = new THREE.Group();
-  group.add(block(1010, 130, 520, 30, MAT.black()));
+  const base = block(1010, 130, 520, 30, MAT.black()); base.name = "calendar base"; group.add(base);
   const riser = block(870, 60, 380, 20, MAT.graphite()); riser.position.y += 130; group.add(riser);
+  const caps: THREE.Mesh[] = [];
   for (const s of [-1, 1]) {
     const post = rbox(56, CAL.rod - 150, 70, 14, MAT.black()); post.position.set(s * 455, 190 + (CAL.rod - 150) / 2 - 20, 0); group.add(post);
-    const cap = rbox(84, 84, 96, 20, MAT.black()); cap.position.set(s * 455, CAL.rod, 0); group.add(cap);
+    const cap = rbox(84, 84, 96, 20, MAT.black()); cap.position.set(s * 455, CAL.rod, 0); group.add(cap); caps.push(cap);
   }
   const rod = new THREE.Mesh(new THREE.CylinderGeometry(15, 15, 930, 32), MAT.satin());
-  rod.rotation.z = Math.PI / 2; rod.position.y = CAL.rod; rod.castShadow = true; group.add(rod);
-  // the easel board between the leaves in front and the flipped ones behind
-  const board = rbox(820, CAL.rod - 236, 30, 10, MAT.black()); board.position.set(0, 190 + (CAL.rod - 236) / 2, 0); group.add(board);   // its top stays under the rings
+  rod.rotation.z = Math.PI / 2; rod.position.y = CAL.rod; rod.castShadow = true; rod.name = "calendar rod"; group.add(rod);
+  // the two binder rings, hanging on the rod: their inside top rests on the rod's top
+  const CY = CAL.rod + 15 - (RING - RT) + 0.2;
+  const rings = [-1, 1].map((s) => {
+    const r = new THREE.Mesh(new THREE.TorusGeometry(RING, RT, 14, 64), MAT.satin()); r.rotation.y = Math.PI / 2; r.position.set(s * 270, CY, 0);
+    r.castShadow = true; r.name = "binder ring"; group.add(r);
+    hangs(r, rod, "the binder ring hangs on the rod");
+    return r;
+  });
   const N = months.length - 1;
-  const zFront = (i: number) => 30 + (N - i) * 20, zBack = (i: number) => -(48 + i * 20);
+  // the stack's slots along the rings' lower arc: the front stack, then the back stack behind it
+  const zFront = (i: number) => GAP * (N / 2 - i), zBack = (i: number) => zFront(N) - GAP * (i + 1);
   const leaves = months.map(([m, y], i) => {
-    const pivot = new THREE.Group(); pivot.position.set(0, CAL.rod, 0);
+    const pivot = new THREE.Group(); pivot.position.set(0, CY, 0);
     const leaf = new THREE.Group(); pivot.add(leaf);
-    const card = rbox(CAL.leafW, CAL.leafH, 18, 8, MAT.graphite());
-    card.position.set(0, -CAL.leafH / 2 - 12, 0);
+    const card = rbox(CAL.leafW, CAL.leafH, LEAF_T, 3, MAT.graphite());
+    // (its top 70 from the rings' centre: the ring's tube, 69–81, runs through it, and as it flips over the top it clears
+    //   the rod the rings hang on, whose far side is 69 from that centre)
+    card.position.set(0, -(RING - RT + 1) - CAL.leafH / 2, 0); card.name = "calendar leaf";
     leaf.add(card);
-    // each leaf hangs on its OWN pair of rings, side by side along the rod (they all sat on one spot and cut each other)
-    const rings: THREE.Mesh[] = [];
-    for (const s of [-1, 1]) { const ring = new THREE.Mesh(new THREE.TorusGeometry(26, 6, 12, 32), MAT.satin()); ring.rotation.y = Math.PI / 2; ring.position.set(s * (270 + (i - 2.5) * 14), 0, 0); leaf.add(ring); rings.push(ring); }
-    // big print stays under the bloom's threshold: white, not a lamp (R3: highlights are rationed)
     const face = lit(K.white, 0.86);
     const month = wide(text3d(m, { font: "800", size: 200, depth: 5, bevel: 0, face }), 1.08);
-    month.position.set(0, -CAL.leafH / 2 - 12 - 20, 9.5);
+    month.position.set(0, card.position.y - 20, LEAF_T / 2 + 0.3);
     const year = wide(text3d(y, { font: "500", size: 40, depth: 4, bevel: 0, face }), 1.1);
-    year.position.set(0, -CAL.leafH / 2 - 12 - 170, 9.5);
-    textOn(month, card, { inset: 8 }); textOn(year, card, { inset: 8 });
+    year.position.set(0, card.position.y - 170, LEAF_T / 2 + 0.3);
+    textOn(month, card, { inset: 3 }); textOn(year, card, { inset: 3 });
     leaf.add(month, year);
-    leaf.position.z = zFront(i);
     group.add(pivot);
-    for (const r of rings) joined(r, rod, "the leaf's rings hang on the rod");
-    return { pivot, leaf, rings, card };
+    for (const r of rings) joined(card, r, "the binder ring runs through the leaf's punched hole");
+    hangs(card, rings[0], "the leaf hangs on the binder rings", { linked: true });
+    return { pivot, leaf, card };
   });
-  // the leaves are punched: every ring runs through the holes of the leaves in front of and behind it
-  for (const a of leaves) for (const b of leaves) if (a !== b) for (const r of a.rings) joined(r, b.card, "the rings run through the leaves' punched holes");
+  /** the leaf's holes at slot z on the rings' lower arc: the card rides up the ring as it moves off the bottom */
+  const onRing = (z: number) => RING - Math.sqrt(Math.max(0, RING * RING - z * z));
   const setP = (p: number[]) => {
     leaves.forEach((l, i) => {
       const q = swing(p[i] ?? 0);
       l.pivot.rotation.x = FRONT + (BACK - FRONT) * q;
       // over the top it crosses from the front of the board to the back
       const k = Math.max(0, Math.min(1, (q - 0.38) / 0.24));
-      l.leaf.position.z = zFront(i) + (zBack(i) - zFront(i)) * k * k * (3 - 2 * k);
+      const z = zFront(i) + (zBack(i) - zFront(i)) * k * k * (3 - 2 * k);
+      l.leaf.position.set(0, onRing(z), z);
     });
   };
   return {

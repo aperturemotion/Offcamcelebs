@@ -22,7 +22,8 @@ export const makeCabinet = (key: string) => {
   back.position.set(0, 150 + (h - 220) / 2, -d / 2 + 15); group.add(back);
   // glass sides and top-light panel
   const glass = new THREE.MeshPhysicalMaterial({ color: new THREE.Color("#cfe9dc"), roughness: 0.05, metalness: 0, transparent: true, opacity: 0.1, depthWrite: false });
-  for (const sx of [-1, 1]) { const g = new THREE.Mesh(new THREE.BoxGeometry(10, h - 230, d - 60), glass); g.position.set(sx * (w / 2 + 4), 150 + (h - 220) / 2, 0); g.userData.noClip = true; group.add(g); }
+  // ★ P17: the panes run from the base to the top (they hung 5 clear of both)
+  for (const sx of [-1, 1]) { const g = new THREE.Mesh(new THREE.BoxGeometry(10, h - 220, d - 60), glass); g.position.set(sx * (w / 2 + 4), 150 + (h - 220) / 2, 0); g.userData.noClip = true; group.add(g); }
   // shelves: glass slabs with a green LED strip along each front edge
   const ledFace = lit(GREEN, 1.1);
   const shelfY = [150, 920, 1460];
@@ -31,7 +32,7 @@ export const makeCabinet = (key: string) => {
     s.position.set(0, y - 9, -10); s.castShadow = false; s.receiveShadow = true; group.add(s);
     const strip = new THREE.Mesh(new THREE.BoxGeometry(w - 30, 8, 8), ledFace); strip.position.set(0, y - 22, d / 2 - 34); group.add(strip);
   }
-  const topStrip = new THREE.Mesh(new THREE.BoxGeometry(w - 30, 8, 8), ledFace); topStrip.position.set(0, h - 80, d / 2 - 34); group.add(topStrip);
+  const topStrip = new THREE.Mesh(new THREE.BoxGeometry(w - 30, 8, 8), ledFace); topStrip.position.set(0, h - 70 - 4 + 0.3, d / 2 - 34);   // under the top (6 below it before) group.add(topStrip);
   return {
     group, shelf: shelfY, w, d,
     /** the LED strips' light 0…1 */

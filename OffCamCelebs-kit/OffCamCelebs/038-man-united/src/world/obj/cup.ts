@@ -14,8 +14,9 @@ const mesh = (g: THREE.BufferGeometry, m: THREE.Material) => { const o = new THR
 /** a plinth carrying an engraved label sized from its text (P14: the text fits its face) */
 const plinth = (label: string, size: number, minW: number) => {
   const g = new THREE.Group();
-  const w = Math.max(minW, textWidth(label, "800", size) * 1.12 + size * 1.6), h = size * 2.1, d = Math.max(150, w * 0.55);
+  const w = Math.max(minW, label ? textWidth(label, "800", size) * 1.12 + size * 1.6 : 0), h = size * 2.1, d = Math.max(150, w * 0.55);
   const body = block(w, h, d, 12, MAT.black()); g.add(body);
+  if (!label) return { g, w, h, d };
   const face = lit(K.white, 0.95);
   const t = wide(text3d(label, { font: "800", size, depth: 2, bevel: 0, face }), 1.12);
   t.position.set(0, h / 2 - size * 0.345, d / 2 + 0.5);
@@ -28,7 +29,9 @@ const plinth = (label: string, size: number, minW: number) => {
 export const makeLeagueCup = (key: string, label: string) => {
   void key;
   const group = new THREE.Group();
-  const p = plinth(label, 46, 230); group.add(p.g);
+  // ★ P17 (one figure a frame): the league cups' plinths are blank; the years were five figures in one frame
+  void label;
+  const p = plinth("", 46, 230); group.add(p.g);
   const m = silver();
   const cup = new THREE.Group(); cup.position.y = p.h; group.add(cup);
   // foot, stem, bowl, lid and finial (one profile)
