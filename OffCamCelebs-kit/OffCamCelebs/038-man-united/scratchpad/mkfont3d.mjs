@@ -8,7 +8,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const { default: opentype } = await import(pathToFileURL(path.join(ROOT, "node_modules/three/examples/jsm/libs/opentype.module.js")).href);
-const KEEP = "=+" + " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,'’!?$%&-:|";
+const KEEP = "=+" + " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,'’!?$%&-:|£/()";   // ★ 038: £ / ( )
 for (const [src, out] of [["archivo-latin-500-normal.woff", "archivo500.json"], ["archivo-latin-800-italic.woff", "archivo800i.json"], ["archivo-latin-800-normal.woff", "archivo800.json"], ["archivo-latin-300-italic.woff", "archivo300i.json"]]) {
   const buf = fs.readFileSync(path.join(ROOT, "scratchpad/fonts3d", src));
   const font = opentype.parse(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));

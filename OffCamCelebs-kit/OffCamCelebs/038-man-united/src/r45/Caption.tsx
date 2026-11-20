@@ -18,7 +18,7 @@ import { Obj, useTag } from "../audit/Probe";
 export const CAP_SIZE = 30, CAP_Y = 275, CAP_WEIGHT = 500, CAP_COLOR = "#e9e2e1";
 export const CAP_IN = 2, CAP_LEAD = 1;
 /** places whose words are drawn by the place itself (the turn cards) */
-export const NO_CAPTION: ReadonlySet<SceneId> = new Set<SceneId>(["explain", "catch"]);
+export const NO_CAPTION: ReadonlySet<SceneId> = new Set<SceneId>(["explain", "worst"]);
 /** ★ kept for the sweeps and old imports: the band the caption lives in */
 export const BAND = { y0: CAP_Y - 10, y1: CAP_Y + CAP_SIZE * 1.3 } as const;
 export type Align = "left" | "centre" | "right";

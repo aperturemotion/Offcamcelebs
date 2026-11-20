@@ -69,8 +69,10 @@ const blurWord = (str: string, font: "300i" | "800i", size: number, color: strin
   };
 };
 
-const card = (id: SceneId, label: string, color: string, glow: string): Place3 => {
-  const words = cardWords(id), big = words[words.length - 1], lead = words.slice(0, -1);
+// ★ 038: a key of more than one word ("worst part.": the brief's "worst" in red): keyN tokens joined, timed on the first
+const card = (id: SceneId, label: string, color: string, glow: string, keyN = 1): Place3 => {
+  const words = cardWords(id), lead = words.slice(0, -keyN);
+  const big = { t: words.slice(-keyN).map((w) => w.t).join(" "), at: words[words.length - keyN].at };
   const enter = enterOf(id);
   const bigSize = Math.min(BIG_MAX, (BIG_MAX * BIG_W) / Math.max(1, textWidth(big.t, "800i", BIG_MAX)));
   return {
@@ -117,5 +119,5 @@ const card = (id: SceneId, label: string, color: string, glow: string): Place3 =
     },
   };
 };
-export const ExplainPlace = card("explain", "2 Turn card: Let us explain.", K.amber, "#743815");
-export const CatchPlace = card("catch", "5 Turn card: But here's the catch.", K.red, "#6c1310");
+export const ExplainPlace = card("explain", "2 Turn card: Let me explain.", K.amber, "#743815");
+export const WorstPlace = card("worst", "6 Turn card: And here's the worst part.", K.red, "#6c1310", 2);

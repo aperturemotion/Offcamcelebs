@@ -5,7 +5,7 @@
 import json, wave, sys
 import numpy as np
 HOLD = 0.55
-CARD_LAST = ["explain.", "catch."]
+CARD_LAST = ["explain.", "part."]   # 038: "Let me explain." and "And here's the worst part."
 W = json.load(open("scratchpad/fw_words.json", encoding="utf8"))["words"]
 w = wave.open("assets/audio/vo_trimmed.wav"); sr = w.getframerate(); x = np.frombuffer(w.readframes(w.getnframes()), np.int16).copy(); w.close()
 cuts = []

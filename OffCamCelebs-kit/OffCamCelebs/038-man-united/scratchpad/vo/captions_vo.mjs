@@ -1,4 +1,4 @@
-// InfluencerAudit037 — captions generated FROM THE TRANSCRIPT, never from the written script (CLAUDE.md). The take always
+// InfluencerAudit038 — captions generated FROM THE TRANSCRIPT, never from the written script (CLAUDE.md). The take always
 // rephrases, and it speaks DIGITS where the script spelled numbers out.
 //
 // ★ THE PLAN IS BY WORD INDEX, not by text search. A cue is [first, last] into scratchpad/fw_words.json, so every cue's `a`
@@ -13,30 +13,28 @@
 import fs from "node:fs";
 
 const PLAN = [
-  // ★ WIRED TO THE TAKE (2026-11-18): script v2, ElevenLabs "Russ" eleven_v4, take B of two, vo_trim TEMPO 1.04 → 61.2 s,
-  //   then cardpause.py (0.55 s held after each turn card's last word) → 62.3 s; 168 tokens after mergetok. One cue per sentence of VO_SCRIPT.txt v2.
-  ["hook",0,7,"An American company bought Afterpay for $29 billion."],
-  ["hook",8,20,"But when the deal closed, its own filing put the price at 13.8."],
-  ["hook",21,25,"So which number is right?"],
-  ["explain",26,28,"Let us explain."],
-  ["deal",29,39,"In August 2021, Jack Dorsey's company, Square, agreed to buy Afterpay."],
-  ["deal",40,45,"But Square didn't pay in cash."],
-  ["deal",46,51,"It paid in its own shares."],
-  ["deal",52,62,"For every Afterpay share, you got 0.375 of a Square share."],
-  ["price",63,71,"At the time, each Square share was worth $247."],
-  ["price",72,79,"Multiply it out, and you get 29 billion."],
-  ["catch",80,83,"But here's the catch."],
-  ["close",84,90,"The deal took six months to close."],
-  ["close",91,104,"By then, Square had renamed itself Block, and its share price had roughly halved."],
-  ["close",105,112,"Same number of shares. About half the price."],
-  ["close",113,128,"So when the deal closed, Block told the SEC what those shares were worth: 13.8 billion."],
-  ["fair",129,147,"To be fair, 29 billion was real on day one, and Afterpay's shareholders got the shares they were promised."],
-  ["verdict",148,158,"But the price tag everyone remembers was never the price paid."],
-  ["verdict",159,161,"Our rating: inflated."],
-  ["verdict",162,167,"Send us who to audit next."],
+  // ★ WIRED TO THE TAKE (2026-11-20): 038, ElevenLabs "Russ" eleven_v4, take A of two (B drops the s of "borrowings"),
+  //   vo_trim TEMPO 1.04 → 57.2 s, cardpause.py (0.55 s after "explain." and "part.") → 58.3 s; 149 tokens after mergetok.
+  ["hook",0,8,"The Glazers bought Manchester United for £790 million."],
+  ["hook",9,14,"More than £500 million was borrowed."],
+  ["hook",15,27,"And within a year, most of that debt was on United's own books."],
+  ["explain",28,30,"Let me explain."],
+  ["sides",31,40,"The American family took over in 2005, mostly with loans."],
+  ["bonds",41,58,"Nearly five years later, United itself sold £500 million of bonds to pay off the bank loans."],
+  ["money",59,70,"So ticket, shirt and TV money went on paying for the takeover."],
+  ["money",71,82,"ESPN says that by 2018, the cost had passed £1 billion."],
+  ["worst",83,87,"And here's the worst part."],
+  ["board",88,97,"21 years later, United's borrowings stand at about £690 million."],
+  ["board",98,106,"Last season, net finance costs alone were £69.6 million."],
+  ["board",107,110,"About £190,000 a day."],
+  ["fair",111,125,"To be fair, under the Glazers, United won five league titles and the Champions League."],
+  ["verdict",126,131,"But £790 million was the price."],
+  ["verdict",132,139,"United has been paying the bill ever since."],
+  ["verdict",140,142,"Our rating: inflated."],
+  ["verdict",143,148,"Send us who to audit next."],
 ];
 // ⚠ what the film indexes, cue(scene, 0…n−1). Mirrored in data.ts's SCENE_CUES, which throws at load if they disagree.
-const EXPECT = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 4, fair: 1, verdict: 3 };
+const EXPECT = { hook: 3, explain: 1, sides: 1, bonds: 1, money: 2, worst: 1, board: 3, fair: 1, verdict: 4 };
 
 const fail = (msg) => { console.error("REFUSING: " + msg); process.exit(1); };
 if (!fs.existsSync("scratchpad/fw_words.json")) fail("scratchpad/fw_words.json does not exist — run fw.py first.");
@@ -119,7 +117,8 @@ fs.writeFileSync("src/audit/cues.ts",
 const BLOCKS = PLAN.map((p) => [[p[3]]]);
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 // a token whisper mishears, mapped BY TOKEN INDEX to the word it stands for (none yet: fill from the real take)
-const MIS_AT = { 58: "0375", 140: "afterpays" };
+// ★ 038 take A: whisper heard "borrowings" as "borrowing" (small.en on the raw take hears the s)
+const MIS_AT = { 92: "borrowings" };
 const tok = (k) => MIS_AT[k] ?? norm(W[k].t);
 const plainLen = (s) => s.replace(/\*\*/g, "").length;
 const boldLen = (s) => (s.match(/\*\*([^*]+)\*\*/g) ?? []).reduce((n, m) => n + m.replace(/\*\*/g, "").replace(/[^A-Za-z0-9$ ]/g, "").trim().length, 0);
@@ -154,10 +153,10 @@ const blocks = [];
     let k = i0, dollarOpen = false;
     for (let j = 0; j < flat.length; j++) {
       const d = norm(flat[j].t);
-      if (dollarOpen && k <= i1 && /^dollars?$/.test(tok(k)) && d !== tok(k)) { k += 1; dollarOpen = false; }
+      if (dollarOpen && k <= i1 && /^(dollars?|pounds?)$/.test(tok(k)) && d !== tok(k)) { k += 1; dollarOpen = false; }
       if (k > i1) fail(`beat ${i0}..${i1}: display word "${flat[j].t}" has no token left`);
       flat[j].a = startOf(k);
-      if (flat[j].t.startsWith("$")) dollarOpen = true;
+      if (/^[$£]/.test(flat[j].t)) dollarOpen = true;   // ★ 038: a spoken "pounds" after a "£" figure is absorbed too
       if (tok(k) === d) k += 1;
       else if (k + 1 <= i1 && tok(k) + tok(k + 1) === d) k += 2;
       // two display words for ONE token ("Lip kits" = "Lipkits"): both take its start; it is consumed by the second
@@ -166,7 +165,7 @@ const blocks = [];
     }
     if (auto) {
       // a spoken "dollars" right after the beat's last "$" figure belongs to it
-      if (dollarOpen && k <= i1 && /^dollars?$/.test(tok(k))) k += 1;
+      if (dollarOpen && k <= i1 && /^(dollars?|pounds?)$/.test(tok(k))) k += 1;
       i1 = k - 1;
     }
     if (k <= i1) fail(`beat ${i0}..${i1} "${lines.join(" / ")}": tokens ${k}..${i1} were never shown`);

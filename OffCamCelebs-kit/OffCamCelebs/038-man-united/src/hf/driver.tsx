@@ -11,7 +11,7 @@ import { Layer, layerSpecs, WORLD_LAYER } from "./film";
 import { drawWorld } from "../world/world";
 import { beginFrame, endFrame, setLayer, loadFonts, loadImages } from "../three/stage";
 /** ★ (032) photos printed INTO 3-D textures are decoded before the first frame; 033 prints none (kept for the next film) */
-const HOOK_PHOTOS: string[] = [];
+const HOOK_PHOTOS: string[] = ["assets/brand/crest.png", "assets/brand/usflag.png", "assets/brand/espn.png"];   // ★ 038: the brand artwork textured onto 3-D objects (P16)
 import { PHOTO_FILE, HAS_PHOTO } from "../audit/data";
 
 const FPS = 30;

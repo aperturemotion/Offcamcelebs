@@ -11,11 +11,11 @@ const W = JSON.parse(fs.readFileSync(P, "utf8")).words;
 const out = [], merged = [];
 for (let i = 0; i < W.length; i++) {
   const w = W[i], n = W[i + 1];
-  const decimal = n && /^\$?\d+$/.test(w.t) && /^\.\d+[.,?!]?$/.test(n.t);
+  const decimal = n && /^[$£]?\d+$/.test(w.t) && /^\.\d+[.,?!]?$/.test(n.t);
   // ★ 033: "40" | ".5" | "%" is THREE tokens: the decimal merges first, so a percent may follow a decimal (run it twice)
   const percent = n && /^\d+(\.\d+)?$/.test(w.t) && /^%[.,?!]?$/.test(n.t);
   // ★ 030 take: a thousands group split off ("$300" | ",000.") and a hyphenated word split at its hyphen ("co" | "-founded")
-  const thousands = n && /^\$?\d{1,3}$/.test(w.t) && /^,\d{3}[.,?!]?$/.test(n.t);
+  const thousands = n && /^[$£]?\d{1,3}$/.test(w.t) && /^,\d{3}[.,?!]?$/.test(n.t);
   const hyphen = n && /^[A-Za-z]+$/.test(w.t) && /^-[A-Za-z]+[.,?!]?$/.test(n.t);
   if (decimal || percent || thousands || hyphen) {
     out.push({ t: w.t + n.t, a: w.a, b: n.b });

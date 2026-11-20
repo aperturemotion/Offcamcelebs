@@ -16,7 +16,8 @@
 //             counter(opts)           a counting figure (solid numerals): `.set(str)`; with countUp() and a fmt it counts up
 //                                     to its value over 0.6–1.6 s and LANDS on the spoken word (R16)
 //   FIGURES   countUp(f, a, b, from, to)   the value at frame f: from → to over [a, b], fast then settling; exactly `to` at b
-//             dollars(n) "$29,000,000,000" · short(n) "$29B" / "$13.8B" / "$247"
+//             dollars(n) "$29,000,000,000" · short(n) "$29B" / "$13.8B" / "$247" · ★ 038: pounds(n) "£790,000,000",
+//             short(n, "£") "£790M" / "£69.6M" (the 3-D fonts carry £, /, ( and ) since 038)
 //   LIGHT     ring(opts)              a thin ring of light that spreads on the floor from a landing (R16): `.update(f, at)`
 //   ACTING    dropIn(f, land, o)      a gravity drop that LANDS on frame `land`, with one bounce and a small second one:
 //                                     { y, on, fast } (y above rest; `fast` marks the frames to motion-blur: return it from
@@ -111,12 +112,14 @@ export const countUp = (f: number, a: number, b: number, from: number, to: numbe
   return from + (to - from) * (1 - Math.pow(1 - t, 2.6));
 };
 export const dollars = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
-/** "$29B", "$13.8B", "$247": a rounded figure with its unit */
-export const short = (n: number) => {
+/** ★ 038: "£790,000,000" (the 3-D fonts carry £ since 038) */
+export const pounds = (n: number) => "£" + Math.round(n).toLocaleString("en-US");
+/** "$29B", "$13.8B", "$247": a rounded figure with its unit; `cur` "£" for sterling ("£790M", "£69.6M") */
+export const short = (n: number, cur = "$") => {
   const a = Math.abs(n);
-  if (a >= 1e9) return "$" + (a >= 1e10 ? Math.round(n / 1e9) : Math.round(n / 1e8) / 10) + "B";
-  if (a >= 1e6) return "$" + (a >= 1e7 ? Math.round(n / 1e6) : Math.round(n / 1e5) / 10) + "M";
-  return "$" + Math.round(n).toLocaleString("en-US");
+  if (a >= 1e9) return cur + (a >= 1e10 ? Math.round(n / 1e9) : Math.round(n / 1e8) / 10) + "B";
+  if (a >= 1e6) return cur + (a >= 1e7 ? Math.round(n / 1e6) : Math.round(n / 1e5) / 10) + "M";
+  return cur + Math.round(n).toLocaleString("en-US");
 };
 /** a counting figure of solid numerals. Origin: the baseline, centred in x; its back at z = 0. `face` is its self-lit
  *  material (recolour it with `face.color` / setLit to turn a number red as it lands: R18) */

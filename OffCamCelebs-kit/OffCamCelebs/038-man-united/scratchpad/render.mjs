@@ -1,4 +1,4 @@
-// Render InfluencerAudit037 (HyperFrames) → renders/afterpay_29b_or_13_8b_037_hf.mp4
+// Render InfluencerAudit038 (HyperFrames) → renders/bought_for_790m_038_hf.mp4
 //
 // ⚠⚠⚠ THE SCRIPT-FIX TRIPWIRE, ported from 029's Remotion render.mjs (029 HF had no guard in front of its render).
 // Six of the brief's lines failed verification (031) (src/audit/script_fixes.json; VO_SCRIPT.txt has the trail). The captions
@@ -18,7 +18,7 @@ import fs from "node:fs";
 import { spawnSync } from "node:child_process";
 import { whisperForm } from "./vo/spoken.mjs";
 
-const OUT = "renders/afterpay_29b_or_13_8b_037_hf.mp4";
+const OUT = "renders/bought_for_790m_038_hf.mp4";
 const refuse = (lines) => {
   console.error(["", ...lines, "", "The Studio still works; only the MP4 is blocked.", ""].join("\n"));
   process.exit(1);

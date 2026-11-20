@@ -1,19 +1,25 @@
 // ═══════════════════════════════════════════════════════════════════════════
-// 037 — THE RECORD. Every figure the film draws. Verified 2026-11-18 (VO_SCRIPT.txt has the trail):
-//   · Square press release, 1 Aug 2021: "implied value of approximately US$29 billion (A$39 billion)", all stock, a fixed
-//     exchange ratio of 0.375 Square Class A shares per Afterpay share, based on Square's US$247.26 close on 30 Jul 2021.
-//   · Block Form 10-Q, Q1 2022 (accession 0001628280-22-012707), acquisitions note: 113,617,352 Class A shares issued;
-//     "the aggregate fair value of the shares issued was $13.8 billion"; stock issued in the acquisition US$13,827,929
-//     thousand (the SEC's structured data for the filing), plus US$66,337 thousand expensed post-combination.
-//   · DERIVED: (13,827,929 + 66,337) thousand / 113,617,352 = US$122.29 a share at closing; down 50.5% from US$247.26.
-//   · Announced 1 Aug 2021; closed 31 Jan 2022 (US) / 1 Feb 2022 (Australia): six months.
-//   · Square renamed Block: announced 1 Dec 2021, legal change on or about 10 Dec 2021.
-//   · Gap: 29 − 13.8 = 15.2, shown "≈ $15,000,000,000".
-// ★ Never a current Block share price. No dots between words on screen: "|".
+// 038 — THE RECORD. Every figure the film draws. Verified 2026-11-20 (VO_SCRIPT.txt has the trail):
+//   · Irish Examiner, 13 May 2005: offer £790.3m; a £265m loan facility plus £275m of securities "which have no hold over
+//     Manchester United's assets". £265m + £275m = £540m borrowed.
+//   · August 2006 refinancing: about £525m of bank debt on the club, £135–138m of PIK debt outside it ("within a year").
+//   · BBC News, 22 Jan 2010: United raised £504m through a bond issue (£250m at 8.75%, $425m at 8.375%, due 2017).
+//   · ESPN: the cost of financing the Glazers' ownership (interest, debt repayments, dividends) passed £1bn by 2018 (ESPN's
+//     estimate; its own pieces also date it to 2015).
+//   · Manchester United plc FY2026 results (23 Sep 2026; year to 30 Jun 2026): non-current borrowings £577.6m ($775m);
+//     current borrowings incl. accrued interest £111.4m (revolving credit £110.0m drawn); net finance costs £69.6m (prior
+//     year £21.2m).
+//   · DERIVED: £577.6m + £111.4m = £689.0m; £69.6m / 365 = £190,685 a day.
+//   · Trophies after June 2005: Premier League 2006/07, 2007/08, 2008/09, 2010/11, 2012/13; Champions League 2007/08.
+// ★ No "·" on screen: "|". Today's £689m is CURRENT borrowing, never the 2005 loan. "Net finance costs", never "interest".
 // ═══════════════════════════════════════════════════════════════════════════
 
-export const DEAL = { announced: 29_000_000_000, booked: 13_800_000_000, gap: 15_000_000_000, ratio: 0.375 } as const;
-export const PRICE = { announce: 247.26, announceDate: "30 JUL 2021", close: 122.29, closeDate: "31 JAN 2022" } as const;
-export const DATES = { contract: "1 AUG 2021", from: "AUG 2021", to: "JAN 2022", form: "FORM 10-Q | Q1 2022" } as const;
-export const NAMES = { buyer: "JACK DORSEY | CEO, SQUARE", holders: "AFTERPAY SHAREHOLDERS", was: "SQUARE", now: "BLOCK" } as const;
-export const FILING_LINE = "AGGREGATE FAIR VALUE OF THE SHARES ISSUED: $13.8 BILLION";
+export const TAKEOVER = { price: 790_000_000, offer: 790_300_000, loan: 265_000_000, securities: 275_000_000, borrowed: 540_000_000, year: 2005 } as const;
+export const BONDS = { raised: 504_000_000, year: 2010, label: "MANCHESTER UNITED | SENIOR SECURED NOTES | 2010" } as const;
+export const ESPN = { cost: 1_000_000_000, label: "COST OF FINANCING THE TAKEOVER | ESPN ESTIMATE, 2018" } as const;
+export const NOW = { borrowings: 689_000_000, date: "30 JUN 2026", financeCosts: 69_600_000, season: "2025/26", perDay: 190_000 } as const;
+export const TITLES = { league: [2007, 2008, 2009, 2011, 2013], ucl: 2008 } as const;
+export const NAMES = {
+  glazers: ["THE GLAZER FAMILY", "TAMPA, FLORIDA"], club: ["MANCHESTER UNITED", "OLD TRAFFORD"],
+  bought: "BOUGHT BY: THE GLAZERS", paidFor: "PAID FOR BY: MANCHESTER UNITED", billed: "BILLED TO: MANCHESTER UNITED",
+} as const;

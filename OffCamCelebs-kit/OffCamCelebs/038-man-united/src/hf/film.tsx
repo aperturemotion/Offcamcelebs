@@ -1,5 +1,5 @@
 // ═════════════════════════════════════════════════════════════════════════════════════════════
-// THE COMPOSITION'S LAYERS — 037 "Afterpay: $29B or $13.8B?" (THE PAYOUTS; rule P12: one complete 3-D world).
+// THE COMPOSITION'S LAYERS — 038 "Bought for £790M. United paid the bill." (THE PAYOUTS; rule P12: one complete 3-D world).
 //   · "world"    — ONE film-long clip: the whole frame is one rendered 3-D scene filmed by one camera (src/world/world.ts).
 //                  The driver draws it; nothing in it is DOM.
 //   · "captions" — the narration's small phrases, as text above the picture (the only DOM in the film).

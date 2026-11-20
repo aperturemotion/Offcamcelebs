@@ -1,30 +1,32 @@
-// InfluencerAudit037 — "Afterpay: $29B or $13.8B?" (Afterpay / Block, audit #037): the first film in THE PAYOUTS' new look,
-// @moneydecoded.au's black studio (preferences, 2026-11-18, rules P1–P10). FACTS + GUARDRAILS + timing. Every verified
-// figure lives in record.ts; VO_SCRIPT.txt has the trail. The brief is content-only.
+// InfluencerAudit038 — "Bought for £790M. United paid the bill." (Manchester United / the Glazer takeover, audit #038), THE
+// PAYOUTS in the @moneydecoded.au look (preferences P1–P16; study README R1–R32; P16: real logos, recognisable objects).
+// FACTS + GUARDRAILS + timing. Every verified figure lives in record.ts; VO_SCRIPT.txt has the trail. Studio port 3179.
 //
-// ═══════════════════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
 // ★★ THE MECHANISM — read before touching a place.
-// The headline: Square bought Afterpay for US$29 billion (announced 1 Aug 2021). It paid in SHARES at a FIXED RATIO, 0.375
-// Square Class A shares per Afterpay share, and US$29B was that ratio at Square's US$247.26 close on 30 Jul 2021. The deal
-// took six months to close (31 Jan 2022). By then Square was Block and the share price had roughly halved (US$122.29,
-// DERIVED from the 10-Q), so the shares Block actually issued were booked at US$13.8 billion (Form 10-Q, Q1 2022).
-// Fair: US$29B was the real value on announcement day; the deal fixed the number of shares, not the dollars.
-// Verdict on the FIGURE: $29 billion as "the price paid" is INFLATED. One tag changing its number: 29,000,000,000 → 13,800,000,000.
-// ═══════════════════════════════════════════════════════════════════════════
+// The Glazer family bought Manchester United for £790m (offer £790.3m, May–June 2005). More than £500m was borrowed: a £265m
+// loan facility on the club plus £275m of securities that, in 2005, had no hold over the club's assets (£540m in all). Within
+// a year (the August 2006 refinancing) most of that debt was on the club's books. In January 2010 the club itself sold £504m
+// of bonds (£250m 8.75% + $425m 8.375%, due 2017) to repay the bank loans; ticket, shirt and TV money serviced it. ESPN puts the
+// cost of financing the Glazers' ownership past £1bn by 2018 (interest, repayments, dividends: ESPN's estimate). At 30 June
+// 2026 the club's borrowings were £689.0m (£577.6m + £111.4m, FY2026 results); net finance costs 2025/26 £69.6m (≈ £190,700 a
+// day). Fair: five league titles and the 2008 Champions League since. Verdict on the FIGURE: "£790 million as money the
+// Glazers paid" is INFLATED. The plinth's sign flips from BOUGHT BY: THE GLAZERS to PAID FOR BY: MANCHESTER UNITED.
+// ═══════════════════════════════════════════════════════════
 // ⚠⚠ THE BRIEF'S ACCURACY GUARDRAILS — NON-NEGOTIABLE (the render guard enforces the voice):
-//   · $29B was accurate on announcement day. Never imply Square, Block, Dorsey or the founders misled anyone; the rating is
-//     on the headline figure used as the price paid;
-//   · never say the founders or shareholders "lost" $15B: they received Block shares whose value kept moving after closing;
-//   · no current Block share price anywhere;
-//   · the two banned words of the standing rules never appear;
-//   · the verdict rates the $29 billion figure as the price Block paid, not any person or company.
-// ★ THE BRIEF'S DELIVERY NOTES: first frame = the hanging price tag already lit, reading $29,000,000,000 (no intro, no title
-//   card); one object and one number per line, the number appearing as the voice says it; brand names in plain type (no
-//   logos, app screenshots or copied charts); one real photo (assets/afterpay_face.jpg, Jack Dorsey, SUPPLIED BY TIMUR, never
-//   downloaded) as a framed print at beat 2 and at the verdict, everyone else a nameplate; text clear of Instagram's
-//   buttons (x > 940 from y ~1000) and caption area (y > 1500). No "·" anywhere a viewer sees: "|".
-// ★ COLOUR ROLES (preferences): mint neon = THE HEADLINE NUMBER as reported ($29B) only; khaki = documented figures
-//   ($13.8B, 0.375, $247.26, $122.29); red = the fallen price.
+//   · the takeover was legal: nothing on screen or in the VO implies wrongdoing; it is about who paid;
+//   · never say all £540m was put on the club (the £275m sat outside it in 2005): "most of that debt", "within a year";
+//   · the £1bn+ is ESPN's estimate and includes dividends: always labelled as ESPN's;
+//   · today's £689m is United's CURRENT borrowing, never presented as the 2005 loan;
+//   · "net finance costs", never "interest", for the £69.6m (it includes currency effects);
+//   · no mention of current sale reports; the two banned words never appear;
+//   · the verdict rates "the £790 million as money the Glazers paid", not the Glazers.
+// ★ THE BRIEF'S DELIVERY NOTES: VO on frame 1, the crane already lowering the crest; real, recognisable things (the real
+//   crest, the real US flag, Old Trafford, red shirts, turnstiles, bond certificates, an LED scoreboard; brand assets in
+//   assets/brand/ with SOURCES.txt); no faces (people are nameplates); every number ON an object, changing as it is said;
+//   green = fairness, red = debt and "the worst part", gold/amber = money; generic cups, not the real trophies; the last set
+//   is the first set changed, ending within a second of the last word; text clear of Instagram's buttons (x > 940 from
+//   y ~1000) and caption area (y > 1500). No "·" anywhere a viewer sees: "|".
 
 import { CUES, VO_START } from "./cues";
 import FIXES from "./script_fixes.json";
@@ -32,7 +34,7 @@ import FIXES from "./script_fixes.json";
 export * from "./record";
 export const FPS = 30;
 /** the brief's composition name (index.html's root composition id) */
-export const COMPOSITION_ID = "InfluencerAudit037";
+export const COMPOSITION_ID = "InfluencerAudit038";
 
 // ── ★★ THE SCREEN FOLLOWS THE VOICE: a switch that mirrors a BLOCKED line reads the guard's own pattern (018) ──
 export type ScriptFix = { at: string; brief: string; briefSpoken: string; use: string; why: string; bad: string };
@@ -43,23 +45,17 @@ export const TAKE = {
   ctaSpoken: said(/audit next/i),
 } as const;
 
-// ── ASSETS ─────────────────────────────────────────────────────────────
-// ★ THE PHOTO: Jack Dorsey, supplied by Timur as assets/afterpay_face.jpg (the brief's public/afterpay_face.jpg). It has NOT
-//   arrived (2026-11-18), and a real person's photo is never downloaded: until it does the framed print is a plain dark
-//   matte. When it lands: put it in assets/, set HAS_PHOTO true.
+// ── ASSETS ──────────────────────────────────────────────────────
+// ★ NO PHOTO: no faces in this film (the brief). Brand artwork (crest, US flag, ESPN) is in assets/brand/ (SOURCES.txt).
 export const HAS_PHOTO = false;
-export const PHOTO_FILE = "afterpay_face.jpg";
+export const PHOTO_FILE = "none.png";
 
-// ── AUDIO ─────────────────────────────────────────────────────────────�
-// ★ NO TAKE YET (2026-11-18): the cues are PROVISIONAL (scratchpad/vo/provisional.mjs times the corrected script). The take
-//   is generated through ElevenLabs ("Russ", HKFOb9iktHA85uKXydRT, eleven_v4) from VO_SCRIPT.txt, then the VO pipeline.
-// ★ THE BED: the previous film's song unless Timur names another (Big Rich Town), cut once the take is wired.
-// ★ THE TAKE (2026-11-18, script v2): GENERATED in-session, ElevenLabs "Russ – Deep, Smooth and Articulate"
-//   (HKFOb9iktHA85uKXydRT), eleven_v4, from VO_SCRIPT.txt v2; take B of two (both read the script exactly; B is the
-//   tighter read: 71.6 s raw, 144 wpm). vo_trim (TEMPO 1.04) 61.2 s → cardpause.py (0.55 s held after each turn card's
-//   last word, as the references hold theirs) 62.3 s → fw → mergetok → silmap → onsets → captions_vo → level_vo.
-// ★ THE BED: the standing song, 50 Cent "Big Rich Town (Instrumental)", cut by scratchpad/vo/mkbed_bigrich.mjs with its
-//   drop on the first "$29 billion" (film 2.24 s); bedenv holds it 5.5 dB under the speech-gated voice (residual 0.1 dB).
+// ── AUDIO ──────────────────────────────────────────────────────
+// ★ THE TAKE (2026-11-20): GENERATED in-session, ElevenLabs "Russ – Deep, Smooth and Articulate" (HKFOb9iktHA85uKXydRT),
+//   eleven_v4, from VO_SCRIPT.txt; take A of two (B drops the s of "borrowings"). 67.9 s raw → vo_trim (TEMPO 1.04) 57.2 s
+//   → cardpause.py (0.55 s after "explain." and "part.") 58.3 s → fw → mergetok → silmap → onsets → captions_vo → level_vo.
+// ★ THE BED: Runaway (Timur picked it for 037; the standing song), cut from 030's bed so its drop lands on the first
+//   "£790 million"; bedenv holds it 5.5 dB under the speech-gated voice.
 export const HAS_VO = true;
 export const HAS_MUSIC = true;
 export const HAS_SFX = true;
@@ -73,15 +69,15 @@ export const MUSIC_GAIN = 0.505;
 
 // ── TIMING ───────────────────────────────────────────────────────────────────
 /** the eight PLACES: six object places and two turn cards (explain, catch), all in the black studio */
-export type SceneId = "hook" | "explain" | "deal" | "price" | "catch" | "close" | "fair" | "verdict";
-export const SCENE_ORDER: SceneId[] = ["hook", "explain", "deal", "price", "catch", "close", "fair", "verdict"];
+export type SceneId = "hook" | "explain" | "sides" | "bonds" | "money" | "worst" | "board" | "fair" | "verdict";
+export const SCENE_ORDER: SceneId[] = ["hook", "explain", "sides", "bonds", "money", "worst", "board", "fair", "verdict"];
 /** ★★ WHAT THE FILM INDEXES — a count mismatch refuses at module load */
-export const SCENE_CUES: Record<SceneId, number> = { hook: 3, explain: 1, deal: 4, price: 2, catch: 1, close: 4, fair: 1, verdict: 3 };
+export const SCENE_CUES: Record<SceneId, number> = { hook: 3, explain: 1, sides: 1, bonds: 1, money: 2, worst: 1, board: 3, fair: 1, verdict: 4 };
 {
   const got: Partial<Record<SceneId, number>> = {};
   for (const c of CUES) got[c.scene] = (got[c.scene] ?? 0) + 1;
   const bad = SCENE_ORDER.filter((id) => (got[id] ?? 0) !== SCENE_CUES[id]).map((id) => `${id}: wired ${got[id] ?? 0}, the film indexes ${SCENE_CUES[id]}`);
-  if (bad.length) throw new Error("037 CUE COUNT MISMATCH — the wired take does not match the film.\n" + bad.map((b) => "  · " + b).join("\n"));
+  if (bad.length) throw new Error("038 CUE COUNT MISMATCH — the wired take does not match the film.\n" + bad.map((b) => "  · " + b).join("\n"));
 }
 /** the film ends 0.5 s after the last word — no CTA graphic, logo or handle */
 const OUTRO_SEC = 0.8;   // the references end 0.6–0.9 s after the last word (study R31)
