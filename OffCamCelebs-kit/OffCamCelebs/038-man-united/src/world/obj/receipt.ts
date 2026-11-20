@@ -17,27 +17,29 @@
 import * as THREE from "three";
 import { MAT, K, rbox, mounted } from "../kit";
 
-const PW = 380;                 // the paper's width
+const PW = 300;                 // the paper's width (a real receipt's proportion to its printer)
 const BW = 640, BH = 210, BD = 440, SLOT_Z = -30;
 const TEX_K = 2.7;              // texture pixels per unit
 /** the receipt, top to bottom, in units from its top edge (y = the line's baseline) */
 type Line = { y: number; text: string; size: number; weight?: string; color?: string; align?: "l" | "c" | "lr"; right?: string; rule?: boolean };
-const MARGIN = 26;
+const MARGIN = 20;
 const LINES: Line[] = [
-  { y: 56, text: "AUDIT RECEIPT", size: 11, weight: "700", align: "c" },
-  { y: 72, text: "THE PAYOUTS", size: 9, align: "c" },
-  { y: 88, text: "", size: 9, rule: true },
-  { y: 104, text: "MANCHESTER UNITED", size: 9, align: "l" },
-  { y: 118, text: "TAKEOVER, 2005", size: 9, align: "l" },
-  { y: 134, text: "", size: 9, rule: true },
-  { y: 156, text: "PRICE", right: "£790,000,000", size: 10, align: "lr" },
-  { y: 176, text: "BORROWED", right: "£540,000,000", size: 10, align: "lr" },
-  { y: 194, text: "", size: 9, rule: true },
-  { y: 236, text: "RATING: INFLATED", size: 25, weight: "800", color: "#c8221b", align: "c" },
-  { y: 256, text: "", size: 9, rule: true },
+  { y: 44, text: "AUDIT RECEIPT", size: 7.5, weight: "700", align: "c" },
+  { y: 56, text: "THE PAYOUTS", size: 6.5, align: "c" },
+  { y: 68, text: "", size: 6.5, rule: true },
+  { y: 80, text: "MANCHESTER UNITED", size: 6.5, align: "l" },
+  { y: 91, text: "TAKEOVER, 2005", size: 6.5, align: "l" },
+  { y: 103, text: "", size: 6.5, rule: true },
+  { y: 118, text: "PRICE", right: "£790,000,000", size: 7, align: "lr" },
+  { y: 131, text: "BORROWED", right: "£540,000,000", size: 7, align: "lr" },
+  { y: 144, text: "", size: 6.5, rule: true },
+  { y: 176, text: "RATING: INFLATED", size: 22, weight: "800", color: "#c8221b", align: "c" },
+  { y: 192, text: "", size: 6.5, rule: true },
 ];
-const LINE_AT = [176 + 12, 194 + 10, 236 + 14];   // PRICE … BORROWED out, then the verdict
-export const RECEIPT = { PW, BW, BH, BD, FULL: 300 } as const;
+// (★ P17, one label a frame: the small print stands under 14 px a capital at the film's nearest framing; the verdict line is
+//   the one that reads)
+const LINE_AT = [131 + 10, 144 + 8, 176 + 14];   // PRICE … BORROWED out, then the verdict
+export const RECEIPT = { PW, BW, BH, BD, FULL: 230 } as const;
 
 let paperTex: THREE.CanvasTexture | null = null;
 const drawPaper = () => {
@@ -101,7 +103,8 @@ export const makeReceipt = (key: string) => {
   mounted(teeth, bar, "the tear bar's teeth are its own edge");
   // ── the paper: a strip of SEG rows, re-laid every frame from the slot up by arc length ──
   const tex = drawPaper();
-  const paperMat = new THREE.MeshStandardMaterial({ color: "#ffffff", map: tex, roughness: 0.82, metalness: 0, side: THREE.DoubleSide, alphaTest: tex ? 0.5 : 0, envMapIntensity: 0.25 });
+  // (a touch of its own light, through its own texture, so it reads as WHITE paper under the dark stage, its print still dark)
+  const paperMat = new THREE.MeshStandardMaterial({ color: "#ffffff", map: tex, roughness: 0.82, metalness: 0, side: THREE.DoubleSide, alphaTest: tex ? 0.5 : 0, envMapIntensity: 0.25, emissive: new THREE.Color("#ffffff"), emissiveMap: tex, emissiveIntensity: 0.22 });
   if (!tex) paperMat.color.set("#f2f0ea");
   const SEG = 72, COLS = 8;
   const geo = new THREE.PlaneGeometry(PW, 1, COLS, SEG);
@@ -123,7 +126,7 @@ export const makeReceipt = (key: string) => {
     const spine: { y: number; z: number; a: number }[] = [];
     for (let r = 0; r <= SEG; r++) {
       const sArc = (feed + 6) * (r / SEG);
-      const a = 0.14 + 0.85 * Math.pow(Math.max(0, sArc - 40) / 520, 2);
+      const a = 0.14 + 1.9 * Math.pow(Math.max(0, sArc - 60) / 520, 2);   // the roll's set: it curls back toward its top
       const ds = sArc - prevS; prevS = sArc;
       y += Math.cos(a) * ds; z -= Math.sin(a) * ds;
       spine.push({ y, z, a });
@@ -134,7 +137,7 @@ export const makeReceipt = (key: string) => {
         const i = (SEG - r) * (COLS + 1) + c;   // PlaneGeometry's rows run top to bottom
         const xn = c / COLS - 0.5, x = xn * PW;
         // cupped across its width (the edges a little forward), more so higher up
-        const cup = 7 * (xn * xn * 4) * Math.min(1, sArc / 200);
+        const cup = 2.5 * (xn * xn * 4) * Math.min(1, sArc / 200);
         pos.setXYZ(i, x, sp.y, sp.z + cup);
         // the texture by distance from the paper's TOP (the receipt's top is the paper's top)
         const fromTop = feed + 6 - sArc;

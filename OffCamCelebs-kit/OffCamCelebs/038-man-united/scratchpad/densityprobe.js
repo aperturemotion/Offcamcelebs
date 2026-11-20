@@ -66,7 +66,8 @@
         const half = new V(L.w ?? L.cap * 4, L.cap, 1).multiplyScalar(0.5);
         const box = new THREE.Box3(new V(...L.at).sub(half).applyMatrix4(m.matrixWorld), new V(...L.at).add(half).applyMatrix4(m.matrixWorld));
         box.expandByPoint(c);
-        items.push({ o: m, str: L.text, size: L.cap / CAP, box, plate: L.plate ? m.userData.printPlates?.[L.plate] ?? L.plate : m, own: (h) => h.object === m, print: L });
+        // each printed line is its own plate (a receipt's lines are counted one by one, as they read)
+        items.push({ o: m, str: L.text, size: L.cap / CAP, box, plate: { uuid: m.uuid + '|' + L.text, name: L.text }, own: (h) => h.object === m, print: L });
       }
     });
     const out = [];

@@ -72765,7 +72765,8 @@ var BondsPlace = {
     dolly(T1 + 1, Math.max(20, T2 - T1 - 2), [X1 + 260, 1750, 3500], [X1 + 260, 680, 120], { fov: 40, ease: SOFT, why: "push on the press: \xA3504m" }),
     travel(T2, T2_DUR, [X2 - 900, 2e3, 3300], [X2 - 350, 820, 60], { fov: 40, why: "along the table to the vault", vol: 0.5 }),
     dolly(T2 + T2_DUR + 1, Math.max(20, SLAM2[1] - (T2 + T2_DUR) - 2), [X2 - 120, 1800, 3800], [X2 + 130, 860, 0], { fov: 40, ease: SOFT, why: "the bonds fly into the vault" }),
-    dolly(SLAM2[1] + 1, Math.max(16, to - SLAM2[1] - 2), [X2 - 60, 1450, 3400], [X2, 860, 150], { fov: 40, ease: SOFT, why: "in on the door: PAID OFF" })
+    // (★ P17: up on the plate PAID OFF is stamped over, not on the door below it)
+    dolly(SLAM2[1] + 1, Math.max(16, to - SLAM2[1] - 2), [X2 - 60, 1750, 3300], [X2, 1060, 150], { fov: 40, ease: SOFT, why: "in on the vault's plate: PAID OFF" })
   ],
   lights: (f2) => {
     const cx = f2 < T1 ? X0 : f2 < T2 ? X1 : X2 - 300;
@@ -74495,28 +74496,28 @@ var build2 = () => {
 var FairPlace = { id: S7, label: "8 Set F: to be fair: five league titles and the Champions League", enter: E3, stage: "dark", shots: shots2, lights: lights2, build: build2, blur: blur2, cues: cues2 };
 
 // src/world/obj/receipt.ts
-var PW = 380;
+var PW = 300;
 var BW = 640;
 var BH = 210;
 var BD2 = 440;
 var SLOT_Z = -30;
 var TEX_K = 2.7;
-var MARGIN = 26;
+var MARGIN = 20;
 var LINES = [
-  { y: 56, text: "AUDIT RECEIPT", size: 11, weight: "700", align: "c" },
-  { y: 72, text: "THE PAYOUTS", size: 9, align: "c" },
-  { y: 88, text: "", size: 9, rule: true },
-  { y: 104, text: "MANCHESTER UNITED", size: 9, align: "l" },
-  { y: 118, text: "TAKEOVER, 2005", size: 9, align: "l" },
-  { y: 134, text: "", size: 9, rule: true },
-  { y: 156, text: "PRICE", right: "\xA3790,000,000", size: 10, align: "lr" },
-  { y: 176, text: "BORROWED", right: "\xA3540,000,000", size: 10, align: "lr" },
-  { y: 194, text: "", size: 9, rule: true },
-  { y: 236, text: "RATING: INFLATED", size: 25, weight: "800", color: "#c8221b", align: "c" },
-  { y: 256, text: "", size: 9, rule: true }
+  { y: 44, text: "AUDIT RECEIPT", size: 7.5, weight: "700", align: "c" },
+  { y: 56, text: "THE PAYOUTS", size: 6.5, align: "c" },
+  { y: 68, text: "", size: 6.5, rule: true },
+  { y: 80, text: "MANCHESTER UNITED", size: 6.5, align: "l" },
+  { y: 91, text: "TAKEOVER, 2005", size: 6.5, align: "l" },
+  { y: 103, text: "", size: 6.5, rule: true },
+  { y: 118, text: "PRICE", right: "\xA3790,000,000", size: 7, align: "lr" },
+  { y: 131, text: "BORROWED", right: "\xA3540,000,000", size: 7, align: "lr" },
+  { y: 144, text: "", size: 6.5, rule: true },
+  { y: 176, text: "RATING: INFLATED", size: 22, weight: "800", color: "#c8221b", align: "c" },
+  { y: 192, text: "", size: 6.5, rule: true }
 ];
-var LINE_AT = [176 + 12, 194 + 10, 236 + 14];
-var RECEIPT = { PW, BW, BH, BD: BD2, FULL: 300 };
+var LINE_AT = [131 + 10, 144 + 8, 176 + 14];
+var RECEIPT = { PW, BW, BH, BD: BD2, FULL: 230 };
 var paperTex = null;
 var drawPaper = () => {
   if (paperTex) return paperTex;
@@ -74634,7 +74635,7 @@ var makeReceipt = (key2) => {
   for (const m2 of [body, deck, lid, slot, bar, teeth, lamp]) m2.position.y += 8;
   mounted(teeth, bar, "the tear bar's teeth are its own edge");
   const tex = drawPaper();
-  const paperMat = new MeshStandardMaterial({ color: "#ffffff", map: tex, roughness: 0.82, metalness: 0, side: DoubleSide, alphaTest: tex ? 0.5 : 0, envMapIntensity: 0.25 });
+  const paperMat = new MeshStandardMaterial({ color: "#ffffff", map: tex, roughness: 0.82, metalness: 0, side: DoubleSide, alphaTest: tex ? 0.5 : 0, envMapIntensity: 0.25, emissive: new Color("#ffffff"), emissiveMap: tex, emissiveIntensity: 0.22 });
   if (!tex) paperMat.color.set("#f2f0ea");
   const SEG = 72, COLS = 8;
   const geo = new PlaneGeometry(PW, 1, COLS, SEG);
@@ -74657,7 +74658,7 @@ var makeReceipt = (key2) => {
     const spine = [];
     for (let r2 = 0; r2 <= SEG; r2++) {
       const sArc = (feed + 6) * (r2 / SEG);
-      const a2 = 0.14 + 0.85 * Math.pow(Math.max(0, sArc - 40) / 520, 2);
+      const a2 = 0.14 + 1.9 * Math.pow(Math.max(0, sArc - 60) / 520, 2);
       const ds = sArc - prevS;
       prevS = sArc;
       y2 += Math.cos(a2) * ds;
@@ -74669,7 +74670,7 @@ var makeReceipt = (key2) => {
       for (let c2 = 0; c2 <= COLS; c2++) {
         const i2 = (SEG - r2) * (COLS + 1) + c2;
         const xn = c2 / COLS - 0.5, x2 = xn * PW;
-        const cup = 7 * (xn * xn * 4) * Math.min(1, sArc / 200);
+        const cup = 2.5 * (xn * xn * 4) * Math.min(1, sArc / 200);
         pos.setXYZ(i2, x2, sp.y, sp.z + cup);
         const fromTop = feed + 6 - sArc;
         uv.setXY(i2, c2 / COLS, 1 - fromTop / FULL);
@@ -74723,7 +74724,7 @@ var VerdictPlace = {
     // ★ P17: nearer than before: the receipt is a real receipt's size now (thin paper, small print), so the camera comes to it
     cut(BILL + 8, [PX - 60, 1820, PZ + 1e3], [PX + 25, 300, PZ], { fov: 44, focus: [PX, 380, PZ], why: "cut to the printer as it lands" }),
     { ...dolly(BILL + 9, INF - 22 - (BILL + 9), [PX - 50, 1700, PZ + 950], [PX + 25, 320, PZ], { fov: 44, ease: SOFT, why: "drift as it prints" }), focus: [PX, 400, PZ] },
-    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 40, 1300, PZ + 760], [PX + 10, 390, PZ - 20], { fov: 40, why: "push in on the receipt" }), focus: [PX, 420, PZ - 40] },
+    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 30, 1080, PZ + 700], [PX + 5, 400, PZ - 40], { fov: 38, why: "push in on the receipt" }), focus: [PX, 420, PZ - 40] },
     // ★ (038 review) a crane up from the receipt swept the crest and the beam through the caption band: CUT to the opening's
     //   framing (drifted the other way) and settle exactly on frame 0's pose, so the loop joins
     cut(SEND - 2, [OPENING.pos[0] - 220, OPENING.pos[1], OPENING.pos[2] + 120], [OPENING.look[0] - 190, OPENING.look[1], 0], { fov: OPENING.fov, focus: OPENING.focus, why: "cut to the opening framing" }),
@@ -74755,7 +74756,7 @@ var VerdictPlace = {
     group.add(A3.group);
     const rec = makeReceipt("verdict");
     rec.group.position.set(PX, 0, PZ);
-    rec.group.rotation.y = -0.32;
+    rec.group.rotation.y = -0.14;
     const redR = ring({ r: 1500, color: K2.red, dur: 30 });
     redR.mesh.position.set(PX, 1.5, PZ + 160);
     const billR = ring({ r: 1600, color: K2.red, dur: 30 });

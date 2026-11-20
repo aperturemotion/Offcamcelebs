@@ -102,7 +102,8 @@ export const BondsPlace: Place3 = {
     dolly(T1 + 1, Math.max(20, T2 - T1 - 2), [X1 + 260, 1750, 3500], [X1 + 260, 680, 120], { fov: 40, ease: SOFT, why: "push on the press: £504m" }),
     travel(T2, T2_DUR, [X2 - 900, 2000, 3300], [X2 - 350, 820, 60], { fov: 40, why: "along the table to the vault", vol: 0.5 }),
     dolly(T2 + T2_DUR + 1, Math.max(20, SLAM[1] - (T2 + T2_DUR) - 2), [X2 - 120, 1800, 3800], [X2 + 130, 860, 0], { fov: 40, ease: SOFT, why: "the bonds fly into the vault" }),
-    dolly(SLAM[1] + 1, Math.max(16, to - SLAM[1] - 2), [X2 - 60, 1450, 3400], [X2, 860, 150], { fov: 40, ease: SOFT, why: "in on the door: PAID OFF" }),
+    // (★ P17: up on the plate PAID OFF is stamped over, not on the door below it)
+    dolly(SLAM[1] + 1, Math.max(16, to - SLAM[1] - 2), [X2 - 60, 1750, 3300], [X2, 1060, 150], { fov: 40, ease: SOFT, why: "in on the vault's plate: PAID OFF" }),
   ],
   lights: (f): Lights => {
     const cx = f < T1 ? X0 : f < T2 ? X1 : X2 - 300;

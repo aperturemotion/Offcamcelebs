@@ -52,7 +52,7 @@ export const VerdictPlace: Place3 = {
     // ★ P17: nearer than before: the receipt is a real receipt's size now (thin paper, small print), so the camera comes to it
     cut(BILL + 8, [PX - 60, 1820, PZ + 1000], [PX + 25, 300, PZ], { fov: 44, focus: [PX, 380, PZ] as Vec, why: "cut to the printer as it lands" }),
     { ...dolly(BILL + 9, INF - 22 - (BILL + 9), [PX - 50, 1700, PZ + 950], [PX + 25, 320, PZ], { fov: 44, ease: SOFT, why: "drift as it prints" }), focus: [PX, 400, PZ] as Vec },
-    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 40, 1300, PZ + 760], [PX + 10, 390, PZ - 20], { fov: 40, why: "push in on the receipt" }), focus: [PX, 420, PZ - 40] as Vec },
+    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 30, 1080, PZ + 700], [PX + 5, 400, PZ - 40], { fov: 38, why: "push in on the receipt" }), focus: [PX, 420, PZ - 40] as Vec },
     // ★ (038 review) a crane up from the receipt swept the crest and the beam through the caption band: CUT to the opening's
     //   framing (drifted the other way) and settle exactly on frame 0's pose, so the loop joins
     cut(SEND - 2, [OPENING.pos[0] - 220, OPENING.pos[1], OPENING.pos[2] + 120], [OPENING.look[0] - 190, OPENING.look[1], 0], { fov: OPENING.fov, focus: OPENING.focus, why: "cut to the opening framing" }),
@@ -84,7 +84,7 @@ export const VerdictPlace: Place3 = {
     group.add(A.group);
     const rec = makeReceipt("verdict");
     rec.group.position.set(PX, 0, PZ);
-    rec.group.rotation.y = -0.32;
+    rec.group.rotation.y = -0.14;   // (nearly square to the camera: the receipt's lines read level)
     const redR = ring({ r: 1500, color: K.red, dur: 30 }); redR.mesh.position.set(PX, 1.5, PZ + 160);
     const billR = ring({ r: 1600, color: K.red, dur: 30 }); billR.mesh.position.set(0, 1.5, PLINTH.d / 2 + 260);
     dropFalls(rec.group, PRINTER_LAND, PDROP, "the receipt printer drops in beside the plinth");
