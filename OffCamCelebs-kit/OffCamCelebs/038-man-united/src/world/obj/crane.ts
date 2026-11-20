@@ -90,25 +90,27 @@ export const makeCrane = (key: string) => {
   //   swept along the hook's own curve) whose bowl opens to the right; the slings' master ring hangs IN the bowl, its inside
   //   top resting on the bowl. Everything touches what holds it (the support check verifies it; the close-up sheet shows it).
   const nut = new THREE.Mesh(new THREE.CylinderGeometry(40, 44, 34, 32), MAT.satin()); nut.position.y = -bh / 2 - 17 + 1; nut.name = "swivel nut";
-  const shank = new THREE.Mesh(new THREE.CylinderGeometry(22, 24, 96, 24), MAT.satin()); shank.position.y = -bh / 2 - 34 - 48 + 4; shank.name = "hook shank";
-  const SY0 = -bh / 2 - 34 - 92;   // the shank's foot, where the forging begins
-  const BOWL = { x: 0, y: SY0 - 92, r: 58, t: 19 };
+  // (compact: the whole hook stays above the caption band in the sign's framing, as the old one did)
+  const shank = new THREE.Mesh(new THREE.CylinderGeometry(22, 24, 60, 24), MAT.satin()); shank.position.y = -bh / 2 - 34 - 30 + 4; shank.name = "hook shank";
+  const SY0 = -bh / 2 - 34 - 56;   // the shank's foot, where the forging begins
+  const BOWL = { x: 0, y: SY0 - 60, r: 50, t: 17 };
+  const r_ = BOWL.r;
   const jPts = [
-    [0, SY0 + 10], [0, SY0 - 8], [-14, SY0 - 26], [-44, SY0 - 52], [-BOWL.r, BOWL.y], [-41, BOWL.y - 41], [0, BOWL.y - BOWL.r],
-    [41, BOWL.y - 41], [BOWL.r, BOWL.y], [50, BOWL.y + 30], [36, BOWL.y + 46],
+    [0, SY0 + 10], [0, SY0 - 6], [-0.76 * r_, BOWL.y + 0.69 * r_], [-r_, BOWL.y], [-0.707 * r_, BOWL.y - 0.707 * r_], [0, BOWL.y - r_],
+    [0.707 * r_, BOWL.y - 0.707 * r_], [r_, BOWL.y], [0.86 * r_, BOWL.y + 0.52 * r_], [0.62 * r_, BOWL.y + 0.79 * r_],
   ].map(([x, y]) => new THREE.Vector3(x, y, 0));
   const jCurve = new THREE.CatmullRomCurve3(jPts, false, "centripetal");
   // the forging tapers toward its tip (a real hook's throat is thinner than its bowl)
   const jGeo = new THREE.TubeGeometry(jCurve, 90, BOWL.t, 20, false);
   { const pos = jGeo.attributes.position as THREE.BufferAttribute, n = 90, ring = 21;
-    for (let i = 0; i <= n; i++) { const u = i / n, c = jCurve.getPointAt(u), k = u < 0.18 ? 1 + (24 / BOWL.t - 1) * (1 - u / 0.18) ** 2 : u > 0.8 ? 1 - 0.45 * (u - 0.8) / 0.2 : 1;   // the shank's thickness easing into the forging, no step
+    for (let i = 0; i <= n; i++) { const u = i / n, c = jCurve.getPointAt(u), k = u < 0.2 ? 1 + (24 / BOWL.t - 1) * (1 - u / 0.2) ** 2 : u > 0.8 ? 1 - 0.45 * (u - 0.8) / 0.2 : 1;   // the shank's thickness easing into the forging, no step
       for (let j = 0; j < ring; j++) { const v = i * ring + j; pos.setXYZ(v, c.x + (pos.getX(v) - c.x) * k, c.y + (pos.getY(v) - c.y) * k, c.z + (pos.getZ(v) - c.z) * k); } }
     pos.needsUpdate = true; jGeo.computeVertexNormals(); }
   const c = new THREE.Mesh(jGeo, MAT.satin()); c.name = "hook";
   // the tip's rounded end
   const tip = new THREE.Mesh(new THREE.SphereGeometry(BOWL.t * 0.55, 16, 12), MAT.satin()); tip.position.copy(jPts[jPts.length - 1]); tip.name = "hook tip";
   // the master ring: a closed steel ring across the bowl (in the y–z plane), its inside top ON the bowl's lowest point
-  const RR = 36, RT = 10;
+  const RR = 30, RT = 9;
   const bowlTop = BOWL.y - BOWL.r + BOWL.t;   // the top of the forging at the bowl's lowest point
   const master = new THREE.Mesh(new THREE.TorusGeometry(RR, RT, 16, 48), MAT.satin()); master.rotation.y = Math.PI / 2;
   master.position.set(0, bowlTop - (RR - RT) + 0.2, 0); master.name = "master ring";
