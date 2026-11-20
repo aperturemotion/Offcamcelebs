@@ -309,6 +309,8 @@ export const drawWorld = (host: HTMLElement, f: number) => {
   setStage(stage);
   setLights(place.lights(f), stage);
   worldStats.place = place.id;
+  (window as unknown as { __worldPlace?: string }).__worldPlace = place.id;   // the caption-band check (scratchpad/capband.mjs) reads these
+  (window as unknown as { __worldStage?: string }).__worldStage = place.stageAt?.(f) ?? place.stage ?? "dark";
 
   const dbg = (window as unknown as { __world?: Partial<Record<"bloom" | "bloomRadius" | "bloomAt" | "vignette" | "grain" | "exposure" | "aperture" | "maxBlur", number>> & { noBlur?: boolean; noDof?: boolean } }).__world ?? {};
   bloom.strength = dbg.bloom ?? LOOK.bloom; bloom.radius = dbg.bloomRadius ?? LOOK.bloomRadius; bloom.threshold = dbg.bloomAt ?? LOOK.bloomAt;

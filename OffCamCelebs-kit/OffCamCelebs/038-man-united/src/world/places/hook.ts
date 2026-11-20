@@ -81,11 +81,12 @@ const SNAP: [number, number] = [MOST - 4, MOST + 10], SLAM = OWN;
 export const HK = { land: LAND, count: COUNT, drop: BORROWED, snap: SNAP, slam: SLAM } as const;
 
 /** the frame-0 pose: the film's opening; the verdict ends here (the film loops: R31) */
-export const OPENING = { pos: [-720, 1480, 3150] as Vec, look: [0, 1840, 0] as Vec, fov: 50, focus: [0, 1600, 0] as Vec } as const;
+// ★ (038 review) every framing keeps the caption band (y 230–330) clear: the whole rig, beam and flag included, sits below it
+export const OPENING = { pos: [-760, 1560, 4550] as Vec, look: [0, 2150, 0] as Vec, fov: 50, focus: [0, 1500, 0] as Vec } as const;
 /** the sign framing (the count; the verdict's flip) */
-export const SIGN = { pos: [-330, 780, 2750] as Vec, look: [0, 640, 400] as Vec, fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] as Vec } as const;
+export const SIGN = { pos: [-330, 1060, 2750] as Vec, look: [0, 970, 400] as Vec, fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] as Vec } as const;
 /** the stamp framing */
-export const INK = { pos: [-320, 400, 2420] as Vec, look: [0, 300, 320] as Vec, fov: 42, focus: [0, 266, PLINTH.d / 2] as Vec } as const;
+export const INK = { pos: [-520, 980, 2950] as Vec, look: [-160, 910, 300] as Vec, fov: 44, focus: [0, 266, PLINTH.d / 2] as Vec } as const;
 
 /** the crane lowers the crest: its height above the cradle (frame 0 is mid-descent), landing on LAND with a small settle */
 const lift = (f: number) => {
@@ -116,12 +117,12 @@ export const HookPlace: Place3 = {
   shots: ({ to }): CamKey3[] => [
     cut(0, OPENING.pos, OPENING.look, { fov: OPENING.fov, focus: OPENING.focus, why: "open on the crane lowering the crest" }),
     { ...crane(1, LAND + 10, SIGN.pos, SIGN.look, { fov: SIGN.fov, bulge: [0, 0, 140], why: "crane down with the crest onto the sign" }), focus: SIGN.focus },
-    { ...dolly(LAND + 12, C1 - 4 - (LAND + 12), [-180, 720, 2560], [0, 640, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
-    { ...crane(C1 - 2, BORROWED - 10 - (C1 - 2), [1080, 1760, 2900], [720, 1560, 0], { fov: 44, bulge: [80, 0, 160], why: "rise to the hook block" }), focus: [760, 1500, 0] as Vec },
-    { ...dolly(BORROWED - 8, C2 + 6 - (BORROWED - 8), [1000, 1680, 2650], [740, 1480, 0], { fov: 44, ease: SOFT, why: "hold on the tag as it drops" }), focus: [780, 1460, 0] as Vec },
-    { ...crane(C2 + 7, SNAP[0] - 2 - (C2 + 7), [940, 1420, 2650], [660, 1360, 0], { fov: 44, bulge: [0, 0, 100], why: "down the tag to the crest" }), focus: [460, 1330, 0] as Vec },
+    { ...dolly(LAND + 12, C1 - 4 - (LAND + 12), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
+    { ...crane(C1 - 2, BORROWED - 10 - (C1 - 2), [560, 1560, 3650], [470, 1620, 0], { fov: 46, bulge: [80, 0, 160], why: "rise to the hook block: nameplate, tag and crest in one frame" }), focus: [500, 1600, 0] as Vec },
+    { ...dolly(BORROWED - 8, C2 + 6 - (BORROWED - 8), [520, 1540, 3500], [460, 1610, 0], { fov: 46, ease: SOFT, why: "hold on the tag as it drops" }), focus: [600, 1600, 0] as Vec },
+    { ...crane(C2 + 7, SNAP[0] - 2 - (C2 + 7), [620, 1360, 3700], [560, 1400, 0], { fov: 46, bulge: [0, 0, 100], why: "down the tag to the crest" }), focus: [400, 1300, 0] as Vec },
     { ...dolly(SNAP[1] + 2, SLAM - 14 - (SNAP[1] + 2), INK.pos, INK.look, { fov: INK.fov, why: "drop to the plinth's face" }), focus: INK.focus },
-    { ...dolly(SLAM - 10, to - (SLAM - 10) - 1, [-240, 380, 2280], [0, 300, 320], { fov: 42, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus },
+    { ...dolly(SLAM - 10, to - (SLAM - 10) - 1, [-470, 960, 2800], [-150, 910, 300], { fov: 44, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus },
   ],
   lights: (f) => {
     const p790 = f >= N790 ? Math.exp(-(f - N790) / 12) : 0, pDrop = f >= BORROWED ? Math.exp(-(f - BORROWED) / 12) : 0, pSlam = f >= SLAM ? Math.exp(-(f - SLAM) / 14) : 0;

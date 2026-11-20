@@ -22226,9 +22226,9 @@ var LAND = 38;
 var COUNT2 = [LAND + 6, N790];
 var SNAP = [MOST - 4, MOST + 10];
 var SLAM = OWN;
-var OPENING = { pos: [-720, 1480, 3150], look: [0, 1840, 0], fov: 50, focus: [0, 1600, 0] };
-var SIGN = { pos: [-330, 780, 2750], look: [0, 640, 400], fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] };
-var INK = { pos: [-320, 400, 2420], look: [0, 300, 320], fov: 42, focus: [0, 266, PLINTH.d / 2] };
+var OPENING = { pos: [-760, 1560, 4550], look: [0, 2150, 0], fov: 50, focus: [0, 1500, 0] };
+var SIGN = { pos: [-330, 1060, 2750], look: [0, 970, 400], fov: 42, focus: [0, 600, PLINTH.d / 2 + 100] };
+var INK = { pos: [-520, 980, 2950], look: [-160, 910, 300], fov: 44, focus: [0, 266, PLINTH.d / 2] };
 var lift = (f2) => {
   if (f2 < LAND) {
     const t3 = clamp01((f2 + 14) / (LAND + 14));
@@ -22263,12 +22263,12 @@ var HookPlace = {
   shots: ({ to }) => [
     cut(0, OPENING.pos, OPENING.look, { fov: OPENING.fov, focus: OPENING.focus, why: "open on the crane lowering the crest" }),
     { ...crane(1, LAND + 10, SIGN.pos, SIGN.look, { fov: SIGN.fov, bulge: [0, 0, 140], why: "crane down with the crest onto the sign" }), focus: SIGN.focus },
-    { ...dolly(LAND + 12, C1 - 4 - (LAND + 12), [-180, 720, 2560], [0, 640, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
-    { ...crane(C1 - 2, BORROWED - 10 - (C1 - 2), [1080, 1760, 2900], [720, 1560, 0], { fov: 44, bulge: [80, 0, 160], why: "rise to the hook block" }), focus: [760, 1500, 0] },
-    { ...dolly(BORROWED - 8, C22 + 6 - (BORROWED - 8), [1e3, 1680, 2650], [740, 1480, 0], { fov: 44, ease: SOFT, why: "hold on the tag as it drops" }), focus: [780, 1460, 0] },
-    { ...crane(C22 + 7, SNAP[0] - 2 - (C22 + 7), [940, 1420, 2650], [660, 1360, 0], { fov: 44, bulge: [0, 0, 100], why: "down the tag to the crest" }), focus: [460, 1330, 0] },
+    { ...dolly(LAND + 12, C1 - 4 - (LAND + 12), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "push in as the price counts" }), focus: SIGN.focus },
+    { ...crane(C1 - 2, BORROWED - 10 - (C1 - 2), [560, 1560, 3650], [470, 1620, 0], { fov: 46, bulge: [80, 0, 160], why: "rise to the hook block: nameplate, tag and crest in one frame" }), focus: [500, 1600, 0] },
+    { ...dolly(BORROWED - 8, C22 + 6 - (BORROWED - 8), [520, 1540, 3500], [460, 1610, 0], { fov: 46, ease: SOFT, why: "hold on the tag as it drops" }), focus: [600, 1600, 0] },
+    { ...crane(C22 + 7, SNAP[0] - 2 - (C22 + 7), [620, 1360, 3700], [560, 1400, 0], { fov: 46, bulge: [0, 0, 100], why: "down the tag to the crest" }), focus: [400, 1300, 0] },
     { ...dolly(SNAP[1] + 2, SLAM - 14 - (SNAP[1] + 2), INK.pos, INK.look, { fov: INK.fov, why: "drop to the plinth's face" }), focus: INK.focus },
-    { ...dolly(SLAM - 10, to - (SLAM - 10) - 1, [-240, 380, 2280], [0, 300, 320], { fov: 42, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus }
+    { ...dolly(SLAM - 10, to - (SLAM - 10) - 1, [-470, 960, 2800], [-150, 910, 300], { fov: 44, ease: SOFT, why: "creep in on the ink" }), focus: INK.focus }
   ],
   lights: (f2) => {
     const p790 = f2 >= N790 ? Math.exp(-(f2 - N790) / 12) : 0, pDrop = f2 >= BORROWED ? Math.exp(-(f2 - BORROWED) / 12) : 0, pSlam = f2 >= SLAM ? Math.exp(-(f2 - SLAM) / 14) : 0;
