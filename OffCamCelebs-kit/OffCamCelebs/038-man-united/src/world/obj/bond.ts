@@ -8,7 +8,7 @@
 //   base's front that rolls the money raised (`value`, lit by `on`). Origin: the footprint's centre. `die`: the die pad's
 //   top surface (a sheet lies on it) in the group's space.
 import * as THREE from "three";
-import { MAT, K, lit, rbox, block, cyl, wide, textOn, litPlate, counter, setLit, joined } from "../kit";
+import { MAT, K, lit, rbox, block, cyl, wide, textOn, litPlate, counter, setLit, joined, mounted } from "../kit";
 import { text3d, textWidth } from "../text3d";
 import { printMat } from "./brand";
 
@@ -105,14 +105,21 @@ export const makeBondPress = (key: string) => {
   const die = BPRESS.base + 10;
   for (const sx of [-1, 1]) { const post = cyl(34, 640, MAT.satin(), 40); post.position.set(sx * 380, BPRESS.base + 320, -200); group.add(post); }
   const beam = rbox(900, 150, 320, 30, MAT.black()); beam.position.set(0, BPRESS.base + 640 + 50, -150); group.add(beam);
-  const head = rbox(340, 120, 360, 24, MAT.graphite()); head.position.set(0, BPRESS.base + 640 + 20, BPRESS.dieZ - 60); group.add(head);
+  // ★ P17: the head (the piston's cylinder) reaches down far enough that the piston stays in it at the bottom of the stroke
+  //   (it slid 114 out of it)
+  const head = rbox(340, 300, 360, 24, MAT.graphite()); head.position.set(0, BPRESS.base + 640 + 20 - 90, BPRESS.dieZ - 60); group.add(head);
   const plate = litPlate(["BONDS"], { size: 64, color: K.white, depth: 24 });
-  plate.group.position.set(0, BPRESS.base + 640 + 160, -60); plate.group.rotation.x = -0.35;
+  // ★ P17: the BONDS plate stands on two satin posts above the beam, clear over the piston's top (the piston covered its N)
+  const plateY = BPRESS.base + 640 + 50 + 75 + 85 + plate.h / 2;
+  plate.group.position.set(0, plateY, -60);
   group.add(plate.group);
+  for (const sx of [-1, 1]) {
+    const post = cyl(10, 85 + 16, MAT.satin(), 16); post.position.set(sx * plate.w * 0.3, BPRESS.base + 640 + 50 + 75 - 8 + (85 + 16) / 2, -60); post.name = "plate post"; group.add(post);
+    if (sx < 0) mounted(plate.body, post, "the BONDS plate stands on its posts");
+  }
   // the ram: a piston and a flat platen the size of a sheet
   const ram = new THREE.Group(); ram.name = "press ram";
-  // ★ P17: the piston is long enough to stay in its head at the bottom of the stroke (it slid out of it, 114 short)
-  const rod = cyl(44, 590, MAT.satin(), 40); rod.position.y = 50 + 295;
+  const rod = cyl(44, 420, MAT.satin(), 40); rod.position.y = 50 + 210;
   const platen = rbox(BOND.w + 20, 50, BOND.d + 10, 10, MAT.graphite()); platen.position.y = 25;
   ram.add(rod, platen);
   ram.position.set(0, BPRESS.up, BPRESS.dieZ);

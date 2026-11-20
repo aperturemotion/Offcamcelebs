@@ -12,7 +12,7 @@ export const makeOdometer = (key: string) => {
   void key;
   const group = new THREE.Group();
   const housing = rbox(ODO.w, ODO.h, ODO.d, 40, MAT.black()); housing.position.y = ODO.h / 2; housing.name = "odometer housing"; group.add(housing);
-  for (const sx of [-1, 1]) { const cap = rbox(70, ODO.h + 30, ODO.d + 30, 20, MAT.satin()); cap.position.set(sx * (ODO.w / 2 + 20), ODO.h / 2, 0); group.add(cap); }
+  for (const sx of [-1, 1]) { const cap = rbox(70, ODO.h + 30, ODO.d + 30, 20, MAT.satin()); cap.position.set(sx * (ODO.w / 2 + 20), (ODO.h + 30) / 2, 0); group.add(cap); }   // (its foot level with the housing's: it stood 15 below it)
   // the window: a dark recess behind a satin bezel, the wheels' faces showing through
   const win = rbox(1300, 200, 14, 8, new THREE.MeshPhysicalMaterial({ color: "#0b0b0d", roughness: 0.3, metalness: 0.3, clearcoat: 0.5 }));
   win.position.set(0, ODO.h / 2, ODO.d / 2 + 4); win.name = "odometer window"; group.add(win);
@@ -35,9 +35,7 @@ export const makeOdometer = (key: string) => {
   textOn(plus.group, win, { inset: 6 });
   group.add(plus.group);
   void plusFace;
-  const top = litPlate(["TAKEOVER COST"], { size: 50, color: K.white, depth: 26 });
-  top.group.position.set(0, ODO.h + top.h / 2 - 6, -20);
-  group.add(top.group);
+  // (★ P17, one label and one figure a frame: no TAKEOVER COST plate on its top; the ESPN sign beside it is the label)
   return {
     group, size: ODO,
     update: (p: { value: string; on: number; plus: number }) => {
@@ -45,7 +43,6 @@ export const makeOdometer = (key: string) => {
       setLit(fig.face, p.on, 0.05);
       plus.group.visible = p.plus > 0.01;
       setLit(plus.face, p.plus, 0.05);
-      top.setLit(0.3 + 0.7 * p.on);
     },
   };
 };

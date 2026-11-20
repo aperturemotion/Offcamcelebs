@@ -27,6 +27,16 @@ const labelOf = (o: THREE.Object3D, root: THREE.Object3D) => {
 };
 const corners = (b: THREE.Box3) => [0, 1, 2, 3, 4, 5, 6, 7].map((i) => new THREE.Vector3(i & 1 ? b.max.x : b.min.x, i & 2 ? b.max.y : b.min.y, i & 4 ? b.max.z : b.min.z));
 
+/** a mesh's OBJECT: the group directly under the place's root that holds it, or, inside a group marked `userData.set` (a set
+ *  of objects built together, as set A's plinth, crane and crest), the group under that */
+export const objectOf = (m: THREE.Object3D, root: THREE.Object3D) => {
+  const chain: THREE.Object3D[] = [];
+  for (let n: THREE.Object3D | null = m; n && n !== root; n = n.parent) chain.unshift(n);
+  let k = 0;
+  while (k < chain.length - 1 && chain[k].userData.set) k++;
+  return chain[k] ?? m;
+};
+
 // ── 1. TEXT ON SURFACE ──────────────────────────────────────────────────────────────────────────────────────────────────
 export type TextHit = { place: string; text: string; surface: string; frame: number; side: string; over: number; frames: number };
 export type TextReport = { hits: TextHit[]; unregistered: { place: string; text: string }[]; texts: number; free: number; samples: number };
@@ -235,6 +245,10 @@ export const passCheck = (places: PlaceRun[], step = 3, minDepth = 1): PassRepor
       part[i] = reps.length; reps.push(i);
     });
     partsN += reps.length;
+    // ★ P17: two OBJECTS (groups under the place's root: a pipe, a stadium, a rack) that never move are one rigid part, and
+    //   the test above never looked at them: a static thing built INTO another static thing was invisible. Such a pair is
+    //   tested once, on the first frame both show.
+    const objs = ms.map((m) => objectOf(m, root)), staticDone = new Set<string>();
     // declared joins: an ancestor (or the mesh) of one names an ancestor (or the mesh) of the other
     const anc = ms.map((m) => { const s = new Set<THREE.Object3D>(); for (let n: THREE.Object3D | null = m; n; n = n.parent) s.add(n); return s; });
     const targets = ms.map((_, i) => { const s: THREE.Object3D[] = []; for (const n of anc[i]) for (const j of (n.userData.joinWith as THREE.Object3D[] | undefined) ?? []) s.push(j); return s; });
@@ -253,7 +267,8 @@ export const passCheck = (places: PlaceRun[], step = 3, minDepth = 1): PassRepor
         if (!ON[i][t]) continue;
         const a = BX[i], o = t * 6;
         for (let j = i + 1; j < ms.length; j++) {
-          if (!ON[j][t] || part[i] === part[j]) continue;
+          if (!ON[j][t]) continue;
+          if (part[i] === part[j]) { if (objs[i] === objs[j] || staticDone.has(`${i}|${j}`)) continue; staticDone.add(`${i}|${j}`); }
           const c = BX[j];
           if (a[o] > c[o + 3] || c[o] > a[o + 3] || a[o + 1] > c[o + 4] || c[o + 1] > a[o + 4] || a[o + 2] > c[o + 5] || c[o + 2] > a[o + 5]) continue;
           if (isDeclared(i, j)) { declared++; continue; }
@@ -448,16 +463,9 @@ export const supportCheck = (places: SupportRun[], step = 3): SupportReport => {
     for (const h of held) declared += h.length;
     const fallOf = ms.map((m) => { const w: [number, number, string][] = []; for (let n: THREE.Object3D | null = m; n; n = n.parent) for (const x of (n.userData.falling as [number, number, string][] | undefined) ?? []) w.push(x); return w; });
     const weld = new Map<string, boolean>();
-    // each mesh's OBJECT: the group under the place's root that holds it (descending through groups of groups, a "set"):
-    //   parts of one object weld where they meet; two objects are only ever held by resting or a declared hang or mount
-    const objOf = (m: THREE.Object3D) => {
-      const chain: THREE.Object3D[] = [];
-      for (let n: THREE.Object3D | null = m; n && n !== root; n = n.parent) chain.unshift(n);
-      let k = 0;
-      while (k < chain.length - 1 && chain[k].children.every((c) => !(c as THREE.Mesh).isMesh)) k++;
-      return chain[k] ?? m;
-    };
-    const obj = ms.map(objOf);
+    // each mesh's OBJECT (objectOf): parts of one object weld where they meet; two objects are only ever held by resting
+    //   or a declared hang or mount
+    const obj = ms.map((m) => objectOf(m, root));
     const boxes = ms.map(() => new THREE.Box3());
     const low = new Map<string, number>();
     const lowOf = (i: number) => { const k = `${i}|${poseKey(ms[i].matrixWorld)}`; let v = low.get(k); if (v === undefined) { v = lowest(ms[i]); low.set(k, v); } return v; };

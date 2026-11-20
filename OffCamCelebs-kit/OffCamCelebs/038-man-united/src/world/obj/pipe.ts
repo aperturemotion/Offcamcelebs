@@ -6,7 +6,7 @@ import * as THREE from "three";
 import { MAT } from "../kit";
 
 /** `avoid`: points (a funnel's throat) a collar must keep 170 clear of (★ P17: a coin dropping in crossed one) */
-export const makePipe = (key: string, pts: THREE.Vector3[], r = 86, o: { avoid?: THREE.Vector3[] } = {}) => {
+export const makePipe = (key: string, pts: THREE.Vector3[], r = 86, o: { avoid?: THREE.Vector3[]; fromWall?: boolean } = {}) => {
   void key;
   const group = new THREE.Group();
   const curve = new THREE.CatmullRomCurve3(pts, false, "catmullrom", 0.2);
@@ -23,6 +23,7 @@ export const makePipe = (key: string, pts: THREE.Vector3[], r = 86, o: { avoid?:
   for (let i = 0; i <= n; i++) {
     const u = i / n, p = curve.getPointAt(u), t = curve.getTangentAt(u);
     if ((o.avoid ?? []).some((a) => Math.hypot(a.x - p.x, a.z - p.z) < 170)) continue;
+    if (i === 0 && o.fromWall) continue;   // the pipe comes out of a wall: no collar inside the wall
     // ★ P17: the collar clamps the glass from OUTSIDE (it stood 3 into the tube, across the coins' way)
     const collar = new THREE.Mesh(new THREE.TorusGeometry(r + 9 + 0.3, 9, 10, 40), satin);
     collar.position.copy(p); collar.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), t);

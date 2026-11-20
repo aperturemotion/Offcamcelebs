@@ -113,7 +113,7 @@ export const MoneyPlace: Place3 = {
     const rack = makeShirtRack("money"); rack.group.position.set(RX, 0, ITEM_Z); rack.group.name = "shirt rack"; group.add(rack.group);
     const tv = makeTvCamera("money"); tv.group.position.set(VX_CAM, 0, ITEM_Z); tv.group.rotation.y = -0.25; tv.group.name = "TV camera"; group.add(tv.group);
     // the pipe: out of Old Trafford's near wall, along behind the three sources, up into the vault's mouth
-    const pipe = makePipe("money", PIPE_PATH, PIPE_R, { avoid: [0, 1, 2].map((k) => funnelTop(k)) }); pipe.group.name = "pipe"; group.add(pipe.group);
+    const pipe = makePipe("money", PIPE_PATH, PIPE_R, { avoid: [0, 1, 2].map((k) => funnelTop(k)), fromWall: true }); pipe.group.name = "pipe"; group.add(pipe.group);
     // a satin funnel on top of the pipe in front of each source
     const funnels = [0, 1, 2].map((k) => {
       // ★ P17: its throat (64) takes a coin on edge (it was 40: the 120-wide coins went through the steel)
@@ -125,8 +125,8 @@ export const MoneyPlace: Place3 = {
     // where each source's coin enters the pipe, as a fraction along it
     // the vault (mirrored: hinged on the right, so the pipe comes in from the left, clear of its door), open
     const vault = makeVault("money");
-    const vplate = vault.label("TAKEOVER DEBT");
-    vplate.group.parent!.scale.x = -1;
+    // (★ P17, one label and one figure a frame: no TAKEOVER DEBT plate; the ESPN sign is the shot's label, the odometer its figure)
+    vault.unlabel();
     vault.group.scale.set(-VS, VS, VS); vault.group.position.set(VX, 0, VZ); vault.group.name = "vault"; group.add(vault.group);
     // (the pipe runs in through the vault's open mouth, clear of its frame: no exemption)
     // the odometer on the vault's top

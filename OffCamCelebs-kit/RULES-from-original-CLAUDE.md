@@ -584,6 +584,19 @@ These survive independent of style. (Look rules live in the style's own preferen
     (ring to block, posts to sign, rail to uprights, hook to rail, door to vault) and LOOK at it. A wide sheet at 540 px
     did not show any of the 038 faults.
   · All three run in `render.mjs --check`; a hit refuses the handback and the render.
+  · BUILT ON 038 (2026-11-20): `scratchpad/worldcheck.mjs support` (in `all`; kit.ts `hangs` / `mounted` / `falling` /
+    `dropFalls`), `scratchpad/densitycheck.mjs` (+ `densityprobe.js`, `densitycanary.mjs`), `scratchpad/closeups.mjs`
+    (→ `out/closeups/closeupsN.jpg`), `scratchpad/sweep.mjs` (stills + density + contact sheets), `scratchpad/shoot.mjs`
+    (stills, with a camera override for close-ups). Copy them into the next film. What building them found:
+    ⚠ `block()` and `cyl()` set their base on y = 0 through `position.y`; a later `position.set(x, 0, z)` or
+    `position.y = 40` silently CENTRES the part on that height instead (038: the shirt rail's uprights, the ESPN post, the
+    scoreboard's pylons and the trophy pedestal were all half under the floor). Set x and z only, or the full base height.
+    ⚠ The pass-through check's old shrink (homothetic, about the part's centre) also shrank a part's HOLES, so anything
+    resting in a tunnel or running through a punched hole read as crossing it; it now offsets along the normals.
+    ⚠ Two parts that never move relative to each other are ONE rigid part and are never tested against each other: a static
+    thing built into another static thing is invisible to the pass-through check. The support check and the close-up
+    sheet are what catch a static fault; look at the sheet.
+    ⚠ Sample the pass-through check on EVERY frame: a prop that crosses a door does it in one frame.
 
 - **★★ A CHECK WHOSE FAILURE MODE IS "PASS" MUST BE TESTED BY MAKING IT FIRE (2026-09-16, 012).**
   A render tripwire was added to block an MP4 while a known conflict stood. Its regex looked for

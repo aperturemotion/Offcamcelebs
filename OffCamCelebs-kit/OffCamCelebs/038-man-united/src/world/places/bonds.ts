@@ -138,12 +138,13 @@ export const BondsPlace: Place3 = {
     });
     mounted(press.rod, press.head, "the press's piston runs in its head");
     // the PAID OFF plate the stamp leaves on the door, and the stamp
-    // ★ P17: the plate is stamped flat ON the shut door's wheel (its back against the wheel's knobs), not 30 in front of it
-    const WHEEL_FRONT = 120 + 108 + 26;
-    const paid = litPlate(["PAID OFF"], { size: 92, color: K.red, depth: 30 });
-    paid.group.position.set(X2, 640, WHEEL_FRONT + 15 - 0.3); paid.group.name = "PAID OFF plate"; group.add(paid.group);
+    // ★ P17 (one label a frame): the PAID OFF plate is stamped over the vault's BANK LOANS plate and covers it, flat on its
+    //   face, so the frame reads one label (it was a second plate on the door, under BANK LOANS)
+    const vp = vault.plate, PLATE_Y = 1350 - 120, PLATE_FRONT = 20 + vp.d / 2;
+    const paid = litPlate(["PAID OFF"], { size: 92, color: K.red, depth: 30, w: Math.max(0, vp.w + 40) });
+    paid.group.position.set(X2, PLATE_Y, PLATE_FRONT + 15 + 0.3); paid.group.name = "PAID OFF plate"; group.add(paid.group);
     paid.body.name = "PAID OFF plate body";
-    mounted(paid.body, vault.knobs[0], "the PAID OFF plate is stamped onto the door's wheel (against its knobs)");
+    mounted(paid.body, vp.body, "the PAID OFF plate is stamped over the BANK LOANS plate");
     const stamp = makeStamp("bonds"); stamp.group.name = "stamp"; group.add(stamp.group);
     falling(stamp.group, HIT - 7, HIT + 13, "the stamp is swung in, slams PAID OFF onto the door, and is swung away");
     const halo = ring({ r: 900, color: K.money }); halo.mesh.position.set(X1, 1.5, 300); group.add(halo.mesh);
@@ -172,9 +173,9 @@ export const BondsPlace: Place3 = {
         vault.update({ door: 0.905 * open * (1 - shut), wheel: SOFT(clamp01((f - WHEEL[0]) / (WHEEL[1] - WHEEL[0]))) });
         // the stamp: comes in from the camera side, slams on "loans", recoils away
         const sIn = clamp01((f - (HIT - 7)) / 7), sOut = clamp01((f - (HIT + 3)) / 10);
-        const z = WHEEL_FRONT + 30 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
+        const z = PLATE_FRONT + 30.6 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
         stamp.group.visible = f >= HIT - 7 && f < HIT + 13;
-        stamp.group.position.set(X2, 640, z);
+        stamp.group.position.set(X2, PLATE_Y, z);
         paid.group.visible = f >= HIT;
         halo.update(f, COUNT[1]); red.update(f, HIT);
       },

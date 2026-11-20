@@ -90,7 +90,8 @@
           const d = p.clone().sub(camPos), dist = d.length();
           ray.set(camPos, d.normalize()); ray.far = dist + 8;
           const h = ray.intersectObjects(solids, false)[0];
-          if (!h || it.own(h) || h.distance >= dist - 6 || h.object === it.o.parent || (it.plate && h.object === it.plate)) clear++;
+          // clear: nothing in the way, or the first thing hit is the text itself, the face it is printed on, or within 1.5 of it
+          if (!h || it.own(h) || h.distance >= dist - 1.5 || h.object === it.o.userData.fitOn || h.object === it.o.parent || (it.plate && h.object === it.plate)) clear++;
         }
       }
       const occluded = inFrame && facing && capPx >= MIN_PX && clear === 0;

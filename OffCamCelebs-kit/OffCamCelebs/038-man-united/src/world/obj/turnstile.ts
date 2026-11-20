@@ -15,13 +15,11 @@ export const makeTurnstile = (key: string) => {
   // the cabinet and its sloped top
   const cab = block(250, 560, 300, 24, MAT.black()); cab.name = "turnstile cabinet"; group.add(cab);
   const top = rbox(250, 30, 310, 10, steel); top.position.y = 575; group.add(top);
-  // the ticket reader: a lit green glass on top, and a TICKETS label on the cabinet's front
+  // the ticket reader: a lit green glass on top
   const glow = lit("#5cff8a", 0.9);
   const reader = rbox(120, 12, 90, 4, glow); reader.position.set(0, 596, 40); group.add(reader);
-  const labelBody = rbox(232, 64, 10, 4, MAT.graphite()); labelBody.position.set(0, 470, 155); labelBody.name = "turnstile label"; group.add(labelBody);
-  const tFace = lit(K.white, 0.85);
-  const t = wide(text3d("TICKETS", { font: "800", size: 30, depth: 2, bevel: 0, face: tFace }), 1.06);
-  t.position.set(0, 470 - 30 * 0.345, 160.5); textOn(t, labelBody, { inset: 4 }); group.add(t);
+  // (★ P17, one label a frame: no TICKETS label; the turnstile and its reader say it, and the stadium's own lettering is the
+  //   shot's one label)
   // the rotor: a hub on the cabinet's +x side, three arms at 120°
   const rotor = new THREE.Group(); rotor.position.set(150, 470, 0); rotor.rotation.z = -0.62; group.add(rotor);
   // ★ P17: the hub turns WITH the arms (their roots are set in its end: they stopped 6 short of it), in a bearing in the cabinet

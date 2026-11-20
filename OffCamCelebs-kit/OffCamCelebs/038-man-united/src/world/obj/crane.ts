@@ -141,7 +141,7 @@ export const makeCrane = (key: string) => {
   const slings: THREE.Mesh[] = [];
   /** slings from the master ring to load points (in the hook's own frame); each sling's lower end is shackled to `load`, a
    *  MESH (the crest's body), and the load is declared hung from the slings */
-  const slingTo = (pts: THREE.Vector3[], load: THREE.Mesh) => {
+  const slingTo = (pts: THREE.Vector3[], loads: THREE.Mesh[]) => {
     for (const p of pts) {
       const top = hookEye.clone().add(new THREE.Vector3(0, RT * 0.6, 0));
       const d = new THREE.Vector3().subVectors(p, top), L = d.length();
@@ -153,7 +153,8 @@ export const makeCrane = (key: string) => {
       hangs(m, master, "the sling hangs from the master ring");
       slings.push(m);
     }
-    hangs(load, slings[0], "the crest hangs from its slings");
+    // each load point is a shackle on the load: the sling's end runs through it
+    loads.forEach((l, i) => { joined(slings[i], l, "the sling's end runs through its shackle"); hangs(l, slings[i], "the crest's shackle hangs on its sling", { linked: true }); });
   };
   const update = (p: { hookY: number }) => {
     hook.position.y = p.hookY;

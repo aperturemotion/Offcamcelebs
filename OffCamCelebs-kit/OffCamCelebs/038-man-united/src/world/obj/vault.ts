@@ -74,6 +74,8 @@ export const makeVault = (key: string, o: { depth?: number } = {}) => {
     group, size: { w: W, h: H, d: D },
     mouth: new THREE.Vector3(0, CY, 0), R, CY, D, drum, hub, knobs,
     label: (text: string) => { plateG.clear(); plate = litPlate(text.split(" | "), { size: 76, color: K.white }); plateG.add(plate.group); return plate; },
+    /** no plate at all (★ P17: one label a frame) */
+    unlabel: () => { plateG.clear(); },
     get plate() { return plate; },
     update: (p: { door: number; wheel?: number }) => {
       wheel.rotation.z = -(p.wheel ?? 0) * Math.PI * 2;

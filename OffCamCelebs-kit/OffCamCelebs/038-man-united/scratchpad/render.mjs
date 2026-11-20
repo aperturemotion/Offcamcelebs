@@ -128,6 +128,19 @@ if (hasVo !== "true" || provisional) console.warn("⚠ HAS_VO is off / cues are 
   const cb = spawnSync(process.execPath, ["scratchpad/capbandrun.mjs", "3"], { stdio: "inherit" });
   if (cb.status !== 0) refuse(["REFUSING — the caption-band check failed (scratchpad/capbandrun.mjs): something bright sits in the caption", "band while a caption shows, or its canary did not fire. Reframe the shot; never hand it back with a hit."]);
 }
+// ── ★ P17 THE PHYSICAL CHECKS (Timur, 2026-11-20; RULES "THE PHYSICAL CHECKS"). The support and the join checks run in the
+//    world check above (worldcheck.mjs all). Here: the TEXT DENSITY count (at most one label and one figure readable in a
+//    frame, every 3rd frame, behind its canary) and the CLOSE-UP SHEET of every declared joint (hung, mounted) at its first,
+//    middle and last on-screen frame: it must be produced (a planner that finds no joint fails closed), and LOOKED AT.
+{
+  const dc = spawnSync(process.execPath, ["scratchpad/densitycheck.mjs", "3"], { stdio: "inherit" });
+  if (dc.status !== 0) refuse(["REFUSING — the text-density check failed (scratchpad/densitycheck.mjs): a frame shows more than one label", "or more than one figure, or its canary did not fire. Reframe or remove plates (P17)."]);
+  const cu = spawnSync(process.execPath, ["scratchpad/closeups.mjs", "out/closeups"], { stdio: "inherit" });
+  const sheets = fs.existsSync("out/closeups") ? fs.readdirSync("out/closeups").filter((f) => /^closeups\d+\.jpg$/.test(f)) : [];
+  const jobs = fs.existsSync("out/closeups/jobs.json") ? JSON.parse(fs.readFileSync("out/closeups/jobs.json", "utf8")).length : 0;
+  if (cu.status !== 0 || !sheets.length || jobs < 20) refuse([`REFUSING — the close-up sheet was not made (${jobs} joints planned, ${sheets.length} sheet(s)). scratchpad/closeups.mjs`, "draws every declared joint up close; it must exist, and be looked at, before a handback."]);
+  console.log(`close-up sheet: ${jobs} close-ups of the declared joints in out/closeups/${sheets.join(", ")}: LOOK at every one before a handback.`);
+}
 if (process.argv.includes("--check")) {
   console.log(`--check: guards passed${REVIEW ? " (REVIEW mode)" : ""}; not rendering.`);
   process.exit(0);

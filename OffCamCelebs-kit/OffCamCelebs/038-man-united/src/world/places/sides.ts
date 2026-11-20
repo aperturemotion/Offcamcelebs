@@ -1,8 +1,8 @@
 // ══════════════════════════════════════════════════════════════════════════════════
 // SET B, TWO SIDES (038; SHOTS.md): "The American family took over in 2005, mostly with loans."
 // Dark stage. Two plinths: on the left the Glazer side (a glossy ball wrapped in the real US flag, its nameplate THE GLAZER
-// FAMILY | TAMPA, FLORIDA), on the right the club side (the real crest, MANCHESTER UNITED | OLD TRAFFORD). Behind, a bank
-// vault labelled LOANS (its door hinged on the right, so what comes out of it goes left, to the US side).
+// FAMILY | TAMPA, FLORIDA), on the right the club side (the real crest; ★ P17: no second nameplate). Behind, a bank vault
+// (no plate; its door hinged on the right, so what comes out of it goes left, to the US side).
 //   frame 0 mid-action: the flag ball is falling onto the left plinth (it lands on "American");
 //   "family": both nameplates light;
 //   "2005": a flip calendar drops in between the plinths showing 2005;
@@ -108,18 +108,17 @@ export const SidesPlace: Place3 = {
     // the nameplates stand on the floor in front of their plinths
     const n1 = makeNameplate("sides-glazer", ["THE GLAZER FAMILY", "TAMPA, FLORIDA"], { size: 34 });
     n1.group.position.set(LP.x, 0, LP.d / 2 + 150); group.add(n1.group);
-    const n2 = makeNameplate("sides-club", ["MANCHESTER UNITED", "OLD TRAFFORD"], { size: 34 });
-    n2.group.position.set(RP.x, 0, RP.d / 2 + 150); group.add(n2.group);
+    // (★ P17, one label and one figure a frame: the club's side has no nameplate (the real crest says who it is), and the
+    //   vault no LOANS plate (the bricks it pays out are marked LOANS): THE GLAZER FAMILY and 2005 are the shot's text)
     const plateLit: THREE.MeshBasicMaterial[] = [];
-    for (const n of [n1, n2]) n.group.traverse((o) => { const m = (o as THREE.Mesh).material as THREE.MeshBasicMaterial; if (m?.isMeshBasicMaterial && !plateLit.includes(m)) plateLit.push(m); });
+    for (const n of [n1]) n.group.traverse((o) => { const m = (o as THREE.Mesh).material as THREE.MeshBasicMaterial; if (m?.isMeshBasicMaterial && !plateLit.includes(m)) plateLit.push(m); });
     // the calendar between the plinths
     const cal = makeCalendar("sides", ["2005", "2010"]);
     const calG = new THREE.Group(); calG.scale.setScalar(0.42); calG.position.set((LP.x + LP.w / 2 + RP.x - RP.w / 2) / 2, 0, 20); calG.add(cal.group); group.add(calG);
     calG.name = "calendar";
     // the vault behind, mirrored so its door is hinged on the right; its plate text un-mirrored
     const vault = makeVault("sides");
-    const plate = vault.label("LOANS");
-    plate.group.parent!.scale.x = -1;
+    vault.unlabel();
     vault.group.scale.set(-VS, VS, VS); vault.group.position.set(VX, 0, VZ); vault.group.name = "vault";
     group.add(vault.group);
     // the cash bricks

@@ -26,7 +26,7 @@ import { makeStamp } from "../obj/stamp";
 // ── THE SET (shared with the verdict) ────────────────────────────────────────────────────────────────────────────────────
 export const SET_A = { crest: 600, hookRest: 2120, tagChain: 7 } as const;   // ★ P17: an odd count: the first link runs through the bracket eye, the last through the tag's hole, both turned across them
 export const setA = (key: string) => {
-  const group = new THREE.Group();
+  const group = new THREE.Group(); group.userData.set = true;   // a set of objects (the checks: objectOf)
   const plinth = makePlinth(key);
   const crane_ = makeCrane(key);
   const crest = makeCrest(key, SET_A.crest);
@@ -36,8 +36,14 @@ export const setA = (key: string) => {
   group.add(plinth.group, crane_.group, crest.group);
   // the slings from the master ring to the crest's shoulders (in the hook's frame at rest): each ends just inside the badge's
   //   gold rim (the outline's top at x = ±0.275 of its width is 0.363 of it up, plus the bevel)
-  const dy = crestRest - SET_A.hookRest, sh = SET_A.crest * 0.275, shY = SET_A.crest * (0.363 + 0.0162) - 6;
-  crane_.slingTo([new THREE.Vector3(-sh, dy + shY, 0), new THREE.Vector3(sh, dy + shY, 0)], crest.body);
+  //   ★ P17: through two shackles set into the badge's rim at its shoulders (the slings used to end in the air over the rim)
+  const dy = crestRest - SET_A.hookRest, sh = SET_A.crest * 0.275, shY = SET_A.crest * (0.363 + 0.0162) + 12.5;
+  const shackles = [-1, 1].map((sx) => {
+    const m = new THREE.Mesh(new THREE.TorusGeometry(14, 4.5, 10, 28), crane_.eye.material as THREE.Material);
+    m.rotation.y = Math.PI / 2; m.position.set(sx * sh, shY, 0); m.name = "crest shackle"; m.castShadow = true; crest.group.add(m);
+    return m;
+  });
+  crane_.slingTo([new THREE.Vector3(-sh, dy + shY, 0), new THREE.Vector3(sh, dy + shY, 0)], shackles);
   // the loan tag on its chain from the hook block's bracket eye
   const tag = makeLoanTag(key);
   const tagChain = makeChain(key + "-tag", SET_A.tagChain, true);

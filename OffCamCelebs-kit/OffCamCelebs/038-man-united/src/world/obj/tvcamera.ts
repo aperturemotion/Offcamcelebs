@@ -52,11 +52,7 @@ export const makeTvCamera = (key: string) => {
     const bar = new THREE.Mesh(new THREE.CylinderGeometry(9, 9, d.length(), 12), satin);
     bar.position.copy(a).addScaledVector(d, 0.5); bar.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), d.normalize()); bar.castShadow = true; head.add(bar);
   }
-  // a TV label on the body's side
-  const labelBody = rbox(10, 112, 220, 4, MAT.graphite()); labelBody.position.set(115, 190, -20); labelBody.name = "camera label"; head.add(labelBody);
-  const face = lit("#f8f2f2", 0.9);
-  const t = wide(text3d("TV", { font: "800", size: 64, depth: 2, bevel: 0, face }), 1.1);
-  t.rotation.y = Math.PI / 2; t.position.set(120.5, 190 - 64 * 0.345, -20); textOn(t, labelBody, { inset: 4 }); head.add(t);
+  // (★ P17, one label a frame: no TV label on its side; a broadcast camera on a tripod says it)
   return {
     group, spout: new THREE.Vector3(0, crownY + 25 + 470, -90),
     update: (p: { pan: number; tally: number }) => { head.rotation.y = p.pan; setLit(tally, p.tally, 0.15); },

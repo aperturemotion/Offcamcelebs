@@ -49,9 +49,10 @@ export const VerdictPlace: Place3 = {
     cut(from, SIGN.pos, SIGN.look, { fov: SIGN.fov, focus: SIGN.focus, why: "cut back to set A, on the sign" }),
     { ...dolly(from + 1, BILL - 14 - (from + 1), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "the opening's push-in on the sign" }), focus: SIGN.focus },
     // ★ (038 review) cut to the printer seen from above (the crest and the tag stay out of the caption band)
-    cut(BILL + 8, [PX - 70, 2190, PZ + 1120], [PX + 30, 300, PZ], { fov: 46, focus: [PX, 420, PZ] as Vec, why: "cut to the printer as it lands" }),
-    { ...dolly(BILL + 9, INF - 22 - (BILL + 9), [PX - 55, 2110, PZ + 1065], [PX + 30, 320, PZ], { fov: 46, ease: SOFT, why: "drift as it prints" }), focus: [PX, 440, PZ] as Vec },
-    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 55, 1860, PZ + 960], [PX + 20, 420, PZ], { fov: 42, why: "push in on the receipt" }), focus: [PX, 460, PZ] as Vec },
+    // ★ P17: nearer than before: the receipt is a real receipt's size now (thin paper, small print), so the camera comes to it
+    cut(BILL + 8, [PX - 60, 1820, PZ + 1000], [PX + 25, 300, PZ], { fov: 44, focus: [PX, 380, PZ] as Vec, why: "cut to the printer as it lands" }),
+    { ...dolly(BILL + 9, INF - 22 - (BILL + 9), [PX - 50, 1700, PZ + 950], [PX + 25, 320, PZ], { fov: 44, ease: SOFT, why: "drift as it prints" }), focus: [PX, 400, PZ] as Vec },
+    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 40, 1300, PZ + 760], [PX + 10, 390, PZ - 20], { fov: 40, why: "push in on the receipt" }), focus: [PX, 420, PZ - 40] as Vec },
     // ★ (038 review) a crane up from the receipt swept the crest and the beam through the caption band: CUT to the opening's
     //   framing (drifted the other way) and settle exactly on frame 0's pose, so the loop joins
     cut(SEND - 2, [OPENING.pos[0] - 220, OPENING.pos[1], OPENING.pos[2] + 120], [OPENING.look[0] - 190, OPENING.look[1], 0], { fov: OPENING.fov, focus: OPENING.focus, why: "cut to the opening framing" }),

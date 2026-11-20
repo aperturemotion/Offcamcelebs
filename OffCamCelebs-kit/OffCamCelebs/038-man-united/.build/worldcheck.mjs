@@ -71381,7 +71381,7 @@ var makeCrane = (key2) => {
     return m2;
   });
   const slings = [];
-  const slingTo = (pts, load) => {
+  const slingTo = (pts, loads) => {
     for (const p2 of pts) {
       const top = hookEye.clone().add(new Vector3(0, RT2 * 0.6, 0));
       const d2 = new Vector3().subVectors(p2, top), L3 = d2.length();
@@ -71394,7 +71394,10 @@ var makeCrane = (key2) => {
       hangs(m2, master, "the sling hangs from the master ring");
       slings.push(m2);
     }
-    hangs(load, slings[0], "the crest hangs from its slings");
+    loads.forEach((l2, i2) => {
+      joined(slings[i2], l2, "the sling's end runs through its shackle");
+      hangs(l2, slings[i2], "the crest's shackle hangs on its sling", { linked: true });
+    });
   };
   const update = (p2) => {
     hook.position.y = p2.hookY;
@@ -71722,14 +71725,24 @@ var makeStamp = (key2) => {
 var SET_A = { crest: 600, hookRest: 2120, tagChain: 7 };
 var setA = (key2) => {
   const group = new Group();
+  group.userData.set = true;
   const plinth2 = makePlinth(key2);
   const crane_ = makeCrane(key2);
   const crest = makeCrest(key2, SET_A.crest);
   const crestRest = plinth2.top + SET_A.crest * (0.506 + 0.0162) - 0.3;
   crest.group.name = "crest";
   group.add(plinth2.group, crane_.group, crest.group);
-  const dy = crestRest - SET_A.hookRest, sh = SET_A.crest * 0.275, shY = SET_A.crest * (0.363 + 0.0162) - 6;
-  crane_.slingTo([new Vector3(-sh, dy + shY, 0), new Vector3(sh, dy + shY, 0)], crest.body);
+  const dy = crestRest - SET_A.hookRest, sh = SET_A.crest * 0.275, shY = SET_A.crest * (0.363 + 0.0162) + 12.5;
+  const shackles = [-1, 1].map((sx) => {
+    const m2 = new Mesh(new TorusGeometry(14, 4.5, 10, 28), crane_.eye.material);
+    m2.rotation.y = Math.PI / 2;
+    m2.position.set(sx * sh, shY, 0);
+    m2.name = "crest shackle";
+    m2.castShadow = true;
+    crest.group.add(m2);
+    return m2;
+  });
+  crane_.slingTo([new Vector3(-sh, dy + shY, 0), new Vector3(sh, dy + shY, 0)], shackles);
   const tag = makeLoanTag(key2);
   const tagChain = makeChain(key2 + "-tag", SET_A.tagChain, true);
   const crestChain = makeChain(key2 + "-crest", 12);
@@ -72213,6 +72226,10 @@ var makeVault = (key2, o2 = {}) => {
       plateG.add(plate.group);
       return plate;
     },
+    /** no plate at all (★ P17: one label a frame) */
+    unlabel: () => {
+      plateG.clear();
+    },
     get plate() {
       return plate;
     },
@@ -72407,11 +72424,8 @@ var SidesPlace = {
     const n1 = makeNameplate("sides-glazer", ["THE GLAZER FAMILY", "TAMPA, FLORIDA"], { size: 34 });
     n1.group.position.set(LP.x, 0, LP.d / 2 + 150);
     group.add(n1.group);
-    const n2 = makeNameplate("sides-club", ["MANCHESTER UNITED", "OLD TRAFFORD"], { size: 34 });
-    n2.group.position.set(RP.x, 0, RP.d / 2 + 150);
-    group.add(n2.group);
     const plateLit = [];
-    for (const n3 of [n1, n2]) n3.group.traverse((o2) => {
+    for (const n2 of [n1]) n2.group.traverse((o2) => {
       const m2 = o2.material;
       if (m2?.isMeshBasicMaterial && !plateLit.includes(m2)) plateLit.push(m2);
     });
@@ -72423,8 +72437,7 @@ var SidesPlace = {
     group.add(calG);
     calG.name = "calendar";
     const vault = makeVault("sides");
-    const plate = vault.label("LOANS");
-    plate.group.parent.scale.x = -1;
+    vault.unlabel();
     vault.group.scale.set(-VS, VS, VS);
     vault.group.position.set(VX, 0, VZ);
     vault.group.name = "vault";
@@ -72608,17 +72621,24 @@ var makeBondPress = (key2) => {
   const beam = rbox(900, 150, 320, 30, MAT.black());
   beam.position.set(0, BPRESS.base + 640 + 50, -150);
   group.add(beam);
-  const head = rbox(340, 120, 360, 24, MAT.graphite());
-  head.position.set(0, BPRESS.base + 640 + 20, BPRESS.dieZ - 60);
+  const head = rbox(340, 300, 360, 24, MAT.graphite());
+  head.position.set(0, BPRESS.base + 640 + 20 - 90, BPRESS.dieZ - 60);
   group.add(head);
   const plate = litPlate(["BONDS"], { size: 64, color: K2.white, depth: 24 });
-  plate.group.position.set(0, BPRESS.base + 640 + 160, -60);
-  plate.group.rotation.x = -0.35;
+  const plateY = BPRESS.base + 640 + 50 + 75 + 85 + plate.h / 2;
+  plate.group.position.set(0, plateY, -60);
   group.add(plate.group);
+  for (const sx of [-1, 1]) {
+    const post = cyl(10, 85 + 16, MAT.satin(), 16);
+    post.position.set(sx * plate.w * 0.3, BPRESS.base + 640 + 50 + 75 - 8 + (85 + 16) / 2, -60);
+    post.name = "plate post";
+    group.add(post);
+    if (sx < 0) mounted(plate.body, post, "the BONDS plate stands on its posts");
+  }
   const ram = new Group();
   ram.name = "press ram";
-  const rod = cyl(44, 590, MAT.satin(), 40);
-  rod.position.y = 50 + 295;
+  const rod = cyl(44, 420, MAT.satin(), 40);
+  rod.position.y = 50 + 210;
   const platen = rbox(BOND.w + 20, 50, BOND.d + 10, 10, MAT.graphite());
   platen.position.y = 25;
   ram.add(rod, platen);
@@ -72793,13 +72813,13 @@ var BondsPlace = {
       falling(b2.group, FLY[2 - k2], FLY[2 - k2] + FLY_DUR, "the certificate flies into the vault");
     });
     mounted(press.rod, press.head, "the press's piston runs in its head");
-    const WHEEL_FRONT = 120 + 108 + 26;
-    const paid = litPlate(["PAID OFF"], { size: 92, color: K2.red, depth: 30 });
-    paid.group.position.set(X2, 640, WHEEL_FRONT + 15 - 0.3);
+    const vp = vault.plate, PLATE_Y = 1350 - 120, PLATE_FRONT = 20 + vp.d / 2;
+    const paid = litPlate(["PAID OFF"], { size: 92, color: K2.red, depth: 30, w: Math.max(0, vp.w + 40) });
+    paid.group.position.set(X2, PLATE_Y, PLATE_FRONT + 15 + 0.3);
     paid.group.name = "PAID OFF plate";
     group.add(paid.group);
     paid.body.name = "PAID OFF plate body";
-    mounted(paid.body, vault.knobs[0], "the PAID OFF plate is stamped onto the door's wheel (against its knobs)");
+    mounted(paid.body, vp.body, "the PAID OFF plate is stamped over the BANK LOANS plate");
     const stamp = makeStamp("bonds");
     stamp.group.name = "stamp";
     group.add(stamp.group);
@@ -72836,9 +72856,9 @@ var BondsPlace = {
         const shut = EXIT(clamp01((f2 - SLAM2[0]) / (SLAM2[1] - SLAM2[0])));
         vault.update({ door: 0.905 * open * (1 - shut), wheel: SOFT(clamp01((f2 - WHEEL2[0]) / (WHEEL2[1] - WHEEL2[0]))) });
         const sIn = clamp01((f2 - (HIT - 7)) / 7), sOut = clamp01((f2 - (HIT + 3)) / 10);
-        const z2 = WHEEL_FRONT + 30 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
+        const z2 = PLATE_FRONT + 30.6 + (1 - EXIT(sIn)) * 900 + SOFT(sOut) * 1100;
         stamp.group.visible = f2 >= HIT - 7 && f2 < HIT + 13;
-        stamp.group.position.set(X2, 640, z2);
+        stamp.group.position.set(X2, PLATE_Y, z2);
         paid.group.visible = f2 >= HIT;
         halo.update(f2, COUNT3[1]);
         red2.update(f2, HIT);
@@ -73004,15 +73024,6 @@ var makeTurnstile = (key2) => {
   const reader = rbox(120, 12, 90, 4, glow);
   reader.position.set(0, 596, 40);
   group.add(reader);
-  const labelBody = rbox(232, 64, 10, 4, MAT.graphite());
-  labelBody.position.set(0, 470, 155);
-  labelBody.name = "turnstile label";
-  group.add(labelBody);
-  const tFace = lit(K2.white, 0.85);
-  const t2 = wide(text3d("TICKETS", { font: "800", size: 30, depth: 2, bevel: 0, face: tFace }), 1.06);
-  t2.position.set(0, 470 - 30 * 0.345, 160.5);
-  textOn(t2, labelBody, { inset: 4 });
-  group.add(t2);
   const rotor = new Group();
   rotor.position.set(150, 470, 0);
   rotor.rotation.z = -0.62;
@@ -73241,16 +73252,6 @@ var makeTvCamera = (key2) => {
     bar.castShadow = true;
     head.add(bar);
   }
-  const labelBody = rbox(10, 112, 220, 4, MAT.graphite());
-  labelBody.position.set(115, 190, -20);
-  labelBody.name = "camera label";
-  head.add(labelBody);
-  const face = lit("#f8f2f2", 0.9);
-  const t2 = wide(text3d("TV", { font: "800", size: 64, depth: 2, bevel: 0, face }), 1.1);
-  t2.rotation.y = Math.PI / 2;
-  t2.position.set(120.5, 190 - 64 * 0.345, -20);
-  textOn(t2, labelBody, { inset: 4 });
-  head.add(t2);
   return {
     group,
     spout: new Vector3(0, crownY + 25 + 470, -90),
@@ -73278,6 +73279,7 @@ var makePipe = (key2, pts, r2 = 86, o2 = {}) => {
   for (let i2 = 0; i2 <= n2; i2++) {
     const u3 = i2 / n2, p2 = curve.getPointAt(u3), t2 = curve.getTangentAt(u3);
     if ((o2.avoid ?? []).some((a2) => Math.hypot(a2.x - p2.x, a2.z - p2.z) < 170)) continue;
+    if (i2 === 0 && o2.fromWall) continue;
     const collar = new Mesh(new TorusGeometry(r2 + 9 + 0.3, 9, 10, 40), satin);
     collar.position.copy(p2);
     collar.quaternion.setFromUnitVectors(new Vector3(0, 0, 1), t2);
@@ -73310,7 +73312,7 @@ var makeOdometer = (key2) => {
   group.add(housing);
   for (const sx of [-1, 1]) {
     const cap = rbox(70, ODO.h + 30, ODO.d + 30, 20, MAT.satin());
-    cap.position.set(sx * (ODO.w / 2 + 20), ODO.h / 2, 0);
+    cap.position.set(sx * (ODO.w / 2 + 20), (ODO.h + 30) / 2, 0);
     group.add(cap);
   }
   const win = rbox(1300, 200, 14, 8, new MeshPhysicalMaterial({ color: "#0b0b0d", roughness: 0.3, metalness: 0.3, clearcoat: 0.5 }));
@@ -73344,9 +73346,6 @@ var makeOdometer = (key2) => {
   textOn(plus.group, win, { inset: 6 });
   group.add(plus.group);
   void plusFace;
-  const top = litPlate(["TAKEOVER COST"], { size: 50, color: K2.white, depth: 26 });
-  top.group.position.set(0, ODO.h + top.h / 2 - 6, -20);
-  group.add(top.group);
   return {
     group,
     size: ODO,
@@ -73355,7 +73354,6 @@ var makeOdometer = (key2) => {
       setLit(fig.face, p2.on, 0.05);
       plus.group.visible = p2.plus > 0.01;
       setLit(plus.face, p2.plus, 0.05);
-      top.setLit(0.3 + 0.7 * p2.on);
     }
   };
 };
@@ -73511,7 +73509,7 @@ var MoneyPlace = {
     tv.group.rotation.y = -0.25;
     tv.group.name = "TV camera";
     group.add(tv.group);
-    const pipe = makePipe("money", PIPE_PATH, PIPE_R, { avoid: [0, 1, 2].map((k2) => funnelTop(k2)) });
+    const pipe = makePipe("money", PIPE_PATH, PIPE_R, { avoid: [0, 1, 2].map((k2) => funnelTop(k2)), fromWall: true });
     pipe.group.name = "pipe";
     group.add(pipe.group);
     const funnels = [0, 1, 2].map((k2) => {
@@ -73523,8 +73521,7 @@ var MoneyPlace = {
       return fm;
     });
     const vault = makeVault("money");
-    const vplate = vault.label("TAKEOVER DEBT");
-    vplate.group.parent.scale.x = -1;
+    vault.unlabel();
     vault.group.scale.set(-VS2, VS2, VS2);
     vault.group.position.set(VX2, 0, VZ2);
     vault.group.name = "vault";
@@ -74723,9 +74720,10 @@ var VerdictPlace = {
     cut(from, SIGN.pos, SIGN.look, { fov: SIGN.fov, focus: SIGN.focus, why: "cut back to set A, on the sign" }),
     { ...dolly(from + 1, BILL - 14 - (from + 1), [-180, 1040, 2600], [0, 1010, 400], { fov: 42, ease: SOFT, why: "the opening's push-in on the sign" }), focus: SIGN.focus },
     // ★ (038 review) cut to the printer seen from above (the crest and the tag stay out of the caption band)
-    cut(BILL + 8, [PX - 70, 2190, PZ + 1120], [PX + 30, 300, PZ], { fov: 46, focus: [PX, 420, PZ], why: "cut to the printer as it lands" }),
-    { ...dolly(BILL + 9, INF - 22 - (BILL + 9), [PX - 55, 2110, PZ + 1065], [PX + 30, 320, PZ], { fov: 46, ease: SOFT, why: "drift as it prints" }), focus: [PX, 440, PZ] },
-    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 55, 1860, PZ + 960], [PX + 20, 420, PZ], { fov: 42, why: "push in on the receipt" }), focus: [PX, 460, PZ] },
+    // ★ P17: nearer than before: the receipt is a real receipt's size now (thin paper, small print), so the camera comes to it
+    cut(BILL + 8, [PX - 60, 1820, PZ + 1e3], [PX + 25, 300, PZ], { fov: 44, focus: [PX, 380, PZ], why: "cut to the printer as it lands" }),
+    { ...dolly(BILL + 9, INF - 22 - (BILL + 9), [PX - 50, 1700, PZ + 950], [PX + 25, 320, PZ], { fov: 44, ease: SOFT, why: "drift as it prints" }), focus: [PX, 400, PZ] },
+    { ...dolly(INF - 20, SEND - 4 - (INF - 20), [PX - 40, 1300, PZ + 760], [PX + 10, 390, PZ - 20], { fov: 40, why: "push in on the receipt" }), focus: [PX, 420, PZ - 40] },
     // ★ (038 review) a crane up from the receipt swept the crest and the beam through the caption band: CUT to the opening's
     //   framing (drifted the other way) and settle exactly on frame 0's pose, so the loop joins
     cut(SEND - 2, [OPENING.pos[0] - 220, OPENING.pos[1], OPENING.pos[2] + 120], [OPENING.look[0] - 190, OPENING.look[1], 0], { fov: OPENING.fov, focus: OPENING.focus, why: "cut to the opening framing" }),
@@ -74826,6 +74824,13 @@ var labelOf = (o2, root) => {
   return [...names, tail].filter(Boolean).join(" \u203A ") || o2.type;
 };
 var corners = (b2) => [0, 1, 2, 3, 4, 5, 6, 7].map((i2) => new Vector3(i2 & 1 ? b2.max.x : b2.min.x, i2 & 2 ? b2.max.y : b2.min.y, i2 & 4 ? b2.max.z : b2.min.z));
+var objectOf = (m2, root) => {
+  const chain = [];
+  for (let n2 = m2; n2 && n2 !== root; n2 = n2.parent) chain.unshift(n2);
+  let k2 = 0;
+  while (k2 < chain.length - 1 && chain[k2].userData.set) k2++;
+  return chain[k2] ?? m2;
+};
 var itemsOf = (root) => {
   const fit2 = [], free = [], loose = [];
   root.traverse((o2) => {
@@ -75060,6 +75065,7 @@ var passCheck = (places, step = 3, minDepth = 1) => {
       reps.push(i2);
     });
     partsN += reps.length;
+    const objs = ms.map((m2) => objectOf(m2, root)), staticDone = /* @__PURE__ */ new Set();
     const anc = ms.map((m2) => {
       const s2 = /* @__PURE__ */ new Set();
       for (let n2 = m2; n2; n2 = n2.parent) s2.add(n2);
@@ -75091,7 +75097,11 @@ var passCheck = (places, step = 3, minDepth = 1) => {
         if (!ON[i2][t2]) continue;
         const a2 = BX[i2], o2 = t2 * 6;
         for (let j2 = i2 + 1; j2 < ms.length; j2++) {
-          if (!ON[j2][t2] || part[i2] === part[j2]) continue;
+          if (!ON[j2][t2]) continue;
+          if (part[i2] === part[j2]) {
+            if (objs[i2] === objs[j2] || staticDone.has(`${i2}|${j2}`)) continue;
+            staticDone.add(`${i2}|${j2}`);
+          }
           const c2 = BX[j2];
           if (a2[o2] > c2[o2 + 3] || c2[o2] > a2[o2 + 3] || a2[o2 + 1] > c2[o2 + 4] || c2[o2 + 1] > a2[o2 + 4] || a2[o2 + 2] > c2[o2 + 5] || c2[o2 + 2] > a2[o2 + 5]) continue;
           if (isDeclared(i2, j2)) {
@@ -75350,14 +75360,7 @@ var supportCheck = (places, step = 3) => {
       return w2;
     });
     const weld = /* @__PURE__ */ new Map();
-    const objOf = (m2) => {
-      const chain = [];
-      for (let n2 = m2; n2 && n2 !== root; n2 = n2.parent) chain.unshift(n2);
-      let k2 = 0;
-      while (k2 < chain.length - 1 && chain[k2].children.every((c2) => !c2.isMesh)) k2++;
-      return chain[k2] ?? m2;
-    };
-    const obj = ms.map(objOf);
+    const obj = ms.map((m2) => objectOf(m2, root));
     const boxes = ms.map(() => new Box3());
     const low = /* @__PURE__ */ new Map();
     const lowOf = (i2) => {
