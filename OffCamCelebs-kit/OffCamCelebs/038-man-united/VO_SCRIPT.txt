@@ -1,0 +1,53 @@
+038 "Bought for £790M. United paid the bill." — VO SCRIPT (corrected 2026-11-20; read THIS, not the brief)
+
+The Glazers bought Manchester United for seven hundred and ninety million pounds.
+More than five hundred million was borrowed. And within a year, most of that debt was on United's own books.
+Let me explain.
+The American family took over in two thousand and five, mostly with loans.
+Nearly five years later, United itself sold five hundred million pounds of bonds to pay off the bank loans.
+So ticket, shirt and TV money went on paying for the takeover.
+ESPN says that by twenty eighteen, the cost had passed one billion pounds.
+And here's the worst part.
+Twenty-one years later, United's borrowings stand at about six hundred and ninety million.
+Last season, net finance costs alone were sixty-nine point six million. About one hundred and ninety thousand a day.
+To be fair, under the Glazers, United won five league titles and the Champions League.
+But seven hundred and ninety million was the price. United has been paying the bill ever since.
+Our rating: inflated.
+Send us who to audit next.
+
+CHANGES FROM THE BRIEF (5)
+1. "And most of that debt landed on United's own books." -> "And within a year, most of that debt was on United's own books."
+   In 2005 only the £265m loan was secured on the club; the £275m of securities had "no hold over Manchester United's
+   assets" (Irish Examiner, 13 May 2005), so in 2005 it was not "most". The August 2006 refinancing put about £525m of
+   bank debt on the club, with about £135–138m of PIK debt outside it (Irish Times; Irish Examiner).
+2. "Five years later" -> "Nearly five years later": the bonds were issued in January 2010, 4 years 8 months after May 2005.
+3. "By twenty eighteen, ESPN put the cost at over one billion pounds." -> "ESPN says that by twenty eighteen, the cost had
+   passed one billion pounds." ESPN's own pieces date the £1bn mark to 2018 (Ogden) and to 2015 (a later piece); both make
+   "by 2018" true, and the line no longer says ESPN wrote it in 2018. Always labelled as ESPN's; it includes dividends.
+4. "United still owes about six hundred and ninety million" -> "United's borrowings stand at about six hundred and ninety
+   million": the guardrail (today's £689m is current borrowing, refinanced several times, not the 2005 loan).
+5. "finance costs" -> "net finance costs": the release's own label; it includes a £10.0m unrealised FX loss.
+
+VERIFICATION TRAIL (2026-11-20)
+- £790.3m offer; £265m loan facility; £275m of securities "which have no hold over Manchester United's assets": Irish
+  Examiner, "Glazer: I'm borrowing £265m to buy United", 13 May 2005, read on irishexaminer.com/business/arid-30202412.html.
+  £265m + £275m = £540m ("more than five hundred million"). CONFIRMED.
+- Control: 28.7% bought 12 May 2005; 98% by 28 June 2005; delisted 22 June 2005 (RTÉ, Irish Times via search). CONFIRMED by
+  search excerpts only.
+- £504m of bonds, Jan 2010, "which will cover most of what the club owes to international banks": BBC News, 22 Jan 2010,
+  read in the News Sniffer archive of the BBC story. Notes: £250m 8 3/4% and $425m 8 3/8% senior secured notes due 2017
+  (Manchester United FY2013 20-F, sec.gov; seen in search results). CONFIRMED (BBC read; 20-F via search).
+- ESPN £1bn: ESPN (Mark Ogden), "Why Manchester United supporters hate the Glazers": "In 2018 … the Glazers passed a far less
+  appealing milestone" (the £1bn spent financing their ownership: interest, debt repayments, dividends); ESPN "What's gone
+  wrong at Manchester United under Glazer ownership?": "By 2015 … the cost … exceeded £1bn in interest payments, financing
+  costs and dividends." SEARCH EXCERPTS ONLY: ESPN refused direct reads from this session.
+- FY2026 (year to 30 Jun 2026), Manchester United plc results, 23 Sep 2026 (read in full on nasdaq.com's copy of the
+  release): non-current borrowings £577.6m ($775m); current borrowings incl. accrued interest £111.4m; revolving credit
+  £110.0m drawn; net finance costs £69.6m (prior year £21.2m), "primarily due to a large unrealized foreign exchange loss on
+  unhedged USD borrowings". CONFIRMED.
+- DERIVED: £577.6m + £111.4m = £689.0m ("about six hundred and ninety million"); £69.6m / 365 = £190,685 ("about one hundred
+  and ninety thousand a day").
+- Trophies after June 2005: Premier League 2006/07, 2007/08, 2008/09, 2010/11, 2012/13; Champions League 2007/08 (Moscow,
+  21 May 2008). CONFIRMED (manutd.com trophy room via search).
+- "Ticket, shirt and TV money went on paying for the takeover": a characterisation (the club's revenue serviced the debt it
+  carried: Swiss Ramble, "20 years of the Glazers"). Fair as worded.

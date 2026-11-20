@@ -1,0 +1,74 @@
+{
+  "note": "038 \u2014 brief lines that FAIL verification (armed BEFORE the take). Read with JSON.parse. Verified 2026-11-20; VO_SCRIPT.txt has the trail.",
+  "fixes": [
+    {
+      "at": "hook c1",
+      "brief": "And most of that debt landed on United's own books.",
+      "briefSpoken": "And most of that debt landed on United's own books.",
+      "use": "And within a year, most of that debt was on United's own books.",
+      "why": "In 2005 only the \u00a3265m loan was on the club; the \u00a3275m securities had no hold over its assets.",
+      "bad": "\\bmost of that debt landed\\b"
+    },
+    {
+      "at": "bonds c0",
+      "brief": "Five years later, United itself sold\u2026",
+      "briefSpoken": "Five years later, United itself sold five hundred million pounds of bonds",
+      "use": "Nearly five years later, United itself sold\u2026",
+      "why": "January 2010 is 4 years 8 months after May 2005.",
+      "bad": "^five years later\\b"
+    },
+    {
+      "at": "money c1",
+      "brief": "By twenty eighteen, ESPN put the cost at over one billion pounds.",
+      "briefSpoken": "By twenty eighteen, ESPN put the cost at over one billion pounds.",
+      "use": "ESPN says that by twenty eighteen, the cost had passed one billion pounds.",
+      "why": "ESPN dates the \u00a31bn mark to 2018 and to 2015; 'by 2018' is true either way.",
+      "bad": "\\bespn put the cost\\b"
+    },
+    {
+      "at": "board c0",
+      "brief": "Twenty-one years later, United still owes about six hundred and ninety million.",
+      "briefSpoken": "Twenty-one years later, United still owes about six hundred and ninety million.",
+      "use": "Twenty-one years later, United's borrowings stand at about six hundred and ninety million.",
+      "why": "Guardrail: today's \u00a3689m is current borrowing, not the 2005 loan.",
+      "bad": "\\bstill owes\\b"
+    }
+  ],
+  "guardrails": [
+    {
+      "why": "The takeover was legal: nothing implies wrongdoing (the brief).",
+      "bad": "\\b(illegal|stole|stolen|theft|crooks?|criminal|robbed|looted|con(ned)?|lied|misled)\\b",
+      "example": "The Glazers stole the club."
+    },
+    {
+      "why": "Never say all \u00a3540m was put on the club (the brief).",
+      "bad": "\\ball (of )?(that|the|\u00a3?540|five hundred and forty)\\b[^.]*\\b(debt|loan)",
+      "example": "All of that debt went onto United."
+    },
+    {
+      "why": "The \u00a31bn+ is ESPN's estimate: always labelled as ESPN's (the brief).",
+      "bad": "^(?!.*\\bespn\\b).*\\b(1 billion|one billion|\u00a31bn|1bn)\\b",
+      "example": "The cost passed one billion pounds."
+    },
+    {
+      "why": "'Finance costs', never 'interest' for the \u00a369.6m (the brief).",
+      "bad": "\\binterest\\b[^.]*\\b(69|sixty-nine)|\\b(69|sixty-nine)[^.]*\\binterest\\b",
+      "example": "Interest was sixty-nine point six million."
+    },
+    {
+      "why": "No mention of current sale reports (the brief).",
+      "bad": "\\b(for sale|sale process|selling the club|ratcliffe|ineos|qatar|bid(s|der)?)\\b",
+      "example": "Ratcliffe's bid changed that."
+    },
+    {
+      "why": "'Fraud' and 'scam' never appear (standing rule).",
+      "bad": "\\b(fraud|scam)\\w*\\b",
+      "example": "The takeover was a scam."
+    },
+    {
+      "why": "The verdict rates the \u00a3790m as money the Glazers paid, not the Glazers (the brief).",
+      "bad": "\\b(the glazers|glazer family|united|manchester united) (is|was|are|were) (inflated|greedy|dishonest|frauds?)\\b",
+      "example": "The Glazers were greedy."
+    }
+  ]
+}

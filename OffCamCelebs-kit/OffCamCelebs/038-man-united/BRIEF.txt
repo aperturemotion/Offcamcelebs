@@ -1,0 +1,8 @@
+038 BRIEF (Timur, 2026-11-20), as sent: see the conversation; summary of the fixed parts.
+Title: "Bought for £790M. United paid the bill." (Manchester United / the Glazer takeover, audit #038). ~64 s, 1080x1920 @30fps.
+FOLDER 038-man-united | COMPOSITION InfluencerAudit038. Cover: kicker MAN UNITED | THE TAKEOVER; BOUGHT FOR £790M. / UNITED PAID THE BILL.;
+hero: the United crest on a plinth under a crane, a chain from the crest to a loan tag. Sets A crane plinth, B two sides, C the bonds,
+D where the money came from, E the scoreboard, F fairness, A again (bookend). Assets: Timur: "find them yourself, add them to the video".
+Guardrails: legal takeover, no wrongdoing; never all £540m on the club ("most of that debt"); the £1bn+ is ESPN's estimate incl. dividends;
+today's £689m is current borrowing, not the 2005 loan; "finance costs", never "interest"; no current sale reports; no fraud/scam; the
+verdict rates "the £790 million as money the Glazers paid", not the Glazers. The full brief text is SHOTS.md + VO_SCRIPT.txt's changes list.
