@@ -564,6 +564,27 @@ These survive independent of style. (Look rules live in the style's own preferen
     log to `Documents\Video`. Pass ONE string with the path in escaped quotes (`` `"$path`" ``).
 
 ### Guards and tripwires
+- **★★★★ THE PHYSICAL CHECKS: NOTHING FLOATS, NOTHING CROSSES, NO BLANKET EXEMPTIONS (Timur, 2026-11-20, 038; look
+  rule P17).** 038 went to Timur with `worldcheck` "clean" while bonds flew through a vault door, hangers sat through
+  their rail, a shirt rail floated, two signs hung in the air above their posts and the crest's ring did not touch the
+  block above it. The pass-through check was clean because every one of those faults had been DECLARED with
+  `joined(a, b, why)` against a WHOLE GROUP ("the bonds fly in through the vault's open mouth", "the hanger's hook sits
+  over the rail"), which switched the check off for exactly what was wrong; and nothing checked support at all.
+  · `joined()` may name only two specific MESHES, never a group, and only for a crossing hidden from the camera (an
+    axle inside its bearing, a piston inside its sleeve). A prop entering a vault/slot must pass through a modelled
+    opening and the check must still run against the door, frame and walls; worldcheck refuses a join on a Group.
+  · SUPPORT CHECK (worldcheck `support`): every rigid part that does not rest on the floor must, at every sampled frame,
+    have its lowest point within 0.5 units of a supporting part's top surface, or be declared hung/mounted with
+    `hangs(child, parent)` / `mounted(child, parent)`, which the check verifies by the two meshes' bounding volumes
+    touching (gap ≤ 0.5 units). A part in free fall is declared `falling(part, from, to)` for at most 20 frames.
+    Canaries: a floating sign and a hung ring 3 units short must fire; a sign whose posts meet it must not.
+  · TEXT DENSITY (sweep): per frame, count the readable world texts on screen (projected cap height ≥ 14 px, not
+    occluded); more than one label plus one figure is a fault, reported with the frame.
+  · CLOSE-UP SHEET: before handback, render a sheet of tight close-ups on every joint the support check knows about
+    (ring to block, posts to sign, rail to uprights, hook to rail, door to vault) and LOOK at it. A wide sheet at 540 px
+    did not show any of the 038 faults.
+  · All three run in `render.mjs --check`; a hit refuses the handback and the render.
+
 - **★★ A CHECK WHOSE FAILURE MODE IS "PASS" MUST BE TESTED BY MAKING IT FIRE (2026-09-16, 012).**
   A render tripwire was added to block an MP4 while a known conflict stood. Its regex looked for
   `at: "…"` — but those entries were SINGLE-quoted, because their text contained escaped double
@@ -1621,4 +1642,4 @@ anchors written for the provisional tokens missed: "Coty" (whisper: "Kody"), "3.
   (`s.replace(a, () => b)`)** — and grep the edited lines afterwards.
 
 ---
-
+

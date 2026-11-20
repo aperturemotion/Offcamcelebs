@@ -2254,6 +2254,32 @@ _Log every OffCamCelebs preference change and every video build here with a date
         still never downloaded (people stay as pawns or nameplates unless Timur supplies a photo).
       · A check before handback: a contact sheet with every caption hidden, judged on "could someone tell what each
         object is and whose it is?" Any grey box that stands for something else is a fault.
+    - **P17 ★★★★ PHYSICALLY CORRECT OBJECTS: NOTHING FLOATS, NOTHING PASSES THROUGH, NOTHING LOOKS CHEAP** (Timur,
+      2026-11-20, on the 038 Studio: "the notes at 19 seconds, they're glitching through the object… and through the
+      vault as well… the t-shirts are literally floating. The poles aren't holding up the metal bar… the hangers are
+      sort of glitching through the metal bar… the sign at 28 seconds, it's floating… the sign at 37 seconds is floating
+      too. Too much text at 51 seconds… The paper looks fucking terrible at 55 seconds… the metal circle that's holding
+      the Manchester United sign, it's not even attached to the thing on top of it… the objects, they need to be
+      realistic… They can't be bugged out like floating in the air… You always need to check for such things… you gotta
+      focus on accuracy a lot more").
+      · EVERY object is held up by something that touches it: it stands on the floor or a surface, hangs from a link,
+        hook, cable or ring that physically meets both ends, or is mounted on posts/brackets that reach it and are
+        fixed into it. A sign's posts run INTO the sign's frame; a rail sits IN its uprights; a ring hangs ON the hook
+        or block above it, touching. A visible gap of any size between a thing and what is meant to hold it is a fault.
+        The one exception is a thing caught mid-fall or mid-throw for a few frames.
+      · Nothing passes through anything, ever, including moving props (notes, bonds, coins, cards, hangers) entering a
+        vault, a slot or a rail. A thing that "goes into" something goes in through a real, modelled OPENING big enough
+        for it (an open door, a slot, a mouth), and is hidden once inside. A hanger's hook wraps AROUND the rail, never
+        through it.
+      · At most ONE short label and ONE figure readable in a frame (plus the caption). When a shot returns with more
+        plates added (the bookend), the camera frames ONE of them, or the others are removed. Never three plates of
+        text stacked in one shot.
+      · Paper, receipts, notes and documents look like real paper: thin, slightly curled, with a soft paper texture,
+        printed type at a real receipt's size and weight, a torn or perforated edge, real shadow. Never a flat grey
+        card with large type.
+      · Checked automatically before every handback (see the RULES file, "THE PHYSICAL CHECKS"): a support check
+        (nothing floats), a pass-through check with no blanket exemptions, a text-density count per frame, and a
+        close-up review sheet of every hanging, mounted or moving object.
   - **Where this replaces older rules (Timur's "just copy their style"):** the cream/dark grounds and grain of the
     029-HF look; the large two-weight caption block (now P5); "≤ 2–3 labels per film" (now P4: figures are on objects, as
     often as the story needs). Kept from 2026-10-23 because the references do the same: the hook moves from frame 1,
