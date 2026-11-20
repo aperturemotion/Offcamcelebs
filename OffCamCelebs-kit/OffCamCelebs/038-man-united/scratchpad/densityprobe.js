@@ -50,7 +50,13 @@
       //   group the text is mounted in
       let plate = o.parent;
       for (let n = o.parent; n; n = n.parent) if (n.userData.plate) { plate = n; break; }
-      items.push({ o, str, size, box, plate, own: (h) => textOf(h.object) === o });
+      // the text's own box, in its own frame: the sample points for the occlusion rays lie ON its face (a world box of a
+      //   tilted word has points far in front of and behind the letters)
+      const inv = new THREE.Matrix4().copy(o.matrixWorld).invert(), lb = new THREE.Box3();
+      o.traverse((m) => { if (m.isMesh && visibleChain(m)) { m.geometry.computeBoundingBox(); lb.union(m.geometry.boundingBox.clone().applyMatrix4(new THREE.Matrix4().multiplyMatrices(inv, m.matrixWorld))); } });
+      const face = [];
+      for (const fx of [0.2, 0.5, 0.8]) for (const fy of [0.25, 0.5, 0.75]) face.push(new V(lb.min.x + (lb.max.x - lb.min.x) * fx, lb.min.y + (lb.max.y - lb.min.y) * fy, lb.max.z).applyMatrix4(o.matrixWorld));
+      items.push({ o, str, size, box, plate, face, own: (h) => textOf(h.object) === o });
     });
     // declared print lines (a receipt's small print in its paper texture)
     group.traverse((m) => {
@@ -85,8 +91,8 @@
       // occlusion: 9 rays across the text's box; visible when one reaches the text (or its own surface) first
       let clear = 0;
       if (inFrame && facing && capPx >= MIN_PX) {
-        for (const fx of [0.2, 0.5, 0.8]) for (const fy of [0.25, 0.5, 0.75]) {
-          const p = new V(it.box.min.x + (it.box.max.x - it.box.min.x) * fx, it.box.min.y + (it.box.max.y - it.box.min.y) * fy, it.box.min.z + (it.box.max.z - it.box.min.z) * 0.5);
+        const pts = it.face ?? [0.2, 0.5, 0.8].flatMap((fx) => [0.25, 0.5, 0.75].map((fy) => new V(it.box.min.x + (it.box.max.x - it.box.min.x) * fx, it.box.min.y + (it.box.max.y - it.box.min.y) * fy, it.box.min.z + (it.box.max.z - it.box.min.z) * 0.5)));
+        for (const p of pts) {
           const d = p.clone().sub(camPos), dist = d.length();
           ray.set(camPos, d.normalize()); ray.far = dist + 8;
           const h = ray.intersectObjects(solids, false)[0];

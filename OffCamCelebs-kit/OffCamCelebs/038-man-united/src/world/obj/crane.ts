@@ -101,7 +101,7 @@ export const makeCrane = (key: string) => {
   // the forging tapers toward its tip (a real hook's throat is thinner than its bowl)
   const jGeo = new THREE.TubeGeometry(jCurve, 90, BOWL.t, 20, false);
   { const pos = jGeo.attributes.position as THREE.BufferAttribute, n = 90, ring = 21;
-    for (let i = 0; i <= n; i++) { const u = i / n, c = jCurve.getPointAt(u), k = u < 0.18 ? 1 + (22 / BOWL.t - 1) * (1 - u / 0.18) ** 2 : u > 0.8 ? 1 - 0.45 * (u - 0.8) / 0.2 : 1;   // the shank's thickness easing into the forging, no step
+    for (let i = 0; i <= n; i++) { const u = i / n, c = jCurve.getPointAt(u), k = u < 0.18 ? 1 + (24 / BOWL.t - 1) * (1 - u / 0.18) ** 2 : u > 0.8 ? 1 - 0.45 * (u - 0.8) / 0.2 : 1;   // the shank's thickness easing into the forging, no step
       for (let j = 0; j < ring; j++) { const v = i * ring + j; pos.setXYZ(v, c.x + (pos.getX(v) - c.x) * k, c.y + (pos.getY(v) - c.y) * k, c.z + (pos.getZ(v) - c.z) * k); } }
     pos.needsUpdate = true; jGeo.computeVertexNormals(); }
   const c = new THREE.Mesh(jGeo, MAT.satin()); c.name = "hook";
