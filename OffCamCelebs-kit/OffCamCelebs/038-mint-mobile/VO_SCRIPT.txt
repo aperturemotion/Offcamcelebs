@@ -1,0 +1,86 @@
+OffCamCelebs 038 — "Every Dollar" (Ryan Reynolds / Mint Mobile, $1.35B) — CORRECTED VO SCRIPT (final, 2026-11-21)
+Read this version, not the brief's. The two lines marked * were changed after checking every line at source.
+
+------------------------------------------------------------------ PASTE-READY
+Ryan Reynolds' fifteen-dollar-a-month phone company sold for one point three five billion dollars. Every headline said so. We waited for the last payment.
+
+Reynolds bought into Mint Mobile in twenty nineteen and fronted its ads.
+
+In twenty twenty-three, T-Mobile agreed to buy it. Up to one point three five billion.
+
+On closing day: four hundred and twenty million in cash, plus five hundred and thirty-six million in shares.
+
+The rest depended on Mint hitting targets. That's where numbers usually shrink.
+
+Not this time. In twenty twenty-five, the targets were dropped. The rest became the maximum, minus what was already paid.
+
+On October ninth, T-Mobile paid the final four hundred and twenty million.
+
+The catch: Reynolds wasn't the only owner. Reports put his stake at about a quarter, roughly three hundred million.
+
+To be fair, he never called it his billion. He joked T-Mobile beat a last-minute bid from his mom.
+
+So, one point three five billion? Every dollar got paid. Our rating: legit.
+
+Send us who to audit next.
+------------------------------------------------------------------
+
+WHAT CHANGED, AND WHY
+
+* Line 1: "fifteen-dollar phone company" → "fifteen-dollar-a-month phone company".
+  $15 is Mint's entry MONTHLY rate (its ads: "Premium Wireless for $15 per Month"; the 5GB plan), paid upfront in 3-, 6- or
+  12-month blocks; the National Advertising Division found the $15 pricing "not clearly disclosed". "Fifteen-dollar phone
+  company" reads as a $15 phone or a $15 total. "A month" makes it true and keeps the hook.
+
+* Line 8: "Reports put his stake at about a quarter. Still roughly three hundred million." → "Reports put his stake at about a
+  quarter, roughly three hundred million."
+  The brief's guardrail: his ~25% and ~$300M are reports, always "reports put…". As two sentences, "Still roughly three
+  hundred million" stood alone as our own statement. As one, "reports put" carries both figures. (Fortune, 17 Mar 2023:
+  "Reynolds, who owns an estimated 25% stake in Mint Mobile, will receive about $300 million from the deal, the Wall Street
+  Journal reported." Neither T-Mobile nor Mint ever disclosed his stake; Mint's 2019 release called the investment
+  undisclosed.)
+
+* Years are written as spoken ("twenty nineteen", "twenty twenty-three", "twenty twenty-five") for the voice; the screen shows
+  digits.
+
+KEPT, AND WHY (checked, true as written)
+- "sold for one point three five billion" — the headline's own words (NPR, 15 Mar 2023: "T-Mobile buys Ryan Reynolds' Mint
+  Mobile in a $1.35 billion deal"); the film then shows it was "up to", and that the maximum was paid. "Reynolds'" matches
+  NPR's headline; he was a part-owner, and line 8 says so.
+- "Reynolds bought into Mint Mobile in twenty nineteen and fronted its ads" — Mint Mobile release, 25 Nov 2019, "Ryan Reynolds
+  Purchases Ownership Stake in Mint Mobile" (amount undisclosed); he starred in its ads, made by his agency Maximum Effort.
+- "In twenty twenty-three, T-Mobile agreed to buy it. Up to one point three five billion." — T-Mobile 10-Q, Q1 2023: "On March
+  9, 2023, we entered into a Merger and Unit Purchase Agreement … for a maximum purchase price of $1.35 billion"; announced 15
+  Mar 2023 ("T-Mobile will pay up to a maximum of $1.35 billion in a combination of 39% cash and 61% stock to acquire Ka'ena").
+- "On closing day: four hundred and twenty million in cash, plus five hundred and thirty-six million in shares." — T-Mobile
+  10-Q, Q2 2024 (filed 31 Jul 2024): "on May 1, 2024 … we completed the Ka'ena Acquisition"; "we transferred $420 million in
+  cash and 3,264,952 shares of T-Mobile common stock valued at $536 million … for a total payment fair value of $956 million."
+- "The rest depended on Mint hitting targets." — the same filing: "up to an additional $403 million … dependent upon Ka'ena's
+  achievement of specified performance indicators", payable 1 Aug 2026. True at closing; the next lines say it changed.
+- "In twenty twenty-five, the targets were dropped. The rest became the maximum, minus what was already paid." — T-Mobile 10-Q,
+  Q2 2025 (filed 23 Jul 2025): "On June 30, 2025, we amended the Merger and Unit Purchase Agreement to set the calculation of
+  the earnout as the difference between the maximum purchase price of $1.35 billion and the upfront payment, as adjusted, and
+  removed the requirement for Ka'ena to achieve specified performance indicators." ("As adjusted": $17M of the upfront was
+  returned in Q4 2024, raising the earnout by the same amount.)
+- "On October ninth, T-Mobile paid the final four hundred and twenty million." — T-Mobile 10-Q, Q3 2026 (filed 28 Oct 2026):
+  "on October 9, 2026, we transferred $164 million in cash and 1,510,371 shares of T-Mobile common stock in satisfaction of our
+  $420 million earnout obligation."
+- "He joked T-Mobile beat a last-minute bid from his mom." — his statement in T-Mobile's release, 15 Mar 2023: "… beat out an
+  aggressive last-minute bid from my mom Tammy Reynolds …" (exact opening words seen in excerpts only).
+- "He never called it his billion" — no statement found in which he claims $1.35B as his own (absence of evidence; fair).
+- "Every dollar got paid" — the contract's maximum: the amended earnout is by definition $1.35B minus the adjusted upfront, and
+  it was paid in full. NEVER shown as $956M + $420M (= $1,376M: different share prices on different dates).
+
+ON SCREEN, NEVER IN THE VOICE OR ON SCREEN (the brief's guardrails)
+- Never imply Reynolds got $1.35B; the verdict rates the $1.35B figure, not him.
+- His ~25% / ~$300M always as reports ("~25% (REPORTED)").
+- No summed total above $1.35B.
+- Never tie Reynolds to the $169M "services" part of the earnout (the filing: "certain sellers"; it never names him).
+- Mint money only: no Wrexham, Aviation Gin or films. "Fraud" and "scam" never appear.
+
+SOURCES READ (2026-11-21)
+- T-Mobile US 10-Qs on SEC EDGAR, read in full: Q1 2023, Q2 2024 (tmus-20240630), Q3 2024 (tmus-20240930), Q2 2025
+  (tmus-20250630), Q2 2026 (tmus-20260630), Q3 2026 (tmus-20260930); the FY2023 10-K (excerpt).
+- NPR, 15 Mar 2023; Fortune, 17 Mar 2023 (WSJ estimate); Mint Mobile / GlobeNewswire, 25 Nov 2019; T-Mobile newsroom, 15 Mar
+  2023; Cleary Gottlieb deal note; truthinadvertising.org (NAD). These were seen in search excerpts: those sites refused direct
+  reads from this session.

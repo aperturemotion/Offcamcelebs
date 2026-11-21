@@ -423,6 +423,14 @@ These survive independent of style. (Look rules live in the style's own preferen
   film to the app's brand pack ("No need to change anything on it. There's nothing in the brief or the change requests.
   So no. Do not change"). Timur's own instructions in the chat outrank the pack.
 
+- **★ PARALLEL AGENTS ARE ALLOWED TO SPEED A BUILD UP (Timur, 2026-11-21, on 038 Mint Mobile: "To speed up the process,
+  run multiple agents if you need to").** The pattern (038): I build the SKELETON first (script, take, cues, captions, the
+  place list `src/r45/places.ts` with a stub per place, the `PlaceDef` contract in `src/r45/place.ts`), commit it, then give
+  each agent its OWN COPY of the film folder (node_modules symlinked) and one or two places. An agent writes only its
+  place's files (`sets/<id>.tsx`, `props/<id>.ts`) and its line in `places.ts`, verifies them in its copy (tsc, build,
+  stills, the 3-D audit over its window), and reports. I merge the files back, run every check over the whole film and
+  review every place myself before handback.
+
 - **★★★ THE STUDIO PREVIEW QUALITY: THE STUDIO MUST BE FAST ENOUGH TO EDIT IN (Timur, 2026-11-21, after 038: "this looks
   terrible, and the reason is because I couldn't edit it properly… The studio was way too laggy… find some sort of
   solution for this previewing, maybe rendering without lighting or without colors").** The world engine (038

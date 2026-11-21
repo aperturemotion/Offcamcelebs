@@ -1,0 +1,30 @@
+{
+  "note": "038 Mint Mobile — brief lines that FAIL verification (CLAUDE.md, V26: armed BEFORE the take). Any caption matching a `bad` pattern means the take was read from the BRIEF: the master is blocked until it is re-recorded or accepted. Read with JSON.parse, never regex over source. Verified 2026-11-21 (parallel checks at source: T-Mobile 10-Qs on EDGAR read in full; NPR, Fortune, Mint's 2019 release in excerpts); VO_SCRIPT.txt has the trail. The take is generated in-session from the corrected script, so it should carry none.",
+  "fixes": [
+    {
+      "at": "hook c0",
+      "brief": "Ryan Reynolds' fifteen-dollar phone company sold for one point three five billion dollars.",
+      "briefSpoken": "Ryan Reynolds' fifteen-dollar phone company sold for one point three five billion dollars.",
+      "use": "Ryan Reynolds' fifteen-dollar-a-month phone company sold for one point three five billion dollars.",
+      "why": "$15 is Mint's entry MONTHLY rate, prepaid in 3-, 6- or 12-month blocks (its ads: 'Premium Wireless for $15 per Month'; the NAD found the $15 pricing not clearly disclosed). 'Fifteen-dollar phone company' reads as a $15 phone or a $15 total.",
+      "bad": "(fifteen|\\$?15)[- ]dollars?[- ]phone|\\$15 phone"
+    },
+    {
+      "at": "catch c1",
+      "brief": "Reports put his stake at about a quarter. Still roughly three hundred million.",
+      "briefSpoken": "Reports put his stake at about a quarter. Still roughly three hundred million.",
+      "use": "Reports put his stake at about a quarter, roughly three hundred million.",
+      "why": "The brief's guardrail: his ~25% and ~$300M are reports, always 'reports put…'. As its own sentence, 'Still roughly three hundred million' stated the WSJ estimate as ours.",
+      "bad": "\\bstill roughly\\b"
+    }
+  ],
+  "guardrails": [
+    { "why": "The claim rated is the HEADLINE price T-Mobile paid: never imply Reynolds personally got $1.35B (the brief).", "bad": "\\b(he|reynolds|ryan) (got|made|earned|pocketed|received|took home|banked|walked away with)\\b[^.]*\\b(1\\.35|one point three five|billion)\\b", "example": "Reynolds made 1.35 billion dollars." },
+    { "why": "His ~25% / ~$300M are REPORTS: always 'reports put…' in the same line (the brief).", "bad": "^(?!.*\\breport).*\\b(a quarter|25 ?%|25 percent|\\$?300 million|three hundred million)\\b", "example": "He owned a quarter, so he got 300 million." },
+    { "why": "No summed total above $1.35B: $956M + $420M were valued on different dates (the brief).", "bad": "\\b(1\\.37\\d?|1,37\\d|1\\.38|956)\\b", "example": "In total T-Mobile paid 1.376 billion." },
+    { "why": "Never tie Reynolds to the $169M 'services' part of the earnout: the filing says only 'certain sellers' (the brief).", "bad": "\\b(169|services)\\b", "example": "He got 169 million for services." },
+    { "why": "Mint money only: no Wrexham, Aviation Gin, films or Marvel characters (the brief).", "bad": "\\b(wrexham|aviation|gin|deadpool|marvel|wolverine|movies?|films?)\\b", "example": "Add his Wrexham and Aviation Gin money." },
+    { "why": "The verdict rates the $1.35B figure, not him (the brief).", "bad": "\\b(reynolds|ryan|he) (is|was) (legit|inflated|lying|a liar|honest|fake)\\b", "example": "Reynolds is legit." },
+    { "why": "'Fraud' and 'scam' never appear (the brief).", "bad": "\\b(fraud|scam)s?\\b", "example": "The deal was a scam." }
+  ]
+}

@@ -1,0 +1,68 @@
+NEW VIDEO — "Every Dollar" (Ryan Reynolds / Mint Mobile, audit #038). ~60 seconds, 1080x1920 @30fps. FOLDER: 038-mint-mobile | COMPOSITION: InfluencerAudit038
+
+(Received 2026-11-21. Timur, the same message: "Actually, no. Like I said, ignore this style for now. Let's go back to the
+style of the videos that I mentioned to you" — the 034 Ohtani / 035 Powerball look; cloned from 035-powerball.)
+
+THIS IS A CONTENT-ONLY PROMPT. The story, script and facts are fixed.
+
+LOOK: keep the look of the Ohtani ($700M, posted 13 Nov) and Powerball ($847M, posted 15 Nov) videos. Timur likes it: the warm studio rooms, one real-looking object per line, objects sliding in and out, the captions with a small lead-in and one bold key phrase. Keep all of that. The one thing that changes is how it opens.
+
+WHAT THE VIDEO HAS TO DO
+
+- THE HOOK IS MOTION, NOT A NUMBER. Ohtani and Powerball both opened on a display with the number already on it (a cash register, a jackpot sign), and the videos started looking the same. This one opens on something happening. Suggested: a phone vibrating across a table with an incoming call, caller ID "Ryan Reynolds" with his photo (public/reynolds_face.jpg). It buzzes to the edge and falls; mid-fall the SIM tray pops out and the SIM card spins toward camera in slow motion. Swap in a better action if you have one, but nothing static, and no number on screen before about 2 seconds.
+- After the hook, numbers can land throughout, on objects, as the VO says them.
+- Visuals follow the words: when the VO names a number, a company, a date or a document, the viewer is seeing it. A new visual every sentence or two; no repeated assets.
+- The core contrast is a twist on the usual: the "up to" figure that normally shrinks ($1,350,000,000) turns out to be paid in full.
+- One real photo: public/reynolds_face.jpg (the caller-ID photo in the hook; use it once more at the verdict if you like).
+- Brand names in plain type on objects (MINT MOBILE, T-MOBILE), the way POWERBALL and METS appeared before. No Deadpool, no Marvel characters, no Mint fox mascot.
+- Practical only: it's an Instagram Reel, so keep text clear of the app's buttons and caption area.
+- Cover frame suggestion: his face + "$1.35 BILLION. ALL OF IT?"
+
+THE STORY (beats)
+
+1. HOOK — the phone in motion; VO: his $15 phone company sold for $1.35 billion. Every headline said so. We waited for the last payment.
+2. BACKSTORY — 2019: Reynolds buys a stake in Mint Mobile and fronts its ads.
+3. THE DEAL — 2023: T-Mobile agrees to buy it, "up to" $1.35 billion.
+4. CLOSING DAY — 1 May 2024: $420M cash plus $536M in T-Mobile shares.
+5. THE CONDITION — the rest depended on Mint hitting targets, which is usually where these numbers shrink.
+6. THE TWIST — 2025: the targets are dropped; the rest is set at the maximum minus what was already paid.
+7. THE LAST PAYMENT — 9 Oct 2026: T-Mobile pays the final $420M.
+8. THE CATCH — he wasn't the only owner: reports put his stake at about a quarter, roughly $300M.
+9. FAIRNESS — he never called it his billion; he joked T-Mobile beat a last-minute bid from his mom.
+10. VERDICT — every dollar of the $1.35B got paid. LEGIT.
+11. CTA — fixed channel close.
+
+Visual ideas per beat (suggestions only, your call):
+2 a SIM card clicking into a phone, "2019" · 3 a contract with "UP TO $1,350,000,000" · 4 a cash case ($420M) and a stack of share certificates ($536M) · 5 a dartboard or progress bars marked "TARGETS" · 6 an eraser rubbing the targets out of the contract · 7 a calendar flipping to OCT 9 2026, a final envelope landing · 8 a pie or pizza with one quarter lifted out, "~25% (REPORTED)" · 9 an auction paddle marked "MOM" being outbid · 10 a receipt printing "$1,350,000,000 · PAID IN FULL".
+
+SCRIPT
+Ryan Reynolds' fifteen-dollar phone company sold for one point three five billion dollars. Every headline said so. We waited for the last payment.
+Reynolds bought into Mint Mobile in 2019 and fronted its ads.
+In 2023, T-Mobile agreed to buy it. Up to one point three five billion.
+On closing day: four hundred and twenty million in cash, plus five hundred and thirty-six million in shares.
+The rest depended on Mint hitting targets. That's where numbers usually shrink.
+Not this time. In 2025, the targets were dropped. The rest became the maximum, minus what was already paid.
+On October ninth, T-Mobile paid the final four hundred and twenty million.
+The catch: Reynolds wasn't the only owner. Reports put his stake at about a quarter. Still roughly three hundred million.
+To be fair, he never called it his billion. He joked T-Mobile beat a last-minute bid from his mom.
+So, one point three five billion? Every dollar got paid. Our rating: legit.
+Send us who to audit next.
+
+FACTS (all verified — show sources on screen or not, your call)
+
+- CLAIMED (T-Mobile press release, 15 Mar 2023): "T-Mobile will pay up to a maximum of $1.35 billion in a combination of 39% cash and 61% stock to acquire Ka'ena" (Mint Mobile's parent). Agreement signed 9 Mar 2023 (T-Mobile 10-Q).
+- Reynolds' statement released by T-Mobile, 15 Mar 2023: "We are so happy T-Mobile beat out an aggressive last-minute bid from my mom Tammy Reynolds…"
+- Reynolds became a part-owner in 2019 (stake undisclosed) and stars in Mint's ads (NPR, Mar 2023).
+- VERIFIED (T-Mobile 10-Q, Q3 2024): completed 1 May 2024. Upfront: $420M cash + 3,264,952 T-Mobile shares valued at $536M, "total payment fair value of $956 million". The rest was an earnout dependent on "specified performance indicators", then "up to an additional $403 million", payable 1 Aug 2026.
+- VERIFIED (T-Mobile 10-Q, Q3 2026): on 30 Jun 2025 the agreement was amended "to set the calculation of the earnout as the difference between the maximum purchase price of $1.35 billion and the upfront payment, as adjusted," and "removed the requirement for Ka'ena to achieve specified performance indicators." Earnout: $420M, paid 9 Oct 2026 as $164M cash + 1,510,371 T-Mobile shares. T-Mobile split it as $251M "for the acquired Ka'ena business" and $169M "for services provided to T-Mobile by certain sellers during the post-acquisition period."
+- ESTIMATE (WSJ via Fortune, Mar 2023): Reynolds owned about 25% and would receive about $300M. Never disclosed by T-Mobile or Mint.
+
+ACCURACY GUARDRAILS (content, not style)
+
+- The claim being rated is the HEADLINE: $1.35 billion as the price T-Mobile paid for Mint. Never imply Reynolds personally got $1.35B.
+- His ~25% and ~$300M are reports: always "reports put…".
+- Don't show a summed total above $1.35B (the share value moved with T-Mobile's stock price). "Every dollar got paid" means the contract's maximum.
+- Never say Reynolds got any of the $169M "services" money; the filing says only "certain sellers".
+- Mint money only: no Wrexham, Aviation Gin or film earnings.
+- "Fraud" and "scam" never appear (on screen or VO).
+- The verdict rates the $1.35B figure, not him.
