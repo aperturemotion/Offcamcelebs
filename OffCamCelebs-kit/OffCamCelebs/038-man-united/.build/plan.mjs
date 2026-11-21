@@ -21914,7 +21914,7 @@ var makeCrane = (key2) => {
   const BOWL = { x: 0, y: SY0 - 60, r: 50, t: 17 };
   const r_ = BOWL.r;
   const jPts = [
-    [0, SY0 + 10],
+    [0, SY0 + 18],
     [0, SY0 - 6],
     [-0.76 * r_, BOWL.y + 0.69 * r_],
     [-r_, BOWL.y],
@@ -21930,7 +21930,7 @@ var makeCrane = (key2) => {
   {
     const pos = jGeo.attributes.position, n2 = 90, ring2 = 21;
     for (let i2 = 0; i2 <= n2; i2++) {
-      const u3 = i2 / n2, c3 = jCurve.getPointAt(u3), k3 = u3 < 0.2 ? 1 + (24 / BOWL.t - 1) * (1 - u3 / 0.2) ** 2 : u3 > 0.8 ? 1 - 0.45 * (u3 - 0.8) / 0.2 : 1;
+      const u3 = i2 / n2, c3 = jCurve.getPointAt(u3), k3 = u3 < 0.2 ? 1 + (21.5 / BOWL.t - 1) * (1 - u3 / 0.2) ** 2 : u3 > 0.8 ? 1 - 0.45 * (u3 - 0.8) / 0.2 : 1;
       for (let j2 = 0; j2 < ring2; j2++) {
         const v2 = i2 * ring2 + j2;
         pos.setXYZ(v2, c3.x + (pos.getX(v2) - c3.x) * k3, c3.y + (pos.getY(v2) - c3.y) * k3, c3.z + (pos.getZ(v2) - c3.z) * k3);
