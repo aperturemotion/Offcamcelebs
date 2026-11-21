@@ -31,10 +31,10 @@ const PEN_DOWN = [PEN_IN[1], PEN_IN[1] + 4] as const;  // its nib comes down
 const SIGN = [PEN_DOWN[1], PEN_DOWN[1] + 21] as const; // it signs
 const PEN_UP = [SIGN[1], SIGN[1] + 4] as const;        // it lifts
 const PEN_OUT = [PEN_UP[1], PEN_UP[1] + 14] as const;  // and is drawn away
-const BOOK_OUT = [B1END + 1, B1END + 17] as const;     // closing day: the agreement slides off the desk
-const CASE_IN = [B1END + 10, B1END + 30] as const;     // the case slides in
-const LATCH: [number, number][] = [[CASE_IN[1] + 1, CASE_IN[1] + 6], [CASE_IN[1] + 4, CASE_IN[1] + 9]];
-const LID = [CASE_IN[1] + 8, CASE_IN[1] + 40] as const; // the lid swings open (SOFT, ≥ 30 f: its shadow crosses the cash)
+const BOOK_OUT = [B1END - 4, B1END + 11] as const;     // closing day: the agreement slides off the desk (as "billion" ends)
+const CASE_IN = [B1END + 8, B1END + 25] as const;      // the case slides in
+const LATCH: [number, number][] = [[CASE_IN[1] + 1, CASE_IN[1] + 6], [CASE_IN[1] + 3, CASE_IN[1] + 8]];
+const LID = [CASE_IN[1] + 6, CASE_IN[1] + 37] as const; // the lid swings open (SOFT, >= 30 f); its card reads from about "$420"
 const CERT_IN = [PLUS + 1, PLUS + 25] as const;        // the share certificates slide in beside the case
 if (PEN_OUT[1] > BOOK_OUT[0]) throw new Error("deal: the pen is still out when the agreement leaves");
 
@@ -85,16 +85,37 @@ const aim = (x: number, h: number, z: number, zoom: number, sx = 540, sy = 960) 
 const RP = onRight(BK.W / 2, BK.D / 2 - 20);
 const [cx0, cy0, cx1, cy1] = LPRINT.clause;
 const LP = onLeft((cx0 + cx1) / 2, (cy0 + cy1) / 2);
-/** the case framed with its open lid under the caption band; the pan to the certificates keeps its height (the lid stays low) */
-const CASE_V = aim(DG.case.x, CS.BH, DG.case.z + 30, 0.96, 540, 1205);
-/** the pan keeps the case's height (its open lid stays under the band); the stack centred across */
-const CERT_V = (() => { const a = aim(DG.certs.x, 10, DG.certs.z, 1.08, 540, 1100); return { x: a.x + 95, y: CASE_V.y - 6, z: 1.08 }; })();
+/** the open case, centred and filling ~63% of the width: the highest framing whose open lid stays under the band (with a
+ *  margin for the camera's breathing) and whose front stays above the Reel's caption strip */
+const caseExtent = (v: { x: number; y: number; z: number }) => {
+  const e = eyeOf(v), th = (LID_OPEN * Math.PI) / 180, hy = CS.FEET + CS.BH, hz = DG.case.z - CS.D / 2;
+  const scr = (x: number, h: number, z: number) => { const q = project(e, x, DG.floor - h, z); return 960 + (q.y - v.y) * v.z; };
+  let top = 1e9, bot = -1e9;
+  for (const sx of [-1, 1]) {
+    for (const [ly, lz] of [[CS.LH, 0], [CS.LH, CS.D], [0, CS.D]]) top = Math.min(top, scr(DG.case.x + (sx * CS.W) / 2, hy + ly * Math.cos(th) + lz * Math.sin(th), hz - ly * Math.sin(th) + lz * Math.cos(th)));
+    bot = Math.max(bot, scr(DG.case.x + (sx * CS.W) / 2, 0, DG.case.z + CS.D / 2 + 12));
+  }
+  return { top, bot };
+};
+const CASE_Z = 1.26;
+const CASE_V = (() => {
+  for (let sy = 900; sy < 1400; sy += 2) {
+    const v = aim(DG.case.x, CS.BH, DG.case.z, CASE_Z, 540, sy), ex = caseExtent(v);
+    if (ex.top >= 712) { if (ex.bot > 1490) throw new Error(`deal: the open case does not fit between the band and the Reel strip (${Math.round(ex.top)}-${Math.round(ex.bot)})`); return v; }
+  }
+  throw new Error("deal: no framing for the case");
+})();
+/** the certificates centred, the top one ~60% of the width; the pan keeps the case's zoom and height (its lid never rises
+ *  into the band while it is in view), then a push in lands the final framing */
+const CERT_Z = 1.4;
+const CERT_F = aim(DG.certs.x, 6, DG.certs.z, CERT_Z, 540, 1050);
+const CERT_P = { x: aim(DG.certs.x, 6, DG.certs.z, CASE_Z, 540, 1050).x, y: CASE_V.y, z: CASE_Z };
 const STORY: CamKey[] = [
   { at: -9999, ...aim(RP.x + 22, RP.y, RP.z, 1.27, 540, 1040), dur: 1 },                 // the signature page, whole
   { at: UP - 1, ...aim(LP.x + 10, LP.y, LP.z, 1.95, 540, 1010), dur: 40 },                // "Up to": the price clause
-  { at: B1END + 3, ...CASE_V, dur: 44 },  // closing day: the case
-  { at: PLUS, ...CERT_V, dur: 42 },            // "plus": across to the certificates
-  { at: PLUS + 43, ...aim(DG.certs.x + 30, 10, DG.certs.z, 1.24, 540, 1110), dur: 44, drift: true }, // and a slow push onto them
+  { at: B1END + 3, ...CASE_V, dur: 44 },                                                  // closing day: the case
+  { at: PLUS - 2, ...CERT_P, dur: 40 },                                                   // "plus": across to the certificates
+  { at: PLUS + 38, ...CERT_F, dur: 34 },                                                  // and in on them
 ];
 const DONE = Math.max(cueEnd(S, 2) + 4, CERT_IN[1] + 2, LID[1] + 1);
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.35 });

@@ -123,31 +123,33 @@ const paintEdges = () => paintTex("deal38-edges-v1", 64, 64, (c) => {
 }, 4);
 
 // ══ THE CASE ══
-export const CS = { W: 540, D: 360, BH: 62, LH: 40, FEET: 3, R: 22, WALL: 10 } as const;   // inner 520 × 340: two bundles across, three rows (a strap loop stands 54 px off a note's centre)
+export const CS = { W: 540, D: 268, BH: 62, LH: 40, FEET: 3, R: 22, WALL: 10 } as const;   // inner 520 × 248: two bundles across, two rows (a strap loop stands 54 px off a note's centre)
 export const LID_OPEN = 94;
-const paintTag = () => paintTex("deal38-tag-v3", 400, 200, (c) => {
-  c.fillStyle = "#F4EEDC"; c.fillRect(0, 0, 400, 200);
+/** the bank card in the lid: it fills the lining (the lining is 520 × 248) */
+export const TAG = { W: 456, H: 196 } as const;
+const paintTag = () => paintTex("deal38-tag-v4", TAG.W, TAG.H, (c) => {
+  const W = TAG.W, H = TAG.H;
+  c.fillStyle = "#F4EEDC"; c.fillRect(0, 0, W, H);
   // a bank's mustard band down the left, a ruled frame
-  c.fillStyle = "#D9B44A"; c.fillRect(0, 0, 26, 200);
-  c.strokeStyle = "rgba(40,30,20,0.55)"; c.lineWidth = 1.4; c.strokeRect(38, 12, 350, 176);
+  c.fillStyle = "#D9B44A"; c.fillRect(0, 0, 24, H);
+  c.strokeStyle = "rgba(40,30,20,0.55)"; c.lineWidth = 1.4; c.strokeRect(34, 10, W - 44, H - 20);
+  // the figure, as large as the card allows, and CASH under it
   c.fillStyle = INK; c.textAlign = "center"; c.textBaseline = "alphabetic";
-  track(c, 1);
-  const s1 = fitFont(c, 800, 62, "$420,000,000", 320);
-  c.fillText("$420,000,000", 213, 98 + s1 * 0.36);
-  track(c, 8);
-  const s2 = fitFont(c, 700, 26, "CASH", 140);
-  c.fillText("CASH", 217, 150 + s2 * 0.36);
   track(c, 0);
-  c.fillStyle = "rgba(40,30,20,0.35)";
-  rr(c, 290, 32, 80, 4, 2); c.fill();
+  const s1 = fitFont(c, 800, 90, "$420,000,000", W - 76);
+  c.fillText("$420,000,000", 24 + (W - 24) / 2, 104 + s1 * 0.36);
+  track(c, 10);
+  const s2 = fitFont(c, 700, 30, "CASH", 160);
+  c.fillText("CASH", 24 + (W - 24) / 2 + 5, 160 + s2 * 0.36);
+  track(c, 0);
   // the payer's mark, small, in the card's corner
   const tile = mark("tile");
-  if (tile) c.drawImage(tile, 50, 22, 30, 30);
+  if (tile) c.drawImage(tile, 46, 20, 30, 30);
 }, 3);
 
 // ══ THE CERTIFICATES ══
 export const CT = { W: 470, D: 313, T: 0.9, N: 9 } as const;
-const paintCert = () => paintTex("deal38-cert-v3", CT.W, CT.D, (c) => {
+const paintCert = () => paintTex("deal38-cert-v4", CT.W, CT.D, (c) => {
   const W = CT.W, D = CT.D, E = "#8E1A55";
   c.fillStyle = "#F3EEDD"; c.fillRect(0, 0, W, D);
   // the engraved border: a band of fine guilloche waves between ruled frames
@@ -163,44 +165,41 @@ const paintCert = () => paintTex("deal38-cert-v3", CT.W, CT.D, (c) => {
     band((t) => [18 + a * Math.sin(t * 60 + ph), 12 + t * (D - 24)], 400);
     band((t) => [W - 18 + a * Math.sin(t * 60 + ph), 12 + t * (D - 24)], 400);
   }
-  // the vignette: an engraved oval of rays and rings (no figure)
-  const vx = 92, vy = 150;
-  c.save(); c.beginPath(); c.ellipse(vx, vy, 44, 54, 0, 0, Math.PI * 2); c.clip();
-  c.fillStyle = "rgba(142,26,85,0.08)"; c.fillRect(vx - 50, vy - 60, 100, 120);
-  c.strokeStyle = "rgba(142,26,85,0.5)"; c.lineWidth = 0.5;
-  for (let i = 0; i < 72; i++) { const a = (i / 72) * Math.PI * 2; c.beginPath(); c.moveTo(vx, vy + 20); c.lineTo(vx + 80 * Math.cos(a), vy + 20 + 80 * Math.sin(a)); c.stroke(); }
-  for (let r = 8; r < 60; r += 5) { c.beginPath(); c.arc(vx, vy + 20, r, Math.PI, 2 * Math.PI); c.stroke(); }
-  c.restore();
-  c.strokeStyle = E; c.lineWidth = 1.2; c.beginPath(); c.ellipse(vx, vy, 44, 54, 0, 0, Math.PI * 2); c.stroke();
-  // the company and SHARES
-  // the T mark in the vignette, the wordmark as the company's name
-  const tm = mark("t");
-  if (tm) { c.globalAlpha = 0.92; c.drawImage(tm, vx - 30, vy - 30, 60, 60); c.globalAlpha = 1; }
-  wordmark(c, W / 2 + 40, 60, 200);
+  // the company's wordmark at the head, SHARES under it (small: the value is the certificate's dominant print)
+  wordmark(c, W / 2, 56, 168);
   c.textAlign = "center"; c.textBaseline = "alphabetic";
   c.fillStyle = INK;
   track(c, 7);
-  const s2 = fitFont(c, 700, 16, "SHARES", 120);
-  c.fillText("SHARES", W / 2 + 42, 96 + s2 * 0.36);
+  const s2 = fitFont(c, 700, 15, "SHARES", 110);
+  c.fillText("SHARES", W / 2 + 3, 90 + s2 * 0.36);
   track(c, 0);
-  // the cartouche with the value
-  c.strokeStyle = E; c.lineWidth = 1.2;
-  rr(c, 160, 124, 270, 64, 10); c.stroke();
-  rr(c, 165, 129, 260, 54, 7); c.stroke();
+  // the value in a wide engraved cartouche across the middle, as large as it fits
+  c.strokeStyle = E; c.lineWidth = 1.4;
+  rr(c, 44, 106, W - 88, 92, 12); c.stroke();
+  c.lineWidth = 0.8; rr(c, 50, 112, W - 100, 80, 9); c.stroke();
   c.fillStyle = INK;
-  track(c, 1);
-  const s3 = fitFont(c, 800, 40, "$536,000,000", 236);
-  c.fillText("$536,000,000", 295, 156 + s3 * 0.36);
-  track(c, 0);
+  const s3 = fitFont(c, 800, 76, "$536,000,000", W - 132);
+  c.fillText("$536,000,000", W / 2, 152 + s3 * 0.36);
+  // the vignette: a small engraved oval with the T mark, bottom left
+  const vx = 78, vy = 246;
+  c.save(); c.beginPath(); c.ellipse(vx, vy, 26, 32, 0, 0, Math.PI * 2); c.clip();
+  c.fillStyle = "rgba(142,26,85,0.08)"; c.fillRect(vx - 30, vy - 36, 60, 72);
+  c.strokeStyle = "rgba(142,26,85,0.45)"; c.lineWidth = 0.45;
+  for (let i = 0; i < 60; i++) { const a = (i / 60) * Math.PI * 2; c.beginPath(); c.moveTo(vx, vy); c.lineTo(vx + 50 * Math.cos(a), vy + 50 * Math.sin(a)); c.stroke(); }
+  c.restore();
+  c.strokeStyle = E; c.lineWidth = 1.1; c.beginPath(); c.ellipse(vx, vy, 26, 32, 0, 0, Math.PI * 2); c.stroke();
+  const tm = mark("t");
+  if (tm) { c.globalAlpha = 0.92; c.drawImage(tm, vx - 18, vy - 18, 36, 36); c.globalAlpha = 1; }
   // the certifying text (greeked), two signature lines, the seal
-  typeLines(c, 160, 204, 270, 3, 11, 3.6, 0.3, 2);
+  typeLines(c, 120, 214, W - 240, 2, 11, 3.4, 0.3, 2);
   c.fillStyle = INK;
-  c.fillRect(60, 262, 120, 1); c.fillRect(W - 190, 262, 120, 1);
+  c.fillRect(124, 262, 100, 1); c.fillRect(W - 170, 262, 100, 1);
   c.fillStyle = "rgba(28,26,30,0.35)";
-  rr(c, 80, 268, 80, 3.4, 1.7); c.fill(); rr(c, W - 170, 268, 80, 3.4, 1.7); c.fill();
-  c.strokeStyle = E; c.lineWidth = 1; c.beginPath(); c.arc(W / 2 - 4, 262, 20, 0, Math.PI * 2); c.stroke();
-  c.beginPath(); c.arc(W / 2 - 4, 262, 15, 0, Math.PI * 2); c.stroke();
-  for (let i = 0; i < 36; i++) { const a = (i / 36) * Math.PI * 2; c.beginPath(); c.moveTo(W / 2 - 4 + 15 * Math.cos(a), 262 + 15 * Math.sin(a)); c.lineTo(W / 2 - 4 + 20 * Math.cos(a), 262 + 20 * Math.sin(a)); c.stroke(); }
+  rr(c, 140, 268, 70, 3.4, 1.7); c.fill(); rr(c, W - 155, 268, 70, 3.4, 1.7); c.fill();
+  const sx = W / 2 + 6;
+  c.strokeStyle = E; c.lineWidth = 1; c.beginPath(); c.arc(sx, 262, 18, 0, Math.PI * 2); c.stroke();
+  c.beginPath(); c.arc(sx, 262, 13.5, 0, Math.PI * 2); c.stroke();
+  for (let i = 0; i < 36; i++) { const a = (i / 36) * Math.PI * 2; c.beginPath(); c.moveTo(sx + 13.5 * Math.cos(a), 262 + 13.5 * Math.sin(a)); c.lineTo(sx + 18 * Math.cos(a), 262 + 18 * Math.sin(a)); c.stroke(); }
   // the certificate's number box (greeked)
   c.strokeStyle = E; c.lineWidth = 0.9; rr(c, 44, 40, 70, 22, 4); c.stroke();
   c.fillStyle = "rgba(28,26,30,0.45)"; rr(c, 54, 49, 50, 4, 2); c.fill();
@@ -390,7 +389,7 @@ export const dealModel = () => (): Model<DealP> => {
   const CASH_Y = CS.FEET + 8 + 3 + 0.05;
   {
     let k = 0;
-    for (const cx of [-NOTE.W / 2 - 6, NOTE.W / 2 + 6]) for (const cz of [-1, 0, 1]) {
+    for (const cx of [-NOTE.W / 2 - 6, NOTE.W / 2 + 6]) for (const cz of [-0.5, 0.5]) {
       const pl = pile(`cash${k}`, 2, 11 + k, { turn: 0.01, shift: 1.2, plain: true });   // plain straps: one figure in the frame
       pl.group.position.set(cx, CASH_Y, cz * (NOTE.D + 8));
       cs.add(pl.group);
@@ -438,7 +437,7 @@ export const dealModel = () => (): Model<DealP> => {
     const lining = mesh(flatOf(roundRect(W - 2 * wl - 0.4, D - 2 * wl - 0.4, R - wl * 0.6), 3, 0.8, 12), velvet);
     lining.position.y = CS.LH - 8 - 3; inner.add(lining);
     // the bank card tucked under two elastic corner straps in the lining (it faces the viewer when the lid stands open)
-    const TW = 400, TH = 200;   // (the lid's lining is 512 × 324)
+    const TW = TAG.W, TH = TAG.H;
     const tagBody = rbox(TW, 1.2, TH, 2, new THREE.MeshStandardMaterial({ color: col("#EDE6D2"), roughness: 0.8 }), 1);
     tagBody.position.set(0, CS.LH - 11 - 0.6 - 0.3, TH / 2);
     inner.add(tagBody);
