@@ -10,4 +10,4 @@ export const TARGETS = makeStub("targets", "cream", "#C9A46A");
 export const PAYMENT = makeStub("payment", "dark", "#8A8F96");
 export { PLACE as CATCH } from "./sets/catch";
 export { PLACE as FAIR } from "./sets/fair";
-export const VERDICT = makeStub("verdict", "cream", "#5E8C6A");
+export { PLACE as VERDICT } from "./sets/verdict";
