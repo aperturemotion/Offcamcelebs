@@ -135,7 +135,7 @@ const SFX: PlaceSfx[] = [
   { s: "tick", at: POP[0] + 1, vol: 0.55, why: "the nano SIM pops out of its punch-out", mode: "peak" },
   { s: "whooshsoft", at: FLY[0] + 12, end: FLY[1], vol: 0.22, why: "the SIM is carried over to the tray", mode: "peak" },
   { s: "tick", at: DROP[1], vol: 0.4, why: "the SIM drops into the tray's pocket", mode: "peak" },
-  { s: "click", at: HOME[1], vol: 0.75, why: "the tray clicks home in the phone's slot", mode: "peak" },
+  { s: "click", at: HOME[1], vol: 0.45, why: "the tray clicks home in the phone's slot", mode: "peak" },
   { s: "pingshort", at: SCREEN + 6, vol: 0.28, why: "the phone's display lights with the ad", mode: "peak" },
 ];
 

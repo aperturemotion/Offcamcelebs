@@ -560,7 +560,7 @@ const Hook: React.FC<{ f: number }> = ({ f }) => (
 const SFX: PlaceSfx[] = [
   ...PULSES.filter(([a]) => a < F_TIP + 2).map(([a, b], i): PlaceSfx => ({ s: "chain", at: Math.max(0, a), end: Math.min(b, Math.ceil(F_REL)), vol: 0.32 - 0.02 * i, why: `the phone's buzz pulse ${i + 1}, rattling on the oak`, mode: "within" })),
   { s: "whooshsoft", at: Math.round(F_REL - 1), vol: 0.38, why: "it slides off the oak's edge", mode: "peak" },
-  { s: "click", at: Math.round(F_POP), vol: 0.75, why: "the SIM tray pops out of its slot", mode: "within" },
+  { s: "click", at: Math.round(F_POP), vol: 0.45, why: "the SIM tray pops out of its slot", mode: "within" },
   { s: "lowwoosh", at: Math.round((F_SIM + W135) / 2), end: W135 + 2, vol: 0.45, why: "the slow-motion SIM spinning toward the lens", mode: "peak" },
   { s: "swoosh", at: W135 + 4, vol: 0.55, why: "time snaps back: the SIM whips past the lens", mode: "peak" },
   { s: "thud", at: Math.round(F_LAND), vol: 0.9, why: "the phone strikes the floor, bottom end first", mode: "peak" },
