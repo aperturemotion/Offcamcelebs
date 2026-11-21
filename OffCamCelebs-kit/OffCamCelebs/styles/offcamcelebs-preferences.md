@@ -2134,6 +2134,14 @@ the rest is provisional until the user reacts — confirmed items then become nu
 _Log every OffCamCelebs preference change and every video build here with a date. Nothing about
 100BasisPoints / Style 3 goes in this file._
 
+- **2026-11-21: ★★★★ THE HOOK IS AN ENTICING REAL OBJECT IN MOTION** (Timur, on 038 Mint Mobile: "Remember, the hook needs to be
+  enticing. There needs to be an actual object with motion in it, in the hook scene"; the brief the same day: "THE HOOK IS
+  MOTION, NOT A NUMBER… nothing static, and no number on screen before about 2 seconds"). Every film from now on opens on ONE
+  real, recognisable object DOING something from frame 1 (038: Reynolds' call ringing on a phone that buzzes across an oak
+  table, tips off the edge and falls; its SIM tray pops and the Mint SIM spins to camera in slow motion, landing on the
+  first figure). Never a display already showing the number, never a static object waiting for the voice; no figure on
+  screen in the first ~2 s.
+
 - **2026-11-21: ★★★★ BACK TO THE 034 / 035 STYLE; THE @moneydecoded.au WORLD STYLE IS SET ASIDE** (Timur, after 038 was
   handed in: "Actually, you know what? Just completely, for now, set this style aside. Let's go back to the style that we
   had with the Powerball ticket video and the biggest deal in sports history. Yeah, those two videos, that style. Let's go
