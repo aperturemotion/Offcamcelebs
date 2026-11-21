@@ -423,6 +423,31 @@ These survive independent of style. (Look rules live in the style's own preferen
   film to the app's brand pack ("No need to change anything on it. There's nothing in the brief or the change requests.
   So no. Do not change"). Timur's own instructions in the chat outrank the pack.
 
+- **★★★ THE STUDIO PREVIEW QUALITY: THE STUDIO MUST BE FAST ENOUGH TO EDIT IN (Timur, 2026-11-21, after 038: "this looks
+  terrible, and the reason is because I couldn't edit it properly… The studio was way too laggy… find some sort of
+  solution for this previewing, maybe rendering without lighting or without colors").** The world engine (038
+  `src/world/world.ts`, `qualityNow`) draws in one of four qualities:
+  `full` (the final look: up to 8 motion-blur sub-frames × shadow map + floor mirror + MSAA + depth of field + bloom),
+  `fast` (the same lit, coloured scene drawn ONCE, with the key light's shadow; no motion blur, mirror, DOF, bloom or
+  vignette), `flat` (unlit, every surface its own colour: layout, timing, text), and `clay` (grey matte with the key's
+  shadow: shape, contact, floating, pass-through), each at a resolution scale.
+  - **The choice:** `window.__world.quality/.res`, else the URL (`?quality=clay&res=0.5`), else the person's saved choice
+    (localStorage, cycled with **Q** for the quality and **R** for the resolution while the preview has focus), else
+    **`fast` at 0.5 in a person's browser** (the Studio, the Studio artifact) and **`full` under automation**
+    (`navigator.webdriver`, which HyperFrames' Puppeteer render, the sweeps and the checks all set; the saved choice is
+    ignored there).
+  - **Guards:** `scratchpad/render.mjs` refuses if world.ts loses the automation rule; `scratchpad/framerender.mjs` refuses
+    a frame render whose world did not draw in the quality asked for (full unless QUALITY is set).
+  - **Measured on 038 (2026-11-21, this container's CPU renderer, `scratchpad/qbench.mjs`, 12 frames, GPU-synced):** full
+    13.8 s a frame on average (35 s on motion-blur frames); fast at 0.5 with shadow 0.40 s (≈35× faster); clay at 0.5
+    0.17 s (≈80×); flat at 0.5 0.03 s (≈480×). Fast at 0.5 looks nearly identical to full on stills (no bloom glow, no
+    blur); a GPU in a person's browser runs every preview quality in real time.
+  - **Draft renders** (`scratchpad/draftrun.sh <quality> [res]`, a review MP4 with the mastered mix, never the master
+    filename): the whole of 038 in clay at 0.5 in 6 min 54 s, in fast at 0.5 in 12 min 12 s; the full master took
+    4 h 24 min.
+  - **Any engine a film uses gets the same treatment** before its Studio is handed back: fast in a person's browser, the
+    full look only under automation, guarded.
+
 - **★★ THE HANDBACK IS THE REAL HYPERFRAMES STUDIO, NEVER A STAND-IN (user, 2026-10-23, on 034: "you're supposed to
   launch the hyperframes studio, remember that").** Launch `npx --yes hyperframes@0.8.143 preview --background --no-open
   --port <p>` for the film and hand back THAT Studio. Never build a custom player or viewer page in its place.

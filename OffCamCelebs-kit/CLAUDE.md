@@ -31,7 +31,9 @@ and one captured frame. Restart Claude Code after it finishes, so the new enviro
 
 ## The standing rules, in one place
 
-- **Clone the NEWEST film for a new one.** That is `OffCamCelebs/034-ohtani/` (cloned from 033, from 032 …). Copy it in Node,
+- **Clone `OffCamCelebs/035-powerball/` for a new one** (Timur, 2026-11-21: back to the 034/035 style, "the Powerball ticket
+  video and the biggest deal in sports history"; 037/038's world style is set aside for now). 035 was cloned from 034
+  (from 033, from 032 …). Copy it in Node,
   leaving out `node_modules`, `renders`, `.build`, `out`; then follow NEW_VIDEO.md (rename, replace the places, keep the
   style). 029–033 are reference films: their look, tools and lessons are already in 034.
 - **Never render an MP4 unless Timur asks for a render in that message.** Stills and frame sweeps for verification are fine.

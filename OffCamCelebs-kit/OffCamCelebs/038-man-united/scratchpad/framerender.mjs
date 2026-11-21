@@ -38,7 +38,9 @@ const srv = http.createServer((req, res) => {
   fs.createReadStream(p).pipe(res);
 }).listen(0, "127.0.0.1");
 await new Promise((r) => srv.once("listening", r));
-const url = `http://127.0.0.1:${srv.address().port}/index.html`;
+// ★ (2026-11-21) a DRAFT render: QUALITY=fast|flat|clay [RES=0.5] draws the world in that preview quality (world.ts)
+const Q = process.env.QUALITY ? `?quality=${process.env.QUALITY}&res=${process.env.RES ?? 0.5}` : "";
+const url = `http://127.0.0.1:${srv.address().port}/index.html${Q}`;
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, protocolTimeout: 0,
   args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-web-security",
@@ -57,6 +59,12 @@ await page.evaluate(async () => {
   await Promise.all(Object.values(r));
 });
 
+// ★ (2026-11-21) GUARD: a master is drawn in the FULL look, never a preview quality (world.ts qualityNow)
+{
+  const q = await page.evaluate(() => { window.__film.draw(0); return window.__worldStats?.quality; });
+  const want = process.env.QUALITY || "full";
+  if (q !== want) { console.log(`REFUSED: the world drew in "${q}", wanted "${want}"`); await browser.close(); srv.close(); process.exit(2); }
+}
 const draw = (f) => page.evaluate((t) => { window.__film.draw(t); return true; }, f / 30);
 const t0 = Date.now();
 let n = 0;

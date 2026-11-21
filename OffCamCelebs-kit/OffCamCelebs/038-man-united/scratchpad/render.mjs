@@ -31,6 +31,15 @@ const refuse = (lines) => {
   if (unknown.length) refuse([`REFUSING — unknown argument(s): ${unknown.join(" ")}. This script takes only ${[...KNOWN].join(", ")}.`]);
 }
 
+// ── ★ (2026-11-21) THE PREVIEW QUALITIES never reach the master: world.ts draws FULL under automation (navigator.webdriver,
+//    set by HyperFrames' Puppeteer render) and ignores the person's saved preview setting there. Fail closed if that line is
+//    gone: a Studio-default quality in the master would ship a draft. ──
+{
+  const w = fs.readFileSync(path.resolve("src/world/world.ts"), "utf8");
+  if (!/automated\(\) \? "full" : PREVIEW_DEFAULT\.quality/.test(w) || !/automated\(\) \? null : store\("payouts\.quality"\)/.test(w))
+    refuse(["REFUSING — src/world/world.ts no longer forces the FULL look under automation (qualityNow). The master would be drawn", "in a preview quality. Restore the guard."]);
+}
+
 // ── a guard test mid-swap (or killed) leaves synthetic captions live: never render those ──
 if (fs.existsSync("scratchpad/vo/.guardstash") && !process.argv.includes("--check"))
   refuse(["REFUSING TO RENDER — scratchpad/vo/.guardstash exists: a guardtest.mjs run is in progress or was killed.",

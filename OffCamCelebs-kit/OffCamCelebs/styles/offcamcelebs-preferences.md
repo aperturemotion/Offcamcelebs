@@ -2134,6 +2134,24 @@ the rest is provisional until the user reacts — confirmed items then become nu
 _Log every OffCamCelebs preference change and every video build here with a date. Nothing about
 100BasisPoints / Style 3 goes in this file._
 
+- **2026-11-21: ★★★★ BACK TO THE 034 / 035 STYLE; THE @moneydecoded.au WORLD STYLE IS SET ASIDE** (Timur, after 038 was
+  handed in: "Actually, you know what? Just completely, for now, set this style aside. Let's go back to the style that we
+  had with the Powerball ticket video and the biggest deal in sports history. Yeah, those two videos, that style. Let's go
+  back to that."). The two films are **035 "The Real Jackpot" ($847M Powerball)** and **034 "Two Million a Year"
+  (Ohtani; "baseball's own website called it the biggest deal in sports history")**.
+  - **The next film is cloned from `035-powerball/`** (the newest film in that style, itself cloned from 034), NOT from
+    037/038. Its look, its hand-overs (pick D "expo", `src/r45/handover.ts`), its 3-D objects on `src/three/stage.ts` and its
+    checks come with it. 037 and 038 (the world engine, `src/world/`) are kept as history and as a tool box, not a template.
+  - The entry of 2026-11-18 below (the @moneydecoded.au replica) no longer governs new films "for now": Timur may bring it
+    back; until he does, read 034/035 and the 029-HF locked look as the authority, as they were before 2026-11-18.
+  - **What carries over from the 037/038 period, whatever the style:** P17 (nothing floats, nothing passes through, at most
+    one label plus one figure per frame, real paper, the automatic checks; port the checks to the stage engine where they
+    apply), P16 (real logos, from their official sources), the hand-in through the Aperture Motion connector as built, and
+    the bed rule (the previous film's song unless Timur names one: after 038 that is "A Good Man with a Broken Heart").
+  - **A fast Studio preview** (Timur, same day: "the studio was way too laggy to be able to work on it properly"): see
+    RULES-from-original-CLAUDE.md, "THE STUDIO PREVIEW QUALITY". Any engine a film uses must preview fast in a person's
+    browser and draw the full look only under automation (renders, sweeps, checks).
+
 - **2026-11-18: ★★★ THE PAYOUTS' NEW REEL STYLE IS @moneydecoded.au's, REPLICATED** (Timur: "We found the right style
   for it… that account style. I want you to try to replicate it, but obviously keep our fonts, personalize it a little bit
   to look like our account. But basically, yeah, just copy their style"). This supersedes the five candidates of

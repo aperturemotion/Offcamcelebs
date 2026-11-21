@@ -55,6 +55,95 @@ export const LOOK = {
   mirrorLod: 5.6,
 };
 
+/** ★ PREVIEW QUALITY (Timur, 2026-11-21: "the studio was way too laggy to be able to work on it"). The final look costs
+ *  up to 8 sub-frames (motion blur) × (shadow map + floor mirror + MSAA scene + depth of field + bloom) per frame; scrubbing
+ *  the Studio paid all of it on every seek. The film now draws in one of four qualities:
+ *    full  the final look (every render, sweep and check: they run under automation, navigator.webdriver)
+ *    fast  the same lit, coloured scene, drawn ONCE: no motion blur, shadows, floor mirror, DOF, bloom or vignette
+ *    flat  unlit: every surface its own colour (MeshBasic), no lights at all (cheapest; layout, timing, text)
+ *    clay  no colours: grey matte under the key light (shape, contact, floating, pass-through)
+ *  plus a resolution scale (preview default 0.5). Chosen by, first to last: window.__world.quality / .res, the page URL
+ *  (?quality=flat&res=0.5), localStorage "payouts.quality" / "payouts.res", else full under automation and PREVIEW_DEFAULT
+ *  in a person's browser (the Studio, the Studio artifact). Press Q in the preview to cycle, R to cycle the resolution. */
+export type Quality = "full" | "fast" | "flat" | "clay";
+const QUALITIES: Quality[] = ["full", "fast", "flat", "clay"];
+export const PREVIEW_DEFAULT: { quality: Quality; res: number } = { quality: "fast", res: 0.5 };
+const RES_STEPS = [1, 0.75, 0.5, 0.35];
+type WorldDbg = { quality?: Quality; res?: number; shadows?: boolean };
+const store = (k: string): string | null => { try { return localStorage.getItem(k); } catch { return null; } };
+const param = (k: string): string | null => { try { return new URLSearchParams(location.search).get(k); } catch { return null; } };
+const automated = () => typeof navigator !== "undefined" && !!navigator.webdriver;
+export const qualityNow = (): { quality: Quality; res: number } => {
+  const d = (window as unknown as { __world?: WorldDbg }).__world ?? {};
+  const qs = (d.quality ?? param("quality") ?? (automated() ? null : store("payouts.quality"))) as Quality | null;
+  const quality: Quality = qs && QUALITIES.includes(qs) ? qs : automated() ? "full" : PREVIEW_DEFAULT.quality;
+  const rs = Number(d.res ?? param("res") ?? (automated() ? NaN : store("payouts.res")));
+  const res = rs > 0 && rs <= 1 ? rs : quality === "full" ? 1 : PREVIEW_DEFAULT.res;
+  return { quality, res };
+};
+if (typeof window !== "undefined" && !automated()) {
+  window.addEventListener("keydown", (e) => {
+    const k = e.key.toLowerCase();
+    if ((k !== "q" && k !== "r") || e.ctrlKey || e.metaKey || e.altKey) return;
+    const t = e.target as HTMLElement | null;
+    if (t && (t.isContentEditable || /^(input|textarea|select)$/i.test(t.tagName))) return;
+    const q = qualityNow();
+    try {
+      if (k === "q") localStorage.setItem("payouts.quality", QUALITIES[(QUALITIES.indexOf(q.quality) + 1) % QUALITIES.length]);
+      else localStorage.setItem("payouts.res", String(RES_STEPS[(RES_STEPS.indexOf(q.res) + 1) % RES_STEPS.length] ?? 1));
+    } catch { /* no storage: the URL still works */ }
+    (window as unknown as { __film?: { draw: (t: number) => void; frame: () => number } }).__film?.draw(
+      ((window as unknown as { __film?: { frame: () => number } }).__film?.frame() ?? 0) / 30);
+  });
+}
+
+// the preview materials: each original's flat / clay stand-in, made once
+const lite = new WeakMap<THREE.Material, { flat?: THREE.Material; clay?: THREE.Material }>();
+const CLAY = new THREE.Color("#a9a7a5");
+const liteOf = (m: THREE.Material, q: "flat" | "clay"): THREE.Material => {
+  const s = m as THREE.MeshStandardMaterial;
+  if (!s.isMeshStandardMaterial && !(m as THREE.MeshLambertMaterial).isMeshLambertMaterial && !(m as THREE.MeshPhongMaterial).isMeshPhongMaterial) return m;   // basic, depth, shader: as they are
+  let e = lite.get(m);
+  if (!e) lite.set(m, (e = {}));
+  if (e[q]) return e[q]!;
+  const common = {
+    map: s.map ?? null, alphaMap: s.alphaMap ?? null, transparent: s.transparent, opacity: s.opacity, alphaTest: s.alphaTest,
+    side: s.side, depthWrite: s.depthWrite, depthTest: s.depthTest, vertexColors: s.vertexColors, fog: s.fog,
+    clippingPlanes: s.clippingPlanes, clipShadows: s.clipShadows, polygonOffset: s.polygonOffset,
+    polygonOffsetFactor: s.polygonOffsetFactor, polygonOffsetUnits: s.polygonOffsetUnits, colorWrite: s.colorWrite,
+  };
+  const glass = ((s as THREE.MeshPhysicalMaterial).transmission ?? 0) > 0;
+  if (glass) Object.assign(common, { transparent: true, opacity: Math.min(common.opacity, 0.25), depthWrite: false });
+  let out: THREE.Material;
+  if (q === "flat") {
+    // a self-lit thing (the glowing letters, the screens) shows its glow; everything else its own colour
+    const c = s.color.clone(), em = s.emissive ? s.emissive.clone().multiplyScalar(s.emissiveIntensity ?? 1) : null;
+    const lum = (x: THREE.Color) => x.r * 0.2126 + x.g * 0.7152 + x.b * 0.0722;
+    if (em && lum(em) > lum(c)) c.copy(em);
+    const b = new THREE.MeshBasicMaterial({ ...common, color: c });
+    if (!b.map && s.emissiveMap && em && lum(em) > 0) b.map = s.emissiveMap;
+    out = b;
+  } else {
+    out = new THREE.MeshLambertMaterial({ ...common, color: s.map ? new THREE.Color("#ffffff") : CLAY });
+  }
+  out.name = `${m.name || "mat"}~${q}`;
+  e[q] = out;
+  return out;
+};
+const ORIG = "__origMat";
+/** every mesh under `root` drawn in quality q (full and fast: its own material) */
+const dressFor = (root: THREE.Object3D, q: Quality) => {
+  root.traverse((n) => {
+    const mesh = n as THREE.Mesh;
+    if (!mesh.isMesh || mesh === mirror) return;
+    const orig = (mesh.userData[ORIG] ??= mesh.material) as THREE.Material | THREE.Material[];
+    mesh.material = q === "flat" || q === "clay"
+      ? (Array.isArray(orig) ? orig.map((m) => liteOf(m, q)) : liteOf(orig, q))
+      : orig;
+  });
+};
+let lastQ = "";
+
 let R: THREE.WebGLRenderer | null = null;
 let composer: EffectComposer, finish: ShaderPass, bloom: UnrealBloomPass, bokeh: BokehPass;
 const bk = () => bokeh.uniforms as Record<string, { value: number }>;
@@ -288,30 +377,50 @@ const setCamera = (f: number) => {
   bk().focus.value = Math.max(50, (d[0] * look[0] + d[1] * look[1] + d[2] * look[2]) / L);
 };
 
-export type WorldStats = { ms: number; samples: number; place: string };
-export const worldStats: WorldStats = { ms: 0, samples: 1, place: "" };
+export type WorldStats = { ms: number; samples: number; place: string; quality: Quality; res: number };
+export const worldStats: WorldStats = { ms: 0, samples: 1, place: "", quality: "full", res: 1 };
 
 /** draw frame f into `host` (the world layer's element) */
 export const drawWorld = (host: HTMLElement, f: number) => {
   const t0 = performance.now();
   if (!R) init();
   const r = R!;
+  const { quality: Q, res } = qualityNow();
+  const preview = Q !== "full";
   if (!out2d) {
     out2d = document.createElement("canvas");
     out2d.width = W; out2d.height = H;
     out2d.dataset.world = "1";
     out2d.style.cssText = "position:absolute;left:0;top:0;width:1080px;height:1920px;display:block;background:#000";
   }
-  if (out2d.parentElement !== host) host.appendChild(out2d);
+  // ★ the preview shows the WebGL canvas itself (no copy into a 2-D canvas, which reads the GPU back every frame)
+  const shown = preview ? r.domElement : out2d;
+  if (preview) r.domElement.style.cssText = out2d.style.cssText;
+  if (shown.parentElement !== host) host.appendChild(shown);
+  for (const c of [out2d, r.domElement]) if (c !== shown && c.parentElement) c.remove();
+  const key_ = `${Q}|${res}`;
+  if (key_ !== lastQ) {
+    lastQ = key_;
+    const pw = Math.round(W * res), ph = Math.round(H * res);
+    r.setSize(pw, ph, false);
+    composer.setSize(pw, ph);
+    dressFor(scene, Q);
+  }
 
   // ONLY the place on screen is in the scene (hard cuts: R23)
   const cur = placeAt(f);
   for (const [i, b] of built) if (i !== cur) b.group.visible = false;
-  const place = PLACES[cur], b = ensurePlace(cur);
+  const place = PLACES[cur], fresh = !built.has(cur), b = ensurePlace(cur);
+  if (fresh && preview) dressFor(b.group, Q);
   b.group.visible = true;
   const stage = place.stageAt?.(f) ?? place.stage ?? "dark";   // ★ worker B: a place may change stage on a hard cut inside it
   setStage(stage);
   setLights(place.lights(f), stage);
+  const wd = (window as unknown as { __world?: WorldDbg }).__world ?? {};
+  key.castShadow = !preview || (wd.shadows ?? (Q === "fast" || Q === "clay"));   // the key's shadow: kept in fast and clay (contact = "is it standing on something", P17)
+  if (preview) mirror.visible = false;                  // … and no floor mirror
+  if (Q === "flat") { hemi.intensity = 0; for (const l of [key, rim, aux, back]) l.intensity = 0; accent.intensity = 0; }
+  if (Q === "clay") { hemi.intensity = Math.max(hemi.intensity, 0.9); rim.intensity = aux.intensity = back.intensity = 0; accent.intensity = 0; }
   worldStats.place = place.id;
   (window as unknown as { __worldPlace?: string }).__worldPlace = place.id;   // the caption-band check (scratchpad/capband.mjs) reads these
   (window as unknown as { __worldStage?: string }).__worldStage = place.stageAt?.(f) ?? place.stage ?? "dark";
@@ -330,7 +439,7 @@ export const drawWorld = (host: HTMLElement, f: number) => {
   // motion blur: the camera OR the acting is fast (never across a cut: the sub-frames stay inside this place's window)
   const onCut = CAM.some((k) => k.cut && Math.abs(k.at - f) < 0.5);   // ★ worker B: never blur across a hard cut INSIDE a place
   const fast = !dbg.noBlur && !(dbg as { cam?: unknown }).cam && !onCut && (speedAt(CAM, f) > LOOK.blurAt || !!place.blur?.(f));
-  const n = fast ? LOOK.blurN : 1;
+  const n = fast && !preview ? LOOK.blurN : 1;
   const ctx = out2d.getContext("2d")!;
   for (let s = 0; s < n; s++) {
     let fs = n === 1 ? f : f + ((s + 0.5) / n - 0.5) * LOOK.shutter;
@@ -338,6 +447,7 @@ export const drawWorld = (host: HTMLElement, f: number) => {
     b.update(fs);
     setCamera(fs);
     scene.updateMatrixWorld(true);
+    if (preview) { r.setRenderTarget(null); r.render(scene, camera); continue; }   // one plain pass, straight to the screen
     drawMirror(r);
     r.shadowMap.needsUpdate = true;
     composer.render();
@@ -350,4 +460,6 @@ export const drawWorld = (host: HTMLElement, f: number) => {
   (window as unknown as { __worldDebug?: unknown }).__worldDebug = { THREE, scene, camera, renderer: r, group: b.group, place: place.id, stage, frame: f };
   worldStats.ms = performance.now() - t0;
   worldStats.samples = n;
+  worldStats.quality = Q; worldStats.res = res;
+  (window as unknown as { __worldStats?: WorldStats }).__worldStats = worldStats;
 };
