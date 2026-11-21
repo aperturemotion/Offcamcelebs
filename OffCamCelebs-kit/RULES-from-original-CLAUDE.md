@@ -417,6 +417,12 @@ These survive independent of style. (Look rules live in the style's own preferen
   Never hand back a take-wired film with `HAS_SFX` off or an empty `CUES` list.
 
 ### Handback
+- **★ HANDING IN THROUGH THE APERTURE MOTION CONNECTOR (Timur, 2026-11-21, 038).** The Payouts' videos are handed in on
+  the client "The Payouts" (brand OffCamCelebs), on the piece Timur names or the open one. Read the piece's change requests
+  first; if there are none and no piece brief, hand in the video and caption AS BUILT. Do not rework the caption or the
+  film to the app's brand pack ("No need to change anything on it. There's nothing in the brief or the change requests.
+  So no. Do not change"). Timur's own instructions in the chat outrank the pack.
+
 - **★★ THE HANDBACK IS THE REAL HYPERFRAMES STUDIO, NEVER A STAND-IN (user, 2026-10-23, on 034: "you're supposed to
   launch the hyperframes studio, remember that").** Launch `npx --yes hyperframes@0.8.143 preview --background --no-open
   --port <p>` for the film and hand back THAT Studio. Never build a custom player or viewer page in its place.
