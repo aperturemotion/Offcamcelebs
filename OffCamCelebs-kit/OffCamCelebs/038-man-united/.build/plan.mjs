@@ -22647,6 +22647,7 @@ var makeCalendar = (key2, years = ["2005", "2010", "2018", "2026"]) => {
     hangs(r2, rod, "the binder ring hangs on the rod");
     return r2;
   });
+  group.userData.plate = true;
   const N2 = months.length - 1;
   const zFront = (i2) => GAP2 * (N2 / 2 - i2), zBack = (i2) => zFront(N2) - GAP2 * (i2 + 1);
   const leaves = months.map(([m2, y2], i2) => {

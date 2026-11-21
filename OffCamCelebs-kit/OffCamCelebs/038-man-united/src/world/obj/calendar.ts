@@ -39,6 +39,9 @@ export const makeCalendar = (key: string, years: string[] = ["2005", "2010", "20
     hangs(r, rod, "the binder ring hangs on the rod");
     return r;
   });
+  // one instrument (the density probe): a leaf flipping over and the leaf it uncovers are one readout in motion, as a day
+  //   counter's cards are
+  group.userData.plate = true;
   const N = months.length - 1;
   // the stack's slots along the rings' lower arc: the front stack, then the back stack behind it
   const zFront = (i: number) => GAP * (N / 2 - i), zBack = (i: number) => zFront(N) - GAP * (i + 1);
