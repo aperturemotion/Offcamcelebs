@@ -8,6 +8,6 @@ export const SIM = makeStub("sim", "cream", "#9BB8A6");
 export const DEAL = makeStub("deal", "dark", "#E20074");
 export const TARGETS = makeStub("targets", "cream", "#C9A46A");
 export const PAYMENT = makeStub("payment", "dark", "#8A8F96");
-export const CATCH = makeStub("catch", "cream", "#C46A4A");
-export const FAIR = makeStub("fair", "dark", "#7A6A9A");
+export { PLACE as CATCH } from "./sets/catch";
+export { PLACE as FAIR } from "./sets/fair";
 export const VERDICT = makeStub("verdict", "cream", "#5E8C6A");
