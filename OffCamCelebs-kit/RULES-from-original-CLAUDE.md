@@ -423,6 +423,13 @@ These survive independent of style. (Look rules live in the style's own preferen
   film to the app's brand pack ("No need to change anything on it. There's nothing in the brief or the change requests.
   So no. Do not change"). Timur's own instructions in the chat outrank the pack.
 
+- **★★ FACES AND LOGOS: FIND THEM YOURSELF (Timur, 2026-11-21, 038 Mint Mobile: "Remember, you can use logos, you can use
+  faces, you can use anything like that. Just find them yourself").** When a film needs a real person's photo or a brand's
+  logo, I source it myself instead of waiting: Wikimedia Commons first (a free licence; the file page, author and licence go
+  in `assets/brand/SOURCES.txt`), else the company's own press/brand page. Faces are cut out with rembg (mask examined) and
+  graded; logos follow P16 (real logos everywhere, on the object that stands for the brand). A brief's own exclusions still
+  hold (038: no Deadpool, no Marvel characters, no Mint fox mascot).
+
 - **★ PARALLEL AGENTS ARE ALLOWED TO SPEED A BUILD UP (Timur, 2026-11-21, on 038 Mint Mobile: "To speed up the process,
   run multiple agents if you need to").** The pattern (038): I build the SKELETON first (script, take, cues, captions, the
   place list `src/r45/places.ts` with a stub per place, the `PlaceDef` contract in `src/r45/place.ts`), commit it, then give

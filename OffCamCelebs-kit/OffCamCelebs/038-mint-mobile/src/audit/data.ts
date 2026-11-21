@@ -38,9 +38,10 @@ export const TAKE = {
 } as const;
 
 // ── ASSETS ───────────────────────────────────────────────────────────────────
-// ★ THE PHOTO: public/reynolds_face.jpg, Timur's to supply (never downloaded). Asked for in chat 2026-11-21; until it lands
-//   HAS_PHOTO is off and the caller ID shows his initials in the avatar circle.
-export const HAS_PHOTO = false;
+// ★ THE PHOTO (Timur, 2026-11-21: "you can use faces … Just find them yourself"): Gage Skidmore's "Ryan Reynolds by Gage
+//   Skidmore.jpg", Wikimedia Commons, CC BY-SA 3.0 (assets/brand/SOURCES.txt; credit "Photo: Gage Skidmore, CC BY-SA 3.0"
+//   in the post's caption). assets/reynolds_face.png is its square crop, for the caller ID (and the verdict, if used).
+export const HAS_PHOTO = true;
 export const PHOTO_FILE = "reynolds_face.png";
 
 // ── AUDIO ────────────────────────────────────────────────────────────────────

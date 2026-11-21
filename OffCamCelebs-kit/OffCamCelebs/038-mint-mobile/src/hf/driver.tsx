@@ -10,7 +10,7 @@ import { setFrame } from "../shim/remotion";
 import { Layer, layerSpecs } from "./film";
 import { beginFrame, endFrame, setLayer, loadFonts, loadImages } from "../three/stage";
 /** ★ (032) photos printed INTO 3-D textures are decoded before the first frame; 033 prints none (kept for the next film) */
-const HOOK_PHOTOS: string[] = [];
+const HOOK_PHOTOS: string[] = ["assets/reynolds_face.png", "assets/brand/tmobile_wordmark.png", "assets/brand/tmobile_t.png", "assets/brand/tmobile_tile.png"];   // ★ 038: his photo and the T-Mobile marks, textured onto 3-D objects (P16; assets/brand/SOURCES.txt)
 import { PHOTO_FILE, HAS_PHOTO } from "../audit/data";
 
 const FPS = 30;

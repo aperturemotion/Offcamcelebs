@@ -1,0 +1,12 @@
+Brand and photo assets for 038 "Every Dollar" (fetched 2026-11-21; SVGs checked for scripts and external links: none; rasterised with headless Chromium).
+Timur, 2026-11-21: "you can use logos, you can use faces … Just find them yourself."
+- reynolds_face.png (assets/) and public/reynolds_face.jpg: "Ryan Reynolds by Gage Skidmore.jpg", Wikimedia Commons,
+  https://commons.wikimedia.org/wiki/File:Ryan_Reynolds_by_Gage_Skidmore.jpg — author Gage Skidmore, licence CC BY-SA 3.0
+  (attribution required: "Photo: Gage Skidmore, CC BY-SA 3.0"). Square crop (x 100–1180, y 110–1190 of the 1280 px copy),
+  resized to 768 px, contrast +5%, colour −5%.
+- tmobile_wordmark.svg/.png: "T-Mobile US Logo 2022 RGB Magenta on Transparent.svg", Wikimedia Commons (trademark of T-Mobile).
+- tmobile_tile.svg/.png: "T-Mobile logo 2022.svg", Wikimedia Commons (the T in a magenta tile; trademark of T-Mobile).
+- tmobile_t.svg/.png: the T mark from the selfh.st icon set (https://cdn.jsdelivr.net/gh/selfhst/icons/svg/t-mobile.svg; trademark of T-Mobile).
+- MINT MOBILE: no fox-free official wordmark was reachable (Wikipedia/Commons have none; mintmobile.com refused; the selfh.st
+  icon IS the fox, which the brief excludes). Mint is set as type ("mint mobile", lowercase, heavy Archivo) in Mint's green
+  #2B6744 / #69B88B.

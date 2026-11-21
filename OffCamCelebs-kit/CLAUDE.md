@@ -46,7 +46,11 @@ and one captured frame. Restart Claude Code after it finishes, so the new enviro
   TEMPO 1.04. Years 2000–2009 are written "two thousand one", never "twenty oh one".
 - **The bed:** the previous film's song unless Timur names another. Since 033 it is 50 Cent, "Big Rich Town (Instrumental)"
   (`034-ohtani/assets/audio/music_bigrichtown.mp3`, cut by `scratchpad/vo/mkbed_bigrich.mjs`).
-- **Never download a real person's photo.** Timur supplies it; it is cut out with rembg (examine the mask) and graded.
+- **Photos and logos: I find them myself** (Timur, 2026-11-21, on 038 Mint Mobile: "Remember, you can use logos, you can
+  use faces, you can use anything like that. Just find them yourself"). This replaces the old "never download a real
+  person's photo; Timur supplies it". Prefer freely licensed sources (Wikimedia Commons: record file page, author and
+  licence in the film's `assets/brand/SOURCES.txt`), logos from the company's own or Commons files (P16). A face is cut out
+  with rembg (examine the mask) and graded. A photo Timur supplies still wins.
 - **Studio ports 3100–3199.** Each film has its own (034: 3176).
 - **Handback:** the real HyperFrames Studio, never a custom player in its place (Timur, 2026-10-23) (`npx --yes hyperframes@0.8.143 preview --background --no-open --port <p>`), plus a
   srv.us link: `OffCamCelebs\_tunnels\tunnel.ps1 -Port <p> -Fwd <n>`, launched detached, in a reconnect loop. The hostname
