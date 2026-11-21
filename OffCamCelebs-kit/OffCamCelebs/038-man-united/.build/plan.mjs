@@ -212,7 +212,7 @@ var HAS_MUSIC = true;
 var HAS_SFX = true;
 var VO_SKIP_FRAMES = Math.round(VO_START * FPS);
 var VO_GAIN = 1;
-var MUSIC_FILE = "music_runaway_bed.wav";
+var MUSIC_FILE = "music_goodman_bed.wav";
 var MUSIC_GAIN = 0.505;
 var SCENE_ORDER = ["hook", "explain", "sides", "bonds", "money", "worst", "board", "fair", "verdict"];
 var SCENE_CUES = { hook: 3, explain: 1, sides: 1, bonds: 1, money: 2, worst: 1, board: 3, fair: 1, verdict: 4 };
@@ -229,13 +229,12 @@ var TOTAL_FRAMES = VO_END + OUTRO_HOLD;
 
 // src/audit/bedenv.ts
 var BED_ENV = [
-  [7.24, -0.8],
-  [17.24, -0.7],
-  [27.24, -1],
-  [37.24, -1],
-  [47.24, -1.7],
-  [56.3, -2.2],
-  [57.24, -2.2]
+  [7.16, -0.6],
+  [17.16, -2],
+  [27.16, -1.2],
+  [37.16, -1],
+  [47.16, -1.3],
+  [57.16, -1]
 ];
 
 // ../034-ohtani/node_modules/preact/dist/preact.mjs

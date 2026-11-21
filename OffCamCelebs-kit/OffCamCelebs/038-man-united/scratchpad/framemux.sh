@@ -3,7 +3,7 @@
 set -e
 cd "$(dirname "$0")/.."
 N=$(ls renders/frames/f????.png | wc -l)
-[ "$N" -ge 1884 ] || { echo "only $N of 1884 frames"; exit 1; }
+[ "$N" -ge 1765 ] || { echo "only $N of 1765 frames"; exit 1; }
 FFMPEG_DIR=/home/user/occ-work/ff node scratchpad/vo/mixprobe.mjs out | tail -1
 # master to the references' loudness (−14 LUFS, measured on all five; TP −1), two-pass loudnorm
 J=$(ffmpeg -hide_banner -i out/mix.wav -af loudnorm=I=-14:TP=-1.0:LRA=7:print_format=json -f null - 2>&1 | sed -n '/^{/,/^}/p')

@@ -2228,6 +2228,10 @@ _Log every OffCamCelebs preference change and every video build here with a date
       cut so its drop lands on the hook's figure, 5.5 dB under the voice. Masters go out at the references' loudness,
       −14 LUFS integrated, true peak −1 dB (two-pass loudnorm in `scratchpad/framemux.sh`); 035 and earlier went out
       near −24 LUFS.
+      · 038 (Timur, 2026-11-21, picking from the list of past beds: "Let's use a good man with a broken heart"): the bed
+        is "A Good Man with a Broken Heart", cut from 031's bed at 3.27 s so the full arrangement enters on "790" (2.16 s,
+        dropfind-measured), 5.4–5.6 dB under the voice in every window. It is the "previous film's song" for 039 unless
+        Timur names another. When he asks for the song list, list every past bed with the films it was used on.
     - **P16 ★★★★ LOGOS AND ICONS EVERYWHERE; REAL, RECOGNISABLE OBJECTS, NEVER GREY BOXES** (Timur, 2026-11-19, on the
       037 render: "this video was pretty bad because you can't see anything in the beginning. Nobody knows what Afterpay
       is, whether it's a company, a process, a system… That's why you have to add logos. Logos everywhere. We don't care
