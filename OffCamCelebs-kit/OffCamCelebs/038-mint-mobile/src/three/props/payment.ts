@@ -58,7 +58,11 @@ export const flipsDone = (T: PayTiming) => flipStarts(T)[N - 1] + flipLen(N - 1)
 
 /** page k's pose in the calendar's frame: the pivot's rotation and the sheet's offset from the axis */
 const pageRot = (e: number) => -PHI - SWEEP * e;
-const pageZ = (k: number, e: number) => z0Of(k) + (z1Of(k) - z0Of(k)) * ss(0.3, 0.7, e);
+// its offset from the axis: its front-stack place, tapering to 0 as it lifts (in flight it hangs straight off the binding),
+// and its back-stack place growing in as it lands. The old straight blend (0.3–0.7) swapped a sheet to the back stack's side
+// while the next one still sat on the front's, and their top edges crossed by the binding (the audit's PEN, pages 6–9 at
+// f1007–1011); a 2-D sweep of every pair at 0.05-frame steps finds no overlap with this taper
+const pageZ = (k: number, e: number) => z0Of(k) * (1 - ss(0, 0.35, e)) + z1Of(k) * ss(0.65, 1, e);
 
 // ══ THE ENVELOPE ══
 const EW = 440, ED = 300, FLAP = 66;

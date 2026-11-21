@@ -128,11 +128,14 @@ const phys = (() => {
   // the dynamic start: the pivot on the oak's edge, its centre σ along the phone from it
   let phi = r0.phi, w = 0;
   const hOf = (sg: number) => {
-    // the contact over the pivot: the back glass, or (once the slide brings them there) the lens rings, 5 px deeper — it rides
-    // up over the first ring's rounded lip in 3 px (the jolt)
-    const u = -sg;
-    const k = u > LENS_U1 ? 0 : clamp01((LENS_U1 - u) / 3);
-    return V_BACK + RE + GAP + (V_LENS - V_BACK) * k;
+    // the contact over the pivot: the back glass, or the lens column, 5 px deeper. The column meets the ROUND edge before it
+    // reaches the pivot (a 5 px step on a 6 px radius touches ~6 px early), so its clearance is the exact one over the circle:
+    // it rides up over the edge as the column arrives (the jolt) and back down once the column has passed (the audit's PEN
+    // found the old 3-px linear ride-up let the rings cut 2–3 px into the oak at f69)
+    const R = RE + GAP, u = -sg;
+    const d = u > LENS_U1 ? u - LENS_U1 : u < LENS_U0 ? LENS_U0 - u : 0;
+    const lens = d < R ? V_LENS + Math.sqrt(R * R - d * d) : -Infinity;
+    return Math.max(V_BACK + R, lens);
   };
   const cz0 = walk(t0).z;
   // σ from the centre's position relative to the pivot along û

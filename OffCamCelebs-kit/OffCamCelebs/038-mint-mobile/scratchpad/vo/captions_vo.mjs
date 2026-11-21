@@ -120,7 +120,7 @@ const BLOCKS = [
   // ★ (038) THE BRIEF: no number on screen before about 2 s. The voice says "$15" at 0.8 s, so the hook's first beat SPELLS
   //   it ("fifteen-dollar", MIS_AT below); the first figure shown is "$1.35 billion" at ~3.5 s.
   [["Ryan **Reynolds'**", "fifteen-dollar a month"]],
-  [["phone company", "sold for **$1.35 billion.**"]],
+  [["phone company sold for", "**$1.35 billion.**"]],
   [["Every **headline**", "said so."]],
   [["We waited for", "the **last payment.**"]],
   [["Reynolds bought into", "**Mint Mobile**"]],
@@ -134,7 +134,7 @@ const BLOCKS = [
   [["The rest depended on", "Mint hitting **targets.**"]],
   [["That's where numbers", "usually **shrink.**"]],
   [["**Not this time.**"]],
-  [["In 2025,", "the targets were **dropped.**"]],
+  [["In 2025, the targets were", "**dropped.**"]],
   [["The rest became", "the **maximum,**"]],
   [["minus what was", "**already paid.**"]],
   [["On **October 9th,**"]],

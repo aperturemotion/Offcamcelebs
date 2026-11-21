@@ -27,7 +27,7 @@ const srv = http.createServer((req, res) => {
   let rel = decodeURIComponent(new URL(req.url, "http://x").pathname);
   if (process.env.AUDIT && rel === "/assets/film.js") rel = "/.build/film-audit.js";
   const p = path.join(ROOT, rel);
-  if (!p.startsWith(ROOT) || !fs.existsSync(p) || fs.statSync(p).isDirectory()) { res.writeHead(404); return res.end(); }
+  if (!p.startsWith(ROOT) || !fs.existsSync(p) || fs.statSync(p).isDirectory()) { if (process.env.LOG404) console.error("404", rel); res.writeHead(404); return res.end(); }
   res.writeHead(200, { "content-type": TYPES[path.extname(p)] || "application/octet-stream" });
   fs.createReadStream(p).pipe(res);
 }).listen(0, "127.0.0.1");
