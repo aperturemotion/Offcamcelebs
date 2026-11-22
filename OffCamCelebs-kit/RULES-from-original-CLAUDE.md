@@ -460,6 +460,14 @@ These survive independent of style. (Look rules live in the style's own preferen
   - **Draft renders** (`scratchpad/draftrun.sh <quality> [res]`, a review MP4 with the mastered mix, never the master
     filename): the whole of 038 in clay at 0.5 in 6 min 54 s, in fast at 0.5 in 12 min 12 s; the full master took
     4 h 24 min.
+- **★★★★ THE DAILY 6 A.M. RUN, WITH NO APPROVALS (Timur, 2026-11-22: "every day in the morning at 6 a.m. … check whether there
+  is a The Payouts video due … If there isn't a script, then … come up with a script. You'll look at the 5 competitors … start
+  working on the video and hand the studio itself back to me once you're done. You'll do this without needing me for
+  anything, for any approvals … if there is a script, you just do the same thing, but you follow the script").** A scheduled
+  task starts a fresh cloud session at about 06:00 Moscow every day; it follows `DAILY_RUN.md` (bootstrap, the app, the
+  script given or written from `OffCamCelebs/COMPETITORS.md`, the build, the checks, the Studio and a preview MP4). It never
+  waits for approval, never renders the master and never hands in through the app: Timur reviews the Studio first. This
+  overrides "send the script and wait" for these runs (the script still goes in the report).
 - **★★★ SOUND: THE EARNEDITS PACK, HEARD WITH EARSHOT, GAPS FROM OPENVERSE (Timur, 2026-11-22, on 038 Mint: "we have a sound
   effect pack. It's called Earn Edit Sound Effect Pack… use that, and I also want you to set up these tools. Tools are
   Earshot, in order to understand sound effects better, and set up OpenVerse").** The look side (no ping, the chain only on

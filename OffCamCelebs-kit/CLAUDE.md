@@ -51,6 +51,9 @@ and one captured frame. Restart Claude Code after it finishes, so the new enviro
   person's photo; Timur supplies it". Prefer freely licensed sources (Wikimedia Commons: record file page, author and
   licence in the film's `assets/brand/SOURCES.txt`), logos from the company's own or Commons files (P16). A face is cut out
   with rembg (examine the mask) and graded. A photo Timur supplies still wins.
+- **The daily 6 a.m. run** (Timur, 2026-11-22): a scheduled fresh session checks the app for a The Payouts video due, writes or
+  follows the script, builds the film and hands back the Studio, with no approvals: **`DAILY_RUN.md`** beside this file.
+  A fresh container has only git: `bash tools/bootstrap_cloud.sh` restores the rest.
 - **Sound effects: the EarnEdits pack** (`OffCamCelebs/_sfx/earnedits`, with Earshot's `index.json`), heard with **Earshot**
   (`earshot describe`), gaps from **Openverse** (`tools/openverse_audio.py`), cut and levelled by `tools/sfx_prep.py`. Never
   the ping; the chain only on bars, rarely; everything else subtle and fitting (Timur, 2026-11-22; the rules file has the
