@@ -110,14 +110,13 @@ const Comp: React.FC<{ f: number }> = ({ f }) => (
   </>
 );
 
+// ★ 2026-11-22 re-score: the paddles rise on soft air (their drops are silent), a real gavel on its block, a low weight under it
 const sfx: PlaceSfx[] = [
-  { s: "whooshsoft", at: UP1[0] + 3, end: UP1[1], vol: 0.3, why: "the T-MOBILE paddle goes up", mode: "peak" },
-  { s: "whooshsoft", at: DN1[1] - 3, end: DN1[1], vol: 0.14, why: "the T-MOBILE paddle comes down", mode: "peak" },
-  { s: "whooshsoft", at: UPM[0] + 3, end: UPM[1], vol: 0.34, why: "MOM's last-minute paddle shoots up", mode: "peak" },
-  { s: "whooshsoft", at: UP2[0] + 3, end: UP2[1], vol: 0.3, why: "the T-MOBILE paddle goes up again, higher", mode: "peak" },
-  { s: "thud", at: MOM, vol: 0.62, why: "the gavel strikes the block: sold", mode: "peak" },
-  { s: "sub", at: MOM, vol: 0.4, why: "the gavel's weight", mode: "peak" },
-  { s: "whooshsoft", at: DNM[0] + 7, end: DNM[1], vol: 0.12, why: "MOM's paddle sinks away", mode: "peak" },
+  { s: "wsoft", at: UP1[0] + 3, end: UP1[1], vol: 0.3, why: "the T-MOBILE paddle goes up", mode: "peak" },
+  { s: "wsmall1", at: UPM[0] + 3, end: UPM[1], vol: 0.32, why: "MOM's last-minute paddle shoots up", mode: "peak" },
+  { s: "wsoft", at: UP2[0] + 3, end: UP2[1], vol: 0.3, why: "the T-MOBILE paddle goes up again, higher", mode: "peak" },
+  { s: "gavel", at: MOM, vol: 0.7, why: "the gavel strikes the block: sold", mode: "peak" },
+  { s: "lowhit", at: MOM, vol: 0.3, why: "the gavel's weight", mode: "peak" },
 ];
 export const PLACE: PlaceDef = {
   set: { id: S, ground: "dark", Comp, align: () => "centre", focus: [GEO.gavel.x - 160, FLOOR - 300] },

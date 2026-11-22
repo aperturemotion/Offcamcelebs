@@ -2134,6 +2134,24 @@ the rest is provisional until the user reacts — confirmed items then become nu
 _Log every OffCamCelebs preference change and every video build here with a date. Nothing about
 100BasisPoints / Style 3 goes in this file._
 
+- **2026-11-22: ★★★★ SOUND EFFECTS: THE EARNEDITS PACK; NO PING; THE CHAIN ONLY ON BARS, RARELY; EVERYTHING ELSE SUBTLE
+  AND FITTING** (Timur, on 038 Mint's preview: "the main issue with this video is the sound effects… we have a sound effect
+  pack. It's called Earn Edit Sound Effect Pack… I want you to use that… Don't add that pinging anymore. Only add that, like,
+  keep that bicycle chain sound effect for the bars and stuff. I guess that's fine, but don't use it that often. For
+  everything else, try to find subtle fitting sound effects").
+  - **The source:** the EarnEdits SFX Pack (97 sounds in 10 folders: clicks and typing, clocks, ambience, impacts, money and
+    coins, paper, pens, accents, risers, whooshes), kept in the kit at `OffCamCelebs/_sfx/earnedits/` with an Earshot
+    description of each (`index.json`). An action on screen takes the pack's sound of THAT action (a page turn for a page,
+    coins for coins, banknotes for cash, a pen stroke for writing, a clock tick for a calendar); only what the pack lacks
+    comes from Openverse (CC0 / CC BY, credited in the film's `assets/brand/SOURCES.txt`).
+  - **Never the ping** (`ping`, `pingshort`: the old "a number lands" sting) in any film.
+  - **The chain** (`chain`, `chainshort`) only under a BAR filling or a gauge running, at most two or three times a film.
+  - **Subtle:** every effect sits clearly under the voice (the measured peak rule stands), whooshes soft and short, no
+    stings, no cartoon hits; one sound per real action, not one per word.
+- **2026-11-22: THE MINT SIM GETS A LITTLE MORE SCREEN TIME** (Timur, 038 Mint's hook: "It's very good, but try to get a
+  little bit, tiny bit more screen time on the Mint Mobile SIM card itself"). The hero object of a hook holds long enough
+  to read its brand: a beat longer in its slow-motion close-up, not a new shot.
+
 - **2026-11-21: ★★★★ THE HOOK IS AN ENTICING REAL OBJECT IN MOTION** (Timur, on 038 Mint Mobile: "Remember, the hook needs to be
   enticing. There needs to be an actual object with motion in it, in the hook scene"; the brief the same day: "THE HOOK IS
   MOTION, NOT A NUMBER… nothing static, and no number on screen before about 2 seconds"). Every film from now on opens on ONE

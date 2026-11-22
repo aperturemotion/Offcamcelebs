@@ -12,7 +12,11 @@ import { Audio, Sequence, staticFile } from "remotion";
 export type SfxName =
   | "swoosh" | "whooshlong" | "whooshsoft" | "airwoosh" | "lowwoosh"
   | "data" | "datamid" | "datashort" | "chain" | "chainshort"
-  | "sub" | "thud" | "ping" | "pingshort" | "tick" | "click" | "flick" | "coin" | "ding" | "bloom";
+  | "sub" | "thud" | "ping" | "pingshort" | "tick" | "click" | "flick" | "coin" | "ding" | "bloom"
+  // ★ 2026-11-22 (Timur: the EarnEdits pack, no ping, the chain only on bars): cut by tools/sfx_prep.py from
+  //   assets/audio/sfx_src/sfx_spec.json (the pack in OffCamCelebs/_sfx/earnedits; Openverse CC0 for the buzz, gavel,
+  //   printer and thump, credited in assets/brand/SOURCES.txt), each levelled to −35 dBFS at its loudest 50 ms
+  | "buzz" | "buzzshort" | "wcam1" | "wcam2" | "wsmall1" | "wsmall2" | "wsmall3" | "wsoft" | "wlow" | "whum" | "ckey" | "cmouse" | "cpop" | "cwood" | "pflipa" | "pflipb" | "pslide" | "pland" | "ptear" | "pcrunch" | "pensign" | "penwrite" | "erase" | "notes" | "thump" | "lowhit" | "gavel" | "printer";
 
 const EVEN: Record<SfxName, number> = {
   coin: 0.100, ding: 0.699, flick: 0.090, thud: 0.060, tick: 0.030,
@@ -22,6 +26,9 @@ const EVEN: Record<SfxName, number> = {
   // ★ 028's take: click 0.327 → 0.232 (−3 dB). Its peaks sat +2.7 dB over the voice against Bankers V4's −0.9 (sfxlevels028)
   ping: 0.743, whooshlong: 0.202, whooshsoft: 0.202, click: 0.232, data: 0.286, airwoosh: 0.072, chain: 0.947,
   lowwoosh: 0.283, swoosh: 0.065, pingshort: 0.850, chainshort: 0.700, datashort: 0.340, datamid: 0.310,
+  buzz: 0.181, buzzshort: 0.751, wcam1: 0.642, wcam2: 0.534, wsmall1: 0.084, wsmall2: 0.072, wsmall3: 0.041, wsoft: 1.043, wlow: 0.097, whum: 0.085, ckey: 0.061, cmouse: 0.064, cpop: 0.062, cwood: 0.067, pflipa: 0.151, pflipb: 0.199, pslide: 1.246, pland: 0.285, ptear: 0.131, pcrunch: 0.109, pensign: 0.229, penwrite: 0.13, erase: 0.166, notes: 0.114, thump: 0.055, lowhit: 0.037, gavel: 0.305, printer: 0.248,
+  // ★ 2026-11-22, measured (sfxlevels033 on mixprobe stems): ckey ×0.4, cmouse/cpop/cwood/pcrunch/notes/wsmall3 ×0.6, pland ×0.55
+  //   (their transients peaked −5…+1 dB against the voice); printer ×4 and pensign ×2.2 (heard −26 and −18: lost under the voice)
 };
 /** ★ THE one knob for the score's overall level — measured per film from its rendered stems (026: 0.94) */
 export const PRESENCE = 0.94;
@@ -33,6 +40,7 @@ export const LEN: Record<SfxName, number> = {
   coin: 24, ding: 40, flick: 16, thud: 30, tick: 8, sub: 30, bloom: 60,
   ping: 108, whooshlong: 32, whooshsoft: 27, click: 7, data: 68, airwoosh: 53, chain: 90, lowwoosh: 75, swoosh: 40,
   pingshort: 39, chainshort: 32, datashort: 29, datamid: 48,
+  buzz: 18, buzzshort: 14, wcam1: 46, wcam2: 65, wsmall1: 25, wsmall2: 24, wsmall3: 26, wsoft: 22, wlow: 28, whum: 40, ckey: 3, cmouse: 6, cpop: 9, cwood: 5, pflipa: 15, pflipb: 15, pslide: 21, pland: 15, ptear: 14, pcrunch: 11, pensign: 95, penwrite: 15, erase: 48, notes: 42, thump: 17, lowhit: 54, gavel: 18, printer: 85,
 };
 /** where each file's AUDIBLE part begins, in frames from the file's start */
 export const ONSET: Record<SfxName, number> = {
@@ -40,13 +48,16 @@ export const ONSET: Record<SfxName, number> = {
   ping: 0, whooshlong: 8, whooshsoft: 6, click: 0, data: 0,
   airwoosh: 19, chain: 0, lowwoosh: 10, swoosh: 10,
   pingshort: 0, chainshort: 4, datashort: 0, datamid: 0,
+  buzz: 0, buzzshort: 0, wcam1: 0, wcam2: 0, wsmall1: 0, wsmall2: 0, wsmall3: 0, wsoft: 0, wlow: 0, whum: 0, ckey: 0, cmouse: 0, cpop: 0, cwood: 0, pflipa: 0, pflipb: 0, pslide: 0, pland: 0, ptear: 0, pcrunch: 0, pensign: 0, penwrite: 0, erase: 0, notes: 0, thump: 0, lowhit: 0, gavel: 0, printer: 0,
 };
 /** frames from the file's start to its PEAK — a sound is heard where its peak is */
 export const PEAK: Record<SfxName, number> = {
   airwoosh: 21, bloom: 3, chain: 0, chainshort: 4, click: 0, coin: 0, data: 2, datamid: 2, datashort: 2, ding: 0, flick: 0,
   lowwoosh: 13, ping: 0, pingshort: 0, sub: 1, swoosh: 12, thud: 0, tick: 0, whooshlong: 13, whooshsoft: 8,
+  buzz: 6, buzzshort: 10, wcam1: 6, wcam2: 15, wsmall1: 9, wsmall2: 8, wsmall3: 8, wsoft: 3, wlow: 8, whum: 7, ckey: 1, cmouse: 1, cpop: 1, cwood: 1, pflipa: 4, pflipb: 6, pslide: 2, pland: 12, ptear: 10, pcrunch: 3, pensign: 72, penwrite: 4, erase: 40, notes: 29, thump: 1, lowhit: 1, gavel: 1, printer: 54,
 };
-const SUSTAINED = new Set<SfxName>(["data", "datamid", "datashort", "chain", "chainshort", "lowwoosh", "airwoosh", "swoosh", "whooshlong", "whooshsoft"]);
+const SUSTAINED = new Set<SfxName>(["data", "datamid", "datashort", "chain", "chainshort", "lowwoosh", "airwoosh", "swoosh", "whooshlong", "whooshsoft",
+  "buzz", "wcam1", "wcam2", "wsmall1", "wsmall2", "wsmall3", "wsoft", "wlow", "whum", "pensign", "erase", "notes", "printer"]);
 
 export type Cue = { s: SfxName; at: number; dur: number; fade: number; vol: number; why: string };
 

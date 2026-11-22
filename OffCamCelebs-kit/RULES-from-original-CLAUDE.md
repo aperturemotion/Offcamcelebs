@@ -460,6 +460,28 @@ These survive independent of style. (Look rules live in the style's own preferen
   - **Draft renders** (`scratchpad/draftrun.sh <quality> [res]`, a review MP4 with the mastered mix, never the master
     filename): the whole of 038 in clay at 0.5 in 6 min 54 s, in fast at 0.5 in 12 min 12 s; the full master took
     4 h 24 min.
+- **★★★ SOUND: THE EARNEDITS PACK, HEARD WITH EARSHOT, GAPS FROM OPENVERSE (Timur, 2026-11-22, on 038 Mint: "we have a sound
+  effect pack. It's called Earn Edit Sound Effect Pack… use that, and I also want you to set up these tools. Tools are
+  Earshot, in order to understand sound effects better, and set up OpenVerse").** The look side (no ping, the chain only on
+  bars, subtle) is in the preferences changelog, 2026-11-22.
+  - **The pack:** `OffCamCelebs/_sfx/earnedits/` (85 sounds, 10 folders) with `index.json`, what Earshot hears in each file
+    (`tools/sfx_catalogue.py`, its top tags with calibrated z, AudioSet labels, length, peak, LUFS). Choose by the action on
+    screen, then by what Earshot heard.
+  - **Earshot** (github.com/Leonxlnx/earshot, MIT, CPU): `earshot describe <file>` (what it sounds like), `rank "<words>"
+    <files>`, `match`, `timeline <mix>`; an MCP server (`earshot mcp`, in the repo's `.mcp.json`; `setup.ps1` installs it with
+    its listening models and registers it) and its skill (`.claude/skills/earshot`). Here: a venv at
+    `/home/user/occ-work/earshot-venv` (`/usr/local/bin/earshot`). Every cut a film uses is described by Earshot before it
+    is wired; a cut that does not read as its action is re-cut or replaced.
+  - **Openverse** (`tools/openverse_audio.py search "<words>" --max 4` / `get <id> <dir> --name <n>`): CC0, PDM and CC BY
+    only (BY-SA with --sa; never NC or ND); `get` writes the credit JSON and line. The Freesound CDN refuses Python's HTTP
+    client, so the file itself comes through curl. Every Openverse sound a film uses is credited in its
+    `assets/brand/SOURCES.txt`.
+  - **Cutting and levelling:** `tools/sfx_prep.py <film>/assets/audio/sfx_src/sfx_spec.json <film>/assets/audio/sfx` cuts each
+    named segment (auto-start on the first sound within 24 dB of the file's loudest), fades it and measures LEN, ONSET, PEAK
+    and EVEN (its loudest 50 ms at −35 dBFS at vol 1); the table goes into `src/r45/SfxLayer.tsx`. Then `mixprobe.mjs out` →
+    `sfxsheet.mjs` → `sfxlevels033.py`: every family 7–14 dB under the voice (038 Mint: buzz −10.7, clicks −7…−9, paper −7…−9,
+    camera whooshes −7.5…−9, printer −13.5); a transient within 6 dB of the voice is turned down in EVEN.
+  - **Camera whooshes:** only the hand-overs and big in-place travels (≥ 600 px or a strong zoom); a reframe or a push is silent.
 - **★★★ REVIEW BY PREVIEW RENDER, NOT THE STUDIO (Timur, 2026-11-22, on 038 Mint: "watching these videos from the studio is
   not an option anymore. It's way too laggy for me. I need you to preview render them. Just whatever is fastest… lower the
   resolution… without lighting, without colors, if that speeds it up… but not too low").** At every handback, render a

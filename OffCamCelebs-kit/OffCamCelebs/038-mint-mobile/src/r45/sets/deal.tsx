@@ -165,14 +165,16 @@ const Comp: React.FC<{ f: number }> = ({ f }) => (
 );
 
 export const DL = { penIn: PEN_IN, sign: SIGN, penOut: PEN_OUT, bookOut: BOOK_OUT, caseIn: CASE_IN, latch: LATCH, lid: LID, certIn: CERT_IN, done: DONE } as const;
+// ★ 2026-11-22 re-score from the EarnEdits pack: the pen's own stroke, paper, the latches, the banknotes in the case
 const SFX: PlaceSfx[] = [
-  { s: "whooshsoft", at: PEN_IN[0] + 3, end: PEN_IN[1], vol: 0.22, why: "the pen glides in over the signature line", mode: "peak" },
-  { s: "datashort", at: SIGN[0], end: SIGN[1], vol: 0.3, why: "the nib's scratch as the pen signs", mode: "within" },
-  { s: "swoosh", at: BOOK_OUT[1] - 3, end: BOOK_OUT[1], vol: 0.4, why: "the agreement slides off the desk", mode: "peak" },
-  { s: "thud", at: CASE_IN[1] - 2, vol: 0.45, why: "the cash case slides in and settles on the desk", mode: "peak" },
-  { s: "click", at: LATCH[0][1] - 1, vol: 0.6, why: "the case's left latch flips open", mode: "peak" },
-  { s: "click", at: LATCH[1][1] - 1, vol: 0.55, why: "the case's right latch flips open", mode: "peak" },
-  { s: "flick", at: CERT_IN[1] - 6, vol: 0.5, why: "the share certificates slide in and land beside the case", mode: "peak" },
+  { s: "wsoft", at: PEN_IN[0] + 3, end: PEN_IN[1], vol: 0.28, why: "the pen glides in over the signature line", mode: "peak" },
+  { s: "pensign", at: SIGN[0], end: SIGN[1], vol: 0.45, why: "the nib's scratch as the pen signs", mode: "within" },
+  { s: "pslide", at: BOOK_OUT[1] - 3, end: BOOK_OUT[1], vol: 0.4, why: "the agreement slides off the desk", mode: "peak" },
+  { s: "thump", at: CASE_IN[1] - 2, vol: 0.5, why: "the cash case slides in and settles on the desk", mode: "peak" },
+  { s: "ckey", at: LATCH[0][1] - 1, vol: 0.55, why: "the case's left latch flips open", mode: "peak" },
+  { s: "ckey", at: LATCH[1][1] - 1, vol: 0.5, why: "the case's right latch flips open", mode: "peak" },
+  { s: "notes", at: LID[0] + 2, end: CERT_IN[0], vol: 0.35, why: "the lid lifts on the banknotes", mode: "within" },
+  { s: "pland", at: CERT_IN[1] - 6, vol: 0.5, why: "the share certificates slide in and land beside the case", mode: "peak" },
 ];
 
 export const PLACE: PlaceDef = {

@@ -1,0 +1,226 @@
+{
+ "buzz": {
+  "len": 18,
+  "onset": 0,
+  "peak": 6,
+  "even": 0.181,
+  "sustained": true,
+  "src": "vib_glass.mp3"
+ },
+ "buzzshort": {
+  "len": 14,
+  "onset": 0,
+  "peak": 10,
+  "even": 0.751,
+  "sustained": false,
+  "src": "vib_brev.mp3"
+ },
+ "wcam1": {
+  "len": 46,
+  "onset": 0,
+  "peak": 6,
+  "even": 0.642,
+  "sustained": true,
+  "src": "EarnEdits - Human Whoosh.mp3"
+ },
+ "wcam2": {
+  "len": 65,
+  "onset": 0,
+  "peak": 15,
+  "even": 0.534,
+  "sustained": true,
+  "src": "EarnEdits - Human Swoosh - Long.mp3"
+ },
+ "wsmall1": {
+  "len": 25,
+  "onset": 0,
+  "peak": 9,
+  "even": 0.084,
+  "sustained": true,
+  "src": "EarnEdits - Fast Small Whoosh 01.mp3"
+ },
+ "wsmall2": {
+  "len": 24,
+  "onset": 0,
+  "peak": 8,
+  "even": 0.072,
+  "sustained": true,
+  "src": "EarnEdits - Fast Small Whoosh 02.mp3"
+ },
+ "wsmall3": {
+  "len": 26,
+  "onset": 0,
+  "peak": 8,
+  "even": 0.068,
+  "sustained": true,
+  "src": "EarnEdits - Fast Small Whoosh 03.mp3"
+ },
+ "wsoft": {
+  "len": 22,
+  "onset": 0,
+  "peak": 3,
+  "even": 1.043,
+  "sustained": true,
+  "src": "EarnEdits - Whoosh 03.mp3"
+ },
+ "wlow": {
+  "len": 28,
+  "onset": 0,
+  "peak": 8,
+  "even": 0.097,
+  "sustained": true,
+  "src": "EarnEdits - Low Fast Whoosh.mp3"
+ },
+ "whum": {
+  "len": 40,
+  "onset": 0,
+  "peak": 7,
+  "even": 0.085,
+  "sustained": true,
+  "src": "EarnEdits - Large Whoosh - Low Hum.mp3"
+ },
+ "ckey": {
+  "len": 3,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.153,
+  "sustained": false,
+  "src": "EarnEdits - Designed Click 03.mp3"
+ },
+ "cmouse": {
+  "len": 6,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.107,
+  "sustained": false,
+  "src": "EarnEdits - Floor Selection Button.mp3"
+ },
+ "cpop": {
+  "len": 9,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.103,
+  "sustained": false,
+  "src": "EarnEdits - Click 02.mp3"
+ },
+ "cwood": {
+  "len": 5,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.112,
+  "sustained": false,
+  "src": "EarnEdits - Game Click 01.mp3"
+ },
+ "pflipa": {
+  "len": 15,
+  "onset": 0,
+  "peak": 4,
+  "even": 0.151,
+  "sustained": false,
+  "src": "EarnEdits - Fast Page Turn 01.mp3"
+ },
+ "pflipb": {
+  "len": 15,
+  "onset": 0,
+  "peak": 6,
+  "even": 0.199,
+  "sustained": false,
+  "src": "EarnEdits - Page Turn 03.mp3"
+ },
+ "pslide": {
+  "len": 21,
+  "onset": 0,
+  "peak": 2,
+  "even": 1.246,
+  "sustained": false,
+  "src": "EarnEdits - Page Turn 02.mp3"
+ },
+ "pland": {
+  "len": 15,
+  "onset": 0,
+  "peak": 12,
+  "even": 0.518,
+  "sustained": false,
+  "src": "EarnEdits - Page Turn 04.mp3"
+ },
+ "ptear": {
+  "len": 14,
+  "onset": 0,
+  "peak": 10,
+  "even": 0.131,
+  "sustained": false,
+  "src": "EarnEdits - Paper Tear 01.mp3"
+ },
+ "pcrunch": {
+  "len": 11,
+  "onset": 0,
+  "peak": 3,
+  "even": 0.181,
+  "sustained": false,
+  "src": "EarnEdits - Paper Crumple 02.mp3"
+ },
+ "pensign": {
+  "len": 95,
+  "onset": 0,
+  "peak": 72,
+  "even": 0.104,
+  "sustained": true,
+  "src": "EarnEdits - Pen Stroke 01.mp3"
+ },
+ "penwrite": {
+  "len": 15,
+  "onset": 0,
+  "peak": 4,
+  "even": 0.13,
+  "sustained": false,
+  "src": "EarnEdits - Pencil Stroke 02.mp3"
+ },
+ "erase": {
+  "len": 48,
+  "onset": 0,
+  "peak": 40,
+  "even": 0.166,
+  "sustained": true,
+  "src": "EarnEdits - Pencil Stroke 01.mp3"
+ },
+ "notes": {
+  "len": 42,
+  "onset": 0,
+  "peak": 29,
+  "even": 0.19,
+  "sustained": true,
+  "src": "EarnEdits - Counting Banknotes.mp3"
+ },
+ "thump": {
+  "len": 17,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.055,
+  "sustained": false,
+  "src": "stamp_thump.mp3"
+ },
+ "lowhit": {
+  "len": 54,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.037,
+  "sustained": false,
+  "src": "EarnEdits - Low Hit 02.mp3"
+ },
+ "gavel": {
+  "len": 18,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.305,
+  "sustained": false,
+  "src": "gavel_jbe.mp3"
+ },
+ "printer": {
+  "len": 85,
+  "onset": 0,
+  "peak": 54,
+  "even": 0.062,
+  "sustained": true,
+  "src": "printer_tpd.mp3"
+ }
+}

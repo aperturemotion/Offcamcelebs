@@ -10,3 +10,12 @@ Timur, 2026-11-21: "you can use logos, you can use faces … Just find them your
 - MINT MOBILE: no fox-free official wordmark was reachable (Wikipedia/Commons have none; mintmobile.com refused; the selfh.st
   icon IS the fox, which the brief excludes). Mint is set as type ("mint mobile", lowercase, heavy Archivo) in Mint's green
   #2B6744 / #69B88B.
+
+SOUND EFFECTS (2026-11-22). The EarnEdits SFX Pack (Timur's pack; OffCamCelebs/_sfx/earnedits) for every sound but these,
+found on Openverse (tools/openverse_audio.py) and cut by tools/sfx_prep.py (assets/audio/sfx_src/sfx_spec.json). All CC0: no
+credit is required; recorded for the trail.
+- vib_glass.mp3: "cell phone vibrate glass_loopable.wav" by mobaudio, https://freesound.org/people/mobaudio/sounds/384487, CC0 1.0
+- vib_brev.mp3: "Phone vibration" by Breviceps, https://freesound.org/people/Breviceps/sounds/515295, CC0 1.0
+- gavel_jbe.mp3: "wood hammer, gavel, knock, pound, jury, court.mp3" by JohnsonBrandEditing, https://freesound.org/people/JohnsonBrandEditing/sounds/173941, CC0 1.0
+- printer_tpd.mp3: "Receipt Printer 01.wav" by thepodcastdoctor, https://freesound.org/people/thepodcastdoctor/sounds/476011, CC0 1.0
+- stamp_thump.mp3: "Thump.mp3" by mpuffenbarger, https://freesound.org/people/mpuffenbarger/sounds/683031, CC0 1.0

@@ -151,14 +151,15 @@ const Comp: React.FC<{ f: number }> = ({ f }) => (
   </>
 );
 
+// ★ 2026-11-22 re-score from the EarnEdits pack: the crust gives under the knife, wood under the server, paper for the flag
 const sfx: PlaceSfx[] = [
-  { s: "whooshsoft", at: KIN[0] + 6, end: KIN[1], vol: 0.22, why: "the knife glides in along its blade", mode: "peak" },
-  ...CU.cuts.map((c, i): PlaceSfx => ({ s: "click", at: c, vol: 0.42 - 0.04 * i, why: `the knife's edge meets the board (cut ${i + 1})`, mode: "peak" })),
-  { s: "whooshsoft", at: KOUT[0] + 10, end: KOUT[1], vol: 0.16, why: "the knife is drawn away", mode: "peak" },
-  { s: "swoosh", at: SIN[0] + 5, end: SIN[1], vol: 0.2, why: "the server glides in", mode: "peak" },
-  { s: "tick", at: SDOWN[1], vol: 0.35, why: "the server's blade lands on the board", mode: "peak" },
-  { s: "whooshsoft", at: LIFT[0] + 9, end: LIFT[1], vol: 0.3, why: "the quarter is lifted out", mode: "peak" },
-  { s: "flick", at: FB[0] + 5, vol: 0.22, why: "the flag turns to its other side", mode: "peak" },
+  { s: "wsoft", at: KIN[0] + 6, end: KIN[1], vol: 0.28, why: "the knife glides in along its blade", mode: "peak" },
+  ...CU.cuts.map((c, i): PlaceSfx => ({ s: "pcrunch", at: c - 2, vol: 0.45 - 0.05 * i, why: `the knife cuts through the crust (cut ${i + 1})`, mode: "peak" })),
+  { s: "wsoft", at: KOUT[0] + 10, end: KOUT[1], vol: 0.18, why: "the knife is drawn away", mode: "peak" },
+  { s: "wsmall3", at: SIN[0] + 5, end: SIN[1], vol: 0.25, why: "the server glides in", mode: "peak" },
+  { s: "cwood", at: SDOWN[1], vol: 0.4, why: "the server's blade lands on the board", mode: "peak" },
+  { s: "wsoft", at: LIFT[0] + 9, end: LIFT[1], vol: 0.32, why: "the quarter is lifted out", mode: "peak" },
+  { s: "pflipb", at: FB[0] + 5, vol: 0.3, why: "the paper flag turns to its other side", mode: "peak" },
 ];
 export const PLACE: PlaceDef = {
   set: { id: S, ground: "cream", Comp, align: () => "centre", focus: [CX, FLOOR - 150] },

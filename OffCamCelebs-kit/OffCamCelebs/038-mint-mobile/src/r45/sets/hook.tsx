@@ -37,6 +37,9 @@ const S = "hook" as const;
 const STRICT = true;
 const fail = (msg: string) => { if (!STRICT || (globalThis as { __hookNoThrow?: boolean }).__hookNoThrow) console.log("CHECK:", msg); else throw new Error(msg); };
 const W135 = word(S, 0, /^\$1\.35/);               // the big beat (the bed's drop)
+/** ★ Timur 2026-11-22 ("a tiny bit more screen time on the Mint Mobile SIM card itself"): the slow-motion close-up holds on
+ *  the card this many frames past "$1.35" (the camera stays at SIM_NEAR, following it) before time snaps back */
+const SIM_HOLD = 9;
 const BILLION = word(S, 0, /^billion/);
 const EVERY = cue(S, 1), HEADLINE = word(S, 1, /^headline/), SAID = word(S, 1, /^said/), SO = word(S, 1, /^so/);
 const WE = cue(S, 2), WAITED = word(S, 2, /^waited/), LAST = word(S, 2, /^last/), PAYMENT = word(S, 2, /^payment/);
@@ -284,7 +287,7 @@ const TAU = {
 //    SIM's big frame on "$1.35" ══════════════════════════════════════════════════════════════════
 const SLOW = 0.1;
 const fS0 = Math.floor(TAU.pop - 1.5);             // the warp starts as the tray is about to pop (τ = f until here)
-const RAMP_IN = 5, fS1 = W135 + 2, RAMP_OUT = 7;
+const RAMP_IN = 5, fS1 = W135 + 2 + SIM_HOLD, RAMP_OUT = 7;
 const rate = (f: number) => {
   if (f < fS0) return 1;
   if (f < fS0 + RAMP_IN) return 1 + (SLOW - 1) * INOUT((f - fS0) / RAMP_IN);
@@ -414,10 +417,12 @@ const T3: V3 = [REST_P[0], 6, REST_P[2] - 80];
 /** the camera at f */
 const camAt = (f: number): { c: V3; t: V3 } => {
   // phase 1 → 2: from the table shot to the SIM, a 38-f move (TRAVEL) that hands the look from the phone to the SIM
-  const A = F_TIP - 4, B = W135;
+  const A = F_TIP - 4, B = W135 + SIM_HOLD;
   if (f <= A) { const k = INOUT(clamp01(f / A)); return { c: lerp3(C1a, C1b, k), t: T1(f) }; }
+  // the hold: close on the card, following it as it turns in slow motion
+  if (f > W135 && f <= B) return { c: C2(f), t: simP(f) };
   if (f <= B) {
-    const k = TRAVEL(clamp01((f - A) / (B - A)));
+    const k = TRAVEL(clamp01((f - A) / (W135 - A)));
     const look = lerp3(T1(f), simP(Math.max(f, F_SIM)), SETTLE(clamp01((f - A) / (F_SIM + 4 - A))));
     return { c: lerp3(C1b, C2(f), k), t: look };
   }
@@ -470,7 +475,7 @@ const DONE = END + 4;
 const STORY: CamKey[] = [
   { at: -9999, x: 540, y: 960, z: 1, dur: 1 },
   // the 3-D camera flies the action (f50 → the floor framing); the frame itself holds still meanwhile
-  { at: 44, x: 540, y: 960, z: 1, dur: Math.ceil(W135 + 40 - 44) },
+  { at: 44, x: 540, y: 960, z: 1, dur: Math.ceil(W135 + SIM_HOLD + 40 - 44) },
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.22 });
 const M3D = hookModel();
@@ -496,7 +501,7 @@ const paramsAt = (f: number): HookP => {
 //   the camera flies after it (F_TIP − 4 … the floor framing settled): the brief's "in motion where the action demands";
 //   there the phone and the SIM cross the band on purpose, moving fast (the fall, the SIM at the lens, the crane down)
 // · the Reel zones: the notification's and the pending card's print stays left of x 940 and above y 1500
-const FLY_A = F_TIP - 4, FLY_B = W135 + 40;
+const FLY_A = F_TIP - 4, FLY_B = W135 + SIM_HOLD + 40;
 const corners: V3[] = [];
 for (const sx of [-1, 1]) for (const sy of [-1, 1]) for (const sz of [-1, 1]) corners.push([sx * PW / 2, sy * HALF, sz * (sz > 0 ? V_FRONT : V_LENS)]);
 const toScreen = (f: number, p: V3) => {
@@ -560,18 +565,20 @@ const Hook: React.FC<{ f: number }> = ({ f }) => (
 );
 
 // ══ THE SOUNDS, each on its own event's frame ══
+// ★ 2026-11-22 re-score (Timur: "the main issue with this video is the sound effects… Don't add that pinging anymore… For
+//   everything else, try to find subtle fitting sound effects"): a real phone vibration for the buzz (was the chain), a short
+//   buzz for each headline (was the ping), the EarnEdits pack for the rest; the pending spinner is silent
 const SFX: PlaceSfx[] = [
-  ...PULSES.filter(([a]) => a < F_TIP + 2).map(([a, b], i): PlaceSfx => ({ s: "chain", at: Math.max(0, a), end: Math.min(b, Math.ceil(F_REL)), vol: 0.32 - 0.02 * i, why: `the phone's buzz pulse ${i + 1}, rattling on the oak`, mode: "within" })),
-  { s: "whooshsoft", at: Math.round(F_REL - 1), vol: 0.38, why: "it slides off the oak's edge", mode: "peak" },
-  { s: "click", at: Math.round(F_POP), vol: 0.45, why: "the SIM tray pops out of its slot", mode: "within" },
-  { s: "lowwoosh", at: Math.round((F_SIM + W135) / 2), end: W135 + 2, vol: 0.45, why: "the slow-motion SIM spinning toward the lens", mode: "peak" },
-  { s: "swoosh", at: W135 + 4, vol: 0.55, why: "time snaps back: the SIM whips past the lens", mode: "peak" },
-  { s: "thud", at: Math.round(F_LAND), vol: 0.9, why: "the phone strikes the floor, bottom end first", mode: "peak" },
-  ...(F_HITS.length ? [{ s: "thud" as const, at: Math.round(F_HITS[0]), vol: 0.5, why: "it rocks back onto its back", mode: "peak" as const }] : []),
-  { s: "tick", at: F_WAKE, vol: 0.6, why: "the knocked screen wakes", mode: "within" },
-  ...CARDS.map((c, i): PlaceSfx => ({ s: "pingshort", at: c.at, vol: 0.42 - 0.04 * i, why: `headline notification ${i + 1} lands`, mode: "within" })),
-  { s: "flick", at: CLEAR_A + 2, vol: 0.5, why: "the notifications are swiped away", mode: "within" },
-  { s: "datashort", at: PEND_A + 2, end: DONE, vol: 0.22, why: "the payment spinner, pending", mode: "within" },
+  ...PULSES.filter(([a]) => a < F_TIP + 2).map(([a, b], i): PlaceSfx => ({ s: "buzz", at: Math.max(0, a), end: Math.min(b, Math.ceil(F_REL)), vol: 0.55 - 0.03 * i, why: `the phone's buzz pulse ${i + 1}, rattling on the oak`, mode: "within" })),
+  { s: "wsoft", at: Math.round(F_REL - 1), vol: 0.45, why: "it slides off the oak's edge", mode: "peak" },
+  { s: "ckey", at: Math.round(F_POP), vol: 0.5, why: "the SIM tray pops out of its slot", mode: "within" },
+  { s: "whum", at: Math.round((F_SIM + W135) / 2), end: W135 + 2 + SIM_HOLD, vol: 0.4, why: "the slow-motion SIM turning toward the lens", mode: "peak" },
+  { s: "wsmall2", at: W135 + SIM_HOLD + 4, vol: 0.45, why: "time snaps back: the SIM whips past the lens", mode: "peak" },
+  { s: "thump", at: Math.round(F_LAND), vol: 0.75, why: "the phone strikes the floor, bottom end first", mode: "peak" },
+  ...(F_HITS.length ? [{ s: "thump" as const, at: Math.round(F_HITS[0]), vol: 0.35, why: "it rocks back onto its back", mode: "peak" as const }] : []),
+  { s: "cmouse", at: F_WAKE, vol: 0.45, why: "the knocked screen wakes", mode: "within" },
+  ...CARDS.map((c, i): PlaceSfx => ({ s: "buzzshort", at: c.at, vol: 0.5 - 0.05 * i, why: `headline notification ${i + 1} lands (the phone buzzes)`, mode: "within" })),
+  { s: "wsoft", at: CLEAR_A + 2, vol: 0.32, why: "the notifications are swiped away", mode: "within" },
 ];
 
 export const HOOK_DEBUG = { phys: { tCut: phys.tCut, t0: phys.t0, tRel: phys.tRel, tFall: phys.tFall, restPhi: phys.restPhi, w1in: phys.w1in, bounces: phys.bounceAt, rel: phys.rel, hit: phys.hit, qz: phys.qz },

@@ -153,12 +153,13 @@ export const PLACE: PlaceDef = {
   set: { id: S, ground: "cream", Comp: Verdict, align: () => "centre" as const, focus: [CX, FLOOR - 420] as [number, number] },
   done: VD_DONE,
   cam: VD_CAM,
+  // ★ 2026-11-22 re-score: a real receipt printer (Openverse CC0), the pack's paper tear, a soft thump and low weight on LEGIT
   sfx: [
-    ...BURSTS.map(([a, b], i) => ({ s: "datashort" as const, at: a, end: b + 2, vol: 0.22, why: `the printer feeds the receipt (burst ${i + 1})`, mode: "within" as const })),
-    { s: "flick", at: CUT, vol: 0.24, why: "the auto-cutter cuts the receipt at the tear bar", mode: "within" },
-    { s: "lowwoosh", at: VD.inA + 7, end: VD.overA, vol: 0.36, why: "the stamp glides in over the receipt", mode: "peak" },
-    { s: "thud", at: VD.press, vol: 0.5, why: "the stamp presses LEGIT", mode: "within" },
-    { s: "sub", at: VD.press, vol: 0.42, why: "LEGIT", mode: "within" },
-    { s: "click", at: VD.holdTo + 1, vol: 0.2, why: "the stamp lifts off the receipt", mode: "within" },
+    ...BURSTS.map(([a, b], i) => ({ s: "printer" as const, at: a, end: b + 2, vol: 0.38, why: `the printer feeds the receipt (burst ${i + 1})`, mode: "within" as const })),
+    { s: "ptear", at: CUT, vol: 0.35, why: "the auto-cutter cuts the receipt at the tear bar", mode: "within" },
+    { s: "wlow", at: VD.inA + 7, end: VD.overA, vol: 0.32, why: "the stamp glides in over the receipt", mode: "peak" },
+    { s: "thump", at: VD.press, vol: 0.65, why: "the stamp presses LEGIT", mode: "within" },
+    { s: "lowhit", at: VD.press, vol: 0.35, why: "LEGIT", mode: "within" },
+    { s: "cmouse", at: VD.holdTo + 1, vol: 0.22, why: "the stamp lifts off the receipt", mode: "within" },
   ],
 };

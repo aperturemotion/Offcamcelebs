@@ -1,0 +1,155 @@
+{
+ "buzz": {
+  "src": "vib_glass.mp3",
+  "len": 0.6,
+  "fade": 60,
+  "sustained": true
+ },
+ "buzzshort": {
+  "src": "vib_brev.mp3",
+  "len": 0.45,
+  "fade": 80
+ },
+ "wcam1": {
+  "src": "../../../../_sfx/earnedits/10 Whooshes/EarnEdits - Human Whoosh.mp3",
+  "len": 1.7,
+  "fade": 300,
+  "sustained": true
+ },
+ "wcam2": {
+  "src": "../../../../_sfx/earnedits/10 Whooshes/EarnEdits - Human Swoosh - Long.mp3",
+  "len": 2.2,
+  "fade": 400,
+  "sustained": true
+ },
+ "wsmall1": {
+  "src": "../../../../_sfx/earnedits/10 Whooshes/EarnEdits - Fast Small Whoosh 01.mp3",
+  "len": 1.0,
+  "fade": 250,
+  "sustained": true
+ },
+ "wsmall2": {
+  "src": "../../../../_sfx/earnedits/10 Whooshes/EarnEdits - Fast Small Whoosh 02.mp3",
+  "len": 0.95,
+  "fade": 250,
+  "sustained": true
+ },
+ "wsmall3": {
+  "src": "../../../../_sfx/earnedits/10 Whooshes/EarnEdits - Fast Small Whoosh 03.mp3",
+  "len": 1.05,
+  "fade": 250,
+  "sustained": true
+ },
+ "wsoft": {
+  "src": "../../../../_sfx/earnedits/10 Whooshes/EarnEdits - Whoosh 03.mp3",
+  "len": 0.95,
+  "fade": 250,
+  "sustained": true
+ },
+ "wlow": {
+  "src": "../../../../_sfx/earnedits/10 Whooshes/EarnEdits - Low Fast Whoosh.mp3",
+  "len": 1.0,
+  "fade": 250,
+  "sustained": true
+ },
+ "whum": {
+  "src": "../../../../_sfx/earnedits/10 Whooshes/EarnEdits - Large Whoosh - Low Hum.mp3",
+  "len": 1.7,
+  "fade": 400,
+  "sustained": true
+ },
+ "ckey": {
+  "src": "../../../../_sfx/earnedits/01 Clicks and Typing/EarnEdits - Designed Click 03.mp3",
+  "len": 0.12,
+  "fade": 30
+ },
+ "cmouse": {
+  "src": "../../../../_sfx/earnedits/01 Clicks and Typing/EarnEdits - Floor Selection Button.mp3",
+  "len": 0.2,
+  "fade": 60
+ },
+ "cpop": {
+  "src": "../../../../_sfx/earnedits/01 Clicks and Typing/EarnEdits - Click 02.mp3",
+  "len": 0.3,
+  "fade": 80
+ },
+ "cwood": {
+  "src": "../../../../_sfx/earnedits/01 Clicks and Typing/EarnEdits - Game Click 01.mp3",
+  "len": 0.15,
+  "fade": 40
+ },
+ "pflipa": {
+  "src": "../../../../_sfx/earnedits/06 Paper/EarnEdits - Fast Page Turn 01.mp3",
+  "len": 0.5,
+  "fade": 150
+ },
+ "pflipb": {
+  "src": "../../../../_sfx/earnedits/06 Paper/EarnEdits - Page Turn 03.mp3",
+  "len": 0.5,
+  "fade": 150
+ },
+ "pslide": {
+  "src": "../../../../_sfx/earnedits/06 Paper/EarnEdits - Page Turn 02.mp3",
+  "len": 0.7,
+  "fade": 200
+ },
+ "pland": {
+  "src": "../../../../_sfx/earnedits/06 Paper/EarnEdits - Page Turn 04.mp3",
+  "len": 0.5,
+  "fade": 150
+ },
+ "ptear": {
+  "src": "../../../../_sfx/earnedits/06 Paper/EarnEdits - Paper Tear 01.mp3",
+  "len": 0.45,
+  "fade": 120
+ },
+ "pcrunch": {
+  "src": "../../../../_sfx/earnedits/06 Paper/EarnEdits - Paper Crumple 02.mp3",
+  "len": 0.35,
+  "fade": 100
+ },
+ "pensign": {
+  "src": "../../../../_sfx/earnedits/07 Pens and Pencils/EarnEdits - Pen Stroke 01.mp3",
+  "len": 3.2,
+  "fade": 200,
+  "sustained": true
+ },
+ "penwrite": {
+  "src": "../../../../_sfx/earnedits/07 Pens and Pencils/EarnEdits - Pencil Stroke 02.mp3",
+  "len": 0.5,
+  "fade": 150
+ },
+ "erase": {
+  "src": "../../../../_sfx/earnedits/07 Pens and Pencils/EarnEdits - Pencil Stroke 01.mp3",
+  "len": 1.6,
+  "fade": 200,
+  "sustained": true
+ },
+ "notes": {
+  "src": "../../../../_sfx/earnedits/05 Money and Coins/EarnEdits - Counting Banknotes.mp3",
+  "len": 1.4,
+  "fade": 350,
+  "sustained": true
+ },
+ "thump": {
+  "src": "stamp_thump.mp3",
+  "len": 0.7,
+  "fade": 150
+ },
+ "lowhit": {
+  "src": "../../../../_sfx/earnedits/04 Impacts/EarnEdits - Low Hit 02.mp3",
+  "len": 1.8,
+  "fade": 700
+ },
+ "gavel": {
+  "src": "gavel_jbe.mp3",
+  "len": 0.6,
+  "fade": 150
+ },
+ "printer": {
+  "src": "printer_tpd.mp3",
+  "len": 3.1,
+  "fade": 150,
+  "sustained": true
+ }
+}

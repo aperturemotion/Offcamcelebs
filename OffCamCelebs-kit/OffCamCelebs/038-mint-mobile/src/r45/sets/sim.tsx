@@ -130,13 +130,13 @@ const Comp: React.FC<{ f: number }> = ({ f }) => (
 );
 
 export const SM = { glide: GLIDE_IN, pop: POP, fly: FLY, drop: DROP, home: HOME, screen: SCREEN, done: DONE } as const;
+// ★ 2026-11-22 re-score from the EarnEdits pack (no ping: the display lights in silence)
 const SFX: PlaceSfx[] = [
-  { s: "swoosh", at: GLIDE_IN[0] + 4, end: GLIDE_IN[1], vol: 0.32, why: "the SIM card slides in across the desk", mode: "peak" },
-  { s: "tick", at: POP[0] + 1, vol: 0.55, why: "the nano SIM pops out of its punch-out", mode: "peak" },
-  { s: "whooshsoft", at: FLY[0] + 12, end: FLY[1], vol: 0.22, why: "the SIM is carried over to the tray", mode: "peak" },
-  { s: "tick", at: DROP[1], vol: 0.4, why: "the SIM drops into the tray's pocket", mode: "peak" },
-  { s: "click", at: HOME[1], vol: 0.45, why: "the tray clicks home in the phone's slot", mode: "peak" },
-  { s: "pingshort", at: SCREEN + 6, vol: 0.28, why: "the phone's display lights with the ad", mode: "peak" },
+  { s: "pslide", at: GLIDE_IN[0] + 4, end: GLIDE_IN[1], vol: 0.4, why: "the SIM card slides in across the desk", mode: "peak" },
+  { s: "cpop", at: POP[0] + 1, vol: 0.45, why: "the nano SIM pops out of its punch-out", mode: "peak" },
+  { s: "wsoft", at: FLY[0] + 12, end: FLY[1], vol: 0.3, why: "the SIM is carried over to the tray", mode: "peak" },
+  { s: "cmouse", at: DROP[1], vol: 0.4, why: "the SIM drops into the tray's pocket", mode: "peak" },
+  { s: "ckey", at: HOME[1], vol: 0.55, why: "the tray clicks home in the phone's slot", mode: "peak" },
 ];
 
 export const PLACE: PlaceDef = {

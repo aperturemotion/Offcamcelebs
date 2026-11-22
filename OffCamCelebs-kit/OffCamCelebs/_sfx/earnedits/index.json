@@ -1,0 +1,3919 @@
+[
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Click 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "bubbles underwater",
+    "z": 3.3
+   },
+   {
+    "tag": "a mouth pop",
+    "z": 3.3
+   },
+   {
+    "tag": "a liquid bloop",
+    "z": 2.9
+   },
+   {
+    "tag": "a bubble pop",
+    "z": 2.8
+   },
+   {
+    "tag": "a cork pop",
+    "z": 2.7
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.033
+   }
+  ],
+  "shape": "short transient (attack 13 ms, decays in 34 ms)",
+  "summary": "0.32 s short transient (attack 13 ms, decays in 34 ms). Sounds most like: bubbles underwater (z +3.3), a mouth pop (z +3.3), a liquid bloop (z +2.8) [clear reading]. AudioSet tagger unsure (Sound effect 0.03). peak -1.0 dBFS, brightness 2.5 kHz, bandwidth 16.3 kHz, mono.",
+  "duration": 0.317,
+  "peak_dbfs": -1.0,
+  "lufs": null,
+  "attack_ms": 13.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Click 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a mouth pop",
+    "z": 3.7
+   },
+   {
+    "tag": "a cork pop",
+    "z": 2.9
+   },
+   {
+    "tag": "a wooden block hit",
+    "z": 2.6
+   },
+   {
+    "tag": "ice cubes in a glass",
+    "z": 2.6
+   },
+   {
+    "tag": "a kalimba note",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Single-lens reflex camera",
+    "p": 0.148
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.059
+   },
+   {
+    "label": "Scrape",
+    "p": 0.055
+   }
+  ],
+  "shape": "short transient (attack 3 ms, decays in 117 ms)",
+  "summary": "0.32 s short transient (attack 3 ms, decays in 117 ms). Sounds most like: a mouth pop (z +3.6), a cork pop (z +2.8), a wooden block hit (z +2.6) [clear reading]. Other readings: ice cubes in a glass (water, z +2.6), a kalimba note (chimes, z +2.6). AudioSet tagger unsure (Single-lens reflex camera 0.15, Sound effect 0.06, Scrape 0.06). peak -1.0 dBFS, brightness 3.8 kHz, bandwidth 20.5 kHz, mono.",
+  "duration": 0.324,
+  "peak_dbfs": -1.0,
+  "lufs": null,
+  "attack_ms": 3.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Designed Click 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "bubbles underwater",
+    "z": 3.4
+   },
+   {
+    "tag": "a bubble pop",
+    "z": 3.2
+   },
+   {
+    "tag": "a liquid bloop",
+    "z": 2.8
+   },
+   {
+    "tag": "a cork pop",
+    "z": 2.6
+   },
+   {
+    "tag": "a mouth pop",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Plop",
+    "p": 0.278
+   },
+   {
+    "label": "Music",
+    "p": 0.066
+   },
+   {
+    "label": "Speech",
+    "p": 0.06
+   }
+  ],
+  "shape": "short one-shot (attack 37 ms, decays in 33 ms)",
+  "summary": "0.18 s short one-shot (attack 37 ms, decays in 33 ms). Sounds most like: bubbles underwater (z +3.4), a bubble pop (z +3.2), a liquid bloop (z +2.8) [clear reading]. AudioSet: Plop 0.28, Music 0.07, Speech 0.06. peak -1.2 dBFS, brightness 3.1 kHz, bandwidth 20.5 kHz, mono.",
+  "duration": 0.179,
+  "peak_dbfs": -1.2,
+  "lufs": null,
+  "attack_ms": 37.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Designed Click 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a digital glitch",
+    "z": 2.8
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.4
+   },
+   {
+    "tag": "a rubber stretch",
+    "z": 2.3
+   },
+   {
+    "tag": "a stutter glitch transition",
+    "z": 2.3
+   },
+   {
+    "tag": "bubbles underwater",
+    "z": 2.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Speech",
+    "p": 0.073
+   }
+  ],
+  "shape": "short transient (attack 4 ms, decays in 56 ms)",
+  "summary": "0.09 s short transient (attack 4 ms, decays in 56 ms). Sounds most like: a digital glitch (z +2.8), a record scratch (z +2.4), a rubber stretch (z +2.3) [plausible reading]. Other readings: bubbles underwater (water, z +2.3). AudioSet tagger unsure (Speech 0.07). peak -4.5 dBFS, brightness 5.4 kHz, bandwidth 20.5 kHz, mono.",
+  "duration": 0.093,
+  "peak_dbfs": -4.5,
+  "lufs": null,
+  "attack_ms": 4.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Designed Click 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "a soft key release click",
+    "z": 2.9
+   },
+   {
+    "tag": "a single mechanical keyboard key press",
+    "z": 2.6
+   },
+   {
+    "tag": "ice cubes in a glass",
+    "z": 2.6
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.6
+   },
+   {
+    "tag": "an enter key press",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Speech",
+    "p": 0.079
+   },
+   {
+    "label": "Animal",
+    "p": 0.058
+   }
+  ],
+  "shape": "short one-shot (attack 43 ms, decays in 16 ms)",
+  "summary": "0.08 s short one-shot (attack 43 ms, decays in 16 ms). Sounds most like: a soft key release click (z +2.8), a single mechanical keyboard key press (z +2.6), ice cubes in a glass (z +2.5) [plausible reading]. Other readings: a record scratch (transitions, z +2.5). AudioSet tagger unsure (Speech 0.08, Animal 0.06). peak -0.5 dBFS, brightness 2.4 kHz, bandwidth 12.9 kHz, mono.",
+  "duration": 0.078,
+  "peak_dbfs": -0.5,
+  "lufs": null,
+  "attack_ms": 43.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Digital Click 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a quick swipe",
+    "z": 3.0
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.6
+   },
+   {
+    "tag": "an error buzz",
+    "z": 2.5
+   },
+   {
+    "tag": "a finger squeaking on glass",
+    "z": 2.5
+   },
+   {
+    "tag": "a triangle hit",
+    "z": 2.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.318
+   },
+   {
+    "label": "Boing",
+    "p": 0.064
+   },
+   {
+    "label": "Plop",
+    "p": 0.052
+   }
+  ],
+  "shape": "short one-shot (attack 132 ms, decays in 44 ms)",
+  "summary": "0.26 s short one-shot (attack 132 ms, decays in 44 ms). Sounds most like: a quick swipe (z +3.0), a record scratch (z +2.6), an error buzz (z +2.5) [clear reading]. Other readings: a finger squeaking on glass (foley, z +2.5), a triangle hit (chimes, z +2.4). AudioSet: Sound effect 0.32, Boing 0.06, Plop 0.05. peak -0.7 dBFS, brightness 9.9 kHz, bandwidth 20.5 kHz, mono.",
+  "duration": 0.258,
+  "peak_dbfs": -0.7,
+  "lufs": null,
+  "attack_ms": 132.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Elevator Button.mp3",
+  "sounds_like": [
+   {
+    "tag": "an old typewriter",
+    "z": 2.6
+   },
+   {
+    "tag": "a single mechanical keyboard key press",
+    "z": 2.6
+   },
+   {
+    "tag": "a box lid closing",
+    "z": 2.4
+   },
+   {
+    "tag": "a light switch flicked",
+    "z": 2.4
+   },
+   {
+    "tag": "an enter key press",
+    "z": 2.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Typewriter",
+    "p": 0.27
+   }
+  ],
+  "shape": "short transient (attack 5 ms, decays in 311 ms)",
+  "summary": "0.63 s short transient (attack 5 ms, decays in 311 ms). Sounds most like: an old typewriter (z +2.6), a single mechanical keyboard key press (z +2.5), a box lid closing (z +2.4) [plausible reading]. Other readings: a light switch flicked (ui, z +2.4). AudioSet: Typewriter 0.27. peak 0.2 dBFS, -20.3 LUFS, brightness 3.1 kHz, bandwidth 20.5 kHz, mono.",
+  "duration": 0.628,
+  "peak_dbfs": 0.2,
+  "lufs": -20.3,
+  "attack_ms": 5.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Floor Selection Button.mp3",
+  "sounds_like": [
+   {
+    "tag": "a single mechanical keyboard key press",
+    "z": 3.7
+   },
+   {
+    "tag": "a triangle hit",
+    "z": 3.2
+   },
+   {
+    "tag": "a soft key release click",
+    "z": 2.9
+   },
+   {
+    "tag": "an old typewriter",
+    "z": 2.8
+   },
+   {
+    "tag": "a ratchet clicking",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Coin (dropping)",
+    "p": 0.141
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.101
+   },
+   {
+    "label": "Crack",
+    "p": 0.057
+   }
+  ],
+  "shape": "short transient (attack 15 ms, decays in 47 ms)",
+  "summary": "0.51 s short transient (attack 15 ms, decays in 47 ms). Sounds most like: a single mechanical keyboard key press (z +3.6), a triangle hit (z +3.2), a soft key release click (z +2.8) [clear reading]. Other readings: a ratchet clicking (foley, z +2.5). AudioSet tagger unsure (Coin (dropping) 0.14, Sound effect 0.10, Crack 0.06). peak 1.7 dBFS, -19.9 LUFS, brightness 7.8 kHz, bandwidth 20.5 kHz, mono.",
+  "duration": 0.508,
+  "peak_dbfs": 1.7,
+  "lufs": -19.9,
+  "attack_ms": 15.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Game Click 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a wooden block hit",
+    "z": 3.1
+   },
+   {
+    "tag": "a snare hit",
+    "z": 2.6
+   },
+   {
+    "tag": "a chat message pop",
+    "z": 2.6
+   },
+   {
+    "tag": "a bubble pop",
+    "z": 2.5
+   },
+   {
+    "tag": "a kalimba note",
+    "z": 2.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Music",
+    "p": 0.105
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.077
+   },
+   {
+    "label": "Beep, bleep",
+    "p": 0.059
+   }
+  ],
+  "shape": "short transient (attack 4 ms, decays in 89 ms)",
+  "summary": "0.15 s short transient (attack 4 ms, decays in 89 ms). Sounds most like: a wooden block hit (z +3.0), a snare hit (z +2.6), a chat message pop (z +2.5) [clear reading]. Other readings: a kalimba note (chimes, z +2.4). AudioSet tagger unsure (Music 0.10, Sound effect 0.08, Beep, bleep 0.06). peak -1.0 dBFS, brightness 1.4 kHz, bandwidth 12.9 kHz, side/mid -27 dB.",
+  "duration": 0.152,
+  "peak_dbfs": -1.0,
+  "lufs": null,
+  "attack_ms": 4.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Keyboard Typing - Aggressive.mp3",
+  "sounds_like": [
+   {
+    "tag": "a single mechanical keyboard key press",
+    "z": 5.0
+   },
+   {
+    "tag": "slow typing with separate key presses",
+    "z": 4.4
+   },
+   {
+    "tag": "a keyboard typing fast",
+    "z": 4.3
+   },
+   {
+    "tag": "a laptop keyboard typing",
+    "z": 4.1
+   },
+   {
+    "tag": "a clicky mechanical keyboard",
+    "z": 4.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Computer keyboard",
+    "p": 0.832
+   },
+   {
+    "label": "Typing",
+    "p": 0.709
+   },
+   {
+    "label": "Typewriter",
+    "p": 0.138
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.064
+   }
+  ],
+  "shape": "busy, 5.1 onsets/s (attack 184 ms, decays in 108 ms)",
+  "summary": "2.16 s busy, 5.1 onsets/s (attack 184 ms, decays in 108 ms). Sounds most like: a single mechanical keyboard key press (z +5.0), slow typing with separate key presses (z +4.3), a keyboard typing fast (z +4.2) [clear reading]. AudioSet: Computer keyboard 0.83, Typing 0.71, Typewriter 0.14. peak -1.1 dBFS, -22.4 LUFS, brightness 5.2 kHz, bandwidth 20.5 kHz, noise floor -65 dBFS, side/mid -10 dB.",
+  "duration": 2.164,
+  "peak_dbfs": -1.1,
+  "lufs": -22.4,
+  "attack_ms": 184.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Keyboard Typing - Moderate Fast.mp3",
+  "sounds_like": [
+   {
+    "tag": "slow typing with separate key presses",
+    "z": 4.8
+   },
+   {
+    "tag": "a laptop keyboard typing",
+    "z": 4.7
+   },
+   {
+    "tag": "a keyboard typing fast",
+    "z": 4.7
+   },
+   {
+    "tag": "a deep thocky mechanical keyboard",
+    "z": 4.2
+   },
+   {
+    "tag": "a clicky mechanical keyboard",
+    "z": 4.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Computer keyboard",
+    "p": 0.93
+   },
+   {
+    "label": "Typing",
+    "p": 0.926
+   }
+  ],
+  "shape": "busy, 8.4 onsets/s (attack 288 ms, decays in 155 ms)",
+  "summary": "13.60 s busy, 8.4 onsets/s (attack 288 ms, decays in 155 ms). Sounds most like: slow typing with separate key presses (z +4.7), a laptop keyboard typing (z +4.6), a keyboard typing fast (z +4.6) [clear reading]. AudioSet: Computer keyboard 0.93, Typing 0.93. peak -1.0 dBFS, -28.8 LUFS, brightness 7.2 kHz, bandwidth 20.5 kHz, noise floor -53 dBFS, mono.",
+  "duration": 13.596,
+  "peak_dbfs": -1.0,
+  "lufs": -28.8,
+  "attack_ms": 288.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Keyboard Typing 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a deep thocky mechanical keyboard",
+    "z": 3.5
+   },
+   {
+    "tag": "a clicky mechanical keyboard",
+    "z": 3.4
+   },
+   {
+    "tag": "a laptop keyboard typing",
+    "z": 3.4
+   },
+   {
+    "tag": "a keyboard typing fast",
+    "z": 3.4
+   },
+   {
+    "tag": "slow typing with separate key presses",
+    "z": 3.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Computer keyboard",
+    "p": 0.873
+   },
+   {
+    "label": "Typing",
+    "p": 0.801
+   }
+  ],
+  "shape": "busy, 6.2 onsets/s (attack 0 ms, decays in 115 ms)",
+  "summary": "7.05 s busy, 6.2 onsets/s (attack 0 ms, decays in 115 ms). Sounds most like: a deep thocky mechanical keyboard (z +3.4), a clicky mechanical keyboard (z +3.4), a laptop keyboard typing (z +3.4) [clear reading]. AudioSet: Computer keyboard 0.87, Typing 0.80. peak 0.3 dBFS, -33.8 LUFS, brightness 4.6 kHz, bandwidth 20.5 kHz, noise floor -64 dBFS, side/mid -6 dB.",
+  "duration": 7.048,
+  "peak_dbfs": 0.3,
+  "lufs": -33.8,
+  "attack_ms": 0.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Keyboard Typing 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "slow typing with separate key presses",
+    "z": 4.3
+   },
+   {
+    "tag": "a laptop keyboard typing",
+    "z": 4.2
+   },
+   {
+    "tag": "a keyboard typing fast",
+    "z": 3.9
+   },
+   {
+    "tag": "a clicky mechanical keyboard",
+    "z": 3.9
+   },
+   {
+    "tag": "a deep thocky mechanical keyboard",
+    "z": 3.7
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Typing",
+    "p": 0.898
+   },
+   {
+    "label": "Computer keyboard",
+    "p": 0.889
+   }
+  ],
+  "shape": "busy, 8.7 onsets/s, loudness range 3 LU",
+  "summary": "31.08 s busy, 8.7 onsets/s, loudness range 3 LU. Sounds most like: slow typing with separate key presses (z +4.2), a laptop keyboard typing (z +4.1), a keyboard typing fast (z +3.9) [clear reading]. AudioSet: Typing 0.90, Computer keyboard 0.89. peak -22.0 dBFS, -48.7 LUFS, brightness 2.8 kHz, bandwidth 20.5 kHz, mono. Uniform: all 6 analysed 10 s windows read as slow typing with separate key presses.",
+  "duration": 31.08,
+  "peak_dbfs": -22.0,
+  "lufs": -48.7,
+  "attack_ms": 2.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Keyboard Typing 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "slow typing with separate key presses",
+    "z": 4.7
+   },
+   {
+    "tag": "a laptop keyboard typing",
+    "z": 4.7
+   },
+   {
+    "tag": "a keyboard typing fast",
+    "z": 4.5
+   },
+   {
+    "tag": "a deep thocky mechanical keyboard",
+    "z": 4.1
+   },
+   {
+    "tag": "a clicky mechanical keyboard",
+    "z": 4.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Computer keyboard",
+    "p": 0.911
+   },
+   {
+    "label": "Typing",
+    "p": 0.887
+   }
+  ],
+  "shape": "busy, 5.5 onsets/s, loudness range 10 LU",
+  "summary": "40.10 s busy, 5.5 onsets/s, loudness range 10 LU. Sounds most like: slow typing with separate key presses (z +4.6), a laptop keyboard typing (z +4.6), a keyboard typing fast (z +4.4) [clear reading]. AudioSet: Computer keyboard 0.91, Typing 0.89. peak -11.8 dBFS, -41.8 LUFS, brightness 7.8 kHz, bandwidth 20.5 kHz, mono. Windows that read differently: 0:00.00-0:10.00 slow typing with separate key presses (z +4.7; AudioSet Computer keyboard 0.89); 0:20.00-0:30.00 a laptop keyboard typing (z +4.5; AudioSet Computer keyboard 0.91).",
+  "duration": 40.103,
+  "peak_dbfs": -11.8,
+  "lufs": -41.8,
+  "attack_ms": 246.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Laptop Keyboard - Enter Key.mp3",
+  "sounds_like": [
+   {
+    "tag": "a single mechanical keyboard key press",
+    "z": 4.2
+   },
+   {
+    "tag": "a soft key release click",
+    "z": 3.3
+   },
+   {
+    "tag": "an enter key press",
+    "z": 3.3
+   },
+   {
+    "tag": "slow typing with separate key presses",
+    "z": 3.2
+   },
+   {
+    "tag": "a spacebar press",
+    "z": 3.1
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Computer keyboard",
+    "p": 0.372
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.179
+   },
+   {
+    "label": "Clicking",
+    "p": 0.098
+   },
+   {
+    "label": "Typing",
+    "p": 0.095
+   }
+  ],
+  "shape": "busy, 1.8 onsets/s (attack 6 ms, decays in 23 ms)",
+  "summary": "5.60 s busy, 1.8 onsets/s (attack 6 ms, decays in 23 ms). Sounds most like: a single mechanical keyboard key press (z +4.2), a soft key release click (z +3.3), an enter key press (z +3.2) [clear reading]. AudioSet: Computer keyboard 0.37, Sound effect 0.18, Clicking 0.10. peak -0.8 dBFS, -28.4 LUFS, brightness 6.3 kHz, bandwidth 20.5 kHz, noise floor -85 dBFS, mono.",
+  "duration": 5.602,
+  "peak_dbfs": -0.8,
+  "lufs": -28.4,
+  "attack_ms": 6.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Laptop Keyboard - Spacebar.mp3",
+  "sounds_like": [
+   {
+    "tag": "a single mechanical keyboard key press",
+    "z": 4.5
+   },
+   {
+    "tag": "a soft key release click",
+    "z": 3.7
+   },
+   {
+    "tag": "an enter key press",
+    "z": 3.5
+   },
+   {
+    "tag": "a spacebar press",
+    "z": 3.2
+   },
+   {
+    "tag": "a clicky mechanical keyboard",
+    "z": 3.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.162
+   },
+   {
+    "label": "Computer keyboard",
+    "p": 0.124
+   },
+   {
+    "label": "Tick",
+    "p": 0.091
+   },
+   {
+    "label": "Tick-tock",
+    "p": 0.05
+   }
+  ],
+  "shape": "7 separate events (attack 4 ms, decays in 28 ms)",
+  "summary": "4.90 s 7 separate events (attack 4 ms, decays in 28 ms). Sounds most like: a single mechanical keyboard key press (z +4.4), a soft key release click (z +3.6), an enter key press (z +3.5) [clear reading]. AudioSet tagger unsure (Sound effect 0.16, Computer keyboard 0.12, Tick 0.09). peak -1.0 dBFS, -32.0 LUFS, brightness 6.6 kHz, bandwidth 20.5 kHz, noise floor -90 dBFS, mono.",
+  "duration": 4.903,
+  "peak_dbfs": -1.0,
+  "lufs": -32.0,
+  "attack_ms": 4.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Marimba Click 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a success chime",
+    "z": 4.4
+   },
+   {
+    "tag": "a kalimba note",
+    "z": 3.2
+   },
+   {
+    "tag": "a notification ding",
+    "z": 2.9
+   },
+   {
+    "tag": "a magic sparkle chime",
+    "z": 2.9
+   },
+   {
+    "tag": "a doorbell",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Music",
+    "p": 0.194
+   },
+   {
+    "label": "Ding-dong",
+    "p": 0.174
+   },
+   {
+    "label": "Ding",
+    "p": 0.126
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.113
+   },
+   {
+    "label": "Doorbell",
+    "p": 0.09
+   }
+  ],
+  "shape": "short one-shot, tonal, pitch ~131 Hz (C3) (attack 43 ms, decays in 524 ms)",
+  "summary": "0.84 s short one-shot, tonal, pitch ~131 Hz (C3) (attack 43 ms, decays in 524 ms). Sounds most like: a success chime (z +4.3), a kalimba note (z +3.2), a notification ding (z +2.9) [clear reading]. Unvalidated hint: a ukulele (z +3.3). Character: satisfying. AudioSet tagger unsure (Music 0.19, Ding-dong 0.17, Ding 0.13). peak -1.2 dBFS, -14.9 LUFS, brightness 803 Hz, bandwidth 2.6 kHz, mono.",
+  "duration": 0.836,
+  "peak_dbfs": -1.2,
+  "lufs": -14.9,
+  "attack_ms": 43.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Marimba Click 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a kalimba note",
+    "z": 3.8
+   },
+   {
+    "tag": "a success chime",
+    "z": 3.4
+   },
+   {
+    "tag": "a glass ting",
+    "z": 2.9
+   },
+   {
+    "tag": "a doorbell",
+    "z": 2.8
+   },
+   {
+    "tag": "a notification ding",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Ding-dong",
+    "p": 0.332
+   },
+   {
+    "label": "Music",
+    "p": 0.312
+   },
+   {
+    "label": "Doorbell",
+    "p": 0.221
+   },
+   {
+    "label": "Ringtone",
+    "p": 0.123
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.05
+   }
+  ],
+  "shape": "short transient, tonal, pitch ~131 Hz (C3) (attack 11 ms, decays in 618 ms)",
+  "summary": "1.04 s short transient, tonal, pitch ~131 Hz (C3) (attack 11 ms, decays in 618 ms). Sounds most like: a kalimba note (z +3.7), a success chime (z +3.4), a glass ting (z +2.9) [clear reading]. Unvalidated hint: a ukulele (z +3.3). AudioSet: Ding-dong 0.33, Music 0.31, Doorbell 0.22. peak -0.9 dBFS, -14.7 LUFS, brightness 635 Hz, bandwidth 3.2 kHz, noise floor -70 dBFS, mono.",
+  "duration": 1.042,
+  "peak_dbfs": -0.9,
+  "lufs": -14.7,
+  "attack_ms": 11.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Mouse - Middle Click.mp3",
+  "sounds_like": [
+   {
+    "tag": "a typing cursor blip",
+    "z": 3.0
+   },
+   {
+    "tag": "a mouse click",
+    "z": 3.0
+   },
+   {
+    "tag": "a scroll wheel tick",
+    "z": 3.0
+   },
+   {
+    "tag": "an enter key press",
+    "z": 2.9
+   },
+   {
+    "tag": "slow typing with separate key presses",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Computer keyboard",
+    "p": 0.471
+   },
+   {
+    "label": "Typing",
+    "p": 0.239
+   },
+   {
+    "label": "Finger snapping",
+    "p": 0.148
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.074
+   },
+   {
+    "label": "Speech",
+    "p": 0.063
+   }
+  ],
+  "shape": "busy, 5.4 onsets/s (attack 6 ms, decays in 63 ms)",
+  "summary": "1.30 s busy, 5.4 onsets/s (attack 6 ms, decays in 63 ms). Sounds most like: a typing cursor blip (z +3.0), a mouse click (z +3.0), a scroll wheel tick (z +2.9) [clear reading]. Other readings: an enter key press (keyboard, z +2.9). AudioSet: Computer keyboard 0.47, Typing 0.24, Finger snapping 0.15. peak -1.1 dBFS, -22.7 LUFS, brightness 7.6 kHz, bandwidth 20.5 kHz, noise floor -64 dBFS, mono.",
+  "duration": 1.301,
+  "peak_dbfs": -1.1,
+  "lufs": -22.7,
+  "attack_ms": 6.0
+ },
+ {
+  "file": "01 Clicks and Typing/EarnEdits - Mouse Click.mp3",
+  "sounds_like": [
+   {
+    "tag": "a soft key release click",
+    "z": 3.5
+   },
+   {
+    "tag": "a mouse click",
+    "z": 3.2
+   },
+   {
+    "tag": "a single mechanical keyboard key press",
+    "z": 3.2
+   },
+   {
+    "tag": "a typing cursor blip",
+    "z": 3.1
+   },
+   {
+    "tag": "a scroll wheel tick",
+    "z": 3.1
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Computer keyboard",
+    "p": 0.359
+   },
+   {
+    "label": "Clicking",
+    "p": 0.335
+   },
+   {
+    "label": "Typing",
+    "p": 0.17
+   }
+  ],
+  "shape": "busy, 4.3 onsets/s (attack 114 ms, decays in 153 ms)",
+  "summary": "1.38 s busy, 4.3 onsets/s (attack 114 ms, decays in 153 ms). Sounds most like: a soft key release click (z +3.4), a mouse click (z +3.2), a single mechanical keyboard key press (z +3.1) [clear reading]. AudioSet: Computer keyboard 0.36, Clicking 0.34, Typing 0.17. peak -15.4 dBFS, -40.3 LUFS, brightness 8.5 kHz, bandwidth 20.5 kHz, noise floor -63 dBFS, side/mid -6 dB.",
+  "duration": 1.383,
+  "peak_dbfs": -15.4,
+  "lufs": -40.3,
+  "attack_ms": 114.0
+ },
+ {
+  "file": "02 Clocks and Alarms/EarnEdits - Clock Alarm 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a liquid bloop",
+    "z": 2.6
+   },
+   {
+    "tag": "a water drop",
+    "z": 2.4
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 2.4
+   },
+   {
+    "tag": "an alarm clock beeping",
+    "z": 2.2
+   },
+   {
+    "tag": "a notification ding",
+    "z": 2.1
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sonar",
+    "p": 0.406
+   },
+   {
+    "label": "Sidetone",
+    "p": 0.274
+   },
+   {
+    "label": "Music",
+    "p": 0.27
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.204
+   },
+   {
+    "label": "Ringtone",
+    "p": 0.196
+   }
+  ],
+  "shape": "busy, 1.8 onsets/s, tonal, pitch ~1001 Hz (B5) (attack 24 ms, decays in 65 ms)",
+  "summary": "4.50 s busy, 1.8 onsets/s, tonal, pitch ~1001 Hz (B5) (attack 24 ms, decays in 65 ms). Sounds most like: a liquid bloop (z +2.5), a water drop (z +2.3), a cinematic hit with a long tail (z +2.3) [plausible reading]. Other readings: an alarm clock beeping (everyday, z +2.1), a notification ding (ui, z +2.1). AudioSet: Sonar 0.41, Sidetone 0.27, Music 0.27. peak 0.0 dBFS, -15.5 LUFS, brightness 996 Hz, bandwidth 1.6 kHz, noise floor -109 dBFS, side/mid -19 dB.",
+  "duration": 4.5,
+  "peak_dbfs": 0.0,
+  "lufs": -15.5,
+  "attack_ms": 24.0
+ },
+ {
+  "file": "02 Clocks and Alarms/EarnEdits - Clock Alarm 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "an error buzz",
+    "z": 3.4
+   },
+   {
+    "tag": "a car horn honking",
+    "z": 3.1
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 2.4
+   },
+   {
+    "tag": "a doorbell",
+    "z": 2.3
+   },
+   {
+    "tag": "a cow mooing",
+    "z": 2.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Vehicle horn, car horn, honking",
+    "p": 0.436
+   },
+   {
+    "label": "Buzzer",
+    "p": 0.323
+   },
+   {
+    "label": "Air horn, truck horn",
+    "p": 0.204
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.083
+   }
+  ],
+  "shape": "sustained, tonal, pitch ~128 Hz (C3) (attack 110 ms, decays in 1305 ms)",
+  "summary": "4.60 s sustained, tonal, pitch ~128 Hz (C3) (attack 110 ms, decays in 1305 ms). Sounds most like: an error buzz (z +3.3), a car horn honking (z +3.1), a cinematic hit with a long tail (z +2.3) [clear reading]. Other readings: a doorbell (chimes, z +2.2). AudioSet: Vehicle horn, car horn, honking 0.44, Buzzer 0.32, Air horn, truck horn 0.20. peak 0.0 dBFS, -8.1 LUFS, brightness 1.4 kHz, bandwidth 8.1 kHz, noise floor -99 dBFS, side/mid -1 dB.",
+  "duration": 4.6,
+  "peak_dbfs": 0.0,
+  "lufs": -8.1,
+  "attack_ms": 110.0
+ },
+ {
+  "file": "02 Clocks and Alarms/EarnEdits - Clock Alarm 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "an alarm clock beeping",
+    "z": 5.4
+   },
+   {
+    "tag": "a microwave beep",
+    "z": 2.5
+   },
+   {
+    "tag": "a doorbell",
+    "z": 2.4
+   },
+   {
+    "tag": "a heartbeat",
+    "z": 2.3
+   },
+   {
+    "tag": "a phone ringing",
+    "z": 2.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Alarm clock",
+    "p": 0.88
+   },
+   {
+    "label": "Alarm",
+    "p": 0.378
+   },
+   {
+    "label": "Clock",
+    "p": 0.079
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.066
+   }
+  ],
+  "shape": "busy, 4.0 onsets/s, tonal, pitch ~2004 Hz (B6) (attack 141 ms, decays in 99 ms)",
+  "summary": "4.00 s busy, 4.0 onsets/s, tonal, pitch ~2004 Hz (B6) (attack 141 ms, decays in 99 ms). Sounds most like: an alarm clock beeping (z +5.3), a microwave beep (z +2.5), a doorbell (z +2.4) [clear reading]. AudioSet: Alarm clock 0.88, Alarm 0.38, Clock 0.08. peak -0.1 dBFS, -7.5 LUFS, brightness 3.8 kHz, bandwidth 20.5 kHz, noise floor -93 dBFS, side/mid -13 dB.",
+  "duration": 4.0,
+  "peak_dbfs": -0.1,
+  "lufs": -7.5,
+  "attack_ms": 141.0
+ },
+ {
+  "file": "02 Clocks and Alarms/EarnEdits - Clock Ticking 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "ice cubes in a glass",
+    "z": 3.8
+   },
+   {
+    "tag": "a scroll wheel tick",
+    "z": 3.8
+   },
+   {
+    "tag": "a ratchet clicking",
+    "z": 2.9
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 2.7
+   },
+   {
+    "tag": "a clock ticking",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.127
+   },
+   {
+    "label": "Tick-tock",
+    "p": 0.111
+   },
+   {
+    "label": "Tick",
+    "p": 0.094
+   },
+   {
+    "label": "Rattle",
+    "p": 0.064
+   },
+   {
+    "label": "Engine",
+    "p": 0.064
+   }
+  ],
+  "shape": "busy, 5.9 onsets/s (attack 16 ms, decays in 54 ms)",
+  "summary": "5.80 s busy, 5.9 onsets/s (attack 16 ms, decays in 54 ms). Sounds most like: ice cubes in a glass (z +3.8), a scroll wheel tick (z +3.7), a ratchet clicking (z +2.8) [clear reading]. Other readings: a clock ticking (everyday, z +2.5). AudioSet tagger unsure (Sound effect 0.13, Tick-tock 0.11, Tick 0.09). peak -5.5 dBFS, -26.5 LUFS, brightness 5.8 kHz, bandwidth 20.5 kHz, noise floor -57 dBFS, mono.",
+  "duration": 5.802,
+  "peak_dbfs": -5.5,
+  "lufs": -26.5,
+  "attack_ms": 16.0
+ },
+ {
+  "file": "03 Ambience/EarnEdits - Press Conference - Busy Camera Shutters.mp3",
+  "sounds_like": [
+   {
+    "tag": "a power drill",
+    "z": 3.6
+   },
+   {
+    "tag": "a camera shutter click",
+    "z": 3.6
+   },
+   {
+    "tag": "a tape stop slowing down",
+    "z": 3.2
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 3.1
+   },
+   {
+    "tag": "a ratchet clicking",
+    "z": 2.7
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Single-lens reflex camera",
+    "p": 0.105
+   },
+   {
+    "label": "Camera",
+    "p": 0.091
+   },
+   {
+    "label": "Crackle",
+    "p": 0.074
+   },
+   {
+    "label": "Crunch",
+    "p": 0.074
+   }
+  ],
+  "shape": "busy, 4.5 onsets/s, noise-like (attack 28 ms, decays in 160 ms)",
+  "summary": "9.76 s busy, 4.5 onsets/s, noise-like (attack 28 ms, decays in 160 ms). Sounds most like: a power drill (z +3.5), a camera shutter click (z +3.5), a tape stop slowing down (z +3.2) [clear reading]. Other readings: a squishy wet squelch (foley, z +3.1). AudioSet tagger unsure (Single-lens reflex camera 0.10, Camera 0.09, Crackle 0.07). peak -1.4 dBFS, -25.4 LUFS, brightness 7.3 kHz, bandwidth 20.5 kHz, noise floor -72 dBFS, side/mid -10 dB.",
+  "duration": 9.76,
+  "peak_dbfs": -1.4,
+  "lufs": -25.4,
+  "attack_ms": 28.0
+ },
+ {
+  "file": "04 Impacts/EarnEdits - Creepy Impact.mp3",
+  "sounds_like": [
+   {
+    "tag": "a branch snapping",
+    "z": 2.6
+   },
+   {
+    "tag": "something falling into bushes",
+    "z": 2.6
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 2.4
+   },
+   {
+    "tag": "a deep cinematic boom",
+    "z": 2.3
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 2.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Music",
+    "p": 0.138
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.05
+   }
+  ],
+  "shape": "busy, 3.8 onsets/s, tonal, pitch ~70 Hz (C#2) (attack 33 ms, decays in 4.0 s)",
+  "summary": "5.56 s busy, 3.8 onsets/s, tonal, pitch ~70 Hz (C#2) (attack 33 ms, decays in 4.0 s). Sounds most like: a branch snapping (z +2.6), something falling into bushes (z +2.5), a cinematic hit with a long tail (z +2.4) [plausible reading]. Other readings: a deep cinematic whoosh (transitions, z +2.2). AudioSet tagger unsure (Music 0.14, Sound effect 0.05). peak -5.1 dBFS, -17.8 LUFS, brightness 398 Hz, bandwidth 10.2 kHz, noise floor -30 dBFS, side/mid -34 dB.",
+  "duration": 5.56,
+  "peak_dbfs": -5.1,
+  "lufs": -17.8,
+  "attack_ms": 33.0
+ },
+ {
+  "file": "04 Impacts/EarnEdits - Dramatic Bass Hit.mp3",
+  "sounds_like": [
+   {
+    "tag": "a big drum hit",
+    "z": 4.1
+   },
+   {
+    "tag": "a deep cinematic boom",
+    "z": 3.7
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.4
+   },
+   {
+    "tag": "an explosion",
+    "z": 3.4
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 2.9
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Explosion",
+    "p": 0.719
+   },
+   {
+    "label": "Burst, pop",
+    "p": 0.469
+   },
+   {
+    "label": "Bang",
+    "p": 0.309
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.108
+   }
+  ],
+  "shape": "sustained, tonal, pitch ~52 Hz (Ab1) (attack 112 ms, decays in 2.1 s)",
+  "summary": "3.38 s sustained, tonal, pitch ~52 Hz (Ab1) (attack 112 ms, decays in 2.1 s). Sounds most like: a big drum hit (z +4.0), a deep cinematic boom (z +3.6), a cinematic hit with a long tail (z +3.3) [clear reading]. Other readings: a deep cinematic whoosh (transitions, z +2.8). AudioSet: Explosion 0.72, Burst, pop 0.47, Bang 0.31. peak -5.6 dBFS, -20.2 LUFS, brightness 299 Hz, bandwidth 3.2 kHz, digital silence between sounds, side/mid -4 dB.",
+  "duration": 3.378,
+  "peak_dbfs": -5.6,
+  "lufs": -20.2,
+  "attack_ms": 112.0
+ },
+ {
+  "file": "04 Impacts/EarnEdits - Firework Impact.mp3",
+  "sounds_like": [
+   {
+    "tag": "a kick drum",
+    "z": 3.7
+   },
+   {
+    "tag": "a deep cinematic boom",
+    "z": 3.6
+   },
+   {
+    "tag": "a sub bass drop",
+    "z": 3.6
+   },
+   {
+    "tag": "a big drum hit",
+    "z": 3.4
+   },
+   {
+    "tag": "a heartbeat",
+    "z": 2.7
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.231
+   },
+   {
+    "label": "Music",
+    "p": 0.18
+   },
+   {
+    "label": "Bang",
+    "p": 0.069
+   },
+   {
+    "label": "Heart murmur",
+    "p": 0.056
+   },
+   {
+    "label": "Drum machine",
+    "p": 0.05
+   }
+  ],
+  "shape": "short one-shot (attack 29 ms, decays in 1046 ms)",
+  "summary": "2.15 s short one-shot (attack 29 ms, decays in 1046 ms). Sounds most like: a kick drum (z +3.7), a deep cinematic boom (z +3.6), a sub bass drop (z +3.6) [clear reading]. Other readings: a heartbeat (everyday, z +2.6). Unvalidated hint: a punchy kick drum pattern (z +3.5). AudioSet: Sound effect 0.23, Music 0.18, Bang 0.07. peak -6.2 dBFS, -19.6 LUFS, brightness 54 Hz, bandwidth 1.3 kHz, noise floor -100 dBFS, side/mid -35 dB.",
+  "duration": 2.152,
+  "peak_dbfs": -6.2,
+  "lufs": -19.6,
+  "attack_ms": 29.0
+ },
+ {
+  "file": "04 Impacts/EarnEdits - Low Bomb Impact.mp3",
+  "sounds_like": [
+   {
+    "tag": "a deep cinematic boom",
+    "z": 3.9
+   },
+   {
+    "tag": "a sub bass drop",
+    "z": 3.5
+   },
+   {
+    "tag": "an explosion",
+    "z": 3.4
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.1
+   },
+   {
+    "tag": "a big drum hit",
+    "z": 3.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Explosion",
+    "p": 0.194
+   },
+   {
+    "label": "Heart murmur",
+    "p": 0.084
+   },
+   {
+    "label": "Burst, pop",
+    "p": 0.057
+   }
+  ],
+  "shape": "busy, 2.6 onsets/s, tonal, pitch ~52 Hz (Ab1) (attack 50 ms, decays in 1498 ms)",
+  "summary": "3.44 s busy, 2.6 onsets/s, tonal, pitch ~52 Hz (Ab1) (attack 50 ms, decays in 1498 ms). Sounds most like: a deep cinematic boom (z +3.9), a sub bass drop (z +3.5), an explosion (z +3.4) [clear reading]. Other readings: a deep cinematic whoosh (transitions, z +3.0). AudioSet tagger unsure (Explosion 0.19, Heart murmur 0.08, Burst, pop 0.06). peak -6.0 dBFS, -17.2 LUFS, brightness 100 Hz, bandwidth 403 Hz, noise floor -100 dBFS, side/mid -14 dB.",
+  "duration": 3.444,
+  "peak_dbfs": -6.0,
+  "lufs": -17.2,
+  "attack_ms": 50.0
+ },
+ {
+  "file": "04 Impacts/EarnEdits - Low Hit 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.8
+   },
+   {
+    "tag": "a deep cinematic boom",
+    "z": 3.7
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 2.9
+   },
+   {
+    "tag": "a big drum hit",
+    "z": 2.8
+   },
+   {
+    "tag": "an explosion",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Music",
+    "p": 0.297
+   },
+   {
+    "label": "Bang",
+    "p": 0.118
+   },
+   {
+    "label": "Sonar",
+    "p": 0.093
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.089
+   },
+   {
+    "label": "Silence",
+    "p": 0.074
+   }
+  ],
+  "shape": "10 separate events, tonal, pitch ~60 Hz (Bb1) (attack 33 ms, decays in 4.6 s)",
+  "summary": "12.38 s 10 separate events, tonal, pitch ~60 Hz (Bb1) (attack 33 ms, decays in 4.6 s). Sounds most like: a cinematic hit with a long tail (z +3.8), a deep cinematic boom (z +3.7), a deep cinematic whoosh (z +2.8) [clear reading]. AudioSet: Music 0.30, Bang 0.12, Sonar 0.09. peak -3.1 dBFS, -17.2 LUFS, brightness 135 Hz, bandwidth 3.2 kHz, noise floor -84 dBFS, side/mid -13 dB.",
+  "duration": 12.385,
+  "peak_dbfs": -3.1,
+  "lufs": -17.2,
+  "attack_ms": 33.0
+ },
+ {
+  "file": "04 Impacts/EarnEdits - Low Hit 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a sub bass drop",
+    "z": 3.6
+   },
+   {
+    "tag": "a deep cinematic boom",
+    "z": 3.5
+   },
+   {
+    "tag": "a big drum hit",
+    "z": 2.8
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 2.6
+   },
+   {
+    "tag": "an explosion",
+    "z": 2.2
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Music",
+    "p": 0.399
+   },
+   {
+    "label": "Explosion",
+    "p": 0.193
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.119
+   },
+   {
+    "label": "Burst, pop",
+    "p": 0.095
+   },
+   {
+    "label": "Electronic music",
+    "p": 0.09
+   }
+  ],
+  "shape": "2 separate events, tonal, pitch ~59 Hz (Bb1) (attack 24 ms, decays in 2.5 s)",
+  "summary": "5.21 s 2 separate events, tonal, pitch ~59 Hz (Bb1) (attack 24 ms, decays in 2.5 s). Sounds most like: a sub bass drop (z +3.6), a deep cinematic boom (z +3.5), a big drum hit (z +2.7) [clear reading]. Unvalidated hint: a deep sub bass (z +3.3). AudioSet: Music 0.40, Explosion 0.19, Sound effect 0.12. peak -2.1 dBFS, -10.8 LUFS, brightness 87 Hz, bandwidth 403 Hz, noise floor -96 dBFS, side/mid -11 dB.",
+  "duration": 5.208,
+  "peak_dbfs": -2.1,
+  "lufs": -10.8,
+  "attack_ms": 24.0
+ },
+ {
+  "file": "04 Impacts/EarnEdits - Repeating Thud Bumps.mp3",
+  "sounds_like": [
+   {
+    "tag": "a deep cinematic boom",
+    "z": 3.9
+   },
+   {
+    "tag": "a sub bass drop",
+    "z": 3.8
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.5
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.0
+   },
+   {
+    "tag": "a big drum hit",
+    "z": 3.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Bang",
+    "p": 0.235
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.202
+   },
+   {
+    "label": "Music",
+    "p": 0.15
+   },
+   {
+    "label": "Burst, pop",
+    "p": 0.055
+   },
+   {
+    "label": "Rumble",
+    "p": 0.054
+   }
+  ],
+  "shape": "sustained, tonal, pitch ~70 Hz (C#2) (attack 170 ms, decays in 1772 ms)",
+  "summary": "3.34 s sustained, tonal, pitch ~70 Hz (C#2) (attack 170 ms, decays in 1772 ms). Sounds most like: a deep cinematic boom (z +3.8), a sub bass drop (z +3.8), a deep cinematic whoosh (z +3.5) [clear reading]. AudioSet: Bang 0.23, Sound effect 0.20, Music 0.15. peak -8.5 dBFS, -18.0 LUFS, brightness 134 Hz, bandwidth 806 Hz, noise floor -100 dBFS, side/mid -10 dB.",
+  "duration": 3.337,
+  "peak_dbfs": -8.5,
+  "lufs": -18.0,
+  "attack_ms": 170.0
+ },
+ {
+  "file": "04 Impacts/EarnEdits - Repeating Thud Knocks.mp3",
+  "sounds_like": [
+   {
+    "tag": "a deep cinematic boom",
+    "z": 4.1
+   },
+   {
+    "tag": "a sub bass drop",
+    "z": 3.6
+   },
+   {
+    "tag": "a big drum hit",
+    "z": 3.5
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.0
+   },
+   {
+    "tag": "a kick drum",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Music",
+    "p": 0.316
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.174
+   },
+   {
+    "label": "Bang",
+    "p": 0.05
+   }
+  ],
+  "shape": "sustained, tonal, pitch ~63 Hz (B1) (attack 22 ms, decays in 1612 ms)",
+  "summary": "3.44 s sustained, tonal, pitch ~63 Hz (B1) (attack 22 ms, decays in 1612 ms). Sounds most like: a deep cinematic boom (z +4.1), a sub bass drop (z +3.5), a big drum hit (z +3.4) [clear reading]. AudioSet: Music 0.32, Sound effect 0.17, Bang 0.05. peak -6.2 dBFS, -19.1 LUFS, brightness 48 Hz, bandwidth 1.0 kHz, noise floor -100 dBFS, side/mid -31 dB.",
+  "duration": 3.444,
+  "peak_dbfs": -6.2,
+  "lufs": -19.1,
+  "attack_ms": 22.0
+ },
+ {
+  "file": "05 Money and Coins/EarnEdits - Coin Drop 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "coins dropping",
+    "z": 5.9
+   },
+   {
+    "tag": "dominoes falling",
+    "z": 4.5
+   },
+   {
+    "tag": "lego bricks clicking",
+    "z": 3.1
+   },
+   {
+    "tag": "a fidget toy clicking",
+    "z": 2.9
+   },
+   {
+    "tag": "a ratchet clicking",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Coin (dropping)",
+    "p": 0.245
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.089
+   },
+   {
+    "label": "Crushing",
+    "p": 0.054
+   }
+  ],
+  "shape": "busy, 2.4 onsets/s (attack 4 ms, decays in 212 ms)",
+  "summary": "4.16 s busy, 2.4 onsets/s (attack 4 ms, decays in 212 ms). Sounds most like: coins dropping (z +5.8), dominoes falling (z +4.5), lego bricks clicking (z +3.0) [clear reading]. AudioSet: Coin (dropping) 0.24, Sound effect 0.09, Crushing 0.05. peak -1.2 dBFS, -14.4 LUFS, brightness 13.8 kHz, bandwidth 20.5 kHz, digital silence between sounds, mono.",
+  "duration": 4.159,
+  "peak_dbfs": -1.2,
+  "lufs": -14.4,
+  "attack_ms": 4.0
+ },
+ {
+  "file": "05 Money and Coins/EarnEdits - Coin Drop 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "coins dropping",
+    "z": 5.3
+   },
+   {
+    "tag": "dominoes falling",
+    "z": 4.6
+   },
+   {
+    "tag": "lego bricks clicking",
+    "z": 3.0
+   },
+   {
+    "tag": "a small object dropping on a table",
+    "z": 2.8
+   },
+   {
+    "tag": "an old typewriter",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Coin (dropping)",
+    "p": 0.715
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.091
+   },
+   {
+    "label": "Crack",
+    "p": 0.071
+   }
+  ],
+  "shape": "busy, 3.1 onsets/s (attack 75 ms, decays in 438 ms)",
+  "summary": "2.92 s busy, 3.1 onsets/s (attack 75 ms, decays in 438 ms). Sounds most like: coins dropping (z +5.3), dominoes falling (z +4.5), lego bricks clicking (z +3.0) [clear reading]. Other readings: an old typewriter (keyboard, z +2.4). AudioSet: Coin (dropping) 0.71, Sound effect 0.09, Crack 0.07. peak -0.5 dBFS, -17.0 LUFS, brightness 9.5 kHz, bandwidth 20.5 kHz, noise floor -76 dBFS, mono.",
+  "duration": 2.921,
+  "peak_dbfs": -0.5,
+  "lufs": -17.0,
+  "attack_ms": 75.0
+ },
+ {
+  "file": "05 Money and Coins/EarnEdits - Coin Drop 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "coins dropping",
+    "z": 5.4
+   },
+   {
+    "tag": "dominoes falling",
+    "z": 5.2
+   },
+   {
+    "tag": "lego bricks clicking",
+    "z": 3.4
+   },
+   {
+    "tag": "an old typewriter",
+    "z": 3.1
+   },
+   {
+    "tag": "a spray can hissing",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Coin (dropping)",
+    "p": 0.871
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.089
+   }
+  ],
+  "shape": "busy, 3.4 onsets/s (attack 2 ms, decays in 339 ms)",
+  "summary": "5.26 s busy, 3.4 onsets/s (attack 2 ms, decays in 339 ms). Sounds most like: coins dropping (z +5.3), dominoes falling (z +5.2), lego bricks clicking (z +3.4) [clear reading]. Other readings: an old typewriter (keyboard, z +3.0), a spray can hissing (everyday, z +2.6). AudioSet: Coin (dropping) 0.87, Sound effect 0.09. peak -0.4 dBFS, -24.7 LUFS, brightness 12.0 kHz, bandwidth 20.5 kHz, digital silence between sounds, mono.",
+  "duration": 5.256,
+  "peak_dbfs": -0.4,
+  "lufs": -24.7,
+  "attack_ms": 2.0
+ },
+ {
+  "file": "05 Money and Coins/EarnEdits - Coins Tossed on Table.mp3",
+  "sounds_like": [
+   {
+    "tag": "coins dropping",
+    "z": 6.3
+   },
+   {
+    "tag": "dominoes falling",
+    "z": 5.6
+   },
+   {
+    "tag": "a small object dropping on a table",
+    "z": 3.0
+   },
+   {
+    "tag": "a bicycle bell",
+    "z": 2.7
+   },
+   {
+    "tag": "a cash register",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Crack",
+    "p": 0.261
+   },
+   {
+    "label": "Breaking",
+    "p": 0.143
+   },
+   {
+    "label": "Coin (dropping)",
+    "p": 0.118
+   }
+  ],
+  "shape": "busy, 1.7 onsets/s (attack 106 ms, decays in 601 ms)",
+  "summary": "3.45 s busy, 1.7 onsets/s (attack 106 ms, decays in 601 ms). Sounds most like: coins dropping (z +6.2), dominoes falling (z +5.5), a small object dropping on a table (z +2.9) [clear reading]. Other readings: a bicycle bell (everyday, z +2.7). AudioSet: Crack 0.26, Breaking 0.14, Coin (dropping) 0.12. peak -3.4 dBFS, -21.8 LUFS, brightness 4.3 kHz, bandwidth 20.5 kHz, noise floor -84 dBFS, side/mid -14 dB.",
+  "duration": 3.453,
+  "peak_dbfs": -3.4,
+  "lufs": -21.8,
+  "attack_ms": 106.0
+ },
+ {
+  "file": "05 Money and Coins/EarnEdits - Counting Banknotes.mp3",
+  "sounds_like": [
+   {
+    "tag": "paper rustling",
+    "z": 4.1
+   },
+   {
+    "tag": "walking through dry leaves",
+    "z": 3.3
+   },
+   {
+    "tag": "a page turning",
+    "z": 3.1
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 2.7
+   },
+   {
+    "tag": "scissors cutting",
+    "z": 2.7
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Crunch",
+    "p": 0.113
+   },
+   {
+    "label": "Tearing",
+    "p": 0.089
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.078
+   },
+   {
+    "label": "Crumpling, crinkling",
+    "p": 0.057
+   }
+  ],
+  "shape": "busy, 3.1 onsets/s (attack 195 ms, decays in 1376 ms)",
+  "summary": "6.04 s busy, 3.1 onsets/s (attack 195 ms, decays in 1376 ms). Sounds most like: paper rustling (z +4.0), walking through dry leaves (z +3.3), a page turning (z +3.1) [clear reading]. AudioSet tagger unsure (Crunch 0.11, Tearing 0.09, Sound effect 0.08). peak -3.4 dBFS, -24.4 LUFS, brightness 5.6 kHz, bandwidth 20.5 kHz, digital silence between sounds, side/mid -31 dB.",
+  "duration": 6.044,
+  "peak_dbfs": -3.4,
+  "lufs": -24.4,
+  "attack_ms": 195.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Fast Page Turn 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a page turning",
+    "z": 3.8
+   },
+   {
+    "tag": "scissors cutting",
+    "z": 3.2
+   },
+   {
+    "tag": "a quick swipe",
+    "z": 3.1
+   },
+   {
+    "tag": "paper rustling",
+    "z": 2.9
+   },
+   {
+    "tag": "a short swish",
+    "z": 2.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Slap, smack",
+    "p": 0.105
+   },
+   {
+    "label": "Whip",
+    "p": 0.086
+   }
+  ],
+  "shape": "busy, 4.0 onsets/s (attack 43 ms, decays in 61 ms)",
+  "summary": "1.50 s busy, 4.0 onsets/s (attack 43 ms, decays in 61 ms). Sounds most like: a page turning (z +3.7), scissors cutting (z +3.1), a quick swipe (z +3.1) [clear reading]. AudioSet tagger unsure (Slap, smack 0.10, Whip 0.09). peak -2.0 dBFS, -19.7 LUFS, brightness 5.7 kHz, bandwidth 20.5 kHz, digital silence between sounds, mono.",
+  "duration": 1.498,
+  "peak_dbfs": -2.0,
+  "lufs": -19.7,
+  "attack_ms": 43.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Fast Page Turn 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a squishy wet squelch",
+    "z": 4.2
+   },
+   {
+    "tag": "a quick swipe",
+    "z": 3.7
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.0
+   },
+   {
+    "tag": "a sword being drawn",
+    "z": 2.5
+   },
+   {
+    "tag": "digging in soil",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.098
+   }
+  ],
+  "shape": "short one-shot (attack 136 ms, decays in 60 ms)",
+  "summary": "1.16 s short one-shot (attack 136 ms, decays in 60 ms). Sounds most like: a squishy wet squelch (z +4.2), a quick swipe (z +3.7), a short swish (z +2.9) [clear reading]. Other readings: a sword being drawn (everyday, z +2.5), digging in soil (nature, z +2.4). AudioSet tagger unsure (Zipper (clothing) 0.10). peak -2.0 dBFS, -17.2 LUFS, brightness 5.0 kHz, bandwidth 20.5 kHz, digital silence between sounds, mono.",
+  "duration": 1.16,
+  "peak_dbfs": -2.0,
+  "lufs": -17.2,
+  "attack_ms": 136.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Page Turn 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "paper rustling",
+    "z": 4.0
+   },
+   {
+    "tag": "a page turning",
+    "z": 3.8
+   },
+   {
+    "tag": "a reverse cymbal swell",
+    "z": 2.7
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 2.4
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Tearing",
+    "p": 0.059
+   },
+   {
+    "label": "Crunch",
+    "p": 0.054
+   }
+  ],
+  "shape": "busy, 7.6 onsets/s (attack 45 ms, decays in 793 ms)",
+  "summary": "1.70 s busy, 7.6 onsets/s (attack 45 ms, decays in 793 ms). Sounds most like: paper rustling (z +4.0), a page turning (z +3.7), a reverse cymbal swell (z +2.7) [clear reading]. AudioSet tagger unsure (Tearing 0.06, Crunch 0.05). peak -4.0 dBFS, -19.3 LUFS, brightness 7.4 kHz, bandwidth 20.5 kHz, noise floor -118 dBFS, mono.",
+  "duration": 1.702,
+  "peak_dbfs": -4.0,
+  "lufs": -19.3,
+  "attack_ms": 45.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Page Turn 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a quick swipe",
+    "z": 3.0
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.9
+   },
+   {
+    "tag": "paper rustling",
+    "z": 2.7
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 2.6
+   },
+   {
+    "tag": "a rubber stretch",
+    "z": 2.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.613
+   },
+   {
+    "label": "Tearing",
+    "p": 0.14
+   },
+   {
+    "label": "Scrape",
+    "p": 0.105
+   }
+  ],
+  "shape": "busy, 4.6 onsets/s (attack 25 ms, decays in 134 ms)",
+  "summary": "1.30 s busy, 4.6 onsets/s (attack 25 ms, decays in 134 ms). Sounds most like: a quick swipe (z +2.9), a record scratch (z +2.8), paper rustling (z +2.7) [plausible reading]. Unvalidated hint: a ukulele (z +3.0). AudioSet: Zipper (clothing) 0.61, Tearing 0.14, Scrape 0.10. peak -4.0 dBFS, -23.0 LUFS, brightness 7.1 kHz, bandwidth 20.5 kHz, noise floor -52 dBFS, mono.",
+  "duration": 1.298,
+  "peak_dbfs": -4.0,
+  "lufs": -23.0,
+  "attack_ms": 25.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Page Turn 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "paper rustling",
+    "z": 3.2
+   },
+   {
+    "tag": "a page turning",
+    "z": 3.1
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 2.8
+   },
+   {
+    "tag": "a quick swipe",
+    "z": 2.5
+   },
+   {
+    "tag": "scissors cutting",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Crunch",
+    "p": 0.141
+   },
+   {
+    "label": "Crack",
+    "p": 0.079
+   },
+   {
+    "label": "Scrape",
+    "p": 0.079
+   },
+   {
+    "label": "Tearing",
+    "p": 0.063
+   }
+  ],
+  "shape": "busy, 8.4 onsets/s (attack 148 ms, decays in 239 ms)",
+  "summary": "0.83 s busy, 8.4 onsets/s (attack 148 ms, decays in 239 ms). Sounds most like: paper rustling (z +3.2), a page turning (z +3.0), a squishy wet squelch (z +2.8) [clear reading]. Other readings: a quick swipe (transitions, z +2.4). AudioSet tagger unsure (Crunch 0.14, Crack 0.08, Scrape 0.08). peak -4.0 dBFS, -18.8 LUFS, brightness 6.5 kHz, bandwidth 20.5 kHz, mono.",
+  "duration": 0.83,
+  "peak_dbfs": -4.0,
+  "lufs": -18.8,
+  "attack_ms": 148.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Page Turn 04.mp3",
+  "sounds_like": [
+   {
+    "tag": "paper rustling",
+    "z": 3.8
+   },
+   {
+    "tag": "a page turning",
+    "z": 3.5
+   },
+   {
+    "tag": "scissors cutting",
+    "z": 2.8
+   },
+   {
+    "tag": "a single mechanical keyboard key press",
+    "z": 2.2
+   },
+   {
+    "tag": "a camera shutter click",
+    "z": 2.2
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Tearing",
+    "p": 0.643
+   },
+   {
+    "label": "Crumpling, crinkling",
+    "p": 0.178
+   },
+   {
+    "label": "Inside, small room",
+    "p": 0.108
+   }
+  ],
+  "shape": "busy, 7.5 onsets/s (attack 145 ms, decays in 92 ms)",
+  "summary": "2.79 s busy, 7.5 onsets/s (attack 145 ms, decays in 92 ms). Sounds most like: paper rustling (z +3.8), a page turning (z +3.4), scissors cutting (z +2.8) [clear reading]. Other readings: a single mechanical keyboard key press (keyboard, z +2.2), a camera shutter click (ui, z +2.1). AudioSet: Tearing 0.64, Crumpling, crinkling 0.18, Inside, small room 0.11. peak -2.1 dBFS, -23.3 LUFS, brightness 8.4 kHz, bandwidth 20.5 kHz, noise floor -66 dBFS, mono.",
+  "duration": 2.79,
+  "peak_dbfs": -2.1,
+  "lufs": -23.3,
+  "attack_ms": 145.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Paper Crumple 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "paper rustling",
+    "z": 4.8
+   },
+   {
+    "tag": "a rubber stretch",
+    "z": 2.9
+   },
+   {
+    "tag": "walking through dry leaves",
+    "z": 2.5
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 2.5
+   },
+   {
+    "tag": "a page turning",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Crumpling, crinkling",
+    "p": 0.497
+   },
+   {
+    "label": "Inside, small room",
+    "p": 0.311
+   },
+   {
+    "label": "Tearing",
+    "p": 0.294
+   },
+   {
+    "label": "Crunch",
+    "p": 0.151
+   }
+  ],
+  "shape": "busy, 7.2 onsets/s (attack 126 ms, decays in 1859 ms)",
+  "summary": "15.40 s busy, 7.2 onsets/s (attack 126 ms, decays in 1859 ms). Sounds most like: paper rustling (z +4.8), a rubber stretch (z +2.9), walking through dry leaves (z +2.5) [clear reading]. AudioSet: Crumpling, crinkling 0.50, Inside, small room 0.31, Tearing 0.29. peak -1.0 dBFS, -29.0 LUFS, brightness 5.9 kHz, bandwidth 20.5 kHz, noise floor -85 dBFS, mono.",
+  "duration": 15.402,
+  "peak_dbfs": -1.0,
+  "lufs": -29.0,
+  "attack_ms": 126.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Paper Crumple 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "paper rustling",
+    "z": 4.0
+   },
+   {
+    "tag": "walking through dry leaves",
+    "z": 3.5
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 3.1
+   },
+   {
+    "tag": "an apple falling on grass",
+    "z": 2.3
+   },
+   {
+    "tag": "a microwave beep",
+    "z": 2.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Crumpling, crinkling",
+    "p": 0.211
+   },
+   {
+    "label": "Crunch",
+    "p": 0.138
+   },
+   {
+    "label": "Crackle",
+    "p": 0.063
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.063
+   },
+   {
+    "label": "Crushing",
+    "p": 0.05
+   }
+  ],
+  "shape": "busy, 6.9 onsets/s (attack 79 ms, decays in 1020 ms)",
+  "summary": "6.53 s busy, 6.9 onsets/s (attack 79 ms, decays in 1020 ms). Sounds most like: paper rustling (z +3.9), walking through dry leaves (z +3.4), a squishy wet squelch (z +3.1) [clear reading]. Other readings: a microwave beep (everyday, z +2.2). AudioSet: Crumpling, crinkling 0.21, Crunch 0.14, Crackle 0.06. peak -0.9 dBFS, -20.9 LUFS, brightness 7.5 kHz, bandwidth 20.5 kHz, noise floor -68 dBFS, mono.",
+  "duration": 6.534,
+  "peak_dbfs": -0.9,
+  "lufs": -20.9,
+  "attack_ms": 79.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Paper Tear 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "scissors cutting",
+    "z": 3.5
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.7
+   },
+   {
+    "tag": "paper rustling",
+    "z": 2.6
+   },
+   {
+    "tag": "a page turning",
+    "z": 2.5
+   },
+   {
+    "tag": "a printer printing",
+    "z": 2.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.585
+   },
+   {
+    "label": "Tearing",
+    "p": 0.16
+   },
+   {
+    "label": "Scrape",
+    "p": 0.121
+   }
+  ],
+  "shape": "busy, 6.1 onsets/s (attack 291 ms, decays in 170 ms)",
+  "summary": "0.99 s busy, 6.1 onsets/s (attack 291 ms, decays in 170 ms). Sounds most like: scissors cutting (z +3.4), a record scratch (z +2.6), paper rustling (z +2.6) [clear reading]. Other readings: a printer printing (everyday, z +2.4). AudioSet: Zipper (clothing) 0.58, Tearing 0.16, Scrape 0.12. peak -2.3 dBFS, -13.7 LUFS, brightness 9.2 kHz, bandwidth 20.5 kHz, mono.",
+  "duration": 0.989,
+  "peak_dbfs": -2.3,
+  "lufs": -13.7,
+  "attack_ms": 291.0
+ },
+ {
+  "file": "06 Paper/EarnEdits - Paper Tear 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "scissors cutting",
+    "z": 3.2
+   },
+   {
+    "tag": "a record scratch",
+    "z": 3.1
+   },
+   {
+    "tag": "a rubber stretch",
+    "z": 3.1
+   },
+   {
+    "tag": "a sustained glass harp tone",
+    "z": 2.9
+   },
+   {
+    "tag": "a match being struck",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.281
+   },
+   {
+    "label": "Scrape",
+    "p": 0.108
+   },
+   {
+    "label": "Tearing",
+    "p": 0.086
+   }
+  ],
+  "shape": "short swell (attack 163 ms, decays in 164 ms)",
+  "summary": "2.07 s short swell (attack 163 ms, decays in 164 ms). Sounds most like: scissors cutting (z +3.2), a record scratch (z +3.1), a rubber stretch (z +3.0) [clear reading]. Other readings: a sustained glass harp tone (chimes, z +2.9), a match being struck (everyday, z +2.7). AudioSet: Zipper (clothing) 0.28, Scrape 0.11, Tearing 0.09. peak -2.0 dBFS, -14.5 LUFS, brightness 8.3 kHz, bandwidth 20.5 kHz, noise floor -65 dBFS, mono.",
+  "duration": 2.066,
+  "peak_dbfs": -2.0,
+  "lufs": -14.5,
+  "attack_ms": 163.0
+ },
+ {
+  "file": "07 Pens and Pencils/EarnEdits - Marker Stroke 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a record scratch",
+    "z": 3.6
+   },
+   {
+    "tag": "a spray can hissing",
+    "z": 3.4
+   },
+   {
+    "tag": "a balloon squeak",
+    "z": 3.0
+   },
+   {
+    "tag": "a rubber stretch",
+    "z": 2.9
+   },
+   {
+    "tag": "a finger squeaking on glass",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Spray",
+    "p": 0.325
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.052
+   }
+  ],
+  "shape": "busy, 4.7 onsets/s (attack 4 ms, decays in 334 ms)",
+  "summary": "2.34 s busy, 4.7 onsets/s (attack 4 ms, decays in 334 ms). Sounds most like: a record scratch (z +3.5), a spray can hissing (z +3.3), a balloon squeak (z +3.0) [clear reading]. AudioSet: Spray 0.33, Sound effect 0.05. peak -1.0 dBFS, -14.5 LUFS, brightness 8.4 kHz, bandwidth 20.5 kHz, noise floor -45 dBFS, mono.",
+  "duration": 2.345,
+  "peak_dbfs": -1.0,
+  "lufs": -14.5,
+  "attack_ms": 4.0
+ },
+ {
+  "file": "07 Pens and Pencils/EarnEdits - Marker Stroke 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a spray can hissing",
+    "z": 3.4
+   },
+   {
+    "tag": "a sustained glass harp tone",
+    "z": 3.3
+   },
+   {
+    "tag": "a finger squeaking on glass",
+    "z": 2.9
+   },
+   {
+    "tag": "a rubber stretch",
+    "z": 2.9
+   },
+   {
+    "tag": "a wine glass ring",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Rub",
+    "p": 0.254
+   },
+   {
+    "label": "Filing (rasp)",
+    "p": 0.051
+   }
+  ],
+  "shape": "busy, 1.7 onsets/s (attack 291 ms, decays in 104 ms)",
+  "summary": "2.94 s busy, 1.7 onsets/s (attack 291 ms, decays in 104 ms). Sounds most like: a spray can hissing (z +3.4), a sustained glass harp tone (z +3.2), a finger squeaking on glass (z +2.9) [clear reading]. AudioSet: Rub 0.25, Filing (rasp) 0.05. peak -1.0 dBFS, -12.5 LUFS, brightness 9.0 kHz, bandwidth 20.5 kHz, noise floor -66 dBFS, mono.",
+  "duration": 2.942,
+  "peak_dbfs": -1.0,
+  "lufs": -12.5,
+  "attack_ms": 291.0
+ },
+ {
+  "file": "07 Pens and Pencils/EarnEdits - Pen Stroke 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a record scratch",
+    "z": 3.2
+   },
+   {
+    "tag": "scissors cutting",
+    "z": 3.1
+   },
+   {
+    "tag": "a small animal running through grass",
+    "z": 2.8
+   },
+   {
+    "tag": "a squishy wet squelch",
+    "z": 2.5
+   },
+   {
+    "tag": "a sustained glass harp tone",
+    "z": 2.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.34
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.069
+   },
+   {
+    "label": "Snort",
+    "p": 0.055
+   },
+   {
+    "label": "Scratch",
+    "p": 0.053
+   }
+  ],
+  "shape": "busy, 7.0 onsets/s (attack 176 ms, decays in 136 ms)",
+  "summary": "3.29 s busy, 7.0 onsets/s (attack 176 ms, decays in 136 ms). Sounds most like: a record scratch (z +3.1), scissors cutting (z +3.1), a small animal running through grass (z +2.8) [clear reading]. Other readings: a sustained glass harp tone (chimes, z +2.3). AudioSet: Zipper (clothing) 0.34, Sound effect 0.07, Snort 0.06. peak -1.0 dBFS, -16.2 LUFS, brightness 2.8 kHz, bandwidth 20.5 kHz, noise floor -49 dBFS, mono.",
+  "duration": 3.287,
+  "peak_dbfs": -1.0,
+  "lufs": -16.2,
+  "attack_ms": 176.0
+ },
+ {
+  "file": "07 Pens and Pencils/EarnEdits - Pencil Stroke 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a spray can hissing",
+    "z": 3.3
+   },
+   {
+    "tag": "a balloon squeak",
+    "z": 3.3
+   },
+   {
+    "tag": "a record scratch",
+    "z": 3.0
+   },
+   {
+    "tag": "a small animal running through grass",
+    "z": 2.5
+   },
+   {
+    "tag": "a printer printing",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Rub",
+    "p": 0.671
+   },
+   {
+    "label": "Sanding",
+    "p": 0.39
+   },
+   {
+    "label": "Wood",
+    "p": 0.221
+   },
+   {
+    "label": "Sawing",
+    "p": 0.059
+   }
+  ],
+  "shape": "busy, 5.7 onsets/s (attack 25 ms)",
+  "summary": "5.62 s busy, 5.7 onsets/s (attack 25 ms). Sounds most like: a spray can hissing (z +3.3), a balloon squeak (z +3.2), a record scratch (z +2.9) [clear reading]. Other readings: a small animal running through grass (nature, z +2.5). AudioSet: Rub 0.67, Sanding 0.39, Wood 0.22. peak -1.0 dBFS, -13.8 LUFS, brightness 10.3 kHz, bandwidth 20.5 kHz, noise floor -34 dBFS, mono.",
+  "duration": 5.619,
+  "peak_dbfs": -1.0,
+  "lufs": -13.8,
+  "attack_ms": 25.0
+ },
+ {
+  "file": "07 Pens and Pencils/EarnEdits - Pencil Stroke 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a rubber stretch",
+    "z": 3.1
+   },
+   {
+    "tag": "a balloon squeak",
+    "z": 3.1
+   },
+   {
+    "tag": "a spray can hissing",
+    "z": 3.1
+   },
+   {
+    "tag": "scissors cutting",
+    "z": 3.0
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.9
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.247
+   },
+   {
+    "label": "Scratch",
+    "p": 0.071
+   },
+   {
+    "label": "Writing",
+    "p": 0.059
+   },
+   {
+    "label": "Tearing",
+    "p": 0.053
+   },
+   {
+    "label": "Inside, small room",
+    "p": 0.05
+   }
+  ],
+  "shape": "busy, 4.3 onsets/s (attack 92 ms, decays in 181 ms)",
+  "summary": "2.81 s busy, 4.3 onsets/s (attack 92 ms, decays in 181 ms). Sounds most like: a rubber stretch (z +3.1), a balloon squeak (z +3.1), a spray can hissing (z +3.0) [clear reading]. Other readings: a record scratch (transitions, z +2.8). AudioSet: Zipper (clothing) 0.25, Scratch 0.07, Writing 0.06. peak -0.9 dBFS, -15.1 LUFS, brightness 10.6 kHz, bandwidth 20.5 kHz, noise floor -60 dBFS, mono.",
+  "duration": 2.809,
+  "peak_dbfs": -0.9,
+  "lufs": -15.1,
+  "attack_ms": 92.0
+ },
+ {
+  "file": "07 Pens and Pencils/EarnEdits - Pencil Stroke 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "scissors cutting",
+    "z": 2.7
+   },
+   {
+    "tag": "a keyboard typing fast",
+    "z": 2.7
+   },
+   {
+    "tag": "a printer printing",
+    "z": 2.5
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.4
+   },
+   {
+    "tag": "a kalimba note",
+    "z": 2.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.085
+   },
+   {
+    "label": "Writing",
+    "p": 0.079
+   }
+  ],
+  "shape": "busy, 5.2 onsets/s (attack 10 ms, decays in 924 ms)",
+  "summary": "5.19 s busy, 5.2 onsets/s (attack 10 ms, decays in 924 ms). Sounds most like: scissors cutting (z +2.6), a keyboard typing fast (z +2.6), a printer printing (z +2.5) [plausible reading]. Other readings: a record scratch (transitions, z +2.4), a kalimba note (chimes, z +2.3). AudioSet tagger unsure (Sound effect 0.09, Writing 0.08). peak -0.5 dBFS, -18.8 LUFS, brightness 7.6 kHz, bandwidth 20.5 kHz, noise floor -44 dBFS, mono.",
+  "duration": 5.192,
+  "peak_dbfs": -0.5,
+  "lufs": -18.8,
+  "attack_ms": 10.0
+ },
+ {
+  "file": "08 Accents/EarnEdits - Brass Accent.mp3",
+  "sounds_like": [
+   {
+    "tag": "a big braam",
+    "z": 3.4
+   },
+   {
+    "tag": "a sub bass drop",
+    "z": 2.4
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 2.1
+   },
+   {
+    "tag": "a cow mooing",
+    "z": 2.1
+   },
+   {
+    "tag": "a zipper",
+    "z": 1.9
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Music",
+    "p": 0.657
+   },
+   {
+    "label": "Musical instrument",
+    "p": 0.282
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.123
+   },
+   {
+    "label": "Synthesizer",
+    "p": 0.07
+   }
+  ],
+  "shape": "3 separate events (attack 153 ms, decays in 3.0 s)",
+  "summary": "3.88 s 3 separate events (attack 153 ms, decays in 3.0 s). Music (AudioSet Music 0.66). Unvalidated hints - genre: ; mood (wrong for ~1 in 5 tracks in a test): . Sounds most like: a big braam (z +3.4), a sub bass drop (z +2.3), a cinematic hit with a long tail (z +2.1) [clear reading]. Other readings: a cow mooing (everyday, z +2.1), a zipper (foley, z +1.9). AudioSet: Music 0.66, Musical instrument 0.28, Sound effect 0.12. peak 0.0 dBFS, -18.4 LUFS, brightness 786 Hz, bandwidth 6.5 kHz, noise floor -49 dBFS, side/mid -3 dB.",
+  "duration": 3.885,
+  "peak_dbfs": 0.0,
+  "lufs": -18.4,
+  "attack_ms": 153.0
+ },
+ {
+  "file": "08 Accents/EarnEdits - Sci-Fi Buzz.mp3",
+  "sounds_like": [
+   {
+    "tag": "a squishy wet squelch",
+    "z": 3.2
+   },
+   {
+    "tag": "a reverse cymbal swell",
+    "z": 3.0
+   },
+   {
+    "tag": "a stutter glitch transition",
+    "z": 2.7
+   },
+   {
+    "tag": "a record scratch",
+    "z": 2.6
+   },
+   {
+    "tag": "a digital glitch",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.063
+   }
+  ],
+  "shape": "busy, 4.8 onsets/s (attack 246 ms, decays in 44 ms)",
+  "summary": "2.10 s busy, 4.8 onsets/s (attack 246 ms, decays in 44 ms). Sounds most like: a squishy wet squelch (z +3.2), a reverse cymbal swell (z +3.0), a stutter glitch transition (z +2.6) [clear reading]. Other readings: a digital glitch (ui, z +2.4). Unvalidated hint: crisp hi-hats (z +3.4). AudioSet tagger unsure (Sound effect 0.06). peak -0.9 dBFS, -16.8 LUFS, brightness 6.9 kHz, bandwidth 20.5 kHz, noise floor -74 dBFS, side/mid -4 dB.",
+  "duration": 2.102,
+  "peak_dbfs": -0.9,
+  "lufs": -16.8,
+  "attack_ms": 246.0
+ },
+ {
+  "file": "09 Risers/EarnEdits - Cymbal Riser.mp3",
+  "sounds_like": [
+   {
+    "tag": "a reverse cymbal swell",
+    "z": 4.2
+   },
+   {
+    "tag": "a rising riser building tension",
+    "z": 2.5
+   },
+   {
+    "tag": "a sword being drawn",
+    "z": 2.5
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 2.3
+   },
+   {
+    "tag": "a metal scrape",
+    "z": 2.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Music",
+    "p": 0.559
+   },
+   {
+    "label": "Cymbal",
+    "p": 0.099
+   },
+   {
+    "label": "Musical instrument",
+    "p": 0.097
+   },
+   {
+    "label": "Hi-hat",
+    "p": 0.052
+   }
+  ],
+  "shape": "2 separate events, tonal, pitch ~416 Hz (Ab4) (attack 94 ms, decays in 27 ms)",
+  "summary": "2.97 s 2 separate events, tonal, pitch ~416 Hz (Ab4) (attack 94 ms, decays in 27 ms). Music (AudioSet Music 0.56). Unvalidated hints - genre: drum and bass music (z +1.6); mood (wrong for ~1 in 5 tracks in a test): energetic and driving music (z +1.5). Sounds most like: a reverse cymbal swell (z +4.2), a rising riser building tension (z +2.5), a sword being drawn (z +2.4) [clear reading]. Other readings: a cinematic hit with a long tail (impacts, z +2.2), a metal scrape (foley, z +2.0). AudioSet: Music 0.56, Cymbal 0.10, Musical instrument 0.10. peak -8.3 dBFS, -24.1 LUFS, brightness 5.5 kHz, bandwidth 20.5 kHz, noise floor -54 dBFS, side/mid -6 dB.",
+  "duration": 2.968,
+  "peak_dbfs": -8.3,
+  "lufs": -24.1,
+  "attack_ms": 94.0
+ },
+ {
+  "file": "09 Risers/EarnEdits - Spiritual Riser 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a reverse cymbal swell",
+    "z": 4.3
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.6
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.5
+   },
+   {
+    "tag": "a rising riser building tension",
+    "z": 3.1
+   },
+   {
+    "tag": "a fast whoosh",
+    "z": 3.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.108
+   },
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.07
+   },
+   {
+    "label": "Static",
+    "p": 0.05
+   }
+  ],
+  "shape": "busy, 10.0 onsets/s (attack 238 ms, decays in 126 ms)",
+  "summary": "2.99 s busy, 10.0 onsets/s (attack 238 ms, decays in 126 ms). Sounds most like: a reverse cymbal swell (z +4.3), a deep cinematic whoosh (z +3.5), a cinematic hit with a long tail (z +3.5) [clear reading]. AudioSet tagger unsure (Sound effect 0.11, Whoosh, swoosh, swish 0.07, Static 0.05). peak 0.0 dBFS, -16.4 LUFS, brightness 764 Hz, bandwidth 6.5 kHz, noise floor -69 dBFS, side/mid -2 dB.",
+  "duration": 2.987,
+  "peak_dbfs": 0.0,
+  "lufs": -16.4,
+  "attack_ms": 238.0
+ },
+ {
+  "file": "09 Risers/EarnEdits - Spiritual Riser 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 4.2
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.7
+   },
+   {
+    "tag": "a deep cinematic boom",
+    "z": 3.4
+   },
+   {
+    "tag": "a downlifter falling sweep",
+    "z": 2.9
+   },
+   {
+    "tag": "a reverse cymbal swell",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Rumble",
+    "p": 0.439
+   }
+  ],
+  "shape": "busy, 4.8 onsets/s, tonal, pitch ~132 Hz (C3) (attack 92 ms, decays in 425 ms)",
+  "summary": "6.01 s busy, 4.8 onsets/s, tonal, pitch ~132 Hz (C3) (attack 92 ms, decays in 425 ms). Sounds most like: a deep cinematic whoosh (z +4.1), a cinematic hit with a long tail (z +3.7), a deep cinematic boom (z +3.4) [clear reading]. AudioSet: Rumble 0.44. peak 0.0 dBFS, -15.2 LUFS, brightness 201 Hz, bandwidth 2.0 kHz, noise floor -44 dBFS, side/mid -2 dB.",
+  "duration": 6.007,
+  "peak_dbfs": 0.0,
+  "lufs": -15.2,
+  "attack_ms": 92.0
+ },
+ {
+  "file": "09 Risers/EarnEdits - Whoosh Riser 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.6
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.6
+   },
+   {
+    "tag": "a fast whoosh",
+    "z": 3.5
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.4
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.519
+   },
+   {
+    "label": "Music",
+    "p": 0.206
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.172
+   }
+  ],
+  "shape": "busy, 9.5 onsets/s (attack 293 ms, decays in 1541 ms)",
+  "summary": "4.09 s busy, 9.5 onsets/s (attack 293 ms, decays in 1541 ms). Sounds most like: a cinematic hit with a long tail (z +3.6), a deep cinematic whoosh (z +3.6), a fast whoosh (z +3.4) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.52, Music 0.21, Sound effect 0.17. peak -12.7 dBFS, -26.6 LUFS, brightness 2.8 kHz, bandwidth 20.5 kHz, noise floor -53 dBFS, side/mid -3 dB.",
+  "duration": 4.088,
+  "peak_dbfs": -12.7,
+  "lufs": -26.6,
+  "attack_ms": 293.0
+ },
+ {
+  "file": "09 Risers/EarnEdits - Whoosh Riser 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.2
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.8
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.7
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.5
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.871
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.105
+   }
+  ],
+  "shape": "6 separate events (attack 212 ms, decays in 1690 ms)",
+  "summary": "5.76 s 6 separate events (attack 212 ms, decays in 1690 ms). Sounds most like: a fast whoosh (z +4.2), a deep cinematic whoosh (z +3.8), a soft air whoosh (z +3.7) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.87, Sound effect 0.10. peak -9.4 dBFS, -25.0 LUFS, brightness 779 Hz, bandwidth 12.9 kHz, noise floor -66 dBFS, side/mid 1 dB.",
+  "duration": 5.76,
+  "peak_dbfs": -9.4,
+  "lufs": -25.0,
+  "attack_ms": 212.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Cinematic Whoosh Hit.mp3",
+  "sounds_like": [
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.9
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.3
+   },
+   {
+    "tag": "a deep cinematic boom",
+    "z": 3.0
+   },
+   {
+    "tag": "a punchy impact hit",
+    "z": 2.9
+   },
+   {
+    "tag": "a big drum hit",
+    "z": 2.9
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.457
+   },
+   {
+    "label": "Explosion",
+    "p": 0.169
+   },
+   {
+    "label": "Bang",
+    "p": 0.159
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.141
+   },
+   {
+    "label": "Burst, pop",
+    "p": 0.078
+   }
+  ],
+  "shape": "7 separate events (attack 140 ms, decays in 826 ms)",
+  "summary": "6.60 s 7 separate events (attack 140 ms, decays in 826 ms). Sounds most like: a cinematic hit with a long tail (z +3.9), a deep cinematic whoosh (z +3.2), a deep cinematic boom (z +3.0) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.46, Explosion 0.17, Bang 0.16. peak 0.0 dBFS, -13.2 LUFS, brightness 3.1 kHz, bandwidth 20.5 kHz, noise floor -80 dBFS, side/mid -9 dB.",
+  "duration": 6.601,
+  "peak_dbfs": 0.0,
+  "lufs": -13.2,
+  "attack_ms": 140.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Designed Medium Whoosh 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.6
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.8
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.7
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.6
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.576
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.171
+   },
+   {
+    "label": "Bang",
+    "p": 0.06
+   }
+  ],
+  "shape": "busy, 6.4 onsets/s (attack 260 ms, decays in 509 ms)",
+  "summary": "1.56 s busy, 6.4 onsets/s (attack 260 ms, decays in 509 ms). Sounds most like: a fast whoosh (z +4.5), a deep cinematic whoosh (z +3.7), a swoosh passing by (z +3.7) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.58, Sound effect 0.17, Bang 0.06. peak -1.0 dBFS, -14.3 LUFS, brightness 339 Hz, bandwidth 4.1 kHz, noise floor -68 dBFS, side/mid -5 dB.",
+  "duration": 1.558,
+  "peak_dbfs": -1.0,
+  "lufs": -14.3,
+  "attack_ms": 260.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Designed Medium Whoosh 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 4.4
+   },
+   {
+    "tag": "a fast whoosh",
+    "z": 3.8
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.4
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.4
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.1
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.734
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.17
+   }
+  ],
+  "shape": "busy, 8.4 onsets/s, tonal, pitch ~70 Hz (C#2) (attack 228 ms, decays in 725 ms)",
+  "summary": "2.50 s busy, 8.4 onsets/s, tonal, pitch ~70 Hz (C#2) (attack 228 ms, decays in 725 ms). Sounds most like: a deep cinematic whoosh (z +4.3), a fast whoosh (z +3.8), a swoosh passing by (z +3.3) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.73, Sound effect 0.17. peak -1.0 dBFS, -15.0 LUFS, brightness 225 Hz, bandwidth 2.6 kHz, digital silence between sounds, side/mid -6 dB.",
+  "duration": 2.504,
+  "peak_dbfs": -1.0,
+  "lufs": -15.0,
+  "attack_ms": 228.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Fast Small Whoosh 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 3.2
+   },
+   {
+    "tag": "a downlifter falling sweep",
+    "z": 2.9
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 2.8
+   },
+   {
+    "tag": "cloth whipping through the air",
+    "z": 2.6
+   },
+   {
+    "tag": "a spray can hissing",
+    "z": 2.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.376
+   },
+   {
+    "label": "Whip",
+    "p": 0.166
+   }
+  ],
+  "shape": "short swell (attack 204 ms, decays in 383 ms)",
+  "summary": "1.00 s short swell (attack 204 ms, decays in 383 ms). Sounds most like: a fast whoosh (z +3.1), a downlifter falling sweep (z +2.9), a swoosh passing by (z +2.8) [clear reading]. Other readings: a spray can hissing (everyday, z +2.5). AudioSet: Whoosh, swoosh, swish 0.38, Whip 0.17. peak -3.3 dBFS, -15.6 LUFS, brightness 5.2 kHz, bandwidth 20.5 kHz, noise floor -52 dBFS, side/mid -19 dB.",
+  "duration": 1.002,
+  "peak_dbfs": -3.3,
+  "lufs": -15.6,
+  "attack_ms": 204.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Fast Small Whoosh 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 3.6
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.0
+   },
+   {
+    "tag": "a whip pan transition",
+    "z": 2.8
+   },
+   {
+    "tag": "cloth whipping through the air",
+    "z": 2.7
+   },
+   {
+    "tag": "a downlifter falling sweep",
+    "z": 2.7
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.424
+   },
+   {
+    "label": "Whip",
+    "p": 0.074
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.062
+   },
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.052
+   }
+  ],
+  "shape": "short swell (attack 219 ms, decays in 311 ms)",
+  "summary": "0.98 s short swell (attack 219 ms, decays in 311 ms). Sounds most like: a fast whoosh (z +3.6), a swoosh passing by (z +3.0), a whip pan transition (z +2.8) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.42, Whip 0.07, Sound effect 0.06. peak -1.2 dBFS, -14.1 LUFS, brightness 5.5 kHz, bandwidth 20.5 kHz, side/mid -19 dB.",
+  "duration": 0.984,
+  "peak_dbfs": -1.2,
+  "lufs": -14.1,
+  "attack_ms": 219.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Fast Small Whoosh 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 3.6
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.0
+   },
+   {
+    "tag": "cloth whipping through the air",
+    "z": 3.0
+   },
+   {
+    "tag": "a whip pan transition",
+    "z": 2.7
+   },
+   {
+    "tag": "a short swish",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.43
+   },
+   {
+    "label": "Whip",
+    "p": 0.08
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.056
+   },
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.05
+   }
+  ],
+  "shape": "short swell (attack 201 ms, decays in 390 ms)",
+  "summary": "1.11 s short swell (attack 201 ms, decays in 390 ms). Sounds most like: a fast whoosh (z +3.6), a swoosh passing by (z +3.0), cloth whipping through the air (z +3.0) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.43, Whip 0.08, Sound effect 0.06. peak -0.9 dBFS, -13.9 LUFS, brightness 5.4 kHz, bandwidth 20.5 kHz, noise floor -55 dBFS, side/mid -19 dB.",
+  "duration": 1.113,
+  "peak_dbfs": -0.9,
+  "lufs": -13.9,
+  "attack_ms": 201.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Human Swoosh - Long.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.1
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.4
+   },
+   {
+    "tag": "a reverse cymbal swell",
+    "z": 3.2
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.1
+   },
+   {
+    "tag": "a spray can hissing",
+    "z": 2.9
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sneeze",
+    "p": 0.198
+   },
+   {
+    "label": "Sigh",
+    "p": 0.142
+   },
+   {
+    "label": "Snort",
+    "p": 0.099
+   },
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.072
+   },
+   {
+    "label": "Breathing",
+    "p": 0.053
+   }
+  ],
+  "shape": "short swell (attack 287 ms, decays in 352 ms)",
+  "summary": "2.29 s short swell (attack 287 ms, decays in 352 ms). Sounds most like: a fast whoosh (z +4.1), a soft air whoosh (z +3.4), a reverse cymbal swell (z +3.1) [clear reading]. Other readings: a spray can hissing (everyday, z +2.8). AudioSet tagger unsure (Sneeze 0.20, Sigh 0.14, Snort 0.10). peak -16.2 dBFS, -29.4 LUFS, brightness 4.0 kHz, bandwidth 20.5 kHz, digital silence between sounds, side/mid -5 dB.",
+  "duration": 2.292,
+  "peak_dbfs": -16.2,
+  "lufs": -29.4,
+  "attack_ms": 287.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Human Whoosh.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.3
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.9
+   },
+   {
+    "tag": "a spray can hissing",
+    "z": 3.1
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.1
+   },
+   {
+    "tag": "a stick swung fast through the air",
+    "z": 3.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sigh",
+    "p": 0.432
+   },
+   {
+    "label": "Gasp",
+    "p": 0.188
+   },
+   {
+    "label": "Breathing",
+    "p": 0.181
+   },
+   {
+    "label": "Snort",
+    "p": 0.127
+   },
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.054
+   }
+  ],
+  "shape": "short swell (attack 178 ms, decays in 586 ms)",
+  "summary": "1.73 s short swell (attack 178 ms, decays in 586 ms). Sounds most like: a fast whoosh (z +4.2), a soft air whoosh (z +3.8), a spray can hissing (z +3.1) [clear reading]. AudioSet: Sigh 0.43, Gasp 0.19, Breathing 0.18. peak -21.0 dBFS, -32.9 LUFS, brightness 2.7 kHz, bandwidth 20.5 kHz, digital silence between sounds, side/mid -12 dB.",
+  "duration": 1.733,
+  "peak_dbfs": -21.0,
+  "lufs": -32.9,
+  "attack_ms": 178.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Jet Takeoff.mp3",
+  "sounds_like": [
+   {
+    "tag": "an explosion",
+    "z": 4.3
+   },
+   {
+    "tag": "a gunshot",
+    "z": 3.0
+   },
+   {
+    "tag": "fireworks exploding",
+    "z": 2.8
+   },
+   {
+    "tag": "a deep cinematic boom",
+    "z": 2.5
+   },
+   {
+    "tag": "a big drum hit",
+    "z": 2.2
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.504
+   },
+   {
+    "label": "Bang",
+    "p": 0.237
+   },
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.139
+   },
+   {
+    "label": "Explosion",
+    "p": 0.057
+   },
+   {
+    "label": "Grunt",
+    "p": 0.053
+   }
+  ],
+  "shape": "busy, 6.7 onsets/s, tonal, pitch ~97 Hz (G2) (attack 100 ms, decays in 1910 ms)",
+  "summary": "2.68 s busy, 6.7 onsets/s, tonal, pitch ~97 Hz (G2) (attack 100 ms, decays in 1910 ms). Sounds most like: an explosion (z +4.3), a gunshot (z +2.9), fireworks exploding (z +2.7) [clear reading]. AudioSet: Sound effect 0.50, Bang 0.24, Whoosh, swoosh, swish 0.14. peak -0.0 dBFS, -11.3 LUFS, brightness 1.1 kHz, bandwidth 8.1 kHz, noise floor -35 dBFS, side/mid -13 dB.",
+  "duration": 2.68,
+  "peak_dbfs": -0.0,
+  "lufs": -11.3,
+  "attack_ms": 100.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Large Whoosh - Low Hum.mp3",
+  "sounds_like": [
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.8
+   },
+   {
+    "tag": "a fast whoosh",
+    "z": 3.5
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.1
+   },
+   {
+    "tag": "a sub bass drop",
+    "z": 2.9
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Sound effect",
+    "p": 0.326
+   },
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.239
+   },
+   {
+    "label": "Rumble",
+    "p": 0.166
+   },
+   {
+    "label": "Roar",
+    "p": 0.074
+   },
+   {
+    "label": "Music",
+    "p": 0.053
+   }
+  ],
+  "shape": "busy, 3.5 onsets/s (attack 153 ms, decays in 489 ms)",
+  "summary": "1.72 s busy, 3.5 onsets/s (attack 153 ms, decays in 489 ms). Sounds most like: a deep cinematic whoosh (z +3.8), a fast whoosh (z +3.5), a soft air whoosh (z +3.1) [clear reading]. Other readings: a sub bass drop (impacts, z +2.9). AudioSet: Sound effect 0.33, Whoosh, swoosh, swish 0.24, Rumble 0.17. peak -3.0 dBFS, -14.6 LUFS, brightness 174 Hz, bandwidth 1.6 kHz, noise floor -102 dBFS, side/mid 5 dB.",
+  "duration": 1.722,
+  "peak_dbfs": -3.0,
+  "lufs": -14.6,
+  "attack_ms": 153.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Large Whoosh 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.4
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.7
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.6
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.5
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.1
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.681
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.181
+   },
+   {
+    "label": "Bang",
+    "p": 0.105
+   },
+   {
+    "label": "Explosion",
+    "p": 0.053
+   }
+  ],
+  "shape": "busy, 4.8 onsets/s (attack 251 ms, decays in 688 ms)",
+  "summary": "2.48 s busy, 4.8 onsets/s (attack 251 ms, decays in 688 ms). Sounds most like: a fast whoosh (z +4.3), a deep cinematic whoosh (z +3.7), a swoosh passing by (z +3.6) [clear reading]. Other readings: a cinematic hit with a long tail (impacts, z +3.1). AudioSet: Whoosh, swoosh, swish 0.68, Sound effect 0.18, Bang 0.10. peak 0.0 dBFS, -15.4 LUFS, brightness 1.3 kHz, bandwidth 12.9 kHz, digital silence between sounds, side/mid -1 dB.",
+  "duration": 2.478,
+  "peak_dbfs": 0.0,
+  "lufs": -15.4,
+  "attack_ms": 251.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Large Whoosh 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.2
+   },
+   {
+    "tag": "a gust of wind rushing past",
+    "z": 3.7
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.6
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.5
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.3
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.471
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.145
+   },
+   {
+    "label": "Explosion",
+    "p": 0.065
+   },
+   {
+    "label": "Bang",
+    "p": 0.06
+   }
+  ],
+  "shape": "busy, 8.2 onsets/s (attack 155 ms, decays in 523 ms)",
+  "summary": "1.58 s busy, 8.2 onsets/s (attack 155 ms, decays in 523 ms). Sounds most like: a fast whoosh (z +4.1), a gust of wind rushing past (z +3.6), a swoosh passing by (z +3.6) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.47, Sound effect 0.14, Explosion 0.07. peak -0.4 dBFS, -13.8 LUFS, brightness 572 Hz, bandwidth 5.1 kHz, noise floor -55 dBFS, side/mid -5 dB.",
+  "duration": 1.58,
+  "peak_dbfs": -0.4,
+  "lufs": -13.8,
+  "attack_ms": 155.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Large Whoosh 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.0
+   },
+   {
+    "tag": "cloth whipping through the air",
+    "z": 3.5
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.3
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.3
+   },
+   {
+    "tag": "a gust of wind rushing past",
+    "z": 3.2
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.209
+   },
+   {
+    "label": "Explosion",
+    "p": 0.062
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.061
+   }
+  ],
+  "shape": "busy, 5.2 onsets/s (attack 214 ms, decays in 655 ms)",
+  "summary": "2.70 s busy, 5.2 onsets/s (attack 214 ms, decays in 655 ms). Sounds most like: a fast whoosh (z +3.9), cloth whipping through the air (z +3.5), a deep cinematic whoosh (z +3.2) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.21, Explosion 0.06, Sound effect 0.06. peak -1.0 dBFS, -15.5 LUFS, brightness 536 Hz, bandwidth 8.1 kHz, noise floor -89 dBFS, side/mid -12 dB.",
+  "duration": 2.697,
+  "peak_dbfs": -1.0,
+  "lufs": -15.5,
+  "attack_ms": 214.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Large Whoosh 04.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.3
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.7
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.5
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.4
+   },
+   {
+    "tag": "a gust of wind rushing past",
+    "z": 3.4
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.445
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.105
+   }
+  ],
+  "shape": "busy, 7.4 onsets/s (attack 253 ms, decays in 712 ms)",
+  "summary": "2.70 s busy, 7.4 onsets/s (attack 253 ms, decays in 712 ms). Sounds most like: a fast whoosh (z +4.3), a deep cinematic whoosh (z +3.6), a soft air whoosh (z +3.5) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.45, Sound effect 0.10. peak -1.0 dBFS, -14.6 LUFS, brightness 547 Hz, bandwidth 8.1 kHz, noise floor -85 dBFS, side/mid -13 dB.",
+  "duration": 2.697,
+  "peak_dbfs": -1.0,
+  "lufs": -14.6,
+  "attack_ms": 253.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Low Fast Whoosh.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.6
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 4.1
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 4.0
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.8
+   },
+   {
+    "tag": "a gust of wind rushing past",
+    "z": 3.2
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.291
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.163
+   },
+   {
+    "label": "Music",
+    "p": 0.113
+   },
+   {
+    "label": "Timpani",
+    "p": 0.058
+   },
+   {
+    "label": "Rumble",
+    "p": 0.052
+   }
+  ],
+  "shape": "busy, 6.7 onsets/s (attack 210 ms, decays in 384 ms)",
+  "summary": "1.04 s busy, 6.7 onsets/s (attack 210 ms, decays in 384 ms). Sounds most like: a fast whoosh (z +4.5), a soft air whoosh (z +4.1), a deep cinematic whoosh (z +3.9) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.29, Sound effect 0.16, Music 0.11. peak -4.0 dBFS, -19.2 LUFS, brightness 316 Hz, bandwidth 2.0 kHz, noise floor -60 dBFS, side/mid -8 dB.",
+  "duration": 1.038,
+  "peak_dbfs": -4.0,
+  "lufs": -19.2,
+  "attack_ms": 210.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Medium Whoosh 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.7
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.9
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.7
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.6
+   },
+   {
+    "tag": "a reverse cymbal swell",
+    "z": 3.2
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.655
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.118
+   }
+  ],
+  "shape": "busy, 4.3 onsets/s (attack 229 ms, decays in 343 ms)",
+  "summary": "2.10 s busy, 4.3 onsets/s (attack 229 ms, decays in 343 ms). Sounds most like: a fast whoosh (z +4.7), a swoosh passing by (z +3.8), a deep cinematic whoosh (z +3.7) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.66, Sound effect 0.12. peak -1.7 dBFS, -16.2 LUFS, brightness 893 Hz, bandwidth 12.9 kHz, noise floor -86 dBFS, side/mid -8 dB.",
+  "duration": 2.096,
+  "peak_dbfs": -1.7,
+  "lufs": -16.2,
+  "attack_ms": 229.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Medium Whoosh 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.8
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 4.0
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.6
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.4
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.1
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.653
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.138
+   }
+  ],
+  "shape": "busy, 4.3 onsets/s (attack 273 ms, decays in 389 ms)",
+  "summary": "1.85 s busy, 4.3 onsets/s (attack 273 ms, decays in 389 ms). Sounds most like: a fast whoosh (z +4.8), a swoosh passing by (z +3.9), a deep cinematic whoosh (z +3.5) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.65, Sound effect 0.14. peak -0.6 dBFS, -15.1 LUFS, brightness 888 Hz, bandwidth 12.9 kHz, noise floor -83 dBFS, side/mid -9 dB.",
+  "duration": 1.847,
+  "peak_dbfs": -0.6,
+  "lufs": -15.1,
+  "attack_ms": 273.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Metal String Rise.mp3",
+  "sounds_like": [
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.5
+   },
+   {
+    "tag": "a fast whoosh",
+    "z": 3.5
+   },
+   {
+    "tag": "a cinematic hit with a long tail",
+    "z": 3.3
+   },
+   {
+    "tag": "a reverse cymbal swell",
+    "z": 3.2
+   },
+   {
+    "tag": "a rising riser building tension",
+    "z": 2.9
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.188
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.163
+   }
+  ],
+  "shape": "sustained, tonal, pitch ~75 Hz (D2) (attack 131 ms, decays in 1192 ms)",
+  "summary": "4.82 s sustained, tonal, pitch ~75 Hz (D2) (attack 131 ms, decays in 1192 ms). Sounds most like: a deep cinematic whoosh (z +3.5), a fast whoosh (z +3.4), a cinematic hit with a long tail (z +3.3) [clear reading]. AudioSet tagger unsure (Whoosh, swoosh, swish 0.19, Sound effect 0.16). peak -4.4 dBFS, -21.3 LUFS, brightness 897 Hz, bandwidth 16.3 kHz, noise floor -101 dBFS, side/mid -16 dB.",
+  "duration": 4.822,
+  "peak_dbfs": -4.4,
+  "lufs": -21.3,
+  "attack_ms": 131.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Sci-Fi Sweep - Ultra High.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 3.3
+   },
+   {
+    "tag": "a phone vibration buzz",
+    "z": 3.1
+   },
+   {
+    "tag": "a motorcycle revving",
+    "z": 2.9
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 2.8
+   },
+   {
+    "tag": "a stick swung fast through the air",
+    "z": 2.7
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.327
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.157
+   },
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.085
+   },
+   {
+    "label": "Music",
+    "p": 0.054
+   }
+  ],
+  "shape": "short swell (attack 277 ms, decays in 373 ms)",
+  "summary": "1.24 s short swell (attack 277 ms, decays in 373 ms). Sounds most like: a fast whoosh (z +3.3), a phone vibration buzz (z +3.0), a motorcycle revving (z +2.8) [clear reading]. AudioSet: Zipper (clothing) 0.33, Sound effect 0.16, Whoosh, swoosh, swish 0.09. peak -12.3 dBFS, -25.0 LUFS, brightness 4.3 kHz, bandwidth 20.5 kHz, digital silence between sounds, side/mid -12 dB.",
+  "duration": 1.243,
+  "peak_dbfs": -12.3,
+  "lufs": -25.0,
+  "attack_ms": 277.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Sci-Fi Whoosh.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 3.9
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.9
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 3.9
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.7
+   },
+   {
+    "tag": "a gust of wind rushing past",
+    "z": 3.0
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.338
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.216
+   },
+   {
+    "label": "Music",
+    "p": 0.09
+   },
+   {
+    "label": "Bang",
+    "p": 0.066
+   }
+  ],
+  "shape": "busy, 6.6 onsets/s (attack 288 ms, decays in 806 ms)",
+  "summary": "1.67 s busy, 6.6 onsets/s (attack 288 ms, decays in 806 ms). Sounds most like: a fast whoosh (z +3.9), a soft air whoosh (z +3.8), a deep cinematic whoosh (z +3.8) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.34, Sound effect 0.22, Music 0.09. peak -4.1 dBFS, -18.7 LUFS, brightness 351 Hz, bandwidth 2.6 kHz, noise floor -46 dBFS, side/mid -9 dB.",
+  "duration": 1.667,
+  "peak_dbfs": -4.1,
+  "lufs": -18.7,
+  "attack_ms": 288.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Ultra Fast Whistle.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.8
+   },
+   {
+    "tag": "a stick swung fast through the air",
+    "z": 4.7
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.3
+   },
+   {
+    "tag": "cloth whipping through the air",
+    "z": 3.2
+   },
+   {
+    "tag": "a whip pan transition",
+    "z": 2.8
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Zipper (clothing)",
+    "p": 0.638
+   },
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.228
+   },
+   {
+    "label": "Whip",
+    "p": 0.084
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.07
+   }
+  ],
+  "shape": "short one-shot (attack 30 ms, decays in 89 ms)",
+  "summary": "0.49 s short one-shot (attack 30 ms, decays in 89 ms). Sounds most like: a fast whoosh (z +4.7), a stick swung fast through the air (z +4.7), a swoosh passing by (z +3.2) [clear reading]. AudioSet: Zipper (clothing) 0.64, Whoosh, swoosh, swish 0.23, Whip 0.08. peak -1.3 dBFS, -19.3 LUFS, brightness 3.3 kHz, bandwidth 20.5 kHz, side/mid -15 dB.",
+  "duration": 0.488,
+  "peak_dbfs": -1.3,
+  "lufs": -19.3,
+  "attack_ms": 30.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Whoosh 01.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 3.3
+   },
+   {
+    "tag": "a stick swung fast through the air",
+    "z": 2.9
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 2.9
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 2.7
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 2.6
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.594
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.102
+   },
+   {
+    "label": "Explosion",
+    "p": 0.058
+   }
+  ],
+  "shape": "busy, 3.5 onsets/s (attack 278 ms, decays in 601 ms)",
+  "summary": "2.00 s busy, 3.5 onsets/s (attack 278 ms, decays in 601 ms). Sounds most like: a fast whoosh (z +3.3), a stick swung fast through the air (z +2.9), a swoosh passing by (z +2.8) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.59, Sound effect 0.10, Explosion 0.06. peak -10.1 dBFS, -24.3 LUFS, brightness 1.6 kHz, bandwidth 12.9 kHz, noise floor -86 dBFS, side/mid -32 dB.",
+  "duration": 2.0,
+  "peak_dbfs": -10.1,
+  "lufs": -24.3,
+  "attack_ms": 278.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Whoosh 02.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 4.9
+   },
+   {
+    "tag": "a deep cinematic whoosh",
+    "z": 4.1
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.9
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 3.6
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.5
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.54
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.22
+   },
+   {
+    "label": "Bang",
+    "p": 0.188
+   }
+  ],
+  "shape": "busy, 3.7 onsets/s (attack 169 ms, decays in 691 ms)",
+  "summary": "2.14 s busy, 3.7 onsets/s (attack 169 ms, decays in 691 ms). Sounds most like: a fast whoosh (z +4.8), a deep cinematic whoosh (z +4.0), a swoosh passing by (z +3.9) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.54, Sound effect 0.22, Bang 0.19. peak -0.0 dBFS, -15.4 LUFS, brightness 751 Hz, bandwidth 5.1 kHz, noise floor -107 dBFS, side/mid -8 dB.",
+  "duration": 2.144,
+  "peak_dbfs": -0.0,
+  "lufs": -15.4,
+  "attack_ms": 169.0
+ },
+ {
+  "file": "10 Whooshes/EarnEdits - Whoosh 03.mp3",
+  "sounds_like": [
+   {
+    "tag": "a fast whoosh",
+    "z": 5.4
+   },
+   {
+    "tag": "a stick swung fast through the air",
+    "z": 4.8
+   },
+   {
+    "tag": "a soft air whoosh",
+    "z": 4.0
+   },
+   {
+    "tag": "a short swish",
+    "z": 3.9
+   },
+   {
+    "tag": "a swoosh passing by",
+    "z": 3.7
+   }
+  ],
+  "audioset": [
+   {
+    "label": "Whoosh, swoosh, swish",
+    "p": 0.211
+   },
+   {
+    "label": "Sound effect",
+    "p": 0.06
+   }
+  ],
+  "shape": "short one-shot (attack 80 ms, decays in 261 ms)",
+  "summary": "0.99 s short one-shot (attack 80 ms, decays in 261 ms). Sounds most like: a fast whoosh (z +5.3), a stick swung fast through the air (z +4.7), a soft air whoosh (z +4.0) [clear reading]. AudioSet: Whoosh, swoosh, swish 0.21, Sound effect 0.06. peak -19.4 dBFS, -38.2 LUFS, brightness 1.5 kHz, bandwidth 16.3 kHz, side/mid -2 dB.",
+  "duration": 0.988,
+  "peak_dbfs": -19.4,
+  "lufs": -38.2,
+  "attack_ms": 80.0
+ }
+]

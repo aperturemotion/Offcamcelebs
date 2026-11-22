@@ -80,13 +80,14 @@ export const PLACE: PlaceDef = {
   set: { id: S, ground: "dark", Comp, align: () => "centre", focus: [DAY.x, DAY.y] },
   done: DONE,
   cam: CAM,
+  // ★ 2026-11-22 re-score from the EarnEdits pack: a page turn per sheet (two takes, alternating; the early fast ones
+  //   quieter under the arrival), paper and a soft thump for the envelope
   sfx: [
-    // a tick per page as it passes over the top (its swing's middle), the early ones quieter under the arrival
-    ...starts.map((s, k) => ({ s: "tick" as const, at: s + (k < 10 ? 4 : 4 + Math.round((k - 9) / 2)), vol: 0.16 + 0.012 * k, why: `payment: calendar page ${k + 1} flips over`, mode: "peak" as const })),
-    { s: "click", at: revealAt(T) + 7, vol: 0.4, why: "payment: the last page lands, OCT 9 2026 uncovered", mode: "peak" },
-    { s: "swoosh", at: T.land - 6, vol: 0.32, why: "payment: the envelope is tossed in", mode: "peak" },
-    { s: "thud", at: T.land, vol: 0.75, why: "payment: the envelope lands with weight", mode: "peak" },
-    { s: "flick", at: T.land + 1, vol: 0.35, why: "payment: the envelope's paper slaps the desk", mode: "peak" },
-    { s: "flick", at: T.slA + 8, vol: 0.4, why: "payment: the slip slides out of the envelope", mode: "peak" },
+    ...starts.map((s, k) => ({ s: (k % 2 ? "pflipb" : "pflipa") as "pflipa" | "pflipb", at: s + (k < 10 ? 4 : 4 + Math.round((k - 9) / 2)), vol: 0.18 + 0.014 * k, why: `payment: calendar page ${k + 1} flips over`, mode: "peak" as const })),
+    { s: "pland", at: revealAt(T) + 7, vol: 0.45, why: "payment: the last page lands, OCT 9 2026 uncovered", mode: "peak" },
+    { s: "wsmall1", at: T.land - 6, vol: 0.3, why: "payment: the envelope is tossed in", mode: "peak" },
+    { s: "thump", at: T.land, vol: 0.5, why: "payment: the envelope lands with weight", mode: "peak" },
+    { s: "pland", at: T.land + 1, vol: 0.35, why: "payment: the envelope's paper slaps the desk", mode: "peak" },
+    { s: "pslide", at: T.slA + 8, vol: 0.4, why: "payment: the slip slides out of the envelope", mode: "peak" },
   ],
 };

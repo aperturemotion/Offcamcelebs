@@ -51,6 +51,12 @@ and one captured frame. Restart Claude Code after it finishes, so the new enviro
   person's photo; Timur supplies it". Prefer freely licensed sources (Wikimedia Commons: record file page, author and
   licence in the film's `assets/brand/SOURCES.txt`), logos from the company's own or Commons files (P16). A face is cut out
   with rembg (examine the mask) and graded. A photo Timur supplies still wins.
+- **Sound effects: the EarnEdits pack** (`OffCamCelebs/_sfx/earnedits`, with Earshot's `index.json`), heard with **Earshot**
+  (`earshot describe`), gaps from **Openverse** (`tools/openverse_audio.py`), cut and levelled by `tools/sfx_prep.py`. Never
+  the ping; the chain only on bars, rarely; everything else subtle and fitting (Timur, 2026-11-22; the rules file has the
+  steps).
+- **Preview renders, not the Studio, for review** (Timur, 2026-11-22): at every handback a draft MP4 with the cheap 3-D switch
+  (rules file, "REVIEW BY PREVIEW RENDER").
 - **Studio ports 3100–3199.** Each film has its own (034: 3176).
 - **Handback:** the real HyperFrames Studio, never a custom player in its place (Timur, 2026-10-23) (`npx --yes hyperframes@0.8.143 preview --background --no-open --port <p>`), plus a
   srv.us link: `OffCamCelebs\_tunnels\tunnel.ps1 -Port <p> -Fwd <n>`, launched detached, in a reconnect loop. The hostname
