@@ -1,5 +1,9 @@
 # DAILY_RUN.md — the 6 a.m. The Payouts run (OffCamCelebs)
 
+Scheduled task "OffCamCelebs daily Payouts run" (trig_01S1V4pKB7F2FRDQq2KmAiPK): 05:58 Moscow every day, delivered into
+the "the payouts" cloud session (it holds the Aperture Motion Worker and ElevenLabs connectors; this org cannot store
+connectors on a scheduled task, so a fresh session per run would have neither).
+
 Timur, 2026-11-22: "every day in the morning at 6 a.m. … check whether there is a The Payouts video due. If there is … check if
 there's a script. If there isn't a script, then … come up with a script. You'll look at the 5 competitors, do exactly what I
 told you to do before to come up with the script. And you're going to start working on the video and hand the studio itself
@@ -62,6 +66,11 @@ song, `bedenv` to 5.5 dB under) → the subject's face from Wikimedia Commons an
 → the places (parallel agents allowed; the 034/035 look; the hook is an enticing real object in motion from frame 1, no
 figure before ~2 s; visuals follow the words; one object per line) → the sound (the EarnEdits pack, Earshot-checked cuts,
 Openverse for gaps; no ping; the chain only on bars, rarely; 7–14 dB under the voice).
+
+**If the EarnEdits pack is missing** (the bootstrap says "0 EarnEdits sounds": its audio lives only in the LFS zip
+`OffCamCelebs/_sfx/EarnEdits-SFX-Pack.zip`, committed once Timur re-attaches it): take every effect from Openverse
+(`tools/openverse_audio.py`, CC0 first) and check each cut with `earshot describe`, same levels and rules; say so in the report.
+The pack's `index.json` still says what each EarnEdits sound is, so the choices can be swapped back later.
 
 ## 4. Check (RULE 54 and the rest, all with canaries)
 
