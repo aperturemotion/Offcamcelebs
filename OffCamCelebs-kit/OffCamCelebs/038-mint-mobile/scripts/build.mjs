@@ -156,6 +156,13 @@ ${sfxHtml}
 `;
 // ★ `--audit-only` (2026-10-12) builds ONLY .build/film-audit.js and leaves index.html and assets/film.js untouched: the
 //   audit can be rebuilt while a render is reading the film's own files
+// ★ `--preview-only` (Timur, 2026-11-22) builds ONLY .build/film-preview.js: the film with the cheap 3-D switch on
+//   (src/three/stage.ts PREVIEW), for scratchpad/preview.mjs; index.html and assets/film.js are untouched
+if (process.argv.includes("--preview-only")) {
+  await esbuild.build({ ...browserOpts, outfile: r(".build/film-preview.js"), banner: { js: "window.__v34preview={scale:0.5};" } });
+  console.log("built .build/film-preview.js only (index.html and assets/film.js untouched)");
+  process.exit(0);
+}
 if (process.argv.includes("--audit-only")) {
   await esbuild.build({ ...browserOpts, entryPoints: [r("src/audit/g3entry.ts")], outfile: r(".build/film-audit.js") });
   console.log("built .build/film-audit.js only (index.html and assets/film.js untouched)");

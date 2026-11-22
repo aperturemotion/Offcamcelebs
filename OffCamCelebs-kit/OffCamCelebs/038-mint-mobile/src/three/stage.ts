@@ -121,16 +121,21 @@ export const LIGHT = { key: 3.8, rim: 0.7, fill: 0.3, env: 0.35, envMetal: 1, di
 const lightNow = () => ({ ...LIGHT, ...((window as unknown as { __g3light?: Partial<typeof LIGHT> }).__g3light ?? {}) });
 const dirTmp = new THREE.Vector3();
 
+/** ★ PREVIEW (Timur, 2026-11-22: "watching these videos from the studio is not an option anymore … preview render them.
+ *  Just whatever is fastest … lower resolution … without lighting"): `window.__v34preview` (set only by the preview build,
+ *  scripts/build.mjs --preview-only) draws every 3-D view at `scale` of its frame size, with no shadow map, no mirror floor
+ *  and no antialiasing. The film's own build never sets it. */
+const PV = (globalThis as unknown as { __v34preview?: { scale?: number } }).__v34preview;
 const ensure = () => {
   if (R) return R;
   const canvas = document.createElement("canvas");
-  R = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, premultipliedAlpha: true, preserveDrawingBuffer: true, powerPreference: "high-performance" });
+  R = new THREE.WebGLRenderer({ canvas, antialias: !PV, alpha: true, premultipliedAlpha: true, preserveDrawingBuffer: true, powerPreference: "high-performance" });
   R.setPixelRatio(1);
   R.outputColorSpace = THREE.SRGBColorSpace;
   R.toneMapping = THREE.NeutralToneMapping;
   R.toneMappingExposure = 1.0;
   R.localClippingEnabled = true;                                     // a receipt clipped at its slot, drums at their housing
-  R.shadowMap.enabled = true;
+  R.shadowMap.enabled = !PV;
   R.shadowMap.type = THREE.PCFSoftShadowMap;   // ★ RULE 54: filtered soft shadows (VSM threw false wedges: see LIGHT)
   R.setClearColor(0x000000, 0);
   const pm = new THREE.PMREMGenerator(R);
@@ -260,7 +265,7 @@ const drawJob = (r: THREE.WebGLRenderer, j: Job) => {
   const sQ = B !== undefined && sRaw >= B - 0.3 && sRaw <= B + 0.1 ? B
     : B !== undefined ? Math.ceil((sRaw - 0.05) / 0.25 - 1e-9) * 0.25
     : Math.ceil(sRaw * 20 - 1e-6) / 20; // a view the sweep has not measured yet
-  const s = Math.max(1, Math.min(2.25, sQ));
+  const s = PV ? (PV.scale ?? 0.5) : Math.max(1, Math.min(2.25, sQ));
   const pw = Math.max(1, Math.round(j.rect.w * s)), ph = Math.max(1, Math.round(j.rect.h * s));
   // DEBUG (scratchpad/viewdbg.mjs): what this view measured and was given, when a harness asks for it
   const dbg = window as unknown as { __v34dbg?: unknown[]; __v34measureOnly?: boolean };
@@ -322,7 +327,7 @@ const drawJob = (r: THREE.WebGLRenderer, j: Job) => {
   const sc = key.shadow.camera as THREE.OrthographicCamera;
   sc.left = -rad; sc.right = rad; sc.top = rad; sc.bottom = -rad; sc.near = rad * 0.5; sc.far = rad * 6;
   sc.updateProjectionMatrix();
-  key.castShadow = entry.model.shadows !== false;
+  key.castShadow = !PV && entry.model.shadows !== false;
   // DEBUG (scratchpad/viewdbg.mjs): switch parts of the look off to find what a frame's glitch comes from
   const dflags = (window as unknown as { __v34flags?: Record<string, boolean> }).__v34flags;
   if (dflags) {
@@ -341,7 +346,7 @@ const drawJob = (r: THREE.WebGLRenderer, j: Job) => {
     entry.mirrors = ms;
   }
   for (const m of entry.mirrors) {
-    if (m.visible && (m.material as THREE.ShaderMaterial).uniforms.strength.value > 0.001) drawMirror(r, entry.scene, m, pw, ph);
+    if (!PV && m.visible && (m.material as THREE.ShaderMaterial).uniforms.strength.value > 0.001) drawMirror(r, entry.scene, m, pw, ph);
   }
   r.setViewport(0, 0, pw, ph);
   r.setScissor(0, 0, pw, ph);
