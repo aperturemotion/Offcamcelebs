@@ -22,7 +22,7 @@ export const LAYER = BUNDLE.H + 0.3;
 const HX = BUNDLE.HX + 5, HZ = BUNDLE.HZ + 4.2;   // the four bundles' centres in a layer (±HX, ±HZ), before each one's jitter
 const JX = 1.2, JZ = 0.8, JYAW = 0.006;           // a bundle's hand-stacked shift (±px) and turn (±rad)
 const BAND_T = 0.32 + 0.3 + 0.02;                 // the band's paper and its outward crinkle (cash.ts BAND_OUT)
-const B_Y0 = 0.32 + 0.1;                          // the bundles stand on the band's bottom run (its paper 0.32)
+const B_Y0 = 0.32 + 0.5;                          // the bundles stand on the band's bottom run (its paper 0.32; 0.5 clear: the audit's float32 world)
 /** the band round each brick: its width, its centre x on the brick, its inner half depth (clear of the bundles' straps) */
 const SASH = { w: 132, x: -HX - 12, z: HZ + BUNDLE.HZ + JZ + JYAW * BUNDLE.HX + 0.5 } as const;
 export const BRICK = { hw: HX + JX + BUNDLE.HX + JYAW * BUNDLE.HZ + 0.3, hd: SASH.z + BAND_T } as const;   // half width (x), half depth (z)
@@ -33,7 +33,7 @@ export const BRICKS = [
 ] as const;
 /** a brick's bundles' top (over its own foot), and its whole height over its band */
 export const brickH = (k: number) => B_Y0 + BRICKS[k].n * LAYER - 0.3;
-const bandYTop = (k: number) => brickH(k) + 0.15;
+const bandYTop = (k: number) => brickH(k) + 0.5;
 export const brickTall = (k: number) => bandYTop(k) + BAND_T;
 /** where brick k rests (its base over the floor) in the finished tower: on the band of the one below, 0.3 over it */
 export const brickBase = (k: number) => { let b = 0; for (let j = 0; j < k; j++) b += brickTall(j) + 0.3; return b; };
