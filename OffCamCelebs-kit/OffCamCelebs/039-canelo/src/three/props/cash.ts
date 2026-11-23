@@ -32,6 +32,7 @@ const SW = 49;                 // the strap's width (1¼" of a 6.14" note)
 const CRINKLE = 0.3;           // the strap's largest crinkle, outward
 const Y0 = ST + 0.08;          // the bottom note's underside
 const JX = 0.7, JZ = 0.55, JYAW = 0.0035;
+const RIM = 3;                 // the inner sheets' tops: the band round each edge that a neighbour's shift can expose
 export const MUSTARD = "#C7A23C";
 
 /** the underside of note i at x (note-local x) */
@@ -200,15 +201,27 @@ const variant = (seed: number): Variant => {
       // the front and back cut edges
       quad([f0x, yb0, f0z], [f1x, yb1, f1z], [f1x, yt1, f1z], [f0x, yt0, f0z], [nF[0], 0, nF[1]], col);
       quad([b1x, yb1, b1z], [b0x, yb0, b0z], [b0x, yt0, b0z], [b1x, yt1, b1z], [nB[0], 0, nB[1]], col);
-      // the inner sheets' tops (they show only as slivers where a sheet stands proud of the one above it)
-      if (i < N - 1) quad([b0x, yt0, b0z], [f0x, yt0, f0z], [f1x, yt1, f1z], [b1x, yt1, b1z], [0, 1, 0], col.map((v) => v * 0.97));
+      // the inner sheets' tops show only as slivers where a sheet stands proud of the one above it: ★ so only a RIM of each
+      //   is drawn (a full face under every sheet drew each pixel of a bundle a hundred times: a 2-minute frame in close-up)
+      if (i < N - 1) {
+        const tc = col.map((v) => v * 0.97);
+        const [g0x, g0z] = j.at(x0, NOTE.D / 2 - RIM), [g1x, g1z] = j.at(x1, NOTE.D / 2 - RIM);
+        const [h0x, h0z] = j.at(x0, -NOTE.D / 2 + RIM), [h1x, h1z] = j.at(x1, -NOTE.D / 2 + RIM);
+        quad([g0x, yt0, g0z], [f0x, yt0, f0z], [f1x, yt1, f1z], [g1x, yt1, g1z], [0, 1, 0], tc);
+        quad([b0x, yt0, b0z], [h0x, yt0, h0z], [h1x, yt1, h1z], [b1x, yt1, b1z], [0, 1, 0], tc);
+      }
     }
-    // the two end edges
+    // the two end edges (and the inner sheets' rims across the ends)
     for (const s of [1, -1]) {
       const x = (s * NOTE.W) / 2, yb = yAt(i, x), yt = yb + SHEET;
       const [ax, az] = j.at(x, s * NOTE.D / 2), [bx, bz] = j.at(x, -s * NOTE.D / 2);
       const n = s > 0 ? nR : nL;
       quad([ax, yb, az], [bx, yb, bz], [bx, yt, bz], [ax, yt, az], [n[0], 0, n[1]], col);
+      if (i < N - 1) {
+        const xi = x - s * RIM, yti = yAt(i, xi) + SHEET;
+        const [cx, cz] = j.at(xi, s * NOTE.D / 2), [dx, dz] = j.at(xi, -s * NOTE.D / 2);
+        quad([ax, yt, az], [bx, yt, bz], [dx, yti, dz], [cx, yti, cz], [0, 1, 0], col.map((v) => v * 0.97));
+      }
     }
   }
   const edges = new THREE.BufferGeometry();
