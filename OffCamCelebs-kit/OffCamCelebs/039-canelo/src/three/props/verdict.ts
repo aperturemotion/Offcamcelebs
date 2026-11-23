@@ -6,7 +6,7 @@
 //     into the top of
 //   · a walnut display PLINTH (a black kick plinth at its foot);
 //   · on the plinth's top front edge, a brass piano hinge and a FLIP PLATE: an enamel plate standing upright on the hinge,
-//     its plain brass back to the camera; on "inflated" it tips forward, swings down under gravity and lands against the
+//     its plain walnut back to the camera; on "inflated" it tips forward, swings down under gravity and lands against the
 //     plinth's front with weight: INFLATED in amber (#c98a2b) on cream enamel.
 // The balloon sways about its tie on the string (a breeze, the place's arrival, the plate's knock); its string stays taut.
 // Units are the layer's px; `sc` is the plinth's floor point, y UP.
@@ -17,14 +17,14 @@ import { M, rad, hash, col, rbox, fitFont, track } from "../kit029";
 
 // ══ THE GEOMETRY (exported: the place's camera and checks are solved on it) ══
 /** the plinth: a kick plinth, then the walnut body; its top at TOP */
-export const PL = { w: 440, d: 300, kick: 14, kickIn: -8, top: 172 } as const;
+export const PL = { w: 780, d: 300, kick: 14, kickIn: -8, top: 200 } as const;
 /** the balloon: body height HB, its widest radius RB; the knot KN tall; the string LS long from the eye's tie */
-export const BL = { HB: 480, RB: 208, KN: 22, LS: 74 } as const;
+export const BL = { HB: 400, RB: 178, KN: 22, LS: 140 } as const;
 /** the brass eye on the plinth's top: its base disc, the ring's centre; the tie (the string's foot, inside the ring's tube) */
 const EYE_BASE = 3, EYE_R = 8.5, EYE_T = 2.4;
 export const TIE = PL.top + EYE_BASE + EYE_R + 1.2 + EYE_R - 2;
 /** the flip plate: w × h × t, hung from the hinge axis (HA up, HZ out from the plinth's front) */
-export const PLATE = { w: 420, h: 140, t: 5, gapTop: 4.6, back: 0.6 } as const;
+export const PLATE = { w: 740, h: 170, t: 5, gapTop: 4.6, back: 0.6 } as const;
 const HINGE_R = 3.1;
 /** the hinge axis, plinth frame: just over the top, just in front of the front face */
 export const HA = PL.top + HINGE_R + 0.2, HZ = PL.d / 2 + HINGE_R + 0.4;
@@ -40,7 +40,7 @@ export const balloonAt = (t: number): [number, number] => {
 const PROF_N = 72;
 const PROFILE: [number, number][] = Array.from({ length: PROF_N + 1 }, (_, j) => balloonAt((j / PROF_N) * Math.PI));
 /** where the print sits: its centre's height above the neck, and its width along the latex */
-export const PRINT = { y: BL.HB * 0.54, w: 368, size: 196 } as const;
+export const PRINT = { y: BL.HB * 0.54, w: 300, size: 170 } as const;
 
 export type VerdictGeo = { floor: number; cx: number; z: number };
 /** sway: the balloon's lean about its tie (rad, +: its crown to the LEFT); spin: its turn on its own axis (rad);
@@ -85,7 +85,7 @@ export const plateCorners = (flap: number) => {
 
 // ══ PRINT ══
 const GREEN = "#1F6A49";
-const CIRC = 1300, PH = 760;
+const CIRC = Math.round(2 * Math.PI * BL.RB), PH = 650;
 const balloonTex = () => paintTex("vd039-balloon", CIRC, PH, (g) => {
   g.fillStyle = GREEN; g.fillRect(0, 0, CIRC, PH);
   // the latex: thicker and deeper toward the neck (the canvas foot is the neck), a little thinner and brighter at the crown
@@ -128,7 +128,7 @@ const plateTex = () => paintTex("vd039-plate", PLATE.w, PLATE.h, (g) => {
   g.lineWidth = 1.2; g.strokeRect(16, 16, W - 32, H - 32);
   g.fillStyle = AMBER; g.textAlign = "center"; g.textBaseline = "alphabetic";
   track(g, 6);
-  const s = fitFont(g, 800, 104, "INFLATED", W - 58);
+  const s = fitFont(g, 800, 150, "INFLATED", W - 74);
   g.fillText("INFLATED", W / 2 + 3, H / 2 + s * 0.36);
   track(g, 0);
 }, 3);
@@ -169,8 +169,8 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
   const flapG = new THREE.Group(); flapG.position.set(0, HA, HZ); sc.add(flapG);
   const plate = new THREE.Group(); plate.userData.obj = "plate"; flapG.add(plate);
   const face = new THREE.MeshPhysicalMaterial({ map: plateTex(), roughness: 0.3, clearcoat: 0.7, clearcoatRoughness: 0.15, envMapIntensity: 0.6 });
-  // its back and edges: black stove enamel, plain (a brass back read as a gold bar standing on the plinth)
-  const back = new THREE.MeshPhysicalMaterial({ color: col("#2B2724"), roughness: 0.4, clearcoat: 0.5, clearcoatRoughness: 0.3, envMapIntensity: 0.6 });
+  // its back and edges: walnut like the plinth, plain (a brass back read as a gold bar; a black one as a hole)
+  const back = new THREE.MeshPhysicalMaterial({ map: walnutTex("vd039-walnut-pb", PLATE.w, PLATE.h), roughness: 0.5, clearcoat: 0.35, clearcoatRoughness: 0.35, envMapIntensity: 0.55 });
   const pl = rbox(PLATE.w, PLATE.h, PLATE.t, 1.6, { px: back, nx: back, top: back, bottom: back, front: face, back }, 2);
   // rbox: front at z 0, depth back → the plate's back sits PLATE.back off the plinth's front when it hangs
   pl.position.set(0, -PLATE.gapTop - PLATE.h / 2, PLATE.t / 2);
@@ -195,7 +195,7 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
 
   // ── the floor: a shadow catcher and soft contact pools under the plinth ──
   root.add(makeFloor({ y: g.floor, x0: g.cx - 900, x1: g.cx + 900, z0: g.z - 640, z1: g.z + 560, reflect: 0, shadow: 0.42,
-    fadeC: [g.cx, g.z + PL.d / 2], fadeR: [640, 460], blobs: [{ x: g.cx, z: g.z + PL.d / 2, w: PL.w + 120, d: PL.d + 110, a: 0.3 }] }));
+    fadeC: [g.cx, g.z + PL.d / 2], fadeR: [PL.w / 2 + 360, 460], blobs: [{ x: g.cx, z: g.z + PL.d / 2, w: PL.w + 120, d: PL.d + 110, a: 0.3 }] }));
 
   return {
     root,

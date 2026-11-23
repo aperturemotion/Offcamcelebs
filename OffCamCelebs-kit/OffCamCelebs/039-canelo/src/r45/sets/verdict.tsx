@@ -12,7 +12,7 @@ import type { PlaceDef, PlaceSfx } from "../place";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // PLACE 8 · THE VERDICT (cream; the film's last place, to its end) — a big green latex balloon printed "$365M", taut on its
-// string over a walnut plinth; a flip plate stands on the plinth's top front edge, its plain brass back to the camera.
+// string over a walnut plinth; a flip plate stands on the plinth's top front edge, its plain walnut back to the camera.
 //  0 "So, $365 million?" The place trucks in CLOSE on the balloon's print, $365M; the balloon trails on its string as the
 //    place travels, swings back past upright as it stops, and settles to a slow sway in the air.
 //  1 "Our rating: inflated." The camera eases back to the whole object as the plate tips forward on its hinge, swings down

@@ -37,12 +37,11 @@ const EVEN: Record<SfxName, number> = {
   flip: 0.088,
   pen: 0.501,
   punch: 0.066,
-  cash: 0.672,
+  cash: 0.336,
   tear: 0.131,
   crowd: 0.095,
   stack: 0.06,
-
-
+  // ★ 039, measured (sfxlevels033): cash ×0.5 (its hook burst peaked −2.4 dB against the voice)
 };
 /** ★ THE one knob for the score's overall level — measured per film from its rendered stems (026: 0.94) */
 export const PRESENCE = 0.94;
