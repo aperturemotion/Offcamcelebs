@@ -1,104 +1,94 @@
 {
  "wcam1": {
-  "src": "/home/user/occ-work/sfx039/wcam1_src.wav",
-  "len": 1.5,
-  "fade": 300,
+  "src": "es_wcam1.wav",
+  "len": 1.6,
+  "fade": 350,
   "sustained": true
  },
  "wcam2": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 1.5,
-  "fade": 300,
+  "src": "es_wcam2.wav",
+  "len": 2.4,
+  "fade": 450,
   "sustained": true
  },
  "glide": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
+  "src": "es_glide.wav",
+  "len": 0.6,
+  "fade": 150,
   "sustained": true
  },
  "glide2": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
+  "src": "es_glide2.wav",
+  "len": 1.1,
+  "fade": 250,
   "sustained": true
  },
  "whip": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "src": "es_whip.wav",
   "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "fade": 120
  },
  "thump": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "src": "stamp_thump.mp3",
+  "len": 0.7,
+  "fade": 150
  },
  "paper": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "src": "es_paper.wav",
   "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "fade": 100
  },
  "flip": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "src": "es_flip.wav",
+  "len": 0.55,
+  "fade": 120
  },
  "pen": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
+  "src": "pen_jaime.mp3",
+  "len": 2.0,
+  "fade": 200,
   "sustained": true
  },
  "click": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "src": "es_click.wav",
+  "len": 0.12,
+  "fade": 30
  },
  "punch": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "src": "punch2.mp3",
+  "len": 0.9,
+  "fade": 250
  },
  "cash": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
+  "src": "cash_yake.mp3",
+  "len": 1.3,
+  "fade": 300,
   "sustained": true
  },
  "gavel": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "src": "gavel_jbe.mp3",
+  "len": 0.6,
+  "fade": 150
  },
  "tear": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "src": "tear_afs.mp3",
+  "len": 0.37,
+  "fade": 80
  },
  "lowhit": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
-  "sustained": false
+  "src": "es_lowhit.wav",
+  "len": 0.35,
+  "fade": 120
  },
  "crowd": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
+  "src": "crowd_bgs.mp3",
+  "len": 2.5,
+  "fade": 700,
   "sustained": true
  },
  "stack": {
-  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
-  "len": 0.4,
-  "fade": 100,
-  "sustained": true
+  "src": "es_stack.wav",
+  "len": 0.2,
+  "fade": 60
  }
 }

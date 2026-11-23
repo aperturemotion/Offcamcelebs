@@ -4,11 +4,10 @@
 // separation at 5.5 dB in every window (user, 2026-09-19: "a little louder").
 export const BED_TARGET_SEP = 5.5;
 export const BED_ENV: readonly (readonly [number, number])[] = [
-  [8.14, -0.2],
-  [18.14, 0.2],
-  [28.14, 0.1],
-  [38.14, 0.0],
-  [48.14, -0.2],
-  [52.5, 1.2],
-  [58.14, 1.2],
+  [8.14, 1.4],
+  [18.14, 0.0],
+  [28.14, -0.6],
+  [38.14, 0.9],
+  [48.14, -0.5],
+  [58.14, -0.2],
 ];

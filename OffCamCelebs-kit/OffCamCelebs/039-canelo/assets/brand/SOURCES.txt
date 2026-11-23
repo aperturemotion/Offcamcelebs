@@ -1,0 +1,23 @@
+039 Canelo Álvarez — sources of every image and sound not built in code (2026-11-23)
+
+PHOTO
+- canelo_face.png (assets/) and public/canelo_face.png: "Saúl Álvarez.png", Wikimedia Commons,
+  https://commons.wikimedia.org/wiki/File:Saúl_Álvarez.png — author Box Azteca (a 2017 YouTube still, via Commons' YouTube
+  CC BY review), licence CC BY 3.0. Credit: "Photo: Box Azteca, CC BY 3.0, via Wikimedia Commons".
+
+NO LOGOS: DAZN and GOLDEN BOY appear only as plain type.
+
+SOUND EFFECTS (the EarnEdits pack was unavailable on this machine: Openverse recordings and Earshot renders instead;
+cut by tools/sfx_prep.py from assets/audio/sfx_src/sfx_spec_039.json; es_*.wav are Earshot renders, MIT, no credit needed)
+- cash_yake: "Foley_Bills_Mono_14.wav" by yake01, https://freesound.org/people/yake01/sounds/581844, BY 4.0
+- crowd_bgs: "BerlinGameScene.com Crowd Cheer 2" by BerlinGameScene, https://freesound.org/people/BerlinGameScene/sounds/267248, CC0 1.0
+- gavel_jbe: "wood hammer, gavel, knock, pound, jury, court.mp3" by JohnsonBrandEditing, https://freesound.org/people/JohnsonBrandEditing/sounds/173941, CC0 1.0
+- pen_jaime: "Signing_Pen.wav" by Jaime1989, https://freesound.org/people/Jaime1989/sounds/439265, CC0 1.0
+- printer_tpd: "Receipt Printer 01.wav" by thepodcastdoctor, https://freesound.org/people/thepodcastdoctor/sounds/476011, CC0 1.0
+- punch2: "PUNCH-BOXING-02.wav" by newagesoup, https://freesound.org/people/newagesoup/sounds/348243, CC0 1.0
+- stamp_thump: "Thump.mp3" by mpuffenbarger, https://freesound.org/people/mpuffenbarger/sounds/683031, CC0 1.0
+- tear_afs: "Packaging Paper Tear Short.wav" by afleetingspeck, https://freesound.org/people/afleetingspeck/sounds/140461, CC0 1.0
+- vib_brev: "Phone vibration" by Breviceps, https://freesound.org/people/Breviceps/sounds/515295, CC0 1.0
+- vib_glass: "cell phone vibrate glass_loopable.wav" by mobaudio, https://freesound.org/people/mobaudio/sounds/384487, CC0 1.0
+
+MUSIC: 031's bed ("A Good Man with a Broken Heart"), as 038.

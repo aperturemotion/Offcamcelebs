@@ -1,0 +1,138 @@
+{
+ "wcam1": {
+  "len": 48,
+  "onset": 0,
+  "peak": 12,
+  "even": 0.096,
+  "sustained": true,
+  "src": "es_wcam1.wav"
+ },
+ "wcam2": {
+  "len": 72,
+  "onset": 0,
+  "peak": 48,
+  "even": 0.093,
+  "sustained": true,
+  "src": "es_wcam2.wav"
+ },
+ "glide": {
+  "len": 11,
+  "onset": 0,
+  "peak": 6,
+  "even": 0.067,
+  "sustained": true,
+  "src": "es_glide.wav"
+ },
+ "glide2": {
+  "len": 32,
+  "onset": 0,
+  "peak": 23,
+  "even": 0.104,
+  "sustained": true,
+  "src": "es_glide2.wav"
+ },
+ "whip": {
+  "len": 10,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.069,
+  "sustained": false,
+  "src": "es_whip.wav"
+ },
+ "thump": {
+  "len": 17,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.055,
+  "sustained": false,
+  "src": "stamp_thump.mp3"
+ },
+ "paper": {
+  "len": 11,
+  "onset": 0,
+  "peak": 4,
+  "even": 0.08,
+  "sustained": false,
+  "src": "es_paper.wav"
+ },
+ "flip": {
+  "len": 15,
+  "onset": 0,
+  "peak": 6,
+  "even": 0.088,
+  "sustained": false,
+  "src": "es_flip.wav"
+ },
+ "pen": {
+  "len": 60,
+  "onset": 0,
+  "peak": 48,
+  "even": 0.501,
+  "sustained": true,
+  "src": "pen_jaime.mp3"
+ },
+ "click": {
+  "len": 3,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.106,
+  "sustained": false,
+  "src": "es_click.wav"
+ },
+ "punch": {
+  "len": 27,
+  "onset": 0,
+  "peak": 3,
+  "even": 0.066,
+  "sustained": false,
+  "src": "punch2.mp3"
+ },
+ "cash": {
+  "len": 37,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.672,
+  "sustained": true,
+  "src": "cash_yake.mp3"
+ },
+ "gavel": {
+  "len": 18,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.305,
+  "sustained": false,
+  "src": "gavel_jbe.mp3"
+ },
+ "tear": {
+  "len": 11,
+  "onset": 0,
+  "peak": 8,
+  "even": 0.131,
+  "sustained": false,
+  "src": "tear_afs.mp3"
+ },
+ "lowhit": {
+  "len": 9,
+  "onset": 0,
+  "peak": 4,
+  "even": 0.059,
+  "sustained": false,
+  "src": "es_lowhit.wav"
+ },
+ "crowd": {
+  "len": 75,
+  "onset": 0,
+  "peak": 22,
+  "even": 0.095,
+  "sustained": true,
+  "src": "crowd_bgs.mp3"
+ },
+ "stack": {
+  "len": 5,
+  "onset": 0,
+  "peak": 1,
+  "even": 0.06,
+  "sustained": false,
+  "src": "es_stack.wav"
+ }
+}
