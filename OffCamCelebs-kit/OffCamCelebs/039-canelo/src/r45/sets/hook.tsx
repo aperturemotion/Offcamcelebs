@@ -426,7 +426,7 @@ for (let f = 0; f < 60; f++) {
 }
 for (let f = 0; f < GLOVE_HIDE; f++) {
   const g = gloveAt(f), c = camAt(f);
-  if (c.c[0] > g.p[0] + GL.CUFF1 - 120) fail(`hook: the camera can see into the glove's cuff at f${f}`);
+  if (c.c[0] > g.p[0] + GL.CUFF1 - 24) fail(`hook: the camera can see into the glove's cuff at f${f}`);
 }
 for (let f = 0; f <= LAST; f += 1) {
   const c = camAt(f), cv = new THREE.Vector3(...c.c);

@@ -23,7 +23,7 @@
 // ══════════════════════════════════════════════════════════════════════════════════════════════
 import { THREE, mesh, type Model } from "../stage";
 import { col, hash, wire } from "../kit029";
-import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
+import { mergeGeometries, mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { makeBundle, makeBand, noteMaterials, keepFresh, BUNDLE, BAND_OUT, BAND_W, NOTE } from "./cash";
 
 // ══ DIMENSIONS (px; a $100 note is 156 mm = 240 px: 1.54 px per mm) ══════════════════════════════════
@@ -48,12 +48,15 @@ export const HH = { x: BUNDLE.HX + 1.6 + 0.01 * NOTE.D / 2, y: HERO_H / 2, z: HB
 export const CURL = 4;
 export const NH = { x: NOTE.W / 2, y: (CURL + 0.7) / 2, z: NOTE.D / 2 } as const;
 
-/** the glove (local: the punching face's centre at the origin, its cuff along +x, y up, z toward the thumb) */
-export const GL = { A: 136, B: 106, C: 92, CUFF0: 214, CUFF1: 560, RY: 84, RZ: 78 } as const;
-/** its parts as boxes for the set's clearance checks (local min / max): the fist with its thumb, the cuff */
+/** ★ the glove (local: the punching face's centre at the origin, its cuff along +x, y up, z toward the thumb). A real
+ *  lace-up glove's proportions: the fist (FL long) ≈ 1.3× the cuff's width at its knuckles, the whole glove ≈ 2× the fist's
+ *  height. A: half the fist's length · B: its half-height (the knuckles' top, the curled fingers' underside) · C: its
+ *  half-width at the knuckles · the cuff from CUFF0 (inside the fist) to its mouth at CUFF1, RY × RZ at the wrist */
+export const GL = { A: 150, B: 106, C: 97, CUFF0: 240, CUFF1: 452, RY: 80, RZ: 72 } as const;
+/** its parts as boxes for the set's clearance checks (local min / max): the fist with its thumb, the cuff with its laces */
 export const GLOVE_BOXES: [[number, number, number], [number, number, number]][] = [
-  [[0, -GL.B - 1, -GL.C - 1], [2 * GL.A, GL.B + 1, GL.C + 26]],
-  [[GL.CUFF0, -GL.RY - 6, -GL.RZ - 6], [GL.CUFF1 + 4, GL.RY + 10, GL.RZ + 6]],
+  [[0, -GL.B - 2, -GL.C - 2], [2 * GL.A, GL.B + 1, 140]],
+  [[GL.CUFF0, -GL.RY - 12, -GL.RZ - 10], [GL.CUFF1 + 4, GL.RY + 10, GL.RZ + 14]],
 ];
 
 /** the stage's eye for this place: on the frame's centre, D 2000 (layer px) */
@@ -180,47 +183,152 @@ const pooled = <T extends THREE.Material>(m: T, c: [number, number], r: [number,
   return m;
 };
 
-// ══ THE GLOVE'S GEOMETRY ═══════════════════════════════════════════════════════════════════════════
-const sp = (a: number, e: number) => Math.sign(a) * Math.pow(Math.abs(a), e);
-/** the padded fist: a superellipsoid, fuller over the knuckle roll (top front), the curled fingers a little flatter under,
- *  tapering at the back into the cuff */
-/** a point of the fist's surface for a unit direction (ux along the punching axis, toward the cuff) */
-const fistPt = (ux: number, uy: number, uz: number): [number, number, number] => {
-  const back = Math.max(0, ux);
-  const taper = 1 - 0.16 * back * back * back;
-  const x = GL.A + GL.A * sp(ux, 0.78);
-  let y = GL.B * sp(uy, 0.82) * taper * (uy < 0 ? 0.93 : 1);
-  const z = GL.C * sp(uz, 0.84) * taper;
-  // the knuckle roll: the top front stands a little proud
-  if (uy > 0 && ux < 0.2) y += 7 * uy * (0.2 - ux) / 1.2;
+// ══ THE GLOVE'S GEOMETRY (shape first: a real lace-up boxing glove) ═══════════════════════════════════
+type P3 = [number, number, number];
+const sm = (a: number, b: number, x: number) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+const gs = (x: number, c: number, w: number) => Math.exp(-(((x - c) / w) ** 2));
+const spw = (a: number, e: number) => Math.sign(a) * Math.pow(Math.abs(a), e);
+const FL = 2 * GL.A;           // the fist: from the punching face to the wrist
+const XR = 96;                 // the face's rounding (the dome of the knuckle face)
+const NSE = 2.6;               // the cross-section's superellipse (padded, a little square)
+/** the fist's cross-section at x: its top (knuckles → back of the hand), its underside (curled fingers → grip → heel of the
+ *  palm), its half-width; it tucks inside the cuff at the wrist */
+const fistProf = (x: number) => {
+  const front = x < XR ? Math.pow(Math.sqrt(Math.max(0, 1 - (1 - x / XR) ** 2)), 0.9) : 1;
+  const tuck = 1 - 0.13 * sm(0.86 * FL, FL, x);
+  return { s: front * tuck, top: 98 - 16 * sm(90, FL, x), bot: 100 - 16 * sm(150, FL, x), half: GL.C - 21 * sm(80, FL, x) };
+};
+/** a point of the fist's surface at (x, θ): θ = 0 on the thumb side (+z), π/2 on top */
+const fistP = (x: number, th: number): P3 => {
+  const { s, top, bot, half } = fistProf(x);
+  const ct = Math.cos(th), st = Math.sin(th), up = Math.max(0, st), dn = Math.max(0, -st);
+  // the knuckle roll (a distinct ridge across the top front), the dip behind it, the back of the hand
+  let t = top + 7 * gs(x, 56, 22) * up ** 1.5 - 4 * gs(x, 104, 13) * up ** 2;
+  // underneath: the curled fingers' roll, the crease where the fingertips meet the palm, the grip bar's bulge
+  let b = bot + 4 * gs(x, 72, 28) * dn ** 2 - 6 * gs(x, 130, 10) * dn ** 3 + 4.5 * gs(x, 182, 24) * dn ** 3;
+  t = Math.min(t, GL.B - 0.5); b = Math.min(b, GL.B + 1);
+  const z = half * s * spw(ct, 2 / NSE) * (ct > 0 ? 1 - 0.04 * gs(x, 140, 70) : 1);
+  const y = (st >= 0 ? t : -b) * s * Math.pow(Math.abs(st), 2 / NSE);
   return [x, y, z];
 };
+const sub = (a: P3, b: P3): P3 => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+const crs = (a: P3, b: P3): P3 => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+const nrm = (a: P3): P3 => { const l = Math.hypot(...a) || 1; return [a[0] / l, a[1] / l, a[2] / l]; };
+/** the fist's outward normal at (x, θ), by finite differences (smooth everywhere, the face's pole included) */
+const fistN = (x: number, th: number): P3 => {
+  const xx = Math.max(0.6, x), e = 0.4, d = 0.004;
+  const n = crs(sub(fistP(xx + e, th), fistP(Math.max(0.2, xx - e), th)), sub(fistP(xx, th + d), fistP(xx, th - d)));
+  return nrm(n);
+};
+const onFist = (x: number, th: number, lift: number): P3 => { const p = fistP(x, th), n = fistN(x, th); return [p[0] + n[0] * lift, p[1] + n[1] * lift, p[2] + n[2] * lift]; };
+/** the fist: a subdivided loft, dense at the face, its normals analytic (no facets, no seam crease) */
 const fistGeo = () => {
-  const g = new THREE.SphereGeometry(1, 96, 64);
-  const p = g.attributes.position as THREE.BufferAttribute;
-  for (let i = 0; i < p.count; i++) {
-    // the sphere's poles on ±x (the punching axis): a quarter turn about z (the winding kept)
-    p.setXYZ(i, ...fistPt(p.getY(i), -p.getX(i), p.getZ(i)));
+  const NU = 120, NT = 112;
+  const pos: number[] = [], nor: number[] = [], uv: number[] = [], idx: number[] = [];
+  for (let i = 0; i <= NU; i++) {
+    const x = FL * (1 - Math.cos((i / NU) * (Math.PI / 2))) ** 0.85;
+    for (let j = 0; j <= NT; j++) {
+      const th = (j / NT) * Math.PI * 2;
+      const p = fistP(x, th), n = i === 0 ? [-1, 0, 0] : fistN(x, th);
+      pos.push(...p); nor.push(...n); uv.push((x / FL) * 2, (j / NT) * 3);
+    }
   }
+  for (let i = 0; i < NU; i++) for (let j = 0; j < NT; j++) {
+    const a = i * (NT + 1) + j, b = a + 1, c = a + NT + 1, d = c + 1;
+    idx.push(a, c, b, b, c, d);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  return g;
+};
+/** ★ the thumb: its own padded lobe lying along the fist's thumb side, curving forward to its tip by the knuckles; a
+ *  tapered, slightly flattened tube on a curved spine, rounded at both ends */
+const THUMB_SPINE = new THREE.CatmullRomCurve3([new THREE.Vector3(232, -36, 60), new THREE.Vector3(176, -33, 94), new THREE.Vector3(114, -25, 106), new THREE.Vector3(58, -12, 100)], false, "centripetal");
+const thumbR = (s: number) => {
+  const cap = (u: number) => Math.pow(Math.sqrt(Math.max(0, 1 - u * u)), 0.8);
+  const k = s > 0.8 ? cap((s - 0.8) / 0.2) : s < 0.1 ? cap((0.1 - s) / 0.1) : 1;
+  return (36 - 5 * s) * k;
+};
+const thumbFrame = (s: number) => {
+  const p = THUMB_SPINE.getPointAt(s), t = THUMB_SPINE.getTangentAt(s).normalize();
+  const e1 = new THREE.Vector3(0, 1, 0).addScaledVector(t, -t.y).normalize();      // up, across the thumb
+  const e2 = new THREE.Vector3().crossVectors(t, e1).normalize();                   // outward from the fist
+  return { p, t, e1, e2 };
+};
+const thumbP = (s: number, ph: number, lift = 0): P3 => {
+  const { p, e1, e2 } = thumbFrame(s), r = thumbR(s);
+  const ry = r * 1.06 + lift, rz = r * 0.86 + lift;
+  return [p.x + e1.x * ry * Math.cos(ph) + e2.x * rz * Math.sin(ph), p.y + e1.y * ry * Math.cos(ph) + e2.y * rz * Math.sin(ph), p.z + e1.z * ry * Math.cos(ph) + e2.z * rz * Math.sin(ph)];
+};
+const thumbGeo = () => {
+  const NS = 80, NP = 64;
+  const pos: number[] = [], uv: number[] = [], idx: number[] = [];
+  for (let i = 0; i <= NS; i++) for (let j = 0; j <= NP; j++) { pos.push(...thumbP(i / NS, (j / NP) * Math.PI * 2)); uv.push((i / NS) * 1.2, (j / NP) * 1.4); }
+  for (let i = 0; i < NS; i++) for (let j = 0; j < NP; j++) { const a = i * (NP + 1) + j, b = a + 1, c = a + NP + 1, d = c + 1; idx.push(a, c, b, b, c, d); }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  g.computeVertexNormals();
+  return mergeVertices(g, 1e-3);
+};
+/** a strip of leather lying on a surface: along `pts`, `w` wide, `t` thick, its face along the surface normals `ns` */
+const ribbon = (pts: P3[], ns: P3[], w: number, t: number) => {
+  const pos: number[] = [], idx: number[] = [];
+  for (let i = 0; i < pts.length; i++) {
+    const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
+    const side = nrm(crs(sub(b, a), ns[i]));
+    for (const [sw, st] of [[-1, 0], [1, 0], [1, 1], [-1, 1]] as const) for (let k = 0; k < 3; k++) pos.push(pts[i][k] + side[k] * sw * w / 2 + ns[i][k] * st * t);
+  }
+  for (let i = 0; i < pts.length - 1; i++) for (let q = 0; q < 4; q++) {
+    const a = i * 4 + q, b = i * 4 + ((q + 1) % 4), c = a + 4, d = b + 4;
+    idx.push(a, c, b, b, c, d);
+  }
+  idx.push(0, 1, 2, 0, 2, 3);
+  const L = (pts.length - 1) * 4;
+  idx.push(L, L + 2, L + 1, L, L + 3, L + 2);
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setIndex(idx);
   g.computeVertexNormals();
   return g;
 };
-/** the palm panel's seam: round the fist a little below its middle, from the cuff on one side, round the punching face, to
- *  the cuff on the other; `lift` raises it off the surface along the direction (stitches ride beside the piping) */
-const seamPts = (uy: number, lift: number, n = 72): [number, number, number][] => {
-  const out: [number, number, number][] = [];
-  const r = Math.sqrt(1 - uy * uy);
-  for (let i = 0; i <= n; i++) {
-    const a = -2.2 + (4.4 * i) / n;                           // round the front (ux = −1 at a = 0)
-    const ux = -r * Math.cos(a), uz = r * Math.sin(a);
-    const p = fistPt(ux, uy, uz), q = fistPt(ux * 1.02, uy * 1.02, uz * 1.02);
-    const d = Math.hypot(q[0] - p[0], q[1] - p[1], q[2] - p[2]) || 1;
-    out.push([p[0] + ((q[0] - p[0]) / d) * lift, p[1] + ((q[1] - p[1]) / d) * lift, p[2] + ((q[2] - p[2]) / d) * lift]);
+/** the cuff: padded (a soft swell along it), tapering to the wrist's opening, a slight flare at the mouth */
+const cuffSwell = (x: number) => Math.sin(Math.PI * sm(GL.CUFF0 + 40, GL.CUFF1 - 6, x));
+const cuffRY = (x: number) => GL.RY - 7 * sm(300, GL.CUFF1, x) + 3.2 * cuffSwell(x) + 2 * sm(GL.CUFF1 - 12, GL.CUFF1, x);
+const cuffRZ = (x: number) => GL.RZ - 6 * sm(300, GL.CUFF1, x) + 2.6 * cuffSwell(x) + 2 * sm(GL.CUFF1 - 12, GL.CUFF1, x);
+const cuffP = (x: number, a: number, lift = 0): P3 => {
+  const ry = cuffRY(x), rz = cuffRZ(x), n = nrm([0, Math.cos(a) / ry, Math.sin(a) / rz]);
+  return [x, ry * Math.cos(a) + n[1] * lift, rz * Math.sin(a) + n[2] * lift];
+};
+const cuffN = (a: number, x: number): P3 => nrm([0, Math.cos(a) / cuffRY(x), Math.sin(a) / cuffRZ(x)]);
+/** the cuff's skin: an elliptical tube (a = 0 on top), outward or inward (the lining) */
+const tubeGeo = (x0: number, x1: number, ry: (x: number) => number, rz: (x: number) => number, inward = false) => {
+  const NI = 56, NJ = 96;
+  const pos: number[] = [], nor: number[] = [], uv: number[] = [], idx: number[] = [];
+  for (let i = 0; i <= NI; i++) for (let j = 0; j <= NJ; j++) {
+    const x = x0 + ((x1 - x0) * i) / NI, a = (j / NJ) * Math.PI * 2;
+    pos.push(x, ry(x) * Math.cos(a), rz(x) * Math.sin(a));
+    const n = nrm([0, Math.cos(a) / ry(x), Math.sin(a) / rz(x)]);
+    nor.push(...(inward ? [-n[0], -n[1], -n[2]] : n));
+    uv.push((i / NI) * 2, (j / NJ) * 3);
   }
-  return out;
+  for (let i = 0; i < NI; i++) for (let j = 0; j < NJ; j++) {
+    const a = i * (NJ + 1) + j, b = a + 1, c = a + NJ + 1, d = c + 1;
+    if (inward) idx.push(a, c, b, b, c, d); else idx.push(a, b, c, b, d, c);
+  }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute("normal", new THREE.Float32BufferAttribute(nor, 3));
+  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  g.setIndex(idx);
+  return g;
 };
 /** a row of stitches along a polyline: short thread dashes, merged into one geometry */
-const stitchGeo = (pts: [number, number, number][], dash = 3.4, gap = 2.6, r = 0.75) => {
+const stitchGeo = (pts: P3[], dash = 3.4, gap = 2.6, r = 0.75) => {
   const parts: THREE.BufferGeometry[] = [];
   const P = pts.map((p) => new THREE.Vector3(...p));
   let carry = 0;
@@ -238,33 +346,20 @@ const stitchGeo = (pts: [number, number, number][], dash = 3.4, gap = 2.6, r = 0
   }
   return mergeGeometries(parts.map((g) => g.toNonIndexed()))!;
 };
-/** the cuff: an elliptical tube from inside the fist to its mouth (outer skin and the lining as one open tube each) */
-const tubeGeo = (x0: number, x1: number, ry: (x: number) => number, rz: (x: number) => number, inward = false) => {
-  const NI = 28, NJ = 64;
-  const pos: number[] = [], uv: number[] = [], idx: number[] = [];
-  for (let i = 0; i <= NI; i++) for (let j = 0; j <= NJ; j++) {
-    const x = x0 + ((x1 - x0) * i) / NI, a = (j / NJ) * Math.PI * 2;
-    pos.push(x, ry(x) * Math.cos(a), rz(x) * Math.sin(a));
-    uv.push(i / NI * 2, j / NJ * 3);
-  }
-  for (let i = 0; i < NI; i++) for (let j = 0; j < NJ; j++) {
-    const a = i * (NJ + 1) + j, b = a + 1, c = a + NJ + 1, d = c + 1;
-    if (inward) idx.push(a, c, b, b, c, d); else idx.push(a, b, c, b, d, c);
-  }
-  const g = new THREE.BufferGeometry();
-  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
-  g.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
-  g.setIndex(idx);
-  g.computeVertexNormals();
-  return g;
+/** the palm panel's seam: along the thumb side a little below the middle, round under the knuckle face, back along the
+ *  other side; `dth` shifts it (the stitch rows ride either side of the piping) */
+const palmSeam = (dth: number, lift: number): P3[] => {
+  const side = (sg: number) => {
+    const out: P3[] = [];
+    for (let i = 0; i <= 60; i++) {
+      const x = 286 - (286 - 14) * (i / 60) ** 0.8;
+      const th = -0.3 + dth - 1.27 * sm(84, 14, x);
+      out.push(onFist(x, sg > 0 ? th : Math.PI - th, lift));
+    }
+    return out;
+  };
+  return [...side(1), ...side(-1).reverse()];
 };
-/** the cuff's padding swells a little between its seam and its mouth, and flares at the mouth */
-const cuffPad = (x: number) => 4.5 * Math.sin(Math.PI * Math.min(1, Math.max(0, (x - GL.CUFF0 - 60) / (GL.CUFF1 - GL.CUFF0 - 76))));
-const cuffRY = (x: number) => GL.RY + cuffPad(x) + 4 * Math.max(0, (x - 420) / 140);
-const cuffRZ = (x: number) => GL.RZ + cuffPad(x) * 0.8 + 4 * Math.max(0, (x - 420) / 140);
-/** the cuff's top surface height at (x, z) (where the laces lie) */
-const cuffTop = (x: number, z: number) => cuffRY(x) * Math.sqrt(Math.max(0, 1 - (z / cuffRZ(x)) ** 2));
-
 // ══ THE MODEL ═══════════════════════════════════════════════════════════════════════════════════════
 export const hookModel = () => (): Model<HookP> => {
   const root = new THREE.Group();
@@ -312,63 +407,83 @@ export const hookModel = () => (): Model<HookP> => {
     const white = new THREE.MeshPhysicalMaterial({ color: col("#F1EEE6"), roughness: 0.55, clearcoat: 0.2, envMapIntensity: 0.5 });
     const lace = new THREE.MeshStandardMaterial({ color: col("#F4F2EC"), roughness: 0.8, envMapIntensity: 0.4 });
     const steel = new THREE.MeshPhysicalMaterial({ color: col("#C9CDD2"), metalness: 1, roughness: 0.3, envMapIntensity: 1 });
-    glove.add(mesh(fistGeo(), leather));
-    // the palm panel's piping, and a row of stitches beside it; the thread is the leather's own, a shade lighter
     const thread = new THREE.MeshStandardMaterial({ color: col("#E4D9C8"), roughness: 0.75, envMapIntensity: 0.3 });
-    glove.add(wire(seamPts(-0.2, 1.2), 2.6, leatherDk, false, 160));
-    glove.add(mesh(stitchGeo(seamPts(-0.12, 0.5)), thread));
-    glove.add(mesh(stitchGeo(seamPts(-0.28, 0.6)), thread));
-    // the thumb: a padded capsule lying along the fist's near side, its tip stitched to the knuckle roll
-    const th = mesh(new THREE.CapsuleGeometry(38, 128, 12, 32), leather);
-    th.rotation.z = Math.PI / 2 + 0.08; th.rotation.y = 0.18;
-    th.position.set(128, -34, 62);
-    glove.add(th);
-    // the cuff: outer skin, lining, the piping round its mouth
+    // the fist: the padded knuckle face, the roll over the knuckles, the curled fingers and the grip bar under it
+    glove.add(mesh(fistGeo(), leather));
+    // the palm panel's piping, a stitch row either side of it
+    glove.add(wire(palmSeam(0, 1.2), 2.5, leatherDk, false, 220));
+    glove.add(mesh(stitchGeo(palmSeam(0.07, 0.5)), thread));
+    glove.add(mesh(stitchGeo(palmSeam(-0.07, 0.5)), thread));
+    // ★ the thumb: its own padded lobe along the side, its seam piped along its outer edge
+    glove.add(mesh(thumbGeo(), leather));
+    {
+      const pts: P3[] = [];
+      for (let i = 0; i <= 40; i++) { const s0 = 0.08 + 0.88 * (i / 40); pts.push(thumbP(s0, Math.PI / 2 + 0.25, 0.8)); }
+      glove.add(wire(pts, 2.1, leatherDk, false, 120));
+      const st: P3[] = [];
+      for (let i = 0; i <= 40; i++) { const s0 = 0.1 + 0.84 * (i / 40); st.push(thumbP(s0, Math.PI / 2 + 0.05, 0.4)); }
+      glove.add(mesh(stitchGeo(st), thread));
+    }
+    // the thumb's attachment strap: a short band of leather from the thumb's tip over to the fist by the knuckle roll
+    {
+      const pts: P3[] = [], ns: P3[] = [];
+      for (let i = 0; i <= 16; i++) {
+        const k = i / 16, x = 66 - 16 * k, th = 0.12 + 0.9 * k;
+        const pf = onFist(x, th, 2.2), pt = thumbP(0.86, Math.PI / 2 * (1 - k), 2.2);
+        const w = sm(0, 0.3, k);
+        pts.push([pt[0] + (pf[0] - pt[0]) * w, pt[1] + (pf[1] - pt[1]) * w, pt[2] + (pf[2] - pt[2]) * w]);
+        ns.push(fistN(x, th));
+      }
+      glove.add(mesh(ribbon(pts, ns, 17, 2.6), leatherDk));
+      glove.add(mesh(stitchGeo(pts.map((p, i) => [p[0] + ns[i][0] * 2.8 - 5.5, p[1] + ns[i][1] * 2.8, p[2] + ns[i][2] * 2.8] as P3)), thread));
+    }
+    // the cuff: padded, tapering to the wrist's opening; its lining; the white piping rolled round its mouth
     glove.add(mesh(tubeGeo(GL.CUFF0, GL.CUFF1, cuffRY, cuffRZ), leather));
-    glove.add(mesh(tubeGeo(GL.CUFF1 - 60, GL.CUFF1, (x) => cuffRY(x) - 5, (x) => cuffRZ(x) - 5, true), lining));
-    const pipe: [number, number, number][] = [];
-    for (let j = 0; j <= 64; j++) { const a = (j / 64) * Math.PI * 2; pipe.push([GL.CUFF1, (cuffRY(GL.CUFF1) - 1.5) * Math.cos(a), (cuffRZ(GL.CUFF1) - 1.5) * Math.sin(a)]); }
-    glove.add(wire(pipe, 3.6, white, true, 96));
-    // a seam band where the cuff meets the fist
-    const seam: [number, number, number][] = [];
-    for (let j = 0; j <= 64; j++) { const a = (j / 64) * Math.PI * 2; seam.push([GL.CUFF0 + 70, (cuffRY(GL.CUFF0 + 70) + 0.6) * Math.cos(a), (cuffRZ(GL.CUFF0 + 70) + 0.6) * Math.sin(a)]); }
-    glove.add(wire(seam, 2.2, leatherDk, true, 96));
-    for (const sx of [GL.CUFF0 + 80, GL.CUFF1 - 16]) {
-      const ring: [number, number, number][] = [];
-      for (let j = 0; j <= 96; j++) { const a = (j / 96) * Math.PI * 2; ring.push([sx, (cuffRY(sx) + 0.35) * Math.cos(a), (cuffRZ(sx) + 0.35) * Math.sin(a)]); }
-      glove.add(mesh(stitchGeo(ring), thread));
+    glove.add(mesh(tubeGeo(GL.CUFF1 - 50, GL.CUFF1, (x) => cuffRY(x) - 5, (x) => cuffRZ(x) - 5, true), lining));
+    const ringAt = (x: number, lift: number) => { const r: P3[] = []; for (let j = 0; j <= 96; j++) r.push(cuffP(x, (j / 96) * Math.PI * 2, lift)); return r; };
+    glove.add(wire(ringAt(GL.CUFF1, -1.6), 3.8, white, true, 128));
+    glove.add(mesh(stitchGeo(ringAt(GL.CUFF1 - 13, 0.4)), thread));
+    // the seam where the cuff is sewn to the fist, and its stitches
+    glove.add(wire(ringAt(282, 1.0), 2.4, leatherDk, true, 128));
+    glove.add(mesh(stitchGeo(ringAt(292, 0.4)), thread));
+    // ★ the lace-up front, on the palm side turned toward the thumb: the slit's two edges, the tongue under it, steel eyelets,
+    //   white laces criss-crossing through them, tied off in a bow by the mouth, its ends hanging along the cuff
+    const AL = Math.PI - 0.85, DE = 0.21;
+    const along = (a: number, x0: number, x1: number, lift: number, n = 30) => { const r: P3[] = []; for (let i = 0; i <= n; i++) r.push(cuffP(x0 + ((x1 - x0) * i) / n, a, lift)); return r; };
+    {
+      const pts = along(AL, 300, 436, 0.25, 24), ns = pts.map((p) => cuffN(AL, p[0]));
+      glove.add(mesh(ribbon(pts, ns, 30, 1.4), leatherDk));
     }
-    // the lacing: a darker tongue down the cuff's top, two rows of steel eyelets, white laces criss-crossing through them
-    const tongue = new THREE.Group();
-    for (let k = 0; k < 14; k++) {
-      const x = GL.CUFF0 + 92 + k * 18;
-      const seg = new THREE.BoxGeometry(18.5, 2, 30);
-      seg.translate(x, cuffTop(x, 0) + 0.2, 0);
-      tongue.add(mesh(seg, leatherDk));
-    }
-    glove.add(tongue);
-    const EX = [GL.CUFF0 + 104, GL.CUFF0 + 140, GL.CUFF0 + 176, GL.CUFF0 + 212, GL.CUFF0 + 248, GL.CUFF0 + 284, GL.CUFF0 + 318];
-    const EZ = 22;
-    const eye = (x: number, z: number) => [x, cuffTop(x, z) + 1.6, z] as [number, number, number];
-    for (const x of EX) for (const z of [-EZ, EZ]) {
-      const t = mesh(new THREE.TorusGeometry(4.6, 1.5, 8, 20), steel);
-      t.rotation.x = Math.PI / 2;
-      const [ex, ey, ez] = eye(x, z);
-      t.position.set(ex, ey - 0.6, ez);
+    for (const sg of [-1, 1]) glove.add(wire(along(AL + sg * 0.12, 296, 440, 1.6), 2.2, leather, false, 60));
+    const EX = [310, 331, 352, 373, 394, 415];
+    for (const x of EX) for (const sg of [-1, 1]) {
+      const a = AL + sg * DE, p = cuffP(x, a, 1.1), n = cuffN(a, x);
+      const t = mesh(new THREE.TorusGeometry(4.2, 1.4, 8, 20), steel);
+      t.quaternion.setFromUnitVectors(new THREE.Vector3(0, 0, 1), new THREE.Vector3(...n));
+      t.position.set(...p);
       glove.add(t);
     }
-    for (let k = 0; k < EX.length - 1; k++) {
-      for (const s of [1, -1]) {
-        const a = eye(EX[k], s * EZ), b = eye(EX[k + 1], -s * EZ);
-        const mid: [number, number, number] = [(a[0] + b[0]) / 2, Math.max(a[1], b[1]) + 2.6 + (s > 0 ? 1.2 : 0), 0];
-        glove.add(wire([a, mid, b], 2.6, lace, false, 16));
-      }
+    for (let k = 0; k < EX.length - 1; k++) for (const sg of [1, -1]) {
+      const a = cuffP(EX[k], AL + sg * DE, 1.8), b = cuffP(EX[k + 1], AL - sg * DE, 1.8);
+      const m = cuffP((EX[k] + EX[k + 1]) / 2, AL, sg > 0 ? 4.6 : 3.4);
+      glove.add(wire([a, m, b], 2.3, lace, false, 18));
     }
-    // the laces' ends, tied off in a flat knot by the last eyelets and tucked along the cuff
-    const L = EX[EX.length - 1];
-    const k0 = eye(L, EZ), k1 = eye(L, -EZ);
-    glove.add(wire([k0, [L + 10, cuffTop(L + 10, 6) + 4, 6], [L + 30, cuffTop(L + 30, 10) + 3, 10], [L + 54, cuffTop(L + 54, 16) + 2.2, 16]], 2.6, lace, false, 24));
-    glove.add(wire([k1, [L + 10, cuffTop(L + 10, -4) + 4.6, -4], [L + 26, cuffTop(L + 26, -16) + 3, -16], [L + 46, cuffTop(L + 46, -26) + 2.2, -26]], 2.6, lace, false, 24));
+    // the bow: two loops and two ends, by the last eyelets
+    {
+      const L = EX[EX.length - 1] + 6, kn = cuffP(L, AL, 4.2);
+      for (const sg of [-1, 1]) {
+        const loop: P3[] = [];
+        for (let i = 0; i <= 14; i++) {
+          const t = (i / 14) * Math.PI * 2;
+          loop.push(cuffP(L + 9 + 8 * Math.cos(t) - 1, AL + sg * (0.16 + 0.1 * (1 + Math.sin(t))), 4.2 + 3 * Math.sin(t) * 0.5 + 1.5));
+        }
+        glove.add(wire(loop, 2.2, lace, true, 40));
+        glove.add(wire([kn, cuffP(L + 12, AL + sg * 0.08, 3.2), cuffP(L + 24, AL + sg * 0.16, 2.6), cuffP(L + 33, AL + sg * 0.24, 2.4)], 2.2, lace, false, 24));
+      }
+      const knot = mesh(new THREE.SphereGeometry(4.2, 16, 12), lace);
+      knot.position.set(...kn);
+      glove.add(knot);
+    }
   }
 
   // ══ THE BUNDLES (base, struck, top: in stack order) ══

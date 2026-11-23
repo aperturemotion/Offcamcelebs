@@ -17,7 +17,7 @@
 // `makeBand` wraps a paper band round any stack (a brick of bundles), printed the same way.
 // Units: world px, a note 240 px long (x) × 102 px wide (z); a bundle's origin is the centre of its underside.
 // ══════════════════════════════════════════════════════════════════════════════════════════════
-import { THREE, mesh, paintTex as paintTex0, imageOf, imagesReady, fontsReady } from "../stage";
+import { THREE, mesh, paintTex as paintTex0, imageOf, fontsReady, currentFrame } from "../stage";
 import { hash, fitFont, track } from "../kit029";
 
 /** a note: its length (x) and width (z), 156 × 66.3 mm */
@@ -65,10 +65,17 @@ const paintTex = (key: string, w: number, h: number, draw: (g: CanvasRenderingCo
 };
 const refresh = () => {
   if (final) return;
-  const ready = imagesReady() && fontsReady() && imageOf(FACE_SRC).naturalWidth > 0;
+  // ★ only this module's own art and the fonts decide it (another place's missing image must never keep every bundle
+  //   repainting every strap on every draw), and at most once per frame
+  const f = currentFrame();
+  if (f === lastFrame) return;
+  lastFrame = f;
+  const im = imageOf(FACE_SRC);
+  const ready = fontsReady() && im.complete && im.naturalWidth > 0;
   for (const r of repaints.values()) r();
   if (ready) final = true;
 };
+let lastFrame = -1e9;
 /** run `refresh` whenever this mesh is drawn (until every texture is final) */
 const refreshing = <T extends THREE.Object3D>(o: T) => { o.onBeforeRender = () => refresh(); return o; };
 const FACE_SRC = "assets/note100.jpg";
