@@ -3,7 +3,7 @@
 // a real place in, replace its stub line with `export { PLACE as HOOK } from "./sets/hook";` (and so on).
 // ═══════════════════════════════════════════════════════════════════════════
 import { makeStub } from "./sets/_stub";
-export const HOOK = makeStub("hook", "dark", "#8a1c1c");
+export { PLACE as HOOK } from "./sets/hook";
 export { PLACE as CHAMP } from "./sets/champ";
 export { PLACE as DEAL } from "./sets/deal";
 export { PLACE as PAY } from "./sets/pay";

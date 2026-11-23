@@ -163,16 +163,16 @@ const HERO_REST: V3 = [-24, HH.y + GAP, -236];
 const HERO: Fl = lander({ he: HHE, p0: [0, HERO_Y0, 0], yaw0: 0.004, T: 12.2, L: HERO_REST, yawL: 0.035, axis: [0.12, 0.08, 1], turns: 1, ramp: 5 });
 // the top bundles: flung up and tumbling toward the lens, landing in front
 const TOPS: Fl[] = [
-  lander({ he: BHE, p0: [jit(20).dx, yTop(0), jit(20).dz], yaw0: jit(20).yaw, T: 13.8, L: [-420, BH.y + GAP, 20], yawL: 0.25, axis: [1, 0.12, 0], turns: 1, ramp: 4 }),
+  lander({ he: BHE, p0: [jit(20).dx, yTop(0), jit(20).dz], yaw0: jit(20).yaw, T: 14.8, L: [-420, BH.y + GAP, 20], yawL: 0.25, axis: [1, 0.12, 0], turns: 1, ramp: 4 }),
   lander({ he: BHE, p0: [jit(21).dx, yTop(1), jit(21).dz], yaw0: jit(21).yaw, T: 16.2, L: [300, BH.y + GAP, 260], yawL: -0.3, axis: [1, -0.16, 0], turns: 1, ramp: 4 }),
-  lander({ he: BHE, p0: [jit(22).dx, yTop(2), jit(22).dz], yaw0: jit(22).yaw, T: 18.4, L: [-300, BH.y + GAP, 270], yawL: 0.2, axis: [1, 0.08, 0], turns: 1, ramp: 4 }),
+  lander({ he: BHE, p0: [jit(22).dx, yTop(2), jit(22).dz], yaw0: jit(22).yaw, T: 18.4, L: [-390, BH.y + GAP, 280], yawL: 0.2, axis: [1, 0.08, 0], turns: 1, ramp: 4 }),
 ];
 
 // ══ THE LOOSE NOTES: flung high off the top, then they fall at a banknote's terminal speed, swaying like leaves (the sway's
 //    tilt follows its swing), and lie down flat as they reach the table ══
-const VT = 28, TDRAG = 2.5, SWAY_W = (2 * Math.PI) / 13;
+const VT = 28, TDRAG = 1.8, SWAY_W = (2 * Math.PI) / 13;
 type Nt = { p0: V3; yaw0: number; t0: number; vy: number; vx: number; vz: number; ax: number; az: number; ph: number; spin: number; tilt: number; tL: number; L: V3 };
-const NOTE_LAND: [number, number, number][] = [[-430, -220, 0.3], [380, -200, -0.3], [400, 40, 0.2], [-560, 260, -0.15], [560, 420, 0.5]];
+const NOTE_LAND: [number, number, number][] = [[-430, -220, 0.3], [380, -200, -0.3], [400, 40, 0.2], [-650, 330, -0.15], [560, 420, 0.5]];
 const noteY = (n: { p0: V3; vy: number }, s: number) => n.p0[1] + (n.vy + VT) * TDRAG * (1 - Math.exp(-s / TDRAG)) - VT * s;
 const sway = (n: { ax: number; az: number; ph: number }, s: number) => {
   const a = SWAY_W * s + n.ph, k = clamp01(s / 3);
@@ -180,7 +180,7 @@ const sway = (n: { ax: number; az: number; ph: number }, s: number) => {
 };
 const NOTES: Nt[] = NOTE_LAND.map(([lx, lz, yawL], j) => {
   const p0: V3 = [(hash(j, 1, 8) - 0.5) * 40, NOTES0 + NH.y + j * NOTE_STEP, (hash(j, 2, 8) - 0.5) * 20];
-  const base = { p0, vy: 150 + 14 * j, ax: 34 + 18 * hash(j, 3, 8), az: 20 + 14 * hash(j, 4, 8), ph: hash(j, 5, 8) * 6.28 };
+  const base = { p0, vy: 260 + 12 * j, ax: 34 + 18 * hash(j, 3, 8), az: 20 + 14 * hash(j, 4, 8), ph: hash(j, 5, 8) * 6.28 };
   const rest = NH.y + GAP;
   let s = 0.5;
   while (noteY(base, s) > rest && s < 400) s += 0.01;
@@ -216,7 +216,7 @@ const K0: Shot = { c: [G0[0] - 250, YG + 150, 690], t: [G0[0] + 150, YG - 10, 0]
 const K1: Shot = { c: [320, 360, 1180], t: [90, 280, 0] };
 /** the burst: rising with it */
 const K2: Shot = { c: [150, 560, 1180], t: [-60, 470, 40] };
-const K3: Shot = { c: [-40, 1000, 520], t: [-30, 200, -150] };
+const K3: Shot = { c: [260, 1080, 560], t: [-20, 200, -150] };
 /** ★ "$365": over the brick's band, looking down at 64°, the figure across the frame's middle */
 const BAND_C: V3 = [HERO_REST[0] + BAND.X, HERO_REST[1] + HH.y, HERO_REST[2]];
 const LOOK = (64 * Math.PI) / 180, NEAR = 404;
@@ -246,7 +246,7 @@ const camAt = (f: number): Shot => {
   if (f <= F_IMP) {
     // riding with the glove (its pace at f0), handing over to the impact's framing, at rest as the punch lands
     const g = gloveAt(f).p, d: V3 = [g[0] - G0[0], 0, 0];
-    const k = clamp01(f / F_IMP), w = k * k * (3 - 2 * k);
+    const k = clamp01(f / F_IMP) ** 1.6, w = k * k * (3 - 2 * k);
     return { c: lerp3([K0.c[0] + d[0], K0.c[1], K0.c[2]], K1.c, w), t: lerp3([K0.t[0] + d[0], K0.t[1], K0.t[2]], K1.t, w) };
   }
   return { c: herm(f, (s) => s.c), t: herm(f, (s) => s.t) };
