@@ -333,7 +333,7 @@ export const mathModel = (g: MathGeo) => (): Model<MathP> => {
   const column = columnModel(); sc.add(column);
   const cx = (g.tower.x + g.ghost.x) / 2;
   sc.add(tableModel(cx, -120, 1700, 760));
-  root.add(makeFloor({ y: g.floor, x0: g.tower.x - 1600, x1: g.ghost.x + 1600, z0: -900, z1: 520, reflect: 0.1, shadow: 0.55,
+  root.add(makeFloor({ y: g.floor, x0: g.tower.x - 1600, x1: g.ghost.x + 1600, z0: -900, z1: 520, reflect: 0.05, shadow: 0.55,
     fadeC: [cx, -60], fadeR: [g.ghost.x - g.tower.x + 900, 600],
     blobs: [{ x: g.tower.x, z: g.tower.z, w: 620, d: 330, a: 0.32 }] }));
   return {
