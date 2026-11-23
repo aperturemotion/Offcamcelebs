@@ -2134,6 +2134,10 @@ the rest is provisional until the user reacts — confirmed items then become nu
 _Log every OffCamCelebs preference change and every video build here with a date. Nothing about
 100BasisPoints / Style 3 goes in this file._
 
+- **2026-11-23: THE SHAPE COMES FIRST** (Timur, on 039's glove: "fix up the glove, make it more realistic, and just focus on
+  the shape itself"). A real object is recognised by its silhouette before its surface: model the true shape (a boxing
+  glove's padded fist, attached thumb, knuckle roll, palm grip, laced cuff, its real proportions) before adding texture.
+
 - **2026-11-23: ★★★★ MORE REALISTIC 3-D, THE CASH ABOVE ALL** (Timur, on 039 Canelo's preview: "Overall, the cash stacks,
   and the 3d visuals need to be more realistic, put more effort into them"). Every object must read as a real thing on a
   phone at a glance:
