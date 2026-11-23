@@ -216,10 +216,10 @@ const K0: Shot = { c: [G0[0] - 250, YG + 150, 690], t: [G0[0] + 150, YG - 10, 0]
 const K1: Shot = { c: [320, 360, 1180], t: [90, 280, 0] };
 /** the burst: rising with it */
 const K2: Shot = { c: [150, 560, 1180], t: [-60, 470, 40] };
-const K3: Shot = { c: [260, 1080, 560], t: [-20, 200, -150] };
+const K3: Shot = { c: [120, 1120, 600], t: [-20, 200, -150] };
 /** ★ "$365": over the brick's band, looking down at 64°, the figure across the frame's middle */
 const BAND_C: V3 = [HERO_REST[0] + BAND.X, HERO_REST[1] + HH.y, HERO_REST[2]];
-const LOOK = (64 * Math.PI) / 180, NEAR = 404;
+const LOOK = (64 * Math.PI) / 180, NEAR = 322;   // close: the strap's figure ~480 px across
 const K4: Shot = { c: [BAND_C[0] + 6, BAND_C[1] + NEAR * Math.sin(LOOK), BAND_C[2] + NEAR * Math.cos(LOOK)], t: [BAND_C[0] + 6, BAND_C[1], BAND_C[2] - 42] };
 /** "We counted the fights": back and up, the landed money round the brick */
 const FAR = 980, LOOK2 = (58 * Math.PI) / 180;
@@ -403,7 +403,7 @@ if (F_LANDED > WE - 4) fail(`hook: the money is still moving at f${F_LANDED}, af
   }
 }
 /** the band's figure: its print box on the band's top (band-local), in the table world */
-const TEXT_W = BAND.W - 12, TEXT_H = 26;
+const TEXT_W = BAND.W - 7, TEXT_H = 22;
 const textCorners = (f: number) => {
   const h = flAt(HERO, tauAt(f));
   return [[-1, -1], [-1, 1], [1, -1], [1, 1]].map(([a, b]) => {

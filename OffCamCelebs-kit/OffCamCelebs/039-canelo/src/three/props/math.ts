@@ -24,7 +24,7 @@ const JX = 1.2, JZ = 0.8, JYAW = 0.006;           // a bundle's hand-stacked shi
 const BAND_T = 0.32 + 0.3 + 0.02;                 // the band's paper and its outward crinkle (cash.ts BAND_OUT)
 const B_Y0 = 0.32 + 0.5;                          // the bundles stand on the band's bottom run (its paper 0.32; 0.5 clear: the audit's float32 world)
 /** the band round each brick: its width, its centre x on the brick, its inner half depth (clear of the bundles' straps) */
-const SASH = { w: 132, x: -HX - 12, z: HZ + BUNDLE.HZ + JZ + JYAW * BUNDLE.HX + 0.5 } as const;
+const SASH = { w: 90, x: -HX, z: HZ + BUNDLE.HZ + JZ + JYAW * BUNDLE.HX + 0.5 } as const;
 export const BRICK = { hw: HX + JX + BUNDLE.HX + JYAW * BUNDLE.HZ + 0.3, hd: SASH.z + BAND_T } as const;   // half width (x), half depth (z)
 export const BRICKS = [
   { n: 3, label: "$15M" },
@@ -44,7 +44,7 @@ export const sashPanel = (k: number) => ({ x0: SASH.x - SASH.w / 2, x1: SASH.x +
 const INK = "#2A1B15";
 /** the band's kraft, its two printed border rules, and its figure printed ACROSS the band on its FRONT run (where the camera
  *  reads it), the ink a little uneven in the fibre. `len` the loop's length, `span` the front run's [start, end] along it. */
-const bandTex = (k: number, len: number, w: number, span: [number, number], label: string) => paintTex(`math-band-${k}-v1`, len, w, (g) => {
+const bandTex = (k: number, len: number, w: number, span: [number, number], label: string) => paintTex(`math-band-${k}-v2`, len, w, (g) => {
   g.fillStyle = MUSTARD; g.fillRect(0, 0, len, w);
   for (let i = 0; i < len * 3; i++) {
     g.fillStyle = `rgba(${hash(i, 1, 16 + k) > 0.5 ? "110,78,18" : "245,220,140"},${0.05 + 0.09 * hash(i, 2, 16 + k)})`;

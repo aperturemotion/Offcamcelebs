@@ -94,7 +94,7 @@ const backTex = () => paintTex("cash39-back-v1", 300, 128, (g) => {
   g.strokeStyle = "rgba(40,70,45,0.6)"; g.lineWidth = 1; g.strokeRect(6, 6, 288, 116);
 }, 2);
 /** the kraft: mustard fibre, a thin printed border along both edges, `text` along the strap's length (or across its width) */
-const strapTex = (key: string, len: number, w: number, text: string, top: [number, number], across: boolean) => paintTex(key, len, w, (g) => {
+const strapTex = (key: string, len: number, w: number, text: string, top: [number, number], across: boolean, folds: number[] = []) => paintTex(key, len, w, (g) => {
   g.fillStyle = MUSTARD; g.fillRect(0, 0, len, w);
   for (let i = 0; i < len * 3; i++) {
     g.fillStyle = `rgba(${hash(i, 1, 6) > 0.5 ? "110,78,18" : "245,220,140"},${0.05 + 0.09 * hash(i, 2, 6)})`;
@@ -102,6 +102,13 @@ const strapTex = (key: string, len: number, w: number, text: string, top: [numbe
   }
   // wear: a darker scuff or two, the paper's mottling
   for (let i = 0; i < 6; i++) { g.fillStyle = `rgba(90,60,15,${0.04 + 0.04 * hash(i, 9, 6)})`; g.beginPath(); g.ellipse(hash(i, 7, 6) * len, hash(i, 8, 6) * w, 6 + 10 * hash(i, 10, 6), 2 + 3 * hash(i, 11, 6), 0, 0, Math.PI * 2); g.fill(); }
+  // ★ the folds where it turns round the stack's edges: a crease line, the paper darkened in the bend, a pale ridge beside it
+  for (const f of folds) {
+    const gr = g.createLinearGradient(f - 3.5, 0, f + 3.5, 0);
+    gr.addColorStop(0, "rgba(70,45,8,0)"); gr.addColorStop(0.42, "rgba(70,45,8,0.28)"); gr.addColorStop(0.5, "rgba(50,30,5,0.5)");
+    gr.addColorStop(0.62, "rgba(255,235,170,0.22)"); gr.addColorStop(1, "rgba(255,235,170,0)");
+    g.fillStyle = gr; g.fillRect(f - 3.5, 0, 7, w);
+  }
   g.fillStyle = "rgba(48,32,8,0.8)";
   g.fillRect(0, 2.2, len, 0.45); g.fillRect(0, w - 2.65, len, 0.45);
   if (!text) return;
@@ -111,7 +118,7 @@ const strapTex = (key: string, len: number, w: number, text: string, top: [numbe
     // the text runs across the band's width, centred on the top run, read from the band's front (+s side down)
     g.save(); g.translate(mid, w / 2); g.rotate(-Math.PI / 2);
     track(g, 0);
-    const s = fitFont(g, 800, (b - a) * 0.34, text, w - 10);
+    const s = fitFont(g, 800, (b - a) * 0.34, text, w - 7);
     g.fillText(text, 0, s * 0.36);
     g.restore();
   } else {
@@ -215,8 +222,10 @@ const jit = (k: number, i: number) => {
 // ══ THE STRAP / BAND: a paper loop round a stack (inner surface clear of it), crinkled outward, its glued overlap ══
 /** a loop of paper `w` wide (along x) round z ∈ ±zIn, from its bottom run (outer face at y 0) to its top run's underside at
  *  yTop; printed `text` along its length (a strap) or across its width (a band). Its overlap is glued on the back (−z). */
-export const makeBand = (o: { w: number; zIn: number; yTop: number; text?: string; across?: boolean; seed?: number; key?: string }) => {
-  const seed = o.seed ?? 1, t = ST, R = 1.1;
+/** a band's default width: a real strap's share of the note (≈ 38%: the faces stay clear on both sides of it) */
+export const BAND_W = Math.round(NOTE.W * 0.38);
+export const makeBand = (o: { w?: number; zIn: number; yTop: number; text?: string; across?: boolean; seed?: number; key?: string }) => {
+  const seed = o.seed ?? 1, t = ST, R = 0.7, w = o.w ?? BAND_W;
   const yb = t, yt = o.yTop, zo = o.zIn;
   // the inner path, from the back's middle, up, over the top (−z → +z), down the front, under (+z → −z), up the back
   type Pt = { y: number; z: number; ny: number; nz: number; run: "top" | "bottom" | "side" };
@@ -244,7 +253,10 @@ export const makeBand = (o: { w: number; zIn: number; yTop: number; text?: strin
   // where the top run lies along the length (for the print)
   const topIdx = path.map((p, i) => (p.run === "top" ? i : -1)).filter((i) => i >= 0);
   const topSpan: [number, number] = [S[topIdx[0]], S[topIdx[topIdx.length - 1]]];
-  const SXb = Math.max(6, Math.round(o.w / 4));
+  // the four folds (the middle of each turn round an edge), and the overlap's edge
+  const folds: number[] = [];
+  for (let i = 1; i < path.length; i++) if (path[i].run !== path[i - 1].run && path[i - 1].run !== "side") folds.push(S[i]); else if (path[i].run !== path[i - 1].run) folds.push(S[i - 1]);
+  const SXb = Math.max(6, Math.round(w / 4));
   // crinkle: soft creases across the band, a few sharper folds, always outward; none under it (it lies on the table)
   const crinkle = (i: number, x: number) => {
     const p = path[i];
@@ -258,11 +270,11 @@ export const makeBand = (o: { w: number; zIn: number; yTop: number; text?: strin
   const ring = (layer: "out" | "in") => {
     const base = pos.length / 3;
     for (let i = 0; i < path.length; i++) for (let c = 0; c <= SXb; c++) {
-      const x = -o.w / 2 + (o.w * c) / SXb, p = path[i];
+      const x = -w / 2 + (w * c) / SXb, p = path[i];
       const over = S[i] > loopLen ? t + CRINKLE + 0.02 : 0;     // the overlap lies over the start (clear of its crinkle)
       const d = (layer === "out" ? t + crinkle(i, x) : 0) + over;
       pos.push(x, p.y + p.ny * d, p.z + p.nz * d);
-      uv.push(S[i] / L, (x + o.w / 2) / o.w);
+      uv.push(S[i] / L, (x + w / 2) / w);
     }
     for (let i = 0; i < path.length - 1; i++) for (let c = 0; c < SXb; c++) {
       const a = base + i * (SXb + 1) + c, b = a + 1, d = a + SXb + 1, e = d + 1;
@@ -287,8 +299,8 @@ export const makeBand = (o: { w: number; zIn: number; yTop: number; text?: strin
   g.setIndex(idx);
   g.computeVertexNormals();
   const text = o.text ?? "";
-  const key = o.key ?? `cash39-strap-${Math.round(o.w)}-${Math.round(L)}-${text}-${o.across ? "x" : "l"}`;
-  const m = new THREE.MeshStandardMaterial({ map: strapTex(key, L, o.w, text, topSpan, !!o.across), roughness: 0.86, metalness: 0, envMapIntensity: 0.3, side: THREE.DoubleSide });
+  const key = o.key ?? `cash39-strap-${Math.round(w)}-${Math.round(L)}-${text}-${o.across ? "x" : "l"}`;
+  const m = new THREE.MeshStandardMaterial({ map: strapTex(key, L, w, text, topSpan, !!o.across, folds), roughness: 0.86, metalness: 0, envMapIntensity: 0.3, side: THREE.DoubleSide });
   const band = refreshing(mesh(g, m));
   band.userData.bandTop = yt + t + CRINKLE;
   return band;

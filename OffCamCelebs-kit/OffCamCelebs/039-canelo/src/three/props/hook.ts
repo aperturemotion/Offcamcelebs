@@ -24,7 +24,7 @@
 import { THREE, mesh, type Model } from "../stage";
 import { col, hash, wire } from "../kit029";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { makeBundle, makeBand, noteMaterials, keepFresh, BUNDLE, BAND_OUT, NOTE } from "./cash";
+import { makeBundle, makeBand, noteMaterials, keepFresh, BUNDLE, BAND_OUT, BAND_W, NOTE } from "./cash";
 
 // ══ DIMENSIONS (px; a $100 note is 156 mm = 240 px: 1.54 px per mm) ══════════════════════════════════
 export const KPX = NOTE.W / 156;
@@ -35,7 +35,7 @@ export const LAYER = BUNDLE.H + 0.3;
 /** a bundle's half extents round its centre (cash.ts: its sheets' shifts and turns, the strap's crinkled loop) */
 export const BH = { x: BUNDLE.HX, y: BUNDLE.H / 2, z: BUNDLE.HZ } as const;
 /** ★ the hero brick: four real bundles stacked a little out of square (HB_OFF), under one wide paper band (BAND.W, centred) */
-export const BAND = { W: 130, X: 0 } as const;
+export const BAND = { W: BAND_W, X: 0 } as const;   // ★ a real strap's width (38% of the note): the $100 faces show on both sides
 /** the figure on the brick's band, printed across it */
 export const BAND_TEXT = "$365,000,000";
 const HB_OFF = Array.from({ length: 4 }, (_, k) => ({ dx: (hash(k, 1, 9) - 0.5) * 3.2, dz: (hash(k, 2, 9) - 0.5) * 2.4, yaw: (hash(k, 3, 9) - 0.5) * 0.02 }));
