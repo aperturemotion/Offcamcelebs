@@ -495,8 +495,8 @@ These survive independent of style. (Look rules live in the style's own preferen
   resolution… without lighting, without colors, if that speeds it up… but not too low").** At every handback, render a
   PREVIEW MP4 and send it with the Studio link; this counts as the asked-for render for previews only (the master still
   waits for "render it"). For the 034/035 engine (`src/three/stage.ts`): `node scripts/build.mjs --preview-only` builds
-  `.build/film-preview.js` (`window.__v34preview={scale:0.5}`: every 3-D view at half size, no shadow map, no mirror floor,
-  no antialiasing; the film's own build never sets it); copy index.html, meta.json, hyperframes.json, assets/ and public/
+  `.build/film-preview.js` (`window.__v34preview={scale:0.5}`: every 3-D view at half size, no mirror floor, no antialiasing; the
+  shadow map KEPT at 1024 since 2026-11-23 (Timur: "more realistic": a preview without shadows judges the look unfairly); the film's own build never sets it); copy index.html, meta.json, hyperframes.json, assets/ and public/
   to a short work folder, put the preview build in as assets/film.js, and run `npx --yes hyperframes@0.8.143 render . -q
   draft -o <film>/renders/preview/<name>_preview.mp4` (the real mix, never the master filename). Measured on 038 Mint:
   2.9 s → 1.2 s a frame, one worker. A scaled-down copy for the phone (540×960) goes beside it.

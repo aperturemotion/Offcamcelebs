@@ -135,7 +135,7 @@ const ensure = () => {
   R.toneMapping = THREE.NeutralToneMapping;
   R.toneMappingExposure = 1.0;
   R.localClippingEnabled = true;                                     // a receipt clipped at its slot, drums at their housing
-  R.shadowMap.enabled = !PV;
+  R.shadowMap.enabled = true;   // ★ 2026-11-23 (Timur: more realistic): the preview keeps the shadows too
   R.shadowMap.type = THREE.PCFSoftShadowMap;   // ★ RULE 54: filtered soft shadows (VSM threw false wedges: see LIGHT)
   R.setClearColor(0x000000, 0);
   const pm = new THREE.PMREMGenerator(R);
@@ -327,7 +327,8 @@ const drawJob = (r: THREE.WebGLRenderer, j: Job) => {
   const sc = key.shadow.camera as THREE.OrthographicCamera;
   sc.left = -rad; sc.right = rad; sc.top = rad; sc.bottom = -rad; sc.near = rad * 0.5; sc.far = rad * 6;
   sc.updateProjectionMatrix();
-  key.castShadow = !PV && entry.model.shadows !== false;
+  key.castShadow = entry.model.shadows !== false;
+  if (PV && key.shadow.mapSize.x !== 1024) { key.shadow.mapSize.set(1024, 1024); key.shadow.map?.dispose(); key.shadow.map = null as unknown as THREE.WebGLRenderTarget; }
   // DEBUG (scratchpad/viewdbg.mjs): switch parts of the look off to find what a frame's glitch comes from
   const dflags = (window as unknown as { __v34flags?: Record<string, boolean> }).__v34flags;
   if (dflags) {

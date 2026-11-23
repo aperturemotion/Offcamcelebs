@@ -2134,6 +2134,17 @@ the rest is provisional until the user reacts — confirmed items then become nu
 _Log every OffCamCelebs preference change and every video build here with a date. Nothing about
 100BasisPoints / Style 3 goes in this file._
 
+- **2026-11-23: ★★★★ MORE REALISTIC 3-D, THE CASH ABOVE ALL** (Timur, on 039 Canelo's preview: "Overall, the cash stacks,
+  and the 3d visuals need to be more realistic, put more effort into them"). Every object must read as a real thing on a
+  phone at a glance:
+  - **Cash** is built like real money: a real $100 note face (the public-domain US note art, not a drawing), each bundle a
+    stack of individual notes with visible paper edges, slight offsets and a soft bow, a real paper strap (crinkled, printed,
+    slightly loose), never a box with a texture on it.
+  - **Everything else**: real materials (paper grain and sheen, leather grain, brushed metal, latex gloss), thickness and
+    bevels on every edge, small imperfections (a curl, a crease, a tilt, wear), soft contact shadows, nothing perfectly
+    flat or perfectly square; text printed as print (ink sits in the paper), not floating labels.
+  - **The preview keeps the shadows** so it judges the look fairly (only the mirror floor and antialiasing are dropped).
+
 - **2026-11-22: ★★★★ SOUND EFFECTS: THE EARNEDITS PACK; NO PING; THE CHAIN ONLY ON BARS, RARELY; EVERYTHING ELSE SUBTLE
   AND FITTING** (Timur, on 038 Mint's preview: "the main issue with this video is the sound effects… we have a sound effect
   pack. It's called Earn Edit Sound Effect Pack… I want you to use that… Don't add that pinging anymore. Only add that, like,

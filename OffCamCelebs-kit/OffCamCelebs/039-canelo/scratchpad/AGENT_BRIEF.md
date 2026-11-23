@@ -110,3 +110,25 @@ Words (whisper spellings, for `word()` regexes): "Dazon" = DAZN, "Goldenboy," = 
 - **verdict** (cream): the channel's verdict object, INFLATED: a big balloon printed "$365M" inflated on its string over a
   plinth; on "Our rating: inflated." an "INFLATED" plate / tag swings onto it (the word INFLATED large, amber #c98a2b). On
   "Send us who to audit next" it holds. sfx: glide, lowhit on INFLATED.
+
+## ★ ROUND 2 — REALISM (Timur, 2026-11-23: "the cash stacks, and the 3d visuals need to be more realistic, put more effort
+into them"). Read the new top entry of the preferences changelog. Every object must read as a REAL thing on a phone.
+- **Cash (hook, math):** ONE shared module `src/three/props/cash.ts` (written by the hook agent; the math agent switches to
+  it once it exists) exporting `makeBundle(opts)` → a THREE.Group: ~100 individual notes as thin sheets (a real note is
+  156 × 66 mm, ratio 2.36:1; 100 notes ≈ 11 mm thick) with per-note jitter (±0.3–0.8 px offsets, tiny yaw), a soft bow
+  (the middle sits a hair lower), visible paper edges (off-white with faint grey/green lines, not a flat grey side),
+  the TOP note carrying the real $100 face `assets/note100.jpg` (public domain, 1200×505; preload it like
+  canelo_face.png in src/hf/driver.tsx HOOK_PHOTOS — the hook agent adds it there), the bottom note the same face
+  (darker), and a paper STRAP around the middle (real straps are mustard #c7a23c for $10,000 of $100s: matte paper,
+  slightly wider at the fold, a printed "$10,000" and a thin border, a visible seam and crinkle; the figure the film
+  needs, e.g. "$365,000,000", printed on the strap of the hero brick only). Notes are paper (roughness 0.8–0.9, a faint
+  sheen), never glossy plastic. A brick of bundles is bundles stacked with small offsets, not one block.
+- **Everything else:** thickness and rounded/bevelled edges on every object; real material response (paper grain and
+  sheen, leather grain + stitching, brushed/polished metal with proper metalness, latex/lacquer gloss with clearcoat,
+  wood grain); small imperfections (a curl or a crease in paper, a slight tilt, wear on corners); print that sits IN the
+  paper (texture), not floating labels; soft contact shadows under everything (the engine has them: make sure objects
+  cast and receive); nothing perfectly flat, square or uniform.
+- **The preview now keeps shadows** (stage.ts), so judge your stills with PREVIEW=1 as before; then one full-quality
+  contact sheet (no PREVIEW) of 6 frames of your place at scale 0.4 to judge the final look.
+- Keep every rule and check from round 1 (timings, screen zones, module-load checks, 3-D audit clean). Edit only your own
+  files (+ cash.ts for the hook agent, + the HOOK_PHOTOS line in driver.tsx for the hook agent). Report in under 150 words.

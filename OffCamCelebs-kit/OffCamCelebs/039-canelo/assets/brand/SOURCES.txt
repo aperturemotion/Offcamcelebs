@@ -21,3 +21,8 @@ cut by tools/sfx_prep.py from assets/audio/sfx_src/sfx_spec_039.json; es_*.wav a
 - vib_glass: "cell phone vibrate glass_loopable.wav" by mobaudio, https://freesound.org/people/mobaudio/sounds/384487, CC0 1.0
 
 MUSIC: 031's bed ("A Good Man with a Broken Heart"), as 038.
+
+BANKNOTE ART (2026-11-23)
+- note100.jpg (assets/): "Obverse of the series 2009 $100 Federal Reserve Note.jpg", Wikimedia Commons; a work of the US
+  government (Bureau of Engraving and Printing), public domain. Shown as one face of bundled notes, never at true size
+  as a flat one-sided reproduction.
