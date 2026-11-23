@@ -72,6 +72,20 @@ Openverse for gaps; no ping; the chain only on bars, rarely; 7–14 dB under the
 (`tools/openverse_audio.py`, CC0 first) and check each cut with `earshot describe`, same levels and rules; say so in the report.
 The pack's `index.json` still says what each EarnEdits sound is, so the choices can be swapped back later.
 
+**Lessons from the first run (039 Canelo, 2026-11-23):**
+- Clone from the newest film in this style (038-mint-mobile: place modules, preview switch, SFX tools), leaving out
+  `node_modules`, `renders`, `.build`, `out`, then `npm install`. Its assets that git does not track are gone in a fresh
+  container: copy `assets/fonts`, `assets/vendor`, `assets/grain.png`, `assets/tex_worn.png` from `034-ohtani` (restored by
+  the bootstrap from the kit zip), and the bed from `031-musk/assets/audio/music_goodman_bed.wav` (039 shifted it so its drop,
+  at 5.45 s in the file, lands on the hook's big figure).
+- Plan places so every place has at least ~3.5 s of speech: a hand-over takes ~2 s, and a short place makes the next one
+  arrive after its first caption beat (the build refuses). 039 put the fairness beat inside the math place.
+- Run the VO pipeline with `/usr/local/bin/python3` (faster-whisper lives there); fw.py decodes through ffmpeg itself.
+- Give the place agents a fixed SFX palette (names + placeholder files made first with sfx_prep, then the real cuts), so they
+  build and score in parallel: see `039-canelo/scratchpad/AGENT_BRIEF.md` for the brief that worked (8 agents, ~30–45 min).
+- Look at a PREVIEW contact sheet of the whole film (every 45 frames) before the long checks: 039's verdict word landed too
+  small and was sent back.
+
 ## 4. Check (RULE 54 and the rest, all with canaries)
 
 tsc; build; `render.mjs --check`; the audit sweep (PEN/EDGES) on every frame; the viol sweep (CROSS/NEAR/BAND/CAPZONE, Reel
