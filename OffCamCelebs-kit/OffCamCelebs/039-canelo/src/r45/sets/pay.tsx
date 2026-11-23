@@ -4,7 +4,7 @@ import { Obj } from "../../audit/Probe";
 import { World, Light, alive, camView, type CamKey } from "../camera";
 import { View3D } from "../../three/View3D";
 import { project, type Eye } from "../../three/stage";
-import { payModel, PAY_FLOOR, CP, C1, C2, PRINT, poseC1, poseC2, sheetPt, corners, type PayTiming } from "../../three/props/pay";
+import { payModel, PAY_FLOOR, CP, C1, C2, PRINT, poseC1, poseC2, sheetPt, corners, padFar, type PayTiming } from "../../three/props/pay";
 import type { PlaceDef, PlaceSfx } from "../place";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -41,8 +41,8 @@ const C1MID = sheetPt(C1, { ...C1 }, C1.w / 2, C1.d / 2 - 30);
 const BOTH = sheetPt(C2, { ...C2 }, C2.w / 2, 10);
 const STORY: CamKey[] = [
   { at: -9999, ...aim(TITLE.x - 10, TITLE.h, TITLE.z, 1.62, 540, 1020), dur: 1 },   // close on the complaint's caption
-  { at: D35 - 16, ...aim(C1MID.x - 14, C1MID.h, C1MID.z, 1.2, 540, 1000), dur: 36 },  // "$35": back onto the big cheque
-  { at: D15 - 14, ...aim(BOTH.x + 64, BOTH.h, BOTH.z, 1.2, 540, 1214), dur: 36 },     // "$15": back over both cheques
+  { at: D35 - 16, ...aim(C1MID.x - 14, C1MID.h, C1MID.z, 1.2, 540, 1030), dur: 36 },  // "$35": back onto the big cheque
+  { at: D15 - 14, ...aim(BOTH.x + 64, BOTH.h, BOTH.z, 1.16, 540, 1226), dur: 36 },     // "$15": back over both cheques
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
 
@@ -54,9 +54,10 @@ const scr = (f: number, p: { x: number; h: number; z: number }) => {
 };
 const box = (s: { w: number; d: number }, b: readonly [number, number, number, number]) => [[b[0], b[1]], [b[2], b[1]], [b[2], b[3]], [b[0], b[3]]] as const;
 const BAD: string[] = [];
+const PADFAR = padFar();
 const bad = (m: string) => { BAD.push(m); };
 for (let f = cue(S, 0) - 6; f <= DONE + 44; f++) {
-  const tops = [...corners({ w: CP.w + 16, d: CP.d + 28 }, { ...REST, z: CP.z - 11 })];
+  const tops = [...corners({ w: CP.w + 16, d: CP.d + 28 }, { ...REST, z: CP.z - 11 }), ...PADFAR];
   const p1 = poseC1(T, f), p2 = poseC2(T, f);
   if (p1.visible) tops.push(...corners(C1, p1));
   if (p2.visible) tops.push(...corners(C2, p2));

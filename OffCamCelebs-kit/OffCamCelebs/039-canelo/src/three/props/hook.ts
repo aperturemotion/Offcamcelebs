@@ -21,25 +21,29 @@
 // THE LOOSE NOTES ("note-i"): single $100 notes, a little curled, lying on the stack's top before the punch.
 // THE TABLE (the floor): dark oiled walnut, falling into the dark ground away from its pool of light.
 // ══════════════════════════════════════════════════════════════════════════════════════════════
-import { THREE, mesh, paintTex, type Model } from "../stage";
-import { col, hash, fitFont, track, wire } from "../kit029";
-import { bundle, NOTE, BUNDLE_H } from "../cash";
+import { THREE, mesh, type Model } from "../stage";
+import { col, hash, wire } from "../kit029";
+import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
+import { makeBundle, makeBand, noteMaterials, BUNDLE, BAND_OUT, NOTE } from "./cash";
 
 // ══ DIMENSIONS (px; a $100 note is 156 mm = 240 px: 1.54 px per mm) ══════════════════════════════════
 export const KPX = NOTE.W / 156;
 /** g = 9.81 m/s² in px per PHYSICAL frame² */
 export const G = (9810 * KPX) / 900;
 /** a layer of the stack: a bundle and the air over it */
-export const LAYER = BUNDLE_H + 0.3;
-/** a bundle's half extents round its centre (its top notes' shifts and turns and the strap's loop included) */
-export const BH = { x: NOTE.W / 2 + 1.3, y: BUNDLE_H / 2, z: NOTE.D / 2 + 2.4 + 0.45 } as const;
-/** the hero brick: four bundles squared under one wide band (BAND.W wide, centred at BAND.X along the notes) */
-export const BAND = { W: 150, X: -30, T: 0.5 } as const;
-const HB_IN = NOTE.D / 2 + 2.4 + 0.45 + 0.3;                     // the band's inner half-depth (over the straps' loops)
-const HB_BOT = BAND.T + 0.15;                                     // the bottom bundle sits on the band's bottom run
-const HB_TOP = HB_BOT + 3 * LAYER + BUNDLE_H + 0.3;               // the band's top run, its underside
-export const HERO_H = HB_TOP + BAND.T;
-export const HH = { x: NOTE.W / 2 + 1.3, y: HERO_H / 2, z: HB_IN + BAND.T } as const;
+export const LAYER = BUNDLE.H + 0.3;
+/** a bundle's half extents round its centre (cash.ts: its sheets' shifts and turns, the strap's crinkled loop) */
+export const BH = { x: BUNDLE.HX, y: BUNDLE.H / 2, z: BUNDLE.HZ } as const;
+/** ★ the hero brick: four real bundles stacked a little out of square (HB_OFF), under one wide paper band (BAND.W, centred) */
+export const BAND = { W: 130, X: 0 } as const;
+/** the figure on the brick's band, printed across it */
+export const BAND_TEXT = "$365,000,000";
+const HB_OFF = Array.from({ length: 4 }, (_, k) => ({ dx: (hash(k, 1, 9) - 0.5) * 3.2, dz: (hash(k, 2, 9) - 0.5) * 2.4, yaw: (hash(k, 3, 9) - 0.5) * 0.02 }));
+const HB_IN = BUNDLE.HZ + 1.2 + 0.01 * NOTE.W / 2 + 0.4;         // the band's inner half-depth (clear of the four, out of square)
+const HB_BOT = 0.32 + 0.1;                                        // the bottom bundle sits on the band's bottom run
+const HB_TOP = HB_BOT + 3 * LAYER + BUNDLE.TOP_MID + 0.12;        // the band's top run, its underside
+export const HERO_H = Math.max(HB_TOP + BAND_OUT, HB_BOT + 3 * LAYER + BUNDLE.H);
+export const HH = { x: BUNDLE.HX + 1.6 + 0.01 * NOTE.D / 2, y: HERO_H / 2, z: HB_IN + BAND_OUT } as const;
 /** a loose note: its curl lifts its ends this much off its middle */
 export const CURL = 4;
 export const NH = { x: NOTE.W / 2, y: (CURL + 0.7) / 2, z: NOTE.D / 2 } as const;
@@ -79,7 +83,7 @@ export type Pose = { p: [number, number, number]; q: [number, number, number, nu
 export type BodyP = Pose & { vis: boolean };
 /** the stack, bottom to top: the BASE bundles (they stay), the STRUCK ones (in the glove's path: shot out left), the HERO,
  *  the TOP bundles; then the loose notes on top */
-export const N_BASE = 2, N_STRUCK = 12, N_TOP = 3, N_NOTES = 5;
+export const N_BASE = 2, N_STRUCK = 13, N_TOP = 3, N_NOTES = 5;
 /** cam: the camera · glove · bodies: every bundle (base, struck, top), in stack order · hero · notes · pads: contact
  *  shadows' strength under the hero and the landed bundles (0 … 1, per body: tops then hero) */
 export type HookP = {
@@ -176,53 +180,63 @@ const pooled = <T extends THREE.Material>(m: T, c: [number, number], r: [number,
   return m;
 };
 
-/** ★ the hero's band top: kraft mustard, its fibre, two rules, and the figure as large as the band allows (BAND.W along the
- *  notes = the text's run, × the band's depth) */
-const BAND_D = 2 * (HB_IN + BAND.T);
-export const BAND_TEXT = "$365,000,000";
-const bandTopTex = () => paintTex("hk39-band-v2", BAND.W, BAND_D, (g) => {
-  const W = BAND.W, D = BAND_D;
-  g.fillStyle = "#D9B44A"; g.fillRect(0, 0, W, D);
-  for (let i = 0; i < 900; i++) {
-    g.fillStyle = `rgba(${hash(i, 1, 7) > 0.5 ? "120,85,20" : "250,225,140"},${0.06 + hash(i, 2, 7) * 0.1})`;
-    g.fillRect(hash(i, 3, 7) * W, hash(i, 4, 7) * D, 0.4 + hash(i, 5, 7) * 3, 0.3);
-  }
-  g.fillStyle = "rgba(60,40,10,0.7)";
-  g.fillRect(0, 9, W, 0.8); g.fillRect(0, D - 9.8, W, 0.8);
-  g.fillStyle = "#24180A"; g.textAlign = "center"; g.textBaseline = "alphabetic";
-  track(g, 0);
-  const s = fitFont(g, 800, 40, BAND_TEXT, W - 12);
-  g.fillText(BAND_TEXT, W / 2, D / 2 + s * 0.36);
-}, 12);
-const bandSideTex = () => paintTex("hk39-band-side-v1", 64, 64, (g) => {
-  g.fillStyle = "#D9B44A"; g.fillRect(0, 0, 64, 64);
-  for (let i = 0; i < 200; i++) {
-    g.fillStyle = `rgba(${hash(i, 1, 8) > 0.5 ? "120,85,20" : "250,225,140"},${0.06 + hash(i, 2, 8) * 0.1})`;
-    g.fillRect(hash(i, 3, 8) * 64, hash(i, 4, 8) * 64, 0.4 + hash(i, 5, 8) * 3, 0.3);
-  }
-}, 4);
-
 // ══ THE GLOVE'S GEOMETRY ═══════════════════════════════════════════════════════════════════════════
 const sp = (a: number, e: number) => Math.sign(a) * Math.pow(Math.abs(a), e);
 /** the padded fist: a superellipsoid, fuller over the knuckle roll (top front), the curled fingers a little flatter under,
  *  tapering at the back into the cuff */
+/** a point of the fist's surface for a unit direction (ux along the punching axis, toward the cuff) */
+const fistPt = (ux: number, uy: number, uz: number): [number, number, number] => {
+  const back = Math.max(0, ux);
+  const taper = 1 - 0.16 * back * back * back;
+  const x = GL.A + GL.A * sp(ux, 0.78);
+  let y = GL.B * sp(uy, 0.82) * taper * (uy < 0 ? 0.93 : 1);
+  const z = GL.C * sp(uz, 0.84) * taper;
+  // the knuckle roll: the top front stands a little proud
+  if (uy > 0 && ux < 0.2) y += 7 * uy * (0.2 - ux) / 1.2;
+  return [x, y, z];
+};
 const fistGeo = () => {
   const g = new THREE.SphereGeometry(1, 96, 64);
   const p = g.attributes.position as THREE.BufferAttribute;
   for (let i = 0; i < p.count; i++) {
-    // the sphere's poles on ±x (the punching axis)
-    const ux = p.getY(i), uy = -p.getX(i), uz = p.getZ(i);   // a quarter turn about z (the winding kept)
-    const back = Math.max(0, ux);
-    const taper = 1 - 0.16 * back * back * back;
-    let x = GL.A + GL.A * sp(ux, 0.78);
-    let y = GL.B * sp(uy, 0.82) * taper * (uy < 0 ? 0.93 : 1);
-    const z = GL.C * sp(uz, 0.84) * taper;
-    // the knuckle roll: the top front stands a little proud
-    if (uy > 0 && ux < 0.2) y += 7 * uy * (0.2 - ux) / 1.2;
-    p.setXYZ(i, x, y, z);
+    // the sphere's poles on ±x (the punching axis): a quarter turn about z (the winding kept)
+    p.setXYZ(i, ...fistPt(p.getY(i), -p.getX(i), p.getZ(i)));
   }
   g.computeVertexNormals();
   return g;
+};
+/** the palm panel's seam: round the fist a little below its middle, from the cuff on one side, round the punching face, to
+ *  the cuff on the other; `lift` raises it off the surface along the direction (stitches ride beside the piping) */
+const seamPts = (uy: number, lift: number, n = 72): [number, number, number][] => {
+  const out: [number, number, number][] = [];
+  const r = Math.sqrt(1 - uy * uy);
+  for (let i = 0; i <= n; i++) {
+    const a = -2.2 + (4.4 * i) / n;                           // round the front (ux = −1 at a = 0)
+    const ux = -r * Math.cos(a), uz = r * Math.sin(a);
+    const p = fistPt(ux, uy, uz), q = fistPt(ux * 1.02, uy * 1.02, uz * 1.02);
+    const d = Math.hypot(q[0] - p[0], q[1] - p[1], q[2] - p[2]) || 1;
+    out.push([p[0] + ((q[0] - p[0]) / d) * lift, p[1] + ((q[1] - p[1]) / d) * lift, p[2] + ((q[2] - p[2]) / d) * lift]);
+  }
+  return out;
+};
+/** a row of stitches along a polyline: short thread dashes, merged into one geometry */
+const stitchGeo = (pts: [number, number, number][], dash = 3.4, gap = 2.6, r = 0.75) => {
+  const parts: THREE.BufferGeometry[] = [];
+  const P = pts.map((p) => new THREE.Vector3(...p));
+  let carry = 0;
+  for (let i = 0; i < P.length - 1; i++) {
+    const a = P[i], b = P[i + 1], L = a.distanceTo(b), dir = b.clone().sub(a).normalize();
+    for (let t = carry; t + dash <= L; t += dash + gap) {
+      const c = new THREE.CapsuleGeometry(r, dash - 2 * r, 2, 6);
+      c.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir));
+      const m = a.clone().addScaledVector(dir, t + dash / 2);
+      c.translate(m.x, m.y, m.z);
+      parts.push(c);
+      carry = t + dash + gap - L;
+    }
+    if (carry < 0) carry = 0;
+  }
+  return mergeGeometries(parts.map((g) => g.toNonIndexed()))!;
 };
 /** the cuff: an elliptical tube from inside the fist to its mouth (outer skin and the lining as one open tube each) */
 const tubeGeo = (x0: number, x1: number, ry: (x: number) => number, rz: (x: number) => number, inward = false) => {
@@ -244,8 +258,10 @@ const tubeGeo = (x0: number, x1: number, ry: (x: number) => number, rz: (x: numb
   g.computeVertexNormals();
   return g;
 };
-const cuffRY = (x: number) => GL.RY + 4 * Math.max(0, (x - 420) / 140);
-const cuffRZ = (x: number) => GL.RZ + 4 * Math.max(0, (x - 420) / 140);
+/** the cuff's padding swells a little between its seam and its mouth, and flares at the mouth */
+const cuffPad = (x: number) => 4.5 * Math.sin(Math.PI * Math.min(1, Math.max(0, (x - GL.CUFF0 - 60) / (GL.CUFF1 - GL.CUFF0 - 76))));
+const cuffRY = (x: number) => GL.RY + cuffPad(x) + 4 * Math.max(0, (x - 420) / 140);
+const cuffRZ = (x: number) => GL.RZ + cuffPad(x) * 0.8 + 4 * Math.max(0, (x - 420) / 140);
 /** the cuff's top surface height at (x, z) (where the laces lie) */
 const cuffTop = (x: number, z: number) => cuffRY(x) * Math.sqrt(Math.max(0, 1 - (z / cuffRZ(x)) ** 2));
 
@@ -288,8 +304,8 @@ export const hookModel = () => (): Model<HookP> => {
   world.add(glove);
   {
     const grain = grainTex();
-    const leather = new THREE.MeshPhysicalMaterial({ color: col("#B3161C"), roughness: 0.42, roughnessMap: grain, bumpMap: grain, bumpScale: 0.6,
-      metalness: 0, clearcoat: 0.55, clearcoatRoughness: 0.32, sheen: 0.35, sheenColor: col("#FF6A5A"), envMapIntensity: 0.7 });
+    const leather = new THREE.MeshPhysicalMaterial({ color: col("#A8141B"), roughness: 0.52, roughnessMap: grain, bumpMap: grain, bumpScale: 0.9,
+      metalness: 0, clearcoat: 0.32, clearcoatRoughness: 0.42, sheen: 0.3, sheenRoughness: 0.5, sheenColor: col("#FF7A66"), envMapIntensity: 0.6 });
     const leatherDk = new THREE.MeshPhysicalMaterial({ color: col("#8E1016"), roughness: 0.5, bumpMap: grain, bumpScale: 0.5, metalness: 0,
       clearcoat: 0.35, clearcoatRoughness: 0.4, envMapIntensity: 0.6 });
     const lining = new THREE.MeshStandardMaterial({ color: col("#1A1214"), roughness: 0.95, side: THREE.DoubleSide, envMapIntensity: 0.2 });
@@ -297,6 +313,11 @@ export const hookModel = () => (): Model<HookP> => {
     const lace = new THREE.MeshStandardMaterial({ color: col("#F4F2EC"), roughness: 0.8, envMapIntensity: 0.4 });
     const steel = new THREE.MeshPhysicalMaterial({ color: col("#C9CDD2"), metalness: 1, roughness: 0.3, envMapIntensity: 1 });
     glove.add(mesh(fistGeo(), leather));
+    // the palm panel's piping, and a row of stitches beside it; the thread is the leather's own, a shade lighter
+    const thread = new THREE.MeshStandardMaterial({ color: col("#E4D9C8"), roughness: 0.75, envMapIntensity: 0.3 });
+    glove.add(wire(seamPts(-0.2, 1.2), 2.6, leatherDk, false, 160));
+    glove.add(mesh(stitchGeo(seamPts(-0.12, 0.5)), thread));
+    glove.add(mesh(stitchGeo(seamPts(-0.28, 0.6)), thread));
     // the thumb: a padded capsule lying along the fist's near side, its tip stitched to the knuckle roll
     const th = mesh(new THREE.CapsuleGeometry(38, 128, 12, 32), leather);
     th.rotation.z = Math.PI / 2 + 0.08; th.rotation.y = 0.18;
@@ -312,6 +333,11 @@ export const hookModel = () => (): Model<HookP> => {
     const seam: [number, number, number][] = [];
     for (let j = 0; j <= 64; j++) { const a = (j / 64) * Math.PI * 2; seam.push([GL.CUFF0 + 70, (cuffRY(GL.CUFF0 + 70) + 0.6) * Math.cos(a), (cuffRZ(GL.CUFF0 + 70) + 0.6) * Math.sin(a)]); }
     glove.add(wire(seam, 2.2, leatherDk, true, 96));
+    for (const sx of [GL.CUFF0 + 80, GL.CUFF1 - 16]) {
+      const ring: [number, number, number][] = [];
+      for (let j = 0; j <= 96; j++) { const a = (j / 96) * Math.PI * 2; ring.push([sx, (cuffRY(sx) + 0.35) * Math.cos(a), (cuffRZ(sx) + 0.35) * Math.sin(a)]); }
+      glove.add(mesh(stitchGeo(ring), thread));
+    }
     // the lacing: a darker tongue down the cuff's top, two rows of steel eyelets, white laces criss-crossing through them
     const tongue = new THREE.Group();
     for (let k = 0; k < 14; k++) {
@@ -351,8 +377,8 @@ export const hookModel = () => (): Model<HookP> => {
   for (let i = 0; i < nB; i++) {
     const outer = new THREE.Group();
     outer.matrixAutoUpdate = false;
-    const b = bundle(40 + i * 3, hash(i, 7, 3) > 0.6, { plain: true });
-    b.position.y = -BUNDLE_H / 2;                       // its pose is its centre's
+    const b = makeBundle({ seed: 40 + i * 3, flip: hash(i, 7, 3) > 0.6, strap: "" });   // ★ plain straps: no figure before 2 s
+    b.position.y = -BUNDLE.H / 2;                       // its pose is its centre's
     outer.add(b);
     outer.userData.obj = `bundle-${i}`;
     world.add(outer);
@@ -372,33 +398,21 @@ export const hookModel = () => (): Model<HookP> => {
     inner.position.y = -HERO_H / 2;
     hero.add(inner);
     for (let k = 0; k < 4; k++) {
-      const b = bundle(90 + k * 5, k % 2 === 1, { plain: true });
-      b.position.set((hash(k, 1, 9) - 0.5) * 1.6, HB_BOT + k * LAYER, (hash(k, 2, 9) - 0.5) * 1.2);
-      b.rotation.y = (hash(k, 3, 9) - 0.5) * 0.008;
+      const b = makeBundle({ seed: 90 + k * 5, flip: k % 2 === 1, strap: "" });
+      b.position.set(HB_OFF[k].dx, HB_BOT + k * LAYER, HB_OFF[k].dz);
+      b.rotation.y = HB_OFF[k].yaw;
       inner.add(b);
     }
-    // the band: one loop round the four (top, bottom and both sides), its top printed
-    const side = new THREE.MeshStandardMaterial({ map: bandSideTex(), roughness: 0.8, envMapIntensity: 0.35 });
-    const top = new THREE.MeshStandardMaterial({ map: bandTopTex(), roughness: 0.78, envMapIntensity: 0.35 });
-    const W = BAND.W, T = BAND.T, Z = HB_IN;
-    const part = (w: number, h: number, d: number, x: number, y: number, z: number, m: THREE.Material | THREE.Material[]) => {
-      const g = new THREE.BoxGeometry(w, h, d);
-      g.translate(x, y, z);
-      inner.add(mesh(g, m));
-    };
-    part(W, T, 2 * (Z + T), BAND.X, T / 2, 0, side);
-    part(W, T, 2 * (Z + T), BAND.X, HB_TOP + T / 2, 0, [side, side, top, side, side, side]);
-    part(W, HB_TOP - T, T, BAND.X, T + (HB_TOP - T) / 2, Z + T / 2, side);
-    part(W, HB_TOP - T, T, BAND.X, T + (HB_TOP - T) / 2, -Z - T / 2, side);
+    // the band: one crinkled loop round the four, its figure printed across its top
+    inner.add(makeBand({ w: BAND.W, zIn: HB_IN, yTop: HB_TOP, text: BAND_TEXT, across: true, seed: 7 }));
   }
   const heroPad = pad(NOTE.W * 1.2, NOTE.D * 1.36);
 
   // ══ THE LOOSE NOTES ══
-  const tmp = bundle(1, false, { plain: true });
-  const noteMats = ((tmp.children[0] as THREE.Group).children[1] as THREE.Mesh).material as THREE.Material[];
+  const noteMats = noteMaterials();
   const noteGeo = () => {
     // a curled sheet: its ends lift CURL off its middle; the face up, the back down, its thin edge round it
-    const sx = 24, sz = 4, NT = 0.6;
+    const sx = 24, sz = 4, NT = 0.25;
     const pos: number[] = [], uv: number[] = [], idx: number[] = [];
     const yAt = (x: number) => CURL * (x / (NOTE.W / 2)) ** 2;
     const groups: [number, number, number][] = [];

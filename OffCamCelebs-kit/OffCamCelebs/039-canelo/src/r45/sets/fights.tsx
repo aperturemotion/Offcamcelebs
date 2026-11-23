@@ -5,7 +5,7 @@ import { Obj } from "../../audit/Probe";
 import { World, Light, alive, camView, type CamKey } from "../camera";
 import { View3D } from "../../three/View3D";
 import { project } from "../../three/stage";
-import { fightsModel, FG, TK, TICKETS, TK_LIFT, CAL, CAL_PRINT, type FightsP, type TicketPose } from "../../three/props/fights";
+import { fightsModel, ropeModel, FG, TK, TK_TOP, TICKETS, TK_LIFT, CAL, CAL_TOP, CAL_PRINT, ROPE, type FightsP, type TicketPose } from "../../three/props/fights";
 import type { PlaceDef, PlaceSfx } from "../place";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -13,6 +13,8 @@ import type { PlaceDef, PlaceSfx } from "../place";
 //  0 "He fought three times under the deal." The crane brings the canvas in; one by one, three fight tickets are tossed in
 //    from beyond the frame's edges, land flat and skid to rest in a column: ÁLVAREZ vs FIELDING DEC 15 2018, ÁLVAREZ vs
 //    JACOBS MAY 4 2019, ÁLVAREZ vs KOVALEV NOV 2 2019 (the last lands as "deal" ends).
+//  The ring's bottom rope crosses the foot of the frame close to the lens, out of focus (its own blurred view): the scale of
+//  a real ring, and depth as the camera travels (it slides past faster than the canvas).
 //  1 "Then, in 2020, no fights at all." On "Then" the camera travels right along the canvas, and a wall calendar's 2020 page
 //    swings in from beyond the right edge and lands on "2020": twelve months, every day printed, none marked. On "no fights
 //    at all" the camera pushes in on the empty months.
@@ -84,11 +86,14 @@ const cornersOf = (cx: number, cz: number, yawDeg: number, w: number, d: number,
   for (let f = LANDED; f <= END; f++) {
     const p = paramsAt(f);
     const items: { name: string; pts: [number, number, number][]; rest: boolean }[] = [];
-    TICKETS.forEach((t, i) => { const q = p.t[i]; if (q.show) items.push({ name: `ticket ${i + 1}`, pts: cornersOf(t.x + q.dx, t.z + q.dz, t.yaw + q.yaw, TK.W, TK.D, FG.matT + TK_LIFT + q.h + 4), rest: f >= TOSS[i][2] }); });
-    if (p.cal.show) items.push({ name: "the 2020 page", pts: cornersOf(CAL.x + p.cal.dx, CAL.z, CAL.yaw + p.cal.yaw, CAL.W, CAL.D, FG.matT + p.cal.h + 8), rest: f >= CAL_T[2] });
+    TICKETS.forEach((t, i) => { const q = p.t[i]; if (q.show) items.push({ name: `ticket ${i + 1}`, pts: cornersOf(t.x + q.dx, t.z + q.dz, t.yaw + q.yaw, TK.W, TK.D, FG.matT + TK_LIFT + q.h + TK_TOP), rest: f >= TOSS[i][2] }); });
+    if (p.cal.show) items.push({ name: "the 2020 page", pts: cornersOf(CAL.x + p.cal.dx, CAL.z, CAL.yaw + p.cal.yaw, CAL.W, CAL.D, FG.matT + p.cal.h + CAL_TOP), rest: f >= CAL_T[2] });
     const edge: [number, number, number][] = [];
     for (let x = FG.matX0; x <= FG.matX1; x += 50) edge.push([x, FG.matT + 6, FG.matZ0 - 7]);
     items.push({ name: "the canvas's far edge", pts: edge, rest: false });
+    const rope: [number, number, number][] = [];
+    for (let k = 0; k <= 20; k++) { const t = k / 20; rope.push([ROPE.a[0] + (ROPE.b[0] - ROPE.a[0]) * t, ROPE.a[1] + ROPE.r + (ROPE.b[1] - ROPE.a[1]) * t, ROPE.a[2] + (ROPE.b[2] - ROPE.a[2]) * t]); }
+    items.push({ name: "the rope", pts: rope, rest: false });
     for (const it of items) for (const [x, h, z] of it.pts) {
       const s = screenOf(f, x, h, z);
       if (s.x < -40 || s.x > 1120) continue;
@@ -114,6 +119,7 @@ const cornersOf = (cx: number, cz: number, yawDeg: number, w: number, d: number,
 }
 
 const FIGHTS3D = fightsModel();
+const ROPE3D = ropeModel();
 const rectAt = (f: number) => {
   const v = camView(CAM, f), m = 240 / v.z;
   const x0 = v.x - 540 / v.z - m, x1 = v.x + 540 / v.z + m;
@@ -127,6 +133,9 @@ const Comp: React.FC<{ f: number }> = ({ f }) => (
     <World keys={CAM} f={f}>
       <Obj s={S} g="canvas">
         <View3D name="fights" rect={rectAt(f)} eye={eyeOf(camView(CAM, f))} make={FIGHTS3D} params={paramsAt(f)} />
+      </Obj>
+      <Obj s={S} g="rope">
+        <View3D name="fights-rope" rect={rectAt(f)} eye={eyeOf(camView(CAM, f))} make={ROPE3D} params={{}} />
       </Obj>
     </World>
   </>

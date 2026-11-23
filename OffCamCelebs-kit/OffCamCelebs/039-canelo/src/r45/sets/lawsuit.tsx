@@ -5,7 +5,7 @@ import { Obj } from "../../audit/Probe";
 import { World, Light, alive, camView, camMoving, type CamKey } from "../camera";
 import { View3D } from "../../three/View3D";
 import { project } from "../../three/stage";
-import { lawsuitModel, LG, CP, CT, EN, CPRINT, KPRINT, STACK_H, PIVOT, onComplaint, type LawP } from "../../three/props/lawsuit";
+import { lawsuitModel, LG, CP, CT, EN, ENV_BASE, CPRINT, KPRINT, STACK_H, CLIP_TOP, PIVOT, onComplaint, type LawP } from "../../three/props/lawsuit";
 import type { PlaceDef, PlaceSfx } from "../place";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -17,8 +17,9 @@ import type { PlaceDef, PlaceSfx } from "../place";
 //    LEAST / $280,000,000. What HE filed: no court's mark, nothing that says who was right.
 //  1 "By November, they had agreed to part ways." The camera travels right to the PROMOTIONAL & BROADCAST AGREEMENT lying on
 //    the table (DAZN and GOLDEN BOY on the left, ÁLVAREZ on the right). On "agreed" it tears between the parties: the halves
-//    turn apart from the far edge as the tear runs down the sheet, and on "part ways" slide apart.
-//  2 "The terms were never made public." A plain sealed kraft envelope slides in from the right over the torn halves' TERMS
+//    turn apart from the far edge as the tear runs down the sheet (a white fibrous lip following it), their torn edges
+//    curling up a little, and on "part ways" slide apart.
+//  2 "The terms were never made public." A plain sealed kraft envelope (puffed, its flap glued) slides in from the right over the torn halves' TERMS
 //    and settles on them (the parties' names stay readable above it).
 // ═══════════════════════════════════════════════════════════════════════════
 const S = "lawsuit" as const;
@@ -53,7 +54,10 @@ const phiAt = (f: number) => PHI * EXIT(clamp01((f - TEAR[0]) / (TEAR[1] - TEAR[
 /** one sheet until the tear starts (the halves abut exactly), then a hair apart as it runs, then the slide */
 const sepAt = (f: number) => (f < TEAR[0] ? 0 : 0.6 + SEP * GLIDE(clamp01((f - SPLIT[0]) / (SPLIT[1] - SPLIT[0]))));
 const envAt = (f: number) => (f < ENV_IN[0] ? null : ENV0 * (1 - GLIDE(clamp01((f - ENV_IN[0]) / (ENV_IN[1] - ENV_IN[0])))));
-const paramsAt = (f: number): LawP => ({ stack: stackAt(f), phi: phiAt(f), sep: sepAt(f), env: envAt(f) });
+/** the tear's front runs down the sheet over the tear (page y; −1 before it starts); the torn edges curl as the halves part */
+const frontAt = (f: number) => (f < TEAR[0] ? -1 : CT.D * clamp01((f - TEAR[0] + 1) / (TEAR[1] - TEAR[0])));
+const curlAt = (f: number) => Math.round(100 * clamp01((f - TEAR[0]) / (SPLIT[1] - TEAR[0])) ** 0.7) / 100;
+const paramsAt = (f: number): LawP => ({ stack: stackAt(f), phi: phiAt(f), sep: sepAt(f), front: frontAt(f), curl: curlAt(f), env: envAt(f) });
 
 // ── the camera: the eye rides with the view, up and a little to the right, looking ~40° down onto the table (steeper than
 //    038's desk: this place is read off its pages) ──
@@ -82,7 +86,7 @@ const onContract = (px: number, py: number, f: number, side?: -1 | 1) => {
 };
 const onEnvelope = (ex: number, ez: number, f: number) => {
   const r = rot(ex - EN.W / 2, ez - EN.D / 2, (EN.yaw * Math.PI) / 180);
-  return { x: LG.contract.x + EN.x + (envAt(f) ?? 0) + r.x, h: CT.T + 0.3 + EN.T, z: LG.contract.z + EN.z + r.z };
+  return { x: LG.contract.x + EN.x + (envAt(f) ?? 0) + r.x, h: ENV_BASE + EN.T + EN.P, z: LG.contract.z + EN.z + r.z };
 };
 const KT_TOPS = [onContract(0, 0, DONE, -1), onContract(CT.W, 0, DONE, 1), onContract(CT.W / 2 - 30, 0, DONE, -1), onContract(CT.W / 2 + 30, 0, DONE, 1)];
 /** ★ the highest framing at `zoom` that puts `p` on the frame's centre line and keeps every point of `tops` at or below y
@@ -96,7 +100,8 @@ const highest = (p: { x: number; y: number; z: number }, zoom: number, tops: { x
 };
 const Z = { page: 1.15, fig: 1.45, torn: 1.28, env: 1.34 } as const;
 const KCP = { x: KC.x, y: CT.T, z: KC.z };
-const CP_TOPS = [onComplaint(0, -6), onComplaint(CP.W, -6)].map((q) => ({ x: q.x, h: STACK_H + 5, z: q.z }));
+const CP_TOPS = [...[onComplaint(0, -6), onComplaint(CP.W, -6)].map((q) => ({ x: q.x, h: STACK_H + 5, z: q.z })),
+  ...[onComplaint(CP.W / 2 - 66, -4), onComplaint(CP.W / 2 + 66, -4)].map((q) => ({ x: q.x, h: CLIP_TOP, z: q.z }))];
 const STORY: CamKey[] = [
   { at: -9999, ...highest(PAGE, Z.page, CP_TOPS, 690), dur: 1 },                 // the complaint's whole first page
   { at: FIG - 8, ...highest(FIGP, Z.fig, CP_TOPS, 698, 520), dur: 32 },           // "$280": in on the claim
@@ -110,6 +115,7 @@ const LANDED = SLIDE[1];
 {
   const tops = (f: number) => {
     const cps = [onComplaint(0, 0), onComplaint(CP.W, 0)].map((p) => ({ x: p.x, h: STACK_H + 5, z: p.z }));
+    for (const px of [CP.W / 2 - 66, CP.W / 2 + 66]) { const q = onComplaint(px, -4); cps.push({ x: q.x, h: CLIP_TOP, z: q.z }); }
     const ks = [onContract(0, 0, f, -1), onContract(CT.W, 0, f, 1), onContract(CT.W / 2 - 40, 0, f, -1), onContract(CT.W / 2 + 40, 0, f, 1)];
     const es = envAt(f) === null ? [] : [onEnvelope(0, 0, f), onEnvelope(EN.W, 0, f)];
     return [...cps, ...ks, ...es];

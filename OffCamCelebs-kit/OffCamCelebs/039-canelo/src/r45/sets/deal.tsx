@@ -5,7 +5,7 @@ import { Obj } from "../../audit/Probe";
 import { World, Light, alive, camView, type CamKey } from "../camera";
 import { View3D } from "../../three/View3D";
 import { project } from "../../three/stage";
-import { dealModel, DG, PG, Y_COVER, NS, TPRINT, RPRINT, onPage, sigAt, coverProfile, PEN_DIR, PEN_L, type DealP } from "../../three/props/deal";
+import { dealModel, DG, PG, PAD, DOC_Y, T_STACK, HX, Y_COVER, NS, TPRINT, RPRINT, onPage, sigAt, coverProfile, PEN_DIR, PEN_L, type DealP } from "../../three/props/deal";
 import type { PlaceDef, PlaceSfx } from "../place";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -52,11 +52,13 @@ const penAt = (f: number): [number, number, number] | null => {
 };
 void SIG0; void SIG1;
 const sigAtF = (f: number) => (f < SIGN[0] ? 0 : INOUT(clamp01((f - SIGN[0]) / (SIGN[1] - SIGN[0]))));
-const docDxAt = (f: number) => 1150 * (1 - GLIDE(clamp01((f - SLIDE[0]) / (SLIDE[1] - SLIDE[0]))));
+const docDxAt = (f: number) => 820 * (1 - GLIDE(clamp01((f - SLIDE[0]) / (SLIDE[1] - SLIDE[0]))));
 const docYawAt = (f: number) => -7 * (1 - GLIDE(clamp01((f - SLIDE[0]) / (SLIDE[1] - SLIDE[0]))));
 const turnAt = (f: number) => INOUT(clamp01((f - FLIP[0]) / (FLIP[1] - FLIP[0])));
 const yawAt = (f: number) => 1.6 - 3.2 * ramp(f, cue(S, 0), END + 40, TRAVEL);
-const paramsAt = (f: number): DealP => ({ docDx: docDxAt(f), docYaw: docYawAt(f), turn: turnAt(f), sig: sigAtF(f), pen: penAt(f), yaw: yawAt(f) });
+/** the fresh ink is wet while it goes down, and dries back to matte over 50 f */
+const wetAt = (f: number) => (f < SIGN[0] ? 0 : f <= SIGN[1] ? 1 : 1 - clamp01((f - SIGN[1]) / 50));
+const paramsAt = (f: number): DealP => ({ docDx: docDxAt(f), docYaw: docYawAt(f), turn: turnAt(f), sig: sigAtF(f), wet: wetAt(f), pen: penAt(f), yaw: yawAt(f) });
 
 // ── the scene's own transforms, for the checks: the contract's slide and turn, then the scene's yaw about its pivot ──
 const toScene = (x: number, h: number, z: number, f: number) => {
@@ -85,7 +87,7 @@ const aimTop = (zoom: number, top: number, py: number, dx = 0) => {
   const P = onPage(PG.W / 2 + dx, py);
   let sy = 960, v = aim(P.x, P.y, P.z, zoom, 540, sy);
   for (let i = 0; i < 20; i++) {
-    const e = eyeOf(v), q = project(e, FAR.x, DG.floor - PG.BACK - PG.T, FAR.z);
+    const e = eyeOf(v), q = project(e, FAR.x, DG.floor - DOC_Y - PG.BACK - T_STACK, FAR.z);
     sy += top - (960 + (q.y - v.y) * zoom);
     v = aim(P.x, P.y, P.z, zoom, 540, sy);
   }
@@ -109,9 +111,10 @@ const screenOf = (f: number, p: { x: number; y: number; z: number }) => {
 {
   for (let f = cue(S, 0) - 6; f <= DONE + 44; f++) {
     const pts: { x: number; y: number; z: number }[] = [];
-    for (const sx of [-1, 1]) pts.push(docPt(sx * (PG.W / 2 + PG.BX), PG.BACK + PG.T, -PG.D / 2 - PG.BTOP, f));
-    const { X, Y } = coverProfile(turnAt(f));
-    for (let i = 0; i <= NS; i += 4) pts.push(docPt(-PG.W / 2 + X[i], Y_COVER + Y[i] + 0.3, -PG.D / 2, f));
+    for (const sx of [-1, 1]) pts.push(docPt(sx * (PG.W / 2 + PG.BX), DOC_Y + PG.BACK + T_STACK, -PG.D / 2 - PG.BTOP, f));
+    const { X, Y } = coverProfile(turnAt(f), -0.5);
+    for (let i = 0; i <= NS; i += 4) pts.push(docPt(-PG.W / 2 + HX + X[i], DOC_Y + Y_COVER + Y[i] + 0.3, -PG.D / 2, f));
+    for (let x = PAD.x0; x <= PAD.x1; x += 60) pts.push(toScene(x, PAD.H, PAD.z0, f));
     const pen = penAt(f);
     if (pen) pts.push(toScene(pen[0] + PEN_DIR.x * PEN_L, pen[1] + PEN_DIR.y * PEN_L, pen[2] + PEN_DIR.z * PEN_L, f));
     for (const p of pts) {

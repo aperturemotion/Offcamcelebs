@@ -10,7 +10,7 @@ import { setFrame } from "../shim/remotion";
 import { Layer, layerSpecs } from "./film";
 import { beginFrame, endFrame, setLayer, loadFonts, loadImages } from "../three/stage";
 /** ★ (032) photos printed INTO 3-D textures are decoded before the first frame; 033 prints none (kept for the next film) */
-const HOOK_PHOTOS: string[] = ["assets/canelo_face.png"];   // ★ 039: his photo (Wikimedia Commons, Box Azteca, CC BY 3.0; assets/brand/SOURCES.txt), textured onto a 3-D object
+const HOOK_PHOTOS: string[] = ["assets/canelo_face.png", "assets/note100.jpg"];   // ★ 039: his photo (Wikimedia Commons, Box Azteca, CC BY 3.0; assets/brand/SOURCES.txt), textured onto a 3-D object
 import { PHOTO_FILE, HAS_PHOTO } from "../audit/data";
 
 const FPS = 30;

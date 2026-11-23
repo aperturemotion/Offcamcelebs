@@ -155,7 +155,7 @@ const BASE: V3[] = Array.from({ length: N_BASE }, (_, i) => [jit(i).dx, yBundle(
 // neighbour above or below them), each rising a little faster than the one under it
 const STRUCK: Fl[] = Array.from({ length: N_STRUCK }, (_, k) => {
   const i = N_BASE + k, j = jit(i);
-  return { he: BHE, p0: [j.dx, yBundle(i), j.dz], yaw0: j.yaw, t0: TAU_I, v: [-(252 + 26 * hash(k, 1, 6)), 26 + 4.2 * k, 12 + 46 * hash(k, 2, 6)],
+  return { he: BHE, p0: [j.dx, yBundle(i), j.dz], yaw0: j.yaw, t0: TAU_I, v: [-(252 + 26 * hash(k, 1, 6)), 24 + 3.8 * k, 12 + 46 * hash(k, 2, 6)],
     axis: [0, 1, 0], turn: (hash(k, 3, 6) > 0.5 ? 1 : -1) * (0.03 + 0.05 * hash(k, 4, 6)), ramp: 0.6 };
 });
 // the hero brick: lifted, end over end once, landing band up behind the base
