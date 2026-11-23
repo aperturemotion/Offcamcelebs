@@ -113,7 +113,7 @@ const keyOn = (a: [number, number, number], sx: number, sy: number, z: number) =
 const BASE = TIE + BL.LS + BL.KN;
 const T_PRINT = Math.acos(1 - (2 * PRINT.y) / BL.HB);
 const K0 = keyOn([0, BASE + PRINT.y, balloonAt(T_PRINT)[0]], 540, 1050, 1.45);   // close on the print: $365M
-const K1 = keyOn([0, BASE + BL.HB, 0], 540, 704, 1.0);                           // the whole object: balloon, plinth, plate
+const K1 = keyOn([0, BASE + BL.HB, 0], 540, 694, 1.0);                           // the whole object: balloon, plinth, plate
 const STORY: CamKey[] = [
   { at: -9999, ...K0, dur: 1 },
   { at: C1 - 6, ...K1, dur: 40 },   // "Our rating": ease back to the whole object as the plate tips

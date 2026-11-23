@@ -19,7 +19,7 @@ import { M, rad, hash, col, rbox, fitFont, track } from "../kit029";
 /** the plinth: a kick plinth, then the walnut body; its top at TOP */
 export const PL = { w: 780, d: 300, kick: 14, kickIn: -8, top: 200 } as const;
 /** the balloon: body height HB, its widest radius RB; the knot KN tall; the string LS long from the eye's tie */
-export const BL = { HB: 400, RB: 178, KN: 22, LS: 140 } as const;
+export const BL = { HB: 384, RB: 172, KN: 22, LS: 140 } as const;
 /** the brass eye on the plinth's top: its base disc, the ring's centre; the tie (the string's foot, inside the ring's tube) */
 const EYE_BASE = 3, EYE_R = 8.5, EYE_T = 2.4;
 export const TIE = PL.top + EYE_BASE + EYE_R + 1.2 + EYE_R - 2;
