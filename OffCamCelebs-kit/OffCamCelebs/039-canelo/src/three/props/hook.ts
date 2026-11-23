@@ -24,7 +24,7 @@
 import { THREE, mesh, type Model } from "../stage";
 import { col, hash, wire } from "../kit029";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { makeBundle, makeBand, noteMaterials, BUNDLE, BAND_OUT, NOTE } from "./cash";
+import { makeBundle, makeBand, noteMaterials, keepFresh, BUNDLE, BAND_OUT, NOTE } from "./cash";
 
 // ══ DIMENSIONS (px; a $100 note is 156 mm = 240 px: 1.54 px per mm) ══════════════════════════════════
 export const KPX = NOTE.W / 156;
@@ -398,7 +398,7 @@ export const hookModel = () => (): Model<HookP> => {
     inner.position.y = -HERO_H / 2;
     hero.add(inner);
     for (let k = 0; k < 4; k++) {
-      const b = makeBundle({ seed: 90 + k * 5, flip: k % 2 === 1, strap: "" });
+      const b = makeBundle({ seed: 90 + k * 5, flip: k === 1, strap: "" });   // the top one reads the right way up
       b.position.set(HB_OFF[k].dx, HB_BOT + k * LAYER, HB_OFF[k].dz);
       b.rotation.y = HB_OFF[k].yaw;
       inner.add(b);
@@ -445,7 +445,7 @@ export const hookModel = () => (): Model<HookP> => {
     const n = new THREE.Group();
     n.matrixAutoUpdate = false;
     n.userData.obj = `note-${i}`;
-    n.add(mesh(ng, [noteMats[0], noteMats[1]]));
+    n.add(keepFresh(mesh(ng, [noteMats[0], noteMats[1]])));
     world.add(n);
     notes.push(n);
   }

@@ -17,7 +17,7 @@
 // `makeBand` wraps a paper band round any stack (a brick of bundles), printed the same way.
 // Units: world px, a note 240 px long (x) × 102 px wide (z); a bundle's origin is the centre of its underside.
 // ══════════════════════════════════════════════════════════════════════════════════════════════
-import { THREE, mesh, paintTex, imageOf } from "../stage";
+import { THREE, mesh, paintTex as paintTex0, imageOf, imagesReady, fontsReady } from "../stage";
 import { hash, fitFont, track } from "../kit029";
 
 /** a note: its length (x) and width (z), 156 × 66.3 mm */
@@ -54,6 +54,23 @@ export const BAND_OUT = ST + CRINKLE + 0.02;
 export const BUNDLE_H = BUNDLE.H;
 
 // ══ TEXTURES ══
+/** ★ every texture here is painted again until the note's art and the fonts have loaded (paintTex keeps a texture painted
+ *  too early and repaints it only when asked): each one is remembered, and `refresh` (run before every draw of a bundle, a
+ *  band or a loose note) asks again until all are final, then never again */
+const repaints = new Map<string, () => void>();
+let final = false;
+const paintTex = (key: string, w: number, h: number, draw: (g: CanvasRenderingContext2D) => void, scale = 2) => {
+  repaints.set(key, () => paintTex0(key, w, h, draw, scale));
+  return paintTex0(key, w, h, draw, scale);
+};
+const refresh = () => {
+  if (final) return;
+  const ready = imagesReady() && fontsReady() && imageOf(FACE_SRC).naturalWidth > 0;
+  for (const r of repaints.values()) r();
+  if (ready) final = true;
+};
+/** run `refresh` whenever this mesh is drawn (until every texture is final) */
+const refreshing = <T extends THREE.Object3D>(o: T) => { o.onBeforeRender = () => refresh(); return o; };
 const FACE_SRC = "assets/note100.jpg";
 /** the note's face: the real art (1200 × 505), with a whisper of paper fibre over it */
 const faceTex = (dark: boolean) => paintTex(dark ? "cash39-face-dark-v1" : "cash39-face-v1", 600, 255, (g) => {
@@ -117,11 +134,13 @@ const materials = () => {
 };
 /** a loose note's materials: [face, back] (the face reads from +y) */
 export const noteMaterials = () => { const m = materials(); return [m.face, m.back] as THREE.Material[]; };
+/** a loose note's mesh: keep its art fresh (see `refresh`) */
+export const keepFresh = refreshing;
 /** the edge paper's material (vertex-coloured: give a geometry a `color` attribute) */
 export const edgeMaterial = () => materials().edge;
 
 // ══ THE STACK OF NOTES (a variant: one merged geometry of edges and inner sheets, the top face, the bottom face) ══
-const EDGE_TONES: [number, number, number][] = [[0.93, 0.93, 0.88], [0.9, 0.91, 0.85], [0.84, 0.88, 0.8], [0.78, 0.8, 0.74], [0.95, 0.94, 0.9], [0.72, 0.78, 0.7]];
+const EDGE_TONES: [number, number, number][] = [[0.86, 0.86, 0.8], [0.82, 0.84, 0.77], [0.74, 0.8, 0.7], [0.66, 0.69, 0.63], [0.88, 0.87, 0.82], [0.6, 0.68, 0.58]];
 type Variant = { edges: THREE.BufferGeometry; top: THREE.BufferGeometry; bottom: THREE.BufferGeometry };
 const variants = new Map<number, Variant>();
 const variant = (seed: number): Variant => {
@@ -270,7 +289,7 @@ export const makeBand = (o: { w: number; zIn: number; yTop: number; text?: strin
   const text = o.text ?? "";
   const key = o.key ?? `cash39-strap-${Math.round(o.w)}-${Math.round(L)}-${text}-${o.across ? "x" : "l"}`;
   const m = new THREE.MeshStandardMaterial({ map: strapTex(key, L, o.w, text, topSpan, !!o.across), roughness: 0.86, metalness: 0, envMapIntensity: 0.3, side: THREE.DoubleSide });
-  const band = mesh(g, m);
+  const band = refreshing(mesh(g, m));
   band.userData.bandTop = yt + t + CRINKLE;
   return band;
 };
@@ -283,7 +302,7 @@ export const makeBundle = (o: { seed?: number; strap?: string; flip?: boolean } 
   const b = new THREE.Group();
   b.userData.unit = true;
   b.add(mesh(v.edges, m.edge));
-  b.add(mesh(v.top, m.face));
+  b.add(refreshing(mesh(v.top, m.face)));
   b.add(mesh(v.bottom, m.faceDark));
   b.add(makeBand({ w: SW, zIn: STRAP_Z_IN, yTop: STRAP_TOP_IN, text: o.strap ?? "$10,000", seed: seed * 1.37 + 0.5 }));
   if (o.flip) b.rotation.y = Math.PI;

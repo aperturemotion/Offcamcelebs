@@ -525,8 +525,9 @@ export const champModel = (T: BeltT) => (): Model<ChampP> => {
     yg.add(flat(octShape(BT.SPW, BT.SPD, SOCT_C), BT.SPT, 2.5, [sideBase[k], sideEdge[k]]));
     const pnl = flat(octShape(SPW_I, SPD_I, SOCT_C - 8), BT.SPI, 1.2, [sideMats[k], sideEdge[k]]);
     pnl.position.y += BT.SPT; yg.add(pnl);
-    for (const [x, z] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
-      const rv = mesh(rivG, sideEdge[k]); rv.scale.set(1, 0.6, 1); rv.position.set(x * (BT.SPW / 2 - 7), BT.SPT - 0.2, z * (BT.SPD / 2 - 7)); yg.add(rv);
+    // four rivets on the rim, mid-side (between the raised panel and the base's bevel)
+    for (const [x, z] of [[-(BT.SPW / 2 - 6), 0], [BT.SPW / 2 - 6, 0], [0, -(BT.SPD / 2 - 6)], [0, BT.SPD / 2 - 6]]) {
+      const rv = mesh(rivG, sideEdge[k]); rv.scale.set(1, 0.6, 1); rv.position.set(x, BT.SPT - 0.3, z); yg.add(rv);
     }
   });
   // its soft contact pool on the table

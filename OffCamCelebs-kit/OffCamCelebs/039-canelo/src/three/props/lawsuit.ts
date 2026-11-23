@@ -4,8 +4,8 @@
 // floor: its soft shadows), three real things. ★ ROUND 2 (Timur, 2026-11-23: "the 3d visuals need to be more realistic"):
 //   · THE COMPLAINT: a real bound bundle of filed court papers: three squared signatures of sheets (each a little off the
 //     one under it, their cut edges showing the pages as uneven lines), a slight fan of loose sheets on top pivoting on a
-//     black enamelled steel BINDER CLIP at the head (its jaw, rolled channel and two bright steel wire handles, one folded
-//     flat over the page, one folded back behind the spine). Its top page is the complaint's first page on pleading paper:
+//     black enamelled steel BINDER CLIP at the head (its spine, sloping jaw, rolled channel and a bright steel wire
+//     handle folded flat over the page). Its top page is the complaint's first page on pleading paper:
 //     numbered lines, ruled margin, UNITED STATES DISTRICT COURT, the caption SAÚL ÁLVAREZ, Plaintiff, v. DAZN, GOLDEN BOY
 //     PROMOTIONS and OSCAR DE LA HOYA, Defendants (the voice's order), COMPLAINT, and the claim DAMAGES OF AT LEAST /
 //     $280,000,000, large. It is what HE filed: no court's mark, no stamp, nothing that says who was right.
@@ -416,7 +416,8 @@ export const lawsuitModel = () => (): Model<LawP> => {
     inner.add(tp);
   }
   // ══ THE BINDER CLIP at the head: black enamelled spring steel, the jaw sloping onto the page to its rolled channel, a bright
-  //    steel wire handle hooked in the channel and folded flat over the page (the other jaw is inside the bundle) ══
+  //    steel wire handle hooked in the channel and folded flat over the page (the lower jaw is inside the bundle, the other
+//    handle folded back out of sight behind it) ══
   {
     const enamel = new THREE.MeshPhysicalMaterial({ color: col("#121315"), metalness: 0.55, roughness: 0.3, clearcoat: 0.8, clearcoatRoughness: 0.18, envMapIntensity: 0.9 });
     const steel = M.steel("#D6DADF");
@@ -438,9 +439,9 @@ export const lawsuitModel = () => (): Model<LawP> => {
     const chan = mesh(new THREE.CylinderGeometry(2.4, 2.4, CW + 2, 24), enamel);
     chan.rotation.z = Math.PI / 2; chan.position.set(0, tipY, zt);
     inner.add(chan);
-    const yw = top0 + 1.25 + 0.4, hx = CW / 2 - 4;
+    const yw = top0 + 1.6 + 0.4, hx = CW / 2 - 4;
     const handle = wire([[-hx, tipY, zt], [-hx + 2, yw + 0.8, zt + 10], [-hx + 6, yw, zt + 30], [-hx + 10, yw, zt + 70], [-hx + 26, yw, zt + 82],
-      [hx - 26, yw, zt + 82], [hx - 10, yw, zt + 70], [hx - 6, yw, zt + 30], [hx - 2, yw + 0.8, zt + 10], [hx, tipY, zt]], 1.25, steel, false, 96);
+      [hx - 26, yw, zt + 82], [hx - 10, yw, zt + 70], [hx - 6, yw, zt + 30], [hx - 2, yw + 0.8, zt + 10], [hx, tipY, zt]], 1.6, steel, false, 96);
     inner.add(handle);
   }
 
@@ -463,6 +464,11 @@ export const lawsuitModel = () => (): Model<LawP> => {
     contract.add(h);
     return { h, gs, side };
   });
+  // ★ until the tear starts the page is ONE sheet (two abutting halves showed their seam as a faint line)
+  const whole = gridSheet(rows, () => 0, () => CT.W, 56, CT.W, CT.D, CT.T, [faceM, tornE]);
+  whole.shape((px, py) => wave(px, py));
+  whole.mesh.userData.obj = "contract";
+  contract.add(whole.mesh);
   let lastCurl = -1, lastFront = -2, lastReady = false;
   const paintFace = (front: number) => live.paint((g) => {
     g.drawImage(paintContract().image as HTMLCanvasElement, 0, 0, CT.W, CT.D);
@@ -499,7 +505,9 @@ export const lawsuitModel = () => (): Model<LawP> => {
       const ready = fontsReady();
       if (p.front !== lastFront || ready !== lastReady) { paintFace(p.front); lastFront = p.front; lastReady = ready; }
       if (p.curl !== lastCurl) { for (const hv of halves) hv.gs.shape(halfDisp(hv.side, p.curl)); lastCurl = p.curl; }
+      whole.mesh.visible = p.front < 0;
       for (const { h, side } of halves) {
+        h.visible = p.front >= 0;
         h.position.set(PIVOT.x + side * p.sep, 0, PIVOT.z);
         h.rotation.y = -side * p.phi;
       }

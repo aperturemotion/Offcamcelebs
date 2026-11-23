@@ -51,11 +51,11 @@ const stackAt = (f: number): LawP["stack"] => {
   return { dx: 16 * (1 - u), h: 0, dz: -11 * (1 - u), tilt: 0 };
 };
 const phiAt = (f: number) => PHI * EXIT(clamp01((f - TEAR[0]) / (TEAR[1] - TEAR[0])));
-/** one sheet until the tear starts (the halves abut exactly), then a hair apart as it runs, then the slide */
-const sepAt = (f: number) => (f < TEAR[0] ? 0 : 0.6 + SEP * GLIDE(clamp01((f - SPLIT[0]) / (SPLIT[1] - SPLIT[0]))));
+/** the halves abut exactly while the tear runs (only their turn opens it, from the far end), then slide apart */
+const sepAt = (f: number) => (f < SPLIT[0] ? 0 : SEP * GLIDE(clamp01((f - SPLIT[0]) / (SPLIT[1] - SPLIT[0]))));
 const envAt = (f: number) => (f < ENV_IN[0] ? null : ENV0 * (1 - GLIDE(clamp01((f - ENV_IN[0]) / (ENV_IN[1] - ENV_IN[0])))));
 /** the tear's front runs down the sheet over the tear (page y; −1 before it starts); the torn edges curl as the halves part */
-const frontAt = (f: number) => (f < TEAR[0] ? -1 : CT.D * clamp01((f - TEAR[0] + 1) / (TEAR[1] - TEAR[0])));
+const frontAt = (f: number) => (f < TEAR[0] ? -1 : CT.D * clamp01((f - TEAR[0] + 1) / 9));
 const curlAt = (f: number) => Math.round(100 * clamp01((f - TEAR[0]) / (SPLIT[1] - TEAR[0])) ** 0.7) / 100;
 const paramsAt = (f: number): LawP => ({ stack: stackAt(f), phi: phiAt(f), sep: sepAt(f), front: frontAt(f), curl: curlAt(f), env: envAt(f) });
 
