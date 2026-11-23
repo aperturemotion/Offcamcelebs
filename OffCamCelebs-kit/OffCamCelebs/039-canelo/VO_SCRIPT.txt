@@ -1,0 +1,43 @@
+OffCamCelebs 039 — "Counted the Fights" (Canelo Álvarez / the DAZN deal, $365M) — VO SCRIPT (final, 2026-11-23)
+Written by the daily run (no script in the app). Every line checked at source; "DAZN" is said "Da Zone".
+
+------------------------------------------------------------------ PASTE-READY (as sent to ElevenLabs)
+In twenty eighteen, Canelo Álvarez signed what was called the richest contract in sports history. Three hundred and sixty-five million dollars. We counted the fights.
+
+Canelo is boxing's biggest star, a four-division world champion.
+
+The deal, with the streaming service Da Zone and his promoter Golden Boy: eleven fights over five years, worth at least three hundred and sixty-five million.
+
+His own lawsuit spells out the pay: at least thirty-five million a fight. Fifteen million for the first.
+
+He fought three times under the deal. Then, in twenty twenty, no fights at all.
+
+That September, he sued Da Zone, Golden Boy and Oscar De La Hoya for at least two hundred and eighty million. By November, they had agreed to part ways. The terms were never made public.
+
+By the lawsuit's own numbers, his three fights came to about eighty-five million. Not three hundred and sixty-five.
+
+To be fair, the big number was the deal's headline, not his claim. And eighty-five million for three fights is still a fortune.
+
+So, three hundred and sixty-five million? Our rating: inflated.
+
+Send us who to audit next.
+------------------------------------------------------------------
+
+LINE BY LINE (sources)
+- "signed what was called the richest contract in sports history … three hundred and sixty-five million": ESPN, 17 Oct 2018
+  ("five-year, 11-fight deal worth $365 million … the most lucrative long-term athlete contract in history"); CNBC and CBS
+  Sports, 17-18 Oct 2018; the "richest" claim is Golden Boy's (hence "what was called").
+- "a four-division world champion": light middleweight, middleweight, super middleweight, light heavyweight (Kovalev, 2 Nov 2019).
+- "eleven fights over five years, worth at least": ESPN / Sports Business Daily, 17-18 Oct 2018 ("at least $365 million";
+  through 2023).
+- "His own lawsuit … at least thirty-five million a fight. Fifteen million for the first": the complaint as reported (ESPN,
+  9 Sep 2020; Law360, 9 Sep 2020): a $40M licence fee from DAZN to Golden Boy per fight, from which a $35M minimum guarantee
+  to Álvarez, except the first event (Fielding), where he received $15,000,000.
+- "He fought three times under the deal … in twenty twenty, no fights at all": Fielding 15 Dec 2018, Jacobs 4 May 2019,
+  Kovalev 2 Nov 2019 (all on DAZN); his next fight (Callum Smith, 19 Dec 2020) came after the split.
+- "That September, he sued … for at least two hundred and eighty million": filed 8 Sep 2020, C.D. Cal. (ESPN; Law360;
+  re-filed later in September, Bleacher Report).
+- "By November, they had agreed to part ways. The terms were never made public": ESPN and CBS Sports, 6 Nov 2020 (free agent;
+  the lawsuit resolved; terms not disclosed).
+- "about eighty-five million": 15 + 35 + 35, the lawsuit's own figures; said as "by the lawsuit's own numbers … about".
+- "To be fair, the big number was the deal's headline, not his claim": the figure was the promoter's and the announcement's.

@@ -1,0 +1,22 @@
+{
+  "name": "offcamcelebs-039-canelo",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch",
+    "dev": "npx --yes hyperframes@0.8.143 preview",
+    "check": "npx --yes hyperframes@0.8.143 check",
+    "render": "npx --yes hyperframes@0.8.143 render",
+    "publish": "npx --yes hyperframes@0.8.143 publish"
+  },
+  "devDependencies": {
+    "@types/three": "^0.181.0",
+    "esbuild": "^0.25.10",
+    "preact": "^10.27.2",
+    "three": "^0.181.2",
+    "three-mesh-bvh": "^0.9.1",
+    "typescript": "^5.7.3",
+    "puppeteer-core": "25.12.0"
+  }
+}

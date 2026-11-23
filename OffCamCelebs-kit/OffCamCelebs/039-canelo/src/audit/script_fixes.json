@@ -1,0 +1,32 @@
+{
+  "note": "039 Canelo Álvarez / the DAZN deal. Written by the daily run (2026-11-23): there was no brief or script from Timur, so the script was written from the facts at source and there are no brief lines to fix (fixes is empty on purpose; see `none`). The guardrails are the accuracy rules of BRIEF.txt.",
+  "noBlockingLines": "No external script existed: the VO script was written in-session from checked sources (VO_SCRIPT.txt), so there is no brief wording that could come back in a take.",
+  "fixes": [],
+  "guardrails": [
+    {
+      "why": "The $85M is always the lawsuit's own numbers, never a verified payout.",
+      "bad": "^(?!.*lawsuit)(?!.*for three fights).*\\b(85 million|eighty-five million|\\$85)\\b",
+      "example": "He was paid 85 million dollars."
+    },
+    {
+      "why": "The resolution is 'agreed to part ways; terms never made public': no winner, no finding.",
+      "bad": "\\b(won|lost) (the|his) (case|lawsuit|suit)\\b|\\b(dazn|golden boy) (owed|cheated|stole)\\b",
+      "example": "Canelo won the lawsuit."
+    },
+    {
+      "why": "'The richest contract in sports history' is always 'what was called' (the promoter's claim).",
+      "bad": "^(?!.*called).*\\brichest contract\\b",
+      "example": "He signed the richest contract in sports history."
+    },
+    {
+      "why": "Fraud and scam never appear (the brand brief).",
+      "bad": "\\b(fraud|scam)\\b",
+      "example": "The deal was a scam."
+    },
+    {
+      "why": "The verdict rates the $365M figure, never the person.",
+      "bad": "\\b(canelo|he|álvarez|alvarez) (is|was) (inflated|a liar|lying)\\b",
+      "example": "Canelo is inflated."
+    }
+  ]
+}

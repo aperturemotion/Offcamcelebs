@@ -59,12 +59,13 @@ echo "   $(find "$EE" -name '*.mp3' | wc -l) EarnEdits sounds"
 echo "── 4. ffmpeg, Chrome, Python tools"
 mkdir -p "$W/ff"
 ln -sf "$(command -v ffmpeg)" "$W/ff/ffmpeg.exe"; ln -sf "$(command -v ffprobe)" "$W/ff/ffprobe.exe"
+# the Python tools join FF + "\\ffmpeg.exe" (Windows-style): on Linux that is a file named "ff\ffmpeg.exe" beside ff/
+ln -sf "$(command -v ffmpeg)" "$W/ff\\ffmpeg.exe"; ln -sf "$(command -v ffprobe)" "$W/ff\\ffprobe.exe"
 CH=$(ls -d /opt/pw-browsers/chromium-*/chrome-linux64/chrome 2>/dev/null | sort | tail -1)
 cat > "$W/env.sh" <<EOF
 export FFMPEG_DIR=$W/ff
 export HF_CHROME=$CH
 export HYPERFRAMES_RENDER_DETACHED=1
-export PATH=$W/earshot-venv/bin:\$PATH
 EOF
 python3 -m pip install -q --break-system-packages numpy scipy pillow soundfile faster-whisper 2>/dev/null \
   || python3 -m pip install -q numpy scipy pillow soundfile faster-whisper

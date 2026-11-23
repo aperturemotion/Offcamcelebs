@@ -1,0 +1,104 @@
+{
+ "wcam1": {
+  "src": "/home/user/occ-work/sfx039/wcam1_src.wav",
+  "len": 1.5,
+  "fade": 300,
+  "sustained": true
+ },
+ "wcam2": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 1.5,
+  "fade": 300,
+  "sustained": true
+ },
+ "glide": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": true
+ },
+ "glide2": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": true
+ },
+ "whip": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "thump": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "paper": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "flip": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "pen": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": true
+ },
+ "click": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "punch": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "cash": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": true
+ },
+ "gavel": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "tear": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "lowhit": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": false
+ },
+ "crowd": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": true
+ },
+ "stack": {
+  "src": "/home/user/occ-work/sfx039/wcam2_src.wav",
+  "len": 0.4,
+  "fade": 100,
+  "sustained": true
+ }
+}
