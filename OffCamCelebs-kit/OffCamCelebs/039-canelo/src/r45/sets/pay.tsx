@@ -42,7 +42,7 @@ const BOTH = sheetPt(C2, { ...C2 }, C2.w / 2, 10);
 const STORY: CamKey[] = [
   { at: -9999, ...aim(TITLE.x - 10, TITLE.h, TITLE.z, 1.62, 540, 1020), dur: 1 },   // close on the complaint's caption
   { at: D35 - 16, ...aim(C1MID.x - 14, C1MID.h, C1MID.z, 1.2, 540, 1000), dur: 36 },  // "$35": back onto the big cheque
-  { at: D15 - 14, ...aim(BOTH.x + 64, BOTH.h, BOTH.z, 1.2, 540, 1190), dur: 36 },     // "$15": back over both cheques
+  { at: D15 - 14, ...aim(BOTH.x + 64, BOTH.h, BOTH.z, 1.2, 540, 1214), dur: 36 },     // "$15": back over both cheques
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
 

@@ -21,7 +21,7 @@ export type Sheet = { w: number; d: number; x: number; z: number; yaw: number; h
 export const CP: Sheet = { w: 460, d: 595, x: 520, z: -120, yaw: -3, h: 1.05, t: 0.6 };      // the complaint (its face page)
 export const BACKER = { w: 476, d: 622, dz: -11, h: 0.3, t: 0.55 } as const;                 // the blue back, under it
 export const C1: Sheet = { w: 640, d: 272, x: 540, z: 20, yaw: -2, h: 1.95, t: 0.5 };       // $35,000,000 PER FIGHT
-export const C2: Sheet = { w: 470, d: 206, x: 486, z: 296, yaw: 3, h: 0.3, t: 0.5 };      // $15,000,000 FIRST FIGHT
+export const C2: Sheet = { w: 470, d: 206, x: 486, z: 314, yaw: 3, h: 0.3, t: 0.5 };      // $15,000,000 FIRST FIGHT
 
 export type PayTiming = { c1: readonly [number, number]; c2: readonly [number, number] };
 const ss = (a: number, b: number, x: number) => { const t = clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); };

@@ -79,7 +79,7 @@ export type Pose = { p: [number, number, number]; q: [number, number, number, nu
 export type BodyP = Pose & { vis: boolean };
 /** the stack, bottom to top: the BASE bundles (they stay), the STRUCK ones (in the glove's path: shot out left), the HERO,
  *  the TOP bundles; then the loose notes on top */
-export const N_BASE = 2, N_STRUCK = 11, N_TOP = 3, N_NOTES = 5;
+export const N_BASE = 2, N_STRUCK = 12, N_TOP = 3, N_NOTES = 5;
 /** cam: the camera · glove · bodies: every bundle (base, struck, top), in stack order · hero · notes · pads: contact
  *  shadows' strength under the hero and the landed bundles (0 … 1, per body: tops then hero) */
 export type HookP = {

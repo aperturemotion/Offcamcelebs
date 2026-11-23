@@ -99,7 +99,7 @@ const KCP = { x: KC.x, y: CT.T, z: KC.z };
 const CP_TOPS = [onComplaint(0, -6), onComplaint(CP.W, -6)].map((q) => ({ x: q.x, h: STACK_H + 5, z: q.z }));
 const STORY: CamKey[] = [
   { at: -9999, ...highest(PAGE, Z.page, CP_TOPS, 690), dur: 1 },                 // the complaint's whole first page
-  { at: FIG - 8, ...highest(FIGP, Z.fig, CP_TOPS, 690, 520), dur: 32 },           // "$280": in on the claim
+  { at: FIG - 8, ...highest(FIGP, Z.fig, CP_TOPS, 698, 520), dur: 32 },           // "$280": in on the claim
   { at: NOV - 6, ...highest(KCP, Z.torn, KT_TOPS, 690, 565), dur: 44 },                 // "By November": across to the contract
   { at: ENV_IN[0] + 8, ...highest(KCP, Z.env, KT_TOPS, 690, 565), dur: 32 },            // the envelope settles: a little closer
 ];
