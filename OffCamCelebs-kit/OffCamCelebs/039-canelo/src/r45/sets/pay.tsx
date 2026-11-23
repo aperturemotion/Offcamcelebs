@@ -4,7 +4,7 @@ import { Obj } from "../../audit/Probe";
 import { World, Light, alive, camView, type CamKey } from "../camera";
 import { View3D } from "../../three/View3D";
 import { project, type Eye } from "../../three/stage";
-import { payModel, PAY_FLOOR, CP, C1, C2, PRINT, poseC1, poseC2, sheetPt, corners, padFar, type PayTiming } from "../../three/props/pay";
+import { payModel, PAY_FLOOR, CP, C1, C2, PRINT, poseC1, poseC2, sheetPt, corners, padFar, PAD, type PayTiming } from "../../three/props/pay";
 import type { PlaceDef, PlaceSfx } from "../place";
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -89,8 +89,18 @@ const M3D = payModel(T);
 const rectAt = (f: number) => {
   const v = camView(CAM, f), m = 240 / v.z;
   const x0 = v.x - 540 / v.z - m, x1 = v.x + 540 / v.z + m;
-  const y0 = Math.max(v.y - 960 / v.z - m, PAY_FLOOR - 700), y1 = Math.min(v.y + 960 / v.z + m, PAY_FLOOR + 700);
-  return { x: Math.floor(x0), y: Math.floor(y0), w: Math.ceil(x1 - x0), h: Math.ceil(y1 - y0) };
+  let y0 = Math.max(v.y - 960 / v.z - m, PAY_FLOOR - 700), y1 = Math.min(v.y + 960 / v.z + m, PAY_FLOOR + 700);
+  // ★ the whole desk pad (and its contact shadow) always inside the canvas: a hand-over moves the place across the frame,
+  //   and a canvas border cutting the pad would show (the audit's EDGES, f859–891)
+  const e = eyeOf(v);
+  let px0 = 1e9, px1 = -1e9, py0 = 1e9, py1 = -1e9;
+  for (const x of [PAD.x0, PAD.x1]) for (const z of [PAD.z0, PAD.z1]) for (const h of [0, PAD.t]) {
+    const q = project(e, x, PAY_FLOOR - h, z); px0 = Math.min(px0, q.x); px1 = Math.max(px1, q.x); py0 = Math.min(py0, q.y); py1 = Math.max(py1, q.y);
+  }
+  const PM = 70;
+  const X0 = Math.min(x0, px0 - PM), X1 = Math.max(x1, px1 + PM);
+  y0 = Math.min(y0, py0 - PM); y1 = Math.max(y1, py1 + PM);
+  return { x: Math.floor(X0), y: Math.floor(y0), w: Math.ceil(X1 - X0), h: Math.ceil(y1 - y0) };
 };
 const LP = (p: { x: number; h: number; z: number }) => { const q = project(eyeOf(STORY[2]), p.x, PAY_FLOOR - p.h, p.z); return [q.x, q.y] as const; };
 const [tx, ty] = LP(TITLE), [c1x, c1y] = LP(C1MID), [c2x, c2y] = LP(BOTH);
