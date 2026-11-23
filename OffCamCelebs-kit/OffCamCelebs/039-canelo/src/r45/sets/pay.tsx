@@ -25,7 +25,7 @@ export const T: PayTiming = { c1: [D35 - 14, D35 + 4], c2: [D15 - 14, D15 + 4] }
 const DONE = Math.max(cueEnd(S, 0) + 4, T.c2[1] + 2);
 
 // ── the camera: the eye rides with the view (up and a little right, looking down onto the table) ──
-const EL = 1450;
+const EL = 1300;
 const eyeOf = (v: { x: number; y: number }): Eye => ({ x: v.x + 240, y: v.y - EL, D: 1800 });
 const aim = (x: number, h: number, z: number, zoom: number, sx = 540, sy = 960) => {
   let v = { x, y: PAY_FLOOR - h };
@@ -42,7 +42,7 @@ const BOTH = sheetPt(C2, { ...C2 }, C2.w / 2, 10);
 const STORY: CamKey[] = [
   { at: -9999, ...aim(TITLE.x - 10, TITLE.h, TITLE.z, 1.62, 540, 1020), dur: 1 },   // close on the complaint's caption
   { at: D35 - 16, ...aim(C1MID.x - 14, C1MID.h, C1MID.z, 1.2, 540, 1000), dur: 36 },  // "$35": back onto the big cheque
-  { at: D15 - 14, ...aim(BOTH.x + 6, BOTH.h, BOTH.z, 1.07, 540, 1050), dur: 36 },     // "$15": back over both cheques
+  { at: D15 - 14, ...aim(BOTH.x + 64, BOTH.h, BOTH.z, 1.2, 540, 1190), dur: 36 },     // "$15": back over both cheques
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
 

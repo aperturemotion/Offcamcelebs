@@ -18,10 +18,10 @@ import { GLIDE, clamp01 } from "../../r45/tokens";
 export const PAY_FLOOR = 1300;
 /** a sheet lying on the table: size (w across, d deep), centre (x, z), turn (deg), the height of its underside, thickness */
 export type Sheet = { w: number; d: number; x: number; z: number; yaw: number; h: number; t: number };
-export const CP: Sheet = { w: 460, d: 595, x: 520, z: -170, yaw: -3, h: 1.05, t: 0.6 };      // the complaint (its face page)
+export const CP: Sheet = { w: 460, d: 595, x: 520, z: -120, yaw: -3, h: 1.05, t: 0.6 };      // the complaint (its face page)
 export const BACKER = { w: 476, d: 622, dz: -11, h: 0.3, t: 0.55 } as const;                 // the blue back, under it
-export const C1: Sheet = { w: 640, d: 272, x: 566, z: 36, yaw: 2.5, h: 1.95, t: 0.5 };       // $35,000,000 PER FIGHT
-export const C2: Sheet = { w: 500, d: 220, x: 492, z: 336, yaw: -3.5, h: 0.3, t: 0.5 };      // $15,000,000 FIRST FIGHT
+export const C1: Sheet = { w: 640, d: 272, x: 540, z: 20, yaw: -2, h: 1.95, t: 0.5 };       // $35,000,000 PER FIGHT
+export const C2: Sheet = { w: 470, d: 206, x: 486, z: 296, yaw: 3, h: 0.3, t: 0.5 };      // $15,000,000 FIRST FIGHT
 
 export type PayTiming = { c1: readonly [number, number]; c2: readonly [number, number] };
 const ss = (a: number, b: number, x: number) => { const t = clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); };
@@ -43,9 +43,9 @@ export const corners = (s: { w: number; d: number }, p: { x: number; z: number; 
   [[0, 0], [s.w, 0], [s.w, s.d], [0, s.d]].map(([u, v]) => sheetPt(s, p, u, v));
 /** where the readable print sits on each sheet (print px boxes: x0, y0, x1, y1) */
 export const PRINT = {
-  title: [80, 120, 420, 330] as const,      // the complaint's caption and COMPLAINT
+  title: [80, 60, 420, 262] as const,        // the complaint's caption and COMPLAINT
   c1: [24, 74, 616, 236] as const,          // the big cheque's payee, amount and memo
-  c2: [20, 60, 480, 196] as const,
+  c2: [18, 56, 452, 184] as const,
 };
 
 // ══ PRINT ══
@@ -67,23 +67,23 @@ const complaintTex = () => paintTex("pay-complaint", CP.w, CP.d, (g) => {
   const L0 = 44, LS = (H - 62) / 28;
   for (let i = 1; i <= 28; i++) g.fillText(String(i), 42, L0 + (i - 1) * LS);
   // the counsel's block, top left (greeked)
-  typeLines(g, 64, 22, 168, 4, 9, 3.2, 0.32, 3);
+  typeLines(g, 64, 16, 168, 4, 9, 3.2, 0.32, 3);
   // the court
   g.fillStyle = INK; g.textAlign = "center";
   const CX = (54 + W - 34) / 2;
-  track(g, 1.2); fitFont(g, 800, 15, "UNITED STATES DISTRICT COURT", 330); g.fillText("UNITED STATES DISTRICT COURT", CX, 92);
-  track(g, 0.8); fitFont(g, 600, 12, "CENTRAL DISTRICT OF CALIFORNIA", 300); g.fillText("CENTRAL DISTRICT OF CALIFORNIA", CX, 110); track(g, 0);
+  track(g, 1.2); fitFont(g, 800, 15, "UNITED STATES DISTRICT COURT", 330); g.fillText("UNITED STATES DISTRICT COURT", CX, 74);
+  track(g, 0.8); fitFont(g, 600, 12, "CENTRAL DISTRICT OF CALIFORNIA", 300); g.fillText("CENTRAL DISTRICT OF CALIFORNIA", CX, 90); track(g, 0);
   // the caption: the parties, plainly
-  g.fillRect(70, 124, W - 124, 1.1);
-  fitFont(g, 800, 34, "ÁLVAREZ", 320); g.fillText("ÁLVAREZ", CX, 164);
-  font(g, 600, 17); g.fillText("v.", CX, 190);
-  fitFont(g, 800, 26, "GOLDEN BOY PROMOTIONS, DAZN", W - 140); g.fillText("GOLDEN BOY PROMOTIONS, DAZN", CX, 222);
-  g.fillRect(70, 238, W - 124, 1.1);
+  g.fillRect(70, 102, W - 124, 1.1);
+  fitFont(g, 800, 34, "ÁLVAREZ", 320); g.fillText("ÁLVAREZ", CX, 138);
+  font(g, 600, 17); g.fillText("v.", CX, 161);
+  fitFont(g, 800, 26, "GOLDEN BOY PROMOTIONS, DAZN", W - 140); g.fillText("GOLDEN BOY PROMOTIONS, DAZN", CX, 189);
+  g.fillRect(70, 203, W - 124, 1.1);
   // the title
-  track(g, 5); fitFont(g, 800, 52, "COMPLAINT", 320); g.fillText("COMPLAINT", CX + 2.5, 300); track(g, 0);
+  track(g, 5); fitFont(g, 800, 52, "COMPLAINT", 320); g.fillText("COMPLAINT", CX + 2.5, 254); track(g, 0);
   // the body (greeked: not for reading), under where the cheque will lie
-  typeLines(g, 70, 340, W - 124, 9, LS, 3.4, 0.3, 5);
-  typeLines(g, 70, 340 + 9 * LS + 4, W - 124, 4, LS, 3.4, 0.3, 9);
+  typeLines(g, 70, 292, W - 124, 10, LS, 3.4, 0.3, 5);
+  typeLines(g, 70, 292 + 10 * LS + 4, W - 124, 4, LS, 3.4, 0.3, 9);
 }, 3);
 const chequeTex = (key: string, w: number, h: number, o: { tint: string; wave: string; amount: string; memo: string; no: string; least: boolean }) => paintTex(key, w, h, (g) => {
   g.fillStyle = o.tint; g.fillRect(0, 0, w, h);

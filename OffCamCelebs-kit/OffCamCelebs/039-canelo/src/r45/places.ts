@@ -4,10 +4,10 @@
 // ═══════════════════════════════════════════════════════════════════════════
 import { makeStub } from "./sets/_stub";
 export const HOOK = makeStub("hook", "dark", "#8a1c1c");
-export const CHAMP = makeStub("champ", "cream", "#b8922e");
-export const DEAL = makeStub("deal", "dark", "#2c3a4a");
+export { PLACE as CHAMP } from "./sets/champ";
+export { PLACE as DEAL } from "./sets/deal";
 export { PLACE as PAY } from "./sets/pay";
-export const FIGHTS = makeStub("fights", "dark", "#5a4632");
-export const LAWSUIT = makeStub("lawsuit", "cream", "#4a4a58");
-export const MATH = makeStub("math", "dark", "#3f6b4f");
-export const VERDICT = makeStub("verdict", "cream", "#b0573a");
+export { PLACE as FIGHTS } from "./sets/fights";
+export { PLACE as LAWSUIT } from "./sets/lawsuit";
+export { PLACE as MATH } from "./sets/math";
+export { PLACE as VERDICT } from "./sets/verdict";
