@@ -69,7 +69,7 @@ const ss = (a: number, b: number, x: number) => { const t = clamp01((x - a) / (b
 export const posePlate = (T: JuneTiming, f: number) => {
   const u = clamp01((f - T.plate[0]) / (T.plate[1] - T.plate[0]));
   const k = (1 - u) ** 2;
-  return { x: NP.x - 1250 * k, z: NP.z + 10 * k, yaw: NP.yaw - 4 * k, h: PAD.t, visible: f > T.plate[0] - 1 };
+  return { x: NP.x - 1250 * k, z: NP.z + 10 * k, yaw: NP.yaw - 4 * k, h: PAD.t + 0.25, visible: f > T.plate[0] - 1 };
 };
 /** the newspaper glides in from the right a little above the pad on its own air, touches down at 80% of the run, brakes */
 export const poseNews = (T: JuneTiming, f: number) => {

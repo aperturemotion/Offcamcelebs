@@ -64,7 +64,7 @@ export const C2: Card = { w: CW, h: CH, t: CT, x: 450, zb: C2ZB, th: th2, bow: 1
 export const PQ = { w: 860, x: 480, zA: 250, lip: 14, Lf: 250, phi: rad(50), top: 30 } as const;
 export const PLT = { w: 580, h: 220, t: 2.4 } as const;
 /** the plate sits on the face's left; the small card lands on the bare walnut to its right */
-export const PLATE_DX = -110;
+export const PLATE_DX = -120;
 const SPH = Math.sin(PQ.phi), CPH = Math.cos(PQ.phi);
 /** a point s along the face (from its foot) */
 const faceAt = (s: number) => ({ h: PQ.lip + s * CPH, z: PQ.zA - s * SPH });
