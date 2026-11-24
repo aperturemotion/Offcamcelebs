@@ -1,8 +1,7 @@
 import React from "react";
-import { clamp01 } from "../tokens";
 import { word, cue, cueEnd } from "../time";
 import { Obj } from "../../audit/Probe";
-import { World, Light, alive, camView, IO, type CamKey } from "../camera";
+import { World, Light, alive, camView, type CamKey } from "../camera";
 import { View3D } from "../../three/View3D";
 import { project } from "../../three/stage";
 import {
@@ -12,17 +11,16 @@ import {
 import type { PlaceDef, PlaceSfx } from "../place";
 
 // ═══════════════════════════════════════════════════════════════════════════
-// PLACE 2 · TIGER (cream) — two sentences on one long table.
+// PLACE 2 · TIGER (cream) — two sentences along one long table; the camera trucks right from object to object, level, so
+// nothing it leaves ever rises into the captions.
 //  0 "Tiger is golf's biggest name, with 15 major championships." The place arrives close on his FRAMED PHOTO standing on a
-//    walnut display shelf (a short, quiet gallery applause under "biggest name"). On "with" the camera pulls back and cranes
-//    up; on "15" a heavy walnut block slides in from the right and lands beside the frame: "15" cut into its brass plate,
-//    MAJOR CHAMPIONSHIPS under it; then over "major championships" the fifteen majors are dealt in from the right, one after
-//    another, into three columns in front of it: fifteen walnut plaques, each brass plate engraved with its year and major
-//    (1997 MASTERS … 2019 MASTERS, in the order he won them).
-//  1 "In 2022, LIV, a new Saudi-backed tour, went after golf's stars with huge contracts." On "2022," the camera travels right
-//    along the table as a black pin flag slides in and settles: LIV GOLF / 2022 in gold; on "Saudi-backed" it pushes in on
-//    the flag's SAUDI-BACKED line; on "huge contracts" it pulls back as a stack of PLAYER AGREEMENT contracts slides in in
-//    front of the flag and three bundles of $100s slide in after it and are stacked on it.
+//    walnut display shelf (a short, quiet gallery applause under "biggest name"). On "with 15" the camera trucks right as a
+//    heavy walnut block slides in from the right and lands: "15" cut into its brass plate, MAJOR CHAMPIONSHIPS under it; over
+//    "major championships" the fifteen majors are dealt in from the right, one after another, into four rows in front of
+//    it: walnut plaques, each brass plate engraved with its major and year (MASTERS 1997 … MASTERS 2019, in order).
+//  1 "In 2022, LIV, a new Saudi-backed tour, went after golf's stars with huge contracts." On "2022," the camera trucks on
+//    as a black pin flag slides in and settles: LIV GOLF / 2022 / SAUDI-BACKED in gold. On "huge contracts" it trucks on
+//    and in to a stack of PLAYER AGREEMENT contracts sliding in; three bundles of $100s slide in after and stack on them.
 // ═══════════════════════════════════════════════════════════════════════════
 const S = "tiger" as const;
 const BIGGEST = word(S, 0, /^biggest/), WITH = word(S, 0, /^with/), N15 = word(S, 0, /^15/);
