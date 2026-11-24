@@ -365,7 +365,7 @@ const SFX: PlaceSfx[] = [
   { s: "putt", at: 2, vol: 0.42, why: "the putter's stroke: the ball is already on its way", mode: "peak" },
   { s: "glide", at: 4, end: F_IN - 2, vol: 0.25, why: "the ball rolls across the green", mode: "within" },
   { s: "lipout", at: F_RIM + 2, vol: 0.5, why: "the ball rattles round the cup's lip and spins out", mode: "within" },
-  { s: "thump", at: F_SLAP, vol: 0.55, why: "the foam-board cheque slaps flat on the green", mode: "peak" },
+  { s: "thump", at: Math.round(F_SLAP), vol: 0.55, why: "the foam-board cheque slaps flat on the green", mode: "peak" },
 ];
 
 export const HOOK_DEBUG = { F_IN, R0, R1, F_OUT, F_STOP, F_LAND, F_SLAP, F_RIM, TAU_DROP, L_APP, L_RIDE, V0, A_RIDE, DONE, LAST, camAt, paramsAt, toScreen, tauAt, frameOf, chequeAt, ballAtTau, facePt, poolAt, PATH };
