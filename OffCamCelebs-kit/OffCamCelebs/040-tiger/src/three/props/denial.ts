@@ -26,7 +26,7 @@ export const MAG = { W: 420, D: 560, BT: 6, RG: 46 } as const;
 /** where the magazine rests: its spine's middle (x, z) on the table, its turn */
 export const MAG_REST = { x: 456, z: -370, yaw: -2 } as const;
 /** the cheque: foam board w × d, its thickness; where it rests */
-export const CHQ = { w: 820, d: 410, t: 6, x: 494, z: 130, yaw: 1.5 } as const;
+export const CHQ = { w: 820, d: 410, t: 6, x: 494, z: 175, yaw: 1.5 } as const;
 /** the cheque's print is laid out on an 860 × 430 sheet and scaled to the board */
 const CK = CHQ.w / 860;
 

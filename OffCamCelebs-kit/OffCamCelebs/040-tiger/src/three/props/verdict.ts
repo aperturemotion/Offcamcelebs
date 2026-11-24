@@ -32,12 +32,12 @@ export const BAG_REST = rad(140);
 /** the cheque: w × d (its print px), foam-board thickness, its resting centre and turn */
 export const CHQ = { w: 760, d: 380, t: 5, x: 500, z: 150, yaw: -2.2 } as const;
 /** the stamp: its die (w × d), the imprint's place on the cheque (print px, its centre) and its turn on the cheque (deg) */
-export const STAMP = { w: 700, d: 170, u: 382, v: 222, rot: -5 } as const;
+export const STAMP = { w: 700, d: 170, u: 382, v: 250, rot: -5 } as const;
 const DIE_T = 7, CUSH_T = 5, MOUNT = { w: 726, h: 46, d: 182 }, POST_H = 34, BAR_R = 24;
 /** the stamp's height from its die face to its handle's top */
 export const STAMP_H = DIE_T + CUSH_T + MOUNT.h + POST_H + 2 * BAR_R - 6;
 /** where the readable print sits on the cheque (print px boxes: x0, y0, x1, y1) */
-export const PRINT = { cheque: [32, 50, 732, 334] as const };
+export const PRINT = { cheque: [32, 50, 732, 345] as const };
 /** the bag's printed panel along its axis (local x from the bag's centre), and its angular half-span */
 export const PANEL = { x0: -330, x1: 300, half: 0.68 } as const;
 
@@ -217,28 +217,28 @@ const drawCheque = (g: CanvasRenderingContext2D) => {
   g.textAlign = "left"; font(g, 700, 11); g.fillText("DATE", W - 250, 78);
   g.fillRect(W - 214, 79, 170, 1);
   // the payee: PAY TO THE ORDER OF, and a BLANK line
-  track(g, 0.6); font(g, 800, 15); g.fillText("PAY TO THE ORDER OF", 44, 141); track(g, 0);
-  g.fillRect(224, 142, 220, 1.3);
+  track(g, 0.6); font(g, 800, 15); g.fillText("PAY TO THE ORDER OF", 44, 126); track(g, 0);
+  g.fillRect(224, 127, 220, 1.3);
   // the amount, large, in its ruled box
-  const bx = 462, by = 96, bw = 254, bh = 76;
+  const bx = 462, by = 88, bw = 254, bh = 72;
   g.fillStyle = "rgba(255,255,252,0.75)"; g.fillRect(bx, by, bw, bh);
   g.strokeStyle = INK; g.lineWidth = 1.8; g.strokeRect(bx, by, bw, bh);
   g.fillStyle = INK; g.textAlign = "center";
   fitFont(g, 800, 50, "$800,000,000", bw - 18); g.fillText("$800,000,000", bx + bw / 2, by + bh - 20);
   // the written amount on its line
-  g.textAlign = "left"; fitFont(g, 700, 25, "EIGHT HUNDRED MILLION", 440); g.fillText("EIGHT HUNDRED MILLION", 48, 222);
-  g.fillRect(44, 230, 520, 1.2);
-  track(g, 1); font(g, 800, 15); g.fillText("DOLLARS", 576, 229); track(g, 0);
+  g.textAlign = "left"; fitFont(g, 700, 25, "EIGHT HUNDRED MILLION", 440); g.fillText("EIGHT HUNDRED MILLION", 48, 186);
+  g.fillRect(44, 194, 520, 1.2);
+  track(g, 1); font(g, 800, 15); g.fillText("DOLLARS", 576, 193); track(g, 0);
   // the memo, in plain type
-  font(g, 700, 11); g.fillText("MEMO", 44, 304);
-  fitFont(g, 800, 34, "LIV GOLF", 220); g.fillText("LIV GOLF", 90, 304);
-  g.fillRect(88, 311, 250, 1.2);
+  font(g, 700, 11); g.fillText("MEMO", 44, 318);
+  fitFont(g, 800, 34, "LIV GOLF", 220); g.fillText("LIV GOLF", 90, 318);
+  g.fillRect(88, 325, 250, 1.2);
   // the signature line: EMPTY
-  g.fillRect(430, 304, 286, 1.2);
-  track(g, 0.8); font(g, 600, 8.5); g.textAlign = "center"; g.fillText("AUTHORIZED SIGNATURE", 573, 318); track(g, 0);
+  g.fillRect(430, 318, 286, 1.2);
+  track(g, 0.8); font(g, 600, 8.5); g.textAlign = "center"; g.fillText("AUTHORIZED SIGNATURE", 573, 331); track(g, 0);
   // the MICR line at the foot, faint
   g.textAlign = "left"; g.fillStyle = "rgba(28,27,25,0.55)"; track(g, 3); font(g, 700, 12);
-  const mx = 210, my = H - 30;
+  const mx = 210, my = H - 22;
   g.fillRect(mx - 12, my - 9, 2, 9); g.fillRect(mx - 9, my - 9, 4, 4); g.fillRect(mx - 9, my - 4, 4, 4);
   g.fillText("080000800", mx, my); g.fillText("0000 0800 4  0800", mx + 140, my); track(g, 0);
 };
@@ -285,6 +285,7 @@ const drawImprint = (g: CanvasRenderingContext2D, scale: number) => {
   g.translate(STAMP.u, STAMP.v); g.rotate(rad(STAMP.rot));
   g.globalCompositeOperation = "multiply"; g.globalAlpha = 1;
   g.drawImage(c, -(IW + 40) / 2, -(IH + 40) / 2, IW + 40, IH + 40);
+  g.globalAlpha = 0.4; g.drawImage(c, -(IW + 40) / 2, -(IH + 40) / 2, IW + 40, IH + 40);   // a second take of ink deepens it, unevenly as the first
   g.restore();
 };
 const CHQ_SCALE = 3;
@@ -458,7 +459,7 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
   const stShadow = contact(MOUNT.w + 60, MOUNT.d + 60, 0); root.add(stShadow.p);
 
   // ══ THE FLOOR: the shadow catcher and a faint mirror on the dark ground ══
-  root.add(makeFloor({ y: g.floor, x0: -900, x1: 2000, z0: -1400, z1: 900, reflect: 0.08, shadow: 0.55, fadeC: [520, -160], fadeR: [1150, 820] }));
+  root.add(makeFloor({ y: g.floor, x0: -900, x1: 2000, z0: -1400, z1: 900, reflect: 0, shadow: 0.55, fadeC: [520, -160], fadeR: [1150, 820] }));
 
   return {
     root,

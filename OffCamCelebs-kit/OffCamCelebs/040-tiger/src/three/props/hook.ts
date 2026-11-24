@@ -212,8 +212,8 @@ const ballTex = () => paintTex("hook40-ball", 2048, 1024, (g) => {
     g.beginPath(); g.arc(hash(i, 3, 51) * 2048, hash(i, 4, 51) * 1024, 4 + 16 * hash(i, 5, 51), 0, Math.PI * 2); g.fill();
   }
   // the alignment line: 1 mm of black ink round 150° of the equator, ink a little uneven, its ends rounded
-  const y = 512, half = 7, x0 = 2048 * 0.29, x1 = 2048 * 0.71;
-  g.fillStyle = "rgba(28,30,34,0.72)";
+  const y = 512, half = 4.5, x0 = 2048 * 0.33, x1 = 2048 * 0.67;
+  g.fillStyle = "rgba(52,58,70,0.42)";
   g.beginPath(); g.moveTo(x0, y - half); g.lineTo(x1, y - half); g.arc(x1, y, half, -Math.PI / 2, Math.PI / 2); g.lineTo(x0, y + half); g.arc(x0, y, half, Math.PI / 2, -Math.PI / 2); g.fill();
   for (let i = 0; i < 400; i++) {
     g.fillStyle = `rgba(241,239,232,${0.2 + 0.4 * hash(i, 6, 52)})`;
@@ -282,11 +282,11 @@ const chequeTex = () => paintTex("hook40-cheque", CHQ.W, CHQ.D, (g) => {
   band(m, m, W - m, m); band(m, H - m, W - m, H - m); band(m, m, m, H - m); band(W - m, m, W - m, H - m);
   // the layout's labels (pre-printed, in the border's green) and its rules
   g.fillStyle = INK; g.textBaseline = "alphabetic"; g.textAlign = "left";
-  track(g, 3); font(g, 700, 26); g.fillText("DATE", 1060, 178); track(g, 0);
+  track(g, 3); font(g, 700, 34); g.fillText("DATE", 1030, 178); track(g, 0);
   g.fillRect(1146, 180, 290, 2.4);
   // PAY TO THE ORDER OF ____ (the payee line is BLANK)
-  track(g, 2.5); font(g, 700, 30); g.fillText("PAY TO THE", PRINT.payee[0], 318); g.fillText("ORDER OF", PRINT.payee[0], 356); track(g, 0);
-  g.fillRect(296, 358, 448, 2.6);
+  track(g, 2.5); font(g, 800, 40); g.fillText("PAY TO THE", PRINT.payee[0], 312); g.fillText("ORDER OF", PRINT.payee[0], 358); track(g, 0);
+  g.fillRect(352, 360, 392, 3);
   // the amount box: a ruled frame with the printed figure
   const [ax0, ay0, ax1, ay1] = PRINT.amount;
   g.fillStyle = "rgba(255,255,250,0.72)"; g.fillRect(ax0, ay0, ax1 - ax0, ay1 - ay0);
@@ -298,10 +298,10 @@ const chequeTex = () => paintTex("hook40-cheque", CHQ.W, CHQ.D, (g) => {
   // the words line: EIGHT HUNDRED MILLION ____ DOLLARS
   g.fillStyle = INK; g.textAlign = "left";
   g.fillRect(PRINT.words[0], 512, 1170, 2.6);
-  track(g, 2.5); font(g, 700, 30); g.fillText("DOLLARS", 1292, 510); track(g, 0);
+  track(g, 2.5); font(g, 800, 34); g.fillText("DOLLARS", 1282, 512); track(g, 0);
   g.fillStyle = FILL; track(g, 1.5); fitFont(g, 800, 62, "EIGHT HUNDRED MILLION", 1040); g.fillText("EIGHT HUNDRED MILLION", 110, 500); track(g, 0);
   // memo LIV GOLF; the signature line, EMPTY
-  g.fillStyle = INK; track(g, 2.5); font(g, 700, 28); g.fillText("MEMO", PRINT.memo[0], 662); track(g, 0);
+  g.fillStyle = INK; track(g, 2.5); font(g, 800, 32); g.fillText("MEMO", PRINT.memo[0], 662); track(g, 0);
   g.fillRect(206, 664, 520, 2.4);
   g.fillStyle = FILL; track(g, 2); font(g, 800, 52); g.fillText("LIV GOLF", 230, 652); track(g, 0);
   g.fillStyle = INK; g.fillRect(870, 664, 566, 2.4);

@@ -51,8 +51,8 @@ const BOTH = { x: (SPREAD.x + CHQ.x) / 2 + 10, h: 0, z: (SPREAD.z + CHQ.z) / 2 +
 const K_SPREAD = aim(SPREAD, 1.14, 506, 1056);
 const STORY: CamKey[] = [
   { at: -9999, ...K_SPREAD, dur: 1 },                                  // the open spread, its head read on "New Yorker"
-  { at: I - 14, ...aim(QUOTE, 1.8, 520, 1010), dur: 30 },             // "I never": in on the quote
-  { at: THAT - 10, ...aim(BOTH, 0.92, 504, 1030), dur: 30 },            // "that money": back over the magazine and the cheque
+  { at: I - 14, ...aim(QUOTE, 1.84, 520, 1010), dur: 30 },             // "I never": in on the quote
+  { at: THAT - 10, ...aim(BOTH, 0.86, 504, 1010), dur: 30 },            // "that money": back over the magazine and the cheque
   { at: THAT + 25, ...aim(SPREAD, 1.15, 508, 1050), dur: 32 },         // "Not even close": the money gone, the page stays
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });

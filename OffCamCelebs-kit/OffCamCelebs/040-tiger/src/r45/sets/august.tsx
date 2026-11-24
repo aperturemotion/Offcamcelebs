@@ -5,7 +5,7 @@ import { World, Light, alive, camView, type CamKey } from "../camera";
 import { View3D } from "../../three/View3D";
 import { project, type Eye } from "../../three/stage";
 import {
-  backModel, frontModel, FLOOR, TV, ZP, HOLE, C1, C2, SC, PB, PLT, PRINT,
+  backModel, frontModel, FLOOR, TV, ZP, HOLE, C1, C2, SC, PLT, PRINT,
   poseC1, poseC2, posePL, poseSC, cardPt, platePt, boardTop, type AugT, type Card, type CardPose,
 } from "../../three/props/august";
 import type { PlaceDef, PlaceSfx } from "../place";
@@ -54,11 +54,11 @@ const keyOn = (p: P3, sx: number, sy: number, z: number) => {
 };
 const C1MID = cardPt(C1, { ...C1, lift: 0, visible: true }, C1.w / 2, C1.h / 2);
 const PLMID = platePt(PLT.w / 2, PLT.h / 2);
-const SCMID = cardPt(SC, { ...SC, lift: PB.h, visible: true }, SC.w / 2, SC.h / 2);
+const SCMID = cardPt(SC, { ...SC, lift: 0, visible: true }, SC.w / 2, SC.h / 2);
 const K0 = keyOn({ x: HOLE.x + 20, h: HOLE.h, z: ZP }, 540, 990, 1.42);           // close on the picture: the lower-third
 const K1 = keyOn(C1MID, 560, 1195, 1.08);                                       // "$700": back onto the cards
-const K2 = keyOn(PLMID, 540, 1215, 1.02);                                      // "Norman": the plaque
-const K3 = keyOn({ x: (PLMID.x + SCMID.x) / 2, h: (PLMID.h + SCMID.h) / 2, z: (PLMID.z + SCMID.z) / 2 }, 545, 1232, 1.05);   // "before": in on the card
+const K2 = keyOn(PLMID, 540, 1290, 1.02);                                      // "Norman": the plaque
+const K3 = keyOn({ x: (PLMID.x + SCMID.x) / 2, h: (PLMID.h + SCMID.h) / 2, z: (PLMID.z + SCMID.z) / 2 }, 545, 1320, 1.02);   // "before": in on the card
 const STORY: CamKey[] = [
   { at: -9999, ...K0, dur: 1 },
   { at: D700 - 15, ...K1, dur: 36 },
@@ -108,7 +108,7 @@ const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
   const w0 = wide({ x: HOLE.x - HOLE.w / 2, h: HOLE.h, z: ZP }, { x: HOLE.x + HOLE.w / 2, h: HOLE.h, z: ZP }, T.on + 10);
   const r1 = { ...C1, lift: 0, visible: true }, w1 = wide(cardPt(C1, r1, 0, 150), cardPt(C1, r1, C1.w, 150), D700 + 14);
   const w2 = wide(platePt(0, 120), platePt(PLT.w, 120), NOR + 34);
-  const r3 = { ...SC, lift: PB.h, visible: true }, w3 = wide(cardPt(SC, r3, 0, 60), cardPt(SC, r3, SC.w, 60), T.tip + 30);
+  const r3 = { ...SC, lift: 0, visible: true }, w3 = wide(cardPt(SC, r3, 0, 60), cardPt(SC, r3, SC.w, 60), T.tip + 30);
   if (w0 < 480 || w1 < 500 || w2 < 600 || w3 < 250) throw new Error(`august: too small on screen (picture ${Math.round(w0)}, card ${Math.round(w1)}, plate ${Math.round(w2)}, small card ${Math.round(w3)} px)`);
 }
 

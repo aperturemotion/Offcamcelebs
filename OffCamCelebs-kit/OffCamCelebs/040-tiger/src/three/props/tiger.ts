@@ -8,8 +8,8 @@
 //     (assets/tiger_face.png, Wikimedia Commons; the film's assets/brand/SOURCES.txt);
 //   · THE "15": a heavy walnut block with a brushed-brass plate on its face, "15" and MAJOR CHAMPIONSHIPS cut into it and
 //     filled black; it slides in from beyond the right edge, low over the table, and lands with weight on "15";
-//   · THE FIFTEEN MAJORS: fifteen walnut plaques, each a brushed-brass plate engraved with the year and the major (1997
-//     MASTERS … 2019 MASTERS, in the order he won them), dealt in from the right one after another into three columns.
+//   · THE FIFTEEN MAJORS: fifteen walnut plaques, each a brushed-brass plate engraved with the major and the year (MASTERS
+//     1997 … MASTERS 2019, in the order he won them), dealt in from the right one after another into four rows under the 15.
 //   ZONE 2 (LIV), far to the right on the same table
 //   · THE TOURNAMENT FLAG: a black nylon pin flag lying flat (its sewn sleeve, a rolled hem, the crease where it was folded),
 //     printed in gold: LIV GOLF / 2022 / SAUDI-BACKED (plain type, no logo). It slides in from the right, its cloth rippling
@@ -25,17 +25,17 @@ import { makeBundle, BUNDLE } from "./cash";
 export const TG = {
   floor: 1450,
   /** the display shelf: centre x, z; size; its top is floor − h */
-  shelf: { x: 360, z: -366, w: 470, d: 250, h: 40 },
+  shelf: { x: 360, z: -176, w: 470, d: 250, h: 40 },
   /** the frame's back-bottom edge, centre (on the shelf); a hair turned */
-  frame: { x: 360, z: -288, yaw: -3 },
+  frame: { x: 360, z: -98, yaw: -3 },
   /** the "15" block: its base's centre */
-  block: { x: 788, z: -330, w: 288, h: 232, d: 84 },
+  block: { x: 1250, z: -490, w: 288, h: 232, d: 84 },
   /** the plaques: five columns (x), three rows (z); each plaque's size and base thickness */
-  grid: { x: 540, z0: -160, dx: 172, dz: 88, w: 160, d: 72, t: 15 },
+  grid: { x: 1250, z0: -350, dx: 172, dz: 88, w: 160, d: 72, t: 15 },
   /** the flag, lying flat: centre, turn, size (a 20 × 14 in pin flag) */
-  flag: { x: 2400, z: -300, yaw: -3, w: 782, d: 548 },
+  flag: { x: 2180, z: -450, yaw: -3, w: 782, d: 548 },
   /** the contracts (US letter, at the cash's scale: 332 × 429) */
-  deal: { x: 3380, z: -230, yaw: -6, w: 332, d: 429 },
+  deal: { x: 3120, z: -400, yaw: -6, w: 332, d: 429 },
 } as const;
 
 /** the fifteen majors, in the order he won them */
@@ -121,7 +121,8 @@ export const blockPrint = (T: TigerT, f: number) => {
   const p = blockPose(T, f), z = TG.block.d / 2 + 3;
   return [at(p, -110, 30, z), at(p, 110, 30, z), at(p, -110, 210, z), at(p, 110, 210, z)];
 };
-export const plaqueRest = (k: number) => ({ x: TG.grid.x + ((k % 5) - 2) * TG.grid.dx, z: TG.grid.z0 + Math.floor(k / 5) * TG.grid.dz, yaw: rad(((hash(k, 3, 9) - 0.5) * 2) * 1.4) });
+/** plaque k's place: four columns, four rows (the last row's three centred under the others) */
+export const plaqueRest = (k: number) => ({ x: TG.grid.x + ((k % 4) - 1.5 + (k >= 12 ? 0.5 : 0)) * TG.grid.dx, z: TG.grid.z0 + Math.floor(k / 4) * TG.grid.dz, yaw: rad(((hash(k, 3, 9) - 0.5) * 2) * 1.4) });
 const plaquePose = (T: TigerT, k: number, f: number): Pose => { const r = plaqueRest(k), p = plaqueAt(T, k, f); return { x: r.x + p.dx, z: r.z, h: p.h, yaw: r.yaw + p.spin }; };
 export const plaquePts = (T: TigerT, k: number, f: number) => box8(plaquePose(T, k, f), TG.grid.w, TG.grid.t + 2.4, TG.grid.d);
 /** a plaque's engraving (the plate's print box) */
@@ -213,7 +214,7 @@ const plaqueTex = (k: number, mode: Mode) => {
     cut(g, mode, (c) => { g.strokeStyle = c; g.lineWidth = 0.9; g.beginPath(); g.roundRect(4.5, 4.5, w - 9, h - 9, 3); g.stroke(); });
     g.textBaseline = "alphabetic"; g.textAlign = "left";
     g.textAlign = "center";
-    cut(g, mode, (c) => { g.fillStyle = c; track(g, 2); fitFont(g, 800, 15, major, w - 30); g.fillText(major, w / 2 + 1, 20); track(g, 0); });
+    cut(g, mode, (c) => { g.fillStyle = c; track(g, 1.6); fitFont(g, 800, 17, major, w - 26); g.fillText(major, w / 2 + 0.8, 21); track(g, 0); });
     cut(g, mode, (c) => { g.fillStyle = c; g.fillRect(26, 25.5, w - 52, 0.9); });
     cut(g, mode, (c) => { g.fillStyle = c; track(g, 1); fitFont(g, 800, 33, year, w - 30); g.fillText(year, w / 2 + 0.5, 55); track(g, 0); });
   }, 3);

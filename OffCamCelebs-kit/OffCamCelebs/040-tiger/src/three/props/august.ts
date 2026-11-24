@@ -59,36 +59,30 @@ const th2 = (() => {
 })();
 export const C2: Card = { w: CW, h: CH, t: CT, x: 450, zb: C2ZB, th: th2, bow: 1.0 };
 
-/** the plaque: its base (w × h × d, centre x and z), the board (w × h × t, leaning back PHI, its foot in the base's slot), the
- *  brass plate (w × h × t) centred on the board's face */
-export const PB = { w: 700, h: 30, d: 120, x: 520, z: 95 } as const;
-export const BD = { w: 660, h: 280, t: 20, foot: 22, phi: rad(8) } as const;
-export const PLT = { w: 624, h: 244, t: 2.4 } as const;
-/** the board's front face at its foot (z) */
-const BZF = PB.z + BD.t / 2;
-/** the plate's front face: z at height h (a leaning plane) */
-const plateFace = (h: number) => BZF + PLT.t * Math.cos(BD.phi) - (h - BD.foot - PLT.t * Math.sin(BD.phi)) * Math.tan(BD.phi);
+/** the plaque: a low walnut DESK WEDGE (w wide): a front lip `lip` tall at z `zA`, then its face rising back at PHI from the
+ *  vertical for `Lf`, a flat top `top` deep, a vertical back; the brass plate (w × h × t) centred on the face */
+export const PQ = { w: 700, x: 520, zA: 250, lip: 14, Lf: 250, phi: rad(50), top: 30 } as const;
+export const PLT = { w: 624, h: 220, t: 2.4 } as const;
+const SPH = Math.sin(PQ.phi), CPH = Math.cos(PQ.phi);
+/** a point s along the face (from its foot) */
+const faceAt = (s: number) => ({ h: PQ.lip + s * CPH, z: PQ.zA - s * SPH });
 /** a point of the plate's print (u, v in print px from its top-left) in the place (x, h, z), plaque at rest */
 export const platePt = (u: number, v: number, dx = 0) => {
-  const y = (BD.h - PLT.h) / 2 + (PLT.h - v);               // up the board from its foot
-  return { x: PB.x + dx - PLT.w / 2 + u, h: BD.foot + y * Math.cos(BD.phi), z: BZF + PLT.t - y * Math.sin(BD.phi) };
+  const p = faceAt(PQ.Lf / 2 + PLT.h / 2 - v);
+  return { x: PQ.x + dx - PLT.w / 2 + u, h: p.h + PLT.t * SPH, z: p.z + PLT.t * CPH };
 };
-/** the board's top corners at rest */
-export const boardTop = (dx = 0) => [-1, 1].map((s) => ({ x: PB.x + dx + (s * BD.w) / 2, h: BD.foot + BD.h * Math.cos(BD.phi), z: BZF - BD.t - BD.h * Math.sin(BD.phi) }));
+/** the wedge's top edges (front and back) at its two ends */
+export const boardTop = (dx = 0) => {
+  const B = faceAt(PQ.Lf);
+  return [-1, 1].flatMap((s) => [{ x: PQ.x + dx + (s * PQ.w) / 2, h: B.h, z: B.z }, { x: PQ.x + dx + (s * PQ.w) / 2, h: B.h, z: B.z - PQ.top }]);
+};
+/** the wedge's back face (z): what the cue cards must stay behind */
+export const PQ_BACK = faceAt(PQ.Lf).z - PQ.top;
 
-/** the small card: w × h × t, its centre x, its foot's z on the base's top; it leans back until it meets the plate */
-const SW = 250, SH = 128, STK = 1.0;
-const SZB = PB.z + PB.d / 2 - 6;
-const ths = (() => {
-  let lo = 0.01, hi = 1.2;
-  for (let i = 0; i < 60; i++) {
-    const m = (lo + hi) / 2;
-    const topZ = SZB - SH * Math.sin(m) - STK * Math.cos(m), topH = PB.h + SH * Math.cos(m);
-    if (topZ - (plateFace(topH) + GAP) > 0) lo = m; else hi = m;
-  }
-  return (lo + hi) / 2;
-})();
-export const SC: Card = { w: SW, h: SH, t: STK, x: 715, zb: SZB, th: ths, bow: 0 };
+/** the small card: it ends lying back on the plate at the face's own slope, its foot on the floor just in front of the lip */
+const SW = 250, SH = 124, STK = 1.0;
+const SZB = PQ.zA + PQ.lip * Math.tan(PQ.phi) + STK * CPH + (PLT.t + GAP) / CPH;
+export const SC: Card = { w: SW, h: SH, t: STK, x: 715, zb: SZB, th: PQ.phi, bow: 0 };
 
 /** a point of a leaning card's print (u, v from its top-left, in print px) at a pose */
 export type CardPose = { x: number; zb: number; lift: number; th: number; visible: boolean };
@@ -100,7 +94,7 @@ export const cardPt = (c: Card, p: CardPose, u: number, v: number) => {
 export const PRINT = {
   lower: [18, 222, 378, 262] as const,     // the lower-third's type, in the picture's px (the picture is HOLE.w × HOLE.hh, + 6 bleed)
   card: [40, 52, 480, 272] as const,
-  plate: [24, 22, 600, 214] as const,
+  plate: [24, 20, 600, 196] as const,
   small: [16, 16, 234, 116] as const,
 };
 
@@ -122,11 +116,12 @@ export const posePL = (T: AugT, f: number) => {
   const rock = t > 0 && t < 22 ? rad(2.0) * Math.exp(-t / 5.5) * Math.abs(Math.sin((Math.PI * t) / 7.5)) : 0;
   return { dx: -1150 * (1 - g), lift: 10 * (1 - ss(0, 0.8, u)), rock, visible: f > T.pl[0] - 1 };
 };
-/** the small card: it glides in standing (4°) on the base's top, lands, then tips back onto the plate (an accelerating fall) */
+/** the small card: it glides in on its edge (leaning 10°) in front of the plaque, lands, then falls back onto the plate (an
+ *  accelerating fall about its foot) */
 export const poseSC = (T: AugT, f: number): CardPose => {
   const u = clamp01((f - T.sc[0]) / (T.sc[1] - T.sc[0])), g = GLIDE(u);
   const k = clamp01((f - T.sc[1]) / (T.tip - T.sc[1]));
-  return { x: SC.x + 650 * (1 - g), zb: SC.zb, lift: PB.h + 14 * (1 - ss(0, 0.8, u)), th: rad(4) + (SC.th - rad(4)) * k * k, visible: f > T.sc[0] - 1 };
+  return { x: SC.x + 650 * (1 - g), zb: SC.zb, lift: 12 * (1 - ss(0, 0.8, u)), th: rad(10) + (SC.th - rad(10)) * k * k, visible: f > T.sc[0] - 1 };
 };
 export const blurAt = (T: AugT, f: number) => 3.2 * SOFT(clamp01((f - T.blur[0]) / (T.blur[1] - T.blur[0])));
 /** the TV's picture: 0 off; the CRT's line opening (0..1) for 3 frames; then the picture and its flash */
@@ -454,31 +449,39 @@ export const backModel = (T: AugT) => (): Model<AugP> & { blur: number } => {
 export const frontModel = (T: AugT) => (): Model<AugP> => {
   const root = new THREE.Group();
   const FY = -FLOOR;
-  // the plaque: a pivot at its base's right foot (it rocks on that edge), the base, the board in its slot, the plate, screws
+  // the plaque: a pivot at its right foot (it rocks on that edge), the walnut wedge, the plate on its face, four screws
   const pivot = new THREE.Group(); pivot.userData.obj = "plaque"; root.add(pivot);
   const body = new THREE.Group(); pivot.add(body);
   {
-    const base = rbox(PB.w, PB.h, PB.d, 5, walnut("aug-walnut-b", 512, 128, 7), 3);
-    base.position.set(0, PB.h / 2, PB.z + PB.d / 2);
-    body.add(base);
-    const board = new THREE.Group();
-    board.position.set(0, BD.foot, BZF);
-    board.rotation.x = -BD.phi;
-    body.add(board);
-    const bm = rbox(BD.w, BD.h, BD.t, 6, walnut("aug-walnut-c", 512, 256, 11), 3);
-    bm.position.set(0, BD.h / 2, 0);
-    board.add(bm);
+    // the wedge's profile (u = −z, v = h), extruded across its width, every edge rounded
+    const B = faceAt(PQ.Lf);
+    const sh = new THREE.Shape();
+    sh.moveTo(-PQ.zA, 0); sh.lineTo(-PQ.zA, PQ.lip); sh.lineTo(-B.z, B.h); sh.lineTo(-(B.z - PQ.top), B.h); sh.lineTo(-(B.z - PQ.top), 0); sh.lineTo(-PQ.zA, 0);
+    const bev = 3;
+    const g = new THREE.ExtrudeGeometry(sh, { depth: PQ.w - 2 * bev, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelOffset: -bev, bevelSegments: 3 });
+    g.translate(0, 0, -(PQ.w - 2 * bev) / 2);
+    const wt = walnutTex("aug-walnut-b", 512, 256, 7).clone();
+    wt.wrapS = wt.wrapT = THREE.RepeatWrapping; wt.repeat.set(1 / 360, 1 / 300); wt.needsUpdate = true;
+    const wm = new THREE.MeshPhysicalMaterial({ map: wt, roughness: 0.46, clearcoat: 0.38, clearcoatRoughness: 0.3, envMapIntensity: 0.5 });
+    const wedge = mesh(g, wm);
+    wedge.rotation.y = Math.PI / 2;      // (u, v, w) → (x = w, y = v, z = −u)
+    body.add(wedge);
+    const face = new THREE.Group();
+    const c = faceAt(PQ.Lf / 2);
+    face.position.set(0, c.h, c.z);
+    face.rotation.x = -PQ.phi;
+    body.add(face);
     const pm = new THREE.MeshPhysicalMaterial({ map: plateTex(), metalness: 0.72, roughness: 0.36, bumpMap: brush(3, 2), bumpScale: 0.18, clearcoat: 0.25, clearcoatRoughness: 0.3, envMapIntensity: 1 });
     const edge = new THREE.MeshPhysicalMaterial({ color: new THREE.Color("#C9A050"), metalness: 1, roughness: 0.3 });
     const plate = rbox(PLT.w, PLT.h, PLT.t, 1, { px: edge, nx: edge, top: edge, bottom: edge, front: pm, back: edge }, 2);
-    plate.position.set(0, BD.h / 2, PLT.t);
-    board.add(plate);
+    plate.position.set(0, 0, PLT.t);
+    face.add(plate);
     const brass = new THREE.MeshPhysicalMaterial({ color: new THREE.Color("#D2A955"), metalness: 1, roughness: 0.22, envMapIntensity: 1.1 });
     for (const sx of [-1, 1]) for (const sy of [-1, 1]) {
       const sc = mesh(new THREE.SphereGeometry(5.5, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), brass);
       sc.rotation.x = Math.PI / 2; sc.scale.set(1, 0.45, 1);
-      sc.position.set(sx * (PLT.w / 2 - 7), BD.h / 2 + sy * (PLT.h / 2 - 7), PLT.t - 0.2);
-      board.add(sc);
+      sc.position.set(sx * (PLT.w / 2 - 7), sy * (PLT.h / 2 - 7), PLT.t - 0.2);
+      face.add(sc);
     }
   }
   // the small card
@@ -494,8 +497,8 @@ export const frontModel = (T: AugT) => (): Model<AugP> => {
     update: (p) => {
       const q = posePL(T, p.f);
       pivot.visible = q.visible;
-      pivot.position.set(PB.x + q.dx + PB.w / 2, FY + q.lift, 0);
-      body.position.set(-PB.w / 2, 0, 0);
+      pivot.position.set(PQ.x + q.dx + PQ.w / 2, FY + q.lift, 0);
+      body.position.set(-PQ.w / 2, 0, 0);
       pivot.rotation.z = -q.rock;
       setCard(sc, SC, poseSC(T, p.f), FY);
     },

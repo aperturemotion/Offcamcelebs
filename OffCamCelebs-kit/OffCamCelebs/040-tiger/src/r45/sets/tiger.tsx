@@ -26,12 +26,12 @@ import type { PlaceDef, PlaceSfx } from "../place";
 // ═══════════════════════════════════════════════════════════════════════════
 const S = "tiger" as const;
 const BIGGEST = word(S, 0, /^biggest/), WITH = word(S, 0, /^with/), N15 = word(S, 0, /^15/);
-const Y2022 = word(S, 1, /^2022/), LIV = word(S, 1, /^Liv/), HUGE = word(S, 1, /^huge/), CONTRACTS = word(S, 1, /^contracts/);
+const Y2022 = word(S, 1, /^2022/), HUGE = word(S, 1, /^huge/), CONTRACTS = word(S, 1, /^contracts/);
 
 export const T: TigerT = {
-  block: N15 + 3,
-  plaques: Array.from({ length: 15 }, (_, k) => N15 + 9 + 2 * k),
-  flag: LIV - 2,
+  block: N15 + 10,
+  plaques: Array.from({ length: 15 }, (_, k) => N15 + 15 + 2 * k),
+  flag: Y2022 + 28,
   deal: HUGE + 6,
   cash: [CONTRACTS + 1, CONTRACTS + 6, CONTRACTS + 11],
 };
@@ -39,7 +39,8 @@ const DONE = Math.max(cueEnd(S, 1) + 4, T.cash[2] + 6, T.plaques[14] + 8);
 
 // ── the camera: the eye rides with the view, a little right; on the pull-back it cranes up to look down onto the table ──
 const K1_AT = WITH - 4, K1_DUR = 40;
-const tiltAt = (f: number) => IO(clamp01((f - K1_AT) / K1_DUR));
+/** (the eye stays high through the place: a crane-up while the frame is still in shot lifted its top into the captions) */
+const tiltAt = (_f: number) => 1;
 const eyeOf = (v: { x: number; y: number }, tilt: number) => ({ x: v.x + 120, y: v.y - (760 + 740 * tilt), D: 1900 });
 /** the view that puts `pts` (layer coords) between screen rows top and bot, centred on screen x cx */
 const fit = (pts: [number, number, number][], tilt: number, top: number, bot: number, cx = 540) => {
@@ -55,25 +56,21 @@ const fit = (pts: [number, number, number][], tilt: number, top: number, bot: nu
 };
 const REST = 99999;
 const PLAQ_REST = Array.from({ length: 15 }, (_, k) => plaquePts(T, k, REST)).flat();
-const FRAME_V = fit([...framePts(), ...shelfPts()], 0, 712, 1392, 548);
-const ZONE1_V = fit([...framePts(), ...shelfPts(), ...blockPts(T, REST), ...PLAQ_REST], 1, 704, 1446, 534);
+const FRAME_V = fit([...framePts(), ...shelfPts()], 1, 730, 1400, 548);
+const ZONE1_V = fit([...blockPts(T, REST), ...PLAQ_REST], 1, 740, 1440, 534);
 const FLAG_V = fit(flagPts(T, REST), 1, 790, 1290, 530);
-/** "2022,": a level truck along the table (the zone's height and zoom kept, so nothing rises into the captions) */
-const LAT_V = { x: FLAG_V.x, y: ZONE1_V.y, z: ZONE1_V.z };
-/** "huge contracts": a level truck on to them (the flag's height and zoom, so it leaves sideways, never up) */
-const DEAL_V = (() => { const v = fit(dealPts(T, REST), 1, 730, 1440, 520); return { x: v.x, y: FLAG_V.y, z: FLAG_V.z }; })();
+const DEAL_V = fit(dealPts(T, REST), 1, 760, 1420, 520);
 const STORY: CamKey[] = [
   { at: -9999, ...FRAME_V, dur: 1 },                     // close on the framed photo as the place arrives
-  { at: K1_AT, ...ZONE1_V, dur: K1_DUR },                // "with": back and up, the block and the plaques sliding in
-  { at: Y2022 - 4, ...LAT_V, dur: 40 },                  // "2022,": along the table, the LIV flag sliding in
-  { at: LIV - 2, ...FLAG_V, dur: 30 },                   // "LIV, a new Saudi-backed tour": in on the flag
+  { at: K1_AT, ...ZONE1_V, dur: K1_DUR },                // "with 15": along the table and up, the 15 and its plaques sliding in
+  { at: Y2022 - 4, ...FLAG_V, dur: 42 },                 // "2022,": on along the table, the LIV flag sliding in
   { at: HUGE - 14, ...DEAL_V, dur: 40 },                 // "huge contracts": on along the table to the contracts and the cash
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
 if ((globalThis as unknown as { process?: { env: Record<string, string> } }).process?.env.TIGER_DEBUG) {
-  console.log("tiger views", JSON.stringify({ FRAME_V, ZONE1_V, LAT_V, FLAG_V, DEAL_V }));
+  console.log("tiger views", JSON.stringify({ FRAME_V, ZONE1_V, FLAG_V, DEAL_V }));
   const bb = (v: { x: number; y: number; z: number }, pts: [number, number, number][]) => { const q = pts.map((p) => { const r = project(eyeOf(v, 1), ...p); return { x: 540 + (r.x - v.x) * v.z, y: 960 + (r.y - v.y) * v.z }; }); return [Math.min(...q.map((a) => a.x)), Math.min(...q.map((a) => a.y)), Math.max(...q.map((a) => a.x)), Math.max(...q.map((a) => a.y))].map(Math.round); };
-  console.log("tiger bboxes", JSON.stringify({ zone1: bb(ZONE1_V, [...framePts(), ...blockPts(T, REST), ...PLAQ_REST]), flag: bb(FLAG_V, flagPts(T, REST)), deal: bb(DEAL_V, dealPts(T, REST)) }));
+  console.log("tiger bboxes", JSON.stringify({ zone1: bb(ZONE1_V, [...blockPts(T, REST), ...PLAQ_REST]), flag: bb(FLAG_V, flagPts(T, REST)), deal: bb(DEAL_V, dealPts(T, REST)) }));
 }
 const eyeAt = (f: number) => eyeOf(camView(CAM, f), tiltAt(f));
 
@@ -99,7 +96,7 @@ const scr = (f: number, p: [number, number, number]) => {
     // zone 1's print until the camera leaves it for the flag; zone 2's from the flag's landing
     if (f >= T.block + 4 && f < STORY[2].at) ink.push(["the 15 plate", blockPrint(T, f)]);
     T.plaques.forEach((a, k) => { if (f >= a + 4 && f < STORY[2].at) ink.push([`plaque ${k}`, plaquePrint(T, k, f)]); });
-    if (f >= T.flag + 6 && f < STORY[4].at) ink.push(["LIV GOLF 2022", flagPrint(T, f, "main")], ["SAUDI-BACKED", flagPrint(T, f, "sub")]);
+    if (f >= T.flag + 6 && f < STORY[3].at) ink.push(["LIV GOLF 2022", flagPrint(T, f, "main")], ["SAUDI-BACKED", flagPrint(T, f, "sub")]);
     if (f >= T.deal + 4) ink.push(["PLAYER AGREEMENT", dealPrint(T, f)]);
     for (const [what, pts] of ink) {
       const q = pts.map((p) => scr(f, p));
@@ -129,7 +126,7 @@ const rectAt = (f: number) => {
 };
 const FF = frameFace();
 const LP = (v: { x: number; y: number }, tilt: number, x: number, y: number, z: number) => { const q = project(eyeOf(v, tilt), x, y, z); return [q.x, q.y] as const; };
-const [fx, fy] = LP(FRAME_V, 0, FF.x, FF.y, FF.z);
+const [fx, fy] = LP(FRAME_V, 1, FF.x, FF.y, FF.z);
 const [px, py] = LP(ZONE1_V, 1, TG.grid.x, TG.floor, TG.grid.z0 + 2 * TG.grid.dz);
 const [gx, gy] = LP(FLAG_V, 1, TG.flag.x, TG.floor, TG.flag.z);
 const [dx, dy] = LP(DEAL_V, 1, TG.deal.x, TG.floor, TG.deal.z);
