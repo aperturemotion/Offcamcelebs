@@ -1,0 +1,17 @@
+040 Tiger Woods / the LIV Golf offer — sources of every image and sound not built in code (2026-11-24)
+
+PHOTO
+- tiger_face.png (assets/ and public/): "Tiger Woods in May 2019.jpg", Wikimedia Commons,
+  https://commons.wikimedia.org/wiki/File:Tiger_Woods_in_May_2019.jpg — official White House photo (via Flickr), a work of
+  the US federal government, public domain. Cropped to the face (740 x 740). Credit (courtesy): "Photo: The White House,
+  public domain, via Wikimedia Commons".
+
+NO LOGOS: LIV GOLF, PGA TOUR, FOX NEWS, THE WASHINGTON POST and THE NEW YORKER appear only as plain type.
+
+BANKNOTE ART
+- note100.jpg (assets/): "Obverse of the series 2009 $100 Federal Reserve Note.jpg", Wikimedia Commons; a work of the US
+  government (Bureau of Engraving and Printing), public domain. Shown only as one face of bundled notes.
+
+MUSIC: 031's bed ("A Good Man with a Broken Heart"), as 038 and 039.
+
+SOUND EFFECTS: listed below once chosen (tools/sfx_prep.py, assets/audio/sfx_src/sfx_spec_040.json).

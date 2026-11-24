@@ -1,0 +1,34 @@
+NEW VIDEO — "Neighborhood" (Tiger Woods / the LIV Golf offer, audit #040). ~60 seconds, 1080x1920 @30fps. FOLDER: 040-tiger | COMPOSITION: InfluencerAudit040
+
+(Written 2026-11-24 by the daily 6 a.m. run: The Payouts "Video 6 of 9", due 2026-11-25 11:00 Moscow, had no script. The 5
+competitors are not named yet, so the topic follows the brand brief's rules: sports money, a famous headline number, not
+audited before; after LEGIT (038) and INFLATED (039) this one rates UNSUPPORTED.)
+
+THIS IS A CONTENT-ONLY PROMPT. Everything visual is the builder's call, in the 034/035 look, with the 2026-11-23 realism rules
+(real materials, the shape first, real cash from props/cash.ts).
+
+WHAT THE VIDEO HAS TO DO
+- HOOK IS MOTION: a real golf ball rolls across a putting green toward the cup and lips out (it circles the rim and spins
+  away) — "turned down"; no number before ~2 s; then a giant presentation cheque "$800,000,000" (payee blank: "PAY TO ____")
+  lands on the green on "eight hundred million".
+- Visuals follow the words; a new object every sentence or two; numbers land on objects.
+- Core contrast: the famous "$800 million" vs what exists on record: a TV answer "somewhere in that neighborhood", a denial,
+  and no document.
+- One real photo: Tiger Woods' face (Wikimedia Commons, CC licence, credited).
+- Quotes are printed as quotes, attributed in type ("GREG NORMAN, LIV GOLF CEO", "MAJED AL SOROUR, GOLF SAUDI").
+
+THE STORY (beats) — see VO_SCRIPT.txt
+1. HOOK: $800M, every headline; we went looking for the offer.
+2. WHO: golf's biggest name, 15 majors. LIV 2022, Saudi-backed, huge contracts.
+3. JUNE: Norman to the Washington Post: "mind-blowingly enormous… high nine digits."
+4. AUGUST: Fox News; the host listed $700M, then $800M; "somewhere in that neighborhood"; offer made before he was in charge.
+5. THE DENIAL: Golf Saudi's chief to The New Yorker: "I never offered him that money. Not even close."
+6. TIGER: never confirmed any number. No contract, no document.
+7. FAIRNESS: he never joined LIV; stayed with the PGA Tour.
+8. VERDICT: UNSUPPORTED. CTA.
+
+ACCURACY GUARDRAILS
+- Never say Tiger was offered/paid $800M as fact: it is "every headline said", "Norman said", "the host listed".
+- Al Sorour's words exactly as quoted; never "LIV lied" or "Norman lied". No "fraud" or "scam".
+- No other LIV players' figures; no politics beyond "Saudi-backed".
+- The verdict rates the $800M figure, never Woods.

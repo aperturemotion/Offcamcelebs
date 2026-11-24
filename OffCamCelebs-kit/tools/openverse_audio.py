@@ -35,7 +35,8 @@ def _get(url):
 
 def search(q, n, dmax, dmin, sa):
     lic = sorted(SAFE | ({"by-sa"} if sa else set()))
-    url = API + "?" + urllib.parse.urlencode({"q": q, "license": ",".join(lic), "page_size": min(50, max(n * 3, 20)), "mature": "false"})
+    # anonymous callers get HTTP 401 for page_size above 20
+    url = API + "?" + urllib.parse.urlencode({"q": q, "license": ",".join(lic), "page_size": min(50 if os.environ.get("OPENVERSE_TOKEN") else 20, max(n * 3, 20)), "mature": "false"})
     res = json.loads(_get(url))
     out = []
     for r in res.get("results", []):

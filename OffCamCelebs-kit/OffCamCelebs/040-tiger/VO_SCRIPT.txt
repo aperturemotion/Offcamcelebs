@@ -1,0 +1,45 @@
+OffCamCelebs 040 — "Neighborhood" (Tiger Woods / the LIV Golf offer, "$800 million") — VO SCRIPT (final, 2026-11-24)
+Written by the daily run (no script in the app). Every line checked at source.
+
+------------------------------------------------------------------ PASTE-READY (as sent to ElevenLabs)
+Tiger Woods turned down eight hundred million dollars to join LIV Golf. Every headline said so. We went looking for the offer.
+
+Tiger is golf's biggest name, with fifteen major championships.
+
+In twenty twenty-two, LIV, a new Saudi-backed tour, went after golf's stars with huge contracts.
+
+The number came from LIV's boss, Greg Norman. In June, he told The Washington Post the offer was mind-blowingly enormous. High nine digits.
+
+In August, on Fox News, the host listed seven hundred million, then eight hundred. Norman answered: somewhere in that neighborhood. He said the offer was made before he was even in charge.
+
+Then the head of Saudi golf told The New Yorker: I never offered him that money. Not even close.
+
+And Tiger? He has never confirmed any number. No contract. No document.
+
+To be fair, Tiger never joined LIV. He stayed with the PGA Tour.
+
+So, eight hundred million dollars? Our rating: unsupported.
+
+Send us who to audit next.
+------------------------------------------------------------------
+
+LINE BY LINE (sources)
+- "turned down eight hundred million … Every headline said so": NPR, CBS News, ESPN, NBC, Fortune, 2 Aug 2022 ("Tiger Woods
+  turned down $700–800 million…"); the figure is never Woods' own (hence "every headline said").
+- "fifteen major championships": Masters 1997, 2001, 2002, 2005, 2019; PGA 1999, 2000, 2006, 2007; US Open 2000, 2002, 2008;
+  Open 2000, 2005, 2006.
+- "In twenty twenty-two, LIV, a new Saudi-backed tour, went after golf's stars": LIV Golf, funded by Saudi Arabia's Public
+  Investment Fund, launched June 2022 and signed players on guaranteed contracts (reported; no figures used).
+- "In June, he told The Washington Post … mind-blowingly enormous. High nine digits": Norman to the Washington Post, reported
+  6 Jun 2022 (Golf Digest; CBS Sports): "Mind-blowingly enormous … We're talking about high nine digits."
+- "In August, on Fox News, the host listed seven hundred million, then eight hundred. Norman answered: somewhere in that
+  neighborhood. He said the offer was made before he was even in charge": Tucker Carlson Tonight, aired 1 Aug 2022 (NPR, AP,
+  2 Aug 2022): Carlson offered $700M, $800M, $1B; Norman: "They'd originally approached Tiger before I became CEO … the
+  number is somewhere in that neighborhood."
+- "the head of Saudi golf told The New Yorker: I never offered him that money. Not even close": Majed Al Sorour, CEO of Golf
+  Saudi, to The New Yorker, 2022 (Golf Monthly; Golf.com: "I never offered him that money, not even close to that"); he
+  described the package as including equity and a cut of sponsorships.
+- "He has never confirmed any number": no on-record statement from Woods on the amount (all coverage, 2022–2026).
+- "To be fair, Tiger never joined LIV. He stayed with the PGA Tour": he never played a LIV event; he publicly backed the PGA
+  Tour (2022 Open press conference) and later joined its policy board.
+- Verdict: UNSUPPORTED — the $800M rests on Norman agreeing with a TV host's figure; no document; the Saudi side disputes it.

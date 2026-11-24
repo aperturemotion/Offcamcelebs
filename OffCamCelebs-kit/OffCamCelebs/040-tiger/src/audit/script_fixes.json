@@ -1,0 +1,32 @@
+{
+  "note": "040 Tiger Woods / the LIV Golf offer. Written by the daily run (2026-11-24): there was no script in the app, so the script was written from the facts at source and there are no brief lines to fix (fixes is empty on purpose). The guardrails are the accuracy rules of BRIEF.txt.",
+  "noBlockingLines": "No external script existed: the VO script was written in-session from checked sources (VO_SCRIPT.txt), so there is no brief wording that could come back in a take.",
+  "fixes": [],
+  "guardrails": [
+    {
+      "why": "The $800M is never stated as a fact of an offer or payment: it is what headlines said, what a host listed, what Norman agreed with.",
+      "bad": "\\b(was|got|been|is) (offered|paid|given)\\b.*\\b(800|eight hundred)\\b|\\b(800|eight hundred) million (offer|deal|contract) (from|with) liv\\b",
+      "example": "Tiger was offered $800 million by LIV."
+    },
+    {
+      "why": "No one is called a liar: Al Sorour's words are quoted, never turned into 'LIV lied' or 'Norman lied'.",
+      "bad": "\\b(lied|lying|liar|liars)\\b",
+      "example": "Norman lied about the offer."
+    },
+    {
+      "why": "Fraud and scam never appear (the brand brief).",
+      "bad": "\\b(fraud|scam)\\b",
+      "example": "The offer was a scam."
+    },
+    {
+      "why": "No other LIV players' figures (the brief).",
+      "bad": "\\b(mickelson|dechambeau|johnson|koepka|rahm|smith)\\b",
+      "example": "Mickelson got two hundred million."
+    },
+    {
+      "why": "The verdict rates the $800M figure, never the person.",
+      "bad": "\\b(tiger|woods|he|norman) (is|was) (unsupported|a liar|lying)\\b",
+      "example": "Tiger is unsupported."
+    }
+  ]
+}
