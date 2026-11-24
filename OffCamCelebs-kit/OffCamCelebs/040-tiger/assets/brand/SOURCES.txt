@@ -14,4 +14,11 @@ BANKNOTE ART
 
 MUSIC: 031's bed ("A Good Man with a Broken Heart"), as 038 and 039.
 
-SOUND EFFECTS: listed below once chosen (tools/sfx_prep.py, assets/audio/sfx_src/sfx_spec_040.json).
+SOUND EFFECTS (the EarnEdits pack's audio is not on this machine: Openverse recordings and Earshot renders, each heard with
+earshot describe; cut by tools/sfx_prep.py from assets/audio/sfx_src/sfx_spec_040.json; es_*.wav are Earshot renders, MIT)
+- putt: "Golf Ball Putt.wav" by lmbubec, https://freesound.org/people/lmbubec/sounds/119451, CC0 1.0
+- lipout: "Drop ball in cup-1.wav" by AGFX, https://freesound.org/people/AGFX/sounds/20428, CC BY 4.0 (credit needed)
+- clap: "Crowd golf clap.wav" by xtrgamr, https://freesound.org/people/xtrgamr/sounds/257793, CC BY 4.0 (credit needed)
+- thump: "Thump.mp3" by mpuffenbarger, https://freesound.org/people/mpuffenbarger/sounds/683031, CC0 1.0
+- (in the palette, unused in 040: cash "Foley_Bills_Mono_14.wav" by yake01, CC BY 4.0; tear "Packaging Paper Tear Short.wav"
+  by afleetingspeck, CC0 1.0)
