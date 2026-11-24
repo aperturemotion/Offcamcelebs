@@ -86,6 +86,17 @@ The pack's `index.json` still says what each EarnEdits sound is, so the choices 
 - Look at a PREVIEW contact sheet of the whole film (every 45 frames) before the long checks: 039's verdict word landed too
   small and was sent back.
 
+**Lessons from the second run (040 Tiger, 2026-11-24):**
+- `onsets.py` can misplace an onset by 0.3–0.4 s (040: "In August" landed inside "digits", "Our" and "Send" inside the
+  word before; captions_vo refused). Check each measured onset against the waveform's 50 ms energy (speech resumes where it
+  climbs above about -35 dB after a gap) and correct `scratchpad/onsets.json` by hand; note each fix in the report.
+- Read the take for dropped words before choosing (040's take B dropped "then eight hundred").
+- Openverse: anonymous searches must keep page_size ≤ 20 (above it the API answers 401); `tools/openverse_audio.py` does so.
+  Downloads: `get <id> <outdir> --name <name>`.
+- Earshot `make` has no golf-ball roll (it returns a club swing); a putt's roll is near-silent, so a soft glide covers it.
+- Plan the hook's figure to read at ≥ 2.0 s even when the voice says it earlier: spell it in the caption (MIS_AT) and land
+  the object on the word after the number.
+
 ## 4. Check (RULE 54 and the rest, all with canaries)
 
 tsc; build; `render.mjs --check`; the audit sweep (PEN/EDGES) on every frame; the viol sweep (CROSS/NEAR/BAND/CAPZONE, Reel
