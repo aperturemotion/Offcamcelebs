@@ -141,7 +141,7 @@ const Comp: React.FC<{ f: number }> = ({ f }) => (
 );
 
 const SFX: PlaceSfx[] = [
-  { s: "clap", at: BIGGEST - 4, end: WITH + 8, vol: 0.25, why: "tiger: a short polite gallery applause under \"biggest name\"", mode: "within" },
+  { s: "clap", at: BIGGEST - 4, end: WITH + 8, vol: 0.11, why: "tiger: a short polite gallery applause under \"biggest name\"", mode: "within" },
   { s: "glide", at: fastest(T.block, "block") + 3, vol: 0.32, why: "tiger: the 15 block slides in low over the table", mode: "peak" },
   { s: "thump", at: T.block, vol: 0.5, why: "tiger: the 15 block lands with weight", mode: "peak" },
   { s: "glide2", at: T.plaques[7], vol: 0.25, why: "tiger: the fifteen plaques are dealt in", mode: "peak" },

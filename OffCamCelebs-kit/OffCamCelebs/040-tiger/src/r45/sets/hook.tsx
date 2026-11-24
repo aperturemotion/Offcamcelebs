@@ -362,9 +362,9 @@ const Hook: React.FC<{ f: number }> = ({ f }) => (
 // ══ THE SOUNDS, each on its own event's frame ══
 const F_RIM = Math.round(frameOf(TAU_S[iIn] + 0.6));
 const SFX: PlaceSfx[] = [
-  { s: "putt", at: 2, vol: 0.42, why: "the putter's stroke: the ball is already on its way", mode: "peak" },
+  { s: "putt", at: 2, vol: 0.19, why: "the putter's stroke: the ball is already on its way", mode: "peak" },
   { s: "glide", at: 4, end: F_IN - 2, vol: 0.25, why: "the ball rolls across the green", mode: "within" },
-  { s: "lipout", at: F_RIM + 2, vol: 0.5, why: "the ball rattles round the cup's lip and spins out", mode: "within" },
+  { s: "lipout", at: F_RIM + 2, vol: 0.23, why: "the ball rattles round the cup's lip and spins out", mode: "within" },
   { s: "thump", at: Math.round(F_SLAP), vol: 0.55, why: "the foam-board cheque slaps flat on the green", mode: "peak" },
 ];
 
