@@ -57,8 +57,8 @@ const PLMID = platePt(PLT.w / 2, PLT.h / 2);
 const SCMID = cardPt(SC, { ...SC, lift: 0, visible: true }, SC.w / 2, SC.h / 2);
 const K0 = keyOn({ x: HOLE.x + 20, h: HOLE.h, z: ZP }, 540, 990, 1.42);           // close on the picture: the lower-third
 const K1 = keyOn(C1MID, 560, 1195, 1.08);                                       // "$700": back onto the cards
-const K2 = keyOn(PLMID, 540, 1290, 1.02);                                      // "Norman": the plaque
-const K3 = keyOn({ x: (PLMID.x + SCMID.x) / 2, h: (PLMID.h + SCMID.h) / 2, z: (PLMID.z + SCMID.z) / 2 }, 545, 1320, 1.02);   // "before": in on the card
+const K2 = keyOn({ ...PLMID, x: 490 }, 540, 1290, 0.96);                                      // "Norman": the plaque
+const K3 = keyOn({ x: 505, h: (PLMID.h + SCMID.h) / 2, z: (PLMID.z + SCMID.z) / 2 }, 540, 1320, 0.96);   // "before": in on the card
 const STORY: CamKey[] = [
   { at: -9999, ...K0, dur: 1 },
   { at: D700 - 15, ...K1, dur: 36 },
@@ -101,15 +101,15 @@ const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
   for (const b of bad) { const f = +b.slice(1, b.indexOf(":")); const k = b.split(": ")[1].split(" at ")[0] + "@" + Math.floor(f / 20) * 20; const y = +(/y (\d+)/.exec(b)?.[1] ?? 0); by.set(k, by.has(k) ? Math.min(by.get(k)!, y) : y); }
   if (bad.length) throw new Error(`august: ${[...by].map(([k, y]) => k + " " + y).join(", ")} :: ${bad.length} screen-rule breaks: ${[...new Set(bad.map((b) => b.replace(/^f\d+: /, "").replace(/\d+/g, "#")))].slice(0, 6).join("; ")}\nfirst: ${bad[0]}\nlast: ${bad[bad.length - 1]}`);
 }
-// ★ the subjects are big: the picture > 480 px wide as the lower-third is read, card 1 > 500 px on "$700", the plate > 600 px
-//   on "somewhere", the small card > 250 px on "charge"
+// ★ the subjects are big: the picture > 480 px wide as the lower-third is read, card 1 > 500 px on "$700", the plate > 560 px
+//   on "somewhere", the small card > 230 px on "charge"
 {
   const wide = (a: P3, b: P3, f: number) => screenOf(b, camView(CAM, f)).x - screenOf(a, camView(CAM, f)).x;
   const w0 = wide({ x: HOLE.x - HOLE.w / 2, h: HOLE.h, z: ZP }, { x: HOLE.x + HOLE.w / 2, h: HOLE.h, z: ZP }, T.on + 10);
   const r1 = { ...C1, lift: 0, visible: true }, w1 = wide(cardPt(C1, r1, 0, 150), cardPt(C1, r1, C1.w, 150), D700 + 14);
   const w2 = wide(platePt(0, 120), platePt(PLT.w, 120), NOR + 34);
   const r3 = { ...SC, lift: 0, visible: true }, w3 = wide(cardPt(SC, r3, 0, 60), cardPt(SC, r3, SC.w, 60), T.tip + 30);
-  if (w0 < 480 || w1 < 500 || w2 < 600 || w3 < 250) throw new Error(`august: too small on screen (picture ${Math.round(w0)}, card ${Math.round(w1)}, plate ${Math.round(w2)}, small card ${Math.round(w3)} px)`);
+  if (w0 < 480 || w1 < 500 || w2 < 560 || w3 < 230) throw new Error(`august: too small on screen (picture ${Math.round(w0)}, card ${Math.round(w1)}, plate ${Math.round(w2)}, small card ${Math.round(w3)} px)`);
 }
 
 const BACK = backModel(T), FRONT = frontModel(T);

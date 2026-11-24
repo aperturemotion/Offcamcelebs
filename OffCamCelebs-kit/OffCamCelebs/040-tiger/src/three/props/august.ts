@@ -61,15 +61,17 @@ export const C2: Card = { w: CW, h: CH, t: CT, x: 450, zb: C2ZB, th: th2, bow: 1
 
 /** the plaque: a low walnut DESK WEDGE (w wide): a front lip `lip` tall at z `zA`, then its face rising back at PHI from the
  *  vertical for `Lf`, a flat top `top` deep, a vertical back; the brass plate (w × h × t) centred on the face */
-export const PQ = { w: 700, x: 520, zA: 250, lip: 14, Lf: 250, phi: rad(50), top: 30 } as const;
-export const PLT = { w: 624, h: 220, t: 2.4 } as const;
+export const PQ = { w: 860, x: 480, zA: 250, lip: 14, Lf: 250, phi: rad(50), top: 30 } as const;
+export const PLT = { w: 580, h: 220, t: 2.4 } as const;
+/** the plate sits on the face's left; the small card lands on the bare walnut to its right */
+export const PLATE_DX = -110;
 const SPH = Math.sin(PQ.phi), CPH = Math.cos(PQ.phi);
 /** a point s along the face (from its foot) */
 const faceAt = (s: number) => ({ h: PQ.lip + s * CPH, z: PQ.zA - s * SPH });
 /** a point of the plate's print (u, v in print px from its top-left) in the place (x, h, z), plaque at rest */
 export const platePt = (u: number, v: number, dx = 0) => {
   const p = faceAt(PQ.Lf / 2 + PLT.h / 2 - v);
-  return { x: PQ.x + dx - PLT.w / 2 + u, h: p.h + PLT.t * SPH, z: p.z + PLT.t * CPH };
+  return { x: PQ.x + dx + PLATE_DX - PLT.w / 2 + u, h: p.h + PLT.t * SPH, z: p.z + PLT.t * CPH };
 };
 /** the wedge's top edges (front and back) at its two ends */
 export const boardTop = (dx = 0) => {
@@ -80,9 +82,9 @@ export const boardTop = (dx = 0) => {
 export const PQ_BACK = faceAt(PQ.Lf).z - PQ.top;
 
 /** the small card: it ends lying back on the plate at the face's own slope, its foot on the floor just in front of the lip */
-const SW = 250, SH = 124, STK = 1.0;
-const SZB = PQ.zA + PQ.lip * Math.tan(PQ.phi) + STK * CPH + (PLT.t + GAP) / CPH;
-export const SC: Card = { w: SW, h: SH, t: STK, x: 715, zb: SZB, th: PQ.phi, bow: 0 };
+const SW = 230, SH = 124, STK = 1.0;
+const SZB = PQ.zA + PQ.lip * Math.tan(PQ.phi) + STK * CPH + GAP / CPH;
+export const SC: Card = { w: SW, h: SH, t: STK, x: 770, zb: SZB, th: PQ.phi, bow: 0 };
 
 /** a point of a leaning card's print (u, v from its top-left, in print px) at a pose */
 export type CardPose = { x: number; zb: number; lift: number; th: number; visible: boolean };
@@ -94,8 +96,8 @@ export const cardPt = (c: Card, p: CardPose, u: number, v: number) => {
 export const PRINT = {
   lower: [18, 222, 378, 262] as const,     // the lower-third's type, in the picture's px (the picture is HOLE.w × HOLE.hh, + 6 bleed)
   card: [40, 52, 480, 272] as const,
-  plate: [24, 20, 600, 196] as const,
-  small: [16, 16, 234, 116] as const,
+  plate: [24, 20, 556, 208] as const,
+  small: [16, 16, 214, 116] as const,
 };
 
 // ══ THE TIMING AND THE POSES ══
@@ -286,10 +288,11 @@ const plateTex = () => paintTex("aug-plate", PLT.w, PLT.h, (g) => {
   const words = QUOTES.fox.words, cut = words.indexOf(" that ");
   const l1 = words.slice(0, cut), l2 = words.slice(cut + 1);
   g.textAlign = "left"; g.textBaseline = "alphabetic";
-  engrave(() => fillBoldItalic(g, l1, 28, 70, 52));
-  engrave(() => fillBoldItalic(g, l2, 28, 124, 52));
-  engrave(() => g.fillRect(30, 146, 320, 1.6));
-  engrave(() => { track(g, 1.5); fitFont(g, 800, 24, QUOTES.fox.who, 330); g.fillText(QUOTES.fox.who, 30, 180); track(g, 0); });
+  const qs = Math.min(fitFont(g, 300, 80, l1, W - 52, true), fitFont(g, 300, 80, l2, W - 52, true));
+  engrave(() => fillBoldItalic(g, l1, 24, 82, qs));
+  engrave(() => fillBoldItalic(g, l2, 24, 150, qs));
+  engrave(() => g.fillRect(26, 168, W - 52, 1.6));
+  engrave(() => { track(g, 1.5); fitFont(g, 800, 30, QUOTES.fox.who, W - 52); g.fillText(QUOTES.fox.who, 26, 202); track(g, 0); });
 }, 3);
 
 /** the small card: a manila index card, "BEFORE HE WAS CEO" in two lines */
@@ -474,13 +477,13 @@ export const frontModel = (T: AugT) => (): Model<AugP> => {
     const pm = new THREE.MeshPhysicalMaterial({ map: plateTex(), metalness: 0.72, roughness: 0.36, bumpMap: brush(3, 2), bumpScale: 0.18, clearcoat: 0.25, clearcoatRoughness: 0.3, envMapIntensity: 1 });
     const edge = new THREE.MeshPhysicalMaterial({ color: new THREE.Color("#C9A050"), metalness: 1, roughness: 0.3 });
     const plate = rbox(PLT.w, PLT.h, PLT.t, 1, { px: edge, nx: edge, top: edge, bottom: edge, front: pm, back: edge }, 2);
-    plate.position.set(0, 0, PLT.t);
+    plate.position.set(PLATE_DX, 0, PLT.t);
     face.add(plate);
     const brass = new THREE.MeshPhysicalMaterial({ color: new THREE.Color("#D2A955"), metalness: 1, roughness: 0.22, envMapIntensity: 1.1 });
     for (const sx of [-1, 1]) for (const sy of [-1, 1]) {
       const sc = mesh(new THREE.SphereGeometry(5.5, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2), brass);
       sc.rotation.x = Math.PI / 2; sc.scale.set(1, 0.45, 1);
-      sc.position.set(sx * (PLT.w / 2 - 7), sy * (PLT.h / 2 - 7), PLT.t - 0.2);
+      sc.position.set(PLATE_DX + sx * (PLT.w / 2 - 7), sy * (PLT.h / 2 - 7), PLT.t - 0.2);
       face.add(sc);
     }
   }
