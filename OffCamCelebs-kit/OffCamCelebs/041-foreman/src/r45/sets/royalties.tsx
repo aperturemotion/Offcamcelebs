@@ -15,7 +15,7 @@ import type { PlaceDef, PlaceSfx } from "../place";
 //  0 "Salton's own SEC filings show those royalties." The place arrives close on the table as a letter-size page glides in
 //    from the near side on its own air and touches down on "filings": Salton's 8-K, in typewriter type: SECURITIES AND
 //    EXCHANGE COMMISSION, FORM 8-K, SALTON, INC., the date line and dense small type (Items 2 and 7, the signatures).
-//  1 "$38 million in one year," On "$38" the camera travels right as a stack of real $100 straps (two rows of seven) slides
+//  1 "$38 million in one year," On "$38" the camera pulls back as a stack of real $100 straps (two rows of seven) slides
 //    in from the right beside the page and lands with weight; its manila tag on top reads $38,096,000 / FISCAL 1999. On
 //    "one year" the camera pushes in on the tag.
 //  2 "then $16.6 million in just three months." The camera pulls back and down as a second, smaller stack (two rows of
