@@ -11,8 +11,8 @@
 //     The machine prints each line inside, behind the slot, and feeds the paper on: each printed line comes out of the slot and
 //     slides down the chute; after the total it feeds the whole printout across the pad (the roll turns with it).
 //   · FOUR YEAR CARDS: ruled card stock (a red header rule, faint blue rules), "1995", "1996", "1997", "1998" in bold type, and
-//     under each a blank amount line "$ ________". They glide in from the right on their own air and touch down face up in a
-//     2 × 2 block beside the tape, one after another.
+//     under each a blank amount line "$ ________". They glide in from either side on their own air and touch down face up, a
+//     pair either side of the tape, one after another.
 // Units are layer px; desk-local y UP from the desk (the floor at layer y DESK.floor), z toward the viewer.
 // ══════════════════════════════════════════════════════════════════════════════════════════════
 import { THREE, makeFloor, mesh, paintTex, slabOf, roundRect, type Model } from "../stage";
@@ -21,7 +21,7 @@ import { GLIDE, clamp01 } from "../../r45/tokens";
 
 export const DESK = { floor: 1400 } as const;
 /** the desk pad: its extent on the desk (x, z), thickness and corner radius */
-export const PAD = { x0: -660, x1: 1400, z0: -760, z1: 1500, t: 6, r: 26 } as const;
+export const PAD = { x0: -780, x1: 780, z0: -760, z1: 1500, t: 6, r: 26 } as const;
 
 // ══ THE TAPE ══
 /** the tape: width, thickness, its centre line x; the printed texture's length (t from the lead end) */
@@ -97,13 +97,13 @@ export const tapeLen = (T: PaperTiming, f: number) =>
 export const feedDone = (T: PaperTiming) => T.prints[3] + STRIKE + FEED_DUR[3];
 
 // ══ THE CARDS ══
-export const CARD = { w: 420, d: 252, t: 1.5 } as const;
+export const CARD = { w: 400, d: 240, t: 1.5 } as const;
 export const YEARS = ["1995", "1996", "1997", "1998"] as const;
-/** the cards' resting places: column-major (1995 far left, 1996 near left, 1997 far right, 1998 near right), with a slight
- *  hand-dealt yaw each */
+/** the cards' resting places, a pair either side of the tape: 1995 far left, 1996 near left, 1997 far right, 1998 near
+ *  right, each with a slight hand-dealt yaw */
 export const CARD_AT = [
-  { x: 498, z: -580, yaw: 1.6 }, { x: 508, z: -288, yaw: -1.1 },
-  { x: 950, z: -586, yaw: -0.9 }, { x: 958, z: -294, yaw: 1.8 },
+  { x: -482, z: -572, yaw: 1.4 }, { x: -476, z: -300, yaw: -1.2 },
+  { x: 480, z: -578, yaw: -1.0 }, { x: 486, z: -296, yaw: 1.6 },
 ] as const;
 /** the card's height over the desk at rest (its underside) */
 export const CARD_Y = PAD.t + 0.35;
@@ -111,7 +111,8 @@ export const poseCard = (T: PaperTiming, k: number, f: number) => {
   const [a, b] = T.cards[k], r = CARD_AT[k];
   const u = clamp01((f - a) / (b - a));
   const g = GLIDE(u);
-  return { x: r.x + 1500 * (1 - g), z: r.z + 30 * (1 - g), h: CARD_Y + 30 * (1 - sstep(u / 0.8)), yaw: r.yaw + 11 * (1 - g), visible: f > a - 1 };
+  const dir = Math.sign(r.x);   // each glides in from its own side
+  return { x: r.x + dir * 1500 * (1 - g), z: r.z + 30 * (1 - g), h: CARD_Y + 30 * (1 - sstep(u / 0.8)), yaw: r.yaw + dir * 11 * (1 - g), visible: f > a - 1 };
 };
 /** a point of a card lying on the pad (u, v from its top-left in its print px; the top is the far side) */
 export const cardPt = (p: { x: number; z: number; yaw: number; h: number }, u: number, v: number, top: number = CARD.t) => {
@@ -119,7 +120,7 @@ export const cardPt = (p: { x: number; z: number; yaw: number; h: number }, u: n
   return { x: p.x + lx * c + lz * sn, h: p.h + top, z: p.z - lx * sn + lz * c };
 };
 /** the cards' print boxes (x0, y0, x1, y1 in card px) */
-export const CARD_INK = { year: [24, 14, 330, 122] as const, amount: [26, 166, CARD.w - 34, 214] as const };
+export const CARD_INK = { year: [24, 14, 316, 120] as const, amount: [26, 166, CARD.w - 34, 214] as const };
 
 // ══ THE MACHINE (z from the chute's lip toward the viewer) ══
 export const MACH = { x: 40, w: 1060, front: ZL + 1100, rear: SLOT.z, deck: 132, base: PAD.t + 6 } as const;
@@ -273,7 +274,7 @@ const cardTex = (k: number) => paintTex(`paper-card-${k}`, CARD.w, CARD.d, (g) =
   for (let y = 172; y < H - 6; y += 34) if (Math.abs(y - 208) > 4) g.fillRect(0, y, W, 1.2);
   // the year
   g.fillStyle = "#24201C"; g.textAlign = "left"; g.textBaseline = "alphabetic";
-  track(g, 2); const s = fitFont(g, 800, 128, YEARS[k], 300); g.fillText(YEARS[k], 24, 16 + s * 0.78); track(g, 0);
+  track(g, 2); const s = fitFont(g, 800, 124, YEARS[k], 290); g.fillText(YEARS[k], 24, 16 + s * 0.78); track(g, 0);
   // the blank amount line
   font(g, 700, 46); g.fillText("$", 28, 206);
   g.fillStyle = "rgba(36,32,28,0.85)"; g.fillRect(66, 208, W - 100, 2.6);

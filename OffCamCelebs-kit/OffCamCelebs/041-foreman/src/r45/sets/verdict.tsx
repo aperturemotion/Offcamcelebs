@@ -44,7 +44,9 @@ const G = 9810 / 900;
 // ── THE BOXES: tier 0 slides in along the floor (friction: a constant deceleration to rest); the upper tiers are TOSSED in
 //    from the side on a true parabola (an apex a little over their landing, gravity's own curve down onto the box under
 //    them), touch down, skid a short way and stop. Nine landings, every ~4 frames, from "sales" to "booming" ──
-const LANDS = PILE.map((_, k) => SALES + 2 + Math.round(k * ((BOOM + 9 - SALES - 2) / (PILE.length - 1))));
+// ★ the floor tier is down before the first toss leaves (a box in the air never meets one still sliding in)
+const T0N = PILE.filter((b) => b.tier === 0).length, TOSS0 = SALES + 14, TOSS1 = BOOM + 9;
+const LANDS = PILE.map((b, k) => (b.tier === 0 ? SALES - 8 + 3 * k : TOSS0 + Math.round((k - T0N) * ((TOSS1 - TOSS0) / (PILE.length - 1 - T0N)))));
 const SLIDE = 15, FLY = 10, SKID = 5, APEX = 60, RUN = 1150;
 const boxAt = (k: number, f: number): Pose3 => {
   const b = PILE[k], L = LANDS[k];
