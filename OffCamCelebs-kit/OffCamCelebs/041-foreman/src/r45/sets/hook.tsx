@@ -40,10 +40,10 @@ export const T: HookT = {
 type Key = { f: number; az: number; el: number; R: number; t: [number, number, number]; hold?: boolean };
 const KEYS: Key[] = [
   { f: -30, az: 24, el: 36, R: 2250, t: [0, 190, -20] },
-  { f: T.close, az: 18, el: 31, R: 1820, t: [0, 150, 40] },
+  { f: T.close, az: 18, el: 31, R: 1760, t: [0, 150, 40] },
   { f: T.pull[0] - 4, az: 15, el: 31, R: 1780, t: [0, 140, 60] },
-  { f: T.pull[1] + 14, az: 6, el: 37, R: 1700, t: [0, 95, 150], hold: true },
-  { f: MUCH - 14, az: 5, el: 37, R: 1690, t: [0, 95, 152], hold: true },
+  { f: T.pull[1] + 14, az: 6, el: 37, R: 1640, t: [0, 104, 160], hold: true },
+  { f: MUCH - 14, az: 5, el: 37, R: 1630, t: [0, 104, 162], hold: true },
   { f: MORE + 22, az: 2, el: 36, R: 1740, t: [0, 100, 148], hold: true },
   { f: LAST + 10, az: -3, el: 35, R: 1720, t: [0, 100, 146] },
 ];
@@ -71,7 +71,7 @@ export const camAt = (f: number) => {
 };
 
 // ══ THE FRAME ══
-const STORY: CamKey[] = [{ at: -9999, x: 540, y: 840, z: 1, dur: 1 }];
+const STORY: CamKey[] = [{ at: -9999, x: 540, y: 820, z: 1, dur: 1 }];
 const CAM: CamKey[] = alive(S, STORY, LAST, { amp: 0.16 });
 const Vm = new THREE.Matrix4();
 const scr = (f: number, p: readonly number[]) => {
@@ -159,7 +159,7 @@ for (let f = BAND_OUT; f <= LAST; f++) for (const p of bandPts(f)) {
 {
   const handle = (f: number) => [-130, 130].flatMap((x) => [46, 68].flatMap((y) => [180, 226].map((z) => lidPt(f, x, y, z))));
   for (const k of [0, 1] as const) {
-    const t0 = T.extra[k][0] - 6;
+    const t0 = T.extra[k][0] - 5;
     const first = extraPts(t0, k).map((p) => scr(t0, p).x);
     if (!(Math.max(...first) < 0 || Math.min(...first) > 1080)) fail(`hook: tossed bundle ${k} pops in on screen (x ${Math.round(Math.min(...first))}…${Math.round(Math.max(...first))})`);
     for (let f = t0; f <= T.extra[k][1] + 2; f += 0.25) {
@@ -173,7 +173,7 @@ for (let f = BAND_OUT; f <= LAST; f++) for (const p of bandPts(f)) {
       if (front > BAND.zc - BAND.w / 2 - 1) fail(`hook: tossed bundle ${k} lands on the band at f${f}`);
     }
   }
-  if (T.extra[1][0] - 6 < T.extra[0][1]) fail("hook: the second bundle is tossed before the first has stopped");
+  if (T.extra[1][0] - 5 < T.extra[0][1]) fail("hook: the second bundle is tossed before the first has stopped");
   if (EXTRA.y[0] < BRICK_TOP) fail("hook: the tossed bundles rest inside the brick");
 }
 

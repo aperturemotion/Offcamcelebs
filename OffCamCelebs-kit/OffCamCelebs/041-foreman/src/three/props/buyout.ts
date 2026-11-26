@@ -64,7 +64,7 @@ export const NPL_H = (CT_PAPER.t ?? 0.5) + NPL_FOOT + 0.3;
 // ══ THE MONEY ══
 export const MX = 3100;
 /** the plaque: length L, its profile (z, y) from the back foot round to the front toe; where it rests */
-export const PQ = { L: 720, x: MX + 30, z: -695, yaw: 0 } as const;
+export const PQ = { L: 720, x: MX - 70, z: -770, yaw: 0 } as const;
 const PROF: [number, number][] = [[-65, 0], [65, 0], [65, 12], [-36, 104], [-65, 104]];
 const SL0: [number, number] = [65, 12], SL1: [number, number] = [-36, 104];
 const SLEN = Math.hypot(SL1[0] - SL0[0], SL1[1] - SL0[1]);
@@ -72,13 +72,13 @@ const SLOPE_A = Math.atan2(-(SL0[0] - SL1[0]), SL1[1] - SL0[1]);
 /** the brass face on the slope: width, height along the slope, thickness */
 export const PQB = { w: 680, h: 112, t: 2.4 } as const;
 /** the cash brick: 2 × 2 bundles, LAYERS high; its centre at rest */
-export const BRICK = { x: MX - 220, z: -305, layers: 4, yaw: -1.5 } as const;
+export const BRICK = { x: MX - 220, z: -480, layers: 4, yaw: -1.5 } as const;
 const BX = 2 * BUNDLE.HX + 7, BZ = 2 * BUNDLE.HZ + 7;
 export const BRICK_TOP = (BRICK.layers - 1) * (BUNDLE.H + 0.3) + BUNDLE.H;
 /** the manila tag on it */
 export const TAG = { w: 360, d: 156, t: 0.7, dx: 8, dz: 4, yaw: -5 } as const;
 /** the certificate: size, centre and turn at rest */
-export const CERT = { w: 440, d: 310, x: MX + 295, z: -300, yaw: 2.5 } as const;
+export const CERT = { w: 440, d: 310, x: MX + 100, z: -185, yaw: 2.5 } as const;
 const CERT_PAPER: Omit<PaperOpts, "face"> = { w: CERT.w, h: CERT.d, t: 0.6, bow: 0.5, seg: 44, curls: [{ corner: "tl", r: 90, lift: 2.6 }] };
 export const CERT_INK = [30, 40, 410, 280] as const;
 
@@ -108,7 +108,7 @@ export const posePlaque = (T: BuyoutTiming, f: number): Pose => {
 /** the brick slides in from the left on the ground and stops by friction (constant deceleration) */
 export const poseCash = (T: BuyoutTiming, f: number): Pose => {
   const u = clamp01((f - T.cash[0]) / (T.cash[1] - T.cash[0])), k = (1 - u) ** 2;
-  return { x: BRICK.x - 620 * k, z: BRICK.z + 16 * k, h: 0, yaw: BRICK.yaw + 5 * k, visible: f > T.cash[0] - 1 };
+  return { x: BRICK.x - 760 * k, z: BRICK.z + 16 * k, h: 0, yaw: BRICK.yaw + 5 * k, visible: f > T.cash[0] - 1 };
 };
 /** the certificate glides in from the right on its own air and touches down */
 export const poseCert = (T: BuyoutTiming, f: number): Pose => {
@@ -541,7 +541,10 @@ export const buyoutModel = (T: BuyoutTiming) => (): Model<BuyoutP> => {
   const cert = new THREE.Group(); cert.userData.obj = "certificate"; root.add(cert);
   cert.add(lying({ ...CERT_PAPER, face: printMat(certTex(), CERT.w, CERT.d, 0.8), back: paperMat("#EFE9D8"), edge: paperMat("#EAE3D0") }));
 
-  root.add(makeFloor({ y: DESK.floor, x0: -1000, x1: 4300, z0: -900, z1: 1300, reflect: 0.1, shadow: 0.55, fadeC: [1800, 60], fadeR: [2700, 900] }));
+  // the shadows over the whole place; the faint mirror only round the money (under the calendar and the contract it would
+  //   show their print reversed below them, low in the frame)
+  root.add(makeFloor({ y: DESK.floor, x0: -1000, x1: 4300, z0: -1300, z1: 1300, shadow: 0.55, fadeC: [1800, -300], fadeR: [2700, 1000] }));
+  root.add(makeFloor({ y: DESK.floor, x0: 1900, x1: 4300, z0: -1300, z1: 700, reflect: 0.08, shadow: 0, fadeC: [3000, -450], fadeR: [1000, 650] }));
 
   const place = (g: THREE.Group, p: Pose) => { g.visible = p.visible; g.position.set(p.x, FY + p.h, p.z); g.rotation.y = rad(p.yaw); };
   return {

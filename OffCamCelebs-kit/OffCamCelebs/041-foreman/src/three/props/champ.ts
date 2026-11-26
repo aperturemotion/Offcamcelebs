@@ -83,13 +83,13 @@ export const poseBelt = (T: ChampTiming, k: number, f: number): Pose => {
   return { x: B.x + B.from * 1450 * g, z: B.z - 6 * g, h: TOP + 0.2 + LIFT * (1 - fall * fall), yaw: B.from * 4 * g, pitch: 0, visible: f > a - 1 };
 };
 /** the plaque: in from the near side and right on an arc, over the plate, then a short free fall onto it */
-const P_ARC = 0.74;
+const P_ARC = 0.78;
 export const posePlaque = (T: ChampTiming, f: number): Pose => {
   const [a, b] = T.plq, B = BELTS[1];
   const u = clamp01((f - a) / (b - a));
   const p = 1 - (1 - Math.min(u / P_ARC, 1)) ** 3;
   const top = TOP + PLATE_TOP + 0.15;
-  const h = u < P_ARC ? top + 30 + 62 * Math.sin((Math.PI / 2) * (u / P_ARC)) : top + 92 * (1 - ((u - P_ARC) / (1 - P_ARC)) ** 2);
+  const h = u < P_ARC ? top + 20 + 30 * Math.sin((Math.PI / 2) * (u / P_ARC)) : top + 50 * (1 - ((u - P_ARC) / (1 - P_ARC)) ** 2);
   const tilt = 1 - clamp01(u / P_ARC);
   return { x: B.x + PLQ.u + 320 * (1 - p), z: B.z + PLQ.v + 640 * (1 - p), h, yaw: 24 * tilt * tilt, pitch: 34 * tilt, visible: f > a - 1 };
 };

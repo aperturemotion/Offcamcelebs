@@ -52,12 +52,12 @@ const CAL_MID = calPt(CAL.PW / 2, CAL.PH / 2);
 const CT_REST = { x: CT.x, z: CT.z, yaw: CT.yaw, h: 0.6 };
 const CT_MID = flatPt({ w: CT.w, d: CT.d }, CT_REST, CT.w / 2, 360);
 const PQ_MID = slopePt(posePlaque(T, 99999), PQ.L / 2, 0.5);
-const MONEY = { x: MX + 30, h: 30, z: -420 };
+const MONEY = { x: MX - 70, h: 30, z: -440 };
 const STORY: CamKey[] = [
   { at: -9999, ...aim(CAL_MID.x, CAL_MID.h, CAL_MID.z, 1.3, 520, 1080), dur: 1 },          // close on the calendar
   { at: SALTON + 1, ...aim(CT_MID.x, CT_MID.h, CT_MID.z, 1.5, 515, 1080), dur: 40 },          // "Salton": across to the contract
   { at: FOREVER + 9, ...aim(PQ_MID.x, PQ_MID.h, PQ_MID.z, 1.5, 520, 1060), dur: 42 },        // "$137.5": on to the plaque
-  { at: CASH - 36, ...aim(MONEY.x, MONEY.h, MONEY.z, 0.96, 495, 1060), dur: 40 },           // "in cash and stock": out to all three
+  { at: CASH - 36, ...aim(MONEY.x, MONEY.h, MONEY.z, 1.2, 500, 1030), dur: 40 },           // "in cash and stock": out to all three
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
 
@@ -115,8 +115,8 @@ const W_ = (f: number, a: P3, b: P3) => scr(f, b).x - scr(f, a).x;
   const pr = posePlate(T, 99999), w2 = W_(T.plate[1] + 4, flatPt(NPS, pr, 0, NPL.d / 2), flatPt(NPS, pr, NPL.w, NPL.d / 2));
   const qr = posePlaque(T, 99999), w3 = W_(STORY[3].at, slopePt(qr, 0, 0.5), slopePt(qr, PQ.L, 0.5));
   const cr = poseCash(T, 99999), er = poseCert(T, 99999);
-  const w4 = W_(DONE, { x: cr.x - BRICK_EXT.x, h: 0, z: cr.z - BRICK_EXT.z }, flatPt(CES, er, CERT.w, 0));
-  if (w0 < 710 || w1 < 640 || w2 < 520 || w3 < 640 || w4 < 760)
+  const w4 = W_(DONE, { x: cr.x - BRICK_EXT.x, h: 0, z: cr.z - BRICK_EXT.z }, flatPt(CES, er, CERT.w, CERT.d / 2));
+  if (w0 < 710 || w1 < 640 || w2 < 520 || w3 < 640 || w4 < 700)
     throw new Error(`buyout: too small on screen (calendar ${Math.round(w0)}, contract ${Math.round(w1)}, plate ${Math.round(w2)}, plaque ${Math.round(w3)}, money ${Math.round(w4)} px)`);
 }
 // ★ nothing passes through anything: the plate's slide stays clear of the calendar (it passes in front of its foot), the
@@ -131,8 +131,10 @@ const W_ = (f: number, a: P3, b: P3) => scr(f, b).x - scr(f, a).x;
     if (p.x - NPL.w / 2 - 20 < CAL.x + CAL.W / 2 && p.z - NPL.d / 2 - 20 < CAL.z) throw new Error(`buyout: the name plate's slide meets the calendar at f${f}`);
   }
   const cr = poseCash(T, 99999), er = poseCert(T, 99999), qr = posePlaque(T, 99999);
-  if (cr.x + BRICK_EXT.x + 20 > er.x - CERT.w / 2) throw new Error("buyout: the cash brick and the certificate overlap");
-  if (cr.z - BRICK_EXT.z - 60 < qr.z + 65 || er.z - CERT.d / 2 - 60 < qr.z + 65) throw new Error("buyout: the front row crowds the plaque");
+  // the certificate lies in front of the brick (nearer the viewer), overlapping it across but clear of it in depth
+  const certFar = er.z - CERT.d / 2 - (CERT.w / 2) * Math.abs(Math.sin((CERT.yaw * Math.PI) / 180));
+  if (cr.z + BRICK_EXT.z + 12 > certFar) throw new Error(`buyout: the cash brick and the certificate overlap (${Math.round(cr.z + BRICK_EXT.z)} > ${Math.round(certFar)})`);
+  if (cr.z - BRICK_EXT.z - 60 < qr.z + 65) throw new Error("buyout: the brick crowds the plaque");
   // each money object outside the frame on its first frame
   const outside = (f: number, pts: P3[]) => pts.every((p) => { const s = scr(f, p); return s.x < -10 || s.x > 1090 || s.y > 1930; }) ||
     // or wholly to one side

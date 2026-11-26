@@ -81,7 +81,7 @@ export const BAR = bodyPt(0, BAR_B.y, BAR_B.z);
 export const PLAQUE = { w: 300, h: 80, t: 7, word: 262 } as const;
 /** THE S-HOOK (its frame: the wire's centre at the top of the bar = the seat, the pivot): its upper curve round the bar
  *  (radius R), the stem down the bar's front (X below the bar), the lower curve (rU) through the plate's ring (ringR) */
-export const HOOK = { R: GRILL.barR + 2.2, wire: 2.1, rU: 3.6, X: 15, ringR: 4.5, ringT: 1.3 } as const;
+export const HOOK = { R: GRILL.barR + 2.4, wire: 2.1, rU: 3.6, X: 15, ringR: 4.5, ringT: 1.3 } as const;
 const yU = -(HOOK.R + GRILL.barR + HOOK.X), zU = HOOK.R - HOOK.rU;
 /** the plate's top edge and its centre's depth, in the hook's frame */
 export const PLATE_TOP = yU - HOOK.ringR + 1.5, PLATE_Z = zU;
@@ -401,7 +401,7 @@ export type Pose3 = { x: number; h: number; z: number; yaw: number; roll?: numbe
 /** boxes: each box's pose (x, z its centre, h its bottom); grill: the grill's origin; steam 0…1 and its clock; plq: the
  *  hook's seat (world), the swing (deg about z), its lean (deg about x); show: which groups are drawn at all */
 export type VerdictP = { boxes: Pose3[]; grill: Pose3; steam: number; t: number;
-  plq: { x: number; h: number; z: number; swing: number; lean: number; visible: boolean }; cards: boolean };
+  plq: { x: number; h: number; z: number; swing: number; lean: number; yaw: number; visible: boolean }; cards: boolean };
 
 export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
   const root = new THREE.Group();
@@ -550,7 +550,7 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
   }
 
   // ══ THE PLAQUE (its frame: the hook's seat at the origin; the plate hangs below the bar on the hook) ══
-  const plq = new THREE.Group(); plq.userData.obj = "plaque"; plq.userData.pierces = ["grill"]; root.add(plq);
+  const plq = new THREE.Group(); plq.userData.obj = "plaque"; root.add(plq);
   {
     const brass = new THREE.MeshPhysicalMaterial({ color: col("#C99A3E"), metalness: 1, roughness: 0.3, envMapIntensity: 1.15 });
     const face = new THREE.MeshPhysicalMaterial({ map: plaqueTex("c"), bumpMap: plaqueTex("h"), bumpScale: 1.1, metalnessMap: plaqueTex("m"), metalness: 1, roughnessMap: plaqueTex("r"), roughness: 1,
@@ -596,7 +596,7 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
         w.m.scale.set(1 + 0.15 * Math.sin(p.t * 0.05 + w.ph), 0.8 + 0.2 * p.steam, 1);
       }
       const q = p.plq;
-      plq.visible = q.visible; plq.position.set(q.x, FY + q.h, q.z);
+      plq.visible = q.visible; plq.position.set(q.x, FY + q.h, q.z); plq.rotation.y = rad(q.yaw);
       const sw = plq.userData.swing as THREE.Group;
       sw.rotation.set(rad(q.lean), 0, rad(q.swing), "ZXY");
       plqShadow.p.visible = q.visible;

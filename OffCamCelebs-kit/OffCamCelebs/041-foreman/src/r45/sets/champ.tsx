@@ -78,12 +78,6 @@ for (let f = cue(S, 0) - 6; f <= DONE + 44; f++) {
     if (s.y < 662) bad(`champ: print in the caption band (y ${Math.round(s.y)}) at f${f}`);
   }
 }
-{ const G = globalThis as unknown as { process?: { env: Record<string, string | undefined> } };
-  if (G.process?.env.CHAMP_DBG) for (const f of [210, 230, 250, 262, 270, 290, 310, 326, 340, 360, 397]) {
-    const r = (p: P3) => { const s = scr(f, p); return `${Math.round(s.x)},${Math.round(s.y)}`; };
-    console.log(f, JSON.stringify(camView(CAM, f)), "ftop", r(FRAME_TOP[4]), r(FRAME_TOP[5]), "photo", PHOTO.corners.map(r).join(" "),
-      "p1", r(beltPt(B1, 0, -PL.b, PLATE_TOP)), r(beltPt(B1, 0, PL.b, PLATE_TOP)), "p2", r(beltPt(B2, 0, -PL.b, PLATE_TOP)), r(beltPt(B2, 0, PL.b, PLATE_TOP)), r(beltPt(B2, PL.a, PL.b, PLATE_TOP)));
-  } }
 if (BAD.length) throw new Error(`${BAD.length} screen-rule breaks:\n` + [...new Set(BAD.map((b) => b.replace(/ at f\d+.*$/, "").replace(/\d+/g, "#")))].slice(0, 6).join("\n") + `\nfirst: ${BAD[0]}\nlast: ${BAD[BAD.length - 1]}`);
 // ★ the subjects are big: the frame > 460 px wide as "Foreman" is said, each plate > 300 px once both have landed, the 1994
 //   plate > 360 px as the plaque lands

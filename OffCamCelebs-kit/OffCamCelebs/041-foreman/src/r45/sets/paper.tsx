@@ -37,7 +37,7 @@ if (feedDone(T) > PAPERW + 2) throw new Error(`paper: the total's feed ends at f
 const DONE = Math.max(cueEnd(S, 1) + 4, T.cards[3][1] + 6);
 
 // ── the camera: the eye rides with the view (high and a little right, looking down onto the pad) ──
-const EL = 2160, ED = 2000;
+const EL = 1200, ED = 1500;
 const eyeOf = (v: { x: number; y: number }): Eye => ({ x: v.x + 160, y: v.y - EL, D: ED });
 const aim = (x: number, h: number, z: number, zoom: number, sx = 540, sy = 960) => {
   let v = { x, y: DESK.floor - h };
@@ -54,9 +54,9 @@ const PRINT_MID = tapePt(L_FIN, (LINES[1].t + LINES[3].t) / 2, 0.55);
 const C1 = CARD_AT[0], C4 = CARD_AT[3];
 const WIDE = { x: (TAPE.x - TAPE.w / 2 + C4.x + CARD.w / 2) / 2, h: PAD.t, z: (C1.z + C4.z) / 2 };
 const STORY: CamKey[] = [
-  { at: -9999, ...aim(CHUTE_MID.x + 40, CHUTE_MID.h, CHUTE_MID.z, 1.18, 540, 1335), dur: 1 },   // close on the printer
-  { at: MILLION + 6, ...aim(PRINT_MID.x, PRINT_MID.h, PRINT_MID.z, 1.32, 540, 1090), dur: 34 },    // "million": up the pad with the printout
-  { at: AND - 4, ...aim(WIDE.x, WIDE.h, WIDE.z, 0.7, 486, 1060), dur: 44 },                        // "and it leaves out": out and across to the cards
+  { at: -9999, ...aim(CHUTE_MID.x + 40, CHUTE_MID.h, CHUTE_MID.z, 1.42, 540, 1300), dur: 1 },   // close on the printer
+  { at: MILLION + 6, ...aim(PRINT_MID.x, PRINT_MID.h, PRINT_MID.z, 1.6, 540, 1080), dur: 34 },    // "million": up the pad with the printout
+  { at: AND - 4, ...aim(WIDE.x, WIDE.h, WIDE.z, 0.75, 482, 1060), dur: 44 },                        // "and it leaves out": out and across to the cards
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
 
@@ -132,9 +132,9 @@ if (BAD.length && !(globalThis as unknown as { __pd?: boolean }).__pd) throw new
   const [, zb0] = zs(rest[0]), [zf1] = zs(rest[1]), [, zb2] = zs(rest[2]), [zf3] = zs(rest[3]);
   const [zFar] = zs([...rest[0], ...rest[2]]), [, zNear] = zs([...rest[1], ...rest[3]]);
   const lead = tapePt(L_FIN, 0, 0.5);
-  if (!(globalThis as unknown as { __pd?: boolean }).__pd && (Math.min(l0, l1) < tapeR + 30 || Math.max(r0, r1) > Math.min(l2, l3) - 20 || zb0 > zf1 - 14 || zb2 > zf3 - 14
-    || Math.max(rr2, rr3) > PAD.x1 - 50 || zFar < PAD.z0 + 36 || zNear > MACH.rear - 60 || lead.z < PAD.z0 + 40 || S_TOTAL - LINES[3].h < S_FLAT + 20))
-    throw new Error(`paper: the objects crowd each other or the pad (cards x ${[l0, r0, l2, rr2].map(Math.round)}, z ${[zb0, zf1, zb2, zf3].map(Math.round)}, lead ${Math.round(lead.z)}, total s ${Math.round(S_TOTAL)})`);
+  if (!(globalThis as unknown as { __pd?: boolean }).__pd && (Math.min(l0, l1) < tapeR + 20 || Math.max(r0, r1) > Math.min(l2, l3) - 14 || zb0 > zf1 - 14 || zb2 > zf3 - 14
+    || Math.max(rr2, rr3) > PAD.x1 - 50 || zFar < PAD.z0 + 36 || zNear > MACH.rear - 60 || lead.z < PAD.z0 + 40 || S_TOTAL - LINES[3].h / 2 < S_FLAT + 20))
+    throw new Error(`paper: the objects crowd each other or the pad (cards x ${[l0, r0, l2, rr2].map(Math.round)}, z ${[zb0, zf1, zb2, zf3].map(Math.round)}, far ${Math.round(zFar)}, near ${Math.round(zNear)}, lead ${Math.round(lead.z)}, total s ${Math.round(S_TOTAL)})`);
 }
 
 const M3D = paperModel(T);

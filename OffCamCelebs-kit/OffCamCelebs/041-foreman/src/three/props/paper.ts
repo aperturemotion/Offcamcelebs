@@ -114,12 +114,12 @@ export const poseCard = (T: PaperTiming, k: number, f: number) => {
   return { x: r.x + 1500 * (1 - g), z: r.z + 30 * (1 - g), h: CARD_Y + 30 * (1 - sstep(u / 0.8)), yaw: r.yaw + 11 * (1 - g), visible: f > a - 1 };
 };
 /** a point of a card lying on the pad (u, v from its top-left in its print px; the top is the far side) */
-export const cardPt = (p: { x: number; z: number; yaw: number; h: number }, u: number, v: number, top = CARD.t) => {
+export const cardPt = (p: { x: number; z: number; yaw: number; h: number }, u: number, v: number, top: number = CARD.t) => {
   const lx = u - CARD.w / 2, lz = v - CARD.d / 2, a = rad(p.yaw), c = Math.cos(a), sn = Math.sin(a);
   return { x: p.x + lx * c + lz * sn, h: p.h + top, z: p.z - lx * sn + lz * c };
 };
 /** the cards' print boxes (x0, y0, x1, y1 in card px) */
-export const CARD_INK = { year: [26, 22, 250, 104] as const, amount: [26, 150, CARD.w - 34, 196] as const };
+export const CARD_INK = { year: [24, 14, 330, 122] as const, amount: [26, 166, CARD.w - 34, 214] as const };
 
 // ══ THE MACHINE (z from the chute's lip toward the viewer) ══
 export const MACH = { x: 40, w: 1060, front: ZL + 1100, rear: SLOT.z, deck: 132, base: PAD.t + 6 } as const;
@@ -267,15 +267,15 @@ const cardTex = (k: number) => paintTex(`paper-card-${k}`, CARD.w, CARD.d, (g) =
     g.fillRect(hash(i, 3, 51 + k) * W, hash(i, 4, 51 + k) * H, 0.5 + hash(i, 5, 51 + k), 0.4);
   }
   // the rules: a red header rule, faint blue rules below
-  g.fillStyle = "rgba(196,72,64,0.75)"; g.fillRect(0, 118, W, 2);
+  g.fillStyle = "rgba(196,72,64,0.75)"; g.fillRect(0, 134, W, 2);
   g.fillStyle = "rgba(110,146,196,0.42)";
-  for (let y = 152; y < H - 6; y += 30) g.fillRect(0, y, W, 1.2);
+  for (let y = 172; y < H - 6; y += 34) if (Math.abs(y - 208) > 4) g.fillRect(0, y, W, 1.2);
   // the year
   g.fillStyle = "#24201C"; g.textAlign = "left"; g.textBaseline = "alphabetic";
-  track(g, 2); const s = fitFont(g, 800, 92, YEARS[k], 230); g.fillText(YEARS[k], 26, 22 + s * 0.78); track(g, 0);
+  track(g, 2); const s = fitFont(g, 800, 128, YEARS[k], 300); g.fillText(YEARS[k], 24, 16 + s * 0.78); track(g, 0);
   // the blank amount line
-  font(g, 700, 44); g.fillText("$", 28, 190);
-  g.fillStyle = "rgba(36,32,28,0.85)"; g.fillRect(64, 192, W - 98, 2.4);
+  font(g, 700, 46); g.fillText("$", 28, 206);
+  g.fillStyle = "rgba(36,32,28,0.85)"; g.fillRect(66, 208, W - 100, 2.6);
   // a soft handling mark near a corner
   const sm = g.createRadialGradient(W - 30, H - 24, 2, W - 30, H - 24, 60);
   sm.addColorStop(0, "rgba(120,100,70,0.06)"); sm.addColorStop(1, "rgba(120,100,70,0)");

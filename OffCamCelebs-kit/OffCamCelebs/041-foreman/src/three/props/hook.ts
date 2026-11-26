@@ -89,7 +89,7 @@ const BP = BUNDLE.H + 0.3;
 export const BRICK = { cols: [-160.5, -53.5, 53.5, 160.5], zc: 53.5, y0: DRW.FLOOR + 0.15 + 0.32 + 0.15, layers: 3 } as const;
 export const BRICK_TOP = BRICK.y0 + 2 * BP + BUNDLE.H;
 /** the hero band: its width, centre (drawer z) and the loop's half span over the brick (x) */
-export const BAND = { w: 88, zc: 124, zIn: 213.6, text: "$200,000,000" } as const;
+export const BAND = { w: 80, zc: 128, zIn: 213.6, text: "$200,000,000" } as const;
 export const BAND_TOP = BRICK_TOP + 0.25 + 0.32 + 0.32;
 /** the two bundles tossed on top: drawer-local z centre, their landing x, their rest heights */
 export const EXTRA = { zc: 16, land: [-24, 18], from: [-640, 640], yaw: [1.6, -1.2], y: [BRICK_TOP + 0.3, BRICK_TOP + 0.3 + BP] } as const;
@@ -130,7 +130,7 @@ export type BodyPose = { x: number; y: number; z: number; yaw: number; roll: num
 /** a tossed bundle k (drawer-local): flies in from the side under gravity, lands on the pile at T.extra[k][0], slides to a stop */
 export const extraPose = (T: HookT, k: 0 | 1, f: number): BodyPose => {
   const [tl, ts] = T.extra[k];
-  const FLY = 6;
+  const FLY = 5;
   const x0 = EXTRA.from[k], xl = EXTRA.land[k], slide = (k === 0 ? 1 : -1) * 16;
   const y = EXTRA.y[k], z = EXTRA.zc;
   const t0 = tl - FLY;
@@ -153,10 +153,10 @@ export const wispAt = (T: HookT, k: number, f: number, lift: number) => {
   const age = f - (T.close + 2 + k * 5.5), life = 46;
   const ph = ((age % life) + life) % life, cyc = Math.floor(age / life);
   const env = age >= 0 ? Math.sin(Math.PI * Math.min(1, ph / life)) ** 1.4 : 0;
-  const op = 0.2 * env * (cyc === 0 ? Math.min(1, age / 8) : 1);
-  const base = plateW(WISP_X[k], UP_TIP + lift - 6, 176);
+  const op = 0.42 * env * (cyc === 0 ? Math.min(1, age / 8) : 1);
+  const base = plateW(WISP_X[k], UP_TIP + lift, 234);
   const rise = 1.7 * ph, sc = 0.75 + 0.5 * (ph / life);
-  return { x: base[0] + 10 * Math.sin(0.07 * f + k), y: base[1] + 115 * sc + rise, z: base[2] + 6 + 0.25 * rise, sc, op };
+  return { x: base[0] + 10 * Math.sin(0.07 * f + k), y: base[1] + 108 * sc + rise, z: base[2] + 4 + 0.2 * rise, sc, op };
 };
 
 // ══ SURFACES ══
@@ -171,7 +171,7 @@ const brushed = (key: string, base: string, streak: [string, string]) => paintTe
 }, 1);
 /** the honed stone counter: near-black with grain, a few faint veins */
 const stoneTex = () => paintTex("hook41-stone", 1024, 1024, (g) => {
-  g.fillStyle = "#2B2421"; g.fillRect(0, 0, 1024, 1024);
+  g.fillStyle = "#3A322D"; g.fillRect(0, 0, 1024, 1024);
   for (let i = 0; i < 26000; i++) {
     const v = hash(i, 1, 91);
     g.fillStyle = v > 0.6 ? `rgba(120,108,98,${0.08 + 0.12 * hash(i, 2, 91)})` : `rgba(8,6,5,${0.12 + 0.2 * hash(i, 2, 91)})`;
@@ -310,9 +310,9 @@ export const hookModel = (T: HookT) => (): Model<HookP> => {
   const plasticDk = new THREE.MeshPhysicalMaterial({ color: col("#16171A"), roughness: 0.5, metalness: 0, clearcoat: 0.3, clearcoatRoughness: 0.5, envMapIntensity: 0.5 });
   const nonstick = new THREE.MeshPhysicalMaterial({ color: col("#303034"), roughness: 0.4, metalness: 0.35, clearcoat: 0.35, clearcoatRoughness: 0.3, envMapIntensity: 0.9 });
   const rubber = new THREE.MeshStandardMaterial({ color: col("#121214"), roughness: 0.85, metalness: 0 });
-  const bt = brushed("hook41-brushed", "#B9BEC4", ["255,255,255", "70,76,84"]);
+  const bt = brushed("hook41-brushed", "#A9AEB4", ["255,255,255", "70,76,84"]);
   bt.wrapS = bt.wrapT = THREE.RepeatWrapping;
-  const steel = new THREE.MeshPhysicalMaterial({ color: col("#D2D6DB"), map: bt, roughnessMap: bt, bumpMap: bt, bumpScale: 0.25, metalness: 1, roughness: 0.42, envMapIntensity: 1 });
+  const steel = new THREE.MeshPhysicalMaterial({ color: col("#D2D6DB"), map: bt, roughnessMap: bt, bumpMap: bt, bumpScale: 0.25, metalness: 1, roughness: 0.5, envMapIntensity: 0.7 });
   const pinSteel = new THREE.MeshPhysicalMaterial({ color: col("#C8CCD2"), metalness: 1, roughness: 0.28, envMapIntensity: 1 });
 
   // ══ THE COUNTER (the floor): honed stone in a pool of light, falling to the dark ground and to nothing at the canvas's edges ══
@@ -323,7 +323,7 @@ export const hookModel = (T: HookT) => (): Model<HookP> => {
   {
     const st = stoneTex();
     st.wrapS = st.wrapT = THREE.RepeatWrapping; st.repeat.set(3, 3);
-    const m = new THREE.MeshPhysicalMaterial({ map: st, roughness: 0.62, metalness: 0, clearcoat: 0.25, clearcoatRoughness: 0.55, envMapIntensity: 0.4, transparent: true, depthWrite: false });
+    const m = new THREE.MeshPhysicalMaterial({ map: st, roughness: 0.55, metalness: 0, clearcoat: 0.45, clearcoatRoughness: 0.4, envMapIntensity: 0.5, transparent: true, depthWrite: false });
     m.onBeforeCompile = (sh) => {
       sh.uniforms.cRes = POOL_U.res;
       sh.vertexShader = sh.vertexShader.replace("#include <common>", "#include <common>\nvarying vec2 vCtr;")
