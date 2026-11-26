@@ -6,10 +6,10 @@
 //     lifted), a legal-blue printed header ROYALTIES, the year big (1995, 1996, 1997, 1998) and a BLANK amount line ($ and a
 //     rule, nothing on it). The rail is a walnut base with two lips and the slot between them; each card leans back on the
 //     back lip, as a card does in a slot.
-//   · NINE RETAIL GRILL BOXES: printed corrugated cardboard (a white-coated board over brown flutes, the flutes showing as
+//   · EIGHT RETAIL GRILL BOXES: printed corrugated cardboard (a white-coated board over brown flutes, the flutes showing as
 //     faint washboard ribs under the print, rounded crushed corners, scuffs), the front panel printed SALTON small, a line
 //     drawing of the grill, his face photo small in a corner, and THE GEORGE FOREMAN GRILL big; the top's two outer flaps
-//     meeting at a seam under packing tape. They slide and are tossed onto a tall pile behind the cards (tiers 3, 3, 2, 1).
+//     meeting at a seam under packing tape. They slide and are tossed onto a tall pile behind the cards (tiers 3, 3, 2).
 //   · THE GRILL, as on the counter in the hook, closed: a hinged clamshell ~360 × 270 mm whose whole body tilts 8° toward
 //     the front (short front feet, tall back feet), a glossy black moulded housing, the lid's black shell with a BRUSHED
 //     STEEL top skin, the seam between them (the ribbed plates' edges showing), two hinge knuckles at the back, a handle bar
@@ -54,8 +54,7 @@ export const PILE: BoxPose[] = (() => {
   const p: BoxPose[] = [
     { x: 0, z: 4, yaw: 1.2, tier: 0, side: -1 }, { x: -394, z: -8, yaw: -1.6, tier: 0, side: -1 }, { x: 395, z: 6, yaw: 1.8, tier: 0, side: 1 },
     { x: 6, z: -4, yaw: -1.4, tier: 1, side: 1 }, { x: -388, z: 9, yaw: 2.2, tier: 1, side: -1 }, { x: 398, z: -6, yaw: -2.0, tier: 1, side: 1 },
-    { x: -190, z: 2, yaw: -2.4, tier: 2, side: -1 }, { x: 204, z: -9, yaw: 1.6, tier: 2, side: 1 },
-    { x: 12, z: 5, yaw: 3.2, tier: 3, side: -1 },
+    { x: -392, z: 2, yaw: -2.4, tier: 2, side: -1 }, { x: 6, z: -9, yaw: 1.6, tier: 2, side: 1 },
   ].map((b) => ({ ...b, x: RAIL.x + b.x, z: PILE_Z + b.z, h: T(b.tier) }));
   return p;
 })();

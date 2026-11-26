@@ -16,7 +16,7 @@ import type { PlaceDef, PlaceSfx } from "../place";
 // PLACE 8 · THE VERDICT (cream; the film's last place, to its end) — one floor, four real things.
 //  0 "To be fair, those early royalties were never broken out, and sales were already booming." The truck brings the place
 //    in CLOSE on four year cards standing in a walnut rail, 1995 · 1996 · 1997 · 1998, each with its amount line BLANK.
-//    On "sales" the camera eases back and up as nine retail grill boxes (printed corrugated board, THE GEORGE FOREMAN GRILL)
+//    On "sales" the camera eases back and up as eight retail grill boxes (printed corrugated board, THE GEORGE FOREMAN GRILL)
 //    slide in along the floor behind them and are tossed in from both sides onto them, tier on tier, landing fast on real
 //    arcs, a tall pile by "booming".
 //  1 "So, $200 million from a grill?" The camera trucks right, past the pile, as the grill from the hook slides in from the
@@ -43,9 +43,9 @@ const G = 9810 / 900;
 
 // ── THE BOXES: tier 0 slides in along the floor (friction: a constant deceleration to rest); the upper tiers are TOSSED in
 //    from the side on a true parabola (an apex a little over their landing, gravity's own curve down onto the box under
-//    them), touch down, skid a short way and stop. Nine landings, every ~4 frames, from "sales" to "booming" ──
+//    them), touch down, skid a short way and stop. Eight landings, every ~4 frames, from "sales" to "booming" ──
 // ★ the floor tier is down before the first toss leaves (a box in the air never meets one still sliding in)
-const T0N = PILE.filter((b) => b.tier === 0).length, TOSS0 = SALES + 9, TOSS1 = BOOM;
+const T0N = PILE.filter((b) => b.tier === 0).length, TOSS0 = SALES + 9, TOSS1 = BOOM - 2;
 const LANDS = PILE.map((b, k) => (b.tier === 0 ? SALES - 12 + 3 * k : TOSS0 + Math.round((k - T0N) * ((TOSS1 - TOSS0) / (PILE.length - 1 - T0N)))));
 const SLIDE = 15, FLY = 10, SKID = 5, APEX = 60, RUN = 1150;
 const boxAt = (k: number, f: number): Pose3 => {
@@ -67,7 +67,7 @@ const boxAt = (k: number, f: number): Pose3 => {
 };
 
 // ── THE GRILL: from beyond the right edge, sliding on its rubber feet and braking to rest ON "million" ──
-const GX = 2300, GZ = -60, GYAW = -2;
+const GX = 3300, GZ = -60, GYAW = -2;
 const G1 = D200 - 3, G0 = G1 - 40;
 const grillAt = (f: number): Pose3 => {
   const u = clamp01((f - G0) / (G1 - G0)), e = 1 - (1 - u) ** 2.4;
@@ -138,7 +138,7 @@ const CARDS_MID: P3 = { x: RAIL.x, h: 150, z: -12 };
 const PILE_MID: P3 = { x: RAIL.x, h: 560, z: -300 };
 const GRILL_MID = gw(GREST, { x: 0, h: 70, z: TRAY.z * 0.55 });
 const PLQ_MID = (() => { const p = plqAt(TOTAL_FRAMES); return plqPt({ ...p, swing: 0 }, PLAQUE.w / 2, PLAQUE.h / 2); })();
-const K1 = SALES - 32, K2 = K1 + 41, K4 = OUR - 8;
+const K1 = SALES - 32, K2 = BOOM - 6, K4 = OUR - 8;
 const K1V = keyOn(PILE_MID, 540, 1100, 0.6);
 const STORY: CamKey[] = [
   { at: -9999, ...keyOn(CARDS_MID, 478, 1150, 1.14), dur: 1 },              // close on the cards: 1995 … 1998, blank
@@ -215,7 +215,7 @@ const bandPrint = (g: Pose3): P3[] => [[-120, 30], [120, 30], [120, -30], [-120,
   // over 60% of the frame from the word to the film's end
   const at = (f: number, p: P3) => scrOf(p, camView(CAM, f));
   const wr = at(word(S, 0, /^early/i), cardPt(3, CARD.w, 40)).x - at(word(S, 0, /^early/i), cardPt(0, 0, 40)).x;
-  const hp = at(BOOM + 10, { x: RAIL.x, h: 0, z: PILE[0].z + BOX.d / 2 }).y - at(BOOM + 10, { x: RAIL.x, h: PILE[8].h + BOX.h, z: PILE[8].z + BOX.d / 2 }).y;
+  const hp = at(BOOM + 10, { x: RAIL.x, h: 0, z: PILE[0].z + BOX.d / 2 }).y - at(BOOM + 10, { x: RAIL.x, h: PILE[PILE.length - 1].h + BOX.h, z: PILE[PILE.length - 1].z + BOX.d / 2 }).y;
   const wg = at(D200, gw(GREST, { x: TRAY.w / 2, h: 20, z: TRAY.z })).x - at(D200, gw(GREST, { x: -TRAY.w / 2, h: 20, z: TRAY.z })).x;
   const half = PLAQUE.word / 2;
   const wl = Math.min(...[SEATF, SEATF + 12, SEATF + 30, TOTAL_FRAMES - 20, TOTAL_FRAMES].map((f) => { const p = plqAt(f); return at(f, plqPt(p, PLAQUE.w / 2 + half, PLAQUE.h / 2)).x - at(f, plqPt(p, PLAQUE.w / 2 - half, PLAQUE.h / 2)).x; }));
