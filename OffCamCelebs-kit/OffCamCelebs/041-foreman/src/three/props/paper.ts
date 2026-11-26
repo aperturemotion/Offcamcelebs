@@ -319,14 +319,18 @@ export const paperModel = (T: PaperTiming) => (): Model<PaperP> => {
     const body = rbox(W, PAD.t, D, PAD.t / 2 - 0.2, side, 3);
     body.position.set((PAD.x0 + PAD.x1) / 2, FY + PAD.t / 2, PAD.z1);
     pad.add(body);
-    // ★ the pad's surfaces are pushed back in depth (polygon offset): the tape and the cards lie under a unit over it, and
-    //   a coarse depth buffer (the headless renderer's) let the leather win through them from some camera positions
+    // ★ the pad is drawn FIRST and writes no depth (and is pushed back by a polygon offset): the tape and the cards lie
+    //   under a unit over it, and the preview's coarse depth buffer (no antialiasing) let the leather win through them from
+    //   some camera positions. Nothing lies under the pad, so it never needs to hide anything.
     const topM = new THREE.MeshPhysicalMaterial({ map: padTex(), roughness: 0.6, bumpMap: pebble(9, 9), bumpScale: 0.7, metalness: 0, clearcoat: 0.18, clearcoatRoughness: 0.55, envMapIntensity: 0.45,
       polygonOffset: true, polygonOffsetFactor: 2, polygonOffsetUnits: 8 });
     side.polygonOffset = true; side.polygonOffsetFactor = 2; side.polygonOffsetUnits = 8;
+    side.depthWrite = false; topM.depthWrite = false;
+    body.renderOrder = -3;
     const top = mesh(new THREE.PlaneGeometry(W - 2 * PAD.t, D - 2 * PAD.t), topM, false, true);
     top.rotation.x = -Math.PI / 2;
     top.position.set((PAD.x0 + PAD.x1) / 2, FY + PAD.t + 0.04, (PAD.z0 + PAD.z1) / 2);
+    top.renderOrder = -2;
     pad.add(top);
   }
 
@@ -368,7 +372,9 @@ export const paperModel = (T: PaperTiming) => (): Model<PaperP> => {
     const CW = TAPE.w + 90;
     const chuteM = charcoal.clone();
     chuteM.polygonOffset = true; chuteM.polygonOffsetFactor = 2; chuteM.polygonOffsetUnits = 8;
+    chuteM.depthWrite = false;   // ★ as the pad: drawn before the tape that lies on it (only the body, nearer, covers it)
     const chute = mesh(slabOf(cs, CW, 1.2, 4), chuteM);
+    chute.renderOrder = -1;
     chute.rotation.y = Math.PI / 2;
     chute.position.set(TAPE.x + CW / 2, FY, 0);
     mach.add(chute);

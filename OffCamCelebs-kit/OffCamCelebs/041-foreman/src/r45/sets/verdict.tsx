@@ -66,7 +66,7 @@ const boxAt = (k: number, f: number): Pose3 => {
 
 // ── THE GRILL: from beyond the right edge, sliding on its rubber feet and braking to rest ON "million" ──
 const GX = 2300, GZ = -60, GYAW = -2;
-const G1 = GRL - 12, G0 = G1 - 34;
+const G1 = GRL - 12, G0 = G1 - 44;
 const grillAt = (f: number): Pose3 => {
   const u = clamp01((f - G0) / (G1 - G0)), e = 1 - (1 - u) ** 2.4;
   return { x: GX + 1300 * (1 - e), h: 0, z: GZ, yaw: GYAW + 5 * (1 - e), visible: f >= G0 - 1 };
