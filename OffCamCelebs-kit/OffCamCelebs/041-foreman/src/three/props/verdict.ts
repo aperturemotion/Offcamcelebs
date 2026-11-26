@@ -23,7 +23,7 @@
 // ══════════════════════════════════════════════════════════════════════════════════════════════
 import { THREE, makeFloor, mesh, paintTex, imageOf, type Model } from "../stage";
 import { M, rbox, rad, col, hash, fitFont, font, track, paper, type PaperOpts } from "../kit029";
-import { makeBundle, makeBand, BUNDLE, keepFresh } from "./cash";
+import { makeBundle, makeBand, BUNDLE } from "./cash";
 
 // ══ THE GEOMETRY (exported: the place's camera, timing and checks are solved on it) ══
 /** a year card (print px), its thickness, its lean back in the slot (deg) */
@@ -67,30 +67,33 @@ export const boxCorners = (b: { x: number; z: number; yaw: number }) => {
 
 /** THE GRILL (its local frame: the footprint's centre on the floor, z forward). The body tilts TILT° toward the front about
  *  the footprint's centre at height Y0; the housing H high, the seam S, the lid L high, the skin on top */
-export const GRILL = { w: 360, d: 270, tilt: 8, Y0: 36, H: 70, S: 4, L: 54, skin: 5, barR: 9, barW: 196, barOut: 42 } as const;
+export const GRILL = { w: 360, d: 270, tilt: 8, Y0: 44, H: 74, S: 4, L: 56, skin: 5, barR: 9, barW: 196, barOut: 42 } as const;
 /** a point of the tilted body (its frame: y up from the housing's underside, z forward from the footprint's centre) in the
  *  grill's local frame (x, h, z) */
 export const bodyPt = (x: number, y: number, z: number) => {
   const a = rad(GRILL.tilt), c = Math.cos(a), s = Math.sin(a);
   return { x, h: GRILL.Y0 + y * c - z * s, z: y * s + z * c };
 };
-/** the handle bar's centre (body frame) */
+/** the handle bar's centre (body frame) and in the grill's frame */
 const BAR_B = { y: GRILL.H + GRILL.S + GRILL.L * 0.5, z: GRILL.d / 2 + GRILL.barOut };
 export const BAR = bodyPt(0, BAR_B.y, BAR_B.z);
+/** THE PLAQUE: w × h × t, the word's width */
+export const PLAQUE = { w: 300, h: 80, t: 7, word: 262 } as const;
+/** THE S-HOOK (its frame: the wire's centre at the top of the bar = the seat, the pivot): its upper curve round the bar
+ *  (radius R), the stem down the bar's front (X below the bar), the lower curve (rU) through the plate's ring (ringR) */
+export const HOOK = { R: GRILL.barR + 2.2, wire: 2.1, rU: 3.6, X: 15, ringR: 4.5, ringT: 1.3 } as const;
+const yU = -(HOOK.R + GRILL.barR + HOOK.X), zU = HOOK.R - HOOK.rU;
+/** the plate's top edge and its centre's depth, in the hook's frame */
+export const PLATE_TOP = yU - HOOK.ringR + 1.5, PLATE_Z = zU;
 /** THE DRIP TRAY (the grill's frame): outer w × h × d, its walls, its centre z (out on the counter, clear of the plaque) */
-export const TRAY = { w: 344, h: 30, d: 262, wall: 4, floor: 3, z: 0 } as { w: number; h: number; d: number; wall: number; floor: number; z: number };
-/** THE PLAQUE: w × h × t; its top edge below the hook's seat; it hangs PLQ_DZ in front of the bar's centre */
-export const PLAQUE = { w: 300, h: 80, t: 7, word: 262, drop: 9, dz: GRILL.barR + 5.5 } as const;
-TRAY.z = BAR.z + PLAQUE.dz + PLAQUE.t / 2 + 9 + TRAY.d / 2;
+export const TRAY = { w: 344, h: 30, d: 262, wall: 4, floor: 3, z: BAR.z + PLATE_Z + PLAQUE.t / 2 + 9 + 131 } as const;
 /** the hook's seat: the top of the bar (the pivot the plaque swings about), in the grill's frame */
-export const SEAT = { x: 0, h: BAR.h + GRILL.barR + 2.2, z: BAR.z };
-/** the plaque's centre below the seat, at rest (its frame hangs from the seat) */
-export const PLQ_HANG = GRILL.barR + 2.2 + PLAQUE.drop + PLAQUE.h / 2;
-/** a point on the plaque's face (u, v from its top-left, print px) for a pivot pose (world) and its swing (deg about z) */
+export const SEAT = { x: 0, h: BAR.h + HOOK.R, z: BAR.z };
+/** a point on the plaque's face (u, v from its top-left, print px) for a seat pose (world) and its swing (deg about z) */
 export const plqPt = (p: { x: number; h: number; z: number; swing: number }, u: number, v: number) => {
-  const lx = u - PLAQUE.w / 2, ly = -(GRILL.barR + 2.2 + PLAQUE.drop + v);
+  const lx = u - PLAQUE.w / 2, ly = PLATE_TOP - v;
   const a = rad(p.swing), c = Math.cos(a), s = Math.sin(a);
-  return { x: p.x + lx * c - ly * s, h: p.h + lx * s + ly * c, z: p.z + PLAQUE.dz + PLAQUE.t / 2 };
+  return { x: p.x + lx * c - ly * s, h: p.h + lx * s + ly * c, z: p.z + PLATE_Z + PLAQUE.t / 2 };
 };
 /** the cash brick in the tray: three stacks side by side (the notes' length along z), two bundles high */
 const STACK_X = [-104, 0, 104];
@@ -434,7 +437,6 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
     const b = new THREE.Group(); b.userData.obj = `box${k}`;
     const body = rbox(BOX.w, BOX.h, BOX.d, 3.2, (() => { const m = boxMaterials(k); return { px: m[0], nx: m[1], top: m[2], bottom: m[3], front: m[4], back: m[5] }; })(), 3);
     body.position.set(0, BOX.h / 2, BOX.d / 2); b.add(body);
-    keepFresh(body);
     root.add(b); boxes.push(b);
     if (PILE[k].tier === 0) { const s = contact(BOX.w + 80, BOX.d + 70, 0.4); root.add(s.p); boxShadows[k] = s; }
   });
@@ -547,7 +549,7 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
     });
   }
 
-  // ══ THE PLAQUE (its frame: the hook's seat at the origin; it hangs below, in front of the bar) ══
+  // ══ THE PLAQUE (its frame: the hook's seat at the origin; the plate hangs below the bar on the hook) ══
   const plq = new THREE.Group(); plq.userData.obj = "plaque"; plq.userData.pierces = ["grill"]; root.add(plq);
   {
     const brass = new THREE.MeshPhysicalMaterial({ color: col("#C99A3E"), metalness: 1, roughness: 0.3, envMapIntensity: 1.15 });
@@ -556,21 +558,17 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
     const back = new THREE.MeshPhysicalMaterial({ color: col("#A8823C"), metalness: 1, roughness: 0.45, envMapIntensity: 0.9 });
     const plate = rbox(PLAQUE.w, PLAQUE.h, PLAQUE.t, 2.4, { px: brass, nx: brass, top: brass, bottom: brass, front: face, back }, 3);
     const swingG = new THREE.Group(); plq.add(swingG);
-    const yc = -(GRILL.barR + 2.2 + PLAQUE.drop + PLAQUE.h / 2);
-    plate.position.set(0, yc, PLAQUE.dz + PLAQUE.t); swingG.add(plate);
-    // the ring at the plate's top and the S-hook: over the bar's top (its seat at the origin), down its front, into the ring
-    const wire = 2.1;
-    const ring = mesh(new THREE.TorusGeometry(6, 1.6, 10, 28), brass); ring.position.set(0, yc + PLAQUE.h / 2 + 4.4, PLAQUE.dz + PLAQUE.t / 2); ring.rotation.y = Math.PI / 2; swingG.add(ring);
-    const R = GRILL.barR + wire + 0.15;
-    // the upper curve: an arc round the bar from behind (−z) over the top to its front (+z), its centre the bar's centre
-    const upper = mesh(new THREE.TorusGeometry(R, wire, 10, 40, Math.PI * 1.05).rotateY(Math.PI / 2).rotateX(-Math.PI * 0.025), brass);
-    upper.position.set(0, -R + wire, 0); swingG.add(upper);
-    // the stem down the bar's front to the ring, and the lower curve through it
-    const stemTop = -R + wire, stemBot = yc + PLAQUE.h / 2 + 6;
-    const sz = PLAQUE.dz * 0.5 + R * 0.5;
-    const stem = mesh(new THREE.CylinderGeometry(wire, wire, stemTop - stemBot, 10), brass); stem.position.set(0, (stemTop + stemBot) / 2, R); stem.rotation.x = Math.atan2(sz - R, stemTop - stemBot) * 0; swingG.add(stem);
-    const lower = mesh(new THREE.TorusGeometry((PLAQUE.dz + PLAQUE.t / 2 - R) / 2, wire, 8, 20, Math.PI).rotateY(Math.PI / 2).rotateX(Math.PI), brass);
-    lower.position.set(0, stemBot, R + (PLAQUE.dz + PLAQUE.t / 2 - R) / 2); swingG.add(lower);
+    plate.position.set(0, PLATE_TOP - PLAQUE.h / 2, PLATE_Z + PLAQUE.t / 2); swingG.add(plate);
+    const { R, wire, rU, ringR, ringT } = HOOK;
+    // the ring through the plate's top (its axis along z: the hook's lower curve passes through it)
+    const ring = mesh(new THREE.TorusGeometry(ringR, ringT, 10, 28), brass); ring.position.set(0, yU - ringR, zU); swingG.add(ring);
+    // the upper curve: round the bar from behind (−z) over its top to its front (+z), centred on the bar's centre
+    const upper = mesh(new THREE.TorusGeometry(R, wire, 10, 44, Math.PI).rotateY(Math.PI / 2), brass);
+    upper.position.set(0, -R, 0); swingG.add(upper);
+    // the stem straight down the bar's front, and the lower curve round the ring's top wire, its tip turned up behind
+    const stem = mesh(new THREE.CylinderGeometry(wire, wire, -R - yU, 10), brass); stem.position.set(0, (-R + yU) / 2, R); swingG.add(stem);
+    const lower = mesh(new THREE.TorusGeometry(rU, wire, 8, 20, Math.PI).rotateY(Math.PI / 2).rotateX(Math.PI), brass);
+    lower.position.set(0, yU, zU); swingG.add(lower);
     plq.userData.swing = swingG;
   }
   const plqShadow = contact(PLAQUE.w + 40, 60, 0); root.add(plqShadow.p);
@@ -586,8 +584,6 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
         const o = boxes[k];
         o.visible = b.visible;
         o.position.set(b.x, FY + b.h, b.z); o.rotation.set(0, rad(b.yaw), rad(b.roll ?? 0), "YXZ");
-        // the box's centre is its group's origin in x and z: its body sits from −d/2 to d/2 about it
-        (o.children[0] as THREE.Mesh).position.z = 0;
         const s = boxShadows[k];
         if (s) { s.p.visible = b.visible; s.p.position.set(b.x + 18, FY + 0.3, b.z + 6); s.p.rotation.z = rad(b.yaw); }
       });
@@ -605,7 +601,7 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
       sw.rotation.set(rad(q.lean), 0, rad(q.swing), "ZXY");
       plqShadow.p.visible = q.visible;
       const k = Math.max(0, 1 - (q.h - SEAT.h) / 120);
-      plqShadow.m.opacity = 0.32 * k * k; plqShadow.p.position.set(q.x + 16, FY + 0.32, q.z + PLAQUE.dz + 8);
+      plqShadow.m.opacity = 0.32 * k * k; plqShadow.p.position.set(q.x + 16, FY + 0.32, q.z + PLATE_Z + 8);
     },
   };
 };

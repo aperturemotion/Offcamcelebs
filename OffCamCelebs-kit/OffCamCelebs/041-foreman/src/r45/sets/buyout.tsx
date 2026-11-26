@@ -38,7 +38,7 @@ export const T: BuyoutTiming = {
 const DONE = Math.max(cueEnd(S, 1) + 4, T.cert[1] + 2);
 
 // ── the camera: the eye rides with the view (up and a little right, looking down onto the ground) ──
-const EL = 1250;
+const EL = 1600;
 const eyeOf = (v: { x: number; y: number }): Eye => ({ x: v.x + 200, y: v.y - EL, D: 1800 });
 const aim = (x: number, h: number, z: number, zoom: number, sx = 540, sy = 960) => {
   let v = { x, y: DESK.floor - h };

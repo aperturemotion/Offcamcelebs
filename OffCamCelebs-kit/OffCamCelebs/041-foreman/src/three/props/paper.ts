@@ -102,8 +102,8 @@ export const YEARS = ["1995", "1996", "1997", "1998"] as const;
 /** the cards' resting places: column-major (1995 far left, 1996 near left, 1997 far right, 1998 near right), with a slight
  *  hand-dealt yaw each */
 export const CARD_AT = [
-  { x: 498, z: -582, yaw: 1.6 }, { x: 508, z: -306, yaw: -1.1 },
-  { x: 950, z: -592, yaw: -0.9 }, { x: 958, z: -314, yaw: 1.8 },
+  { x: 498, z: -580, yaw: 1.6 }, { x: 508, z: -288, yaw: -1.1 },
+  { x: 950, z: -586, yaw: -0.9 }, { x: 958, z: -294, yaw: 1.8 },
 ] as const;
 /** the card's height over the desk at rest (its underside) */
 export const CARD_Y = PAD.t + 0.35;

@@ -49,9 +49,9 @@ export const CAL_WIRE_TOP = CAL_HTOP + 6;
 export const CT = { x: 1520, z: -400, w: 540, d: 700, yaw: -2.5 } as const;
 const CT_PAPER: Omit<PaperOpts, "face"> = { w: CT.w, h: CT.d, t: 0.5, bow: 0.6, seg: 48, curls: [{ corner: "tr", r: 130, lift: 4 }, { corner: "bl", r: 70, lift: 1.4 }] };
 /** where the readable print sits (print px boxes; y from the far edge) */
-export const CT_INK = { title: [40, 52, 500, 168] as const, perp: [40, 452, 500, 514] as const };
+export const CT_INK = { title: [24, 44, 516, 178] as const, perp: [30, 430, 510, 552] as const };
 /** the name plate: its size, thickness, and where it rests on the page (print px of its centre) */
-export const NPL = { w: 440, d: 100, t: 4.2, u: 270, v: 330 } as const;
+export const NPL = { w: 460, d: 112, t: 4.2, u: 270, v: 318 } as const;
 const NPL_FOOT = (() => {
   const o = { ...CT_PAPER, face: null as unknown as THREE.Material } as PaperOpts;
   // the plate's footprint on the page (paper-local x right, y toward the far edge), with room for its small turn
@@ -76,7 +76,7 @@ export const BRICK = { x: MX - 220, z: -305, layers: 4, yaw: -1.5 } as const;
 const BX = 2 * BUNDLE.HX + 7, BZ = 2 * BUNDLE.HZ + 7;
 export const BRICK_TOP = (BRICK.layers - 1) * (BUNDLE.H + 0.3) + BUNDLE.H;
 /** the manila tag on it */
-export const TAG = { w: 340, d: 140, t: 0.7, dx: 10, dz: 4, yaw: -6 } as const;
+export const TAG = { w: 360, d: 156, t: 0.7, dx: 8, dz: 4, yaw: -5 } as const;
 /** the certificate: size, centre and turn at rest */
 export const CERT = { w: 440, d: 310, x: MX + 295, z: -300, yaw: 2.5 } as const;
 const CERT_PAPER: Omit<PaperOpts, "face"> = { w: CERT.w, h: CERT.d, t: 0.6, bow: 0.5, seg: 44, curls: [{ corner: "tl", r: 90, lift: 2.6 }] };
@@ -174,8 +174,8 @@ const calPageTex = () => paintTex("buyout-cal-page-v1", CAL.PW, CAL.PH, (g) => {
   for (let x = 30; x < W - 26; x += 11.2) { if (Math.abs(x - W / 2) < 36) continue; g.fillStyle = "rgba(40,34,28,0.78)"; g.fillRect(x - 2.6, 5, 5.2, 7.5); }
   // the month and the year
   g.fillStyle = INK; g.textBaseline = "alphabetic";
-  g.textAlign = "left"; track(g, 3); const ms = fitFont(g, 800, 74, "DECEMBER", 400); g.fillText("DECEMBER", 22, 34 + ms * 0.86);
-  g.textAlign = "right"; track(g, 1); fitFont(g, 300, 74, "1999", 190); g.fillText("1999", W - 22, 34 + ms * 0.86);
+  g.textAlign = "left"; track(g, 3); const ms = fitFont(g, 800, 72, "DECEMBER", 352); g.fillText("DECEMBER", 22, 34 + ms * 0.86);
+  g.textAlign = "right"; track(g, 1); fitFont(g, 400, ms, "1999", 170); g.fillText("1999", W - 22, 34 + ms * 0.86);
   track(g, 0);
   g.fillRect(22, 120, W - 44, 2.4);
   // the week
@@ -244,17 +244,18 @@ const contractTex = () => paintTex("buyout-contract-v1", CT.w, CT.d, (g) => {
   g.fillStyle = "#F8F6F0"; g.fillRect(0, 0, W, H);
   grain(g, W, H, 5200, 17);
   g.fillStyle = INK; g.textBaseline = "alphabetic"; g.textAlign = "center";
-  track(g, 2); fitFont(g, 800, 46, "ASSIGNMENT OF NAME", W - 90); g.fillText("ASSIGNMENT OF NAME", W / 2, 100);
-  fitFont(g, 800, 46, "AND LIKENESS", W - 90); g.fillText("AND LIKENESS", W / 2, 152); track(g, 0);
-  g.fillRect(150, 172, W - 300, 1.6);
+  track(g, 1.5); const ts = fitFont(g, 800, 64, "ASSIGNMENT OF NAME", W - 48); g.fillText("ASSIGNMENT OF NAME", W / 2, 46 + ts * 0.9);
+  fitFont(g, 800, ts, "AND LIKENESS", W - 48); g.fillText("AND LIKENESS", W / 2, 46 + ts * 1.95); track(g, 0);
+  g.fillRect(150, 186, W - 300, 1.8);
   // the recitals (dense type, not for reading)
-  typeLines(g, 44, 192, W - 88, 7, 12.5, 4.2, 0.42, 3);
+  typeLines(g, 44, 204, W - 88, 4, 12.5, 4.2, 0.42, 3);
   // the plate's place: more type under where it lies
-  typeLines(g, 44, 290, W - 88, 9, 12.5, 4.2, 0.42, 7);
-  // the grant, set bold
-  g.fillStyle = INK; track(g, 1.6); fitFont(g, 800, 34, "IN PERPETUITY AND WORLDWIDE", W - 84); g.fillText("IN PERPETUITY AND WORLDWIDE", W / 2, 498); track(g, 0);
-  g.fillRect(44, 510, W - 88, 1.2);
-  typeLines(g, 44, 528, W - 88, 5, 12.5, 4.2, 0.42, 11);
+  typeLines(g, 44, 262, W - 88, 9, 12.5, 4.2, 0.42, 7);
+  // the grant, set bold on two lines
+  g.fillStyle = INK; track(g, 2); const ps = fitFont(g, 800, 58, "IN PERPETUITY", W - 70); g.fillText("IN PERPETUITY", W / 2, 432 + ps * 0.9);
+  fitFont(g, 800, ps, "AND WORLDWIDE", W - 70); g.fillText("AND WORLDWIDE", W / 2, 432 + ps * 1.95); track(g, 0);
+  g.fillRect(44, 562, W - 88, 1.4);
+  typeLines(g, 44, 578, W - 88, 4, 12.5, 4.2, 0.42, 11);
   // the signature block: two rules and their names in small type
   g.fillStyle = "rgba(29,26,23,0.85)";
   g.fillRect(44, 640, 200, 1.1); g.fillRect(W - 244, 640, 200, 1.1);
@@ -297,9 +298,9 @@ const brassPbr = (key: string, W: number, H: number, lines: Line[], seed: number
   t.colorSpace = THREE.NoColorSpace;
   return t;
 };
-const NPL_LINES: Line[] = [{ text: "GEORGE FOREMAN", size: 60, weight: 800, y: 72, track: 5 }];
+const NPL_LINES: Line[] = [{ text: "GEORGE FOREMAN", size: 80, weight: 800, y: 86, track: 4 }];
 const PQ_LINES: Line[] = [
-  { text: "PURCHASE PRICE", size: 19, weight: 700, y: 34, track: 6 },
+  { text: "PURCHASE PRICE", size: 24, weight: 700, y: 36, track: 6 },
   { text: "$137,500,000", size: 72, weight: 800, y: 98, track: 2 },
 ];
 
@@ -333,9 +334,9 @@ const tagTex = () => paintTex("buyout-tag-v1", TAG.w, TAG.d, (g) => {
   g.strokeStyle = "rgba(120,90,40,0.5)"; g.lineWidth = 1; g.stroke();
   g.fillStyle = "#1A120C"; g.beginPath(); g.arc(30, H / 2, 6.5, 0, Math.PI * 2); g.fill();
   g.fillStyle = INK; g.textBaseline = "alphabetic"; g.textAlign = "center";
-  track(g, 0.5); const s = fitFont(g, 800, 50, "$113,750,000", W - 84); g.fillText("$113,750,000", 58 + (W - 70) / 2, 20 + s * 0.95);
-  track(g, 8); fitFont(g, 800, 30, "CASH", 140); g.fillText("CASH", 58 + (W - 70) / 2 + 4, H - 18); track(g, 0);
-  g.fillRect(70, H - 54, W - 90, 1.4);
+  track(g, 0.5); const s = fitFont(g, 800, 72, "$113,750,000", W - 72); g.fillText("$113,750,000", 56 + (W - 62) / 2, 14 + s * 0.95);
+  track(g, 8); fitFont(g, 800, 46, "CASH", 200); g.fillText("CASH", 56 + (W - 62) / 2 + 4, H - 16); track(g, 0);
+  g.fillRect(70, H - 66, W - 90, 1.6);
 }, 3);
 
 /** the stock certificate: a green guilloche border, SALTON, INC., COMMON STOCK, $23,750,000, a gold foil seal */
@@ -366,12 +367,12 @@ const certTex = () => paintTex("buyout-cert-v1", CERT.w, CERT.d, (g) => {
   g.lineWidth = 0.8; g.strokeRect(8 + B + 3, 8 + B + 3, W - 2 * (B + 11), H - 2 * (B + 11));
   // the words
   g.fillStyle = GREEN; g.textBaseline = "alphabetic"; g.textAlign = "center";
-  track(g, 3); fitFont(g, 800, 38, "SALTON, INC.", W - 120); g.fillText("SALTON, INC.", W / 2 + 1.5, 80); track(g, 0);
-  track(g, 7); fitFont(g, 700, 20, "COMMON STOCK", W - 160); g.fillText("COMMON STOCK", W / 2 + 3.5, 110); track(g, 0);
-  g.fillRect(W / 2 - 90, 122, 180, 1);
-  g.fillStyle = "#1F2A24"; track(g, 1); fitFont(g, 800, 62, "$23,750,000", W - 110); g.fillText("$23,750,000", W / 2 + 0.5, 192); track(g, 0);
+  track(g, 3); fitFont(g, 800, 50, "SALTON, INC.", W - 100); g.fillText("SALTON, INC.", W / 2 + 1.5, 88); track(g, 0);
+  track(g, 7); fitFont(g, 700, 26, "COMMON STOCK", W - 150); g.fillText("COMMON STOCK", W / 2 + 3.5, 124); track(g, 0);
+  g.fillRect(W / 2 - 100, 136, 200, 1.2);
+  g.fillStyle = "#1F2A24"; track(g, 1); fitFont(g, 800, 84, "$23,750,000", W - 76); g.fillText("$23,750,000", W / 2 + 0.5, 216); track(g, 0);
   // the engraved lines of the grant (not for reading)
-  typeLines(g, 60, 214, W - 120, 3, 11, 3.6, 0.34, 5);
+  typeLines(g, 60, 232, W - 120, 2, 11, 3.6, 0.34, 5);
   // the signature rules
   g.fillStyle = "rgba(31,42,36,0.7)"; g.fillRect(52, 268, 120, 0.9); g.fillRect(W - 172, 268, 120, 0.9);
   // the gold foil seal: a serrated disc, embossed rings

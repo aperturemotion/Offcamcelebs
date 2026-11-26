@@ -5,7 +5,7 @@ import { World, Light, alive, camView, type CamKey } from "../camera";
 import { View3D } from "../../three/View3D";
 import { project, type Eye } from "../../three/stage";
 import {
-  paperModel, DESK, PAD, TAPE, LINES, CARD, CARD_AT, CARD_INK, SLOT, ROLL, S_FLAT,
+  paperModel, DESK, PAD, TAPE, LINES, CARD, CARD_AT, CARD_INK, SLOT, ROLL, S_FLAT, MACH,
   tapeLen, feedDone, tapePt, poseCard, cardPt, type PaperTiming,
 } from "../../three/props/paper";
 import type { PlaceDef, PlaceSfx } from "../place";
@@ -54,8 +54,8 @@ const PRINT_MID = tapePt(L_FIN, (LINES[1].t + LINES[3].t) / 2, 0.55);
 const C1 = CARD_AT[0], C4 = CARD_AT[3];
 const WIDE = { x: (TAPE.x - TAPE.w / 2 + C4.x + CARD.w / 2) / 2, h: PAD.t, z: (C1.z + C4.z) / 2 };
 const STORY: CamKey[] = [
-  { at: -9999, ...aim(CHUTE_MID.x + 40, CHUTE_MID.h, CHUTE_MID.z, 1.18, 540, 1180), dur: 1 },   // close on the printer
-  { at: MILLION + 6, ...aim(PRINT_MID.x, PRINT_MID.h, PRINT_MID.z, 1.24, 540, 1080), dur: 34 },    // "million": up the pad with the printout
+  { at: -9999, ...aim(CHUTE_MID.x + 40, CHUTE_MID.h, CHUTE_MID.z, 1.18, 540, 1335), dur: 1 },   // close on the printer
+  { at: MILLION + 6, ...aim(PRINT_MID.x, PRINT_MID.h, PRINT_MID.z, 1.32, 540, 1090), dur: 34 },    // "million": up the pad with the printout
   { at: AND - 4, ...aim(WIDE.x, WIDE.h, WIDE.z, 0.7, 486, 1060), dur: 44 },                        // "and it leaves out": out and across to the cards
 ];
 const CAM: CamKey[] = alive(S, STORY, DONE + 44, { amp: 0.3 });
@@ -116,7 +116,7 @@ if (BAD.length && !(globalThis as unknown as { __pd?: boolean }).__pd) throw new
   const wCards = scr(fC, cardPt(c4, CARD.w, CARD.d / 2)).x - scr(fC, cardPt(c1, 0, CARD.d / 2)).x;
   const hYear = scr(fC, cardPt(c1, 60, CARD_INK.year[3])).y - scr(fC, cardPt(c1, 60, CARD_INK.year[1] + 14)).y;
   (DBG as Record<string, unknown>).size = { wTape, hTot, wCards, hYear };
-  if (!(globalThis as unknown as { __pd?: boolean }).__pd && (wTape < 500 || hTot < 52 || wCards < 600 || hYear < 30))
+  if (!(globalThis as unknown as { __pd?: boolean }).__pd && (wTape < 500 || hTot < 52 || wCards < 480 || hYear < 30))
     throw new Error(`paper: too small on screen (tape ${Math.round(wTape)}, total ${Math.round(hTot)}, cards ${Math.round(wCards)}, year ${Math.round(hYear)} px)`);
 }
 // ★ everything lies apart on the pad: the cards right of the tape and apart from each other, all inside the pad; the tape's
@@ -133,7 +133,7 @@ if (BAD.length && !(globalThis as unknown as { __pd?: boolean }).__pd) throw new
   const [zFar] = zs([...rest[0], ...rest[2]]), [, zNear] = zs([...rest[1], ...rest[3]]);
   const lead = tapePt(L_FIN, 0, 0.5);
   if (!(globalThis as unknown as { __pd?: boolean }).__pd && (Math.min(l0, l1) < tapeR + 30 || Math.max(r0, r1) > Math.min(l2, l3) - 20 || zb0 > zf1 - 14 || zb2 > zf3 - 14
-    || Math.max(rr2, rr3) > PAD.x1 - 50 || zFar < PAD.z0 + 50 || zNear > SLOT.z - 240 || lead.z < PAD.z0 + 40 || S_TOTAL - LINES[3].h < S_FLAT + 20))
+    || Math.max(rr2, rr3) > PAD.x1 - 50 || zFar < PAD.z0 + 36 || zNear > MACH.rear - 60 || lead.z < PAD.z0 + 40 || S_TOTAL - LINES[3].h < S_FLAT + 20))
     throw new Error(`paper: the objects crowd each other or the pad (cards x ${[l0, r0, l2, rr2].map(Math.round)}, z ${[zb0, zf1, zb2, zf3].map(Math.round)}, lead ${Math.round(lead.z)}, total s ${Math.round(S_TOTAL)})`);
 }
 

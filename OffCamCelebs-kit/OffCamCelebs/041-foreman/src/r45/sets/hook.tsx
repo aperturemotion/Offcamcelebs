@@ -33,19 +33,19 @@ const LAST = DONE + 64;
 export const T: HookT = {
   close: GRILL + 1,
   pull: [Math.max(61, D200 - 11), D200 + 9],
-  extra: [[MUCH + 2, MUCH + 8], [MORE + 3, MORE + 9]],
+  extra: [[MUCH + 1, MUCH + 6], [MORE + 6, MORE + 11]],
 };
 
 // ══ THE REAL CAMERA: keyed in spherical terms round a target (azimuth from +z toward +x, elevation, distance) ══
 type Key = { f: number; az: number; el: number; R: number; t: [number, number, number]; hold?: boolean };
 const KEYS: Key[] = [
-  { f: -30, az: 26, el: 25, R: 1720, t: [0, 205, -30] },
-  { f: T.close, az: 18, el: 27, R: 1420, t: [0, 150, 30] },
-  { f: T.pull[0] - 4, az: 15, el: 29, R: 1360, t: [0, 140, 60] },
-  { f: T.pull[1] + 14, az: 7, el: 44, R: 1180, t: [0, 100, 250], hold: true },
-  { f: MUCH - 14, az: 6, el: 44, R: 1170, t: [0, 100, 252], hold: true },
-  { f: MORE + 22, az: 3, el: 42, R: 1240, t: [0, 108, 246], hold: true },
-  { f: LAST + 10, az: -3, el: 40, R: 1215, t: [0, 108, 242] },
+  { f: -30, az: 24, el: 36, R: 2250, t: [0, 190, -20] },
+  { f: T.close, az: 18, el: 31, R: 1820, t: [0, 150, 40] },
+  { f: T.pull[0] - 4, az: 15, el: 31, R: 1780, t: [0, 140, 60] },
+  { f: T.pull[1] + 14, az: 6, el: 37, R: 1700, t: [0, 95, 150], hold: true },
+  { f: MUCH - 14, az: 5, el: 37, R: 1690, t: [0, 95, 152], hold: true },
+  { f: MORE + 22, az: 2, el: 36, R: 1740, t: [0, 100, 148], hold: true },
+  { f: LAST + 10, az: -3, el: 35, R: 1720, t: [0, 100, 146] },
 ];
 const PARAMS = (k: Key) => [k.az, k.el, k.R, ...k.t];
 const herm = (f: number) => {
@@ -71,7 +71,7 @@ export const camAt = (f: number) => {
 };
 
 // ══ THE FRAME ══
-const STORY: CamKey[] = [{ at: -9999, x: 540, y: 960, z: 1, dur: 1 }];
+const STORY: CamKey[] = [{ at: -9999, x: 540, y: 840, z: 1, dur: 1 }];
 const CAM: CamKey[] = alive(S, STORY, LAST, { amp: 0.16 });
 const Vm = new THREE.Matrix4();
 const scr = (f: number, p: readonly number[]) => {
