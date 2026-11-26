@@ -32,7 +32,7 @@ const S = "verdict" as const;
 const DBG = (globalThis as unknown as { __vdDebug?: boolean }).__vdDebug;
 const FLOOR = 1350;
 const SALES = word(S, 0, /^sales/i), BOOM = word(S, 0, /^booming/i);
-const GRL = word(S, 1, /^grill/i);
+const D200 = word(S, 1, /^\$200/);
 const OUR = word(S, 2, /^Our/), LEGIT = word(S, 2, /^Legit/i);
 /** the place has landed (the truck's arrival is over) */
 const LAND = cue(S, 0) + 30;
@@ -45,8 +45,8 @@ const G = 9810 / 900;
 //    from the side on a true parabola (an apex a little over their landing, gravity's own curve down onto the box under
 //    them), touch down, skid a short way and stop. Nine landings, every ~4 frames, from "sales" to "booming" ──
 // ★ the floor tier is down before the first toss leaves (a box in the air never meets one still sliding in)
-const T0N = PILE.filter((b) => b.tier === 0).length, TOSS0 = SALES + 14, TOSS1 = BOOM + 9;
-const LANDS = PILE.map((b, k) => (b.tier === 0 ? SALES - 8 + 3 * k : TOSS0 + Math.round((k - T0N) * ((TOSS1 - TOSS0) / (PILE.length - 1 - T0N)))));
+const T0N = PILE.filter((b) => b.tier === 0).length, TOSS0 = SALES + 9, TOSS1 = BOOM;
+const LANDS = PILE.map((b, k) => (b.tier === 0 ? SALES - 12 + 3 * k : TOSS0 + Math.round((k - T0N) * ((TOSS1 - TOSS0) / (PILE.length - 1 - T0N)))));
 const SLIDE = 15, FLY = 10, SKID = 5, APEX = 60, RUN = 1150;
 const boxAt = (k: number, f: number): Pose3 => {
   const b = PILE[k], L = LANDS[k];
@@ -68,7 +68,7 @@ const boxAt = (k: number, f: number): Pose3 => {
 
 // ── THE GRILL: from beyond the right edge, sliding on its rubber feet and braking to rest ON "million" ──
 const GX = 2300, GZ = -60, GYAW = -2;
-const G1 = GRL - 12, G0 = G1 - 44;
+const G1 = D200 - 3, G0 = G1 - 40;
 const grillAt = (f: number): Pose3 => {
   const u = clamp01((f - G0) / (G1 - G0)), e = 1 - (1 - u) ** 2.4;
   return { x: GX + 1300 * (1 - e), h: 0, z: GZ, yaw: GYAW + 5 * (1 - e), visible: f >= G0 - 1 };
@@ -138,13 +138,12 @@ const CARDS_MID: P3 = { x: RAIL.x, h: 150, z: -12 };
 const PILE_MID: P3 = { x: RAIL.x, h: 560, z: -300 };
 const GRILL_MID = gw(GREST, { x: 0, h: 70, z: TRAY.z * 0.55 });
 const PLQ_MID = (() => { const p = plqAt(TOTAL_FRAMES); return plqPt({ ...p, swing: 0 }, PLAQUE.w / 2, PLAQUE.h / 2); })();
-const K1 = SALES - 22, K2 = BOOM + 6, K3 = K2 + 43, K4 = OUR - 8;
+const K1 = SALES - 32, K2 = K1 + 41, K4 = OUR - 8;
 const K1V = keyOn(PILE_MID, 540, 1100, 0.6);
 const STORY: CamKey[] = [
   { at: -9999, ...keyOn(CARDS_MID, 478, 1150, 1.14), dur: 1 },              // close on the cards: 1995 … 1998, blank
   { at: K1, ...K1V, dur: 40 },                 // "sales were already booming": back and up, the pile
-  { at: K2, x: keyOn(gw(GREST, { x: 0, h: 60, z: 150 }), 540, 1150, 0.6).x, y: K1V.y, z: 0.6, dur: 42 },   // "So, $200 million": right, the grill
-  { at: K3, ...keyOn(GRILL_MID, 530, 1170, 1.42), dur: 40 },               // "from a grill?": in on it
+  { at: K2, ...keyOn(GRILL_MID, 530, 1170, 1.42), dur: 42 },               // "booming… So, $200 million": right and in, onto the grill
   { at: K4, ...keyOn(PLQ_MID, 522, 1235, 2.16), dur: 32 },                 // "Our rating: legit": in close on the handle
 ];
 const CAM: CamKey[] = alive(S, STORY, TOTAL_FRAMES, { amp: 0.22 });
@@ -217,10 +216,10 @@ const bandPrint = (g: Pose3): P3[] => [[-120, 30], [120, 30], [120, -30], [-120,
   const at = (f: number, p: P3) => scrOf(p, camView(CAM, f));
   const wr = at(word(S, 0, /^early/i), cardPt(3, CARD.w, 40)).x - at(word(S, 0, /^early/i), cardPt(0, 0, 40)).x;
   const hp = at(BOOM + 10, { x: RAIL.x, h: 0, z: PILE[0].z + BOX.d / 2 }).y - at(BOOM + 10, { x: RAIL.x, h: PILE[8].h + BOX.h, z: PILE[8].z + BOX.d / 2 }).y;
-  const wg = at(GRL, gw(GREST, { x: TRAY.w / 2, h: 20, z: TRAY.z })).x - at(GRL, gw(GREST, { x: -TRAY.w / 2, h: 20, z: TRAY.z })).x;
+  const wg = at(D200, gw(GREST, { x: TRAY.w / 2, h: 20, z: TRAY.z })).x - at(D200, gw(GREST, { x: -TRAY.w / 2, h: 20, z: TRAY.z })).x;
   const half = PLAQUE.word / 2;
   const wl = Math.min(...[SEATF, SEATF + 12, SEATF + 30, TOTAL_FRAMES - 20, TOTAL_FRAMES].map((f) => { const p = plqAt(f); return at(f, plqPt(p, PLAQUE.w / 2 + half, PLAQUE.h / 2)).x - at(f, plqPt(p, PLAQUE.w / 2 - half, PLAQUE.h / 2)).x; }));
-  if (DBG) console.log({ wr, hp, wg, wl, LANDS, G0, G1, C0, SEATF, K1, K2, K3, K4, bar: BAR, seat: SEAT, plateTop: PLATE_TOP });
+  if (DBG) console.log({ wr, hp, wg, wl, LANDS, G0, G1, C0, SEATF, K1, K2, K4, bar: BAR, seat: SEAT, plateTop: PLATE_TOP });
   if (!DBG && (wr < 720 || hp < 540 || wg < 440 || wl < 0.6 * 1080 + 8)) throw new Error(`verdict: too small on screen (the cards' row ${Math.round(wr)}, the pile ${Math.round(hp)}, the tray ${Math.round(wg)}, LEGIT ${Math.round(wl)} px)`);
 }
 
