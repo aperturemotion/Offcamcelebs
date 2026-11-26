@@ -53,8 +53,11 @@ export const PILE: BoxPose[] = (() => {
   const T = (t: number) => t * (BOX.h + BOX_GAP);
   const p: BoxPose[] = [
     { x: 0, z: 4, yaw: 1.2, tier: 0, side: -1 }, { x: -394, z: -8, yaw: -1.6, tier: 0, side: -1 }, { x: 395, z: 6, yaw: 1.8, tier: 0, side: 1 },
-    { x: 6, z: -4, yaw: -1.4, tier: 1, side: 1 }, { x: -388, z: 9, yaw: 2.2, tier: 1, side: -1 }, { x: 398, z: -6, yaw: -2.0, tier: 1, side: 1 },
-    { x: -392, z: 2, yaw: -2.4, tier: 2, side: -1 }, { x: 6, z: -9, yaw: 1.6, tier: 2, side: 1 },
+    // ★ the landing order keeps every path clear: a box only flies over columns already down or still empty, and boxes
+    //   from one side leave far enough apart that none catches the one ahead of it
+    { x: 6, z: -4, yaw: -1.4, tier: 1, side: 1 }, { x: -388, z: 9, yaw: 2.2, tier: 1, side: -1 },
+    { x: 6, z: -9, yaw: 1.6, tier: 2, side: 1 }, { x: -392, z: 2, yaw: -2.4, tier: 2, side: -1 },
+    { x: 398, z: -6, yaw: -2.0, tier: 1, side: 1 },
   ].map((b) => ({ ...b, x: RAIL.x + b.x, z: PILE_Z + b.z, h: T(b.tier) }));
   return p;
 })();

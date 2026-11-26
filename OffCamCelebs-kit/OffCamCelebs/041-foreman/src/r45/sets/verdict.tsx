@@ -66,6 +66,18 @@ const boxAt = (k: number, f: number): Pose3 => {
   return { x: lerp(xl, b.x, e), h: b.h, z: b.z, yaw: b.yaw, visible: true };
 };
 
+// ★ no box's path crosses another's (boxes as their swept boxes, with a margin for their turn and tilt in the air)
+for (let f = LANDS[0] - SLIDE - 2; f <= LANDS[LANDS.length - 1] + 1; f++) {
+  const ps = PILE.map((_, k) => boxAt(k, f));
+  for (let i = 0; i < ps.length; i++) for (let j = i + 1; j < ps.length; j++) {
+    const a = ps[i], b = ps[j];
+    if (!a.visible || !b.visible) continue;
+    const m = (Math.abs(a.roll ?? 0) + Math.abs(b.roll ?? 0) + Math.abs(a.yaw - PILE[i].yaw) + Math.abs(b.yaw - PILE[j].yaw)) * 3.4;
+    if (Math.abs(a.x - b.x) < BOX.w + 2 + m && Math.abs(a.h - b.h) < BOX.h - 0.2 && Math.abs(a.z - b.z) < BOX.d)
+      throw new Error(`verdict: f${f} box${i} and box${j} pass through each other`);
+  }
+}
+
 // ── THE GRILL: from beyond the right edge, sliding on its rubber feet and braking to rest ON "million" ──
 const GX = 3300, GZ = -60, GYAW = -2;
 const G1 = D200 - 3, G0 = G1 - 40;
