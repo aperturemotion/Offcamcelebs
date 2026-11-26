@@ -2,8 +2,8 @@
 // PAPER IN 3-D (041) — "That's $192 million on paper, and it leaves out the grill's early years." On the cream ground, on a
 // bottle-green leather desk pad (pebble grain, a darker turned border with tan stitching, its own thickness), two real things:
 //   · THE ADDING MACHINE and its TAPE: a 1990s desktop printing adding machine in warm putty ABS (a sloped keyboard of
-//     charcoal and ivory keys, a big "+" bar, a red "T" total key), a roll of adding-machine paper on a steel spindle between
-//     two charcoal brackets on its rear deck, and behind the roll the printer's exit: a dark slot under a serrated chrome tear
+//     charcoal and ivory keys, a big "+" bar, a red "T" total key), a roll of adding-machine paper sunk in a well in its rear
+//     deck (a charcoal rim round the opening), and behind the roll the printer's exit: a dark slot under a serrated chrome tear
 //     bar, the printed tape sliding out over a charcoal paper chute (27°) and on across the pad. The tape is real bond receipt
 //     paper (off-white, a fibre tooth, a torn zig-zag lead end that curls up a little off the pad, a faint cup), printed in
 //     fixed-pitch impact type in purple-black ribbon ink (uneven density, a hair of bleed, each wheel a touch off its line):
@@ -123,7 +123,8 @@ export const CARD_INK = { year: [24, 14, 330, 122] as const, amount: [26, 166, C
 
 // ══ THE MACHINE (z from the chute's lip toward the viewer) ══
 export const MACH = { x: 40, w: 1060, front: ZL + 1100, rear: SLOT.z, deck: 132, base: PAD.t + 6 } as const;
-export const ROLL = { z: ZL + 370, r: 78, w: TAPE.w + 8, h: MACH.deck + 4 + 78 } as const;
+/** the roll of paper, sunk to a little over half its height in a well in the deck (a charcoal rim round the opening) */
+export const ROLL = { z: ZL + 360, r: 60, w: TAPE.w + 8, h: MACH.deck + 12 } as const;
 /** the keyboard's slope: from its far edge (z0, h0) down to its near edge (z1, h1) */
 const KB = { z0: ZL + 500, h0: 120, z1: MACH.front - 34, h1: 58 } as const;
 
@@ -318,7 +319,11 @@ export const paperModel = (T: PaperTiming) => (): Model<PaperP> => {
     const body = rbox(W, PAD.t, D, PAD.t / 2 - 0.2, side, 3);
     body.position.set((PAD.x0 + PAD.x1) / 2, FY + PAD.t / 2, PAD.z1);
     pad.add(body);
-    const topM = new THREE.MeshPhysicalMaterial({ map: padTex(), roughness: 0.6, bumpMap: pebble(9, 9), bumpScale: 0.7, metalness: 0, clearcoat: 0.18, clearcoatRoughness: 0.55, envMapIntensity: 0.45 });
+    // ★ the pad's surfaces are pushed back in depth (polygon offset): the tape and the cards lie under a unit over it, and
+    //   a coarse depth buffer (the headless renderer's) let the leather win through them from some camera positions
+    const topM = new THREE.MeshPhysicalMaterial({ map: padTex(), roughness: 0.6, bumpMap: pebble(9, 9), bumpScale: 0.7, metalness: 0, clearcoat: 0.18, clearcoatRoughness: 0.55, envMapIntensity: 0.45,
+      polygonOffset: true, polygonOffsetFactor: 2, polygonOffsetUnits: 8 });
+    side.polygonOffset = true; side.polygonOffsetFactor = 2; side.polygonOffsetUnits = 8;
     const top = mesh(new THREE.PlaneGeometry(W - 2 * PAD.t, D - 2 * PAD.t), topM, false, true);
     top.rotation.x = -Math.PI / 2;
     top.position.set((PAD.x0 + PAD.x1) / 2, FY + PAD.t + 0.04, (PAD.z0 + PAD.z1) / 2);
@@ -361,7 +366,9 @@ export const paperModel = (T: PaperTiming) => (): Model<PaperP> => {
     cs.lineTo(-(MACH.rear + 6), B0);
     cs.closePath();
     const CW = TAPE.w + 90;
-    const chute = mesh(slabOf(cs, CW, 1.2, 4), charcoal);
+    const chuteM = charcoal.clone();
+    chuteM.polygonOffset = true; chuteM.polygonOffsetFactor = 2; chuteM.polygonOffsetUnits = 8;
+    const chute = mesh(slabOf(cs, CW, 1.2, 4), chuteM);
     chute.rotation.y = Math.PI / 2;
     chute.position.set(TAPE.x + CW / 2, FY, 0);
     mach.add(chute);
@@ -393,18 +400,25 @@ export const paperModel = (T: PaperTiming) => (): Model<PaperP> => {
       ft.position.set(fx, FY + PAD.t + 0.15 + 3.3, fz);
       mach.add(ft);
     }
-    // the roll's brackets and spindle
-    const bx = TAPE.w / 2 + 22;
-    for (const sx of [-bx, bx]) {
-      const bs = roundRect(150, 170, 26);
-      const br = mesh(slabOf(bs, 12, 2.4, 6), charcoal);
-      br.rotation.y = Math.PI / 2;
-      br.position.set(TAPE.x + sx + (sx > 0 ? 6 : -6) + 6, FY + MACH.deck + 70, ROLL.z);
-      mach.add(br);
+    // the roll's well: a charcoal rim round the opening in the deck, and the dark well itself under the roll
+    {
+      const ow = ROLL.w + 34, od = 2 * ROLL.r + 26, rw = 9;
+      const rim = new THREE.Shape();
+      rim.moveTo(-ow / 2, -od / 2); rim.lineTo(ow / 2, -od / 2); rim.lineTo(ow / 2, od / 2); rim.lineTo(-ow / 2, od / 2); rim.closePath();
+      const hole = new THREE.Path();
+      hole.moveTo(-ow / 2 + rw, -od / 2 + rw); hole.lineTo(-ow / 2 + rw, od / 2 - rw); hole.lineTo(ow / 2 - rw, od / 2 - rw); hole.lineTo(ow / 2 - rw, -od / 2 + rw); hole.closePath();
+      rim.holes.push(hole);
+      const rm = mesh(slabOf(rim, 5, 1.4, 4), charcoal);
+      rm.rotation.x = -Math.PI / 2;
+      rm.position.set(TAPE.x, FY + MACH.deck + 3, ROLL.z);
+      mach.add(rm);
+      const wm = M.rubber("#121112");
+      wm.polygonOffset = true; wm.polygonOffsetFactor = -2; wm.polygonOffsetUnits = -8;
+      const well = mesh(new THREE.PlaneGeometry(ow - 2 * rw, od - 2 * rw), wm, false, true);
+      well.rotation.x = -Math.PI / 2;
+      well.position.set(TAPE.x, FY + MACH.deck + 0.6, ROLL.z);
+      mach.add(well);
     }
-    const spindle = mesh(new THREE.CylinderGeometry(9, 9, 2 * bx + 30, 20).rotateZ(Math.PI / 2), steel);
-    spindle.position.set(TAPE.x, FY + ROLL.h, ROLL.z);
-    mach.add(spindle);
     // the roll: paper wound on a kraft core, its ends showing the layers, its face a touch uneven
     roll = new THREE.Group();
     roll.position.set(TAPE.x, FY + ROLL.h, ROLL.z);

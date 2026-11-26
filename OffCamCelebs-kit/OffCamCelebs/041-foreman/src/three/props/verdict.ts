@@ -78,7 +78,7 @@ export const bodyPt = (x: number, y: number, z: number) => {
 const BAR_B = { y: GRILL.H + GRILL.S + GRILL.L * 0.5, z: GRILL.d / 2 + GRILL.barOut };
 export const BAR = bodyPt(0, BAR_B.y, BAR_B.z);
 /** THE PLAQUE: w × h × t, the word's width */
-export const PLAQUE = { w: 300, h: 80, t: 7, word: 262 } as const;
+export const PLAQUE = { w: 330, h: 80, t: 7, word: 290 } as const;
 /** THE S-HOOK (its frame: the wire's centre at the top of the bar = the seat, the pivot): its upper curve round the bar
  *  (radius R), the stem down the bar's front (X below the bar), the lower curve (rU) through the plate's ring (ringR) */
 export const HOOK = { R: GRILL.barR + 2.4, wire: 2.1, rU: 3.6, X: 15, ringR: 4.5, ringT: 1.3 } as const;
@@ -86,7 +86,7 @@ const yU = -(HOOK.R + GRILL.barR + HOOK.X), zU = HOOK.R - HOOK.rU;
 /** the plate's top edge and its centre's depth, in the hook's frame */
 export const PLATE_TOP = yU - HOOK.ringR + 1.5, PLATE_Z = zU;
 /** THE DRIP TRAY (the grill's frame): outer w × h × d, its walls, its centre z (out on the counter, clear of the plaque) */
-export const TRAY = { w: 344, h: 30, d: 262, wall: 4, floor: 3, z: BAR.z + PLATE_Z + PLAQUE.t / 2 + 9 + 131 } as const;
+export const TRAY = { w: 344, h: 30, d: 262, wall: 4, floor: 3, z: BAR.z + PLATE_Z + PLAQUE.t / 2 + 30 + 131 } as const;
 /** the hook's seat: the top of the bar (the pivot the plaque swings about), in the grill's frame */
 export const SEAT = { x: 0, h: BAR.h + HOOK.R, z: BAR.z };
 /** a point on the plaque's face (u, v from its top-left, print px) for a seat pose (world) and its swing (deg about z) */
@@ -290,7 +290,7 @@ const boxMaterials = (k: number) => {
 
 // ══ THE GRILL'S SURFACES ══
 const plasticBlack = () => new THREE.MeshPhysicalMaterial({ color: col("#141416"), roughness: 0.34, metalness: 0, clearcoat: 0.55, clearcoatRoughness: 0.25, bumpMap: grainTex(1, 3), bumpScale: 0.12, envMapIntensity: 0.75 });
-const brushed = () => new THREE.MeshPhysicalMaterial({ color: col("#C9CED3"), metalness: 1, roughness: 0.3, bumpMap: grainTex(2, 1.5, 3), bumpScale: 0.25, envMapIntensity: 1.05 });
+const brushed = () => new THREE.MeshPhysicalMaterial({ color: col("#9EA4AB"), metalness: 1, roughness: 0.42, bumpMap: grainTex(2, 1.5, 3), bumpScale: 0.25, envMapIntensity: 1.05 });
 /** the housing's front: black moulding, GEORGE FOREMAN in plain silver type, a small amber READY lamp */
 const housingFrontTex = () => paintTex("vd041-housing-front", GRILL.w, GRILL.H, (g) => {
   const W = GRILL.w, H = GRILL.H;
@@ -313,7 +313,7 @@ const seamTex = () => paintTex("vd041-seam", GRILL.w, 8, (g) => {
 
 // ══ THE PLAQUE: enamel and brass ══
 type Mode = "c" | "h" | "m" | "r";
-const GREEN = "#3F8F5C";
+const GREEN = "#2C6E45";   // painted darker: under the key it renders as the brief's #3f8f5c
 /** c colour, h height (bump), m metalness, r roughness */
 const plaqueTex = (mode: Mode) => paintTex(`vd041-plaque-${mode}`, PLAQUE.w, PLAQUE.h, (g) => {
   const W = PLAQUE.w, H = PLAQUE.h, B = 7;
@@ -342,7 +342,7 @@ const plaqueTex = (mode: Mode) => paintTex(`vd041-plaque-${mode}`, PLAQUE.w, PLA
   // LEGIT: raised polished brass letters, struck through the enamel
   g.textAlign = "center"; g.textBaseline = "alphabetic";
   track(g, 7);
-  const s = fitFont(g, 800, 74, "LEGIT", PLAQUE.word);
+  const s = fitFont(g, 800, 84, "LEGIT", PLAQUE.word);
   const ty = H / 2 + s * 0.36, tx = W / 2 + 3.5;
   if (mode === "c") {
     g.fillStyle = "rgba(10,40,20,0.55)"; g.fillText("LEGIT", tx + 1.6, ty + 1.8);       // the letters' shadow on the enamel
@@ -535,7 +535,7 @@ export const verdictModel = (g: VerdictGeo) => (): Model<VerdictP> => {
       mat.onBeforeCompile = (sh) => {
         sh.uniforms.fadeMap = { value: fadeTex() };
         sh.fragmentShader = sh.fragmentShader.replace("#include <common>", "#include <common>\nuniform sampler2D fadeMap;")
-          .replace("#include <alphamap_fragment>", "#include <alphamap_fragment>\ndiffuseColor.a *= texture2D( fadeMap, vUv ).g;");
+          .replace("#include <alphamap_fragment>", "#include <alphamap_fragment>\ndiffuseColor.a *= texture2D( fadeMap, vAlphaMapUv ).g;");
       };
       mat.customProgramCacheKey = () => "vd041-wisp";
       const H = STEAM_TOP + 20;
