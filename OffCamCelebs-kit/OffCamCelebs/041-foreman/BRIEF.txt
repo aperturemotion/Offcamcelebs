@@ -1,0 +1,38 @@
+NEW VIDEO — "On Paper" (George Foreman / the grill money, audit #041). ~60 seconds, 1080x1920 @30fps. FOLDER: 041-foreman | COMPOSITION: InfluencerAudit041
+
+(Written 2026-11-26 by the daily 6 a.m. run: The Payouts "Video 7 of 9", due 2026-11-27 11:00 Moscow, had no script. The 5
+competitors are not named yet, so the topic follows the brand brief's rules: fight money and a famous deal, a big checkable
+number, not audited before; after LEGIT (038), INFLATED (039) and UNSUPPORTED (040) this one rates LEGIT.)
+
+THIS IS A CONTENT-ONLY PROMPT. Everything visual is the builder's call, in the 034/035 look, with the 2026-11-23 realism rules
+(real materials, the shape first, real cash from props/cash.ts).
+
+WHAT THE VIDEO HAS TO DO
+- HOOK IS MOTION: a real countertop contact grill (the sloped, ribbed clamshell kind) with a thick steak on it; the lid
+  swings down and closes with a hiss of steam, grease runs down the slope into the drip tray. No figure before ~2 s; on
+  "two hundred million dollars" the figure lands (e.g. banded cash slid out of the grill like a drawer, or a big printed
+  "$200,000,000" ticket/tag). Brand name only as plain type.
+- Visuals follow the words; a new object every sentence or two; numbers land on objects.
+- Core contrast: what he said ("much more than $200 million") vs what is on paper ($192.2M in Salton's SEC filings, his
+  own buyout cut $110M).
+- One real photo: George Foreman's face (Wikimedia Commons, credited).
+- The filings are shown as real paper (an SEC filing's cover page in plain type: "SALTON, INC.", "FORM 8-K"), not a
+  case-file look: no stamps except the verdict object.
+
+THE STORY (beats) — see VO_SCRIPT.txt
+1. HOOK: he said more than $200M, "much more"; we checked the filings.
+2. WHO: two-time heavyweight champion; won it back at 45.
+3. THE GRILL: Salton sold a grill with his name; royalties on every sale.
+4. ROYALTIES: $38M in one year, then $16.6M in three months.
+5. THE BUYOUT: December 1999, his name bought outright, forever, $137.5M in cash and stock.
+6. THE SUM: $192M on paper, before the early years.
+7. THE CATCH: two partners shared; his own buyout cut $110M.
+8. FAIRNESS: the early royalties were never broken out; sales were booming.
+9. VERDICT: LEGIT. CTA.
+
+ACCURACY GUARDRAILS
+- The royalties went to Foreman AND his partners: never "he was paid $38 million" as his alone.
+- The partners are private individuals: never named.
+- "Much more" is his own claim (AARP, 2014); never stated as fact that he personally made over $200M.
+- Past tense for Foreman (he died 21 March 2025); no other topics (no health, no family, no religion).
+- No "fraud" or "scam". The verdict rates the $200 million figure, never the man.

@@ -1,0 +1,5 @@
+putt_lmb.mp3: "Golf Ball Putt.wav" by lmbubec (https://freesound.org/people/lmbubec/sounds/119451), CC0 1.0
+cup1_agfx.mp3: "Drop ball in cup-1.wav" by AGFX (https://freesound.org/people/AGFX/sounds/20428), BY 4.0
+cup2_agfx.mp3: "Drop ball in cup-2.wav" by AGFX (https://freesound.org/people/AGFX/sounds/20429), BY 4.0
+clap_xtr.mp3: "Crowd golf clap.wav" by xtrgamr (https://freesound.org/people/xtrgamr/sounds/257793), BY 4.0
+roll_hp.mp3: "Golf ball - bounce and roll - 221098_AshtiHari_SD100_Term4.wav" by 221098HariPotter (https://freesound.org/people/221098HariPotter/sounds/655637), BY 4.0

@@ -1,0 +1,85 @@
+{
+ "wcam1": {
+  "src": "es_wcam1.wav",
+  "len": 1.6,
+  "fade": 350,
+  "sustained": true
+ },
+ "wcam2": {
+  "src": "es_wcam2.wav",
+  "len": 2.4,
+  "fade": 450,
+  "sustained": true
+ },
+ "glide": {
+  "src": "es_glide.wav",
+  "len": 0.6,
+  "fade": 150,
+  "sustained": true
+ },
+ "glide2": {
+  "src": "es_glide2.wav",
+  "len": 1.1,
+  "fade": 250,
+  "sustained": true
+ },
+ "whip": {
+  "src": "es_whip.wav",
+  "len": 0.4,
+  "fade": 120
+ },
+ "thump": {
+  "src": "stamp_thump.mp3",
+  "len": 0.7,
+  "fade": 150
+ },
+ "paper": {
+  "src": "es_paper.wav",
+  "len": 0.4,
+  "fade": 100
+ },
+ "flip": {
+  "src": "es_flip.wav",
+  "len": 0.55,
+  "fade": 120
+ },
+ "click": {
+  "src": "es_click.wav",
+  "len": 0.12,
+  "fade": 30
+ },
+ "cash": {
+  "src": "cash_yake.mp3",
+  "len": 1.3,
+  "fade": 300,
+  "sustained": true
+ },
+ "tear": {
+  "src": "tear_afs.mp3",
+  "len": 0.37,
+  "fade": 80
+ },
+ "lowhit": {
+  "src": "es_lowhit.wav",
+  "len": 0.35,
+  "fade": 120
+ },
+ "stack": {
+  "src": "es_stack.wav",
+  "len": 0.2,
+  "fade": 60
+ },
+ "sizzle": {
+  "src": "es_sizzle.wav",
+  "start": "auto",
+  "len": 2.5,
+  "fade": 600,
+  "sustained": true
+ },
+ "lid": {
+  "src": "es_lid.wav",
+  "start": "auto",
+  "len": 0.41,
+  "fade": 100
+ }
+}

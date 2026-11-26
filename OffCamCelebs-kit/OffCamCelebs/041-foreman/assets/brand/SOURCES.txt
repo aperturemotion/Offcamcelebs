@@ -1,0 +1,23 @@
+041 George Foreman / the grill money — sources of every image and sound not built in code (2026-11-26)
+
+PHOTO
+- foreman_face.png (assets/ and public/): "George Foreman 071516.jpg", Wikimedia Commons,
+  https://commons.wikimedia.org/wiki/File:George_Foreman_071516.jpg — George Foreman speaking at the 2016 FreedomFest, Las
+  Vegas (15 July 2016), by Gage Skidmore, CC BY-SA 2.0. Cropped to the face (740 x 740) from the 1280-px Commons
+  rendition. Credit: "Photo: Gage Skidmore (CC BY-SA 2.0), via Wikimedia Commons". Fallback: "George Foreman 2009.jpg" (el
+  grito, CC BY 2.0).
+
+NO LOGOS: SALTON, the SEC and any grill brand appear only as plain type.
+
+BANKNOTE ART
+- note100.jpg (assets/): "Obverse of the series 2009 $100 Federal Reserve Note.jpg", Wikimedia Commons; a work of the US
+  government (Bureau of Engraving and Printing), public domain. Shown only as one face of bundled notes.
+
+MUSIC: 031's bed ("A Good Man with a Broken Heart"), as 038–040.
+
+SOUND EFFECTS (the EarnEdits pack's audio is not on this machine; Openverse was rate-limiting on 2026-11-26): Earshot renders
+(es_*.wav, MIT, no credit needed) and the 039/040 palette; cut by tools/sfx_prep.py from assets/audio/sfx_src/sfx_spec_041.json.
+- sizzle: Earshot pan/sizzle; lid: Earshot book/close (a soft close)
+- thump: "Thump.mp3" by mpuffenbarger, https://freesound.org/people/mpuffenbarger/sounds/683031, CC0 1.0
+- (in the palette: cash "Foley_Bills_Mono_14.wav" by yake01, CC BY 4.0 — credit if used; tear "Packaging Paper Tear
+  Short.wav" by afleetingspeck, CC0 1.0)

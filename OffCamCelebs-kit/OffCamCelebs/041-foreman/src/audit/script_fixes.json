@@ -1,0 +1,32 @@
+{
+  "note": "041 George Foreman / the grill money. Written by the daily run (2026-11-26): there was no script in the app, so the script was written from the facts at source (Salton's SEC filings) and there are no brief lines to fix (fixes is empty on purpose). The guardrails are the accuracy rules of BRIEF.txt.",
+  "noBlockingLines": "No external script existed: the VO script was written in-session from checked sources (VO_SCRIPT.txt), so there is no brief wording that could come back in a take.",
+  "fixes": [],
+  "guardrails": [
+    {
+      "why": "The royalties went to Foreman AND his partners: never stated as his alone.",
+      "bad": "\\b(he|foreman) (was paid|got|earned|made|received)\\b.*\\b(38|thirty-eight|16\\.6|sixteen point six)\\b",
+      "example": "Foreman was paid $38 million in one year."
+    },
+    {
+      "why": "'Much more than $200 million' is his own claim (AARP, 2014): never stated as a proven fact about him personally.",
+      "bad": "\\b(he|foreman) (made|earned|got) (much )?more than \\$?(200|two hundred)\\b(?!.*said)",
+      "example": "Foreman made more than $200 million from the grill."
+    },
+    {
+      "why": "Fraud and scam never appear (the brand brief).",
+      "bad": "\\b(fraud|scam)\\b",
+      "example": "The grill was a scam."
+    },
+    {
+      "why": "The partners are private individuals: never named.",
+      "bad": "\\b(perlmutter|srednick)\\b",
+      "example": "His partner Sam Perlmutter took a share."
+    },
+    {
+      "why": "The verdict rates the $200 million figure, never the man.",
+      "bad": "\\b(foreman|he) (is|was) (legit|a liar|lying)\\b",
+      "example": "Foreman is legit."
+    }
+  ]
+}

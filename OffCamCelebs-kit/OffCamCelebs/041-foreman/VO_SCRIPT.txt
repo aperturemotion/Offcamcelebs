@@ -1,0 +1,56 @@
+OffCamCelebs 041 — "On Paper" (George Foreman / the grill money, "$200 million") — VO SCRIPT (final, 2026-11-26)
+Written by the daily run (no script in the app). Every figure checked at source (Salton, Inc.'s own SEC filings first).
+
+------------------------------------------------------------------ PASTE-READY (as sent to ElevenLabs)
+George Foreman said his grill made him more than two hundred million dollars. Much more, he said. We checked the filings.
+
+Foreman was a two-time heavyweight champion of the world. He won the title back at forty-five.
+
+In the nineties, a company called Salton sold a grill with his name on it, and paid royalties on every sale.
+
+Salton's own S.E.C. filings show those royalties. Thirty-eight million dollars in one year. Then sixteen point six million in just three months.
+
+In December nineteen ninety-nine, Salton bought his name outright. Forever. One hundred thirty-seven point five million dollars, in cash and stock.
+
+That's one hundred ninety-two million on paper. And it leaves out the grill's early years.
+
+The catch: two partners shared in the deal. Foreman's own cut of the buyout was one hundred ten million.
+
+To be fair, those early royalties were never broken out, and sales were already booming.
+
+So, two hundred million dollars from a grill? Our rating: legit.
+
+Send us who to audit next.
+------------------------------------------------------------------
+
+LINE BY LINE (sources)
+- "said his grill made him more than two hundred million dollars. Much more, he said": AARP The Magazine interview, 2014
+  (asked "Estimates are that you earned in excess of $200 million on the grill. True?" Foreman: "Much more. There were
+  months I was being paid $8 million per month."). His own words: CLAIMED.
+- "two-time heavyweight champion … won the title back at forty-five": world heavyweight champion 1973 (beat Joe Frazier,
+  22 Jan 1973) and 1994 (beat Michael Moorer, 5 Nov 1994, aged 45: the oldest heavyweight champion).
+- "a company called Salton sold a grill with his name on it, and paid royalties on every sale": Salton, Inc. 8-K, filed
+  10 Dec 1999 (SEC EDGAR, CIK 878280, accession 0000950137-99-004429): the deal ends "Salton's obligation to pay royalties
+  to George Foreman and his partners based on the sale of 'George Foreman' products".
+- "Thirty-eight million dollars in one year. Then sixteen point six million in just three months": the same 8-K's pro
+  forma notes reverse "royalty payments of $38,096 [thousand] on George Foreman" products for the fiscal year ended
+  26 June 1999, and $16,644 thousand for the thirteen weeks ended 25 September 1999. (Royalties to Foreman AND his
+  partners: the script never calls them his alone.)
+- "In December nineteen ninety-nine, Salton bought his name outright. Forever. One hundred thirty-seven point five
+  million dollars, in cash and stock": Salton 10-K405 for fiscal 2000 (filed 29 Sep 2000, accession 0000950137-00-004296):
+  "On December 9, 1999, Salton acquired from George Foreman and his partners the right to use in perpetuity and
+  worldwide the name 'George Foreman' … $113,750,000 in cash, payable in five annual installments of $22,750,000 …
+  and 779,191 shares"; the 8-K values the shares at $23,750,000 (total $137.5M).
+- "That's one hundred ninety-two million on paper": $137.5M + $38.1M + $16.6M = $192.2M, all from Salton's filings.
+- "it leaves out the grill's early years": the grill launched 1994; royalties before fiscal 1999 are not broken out in
+  Salton's filings.
+- "two partners shared in the deal. Foreman's own cut of the buyout was one hundred ten million": the 8-K: "The
+  purchase price payable to George Foreman is $100,000,000 in cash, payable in five annual installments of $20,000,000
+  … and shares of Salton common stock valued at $10,000,000"; each of the two partners $6,875,000 cash + $6,875,000 in
+  stock. (The partners are private individuals: never named on screen.)
+- "sales were already booming": Salton 10-K405 FY1999 / FY1998: net sales rose 67.2% in fiscal 1998, with the George
+  Foreman Grills, Juiceman and Breadman lines about 62% of net sales.
+- Verdict: LEGIT — the $200 million figure as the grill's money: $192.2M is on paper from 15 months of royalties and the
+  buyout alone, before the grill's first years; his own share of the buyout is $110M.
+
+RE-CHECK BEFORE POSTING: nothing here can change (1999–2000 filings); Foreman died 21 March 2025 (past tense throughout).
