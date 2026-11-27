@@ -33,6 +33,12 @@ tick each one), and report. **Nothing due today or tomorrow: stop**, and report 
 
 Read `get_brief` (The Payouts / OffCamCelebs) and `get_changes` for the piece.
 
+**Already built?** If the due piece already has a built film waiting for Timur's review (its HANDOFF.md row says BUILT,
+not handed in) and no changes were asked, do not rebuild it and do not start a later piece early: report it again (Studio
+link, preview), say how long is left before its 11:00 Moscow posting (the master render takes about 45 min, so "render"
+is needed by about 10:00 Moscow), name the next due piece and its date, and stop. (2026-11-27: Video 7 of 9 was built the day
+before as 041; Video 8 was due 11-29.)
+
 ## 2. The script
 
 - **The piece has a script** (`script` or `piece_brief` in my_work / get_changes): follow it. Still fact-check every line at
